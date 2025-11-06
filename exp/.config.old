@@ -3,6 +3,5 @@
 # main
 #
 CONFIG_CY=y
-CONFIG_TEST=56
 CONFIG_FOO=y
 # end of main

@@ -1,0 +1,23 @@
+menu "main"
+
+config CY
+  def_bool y
+
+config CN
+  def_bool n
+
+config TEST
+  int "set def"
+  default 5
+
+config FOO
+  bool "first Option"
+  depends on CN
+
+config FOO
+  default y
+
+configdefault FOO
+  default 5 if CY
+
+endmenu

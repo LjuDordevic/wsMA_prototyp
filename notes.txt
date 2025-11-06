@@ -12,9 +12,17 @@ Successfully installed kconfiglib-14.1.1a4
 Symbols: 3
 -> cd .. -> echo "-e ./external/ZephyrKconfiglib" > requirements.txt
 
+**********************************zephyr-rtos/Kconfiglib ********************************** 
+deactivate venv
+python3 -m venv venv_zephyr_rtos
+source venv_zephyr_rtos !!!!
+git submodule add https://github.com/zephyrproject-rtos/zephyr.git external/ZephyrRTOS
+pip install -e./external/ZephyrRTOS -> is not a valid editable requirement
+Use directly with python '~/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' KconfigZephyrRTOS
+
 **********************************espressif/esp-idf-kconfig ********************************** 
 
--> ~/wsMA_prototyp$ -> git submodule add https://github.com/espressif/esp-idf-kconfig.git ESPIDFKconfig
+-> ~/wsMA_prototyp$ -> git submodule add https://github.com/espressif/esp-idf-kconfig.git external/ESPIDFKconfig
 -> pip install -e ./external/ESPIDFKconfig/
 Successfully built esp-idf-kconfig
 Installing collected packages: pyparsing, pygments, mdurl, markdown-it-py, rich, esp-idf-kconfig
