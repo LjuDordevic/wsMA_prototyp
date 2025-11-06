@@ -12,7 +12,7 @@ Successfully installed kconfiglib-14.1.1a4
 Symbols: 3
 -> cd .. -> echo "-e ./external/ZephyrKconfiglib" > requirements.txt
 
-**********************************zephyr-rtos/Kconfiglib ********************************** 
+**********************************zephyr-rtos/zephyr ********************************** 
 deactivate venv
 python3 -m venv venv_zephyr_rtos
 source venv_zephyr_rtos !!!!
