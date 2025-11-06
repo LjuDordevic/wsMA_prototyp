@@ -1,0 +1,27 @@
+**********************************zephyr-rtos/Kconfiglib ********************************** 
+
+-> ~/wsMA_prototyp$ git submodule add https://github.com/zephyrproject-rtos/Kconfiglib.git external/ZephyrKconfiglib
+-> cd external/ZephyrKconfiglib -> git pull -> Already up to date.
+-> cd .. -> pip install -e ./external/ZephyrKconfiglib/ 
+Successfully built kconfiglib
+Installing collected packages: kconfiglib
+Successfully installed kconfiglib-14.1.1a4
+-> python -c "import kconfiglib; print(kconfiglib.__file__)"
+~/wsMA_prototyp/external/ZephyrKconfiglib/kconfiglib.py
+-> cd exp/ -> python test.py 
+Symbols: 3
+-> cd .. -> echo "-e ./external/ZephyrKconfiglib" > requirements.txt
+
+**********************************espressif/esp-idf-kconfig ********************************** 
+
+-> ~/wsMA_prototyp$ -> git submodule add https://github.com/espressif/esp-idf-kconfig.git ESPIDFKconfig
+-> pip install -e ./external/ESPIDFKconfig/
+Successfully built esp-idf-kconfig
+Installing collected packages: pyparsing, pygments, mdurl, markdown-it-py, rich, esp-idf-kconfig
+Successfully installed esp-idf-kconfig-3.3.0 markdown-it-py-4.0.0 mdurl-0.1.2 pygments-2.19.2 pyparsing-3.2.5 rich-14.2.0
+-> echo "pip install -e ./external/ESPIDFKconfig/" > requirements.txt
+-> python -c "import esp_idf_kconfig; print(esp_idf_kconfig.__file__)" (same check pip show esp-idf-kconfig)
+~/wsMA_prototyp/external/ESPIDFKconfig/esp_idf_kconfig/__init__.py
+IMPORTANT: set export KCONFIG_PARSER_VERSION='2' in venv/bin/activate  
+-> /exp$ python test.py 
+Symbols: 4
