@@ -1,0 +1,24 @@
+mainmenu "Test set and set default"
+    menu "My Test"
+
+        config UNI_NAME
+            string "Name der Uni"
+            default "Name"
+
+        config NUMBER_OF_STUDENTS
+            int "Anzahl der Studierenden"
+            default 0
+
+        config UNI_DEFAULT_VALUES
+            bool "set default"
+            default n
+            set default UNI_NAME="OvGU"
+            set default NUMBER_OF_STUDENTS=12606
+
+        config FIN_FACULTY
+            bool "set"
+            default n
+            set UNI_NAME="FIN"
+            set NUMBER_OF_STUDENTS=1464
+
+endmenu

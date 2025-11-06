@@ -1,3 +1,6 @@
 [submodule "external/ZephyrKconfiglib"]
 	path = external/ZephyrKconfiglib
 	url = https://github.com/zephyrproject-rtos/Kconfiglib.git
+[submodule "external/ESPIDFKconfig"]
+	path = external/ESPIDFKconfig
+	url = https://github.com/espressif/esp-idf-kconfig.git

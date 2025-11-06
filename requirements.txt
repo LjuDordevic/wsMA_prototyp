@@ -1,1 +1,2 @@
 -e ./external/ZephyrKconfiglib
+-e ./external/ESPIDFKconfig/
