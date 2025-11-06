@@ -1,0 +1,3 @@
+[submodule "external/ZephyrKconfiglib"]
+	path = external/ZephyrKconfiglib
+	url = https://github.com/zephyrproject-rtos/Kconfiglib.git
