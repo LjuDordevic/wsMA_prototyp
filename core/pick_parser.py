@@ -7,10 +7,12 @@ base_dir = Path(__file__).parent
 # /external 
 external_dir = base_dir.parent / "external"
 
-class PickParser(object):
+class PickParser:
 
     __slots__= (
         "spec_version"
+        "_kconfiglib_path"
+        "kconfiglib"
     )
 
     def __init__(self, spec_version: str):
@@ -36,18 +38,27 @@ class PickParser(object):
             )
         
         if self.spec_version == "ZRTOS":
-            zephyr_rtos_root = base_dir.parent / "external" / "ZephyrRTOS"
-            zephyr_rtos_kconfiglib_path = zephyr_rtos_root / "scripts" / "kconfig"
-            sys.path.insert(0, str(zephyr_rtos_kconfiglib_path))
-            assert(zephyr_rtos_kconfiglib_path / "kconfiglib.py").exists(), f"kconfiglib.py not found in {zephyr_rtos_kconfiglib_path}"
-            import kconfiglib 
-        elif self.spec_version == "Z":
-            import kconfiglib
-        elif self.spec_version == "ESPIDF":
-            from  esp_kconfiglib import Kconfig as kconfiglib
+            zephyr_rtos_root = external_dir / "ZephyrRTOS"
+            zephyr_rtos_kconfiglib_folder = zephyr_rtos_root / "scripts" / "kconfig"
+            zephyr_rtos_kconfiglib_file = zephyr_rtos_kconfiglib_folder / "kconfiglib.py"
+
+            assert(zephyr_rtos_kconfiglib_file).exists(), f"kconfiglib.py not found in {zephyr_rtos_kconfiglib_folder}"
+            
+            if zephyr_rtos_kconfiglib_folder not in sys.path:
+                sys.path.insert(0, str(zephyr_rtos_kconfiglib_folder))
+
+            try:
+                import kconfiglib as kconfiglib_zrtos
+                self.kconfiglib = kconfiglib_zrtos
+            except ImportError as e:
+                raise ImportError(f"couldn't import from ")
+
+            """ elif self.spec_version == "Z":
+                import kconfiglib
+            elif self.spec_version == "ESPIDF":
+                from  esp_kconfiglib import Kconfig as kconfiglib"""
 
 if __name__ == "__main__":
-    try:
-        picker_zrtos = PickParser("ZRTOS")
-    except(ImportError) as e:
-        print(f"Initial error: {e}")
+    print("test")
+    picker_zrtos = PickParser("ZRTOS")
+    
