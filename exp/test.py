@@ -1,5 +1,5 @@
-#import kconfiglib
-from  esp_kconfiglib import Kconfig as kconfiglib
+#import kconfiglib                                  # ZephyrKconfiglib
+from  esp_kconfiglib import Kconfig as kconfiglib   # esp-idf-kconfiglib 
 
 #kconf = kconfiglib.Kconfig('Kconfig')
 kconf = kconfiglib('KconfigEsp')
