@@ -61,23 +61,48 @@ class PickParser:
                 import kconfiglib as kconfiglib_zrtos
                 self.kconfiglib = kconfiglib_zrtos
             except ImportError as e:
-                raise ImportError(f"couldn't import from ")
+                raise ImportError(f"couldn't import from {zephyr_rtos_kconfiglib_folder}")
 
-            """ elif self.spec_version == "Z":
-                import kconfiglib
-            elif self.spec_version == "ESPIDF":
-                from  esp_kconfiglib import Kconfig as kconfiglib"""
+        elif self.spec_version == "ZKCL":
+            zephyr_kcl_root = external_dir / "ZephyrKconfiglib"
+            zephyr_kcl_file = zephyr_kcl_root / "kconfiglib.py"
+
+            assert(zephyr_kcl_file).exists(), f"kconfiglib.py not found in {zephyr_kcl_root}"
+            self._kconfig_folder = zephyr_kcl_root # no extra folder
+
+            if str(zephyr_kcl_root) not in sys.path:
+                sys.path.insert(0, str(zephyr_kcl_root))           
+
+            try:
+                import kconfiglib as z_kconfiglib
+                self.kconfiglib = z_kconfiglib
+            except ImportError as e:
+                raise ImportError(f"couldn't import from {zephyr_kcl_root}")
+
+        elif self.spec_version == "ESPIDF":
+            from  esp_kconfiglib import Kconfig as esp_kconfiglib    
+            self.kconfiglib = esp_kconfiglib
 
     def _test_kconfiglib(self, project_dir: str, kconfig_file: str):
         project_dir_path = Path(project_dir)
         os.environ["srctree"] = str(project_dir_path)
 
-        kconf = self.kconfiglib.Kconfig(kconfig_file)
+        if self.spec_version == "ESPIDF":
+            kconf = self.kconfiglib(kconfig_file)
+        else:
+            kconf = self.kconfiglib.Kconfig(kconfig_file)
         print('Symbols: ', len(kconf.defined_syms))
 
 if __name__ == "__main__":
-    print("test")
+  
     picker_zrtos = PickParser("ZRTOS")
     print(picker_zrtos)
     picker_zrtos._test_kconfiglib("/home/ljd/wsMA_prototyp/exp", "KconfigZephyrRTOS")
     
+    picker_zkcl = PickParser("ZKCL")
+    print(picker_zkcl)
+    picker_zkcl._test_kconfiglib("/home/ljd/wsMA_prototyp/exp", "Kconfig")
+    
+    picker_esp = PickParser("ESPIDF")
+    print(picker_esp)
+    picker_esp._test_kconfiglib("/home/ljd/wsMA_prototyp/exp", "KconfigEsp")
