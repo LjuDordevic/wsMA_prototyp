@@ -54,14 +54,19 @@ class PickParser:
             assert(zephyr_rtos_kconfiglib_file).exists(), f"kconfiglib.py not found in {zephyr_rtos_kconfiglib_folder}"
             self._kconfig_folder = zephyr_rtos_kconfiglib_folder
 
-            if str(zephyr_rtos_kconfiglib_folder) not in sys.path:
-                sys.path.insert(0, str(zephyr_rtos_kconfiglib_folder))
+            # clear cache
+            if 'kconfiglib' in sys.modules:
+                del sys.modules['kconfiglib']
+            
+            kcl_folder_str = str(zephyr_rtos_kconfiglib_folder)
+            if kcl_folder_str not in sys.path:
+                sys.path.insert(0, kcl_folder_str)
 
             try:
                 import kconfiglib as kconfiglib_zrtos
                 self.kconfiglib = kconfiglib_zrtos
             except ImportError as e:
-                raise ImportError(f"couldn't import from {zephyr_rtos_kconfiglib_folder}")
+                raise ImportError(f"couldn't import from {zephyr_rtos_kconfiglib_folder}: {e}")
 
         elif self.spec_version == "ZKCL":
             zephyr_kcl_root = external_dir / "ZephyrKconfiglib"
@@ -70,8 +75,18 @@ class PickParser:
             assert(zephyr_kcl_file).exists(), f"kconfiglib.py not found in {zephyr_kcl_root}"
             self._kconfig_folder = zephyr_kcl_root # no extra folder
 
-            if str(zephyr_kcl_root) not in sys.path:
-                sys.path.insert(0, str(zephyr_kcl_root))           
+            # clear cache
+            if 'kconfiglib' in sys.modules:
+                del sys.modules['kconfiglib']
+
+            kcl_folder_str = str(zephyr_kcl_root)
+            # remove all "old paths" from sys.paths that have 'kconfiglib'
+            # leave the current one = /external/ZephyrKconfiglib 
+            # and the ones that don't even have 'kconfiglib'           
+            sys.path = [p for p in sys.path if p == kcl_folder_str or 'kconfiglib' not in p.lower ]
+
+            if kcl_folder_str not in sys.path:
+                sys.path.insert(0, kcl_folder_str)           
 
             try:
                 import kconfiglib as z_kconfiglib
