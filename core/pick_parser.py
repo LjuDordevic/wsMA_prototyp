@@ -66,7 +66,7 @@ class PickParser:
                 import kconfiglib as kconfiglib_zrtos
                 self.kconfiglib = kconfiglib_zrtos
             except ImportError as e:
-                raise ImportError(f"couldn't import from {zephyr_rtos_kconfiglib_folder}: {e}")
+                raise ImportError(f"couldn't import from {kcl_folder_str}: {e}")
 
         elif self.spec_version == "ZKCL":
             zephyr_kcl_root = external_dir / "ZephyrKconfiglib"
@@ -83,7 +83,7 @@ class PickParser:
             # remove all "old paths" from sys.paths that have 'kconfiglib'
             # leave the current one = /external/ZephyrKconfiglib 
             # and the ones that don't even have 'kconfiglib'           
-            sys.path = [p for p in sys.path if p == kcl_folder_str or 'kconfiglib' not in p.lower ]
+            sys.path = [p for p in sys.path if p == kcl_folder_str or 'kconfiglib' not in p.lower()]
 
             if kcl_folder_str not in sys.path:
                 sys.path.insert(0, kcl_folder_str)           
@@ -92,20 +92,36 @@ class PickParser:
                 import kconfiglib as z_kconfiglib
                 self.kconfiglib = z_kconfiglib
             except ImportError as e:
-                raise ImportError(f"couldn't import from {zephyr_kcl_root}")
+                raise ImportError(f"couldn't import from {kcl_folder_str}: {e}")
 
         elif self.spec_version == "ESPIDF":
-            from  esp_kconfiglib import Kconfig as esp_kconfiglib    
-            self.kconfiglib = esp_kconfiglib
+
+            espidf_kcl_root = external_dir / "ESPIDFKconfig"
+            espidf_kcl_folder = espidf_kcl_root / "esp_kconfiglib"
+            
+            assert(espidf_kcl_folder).exists(), f"esp_kconfiglib module not found in {espidf_kcl_root}"
+            self._kconfig_folder = espidf_kcl_folder
+
+            kcl_folder_str = espidf_kcl_root
+            if kcl_folder_str not in sys.path:
+                sys.path.insert(0, kcl_folder_str)
+
+            try:
+                from esp_kconfiglib import Kconfig as esp_kconfiglib
+                self.kconfiglib = esp_kconfiglib
+            except ImportError as e:
+                raise ImportError(f"couldn't import from {kcl_folder_str}: {e}")
 
     def _test_kconfiglib(self, project_dir: str, kconfig_file: str):
         project_dir_path = Path(project_dir)
         os.environ["srctree"] = str(project_dir_path)
+        esp_kconfig_file = project_dir_path / kconfig_file
 
         if self.spec_version == "ESPIDF":
-            kconf = self.kconfiglib(kconfig_file)
+            print("esp file path: " + str(esp_kconfig_file))
+            kconf = self.kconfiglib(str(esp_kconfig_file))
         else:
-            kconf = self.kconfiglib.Kconfig(kconfig_file)
+            kconf = self.kconfiglib.Kconfig(str(kconfig_file))
         print('Symbols: ', len(kconf.defined_syms))
 
 if __name__ == "__main__":
@@ -113,10 +129,12 @@ if __name__ == "__main__":
     picker_zrtos = PickParser("ZRTOS")
     print(picker_zrtos)
     picker_zrtos._test_kconfiglib("/home/ljd/wsMA_prototyp/exp", "KconfigZephyrRTOS")
+    print("-" * 50)
     
     picker_zkcl = PickParser("ZKCL")
     print(picker_zkcl)
     picker_zkcl._test_kconfiglib("/home/ljd/wsMA_prototyp/exp", "Kconfig")
+    print("-" * 50)
     
     picker_esp = PickParser("ESPIDF")
     print(picker_esp)
