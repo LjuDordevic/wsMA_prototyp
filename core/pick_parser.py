@@ -15,6 +15,13 @@ class PickParser:
         "kconfiglib"
     )
 
+    def __str__(self):
+        return (
+            f"spec_version: {self.spec_version}\n"
+            f"kconfig_folder: {self._kconfig_folder}\n"
+            f"kconfiglib: {self.kconfiglib}"
+        )
+
     def __init__(self, spec_version: str):
         """
         Init ParserPicker based on given specification version (specification = main Kconfig file)
@@ -60,13 +67,6 @@ class PickParser:
                 import kconfiglib
             elif self.spec_version == "ESPIDF":
                 from  esp_kconfiglib import Kconfig as kconfiglib"""
-
-    def __str__(self):
-        return (
-            f"spec_version: {self.spec_version}\n"
-            f"kconfig_folder: {self._kconfig_folder}\n"
-            f"kconfiglib: {self.kconfiglib}"
-        )
 
 if __name__ == "__main__":
     print("test")
