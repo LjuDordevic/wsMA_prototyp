@@ -68,8 +68,16 @@ class PickParser:
             elif self.spec_version == "ESPIDF":
                 from  esp_kconfiglib import Kconfig as kconfiglib"""
 
+    def _test_kconfiglib(self, project_dir: str, kconfig_file: str):
+        project_dir_path = Path(project_dir)
+        os.environ["srctree"] = str(project_dir_path)
+
+        kconf = self.kconfiglib.Kconfig(kconfig_file)
+        print('Symbols: ', len(kconf.defined_syms))
+
 if __name__ == "__main__":
     print("test")
     picker_zrtos = PickParser("ZRTOS")
     print(picker_zrtos)
+    picker_zrtos._test_kconfiglib("/home/ljd/wsMA_prototyp/exp", "KconfigZephyrRTOS")
     
