@@ -61,11 +61,15 @@ class PickParser:
             elif self.spec_version == "ESPIDF":
                 from  esp_kconfiglib import Kconfig as kconfiglib"""
 
+    def __str__(self):
+        return (
+            f"spec_version: {self.spec_version}\n"
+            f"kconfig_folder: {self._kconfig_folder}\n"
+            f"kconfiglib: {self.kconfiglib}"
+        )
+
 if __name__ == "__main__":
     print("test")
     picker_zrtos = PickParser("ZRTOS")
-    print("spec version: " + picker_zrtos.spec_version)
-    print("kconfig folder: " + str(picker_zrtos._kconfig_folder))
-    print("kconfiglib: "+ str(picker_zrtos.kconfiglib))
-    print("ok")
+    print(picker_zrtos)
     
