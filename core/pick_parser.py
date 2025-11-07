@@ -10,8 +10,8 @@ external_dir = base_dir.parent / "external"
 class PickParser:
 
     __slots__= (
-        "spec_version"
-        "_kconfiglib_path"
+        "spec_version",
+        "_kconfig_folder",
         "kconfiglib"
     )
 
@@ -25,6 +25,8 @@ class PickParser:
         """
 
         self.spec_version = spec_version.upper() # make sure is upper case 
+        self._kconfig_folder = None
+        self.kconfiglib = None
         self._load_kconfiglib()
             
     def _load_kconfiglib(self):
@@ -43,8 +45,9 @@ class PickParser:
             zephyr_rtos_kconfiglib_file = zephyr_rtos_kconfiglib_folder / "kconfiglib.py"
 
             assert(zephyr_rtos_kconfiglib_file).exists(), f"kconfiglib.py not found in {zephyr_rtos_kconfiglib_folder}"
-            
-            if zephyr_rtos_kconfiglib_folder not in sys.path:
+            self._kconfig_folder = zephyr_rtos_kconfiglib_folder
+
+            if str(zephyr_rtos_kconfiglib_folder) not in sys.path:
                 sys.path.insert(0, str(zephyr_rtos_kconfiglib_folder))
 
             try:
@@ -61,4 +64,5 @@ class PickParser:
 if __name__ == "__main__":
     print("test")
     picker_zrtos = PickParser("ZRTOS")
+    print("ok")
     
