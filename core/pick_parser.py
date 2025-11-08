@@ -35,7 +35,29 @@ class PickParser:
         self._kconfig_folder = None
         self.kconfiglib = None
         self._load_kconfiglib()
+    
+    def _load_zrtos(self):
+        zephyr_rtos_root = external_dir / "ZephyrRTOS"
+        zephyr_rtos_kconfiglib_folder = zephyr_rtos_root / "scripts" / "kconfig"
+        zephyr_rtos_kconfiglib_file = zephyr_rtos_kconfiglib_folder / "kconfiglib.py"
+
+        assert(zephyr_rtos_kconfiglib_file).exists(), f"kconfiglib.py not found in {zephyr_rtos_kconfiglib_folder}"
+        self._kconfig_folder = zephyr_rtos_kconfiglib_folder
+
+        # clear cache
+        if 'kconfiglib' in sys.modules:
+            del sys.modules['kconfiglib']
             
+        kcl_folder_str = str(zephyr_rtos_kconfiglib_folder)
+        if kcl_folder_str not in sys.path:
+                sys.path.insert(0, kcl_folder_str)
+
+        try:
+            import kconfiglib as kconfiglib_zrtos
+            self.kconfiglib = kconfiglib_zrtos
+        except ImportError as e:
+            raise ImportError(f"couldn't import from {kcl_folder_str}: {e}")
+
     def _load_kconfiglib(self):
         """
         get right version of kconfiglib
@@ -47,26 +69,7 @@ class PickParser:
             )
         
         if self.spec_version == "ZRTOS":
-            zephyr_rtos_root = external_dir / "ZephyrRTOS"
-            zephyr_rtos_kconfiglib_folder = zephyr_rtos_root / "scripts" / "kconfig"
-            zephyr_rtos_kconfiglib_file = zephyr_rtos_kconfiglib_folder / "kconfiglib.py"
-
-            assert(zephyr_rtos_kconfiglib_file).exists(), f"kconfiglib.py not found in {zephyr_rtos_kconfiglib_folder}"
-            self._kconfig_folder = zephyr_rtos_kconfiglib_folder
-
-            # clear cache
-            if 'kconfiglib' in sys.modules:
-                del sys.modules['kconfiglib']
-            
-            kcl_folder_str = str(zephyr_rtos_kconfiglib_folder)
-            if kcl_folder_str not in sys.path:
-                sys.path.insert(0, kcl_folder_str)
-
-            try:
-                import kconfiglib as kconfiglib_zrtos
-                self.kconfiglib = kconfiglib_zrtos
-            except ImportError as e:
-                raise ImportError(f"couldn't import from {kcl_folder_str}: {e}")
+            self._load_zrtos()
 
         elif self.spec_version == "ZKCL":
             zephyr_kcl_root = external_dir / "ZephyrKconfiglib"
