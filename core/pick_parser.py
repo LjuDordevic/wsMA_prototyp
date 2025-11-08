@@ -134,7 +134,7 @@ class PickParser:
             kconf = self.kconfiglib.Kconfig(str(kconfig_file))
         print('Symbols: ', len(kconf.defined_syms))
 
-class ZRTOSPicker:
+class ZRTOSParser:
     """
     help-class -> Parser for Zephyr RTOS specifications 
     init: save kconfiglib_module that the PickParser chose -> input for subclass 
@@ -142,6 +142,22 @@ class ZRTOSPicker:
     """
     def __init__(self, kconfiglib_module):
         self.kconfiglib = kconfiglib_module
+
+    def parse_files(self, project_dir: str, kconfig_file: str):
+        project_dir_path = Path(project_dir)
+        assert(project_dir_path).exists(), f"{project_dir_path} not found"
+        os.environ["srctree"] = str(project_dir_path)
+
+        kconfig_file_path = project_dir_path / kconfig_file
+        assert(kconfig_file_path).exists(), f"{kconfig_file} not found in {project_dir_path}"
+        
+        Kconfig = self.kconfiglib.Kconfig
+
+        class KconfigParser(Kconfig):
+            def __init__(self, filename):
+                self._parse_only = True
+                super().__init__(filename)
+        
 
 if __name__ == "__main__":
   
