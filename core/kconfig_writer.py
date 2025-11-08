@@ -126,3 +126,60 @@ class KconfigLine:
     
     def __repr__(self):
         return f"KconfigLine({self.line_type}, line={self.line_number}, indent={self.indent})"
+
+class KconfigReader:
+    def __init__(self, spec_version: str):
+        self.spec_version = spec_version.upper()
+    
+    def read_file(self, file_path: Path) -> List[KconfigLine]:
+        """
+        read file -> give list of lines 
+        """
+        if not file_path.exists():
+            raise FileNotFoundError(f"Kconfig file not found: {file_path}")
+        
+        lines = []
+        with open(file_path, 'r', encoding='utf-8') as f:
+            for line_num, raw_line in enumerate(f, start=1):
+                raw_line = raw_line.rstrip('\n\r')
+                kconfig_line = KconfigLine(raw_line, line_num)
+                lines.append(kconfig_line)
+        
+        return lines
+
+class KconfigWriter:   
+    def __init__(self, spec_version: str):
+        self.spec_version = spec_version.upper()
+    
+    def write(self, lines: List[KconfigLine], output_path: Path):
+        """
+        write lines -> output file
+        """        
+        with open(output_path, 'w', encoding='utf-8') as f:
+            for line in lines:
+                f.write(line.raw_text + '\n') # add EOL 
+                # TODO: theoretisch hier kann man dann schon transformieren 
+                # aber man braucht infos bezüglich Mehrfachdefinition     
+                 
+        print(f"Done writting: {output_path}")
+        print(f"  {len(lines)} lines")
+
+
+if __name__ == "__main__":
+    reader = KconfigReader("ZRTOS")
+    writer = KconfigWriter("ZRTOS")
+    input_path = Path("/home/ljd/wsMA_prototyp/exp/KconfigZephyrRTOS")
+    
+    if input_path.exists():
+        print(f"Read: {input_path}")
+        lines = reader.read_file(input_path)
+
+        for line in lines:
+            print(f"  {line}")
+            if line.line_type != 'empty' and line.line_type != 'other':
+                print(f"    → Content: {line.content}")
+        print(f"Found: {len(lines)} lines in {str(input_path)}")
+        output_path = Path("/home/ljd/wsMA_prototyp/exp_copy/KconfigZephyrRTOS")
+        writer.write(lines, "", output_path)
+    else:
+        print(f"Not found: {input_path}")
