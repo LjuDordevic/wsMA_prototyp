@@ -85,6 +85,24 @@ class PickParser:
         except ImportError as e:
             raise ImportError(f"couldn't import from {kcl_folder_str}: {e}")    
 
+    def _load_espidf(self):
+
+        espidf_kcl_root = external_dir / "ESPIDFKconfig"
+        espidf_kcl_folder = espidf_kcl_root / "esp_kconfiglib"
+            
+        assert(espidf_kcl_folder).exists(), f"esp_kconfiglib module not found in {espidf_kcl_root}"
+        self._kconfig_folder = espidf_kcl_folder
+
+        kcl_folder_str = espidf_kcl_root
+        if kcl_folder_str not in sys.path:
+                sys.path.insert(0, kcl_folder_str)
+
+        try:
+            from esp_kconfiglib import Kconfig as esp_kconfiglib
+            self.kconfiglib = esp_kconfiglib
+        except ImportError as e:
+            raise ImportError(f"couldn't import from {kcl_folder_str}: {e}")
+
     def _load_kconfiglib(self):
         """
         get right version of kconfiglib
@@ -102,22 +120,7 @@ class PickParser:
             self._load_zkcl()
 
         elif self.spec_version == "ESPIDF":
-
-            espidf_kcl_root = external_dir / "ESPIDFKconfig"
-            espidf_kcl_folder = espidf_kcl_root / "esp_kconfiglib"
-            
-            assert(espidf_kcl_folder).exists(), f"esp_kconfiglib module not found in {espidf_kcl_root}"
-            self._kconfig_folder = espidf_kcl_folder
-
-            kcl_folder_str = espidf_kcl_root
-            if kcl_folder_str not in sys.path:
-                sys.path.insert(0, kcl_folder_str)
-
-            try:
-                from esp_kconfiglib import Kconfig as esp_kconfiglib
-                self.kconfiglib = esp_kconfiglib
-            except ImportError as e:
-                raise ImportError(f"couldn't import from {kcl_folder_str}: {e}")
+            self._load_espidf()
 
     def _test_kconfiglib(self, project_dir: str, kconfig_file: str):
         project_dir_path = Path(project_dir)
