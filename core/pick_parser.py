@@ -160,14 +160,35 @@ class ZRTOSParser:
 
             def _finalize_node(self, node, visible):
                 """
-                only when class has att _parse_only and it's = True -> set _parsing_complete = True
-                else: call _finalize_node() as in parenr Kconfig class
+                only when class has attribute _parse_only and it's = True -> set _parsing_complete = True
+                else: call _finalize_node() like in parent Kconfig class
                 """
                 if hasattr(self, '_parse_only') and self._parse_only:
+                    print("skip finalize_node")
                     self._parsing_complete = True
                     return
                 return super()._finalize_node(node, visible)
-                
+            
+            def _finalize_sym(self, sym):
+                if hasattr(self, '_parse_only') and self._parse_only:
+                    print("skip finalize_sym: taakes care of configdefault")
+                    return
+                return super()._finalize_sym(self, sym)
+            
+            # some of these depend on everything being finalized 
+            def _check_sym_sanity():
+                if hasattr(self, '_parse_only') and self._parse_only:
+                    print("skip check_sym_synity")
+                    return
+                return super()._check_sym_sanity()
+            
+            def _check_choice_sanity():
+                if hasattr(self, '_parse_only') and self._parse_only:
+                    print("skip check_choice_sanity")
+                    return
+                return super()._check_choice_sanity()
+            
+
         
 
 if __name__ == "__main__":
