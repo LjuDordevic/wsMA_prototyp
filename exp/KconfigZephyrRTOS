@@ -12,12 +12,12 @@ config TEST
 
 config FOO
   bool "first Option"
-  depends on CN
 
 config FOO
+  bool "seconf"
   default y
 
 configdefault FOO
-  default 5 if CY
+  default y if CY
 
 endmenu
