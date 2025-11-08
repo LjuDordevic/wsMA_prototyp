@@ -134,6 +134,15 @@ class PickParser:
             kconf = self.kconfiglib.Kconfig(str(kconfig_file))
         print('Symbols: ', len(kconf.defined_syms))
 
+class ZRTOSPicker:
+    """
+    help-class -> Parser for Zephyr RTOS specifications 
+    init: save kconfiglib_module that the PickParser chose -> input for subclass 
+    in the subclass: call the Kconfig from the kconfiglib_module + override functions 
+    """
+    def __init__(self, kconfiglib_module):
+        self.kconfiglib = kconfiglib_module
+
 if __name__ == "__main__":
   
     picker_zrtos = PickParser("ZRTOS")
