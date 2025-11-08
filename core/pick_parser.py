@@ -151,12 +151,23 @@ class ZRTOSParser:
         kconfig_file_path = project_dir_path / kconfig_file
         assert(kconfig_file_path).exists(), f"{kconfig_file} not found in {project_dir_path}"
         
-        Kconfig = self.kconfiglib.Kconfig
+        Kconfig = self.kconfiglib.Kconfig   # parent Kconfig class from kconfiglib_module
 
         class KconfigParser(Kconfig):
             def __init__(self, filename):
-                self._parse_only = True
-                super().__init__(filename)
+                self._parse_only = True     # flag used for override 
+                super().__init__(filename)  # call init from parent Kconfig
+
+            def _finalize_node(self, node, visible):
+                """
+                only when class has att _parse_only and it's = True -> set _parsing_complete = True
+                else: call _finalize_node() as in parenr Kconfig class
+                """
+                if hasattr(self, '_parse_only') and self._parse_only:
+                    self._parsing_complete = True
+                    return
+                return super()._finalize_node(node, visible)
+                
         
 
 if __name__ == "__main__":
