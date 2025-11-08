@@ -164,32 +164,55 @@ class ZRTOSParser:
                 else: call _finalize_node() like in parent Kconfig class
                 """
                 if hasattr(self, '_parse_only') and self._parse_only:
-                    print("skip finalize_node")
+                    print("skip _finalize_node")
                     self._parsing_complete = True
                     return
                 return super()._finalize_node(node, visible)
             
             def _finalize_sym(self, sym):
                 if hasattr(self, '_parse_only') and self._parse_only:
-                    print("skip finalize_sym: taakes care of configdefault")
+                    print("skip _finalize_sym: taakes care of configdefault")
                     return
                 return super()._finalize_sym(self, sym)
             
             # some of these depend on everything being finalized 
+            # TODO: check workaround 
             def _check_sym_sanity():
                 if hasattr(self, '_parse_only') and self._parse_only:
-                    print("skip check_sym_synity")
+                    print("skip _check_sym_synity")
                     return
                 return super()._check_sym_sanity()
             
             def _check_choice_sanity():
                 if hasattr(self, '_parse_only') and self._parse_only:
-                    print("skip check_choice_sanity")
+                    print("skip _check_choice_sanity")
                     return
                 return super()._check_choice_sanity()
             
+            def _check_undef_syms():
+                if hasattr(self, '_parse_only') and self._parse_only:
+                    print("skip _check_undef_syms")
+                    return
+                return super()._check_undef_syms()
+            
+            def _check_undef_syms():
+                if hasattr(self, '_parse_only') and self._parse_only:
+                    print("skip _check_undef_syms")
+                    return
+                return super()._check_undef_syms()
 
-        
+            def _build_dep():
+                if hasattr(self, '_parse_only') and self._parse_only:
+                    print("skip _build_dep")
+                    return
+                return super()._build_dep()
+            
+            def _add_choice_deps():
+                if hasattr(self, '_parse_only') and self._parse_only:
+                    print("skip _add_choice_deps")
+                    return
+                return super()._add_choice_deps()    
+
 
 if __name__ == "__main__":
   
