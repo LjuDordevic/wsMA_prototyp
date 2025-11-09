@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Optional, Tuple
+from typing import List
 import re
 
 class KconfigLine:
@@ -163,7 +163,6 @@ class KconfigWriter:
                  
         print(f"Done writting: {output_path}")
         print(f"  {len(lines)} lines")
-
 
 if __name__ == "__main__":
     reader = KconfigReader("ZRTOS")
