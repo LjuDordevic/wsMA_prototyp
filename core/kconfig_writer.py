@@ -161,8 +161,7 @@ class KconfigWriter:
                 # TODO: theoretisch hier kann man dann schon transformieren 
                 # aber man braucht infos bezüglich Mehrfachdefinition     
                  
-        print(f"Done writting: {output_path}")
-        print(f"  {len(lines)} lines")
+        print(f"Done writting {len(lines)} lines in {output_path}")
 
 if __name__ == "__main__":
     reader = KconfigReader("ZRTOS")
