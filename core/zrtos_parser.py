@@ -25,11 +25,12 @@ class ZRTOSParser:
                 self._parse_only = True     # flag used for override 
                 super().__init__(filename)  # call init from parent Kconfig
 
+            """ 
             def _finalize_node(self, node, visible):
-                """
+                
                 only when class has attribute _parse_only and it's = True -> set _parsing_complete = True
                 else: call _finalize_node() like in parent Kconfig class
-                """
+                
                 if hasattr(self, '_parse_only') and self._parse_only:
                     print("skip _finalize_node")
                     self._parsing_complete = True
@@ -41,7 +42,7 @@ class ZRTOSParser:
                     print("skip _finalize_sym: takes care of configdefault")
                     return
                 return super()._finalize_sym(sym)
-            
+            """
             # some of these depend on everything being finalized 
             # TODO: check workaround 
             """ 
@@ -83,13 +84,13 @@ class ZRTOSParser:
                 """ 
 
         kconf = KconfigParser(kconfig_file)
-
+        # dictionary key: value 
         return {
             'kconf': kconf,
             'top_node': kconf.top_node,
             'syms': kconf.syms,
-            'const_sysm': kconf.const_syms,
-            'defined_sysm': kconf.defined_syms,
+            'const_syms': kconf.const_syms,
+            'defined_syms': kconf.defined_syms,
             'missing_syms': kconf.missing_syms,
             'named_choices': kconf.named_choices,
             'choices': kconf.choices,
