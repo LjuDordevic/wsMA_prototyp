@@ -121,7 +121,23 @@ class KconfigLine:
             match = re.match(r'menuconfig\s+(\w+)', s)
             if match:
                 content['symbol'] = match.group(1)
+        
+        elif self.line_type.startswith('def_'):
+            def_keyword = self.line_type        # == def_bool, def_int, def_hex, def_string
+            rest = s[len(def_keyword):].strip() # == value + if <expr>
+            #print('def_keyword: ' + def_keyword)
+            #print('rest: ' + rest)
 
+            _keyword = def_keyword.split('_', 1)
+            content['_keyword'] = _keyword[1].strip()   # save after _: bool, string, hex, int 
+            #print(f"_keyword: {_keyword}")
+            #print(_keyword[1])  
+
+            split_rest = rest.split(' if ', 1)              # split one time
+            #print(f"split_rest: {split_rest}")
+            content['default_value'] = split_rest[0].strip()
+            content['condition'] = split_rest[1].strip() if len(split_rest) > 1 else None
+            
         return content
     
     def __repr__(self):

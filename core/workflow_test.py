@@ -26,15 +26,15 @@ print(f"   Parser found: {len(parser_result['unique_defined_syms'])} unique defi
 print(f"   Parser found: {len(parser_result['kconf'].kconfig_filenames)} files")
 print("-" * 50)
 
-transformer = KconfigTransformer("ZRTOS")
+transformer = KconfigTransformer(source_spec="ZRTOS")
 print("\n2. Bild TransformationContext FROM PARSER RESULTS")
 print(f" Transformer used for: {transformer.source_spec}")
 context = transformer.build_context_from_parser(
     parser_result
 )
-print(f" TransformationContext - configs: {len(context.symbol_definitions)}({', '.join(context.symbol_definitions.keys())})")
-print(f" TransformationContext - configdefaults: {len(context.configdefault_symbols)}({', '.join(context.configdefault_symbols)})")
-print("look at TransformationContext")
+print(f" TransformationContext - symbols: {len(context.symbol_definitions)} ({', '.join(context.symbol_definitions.keys())})")
+print(f" TransformationContext - configdefaults: {len(context.configdefault_symbols)} ({', '.join(context.configdefault_symbols)})")
+print(" look at TransformationContext")
 
 for sym_name, definitions in context.symbol_definitions.items():
     if len(definitions) >= 1:
@@ -45,3 +45,24 @@ for sym_name, definitions in context.symbol_definitions.items():
             file = defn.get('file') or "<unknown file>"
             line = defn.get('line') or "<unknown line>"
             print(f"     - {file}:{line}{default_tag}")
+
+reader = KconfigReader("ZRTOS")
+writer = KconfigWriter("ZRTOS")
+input_file = Path(project_dir) / main_file
+output_file = Path(output_dir) / main_file
+
+print(f"\n3. Transform {input_file} - needs reader & writer")
+print(f"\n3. look the lines reader has found: ")
+lines = reader.read_file(input_file)
+for line in lines:
+            print(f"  {line}")
+            if line.line_type != 'empty' and line.line_type != 'other':
+                print(f"    → Content: {line.content}")
+
+print("give these reader lines to transformer")
+transformed_lines = transformer.transform_lines(lines, input_file)
+print(f"  Reader Input: {len(lines)} lines")
+print(f"  Transformer Output: {len(transformed_lines)} lines")
+print(f"call writer - write transformed lines in {output_file}")
+writer.write(transformed_lines, output_file)
+print("done")

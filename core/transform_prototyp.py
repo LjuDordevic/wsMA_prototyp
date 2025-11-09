@@ -92,21 +92,22 @@ class KconfigTransformer:
             - List[KconfigLine]: 1:n
         """
         # def_bool --> bool + default
-        if line.line_type == 'def_bool':
-            return self._transform_def_bool(line)
+        if line.line_type == 'def_bool' or line.line_type == 'def_string':
+            return self._transform_def_keyword(line)
         else:
             return line    
 
-    def _transform_def_bool(self, line) -> List:
+    def _transform_def_keyword(self, line) -> List:
         
         from kconfig_writer import KconfigLine  # avoid circular import
             
         indent_str = ' ' * line.indent
-        value = line.content.get('value', 'y')
+        def_keyword = line.content.get('_keyword')
+        value = line.content.get('default_value')
         condition = line.content.get('condition')
             
         bool_line = KconfigLine(
-            f"{indent_str}bool",
+            f"{indent_str}{def_keyword}",
             line.line_number
         )
             
