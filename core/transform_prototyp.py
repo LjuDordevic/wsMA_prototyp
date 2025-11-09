@@ -53,3 +53,34 @@ class KconfigTransformer:
         self.context = context
         return context
 
+def transform_lines(self, lines: List, current_file: Path) -> List:
+        """
+        lines -> from reader 
+        """
+        if self.context is None:
+            raise RuntimeError("call build_context_from_parser() first")
+        
+        result = []             # list for whole output  
+        i = 0                   # counter
+        current_symbol = None   
+        
+        while i < len(lines):   # as long as we got lines from the reader
+            line = lines[i]     # take one line at index i
+            
+            if line.line_type in ['config', 'menuconfig']:
+                current_symbol = line.content.get('symbol') # save sym name 
+            
+            transformed = self._transform_single_line(line, current_symbol, current_file)
+
+            # line without transformation needed, go to the next line from the reader list    
+            if transformed is None:
+                i += 1
+                continue
+            # is output list? -> extend, else: add one line
+            if isinstance(transformed, list):
+                result.extend(transformed) # 1:n (def_bool → bool + default)
+            else:
+                result.append(transformed) # 1:1         
+            i += 1  # go to the next 
+        
+        return result
