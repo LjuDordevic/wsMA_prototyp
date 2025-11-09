@@ -33,3 +33,8 @@ Successfully installed esp-idf-kconfig-3.3.0 markdown-it-py-4.0.0 mdurl-0.1.2 py
 IMPORTANT: set export KCONFIG_PARSER_VERSION='2' in venv/bin/activate  
 -> /exp$ python test.py 
 Symbols: 4
+
+********************************** linux ********************************** 
+TODO: als submodule 
+aktuell: cd ~/linux_kc_new/
+~/linux_kc_new/linux/scripts/kconfig/mconf '/home/ljd/wsMA_prototyp/exp_copy/KconfigZephyrRTOS'
