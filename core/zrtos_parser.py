@@ -18,7 +18,7 @@ class ZRTOSParser:
         kconfig_file_path = project_dir_path / kconfig_file
         assert(kconfig_file_path).exists(), f"{kconfig_file} not found in {project_dir_path}"
         
-        Kconfig = self.kconfiglib.Kconfig   # parent Kconfig class from kconfiglib_module
+        Kconfig = self.kconfiglib.Kconfig   # parent Kconfig class from (ZRTOS) kconfiglib_module
 
         class KconfigParser(Kconfig):
             def __init__(self, filename):
@@ -44,6 +44,7 @@ class ZRTOSParser:
             
             # some of these depend on everything being finalized 
             # TODO: check workaround 
+            """ 
             def _check_sym_sanity(self):
                 if hasattr(self, '_parse_only') and self._parse_only:
                     print("skip _check_sym_synity")
@@ -78,7 +79,8 @@ class ZRTOSParser:
                 if hasattr(self, '_parse_only') and self._parse_only:
                     print("skip _add_choice_deps")
                     return
-                return super()._add_choice_deps()    
+                return super()._add_choice_deps()   
+                """ 
 
         kconf = KconfigParser(kconfig_file)
 

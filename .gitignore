@@ -2,3 +2,4 @@
 /venv_zephyr_rtos
 exp_copy/
 xtest/
+__pycache__/
