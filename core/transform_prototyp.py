@@ -18,20 +18,19 @@ class KconfigTransformer:
         self.source_spec = source_spec.upper()  # maybe for some later checks 
         self.context: Optional[TransformationContext] = None
    
-    def build_context_from_parser(self, parser_result: dict, srctree: Path) -> TransformationContext: 
+    def build_context_from_parser(self, parser_result: dict) -> TransformationContext: 
+        konf = parser_result['kconf']
         symbol_definitions = {}
         configdefault_symbols = set()
         
         for sym in parser_result['unique_defined_syms']:
             if sym.name not in symbol_definitions:
-                print(sym.name)
+                #print(sym.name)
                 symbol_definitions[sym.name] = []
             
             for node in sym.nodes:
-                is_configdefault = False      
-                if hasattr(node, 'is_configdefault') and node.is_configdefault:
-                    print(node.is_configdefault)
-                    is_configdefault = True
+                is_configdefault = getattr(node, 'is_configdefault', False)
+                #print(node.is_configdefault)
                 
                 location_info = {
                     'file': node.filename if hasattr(node, 'filename') else None,
@@ -45,11 +44,11 @@ class KconfigTransformer:
                     configdefault_symbols.add(sym.name)
                     
         context = TransformationContext(
-        symbol_definitions=symbol_definitions,
-        configdefault_symbols=configdefault_symbols,
-        parser_result=parser_result,
-        srctree=srctree
-    )
+            symbol_definitions=symbol_definitions,
+            configdefault_symbols=configdefault_symbols,
+            parser_result=parser_result,
+            srctree=konf.srctree
+        )
         
         self.context = context
         return context
