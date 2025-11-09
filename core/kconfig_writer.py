@@ -133,7 +133,7 @@ class KconfigLine:
             #print(f"_keyword: {_keyword}")
             #print(_keyword[1])  
 
-            split_rest = rest.split(' if ', 1)              # split one time
+            split_rest = rest.split(' if ', 1)          # split one time
             #print(f"split_rest: {split_rest}")
             content['default_value'] = split_rest[0].strip()
             content['condition'] = split_rest[1].strip() if len(split_rest) > 1 else None

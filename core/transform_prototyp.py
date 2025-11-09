@@ -14,6 +14,8 @@ class KconfigTransformer:
     build context based on parser_result
     transform lines
     """
+    DEF_KEYWORDS = ('def_bool', 'def_string', 'def_int', 'def_hex')
+
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
         self.context: Optional[TransformationContext] = None
@@ -91,14 +93,18 @@ class KconfigTransformer:
             - KconfigLine: 1:1
             - List[KconfigLine]: 1:n
         """
-        # def_bool --> bool + default
-        if line.line_type == 'def_bool' or line.line_type == 'def_string':
+        if line.line_type in self.DEF_KEYWORDS:
             return self._transform_def_keyword(line)
         else:
             return line    
 
     def _transform_def_keyword(self, line) -> List:
-        
+        """
+        For def_* keywords == def_bool, def_int, def_hex, def_string 
+        config                            config 
+            def_<typ> [if <exp>]   -->      <type> 
+                                            default [if <exp>]
+        """
         from kconfig_writer import KconfigLine  # avoid circular import
             
         indent_str = ' ' * line.indent
@@ -106,7 +112,7 @@ class KconfigTransformer:
         value = line.content.get('default_value')
         condition = line.content.get('condition')
             
-        bool_line = KconfigLine(
+        typ_line = KconfigLine(
             f"{indent_str}{def_keyword}",
             line.line_number
         )
@@ -121,4 +127,4 @@ class KconfigTransformer:
             line.line_number  
         )
             
-        return [bool_line, default_line]
+        return [typ_line, default_line]
