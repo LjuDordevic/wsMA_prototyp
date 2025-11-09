@@ -1,0 +1,7 @@
+config HUNTER2
+  string "set name2"
+  default "user2"
+
+config OUNT2
+  int "set years2"
+  default "22"

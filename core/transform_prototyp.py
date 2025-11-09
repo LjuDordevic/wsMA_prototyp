@@ -49,7 +49,7 @@ class KconfigTransformer:
             symbol_definitions=symbol_definitions,
             configdefault_symbols=configdefault_symbols,
             parser_result=parser_result,
-            srctree=konf.srctree
+            srctree=Path(konf.srctree)
         )
         
         self.context = context
@@ -128,3 +128,24 @@ class KconfigTransformer:
         )
             
         return [typ_line, default_line]
+
+    
+    def get_all_source_files(self) -> List[Path]:
+        """
+        extract Kconfig files, that parser found 
+        output: paths relativ to srctree = project_dir
+        """
+        if self.context is None:
+            raise RuntimeError("call build_context_from_parser() first")
+            
+        kconf = self.context.parser_result['kconf']
+        files = []
+        
+        for filename in kconf.kconfig_filenames:
+            print(f"parser found: {filename}")
+            file_path = Path(filename)
+            print(f"file path: {file_path}")
+            files.append(file_path)
+        
+        print(files)
+        return files
