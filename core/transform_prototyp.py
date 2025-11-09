@@ -53,34 +53,71 @@ class KconfigTransformer:
         self.context = context
         return context
 
-def transform_lines(self, lines: List, current_file: Path) -> List:
-        """
-        lines -> from reader 
-        """
-        if self.context is None:
-            raise RuntimeError("call build_context_from_parser() first")
-        
-        result = []             # list for whole output  
-        i = 0                   # counter
-        current_symbol = None   
-        
-        while i < len(lines):   # as long as we got lines from the reader
-            line = lines[i]     # take one line at index i
+    def transform_lines(self, lines: List, current_file: Path) -> List:
+            """
+            lines -> from reader 
+            """
+            if self.context is None:
+                raise RuntimeError("call build_context_from_parser() first")
             
-            if line.line_type in ['config', 'menuconfig']:
-                current_symbol = line.content.get('symbol') # save sym name 
+            result = []             # list for whole output  
+            i = 0                   # counter
+            current_symbol = None   
             
-            transformed = self._transform_single_line(line, current_symbol, current_file)
+            while i < len(lines):   # as long as we got lines from the reader
+                line = lines[i]     # take one line at index i
+                
+                if line.line_type in ['config', 'menuconfig']:
+                    current_symbol = line.content.get('symbol') # save sym name 
+                
+                transformed = self._transform_single_line(line, current_symbol, current_file)
 
-            # line without transformation needed, go to the next line from the reader list    
-            if transformed is None:
-                i += 1
-                continue
-            # is output list? -> extend, else: add one line
-            if isinstance(transformed, list):
-                result.extend(transformed) # 1:n (def_bool → bool + default)
-            else:
-                result.append(transformed) # 1:1         
-            i += 1  # go to the next 
+                # line without transformation needed, go to the next line from the reader list    
+                if transformed is None:
+                    i += 1
+                    continue
+                # is output list? -> extend, else: add one line
+                if isinstance(transformed, list):
+                    result.extend(transformed) # 1:n (def_bool → bool + default)
+                else:
+                    result.append(transformed) # 1:1         
+                i += 1  # go to the next 
+            
+            return result
         
-        return result
+    def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path):
+        """ 
+        Returns:
+            - KconfigLine: 1:1
+            - List[KconfigLine]: 1:n
+        """
+        # def_bool --> bool + default
+        if line.line_type == 'def_bool':
+            return self._transform_def_bool(line)
+        else:
+            return line    
+
+    def _transform_def_bool(self, line) -> List:
+        
+        from kconfig_writer import KconfigLine  # avoid circular import
+            
+        indent_str = ' ' * line.indent
+        value = line.content.get('value', 'y')
+        condition = line.content.get('condition')
+            
+        bool_line = KconfigLine(
+            f"{indent_str}bool",
+            line.line_number
+        )
+            
+        if condition:
+            default_text = f"{indent_str}default {value} if {condition}"
+        else:
+            default_text = f"{indent_str}default {value}"
+            
+        default_line = KconfigLine(
+            default_text,
+            line.line_number  
+        )
+            
+        return [bool_line, default_line]
