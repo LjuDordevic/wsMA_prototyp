@@ -124,6 +124,7 @@ class PickParser:
         elif self.spec_version == "ESPIDF":
             self._load_espidf()
 
+#------------ ZUM TESTEN TODO: soll weg ------------------- 
     def _test_kconfiglib(self, project_dir: str, kconfig_file: str):
         project_dir_path = Path(project_dir)
         os.environ["srctree"] = str(project_dir_path)
