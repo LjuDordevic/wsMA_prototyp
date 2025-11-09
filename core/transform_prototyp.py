@@ -22,28 +22,26 @@ class KconfigTransformer:
         symbol_definitions = {}
         configdefault_symbols = set()
         
-        for sym in parser_result['unique_defined_syms']:
-            symbol_definitions[sym.name] = []
+        for sym in parser_result['defined_syms']:
+            if sym.name not in symbol_definitions:
+                symbol_definitions[sym.name] = []
             
             for node in sym.nodes:
-                configdefault_node = {
-                    'is_configdefault': node.is_configdefault if hasattr(node, 'is_configdefault') else None
-                }
-
                 location_info = {
                     'file': node.filename if hasattr(node, 'filename') else None,
                     'line': node.linenr if hasattr(node, 'linenr') else None,
-                    'node': node
+                    'node': node,
+                    'is_configdefault': hasattr(node, 'is_configdefault') and node.is_configdefault
                 }
-                symbol_definitions[sym.name].append(configdefault_node)
                 symbol_definitions[sym.name].append(location_info)
-        
+            
         context = TransformationContext(
             symbol_definitions=symbol_definitions,
+            configdefault_symbols=configdefault_symbols,
             parser_result=parser_result,
             srctree=srctree
         )
         
         self.context = context
         return context
-  
+
