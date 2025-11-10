@@ -133,7 +133,9 @@ class KconfigTransformer:
     def get_all_source_files(self) -> List[Path]:
         """
         extract Kconfig files, that parser found 
-        output: paths relativ to srctree = project_dir
+        output: all paths that parser found, 
+        these are either relativ to srctree = project_dir
+        or are absolut paths "outside of srctree"
         """
         if self.context is None:
             raise RuntimeError("call build_context_from_parser() first")
