@@ -16,6 +16,7 @@ class KconfigLine:
         self.line_type = self._detect_type()
         self.content = self._extract_content()
     
+    # all keywords 
     def _detect_type(self) -> str:
         s = self.stripped
         
@@ -160,7 +161,7 @@ class KconfigReader:
                 raw_line = raw_line.rstrip('\n\r')
                 kconfig_line = KconfigLine(raw_line, line_num)
                 lines.append(kconfig_line)
-        
+        print(f"   Reader found: {len(lines)} lines in {str(file_path)}")
         return lines
 
 class KconfigWriter:   
@@ -174,8 +175,6 @@ class KconfigWriter:
         with open(output_path, 'w', encoding='utf-8') as f:
             for line in lines:
                 f.write(line.raw_text + '\n') # add EOL 
-                # TODO: theoretisch hier kann man dann schon transformieren 
-                # aber man braucht infos bezüglich Mehrfachdefinition     
                  
         print(f"Done writting {len(lines)} lines in {output_path}")
 
