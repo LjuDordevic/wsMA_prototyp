@@ -5,9 +5,9 @@ from kconfig_writer import KconfigReader, KconfigWriter
 from transform_prototyp import KconfigTransformer
 import pprint
 
-project_dir = "/home/ljd/wsMA_prototyp/exp"
-output_dir = "/home/ljd/wsMA_prototyp/exp_copy"
-main_file = "KconfigZephyrRTOS"
+project_dir = "/home/ljd/wsMA_prototyp/exp_A"
+output_dir = "/home/ljd/wsMA_prototyp/exp_B"
+main_file = "Kconfig1"
 
 picker = PickParser("ZRTOS")
 print(picker)
@@ -34,7 +34,7 @@ context = transformer.build_context_from_parser(
 )
 print(f" TransformationContext - symbols: {len(context.symbol_definitions)} ({', '.join(context.symbol_definitions.keys())})")
 print(f" TransformationContext - configdefaults: {len(context.configdefault_symbols)} ({', '.join(context.configdefault_symbols)})")
-print(" look at TransformationContext")
+print(f"\n look at TransformationContext: ")
 
 for sym_name, definitions in context.symbol_definitions.items():
     if len(definitions) >= 1:
@@ -51,19 +51,17 @@ writer = KconfigWriter("ZRTOS")
 input_file = Path(project_dir) / main_file
 output_file = Path(output_dir) / main_file
 
-print(f"\n3. Transform {input_file} - needs reader & writer")
-print(f"\n3. look the lines reader has found: ")
+print(f"\n3. Transform - needs reader & writer")
+
 lines = reader.read_file(input_file)
 for line in lines:
             print(f"  {line}")
             if line.line_type != 'empty' and line.line_type != 'other':
                 print(f"    → Content: {line.content}")
 
-print("give these reader lines to transformer")
+print(f"\n4.  give these reader lines to transformer")
 transformed_lines = transformer.transform_lines(lines, input_file)
-print(f"  Reader Input: {len(lines)} lines")
-print(f"  Transformer Output: {len(transformed_lines)} lines")
-print(f"call writer - write transformed lines in {output_file}")
+
+print(f"\n5.  call writer - write transformed lines in {output_file}")
 writer.write(transformed_lines, output_file)
-print("done")
-transformer.get_all_source_files()
+
