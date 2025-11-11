@@ -20,6 +20,33 @@ git submodule add https://github.com/zephyrproject-rtos/zephyr.git external/Zeph
 pip install -e./external/ZephyrRTOS -> is not a valid editable requirement
 Use directly with python '~/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' KconfigZephyrRTOS
 
+activate venv_zephyr_rtos
+mkdir expr_zrtos
+cd expr_zrtos
+pip install west 
+west init -m https://github.com/zephyrproject-rtos/zephyr.git
+west update
+sudo apt install cmake
+west zephyr-export
+--> Zephyr has been added to the user package registry in:
+~/.cmake/packages/Zephyr
+--> ZephyrUnittest
+has been added to the user package registry in:
+~/.cmake/packages/ZephyrUnittest
+
+source '/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/zephyr-env.sh'    !!!
+mkdir app
+cd app
+src -> main.C
+CMakeLists.txt
+prj.conf
+["KCONFIG_BINARY_DIR"] --> erst nach erfolgreichen build
+pip install west jsonschema pyelftools
+sudo apt install ninja-build
+pip install -r '/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/scripts/requirements.txt'
+west build -b native_sim .
+sudo apt install gcc-multilib g++-multilib libc6-dev-i386
+
 **********************************espressif/esp-idf-kconfig ********************************** 
 
 -> ~/wsMA_prototyp$ -> git submodule add https://github.com/espressif/esp-idf-kconfig.git external/ESPIDFKconfig
