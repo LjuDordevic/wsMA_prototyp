@@ -135,8 +135,53 @@ class KconfigTransformer:
             
         return [typ_line, default_line]
 
-    def _transform_source(self, line) -> List:
-        passs
+    def _transform_source(self, line, current_file) -> List:
+        from kconfig_writer import KconfigLine
+        import re
+
+        match = re.match(r'(source|osource|rsource|orsource)\s+["\']([^"\']+)["\']', line.stripped)
+        if not match:
+            print(f"error at source line: {line}")
+        
+        indent_str = ' ' * line.indent
+        source_keyword = match.group(1)
+        pattern = match.group(2)
+        has_glob = any(c in pattern for c in ['*', '?', '[', ']'])
+        
+        if not has_glob:
+            return line
+        
+        print(f"    Resolve glob: {pattern}")
+        matched_files = self._find_matching_files(pattern, current_file)
+        
+        if not matched_files:
+            print(f"      no files found for the: {pattern}")
+            return line
+        
+        # bild source for each found file 
+        result_lines = []
+        for matched_file in matched_files:
+            new_line_text = f'{indent_str}{source_keyword} "{matched_file}"'
+            new_line = KconfigLine(new_line_text, line.line_number)
+            result_lines.append(new_line)
+            print(f"      -> {matched_file}")
+        
+        return result_lines
+
+    def _find_matching_files(self, pattern: str, current_file: Path) -> List[str]:
+        import fnmatch
+        if self.context is None:
+            return []
+        
+        kconf = self.context.parser_result['kconf']
+        matched = []
+        
+        # Parser has relative paths, filter with fnmatch
+        for filename in kconf.kconfig_filenames:
+            if fnmatch.fnmatch(str(filename), pattern):
+                matched.append(str(filename))
+        # sort as zephyr
+        return sorted(matched)    
 
     def get_all_source_files(self) -> List[Path]:
         """
