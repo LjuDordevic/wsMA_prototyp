@@ -40,5 +40,4 @@ configdefault FOO
 #source "exp_u1/*"
 source "exp_u1/Kconfig"
 source "/home/ljd/wsMA_prototyp/exp/exp_u1/Kconfig2"
-source "/home/ljd/wsMA_prototyp/exp_A/Kconfig1"
 endmenu

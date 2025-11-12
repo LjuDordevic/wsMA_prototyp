@@ -161,6 +161,7 @@ class KconfigReader:
                 raw_line = raw_line.rstrip('\n\r')
                 kconfig_line = KconfigLine(raw_line, line_num)
                 lines.append(kconfig_line)
+        print(f"\n")
         print(f"    Reader found: {len(lines)} lines in {str(file_path)}")
         return lines
 

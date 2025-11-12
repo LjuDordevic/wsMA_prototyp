@@ -148,9 +148,9 @@ class KconfigTransformer:
         for filename in kconf.kconfig_filenames:
             file_path = Path(filename)
             files.append(file_path)
-        print("get_all_source_files: ")
+        print("    get_all_source_files: ")
         for file in files:
-            print(f"parser found: {file}")
+            print(f"    parser found: {file}")
 
         return files    
 
@@ -158,79 +158,25 @@ class KconfigTransformer:
         if self.context is None:
             raise RuntimeError("Context missing!")
         
+        # all paths are relative to srctree 
         source_files = self.get_all_source_files()
-        srctree = self.context.srctree.resolve()
-        
-        path_mapping = {}  # absolute_input_path → relative_output_path
-        
-        for file_path in source_files:
-            if not file_path.is_absolute():
-                input_path = (srctree / file_path).resolve()
-                print("is not absolute")
-            else:
-                print("is absolute")
-                input_path = file_path.resolve()
-            print(f"abs input path: {input_path}")
-            try:
-                # in scope of srctree
-                rel_path = input_path.relative_to(srctree)
-                output_path = output_dir / rel_path
-            except ValueError:
-                # out of scope of srctree, find same parent
-                
-                common_parent = next((p for p in srctree.parents if input_path.is_relative_to(p)), None)
-
-                if common_parent:
-                    rel_to_common = input_path.relative_to(common_parent)
-                    output_path = output_dir / "external" / rel_to_common
-                else:
-                    output_path = output_dir / "external" / input_path.parent.name / input_path.name
-
-            path_mapping[input_path] = output_path.relative_to(output_dir)
-        
-        # Mapping
-        print(f"\nPath Mapping (Input -> Output):")
-        for inp, out in path_mapping.items():
-            print(f"  {inp}")
-            print(f"    -> {out}")
-        print(f"\n")
-        print(f" Transform {len(source_files)} files:")
-        print(f"  From: {project_dir}")
-        print(f"  To: {output_dir}")
-        
         transformed_count = 0
         
         for file_path in source_files:
-            # convert to abs
-            if not file_path.is_absolute():
-                input_path = (srctree / file_path).resolve()
-            else:
-                input_path = file_path.resolve()
+            input_file = project_dir / file_path
+            output_file = output_dir / file_path
             
-            output_rel_path = path_mapping[input_path]
-            output_path = output_dir / output_rel_path
-            
-            if not input_path.exists():
-                print(f"  Skip not found: {input_path}")
-                continue
-            print(f"\n")
-            print(f"    output_rel_path: {output_rel_path}")
-            print(f"    output_abs_path: {output_path}")
-            output_path.parent.mkdir(parents=True, exist_ok=True)
-            
-            try:
-                lines = reader.read_file(input_path)
-            except Exception as e:
-                print(f"     Error reading: {e}")
+            if not input_file.exists():
+                print(f"  Skip not found: {input_file}")
                 continue
             
-            transformed = self.transform_lines(lines, input_path)
+            output_file.parent.mkdir(parents=True, exist_ok=True)
+            lines = reader.read_file(input_file)
+            transformed = self.transform_lines(lines, input_file)
             
             try:
-                #writer.write(adjusted, output_path)
-                writer.write(transformed, output_path)
+                writer.write(transformed, output_file)
                 transformed_count += 1
-                #print(f"     {len(lines)} → {len(adjusted)} lines")
             except Exception as e:
                 print(f"     Error write: {e}")
         
