@@ -59,7 +59,8 @@ class KconfigTransformer:
             """
             lines -> from reader 
             """
-            print(f"\n  Reader Input: {len(lines)} lines")
+            print(f"    start transforming lines")
+            print(f"    Reader Input: {len(lines)} lines")
             if self.context is None:
                 raise RuntimeError("call build_context_from_parser() first")
             
@@ -86,7 +87,7 @@ class KconfigTransformer:
                     result.append(transformed) # 1:1         
                 i += 1  # go to the next 
             
-            print(f"  Transformer Output: {len(result)} lines")
+            print(f"    Transformer Output: {len(result)} lines")
             return result
         
     def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path):
@@ -190,10 +191,10 @@ class KconfigTransformer:
         for inp, out in path_mapping.items():
             print(f"  {inp}")
             print(f"    -> {out}")
-        
+        print(f"\n")
         print(f" Transform {len(source_files)} files:")
         print(f"  From: {project_dir}")
-        print(f"  To: {output_dir}\n")
+        print(f"  To: {output_dir}")
         
         transformed_count = 0
         
@@ -210,9 +211,9 @@ class KconfigTransformer:
             if not input_path.exists():
                 print(f"  Skip not found: {input_path}")
                 continue
-            
-            print(f"    output_rel_path {output_rel_path}")
-            
+            print(f"\n")
+            print(f"    output_rel_path: {output_rel_path}")
+            print(f"    output_abs_path: {output_path}")
             output_path.parent.mkdir(parents=True, exist_ok=True)
             
             try:
