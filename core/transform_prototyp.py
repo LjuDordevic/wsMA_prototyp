@@ -3,7 +3,7 @@ from typing import List, Dict, Optional, Set
 from dataclasses import dataclass
 
 @dataclass
-class TransformationContext:
+class ExParserContext:
     symbol_definitions: Dict[str, List[dict]]  # symbol_name -> [location1, location2, ...]
     configdefault_symbols: Set[str]
     parser_result: dict
@@ -18,9 +18,9 @@ class KconfigTransformer:
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
-        self.context: Optional[TransformationContext] = None
+        self.context: Optional[ExParserContext] = None
    
-    def build_context_from_parser(self, parser_result: dict) -> TransformationContext: 
+    def build_context_from_parser(self, parser_result: dict) -> ExParserContext: 
         konf = parser_result['kconf']
         symbol_definitions = {}
         configdefault_symbols = set()
@@ -45,7 +45,7 @@ class KconfigTransformer:
                 if is_configdefault:
                     configdefault_symbols.add(sym.name)
                     
-        context = TransformationContext(
+        context = ExParserContext(
             symbol_definitions=symbol_definitions,
             configdefault_symbols=configdefault_symbols,
             parser_result=parser_result,
@@ -59,6 +59,7 @@ class KconfigTransformer:
             """
             lines -> from reader 
             """
+            print(f"\n  Reader Input: {len(lines)} lines")
             if self.context is None:
                 raise RuntimeError("call build_context_from_parser() first")
             
@@ -85,6 +86,7 @@ class KconfigTransformer:
                     result.append(transformed) # 1:1         
                 i += 1  # go to the next 
             
+            print(f"  Transformer Output: {len(result)} lines")
             return result
         
     def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path):
@@ -108,12 +110,12 @@ class KconfigTransformer:
         from kconfig_writer import KconfigLine  # avoid circular import
             
         indent_str = ' ' * line.indent
-        def_keyword = line.content.get('_keyword')
+        keyword = line.content.get('_keyword')
         value = line.content.get('default_value')
         condition = line.content.get('condition')
             
         typ_line = KconfigLine(
-            f"{indent_str}{def_keyword}",
+            f"{indent_str}{keyword}",
             line.line_number
         )
             
@@ -128,8 +130,7 @@ class KconfigTransformer:
         )
             
         return [typ_line, default_line]
-
-    
+   
     def get_all_source_files(self) -> List[Path]:
         """
         extract Kconfig files, that parser found 
@@ -144,10 +145,90 @@ class KconfigTransformer:
         files = []
         
         for filename in kconf.kconfig_filenames:
-            print(f"parser found: {filename}")
             file_path = Path(filename)
-            print(f"file path: {file_path}")
             files.append(file_path)
+        print("get_all_source_files: ")
+        for file in files:
+            print(f"parser found: {file}")
+
+        return files    
+
+    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path):
+        if self.context is None:
+            raise RuntimeError("Context missing!")
         
-        print(files)
-        return files
+        source_files = self.get_all_source_files()
+        srctree = self.context.srctree.resolve()
+        
+        path_mapping = {}  # absolute_input_path → relative_output_path
+        
+        for file_path in source_files:
+            if not file_path.is_absolute():
+                input_path = (srctree / file_path).resolve()
+            else:
+                input_path = file_path.resolve()
+            print(f"abs input path: {input_path}")
+            try:
+                # in scope of srctree
+                rel_path = input_path.relative_to(srctree)
+                output_path = output_dir / rel_path
+            except ValueError:
+                # out of scope of srctree, find same parent
+                
+                common_parent = next((p for p in srctree.parents if input_path.is_relative_to(p)), None)
+
+                if common_parent:
+                    rel_to_common = input_path.relative_to(common_parent)
+                    output_path = output_dir / "external" / rel_to_common
+                else:
+                    output_path = output_dir / "external" / input_path.parent.name / input_path.name
+
+            path_mapping[input_path] = output_path.relative_to(output_dir)
+        
+        # Mapping
+        print(f"\nPath Mapping (Input -> Output):")
+        for inp, out in path_mapping.items():
+            print(f"  {inp}")
+            print(f"    -> {out}")
+        
+        print(f" Transform {len(source_files)} files:")
+        print(f"  From: {project_dir}")
+        print(f"  To: {output_dir}\n")
+        
+        transformed_count = 0
+        
+        for file_path in source_files:
+            # convert to abs
+            if not file_path.is_absolute():
+                input_path = (srctree / file_path).resolve()
+            else:
+                input_path = file_path.resolve()
+            
+            output_rel_path = path_mapping[input_path]
+            output_path = output_dir / output_rel_path
+            
+            if not input_path.exists():
+                print(f"  Skip not found: {input_path}")
+                continue
+            
+            print(f"    output_rel_path {output_rel_path}")
+            
+            output_path.parent.mkdir(parents=True, exist_ok=True)
+            
+            try:
+                lines = reader.read_file(input_path)
+            except Exception as e:
+                print(f"     Error reading: {e}")
+                continue
+            
+            transformed = self.transform_lines(lines, input_path)
+            
+            try:
+                #writer.write(adjusted, output_path)
+                writer.write(transformed, output_path)
+                transformed_count += 1
+                #print(f"     {len(lines)} → {len(adjusted)} lines")
+            except Exception as e:
+                print(f"     Error write: {e}")
+        
+        print(f" {transformed_count} files transformed")

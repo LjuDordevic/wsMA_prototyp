@@ -5,9 +5,9 @@ from kconfig_writer import KconfigReader, KconfigWriter
 from transform_prototyp import KconfigTransformer
 import pprint
 
-project_dir = "/home/ljd/wsMA_prototyp/exp_A"
-output_dir = "/home/ljd/wsMA_prototyp/exp_B"
-main_file = "Kconfig1"
+project_dir = "/home/ljd/wsMA_prototyp/exp"
+output_dir = "/home/ljd/wsMA_prototyp/exp_copy"
+main_file = "KconfigZephyrRTOS"
 
 picker = PickParser("ZRTOS")
 print(picker)
@@ -65,3 +65,13 @@ transformed_lines = transformer.transform_lines(lines, input_file)
 print(f"\n5.  call writer - write transformed lines in {output_file}")
 writer.write(transformed_lines, output_file)
 
+#transformer.get_all_source_files()
+ 
+print(f"\n6. Transform all files")
+
+transformer.transform_all_files(
+    reader=reader,
+    writer=writer,
+    project_dir=Path(project_dir),
+    output_dir=Path(output_dir)
+)
