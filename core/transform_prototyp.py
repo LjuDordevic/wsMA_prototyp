@@ -166,7 +166,9 @@ class KconfigTransformer:
         for file_path in source_files:
             if not file_path.is_absolute():
                 input_path = (srctree / file_path).resolve()
+                print("is not absolute")
             else:
+                print("is absolute")
                 input_path = file_path.resolve()
             print(f"abs input path: {input_path}")
             try:
