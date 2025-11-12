@@ -37,7 +37,5 @@ configdefault FOO
   default y if CY
 
 
-#source "exp_u1/*"
-source "exp_u1/Kconfig"
-source "/home/ljd/wsMA_prototyp/exp/exp_u1/Kconfig2"
+source "exp_u1/Kconfig?"
 endmenu
