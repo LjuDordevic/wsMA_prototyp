@@ -15,6 +15,7 @@ class KconfigTransformer:
     transform lines
     """
     DEF_KEYWORDS = ('def_bool', 'def_string', 'def_int', 'def_hex')
+    SOURCE_KEYWORDS = ('source', 'osource', 'rsource', 'orsource')
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -98,6 +99,8 @@ class KconfigTransformer:
         """
         if line.line_type in self.DEF_KEYWORDS:
             return self._transform_def_keyword(line)
+        elif line.line_type in self.SOURCE_KEYWORDS:
+            return self._transform_source(line, current_file)
         else:
             return line    
 
@@ -131,7 +134,10 @@ class KconfigTransformer:
         )
             
         return [typ_line, default_line]
-   
+
+    def _transform_source(self, line) -> List:
+        passs
+
     def get_all_source_files(self) -> List[Path]:
         """
         extract Kconfig files, that parser found 
@@ -181,3 +187,5 @@ class KconfigTransformer:
                 print(f"     Error write: {e}")
         
         print(f" {transformed_count} files transformed")
+
+    
