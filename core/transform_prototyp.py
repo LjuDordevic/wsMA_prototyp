@@ -253,7 +253,7 @@ class KconfigTransformer:
                 base_dir = Path(current_file).parent
                 #transform_to_abs = Path(matched_file).resolve()   WRONG 
                 transform_to_abs = (base_dir / matched_file).resolve()
-                new_line_text = f'{indent_str}source "{transform_to_abs}"'
+                new_line_text = f'{indent_str}{source_keyword} "{transform_to_abs}"'
                 new_line = KconfigLine(new_line_text, line.line_number)
                 result_lines.append(new_line)
                 print(f"      -> {transform_to_abs}")
