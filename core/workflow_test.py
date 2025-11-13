@@ -60,7 +60,7 @@ for line in lines:
                 print(f"    → Content: {line.content}")
 
 print(f"\n4.  give these reader lines to transformer")
-transformed_lines = transformer.transform_lines(lines, input_file)
+transformed_lines = transformer._transform_lines(lines, input_file)
 
 print(f"\n5.  call writer - write transformed lines in {output_file}")
 writer.write(transformed_lines, output_file)

@@ -72,7 +72,29 @@ class KconfigTransformer:
         self.context = context
         return context
 
-    def transform_lines(self, lines: List, current_file: Path) -> List:
+    def _get_all_source_files(self) -> List[Path]:
+        """
+        extract Kconfig files, that parser found 
+        output: all paths that parser found, 
+        these are either relativ to srctree = project_dir
+        or are absolut paths "outside of srctree"
+        """
+        if self.context is None:
+            raise RuntimeError("call build_context_from_parser() first")
+            
+        kconf = self.context.parser_result['kconf']
+        files = []
+        
+        for filename in kconf.kconfig_filenames:
+            file_path = Path(filename)
+            files.append(file_path)
+        print("    get_all_source_files: ")
+        for file in files:
+            print(f"    parser found: {file}")
+
+        return files    
+
+    def _transform_lines(self, lines: List, current_file: Path) -> List:
             """
             lines -> from reader 
             """
@@ -107,26 +129,9 @@ class KconfigTransformer:
             # count how many lines were added to output file
             # = SUM of all lines matched through glob - SUM of all (r/or/o)source_keywords 
             self.FILE_ALL_ADDED_LINES_SKW = self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB - self.FILE_SOURCE_KEYWORDS_ALL_NR   
-            
-            print(f"    FILE LOG --------------------------------------------------------------")
-            print(f"    All source_keywords:        {self.FILE_SOURCE_NR}")
-            print(f"    All osource_keywords:       {self.FILE_OSOURCE_NR}")
-            print(f"    All rsource_keywords:       {self.FILE_RSOURCE_NR}")
-            print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
-            print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
-            print(f"    SUM output source lines:    {self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB}")                                  
-            print(f"    Transformer Output:         {len(result)} lines")
-            print(f"        Added new bc of def_*:      {self.FILE_DEF_KEYWORDS_COUNT}")
-            print(f"        Added new lines of source:  {self.FILE_ALL_ADDED_LINES_SKW}")
-            
-            self.FILE_SOURCE_NR = 0
-            self.FILE_OSOURCE_NR = 0
-            self.FILE_RSOURCE_NR = 0
-            self.FILE_ORSOURCE_NR = 0
-            self.FILE_SOURCE_KEYWORDS_ALL_NR = 0
-            self.FILE_DEF_KEYWORDS_COUNT = 0
-            self.FILE_ALL_ADDED_LINES_SKW = 0
-            self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
+            # call log
+            transformed_lines = len(result)
+            self._file_log_and_reset(self.FILE_ALL_ADDED_LINES_SKW, transformed_lines)
             return result
         
     def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path):
@@ -240,7 +245,7 @@ class KconfigTransformer:
 
         # for resolve glob log - one keyword matched 
         self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB += len(result_lines)      
-        print(f"    Matched {source_keyword}_keyword: {self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB}")
+        print(f"    Files matching glob: {self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB} (using {source_keyword})")
         self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0 # set back for the next line with keyword
 
         # for file log
@@ -248,42 +253,26 @@ class KconfigTransformer:
         
         return result_lines
 
-    def _find_matching_files(self, pattern: str, current_file: Path) -> List[str]:
-        import fnmatch
-        if self.context is None:
-            return []
-        
-        kconf = self.context.parser_result['kconf']
-        matched = []
-        
-        # Parser has relative paths, filter with fnmatch
-        for filename in kconf.kconfig_filenames:
-            if fnmatch.fnmatch(str(filename), pattern):
-                matched.append(str(filename))
-        # sort as zephyr
-        return sorted(matched)    
-
-    def get_all_source_files(self) -> List[Path]:
-        """
-        extract Kconfig files, that parser found 
-        output: all paths that parser found, 
-        these are either relativ to srctree = project_dir
-        or are absolut paths "outside of srctree"
-        """
-        if self.context is None:
-            raise RuntimeError("call build_context_from_parser() first")
-            
-        kconf = self.context.parser_result['kconf']
-        files = []
-        
-        for filename in kconf.kconfig_filenames:
-            file_path = Path(filename)
-            files.append(file_path)
-        print("    get_all_source_files: ")
-        for file in files:
-            print(f"    parser found: {file}")
-
-        return files    
+    def _file_log_and_reset(self, new_lines_skw : int, len_result : int):
+        print(f"    FILE LOG --------------------------------------------------------------")
+        print(f"    All source_keywords:        {self.FILE_SOURCE_NR}")
+        print(f"    All osource_keywords:       {self.FILE_OSOURCE_NR}")
+        print(f"    All rsource_keywords:       {self.FILE_RSOURCE_NR}")
+        print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
+        print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
+        print(f"    SUM output source lines:    {self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB}")                                  
+        print(f"    Transformer Output:         {len_result} lines")
+        print(f"        Added new bc of def_*:      {self.FILE_DEF_KEYWORDS_COUNT}")
+        print(f"        Added new lines of source:  {new_lines_skw}")
+           
+        self.FILE_SOURCE_NR = 0
+        self.FILE_OSOURCE_NR = 0
+        self.FILE_RSOURCE_NR = 0
+        self.FILE_ORSOURCE_NR = 0
+        self.FILE_SOURCE_KEYWORDS_ALL_NR = 0
+        self.FILE_DEF_KEYWORDS_COUNT = 0
+        self.FILE_ALL_ADDED_LINES_SKW = 0
+        self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
 
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, log: bool):
         """
@@ -295,7 +284,7 @@ class KconfigTransformer:
             raise RuntimeError("Context missing!")
         
         # all paths are relative to srctree 
-        source_files = self.get_all_source_files()
+        source_files = self._get_all_source_files()
         transformed_count = 0
           
         for file_path in source_files:
@@ -314,7 +303,7 @@ class KconfigTransformer:
                     if line.line_type != 'empty' and line.line_type != 'other':
                         print(f"    -> Content: {line.content}")
 
-            transformed = self.transform_lines(lines, input_file)
+            transformed = self._transform_lines(lines, input_file)
             try:
                 writer.write(transformed, output_file)
                 transformed_count += 1
@@ -323,5 +312,3 @@ class KconfigTransformer:
         
         print(f"----------------------------------------------------------------------")
         print(f"finished transforming: {transformed_count} files transformed")
-
-    

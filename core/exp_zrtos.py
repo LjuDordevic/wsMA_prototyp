@@ -15,4 +15,4 @@ parser = ZRTOSParser(picker.kconfiglib_version)
 parser_result = parser.parse_files(project_dir, main_file)
 
 transformer = KconfigTransformer(source_spec="ZRTOS")
-transformer.get_all_source_files()
+transformer._get_all_source_files()
