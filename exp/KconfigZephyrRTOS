@@ -37,4 +37,5 @@ configdefault FOO
   default y if CY
 
 source "exp_u1/*"
+source "exp_u2/*"
 endmenu

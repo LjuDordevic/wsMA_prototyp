@@ -177,7 +177,7 @@ class KconfigWriter:
             for line in lines:
                 f.write(line.raw_text + '\n') # add EOL 
                  
-        print(f"    Done writting {len(lines)} lines in {output_path}")
+        print(f"        Done writting {len(lines)} lines in {output_path}")
 
 if __name__ == "__main__":
     reader = KconfigReader("ZRTOS")

@@ -1,0 +1,2 @@
+config RRRR
+  def_bool y

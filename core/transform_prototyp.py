@@ -20,14 +20,18 @@ class KconfigTransformer:
             source "exp_u1/Kconfig2" (1 line added)
     """
     DEF_KEYWORDS = ('def_bool', 'def_string', 'def_int', 'def_hex')
-    DEF_KEYWORDS_COUNT = 0
+    FILE_DEF_KEYWORDS_COUNT = 0
+    PROJECT_DEF_KEYWORDS_COUNT = 0
     SOURCE_KEYWORDS = ('source', 'osource', 'rsource', 'orsource')
-    SOURCE_NR = 0
-    OSOURCE_NR = 0
-    RSOURCE_NR = 0
-    ORSOURCE_NR = 0
-    SOURCE_KEYWORDS_TRANSFORMED = 0
-    SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
+    FILE_SOURCE_NR = 0
+    FILE_OSOURCE_NR = 0
+    FILE_RSOURCE_NR = 0
+    FILE_ORSOURCE_NR = 0
+    FILE_SOURCE_KEYWORDS_ALL_NR = 0
+    FILE_ALL_ADDED_LINES_SKW = 0
+    ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0
+    FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
+    
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -100,12 +104,29 @@ class KconfigTransformer:
                     result.append(transformed) # 1:1         
                 i += 1  # go to the next 
             
-            print(f"    Transformer Output:      {len(result)} lines")
-            print(f"    Added new bc of def_*:   {self.DEF_KEYWORDS_COUNT}")
-            print(f"    Added new bc of source:  {self.SOURCE_KEYWORDS_TRANSFORMED}")
-            self.DEF_KEYWORDS_COUNT = 0
-            self.SOURCE_KEYWORDS_TRANSFORMED = 0
-            self.SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
+            # count how many lines were added to output file
+            # = SUM of all lines matched through glob - SUM of all (r/or/o)source_keywords 
+            self.FILE_ALL_ADDED_LINES_SKW = self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB - self.FILE_SOURCE_KEYWORDS_ALL_NR   
+            
+            print(f"    FILE LOG --------------------------------------------------------------")
+            print(f"    All source_keywords:        {self.FILE_SOURCE_NR}")
+            print(f"    All osource_keywords:       {self.FILE_OSOURCE_NR}")
+            print(f"    All rsource_keywords:       {self.FILE_RSOURCE_NR}")
+            print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
+            print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
+            print(f"    SUM output source lines:    {self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB}")                                  
+            print(f"    Transformer Output:         {len(result)} lines")
+            print(f"        Added new bc of def_*:      {self.FILE_DEF_KEYWORDS_COUNT}")
+            print(f"        Added new lines of source:  {self.FILE_ALL_ADDED_LINES_SKW}")
+            
+            self.FILE_SOURCE_NR = 0
+            self.FILE_OSOURCE_NR = 0
+            self.FILE_RSOURCE_NR = 0
+            self.FILE_ORSOURCE_NR = 0
+            self.FILE_SOURCE_KEYWORDS_ALL_NR = 0
+            self.FILE_DEF_KEYWORDS_COUNT = 0
+            self.FILE_ALL_ADDED_LINES_SKW = 0
+            self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
             return result
         
     def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path):
@@ -115,10 +136,11 @@ class KconfigTransformer:
             - List[KconfigLine]: 1:n
         """
         if line.line_type in self.DEF_KEYWORDS:
-            self.DEF_KEYWORDS_COUNT += 1
+            self.FILE_DEF_KEYWORDS_COUNT += 1           # for each def_* -> count 1 one added line   
             return self._transform_def_keyword(line)
         elif line.line_type in self.SOURCE_KEYWORDS:
-            return self._transform_source(line, current_file)
+            self.FILE_SOURCE_KEYWORDS_ALL_NR += 1       # for each self.SOURCE_KEYWORDS -> count 1
+            return self._transform_source_line(line, current_file)
         else:
             return line    
 
@@ -153,7 +175,7 @@ class KconfigTransformer:
             
         return [typ_line, default_line]
 
-    def _transform_source(self, line, current_file) -> List:
+    def _transform_source_line(self, line, current_file) -> List:
         from kconfig_writer import KconfigLine
         import re
 
@@ -166,18 +188,19 @@ class KconfigTransformer:
         pattern = match.group(2)
         has_glob = any(c in pattern for c in ['*', '?', '[', ']'])
 
+        # count each keyword in file
         if source_keyword == "source":
-            self.SOURCE_NR += 1
+            self.FILE_SOURCE_NR += 1
         elif source_keyword == "osource":
-            self.OSOURCE_NR += 1
+            self.FILE_OSOURCE_NR += 1
         elif source_keyword == "rsource":
-            self.RSOURCE_NR += 1
+            self.FILE_RSOURCE_NR += 1       
         else:
-            self.ORSOURCE_NR += 1
+            self.FILE_ORSOURCE_NR += 1  
 
         if not has_glob:
             return line
-        
+        print(f"    GLOB LOG --------------------------------------------------------------")
         print(f"    Resolve glob: {pattern}")
         matched_files = self._find_matching_files(pattern, current_file)
         
@@ -192,11 +215,15 @@ class KconfigTransformer:
             new_line = KconfigLine(new_line_text, line.line_number)
             result_lines.append(new_line)
             print(f"      -> {matched_file}")
+
+        # for resolve glob log - one keyword matched 
+        self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB += len(result_lines)      
+        print(f"    Matched {source_keyword}_keyword: {self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB}")
+        self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0 # set back for the next line with keyword
+
+        # for file log
+        self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB += len(result_lines)
         
-        self.SOURCE_KEYWORDS_RESULT_OF_GLOB += len(result_lines)
-        self.SOURCE_KEYWORDS_TRANSFORMED += len(result_lines) - 1
-        print(f"    Source-keywords:    {self.SOURCE_NR}")
-        print(f"    Resolved from glob: {self.SOURCE_KEYWORDS_RESULT_OF_GLOB}")
         return result_lines
 
     def _find_matching_files(self, pattern: str, current_file: Path) -> List[str]:
@@ -267,6 +294,7 @@ class KconfigTransformer:
             except Exception as e:
                 print(f"     Error write: {e}")
         
-        print(f" {transformed_count} files transformed")
+        print(f"----------------------------------------------------------------------")
+        print(f"finished transforming: {transformed_count} files transformed")
 
     
