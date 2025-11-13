@@ -88,7 +88,6 @@ class ZRTOSParser:
         # dictionary key: value 
         return {
             'kconf': kconf,
-            'include': kconf._include_path,
             'top_node': kconf.top_node,
             'syms': kconf.syms,
             'const_syms': kconf.const_syms,

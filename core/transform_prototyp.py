@@ -202,21 +202,24 @@ class KconfigTransformer:
         matched_files = []
         if self.context is not None:
             kconf = self.context.parser_result['kconf']
-            print(kconf._include_path)
-            for (src_info, included_file) in kconf._include_path:
-                src_filename, src_linenr = src_info
-                if os.path.samefile(src_filename, str(current_file)) and src_linenr == line.line_number:
-                    matched_files.append(included_file)
+            for node in kconf.node_iter():  # iterate over all nodes in tree
+                if not node.filename:
+                    continue
+                if not node.include_path:
+                    continue
 
-        #matched_files = self._find_matching_files(pattern, current_file)
-        
+                # last element is where this node was sourced from
+                src_file, src_linenr = node.include_path[-1]
+                print(f"    -> From: {src_file} at {src_linenr}")
+
+               
         if not matched_files:
             print(f"      no files found for the: {pattern}")
             return line
         
         # bild source for each found file 
         result_lines = []
-        for matched_file in matched_files:
+        for matched_file in sorted(set(matched_files)):
             new_line_text = f'{indent_str}{source_keyword} "{matched_file}"'
             new_line = KconfigLine(new_line_text, line.line_number)
             result_lines.append(new_line)
