@@ -1,0 +1,3 @@
+config U3
+  def_bool n
+

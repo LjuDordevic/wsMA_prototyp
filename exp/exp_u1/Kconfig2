@@ -5,3 +5,5 @@ config HUNTER2
 config OUNT2
   int "set years2"
   default "22"
+
+source "exp_u2/*"
