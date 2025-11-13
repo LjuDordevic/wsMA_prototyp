@@ -37,6 +37,7 @@ configdefault FOO
   default y if CY
 
 source "exp_u1/*"
+rsource "Kconfig"
 #source "/home/ljd/wsMA_prototyp/exp_copy/exp_u1/*"
 #source "/home/ljd/wsMA_prototyp/exp/exp_u1/Kconfig?"
 #source "exp_u2/*"

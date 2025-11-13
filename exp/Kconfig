@@ -1,0 +1,3 @@
+config TESTRSOURCE
+  string "test"
+  default "rs"

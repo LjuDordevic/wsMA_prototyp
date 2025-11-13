@@ -23,6 +23,7 @@ class KconfigTransformer:
     FILE_DEF_KEYWORDS_COUNT = 0
     PROJECT_DEF_KEYWORDS_COUNT = 0
     SOURCE_KEYWORDS = ('source', 'osource', 'rsource', 'orsource')
+    #RSOURCE_KEYWORDS = ('rsource')
     FILE_SOURCE_NR = 0
     FILE_OSOURCE_NR = 0
     FILE_RSOURCE_NR = 0
@@ -199,10 +200,14 @@ class KconfigTransformer:
         elif source_keyword == "rsource": self.FILE_RSOURCE_NR += 1       
         else: self.FILE_ORSOURCE_NR += 1  
         # no glob -> copy line to the output as it is 
-        if not has_glob: return line
+        if not has_glob and not source_keyword == 'rsource':
+            return line
 
         print(f"    GLOB LOG --------------------------------------------------------------")
-        print(f"    Resolve glob: {pattern}")
+        if source_keyword == 'rsource':
+            print(f"    Resolve rsource: {pattern}")
+        else:
+            print(f"    Resolve glob: {pattern}")
         
         matched_files = []
         if self.context is not None:
@@ -214,11 +219,11 @@ class KconfigTransformer:
                 
                 if not node.filename: continue
                 if not node.include_path: continue
-                #print(f"    {node.filename}\n and {node.include_path}\n and {node}")
+                #print(f"    {node.filename}\n and {node.include_path}\n and {node}") # DON'T DELETE FOR DEBUGGING
                 
                 # file and line where this node was sourced from
                 src_file, src_linenr = node.include_path[-1]
-                #print(f"    -> From: {src_file} at {src_linenr}")
+                #print(f"    -> From: {src_file} at {src_linenr}") # DON'T DELETE FOR DEBUGGING
 
                 # absolute path from source file
                 src_abs = (srctree / src_file).resolve() \
@@ -238,6 +243,17 @@ class KconfigTransformer:
         # bild source for each found file 
         result_lines = []
         for matched_file in sorted(set(matched_files)):
+
+            if source_keyword == 'rsource':
+                base_dir = Path(current_file).parent
+                #transform_to_abs = Path(matched_file).resolve()   WRONG 
+                transform_to_abs = (base_dir / matched_file).resolve()
+                new_line_text = f'{indent_str}source "{transform_to_abs}"'
+                new_line = KconfigLine(new_line_text, line.line_number)
+                result_lines.append(new_line)
+                print(f"      -> {transform_to_abs}")
+                continue
+
             new_line_text = f'{indent_str}{source_keyword} "{matched_file}"'
             new_line = KconfigLine(new_line_text, line.line_number)
             result_lines.append(new_line)
