@@ -200,22 +200,22 @@ class KconfigTransformer:
         elif source_keyword == "rsource": self.FILE_RSOURCE_NR += 1       
         else: self.FILE_ORSOURCE_NR += 1  
         # no glob -> copy line to the output as it is 
-        if not has_glob and not source_keyword == 'rsource':
+        if not has_glob and not source_keyword == 'rsource' \
+            and not source_keyword == 'orsource' and not source_keyword == 'osource':
             return line
 
         print(f"    GLOB LOG --------------------------------------------------------------")
-        if source_keyword == 'rsource':
-            print(f"    Resolve rsource: {pattern}")
-        else:
-            print(f"    Resolve glob: {pattern}")
+        if source_keyword == "rsource" or "orsource" or "osource": print(f"    Resolve {source_keyword}: {pattern}")
+        else: print(f"    Resolve glob: {pattern}")
         
         matched_files = []
         if self.context is not None:
             kconf = self.context.parser_result['kconf']
             srctree = Path(kconf.srctree or "")
             current_abs = Path(current_file).resolve()
-
-            for node in kconf.node_iter():  # iterate over all nodes in tree
+            
+            # iterate over all nodes in tree - From: {src_file} at {src_linenr}
+            for node in kconf.node_iter(): 
                 
                 if not node.filename: continue
                 if not node.include_path: continue
@@ -238,13 +238,18 @@ class KconfigTransformer:
                
         if not matched_files:
             print(f"      no files found for the: {pattern}")
+            self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB +=1    #TODO: maybe another counter and rename this = output source lines
+            if source_keyword == "orsource" or source_keyword == "osource":
+                new_line_text = f'#{indent_str}{source_keyword} "{pattern}"'
+                new_line = KconfigLine(new_line_text, line.line_number)
+                return new_line
             return line
         
-        # bild source for each found file 
+        # bild source for each found file #TODO: check sorted
         result_lines = []
         for matched_file in sorted(set(matched_files)):
 
-            if source_keyword == 'rsource':
+            if source_keyword == 'rsource' or source_keyword == 'orsource' or source_keyword == 'osource':
                 base_dir = Path(current_file).parent
                 #transform_to_abs = Path(matched_file).resolve()   WRONG 
                 transform_to_abs = (base_dir / matched_file).resolve()
@@ -279,7 +284,8 @@ class KconfigTransformer:
         print(f"    SUM output source lines:    {self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB}")                                  
         print(f"    Transformer Output:         {len_result} lines")
         print(f"        Added new bc of def_*:      {self.FILE_DEF_KEYWORDS_COUNT}")
-        print(f"        Added new lines of source:  {new_lines_skw}")
+        print(f"        Added new lines of source: -1 (= means one line was just overwritten)" if new_lines_skw < 0 \
+              else f"        Added new lines of source:  {new_lines_skw}")
            
         self.FILE_SOURCE_NR = 0
         self.FILE_OSOURCE_NR = 0
