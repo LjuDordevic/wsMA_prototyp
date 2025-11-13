@@ -264,13 +264,18 @@ class KconfigTransformer:
         return files    
 
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, log: bool):
+        """
+        1. get all source files parser found (these are all realtive to srctree)
+        2. build paths for input & output files
+
+        """
         if self.context is None:
             raise RuntimeError("Context missing!")
         
         # all paths are relative to srctree 
         source_files = self.get_all_source_files()
         transformed_count = 0
-        
+          
         for file_path in source_files:
             input_file = project_dir / file_path
             output_file = output_dir / file_path

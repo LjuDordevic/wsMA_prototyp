@@ -14,6 +14,7 @@ class ZRTOSParser:
         project_dir_path = Path(project_dir)
         assert(project_dir_path).exists(), f"{project_dir_path} not found"
         os.environ["srctree"] = str(project_dir_path)
+        os.environ["exp"] = "exp"
 
         kconfig_file_path = project_dir_path / kconfig_file
         assert(kconfig_file_path).exists(), f"{kconfig_file} not found in {project_dir_path}"
