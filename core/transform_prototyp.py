@@ -177,7 +177,7 @@ class KconfigTransformer:
 
     def _transform_source_line(self, line, current_file) -> List:
         from kconfig_writer import KconfigLine
-        import re
+        import re, os
 
         match = re.match(r'(source|osource|rsource|orsource)\s+["\']([^"\']+)["\']', line.stripped)
         if not match:
@@ -189,20 +189,26 @@ class KconfigTransformer:
         has_glob = any(c in pattern for c in ['*', '?', '[', ']'])
 
         # count each keyword in file
-        if source_keyword == "source":
-            self.FILE_SOURCE_NR += 1
-        elif source_keyword == "osource":
-            self.FILE_OSOURCE_NR += 1
-        elif source_keyword == "rsource":
-            self.FILE_RSOURCE_NR += 1       
-        else:
-            self.FILE_ORSOURCE_NR += 1  
+        if source_keyword == "source": self.FILE_SOURCE_NR += 1
+        elif source_keyword == "osource": self.FILE_OSOURCE_NR += 1
+        elif source_keyword == "rsource": self.FILE_RSOURCE_NR += 1       
+        else: self.FILE_ORSOURCE_NR += 1  
+        # no glob -> copy line to the output as it is 
+        if not has_glob: return line
 
-        if not has_glob:
-            return line
         print(f"    GLOB LOG --------------------------------------------------------------")
         print(f"    Resolve glob: {pattern}")
-        matched_files = self._find_matching_files(pattern, current_file)
+        
+        matched_files = []
+        if self.context is not None:
+            kconf = self.context.parser_result['kconf']
+            print(kconf._include_path)
+            for (src_info, included_file) in kconf._include_path:
+                src_filename, src_linenr = src_info
+                if os.path.samefile(src_filename, str(current_file)) and src_linenr == line.line_number:
+                    matched_files.append(included_file)
+
+        #matched_files = self._find_matching_files(pattern, current_file)
         
         if not matched_files:
             print(f"      no files found for the: {pattern}")

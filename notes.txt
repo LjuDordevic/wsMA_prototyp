@@ -11,6 +11,7 @@ Successfully installed kconfiglib-14.1.1a4
 -> cd exp/ -> python test.py 
 Symbols: 3
 -> cd .. -> echo "-e ./external/ZephyrKconfiglib" > requirements.txt
+python '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' '/home/ljd/wsMA_prototyp/exp/KconfigZephyrRTOS'
 
 **********************************zephyr-rtos/zephyr ********************************** 
 deactivate venv
