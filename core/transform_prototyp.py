@@ -60,7 +60,7 @@ class KconfigTransformer:
             """
             lines -> from reader 
             """
-            print(f"    start transforming lines")
+            print(f"start transforming lines")
             print(f"    Reader Input: {len(lines)} lines")
             if self.context is None:
                 raise RuntimeError("call build_context_from_parser() first")
@@ -205,7 +205,7 @@ class KconfigTransformer:
 
         return files    
 
-    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path):
+    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, log: bool):
         if self.context is None:
             raise RuntimeError("Context missing!")
         
@@ -223,8 +223,13 @@ class KconfigTransformer:
             
             output_file.parent.mkdir(parents=True, exist_ok=True)
             lines = reader.read_file(input_file)
+            if log:
+                for line in lines:
+                    print(f"    {line}")
+                    if line.line_type != 'empty' and line.line_type != 'other':
+                        print(f"    -> Content: {line.content}")
+
             transformed = self.transform_lines(lines, input_file)
-            
             try:
                 writer.write(transformed, output_file)
                 transformed_count += 1

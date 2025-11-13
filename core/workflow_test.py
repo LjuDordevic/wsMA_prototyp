@@ -52,7 +52,7 @@ input_file = Path(project_dir) / main_file
 output_file = Path(output_dir) / main_file
 
 print(f"\n3. Transform - needs reader & writer")
-
+""" 
 lines = reader.read_file(input_file)
 for line in lines:
             print(f"  {line}")
@@ -64,7 +64,7 @@ transformed_lines = transformer.transform_lines(lines, input_file)
 
 print(f"\n5.  call writer - write transformed lines in {output_file}")
 writer.write(transformed_lines, output_file)
-
+"""
 #transformer.get_all_source_files()
  
 print(f"\n6. Transform all files")
@@ -73,5 +73,6 @@ transformer.transform_all_files(
     reader=reader,
     writer=writer,
     project_dir=Path(project_dir),
-    output_dir=Path(output_dir)
+    output_dir=Path(output_dir),
+    log=False
 )
