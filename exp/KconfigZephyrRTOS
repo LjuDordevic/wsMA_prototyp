@@ -36,6 +36,5 @@ config FOO
 configdefault FOO
   default y if CY
 
-
-source "exp_u1/Kconfig?"
+source "exp_u1/*"
 endmenu

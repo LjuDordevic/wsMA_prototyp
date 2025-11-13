@@ -13,9 +13,21 @@ class KconfigTransformer:
     """
     build context based on parser_result
     transform lines
+
+    FOR SOURCE_KEYWORDS_TRANSFORMED 
+    input:  source "exp_u1/*" (1 line)
+    output: source "exp_u1/Kconfig"  (1 line overwrite)
+            source "exp_u1/Kconfig2" (1 line added)
     """
     DEF_KEYWORDS = ('def_bool', 'def_string', 'def_int', 'def_hex')
+    DEF_KEYWORDS_COUNT = 0
     SOURCE_KEYWORDS = ('source', 'osource', 'rsource', 'orsource')
+    SOURCE_NR = 0
+    OSOURCE_NR = 0
+    RSOURCE_NR = 0
+    ORSOURCE_NR = 0
+    SOURCE_KEYWORDS_TRANSFORMED = 0
+    SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -88,7 +100,12 @@ class KconfigTransformer:
                     result.append(transformed) # 1:1         
                 i += 1  # go to the next 
             
-            print(f"    Transformer Output: {len(result)} lines")
+            print(f"    Transformer Output:      {len(result)} lines")
+            print(f"    Added new bc of def_*:   {self.DEF_KEYWORDS_COUNT}")
+            print(f"    Added new bc of source:  {self.SOURCE_KEYWORDS_TRANSFORMED}")
+            self.DEF_KEYWORDS_COUNT = 0
+            self.SOURCE_KEYWORDS_TRANSFORMED = 0
+            self.SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
             return result
         
     def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path):
@@ -98,6 +115,7 @@ class KconfigTransformer:
             - List[KconfigLine]: 1:n
         """
         if line.line_type in self.DEF_KEYWORDS:
+            self.DEF_KEYWORDS_COUNT += 1
             return self._transform_def_keyword(line)
         elif line.line_type in self.SOURCE_KEYWORDS:
             return self._transform_source(line, current_file)
@@ -147,7 +165,16 @@ class KconfigTransformer:
         source_keyword = match.group(1)
         pattern = match.group(2)
         has_glob = any(c in pattern for c in ['*', '?', '[', ']'])
-        
+
+        if source_keyword == "source":
+            self.SOURCE_NR += 1
+        elif source_keyword == "osource":
+            self.OSOURCE_NR += 1
+        elif source_keyword == "rsource":
+            self.RSOURCE_NR += 1
+        else:
+            self.ORSOURCE_NR += 1
+
         if not has_glob:
             return line
         
@@ -166,6 +193,10 @@ class KconfigTransformer:
             result_lines.append(new_line)
             print(f"      -> {matched_file}")
         
+        self.SOURCE_KEYWORDS_RESULT_OF_GLOB += len(result_lines)
+        self.SOURCE_KEYWORDS_TRANSFORMED += len(result_lines) - 1
+        print(f"    Source-keywords:    {self.SOURCE_NR}")
+        print(f"    Resolved from glob: {self.SOURCE_KEYWORDS_RESULT_OF_GLOB}")
         return result_lines
 
     def _find_matching_files(self, pattern: str, current_file: Path) -> List[str]:
