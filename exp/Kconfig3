@@ -3,7 +3,7 @@ menu "test"
 
 if CY
 configdefault FOO
-  default y 
+  default y if CN
 endif
 
 configdefault FOO

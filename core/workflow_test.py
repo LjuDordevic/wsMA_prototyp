@@ -45,7 +45,16 @@ for sym_name, definitions in context.symbol_definitions.items():
             file = defn.get('file') or "<unknown file>"
             line = defn.get('line') or "<unknown line>"
             print(f"     - {file}:{line}{default_tag}")
-
+""" 
+default_line_nr = []
+for sym_name, default_info in context.symbol_defaults.items():
+    if sym_name == "FOO":
+        for result in default_info:
+            result_tupel = result[2]
+            default_line_nr.append(result_tupel)
+print("here")
+print(default_line_nr)
+"""
 reader = KconfigReader("ZRTOS")
 writer = KconfigWriter("ZRTOS")
 input_file = Path(project_dir) / main_file

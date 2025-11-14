@@ -4,7 +4,10 @@ from dataclasses import dataclass
 
 @dataclass
 class ExParserContext:
+    symbol_infos: Dict[str, List[dict]]
     symbol_definitions: Dict[str, List[dict]]  # symbol_name -> [location1, location2, ...]
+    symbol_defaults: Dict[str, List[dict]]
+    symbol_orig_defaults: Dict[str, List[dict]]
     configdefault_symbols: Set[str]
     parser_result: dict
     srctree: Path
@@ -40,14 +43,21 @@ class KconfigTransformer:
    
     def build_context_from_parser(self, parser_result: dict) -> ExParserContext: 
         konf = parser_result['kconf']
+        symbol_infos = {}
         symbol_definitions = {}
+        symbol_defaults = {}
+        symbol_orig_defaults = {}
         configdefault_symbols = set()
         
         for sym in parser_result['unique_defined_syms']:
-            if sym.name not in symbol_definitions:
+            if sym.name not in (symbol_infos or symbol_definitions or symbol_defaults or symbol_orig_defaults):
                 #print(sym.name)
+                symbol_infos[sym.name] = []
                 symbol_definitions[sym.name] = []
+                symbol_defaults[sym.name] = []
+                symbol_orig_defaults[sym.name] = []
             
+            """ 
             if sym.name == "DEFSTRING" or sym.name=="FOO":
                 print(f"sym.name: {sym.name}")
                 print(f"sym.origin: {sym.origin}")
@@ -63,10 +73,31 @@ class KconfigTransformer:
                     print(f"{n}\n")
                     print(f"{n.dep}\n")
                 print(f"\n sym.nodes---------------------")
+            """
+            symbol_info ={
+                'sym.name' : sym.name,
+                'sym.origin' : sym.origin,
+                'sym.name_and_loc' : sym.name_and_loc
+            }  
+            symbol_infos[sym.name].append(symbol_info)
+            
+            for sd in sym.defaults:              
+                #print(f"{sd}\n")
+                defaults_info = {
+                    'sym.default': sd
+                }
+                symbol_defaults[sym.name].append(defaults_info)
+             
+            for sod in sym.orig_defaults:
+                #print(f"{sod}")  
+                orig_defaults_info = {
+                    'orig_defaults': sod
+                }    
+                symbol_orig_defaults[sym.name].append(orig_defaults_info)
+            
             for node in sym.nodes:
                 is_configdefault = getattr(node, 'is_configdefault', False)
-                #print(node.is_configdefault)
-                
+                #print(node.is_configdefault)               
                 location_info = {
                     'file': node.filename if hasattr(node, 'filename') else None,
                     'line': node.linenr if hasattr(node, 'linenr') else None,
@@ -75,12 +106,20 @@ class KconfigTransformer:
                 }
                 symbol_definitions[sym.name].append(location_info)
             
-                if is_configdefault:
-                    configdefault_symbols.add(sym.name)
-                    
+                if is_configdefault: configdefault_symbols.add(sym.name)
+
+        print(symbol_infos)
+        print(f"\n sym.defaults---------------------")
+        print(symbol_defaults)
+        print(f"\n sym.orig_defaults---------------------")
+        print(symbol_orig_defaults)
+         
         context = ExParserContext(
-            symbol_definitions=symbol_definitions,
-            configdefault_symbols=configdefault_symbols,
+            symbol_infos = symbol_infos,
+            symbol_definitions = symbol_definitions,
+            configdefault_symbols = configdefault_symbols,
+            symbol_defaults = symbol_defaults,
+            symbol_orig_defaults = symbol_orig_defaults,
             parser_result=parser_result,
             srctree=Path(konf.srctree)
         )
