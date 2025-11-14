@@ -119,7 +119,7 @@ class KconfigLine:
 
         elif self.line_type == 'configdefault':
             # menuconfig SYMBOL_NAME
-            match = re.match(r'menuconfig\s+(\w+)', s)
+            match = re.match(r'configdefault\s+(\w+)', s)
             if match:
                 content['symbol'] = match.group(1)
         
