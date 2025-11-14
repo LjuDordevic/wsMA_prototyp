@@ -64,6 +64,7 @@ print("filter ------------------------------------------------------")
 info = transformer.extract_symbol_info(context, 'FOO')
 for sn, file, line in info['sym_def']:
     print(f"{sn}, {file}, {line}")
+print("\n")
 for sn, def_loc, def_dep in info['def_dep']:
     print(f"{sn}, {def_loc}, ({', '.join(def_dep)})")
 print("filter ------------------------------------------------------")
@@ -96,5 +97,5 @@ transformer.transform_all_files(
     writer=writer,
     project_dir=Path(project_dir),
     output_dir=Path(output_dir),
-    log=False
+    log=True
 )

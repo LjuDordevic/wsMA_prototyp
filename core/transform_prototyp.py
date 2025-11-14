@@ -142,13 +142,13 @@ class KconfigTransformer:
         
         symbol_definitions_list = []
 
-        for sym_name, location_info in symbol_definitions:
-            for loc in location_info:
-                file = loc.get('file')
-                line = loc.get('line')
-                symbol_definitions_list.append((sym_name, file, line))
+        if symbol_name in symbol_definitions:
+            for location_info in symbol_definitions[symbol_name]:
+                file = location_info.get('file')
+                line = location_info.get('line')
+                symbol_definitions_list.append((symbol_name, file, line))
 
-        default_dependencies = []
+        default_dependencies_list = []
 
         for entry in symbol_defaults[symbol_name]:
             default_tuple = entry['sym.default']
@@ -157,11 +157,11 @@ class KconfigTransformer:
             default_dependencies = default_tuple[1]
             dependencies = self._extract_dependencies(default_dependencies)
                 
-            default_dependencies.append((symbol_name, default_location, dependencies))
+            default_dependencies_list.append((symbol_name, default_location, dependencies))
             
         return {
             'sym_def' : symbol_definitions_list,
-            'def_dep' : default_dependencies
+            'def_dep' : default_dependencies_list
         }
     def _extract_dependencies(self, dep_element):
         dependencies = []
