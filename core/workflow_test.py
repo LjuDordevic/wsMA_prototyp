@@ -32,6 +32,7 @@ print(f" Transformer used for: {transformer.source_spec}")
 context = transformer.build_context_from_parser(
     parser_result
 )
+print(f"\n")
 print(f" ExParserContext - symbols: {len(context.symbol_definitions)} ({', '.join(context.symbol_definitions.keys())})")
 print(f" ExParserContext - configdefaults: {len(context.configdefault_symbols)} ({', '.join(context.configdefault_symbols)})")
 print(f"\n look at ExParserContext: ")
@@ -55,11 +56,16 @@ for sym_name, default_info in context.symbol_defaults.items():
 print("here")
 print(default_line_nr)
 """
+#print("filter ------------------------------------------------------")
+#results = transformer.extract_symbol_info(context, 'FOO')
+#for symbol_name, location, deps in results:
+#    print(f"{symbol_name}, {location}, ({', '.join(deps)})")
 print("filter ------------------------------------------------------")
-symbol_defaults = context.symbol_defaults
-results = transformer.extract_symbol_info(context, 'FOO')
-for symbol_name, location, deps in results:
-    print(f"{symbol_name}, {location}, ({', '.join(deps)})")
+info = transformer.extract_symbol_info(context, 'FOO')
+for sn, file, line in info['sym_def']:
+    print(f"{sn}, {file}, {line}")
+for sn, def_loc, def_dep in info['def_dep']:
+    print(f"{sn}, {def_loc}, ({', '.join(def_dep)})")
 print("filter ------------------------------------------------------")
 
 reader = KconfigReader("ZRTOS")

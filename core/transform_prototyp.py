@@ -108,6 +108,7 @@ class KconfigTransformer:
             
                 if is_configdefault: configdefault_symbols.add(sym.name)
 
+        print(f"\n sym.info---------------------")
         print(symbol_infos)
         print(f"\n sym.defaults---------------------")
         print(symbol_defaults)
@@ -130,29 +131,38 @@ class KconfigTransformer:
     def extract_symbol_info(self, context: ExParserContext, symbol_name: str):
        
         symbol_infos = context.symbol_infos
+        symbol_definitions = context.symbol_definitions
         symbol_defaults = context.symbol_defaults
 
         if symbol_name not in symbol_infos:
-            return []
+            return {
+            'symbol_definitions': [],
+            'default_dependencies': []
+            }
         
-        results = []
-        
-        for entry in symbol_infos[symbol_name]:
-            info_tuple = entry['sym.name_and_loc']
-            info_loc = info_tuple[1]
+        symbol_definitions_list = []
 
-            for entry in symbol_defaults[symbol_name]:
+        for sym_name, location_info in symbol_definitions:
+            for loc in location_info:
+                file = loc.get('file')
+                line = loc.get('line')
+                symbol_definitions_list.append((sym_name, file, line))
 
-                default_tuple = entry['sym.default']
-                default_linenr = default_tuple[2]
+        default_dependencies = []
+
+        for entry in symbol_defaults[symbol_name]:
+            default_tuple = entry['sym.default']
+            default_location = default_tuple[2]
                 
-                default_dependencies = default_tuple[1]
-                dependencies = self._extract_dependencies(default_dependencies)
+            default_dependencies = default_tuple[1]
+            dependencies = self._extract_dependencies(default_dependencies)
                 
-                results.append((info_loc, default_linenr, dependencies))
+            default_dependencies.append((symbol_name, default_location, dependencies))
             
-        return results
-
+        return {
+            'sym_def' : symbol_definitions_list,
+            'def_dep' : default_dependencies
+        }
     def _extract_dependencies(self, dep_element):
         dependencies = []
         
