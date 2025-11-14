@@ -108,33 +108,37 @@ class KconfigLine:
             return 'other'
     
     def _extract_content(self) -> dict:
-        s = self.stripped
+        line_stripped = self.stripped
         content = {}
         
         if self.line_type == 'config':
-            # config SYMBOL_NAME
-            match = re.match(r'config\s+(\w+)', s)
+            match = re.match(r'config\s+(\w+)', line_stripped)
             if match:
                 content['symbol'] = match.group(1)
 
         elif self.line_type == 'configdefault':
-            # menuconfig SYMBOL_NAME
-            match = re.match(r'configdefault\s+(\w+)', s)
+            match = re.match(r'configdefault\s+(\w+)', line_stripped)
             if match:
                 content['symbol'] = match.group(1)
         
+        elif self.line_type == 'default':
+            rest = line_stripped[len("default"):].strip()
+            split_rest = rest.split(' if ', 1)
+            content['value'] = split_rest[0].strip()
+            content['condition'] = split_rest[1].strip() if len(split_rest) > 1 else None
+        
         elif self.line_type.startswith('def_'):
-            def_keyword = self.line_type        # == def_bool, def_int, def_hex, def_string
-            rest = s[len(def_keyword):].strip() # == value + if <expr>
+            def_keyword = self.line_type                    # == def_bool, def_int, def_hex, def_string
+            rest = line_stripped[len(def_keyword):].strip() # == value + if <expr>
             #print('def_keyword: ' + def_keyword)
             #print('rest: ' + rest)
 
             _keyword = def_keyword.split('_', 1)
-            content['_keyword'] = _keyword[1].strip()   # save after _: bool, string, hex, int 
+            content['_keyword'] = _keyword[1].strip()       # save after _: bool, string, hex, int 
             #print(f"_keyword: {_keyword}")
             #print(_keyword[1])  
 
-            split_rest = rest.split(' if ', 1)          # split one time
+            split_rest = rest.split(' if ', 1)              # split one time
             #print(f"split_rest: {split_rest}")
             content['default_value'] = split_rest[0].strip()
             content['condition'] = split_rest[1].strip() if len(split_rest) > 1 else None
