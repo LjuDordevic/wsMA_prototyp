@@ -35,8 +35,8 @@ context = transformer.build_context_from_parser(
 print(f"\n")
 print(f" ExParserContext - symbols: {len(context.symbol_definitions)} ({', '.join(context.symbol_definitions.keys())})")
 print(f" ExParserContext - configdefaults: {len(context.configdefault_symbols)} ({', '.join(context.configdefault_symbols)})")
-print(f"\n look at ExParserContext: ")
-
+print(f"\nlook at ExParserContext: ")
+""" 
 for sym_name, definitions in context.symbol_definitions.items():
     if len(definitions) >= 1:
         print(f"   '{sym_name}' is defined x{len(definitions)}")
@@ -46,7 +46,7 @@ for sym_name, definitions in context.symbol_definitions.items():
             file = defn.get('file') or "<unknown file>"
             line = defn.get('line') or "<unknown line>"
             print(f"     - {file}:{line}{default_tag}")
-""" 
+
 default_line_nr = []
 for sym_name, default_info in context.symbol_defaults.items():
     if sym_name == "FOO":
@@ -60,14 +60,14 @@ print(default_line_nr)
 #results = transformer.extract_symbol_info(context, 'FOO')
 #for symbol_name, location, deps in results:
 #    print(f"{symbol_name}, {location}, ({', '.join(deps)})")
-print("filter ------------------------------------------------------")
+print("filter: symbol definitions ------------------------------------------------------")
 info = transformer.extract_symbol_info(context, 'FOO')
-for sn, file, line in info['sym_def']:
-    print(f"{sn}, {file}, {line}")
+for sn, file, line, cf_flag in info['sym_def']:
+    print(f"{sn}, {file}, {line}, {cf_flag}")
 print("\n")
+print("filter: default definitions of symbol ------------------------------------------------------")
 for sn, def_loc, def_dep in info['def_dep']:
     print(f"{sn}, {def_loc}, ({', '.join(def_dep)})")
-print("filter ------------------------------------------------------")
 
 reader = KconfigReader("ZRTOS")
 writer = KconfigWriter("ZRTOS")

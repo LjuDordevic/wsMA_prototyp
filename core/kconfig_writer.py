@@ -20,8 +20,10 @@ class KconfigLine:
     def _detect_type(self) -> str:
         s = self.stripped
         
-        if not s or s.startswith('#'):
+        if not s:
             return 'empty'
+        elif s.startswith('#'):
+            return 'comment'
         elif s.startswith('mainmenu '):
             return 'mainmenu'
         elif s.startswith('menu '):
@@ -110,7 +112,13 @@ class KconfigLine:
     def _extract_content(self) -> dict:
         line_stripped = self.stripped
         content = {}
+
+        if self.line_type == 'empty':
+            return
         
+        if self.line_type == 'comment':
+            return
+
         if self.line_type == 'config':
             match = re.match(r'config\s+(\w+)', line_stripped)
             if match:

@@ -136,8 +136,8 @@ class KconfigTransformer:
 
         if symbol_name not in symbol_infos:
             return {
-            'symbol_definitions': [],
-            'default_dependencies': []
+            'sym_def': [],
+            'def_dep': []
             }
         
         symbol_definitions_list = []
@@ -146,7 +146,8 @@ class KconfigTransformer:
             for location_info in symbol_definitions[symbol_name]:
                 file = location_info.get('file')
                 line = location_info.get('line')
-                symbol_definitions_list.append((symbol_name, file, line))
+                is_conf_def_flag = location_info.get('is_configdefault')
+                symbol_definitions_list.append((symbol_name, file, line, is_conf_def_flag))
 
         default_dependencies_list = []
 
@@ -434,6 +435,7 @@ class KconfigTransformer:
         # all paths are relative to srctree 
         source_files = self._get_all_source_files()
         transformed_count = 0
+        LINE_TYP_LOG = ("configdefault", "default")
           
         for file_path in source_files:
             input_file = project_dir / file_path
@@ -445,11 +447,13 @@ class KconfigTransformer:
             
             output_file.parent.mkdir(parents=True, exist_ok=True)
             lines = reader.read_file(input_file)
+
             if log:
                 for line in lines:
-                    print(f"    {line}")
-                    if line.line_type != 'empty' and line.line_type != 'other':
-                        print(f"    -> Content: {line.content}")
+                    #if line.line_type in LINE_TYP_LOG:
+                        print(f"    {line}")
+                        if line.line_type != 'empty' and line.line_type != 'other':
+                            print(f"        -> Content: {line.content}")
 
             transformed = self._transform_lines(lines, input_file)
             try:
