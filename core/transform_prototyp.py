@@ -127,6 +127,47 @@ class KconfigTransformer:
         self.context = context
         return context
 
+    def extract_symbol_info(self, context: ExParserContext, symbol_name: str):
+       
+        symbol_infos = context.symbol_infos
+        symbol_defaults = context.symbol_defaults
+
+        if symbol_name not in symbol_infos:
+            return []
+        
+        results = []
+        
+        for entry in symbol_infos[symbol_name]:
+            info_tuple = entry['sym.name_and_loc']
+            info_loc = info_tuple[1]
+
+            for entry in symbol_defaults[symbol_name]:
+
+                default_tuple = entry['sym.default']
+                default_linenr = default_tuple[2]
+                
+                default_dependencies = default_tuple[1]
+                dependencies = self._extract_dependencies(default_dependencies)
+                
+                results.append((info_loc, default_linenr, dependencies))
+            
+        return results
+
+    def _extract_dependencies(self, dep_element):
+        dependencies = []
+        
+        if hasattr(dep_element, 'name'):
+            return [dep_element.name]
+        
+        if isinstance(dep_element, tuple):
+            for item in dep_element:
+                if hasattr(item, 'name'):
+                    dependencies.append(item.name)
+                elif isinstance(item, tuple):
+                    dependencies.extend(self._extract_dependencies(item))
+        
+        return dependencies
+
     def _get_all_source_files(self) -> List[Path]:
         """
         extract Kconfig files, that parser found 

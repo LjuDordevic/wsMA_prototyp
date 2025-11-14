@@ -55,6 +55,13 @@ for sym_name, default_info in context.symbol_defaults.items():
 print("here")
 print(default_line_nr)
 """
+print("filter ------------------------------------------------------")
+symbol_defaults = context.symbol_defaults
+results = transformer.extract_symbol_info(context, 'FOO')
+for symbol_name, location, deps in results:
+    print(f"{symbol_name}, {location}, ({', '.join(deps)})")
+print("filter ------------------------------------------------------")
+
 reader = KconfigReader("ZRTOS")
 writer = KconfigWriter("ZRTOS")
 input_file = Path(project_dir) / main_file
