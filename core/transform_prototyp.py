@@ -48,6 +48,21 @@ class KconfigTransformer:
                 #print(sym.name)
                 symbol_definitions[sym.name] = []
             
+            if sym.name == "DEFSTRING" or sym.name=="FOO":
+                print(f"sym.name: {sym.name}")
+                print(f"sym.origin: {sym.origin}")
+                print(f"sym.name_and_loc: {sym.name_and_loc}")
+                print(f"\n sym.defaults---------------------")
+                for d in sym.defaults:
+                    print(f"{d}")
+                print(f"\n sym.orig_defaults---------------------")
+                for od in sym.orig_defaults:
+                    print(f"{od}")
+                print(f"\n sym.nodes---------------------")
+                for n in sym.nodes:
+                    print(f"{n}\n")
+                    print(f"{n.dep}\n")
+                print(f"\n sym.nodes---------------------")
             for node in sym.nodes:
                 is_configdefault = getattr(node, 'is_configdefault', False)
                 #print(node.is_configdefault)
@@ -147,6 +162,8 @@ class KconfigTransformer:
         elif line.line_type in self.SOURCE_KEYWORDS:
             self.FILE_SOURCE_KEYWORDS_ALL_NR += 1       # for each self.SOURCE_KEYWORDS -> count 1
             return self._transform_source_line(line, current_file)
+        elif line.line_type == 'configdefault':
+            return self._transform_configdefaults(line, current_symbol)
         else:
             return line    
 
@@ -273,6 +290,25 @@ class KconfigTransformer:
         self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB += len(result_lines)
         
         return result_lines
+    
+    def _transform_configdefaults(self, line, current_sym) -> List:
+            kconf = self.context.parser_result['kconf']
+            
+            """for sym, definition in self.context.symbol_definitions.items():
+                if (sym == current_sym):
+                    print(f"   '{sym}' is defined x{len(definition)}")
+            
+            for node in kconf.node_iter(): 
+                
+                if not node.filename: continue
+                if not node.include_path: continue
+                #if not node.is_configdefault: continue
+                print(f"    {node.filename} and {node.include_path} and \n {node.item}")
+                #print(f"    {node.is_configdefault}\n and {node}") # DON'T DELETE FOR DEBUGGING
+                src_file, src_linenr = node.include_path[-1]
+                print(f"    -> From: {src_file} at {src_linenr}") # DON'T DELETE FOR DEBUGGING
+                print("--------------------------------------------------")"""
+            return line  
 
     def _file_log_and_reset(self, new_lines_skw : int, len_result : int):
         print(f"    FILE LOG --------------------------------------------------------------")

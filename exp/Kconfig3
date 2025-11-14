@@ -1,3 +1,18 @@
-config TEST_ORSOURCE
-    bool 
-    default y
+menu "test"
+  depends on ACCC
+
+if CY
+configdefault FOO
+  default y 
+endif
+
+configdefault FOO
+  default n
+
+configdefault DEFSTRING
+  default "x2"
+endmenu
+
+config ACCC
+  bool 
+  default y

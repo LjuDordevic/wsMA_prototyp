@@ -33,9 +33,6 @@ config FOO
   bool "seconf"
   default y
 
-configdefault FOO
-  default y if CY
-
 #source "exp_u1/*"
 orsource "Kconfig3"
 orsource "Kconfig4"
