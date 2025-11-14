@@ -6,9 +6,6 @@ configdefault FOO
   default y if CN
 endif
 
-configdefault FOO
-  default n
-
 configdefault DEFSTRING
   default "x2"
 endmenu

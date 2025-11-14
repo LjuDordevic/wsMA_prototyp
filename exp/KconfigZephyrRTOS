@@ -29,6 +29,9 @@ config TEST
 config FOO
   bool "first Option"
 
+configdefault FOO
+  default n
+
 config FOO
   bool "seconf"
   default y

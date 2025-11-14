@@ -62,8 +62,8 @@ print(default_line_nr)
 #    print(f"{symbol_name}, {location}, ({', '.join(deps)})")
 print("filter: symbol definitions ------------------------------------------------------")
 info = transformer.extract_symbol_info(context, 'FOO')
-for sn, file, line, cf_flag in info['sym_def']:
-    print(f"{sn}, {file}, {line}, {cf_flag}")
+for sn, file, line, cf_flag, nd in info['sym_def']:
+    print(f"{sn}, {file}, {line}, {cf_flag}, {nd}")
 print("\n")
 print("filter: default definitions of symbol ------------------------------------------------------")
 for sn, def_loc, def_dep in info['def_dep']:

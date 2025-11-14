@@ -102,6 +102,7 @@ class KconfigTransformer:
                     'file': node.filename if hasattr(node, 'filename') else None,
                     'line': node.linenr if hasattr(node, 'linenr') else None,
                     'node': node,
+                    'node.defaults': node.defaults,
                     'is_configdefault': is_configdefault
                 }
                 symbol_definitions[sym.name].append(location_info)
@@ -147,7 +148,8 @@ class KconfigTransformer:
                 file = location_info.get('file')
                 line = location_info.get('line')
                 is_conf_def_flag = location_info.get('is_configdefault')
-                symbol_definitions_list.append((symbol_name, file, line, is_conf_def_flag))
+                node_defs = location_info.get('node.defaults')
+                symbol_definitions_list.append((symbol_name, file, line, is_conf_def_flag, node_defs))
 
         default_dependencies_list = []
 
@@ -164,6 +166,7 @@ class KconfigTransformer:
             'sym_def' : symbol_definitions_list,
             'def_dep' : default_dependencies_list
         }
+    
     def _extract_dependencies(self, dep_element):
         dependencies = []
         
