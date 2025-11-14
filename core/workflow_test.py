@@ -27,14 +27,14 @@ print(f"   Parser found: {len(parser_result['kconf'].kconfig_filenames)} files")
 print("-" * 50)
 
 transformer = KconfigTransformer(source_spec="ZRTOS")
-print("\n2. Bild TransformationContext FROM PARSER RESULTS")
+print("\n2. Bild ExParserContext FROM PARSER RESULTS")
 print(f" Transformer used for: {transformer.source_spec}")
 context = transformer.build_context_from_parser(
     parser_result
 )
-print(f" TransformationContext - symbols: {len(context.symbol_definitions)} ({', '.join(context.symbol_definitions.keys())})")
-print(f" TransformationContext - configdefaults: {len(context.configdefault_symbols)} ({', '.join(context.configdefault_symbols)})")
-print(f"\n look at TransformationContext: ")
+print(f" ExParserContext - symbols: {len(context.symbol_definitions)} ({', '.join(context.symbol_definitions.keys())})")
+print(f" ExParserContext - configdefaults: {len(context.configdefault_symbols)} ({', '.join(context.configdefault_symbols)})")
+print(f"\n look at ExParserContext: ")
 
 for sym_name, definitions in context.symbol_definitions.items():
     if len(definitions) >= 1:
