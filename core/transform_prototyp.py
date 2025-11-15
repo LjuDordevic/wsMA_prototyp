@@ -3,7 +3,7 @@ from typing import List, Dict, Optional, Set
 from dataclasses import dataclass
 
 @dataclass
-class ExParserContext:
+class ExtParserContext:
     symbol_infos: Dict[str, List[dict]]
     symbol_definitions: Dict[str, List[dict]]  # symbol_name -> [location1, location2, ...]
     symbol_defaults: Dict[str, List[dict]]
@@ -39,9 +39,9 @@ class KconfigTransformer:
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
-        self.context: Optional[ExParserContext] = None
+        self.context: Optional[ExtParserContext] = None
    
-    def build_context_from_parser(self, parser_result: dict) -> ExParserContext: 
+    def build_context_from_parser(self, parser_result: dict) -> ExtParserContext: 
         konf = parser_result['kconf']
         symbol_infos = {}
         symbol_definitions = {}
@@ -98,25 +98,47 @@ class KconfigTransformer:
             for node in sym.nodes:
                 is_configdefault = getattr(node, 'is_configdefault', False)
                 #print(node.is_configdefault)               
+                
+                """ 
+                if node.defaults and len(node.defaults)>=1:   
+                    print("DEBUG")
+                    print(len(node.defaults))
+                    print(node.defaults)        
+                    node_default_dep = self._extract_dependencies(node.defaults[1])
+                    node_default_loc = node.defaults[2]
+                    print(node_default_dep)
+                    print(node_default_loc)
+                else:
+                    node_default_dep = None
+                    node_default_loc = None
+                """
                 location_info = {
                     'file': node.filename if hasattr(node, 'filename') else None,
                     'line': node.linenr if hasattr(node, 'linenr') else None,
                     'node': node,
                     'node.defaults': node.defaults,
+                    #'node.default.dep':  node_default_dep,
+                    #'node.default.loc': node_default_loc,
                     'is_configdefault': is_configdefault
                 }
                 symbol_definitions[sym.name].append(location_info)
             
                 if is_configdefault: configdefault_symbols.add(sym.name)
 
-        print(f"\n sym.info---------------------")
+        print(f"\n For each symbol found in parser_result['unique_defined_syms']")
+        print(f"    -> filter sym.name/.origin/.name_and_loc")
+        print(f"    -> filter all sym.defaults")
+        print(f"    -> filter all sym.orig_defaults")
+        print(f"\n------------ symbol_infos --------------------------------------------------")
         print(symbol_infos)
-        print(f"\n sym.defaults---------------------")
+        print(f"\n------------ symbol_defaults -----------------------------------------------")
         print(symbol_defaults)
-        print(f"\n sym.orig_defaults---------------------")
+        print(f"\n------------ sym.orig_defaults ---------------------------------------------")
+        print(f"these omit any dependencies propagated from 'depends on' and surrounding 'if's & strip location of default line")
+        #TODO: delete not needed
         print(symbol_orig_defaults)
          
-        context = ExParserContext(
+        context = ExtParserContext(
             symbol_infos = symbol_infos,
             symbol_definitions = symbol_definitions,
             configdefault_symbols = configdefault_symbols,
@@ -129,7 +151,7 @@ class KconfigTransformer:
         self.context = context
         return context
 
-    def extract_symbol_info(self, context: ExParserContext, symbol_name: str):
+    def extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
        
         symbol_infos = context.symbol_infos
         symbol_definitions = context.symbol_definitions
@@ -148,8 +170,38 @@ class KconfigTransformer:
                 file = location_info.get('file')
                 line = location_info.get('line')
                 is_conf_def_flag = location_info.get('is_configdefault')
-                node_defs = location_info.get('node.defaults')
-                symbol_definitions_list.append((symbol_name, file, line, is_conf_def_flag, node_defs))
+                node_defaults = location_info.get('node.defaults')
+                #node_defs_dep = location_info.get('node.default.dep')
+                #node_defs_loc = location_info.get('node.default.loc')
+                #symbol_definitions_list.append((symbol_name, file, line, is_conf_def_flag, node_defs, node_defs_dep, node_defs_loc))
+                
+                """
+                Examples of node_defaults entry:
+                [(<symbol y, bool, value y, constant>, <symbol y, bool, value y, constant>, ('KconfigZephyrRTOS', 34))]
+                --> extracted_node_defaults:
+                [{'value_ext': 'y', 'deps_ext': ['y'], 'loc': ('KconfigZephyrRTOS', 34)}]
+
+                [(<symbol y, bool, value y, constant>, (2, <symbol CN, bool, value n, visibility n, direct deps y, KconfigZephyrRTOS:18>, 
+                (2, <symbol CY, bool, value n, visibility n, direct deps y, KconfigZephyrRTOS:15>, 
+                <symbol ACCC, bool, value y, visibility n, direct deps y, Kconfig3:19>)), ('Kconfig3', 6))]
+                --> extracted_node_defaults:
+                [{'value_ext': 'y', 'deps_ext': ['CN', 'CY', 'ACCC'], 'loc': ('Kconfig3', 6)}]
+
+                * if deps_exp == y, means ther's no [if <exp>] after default value
+                  also deps_exp collects every dependency - form the symbol itself, from if-block, from menu depends on ...
+                """
+
+                extracted_node_defaults = []
+                for (d_value, d_cond, d_loc) in node_defaults:
+                    if_cond_ext = self._extract_dependencies(d_cond)
+                    d_value_ext = self._extract_value(d_value)
+                    extracted_node_defaults.append({
+                        "value_ext": d_value_ext,
+                        "deps_ext": if_cond_ext,       
+                        "loc": d_loc
+                    })
+                
+                symbol_definitions_list.append((symbol_name, file, line, is_conf_def_flag, extracted_node_defaults))
 
         default_dependencies_list = []
 
@@ -181,6 +233,37 @@ class KconfigTransformer:
                     dependencies.extend(self._extract_dependencies(item))
         
         return dependencies
+
+    def _extract_value(self, d_value):
+        if d_value is None:
+            return None
+        #print(f"xx {d_value}")
+
+        if hasattr(d_value, "value"):
+            v = getattr(d_value, "value")
+            if isinstance(v, (str, int, float)):
+                #print(f"1 {d_value}")
+                return v
+    
+        if hasattr(d_value, "str_value"):
+            try:
+                return d_value.str_value()
+            except Exception: # not callable
+                #print(f"2 {d_value}")
+                pass
+
+        if hasattr(d_value, "name"):
+            #print(f"3 {d_value}")
+            return getattr(d_value, "name")
+        
+        if isinstance(d_value, tuple):
+                #print(f"4 {d_value}")
+                return str("expr")
+
+        # 5) Fallback: string representation
+        return str(d_value)
+
+
 
     def _get_all_source_files(self) -> List[Path]:
         """

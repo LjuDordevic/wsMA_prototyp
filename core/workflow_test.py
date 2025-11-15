@@ -28,7 +28,8 @@ print("-" * 50)
 
 transformer = KconfigTransformer(source_spec="ZRTOS")
 print("\n2. Bild ExParserContext FROM PARSER RESULTS")
-print(f" Transformer used for: {transformer.source_spec}")
+print(" call different attributs on symbols found in parser_result['unique_defined_syms']")
+print(f" Transformer used: {transformer.source_spec}")
 context = transformer.build_context_from_parser(
     parser_result
 )
@@ -60,12 +61,13 @@ print(default_line_nr)
 #results = transformer.extract_symbol_info(context, 'FOO')
 #for symbol_name, location, deps in results:
 #    print(f"{symbol_name}, {location}, ({', '.join(deps)})")
-print("filter: symbol definitions ------------------------------------------------------")
+print("filter: symbol definitions & each sym.node.defaults extracted ---------------------------------------------------------------")
 info = transformer.extract_symbol_info(context, 'FOO')
-for sn, file, line, cf_flag, nd in info['sym_def']:
-    print(f"{sn}, {file}, {line}, {cf_flag}, {nd}")
+#for sn, file, line, cf_flag, nd, nd_dep, nd_loc in info['sym_def']:
+for sn, file, line, cf_flag, extr_nd in info['sym_def']:
+    print(f"{sn}, {file}, {line}, {cf_flag}, {extr_nd}")
 print("\n")
-print("filter: default definitions of symbol ------------------------------------------------------")
+print("filter: default definitions of symbol (loc & complete list for if cond) ------------------------------------------------------")
 for sn, def_loc, def_dep in info['def_dep']:
     print(f"{sn}, {def_loc}, ({', '.join(def_dep)})")
 
@@ -97,5 +99,5 @@ transformer.transform_all_files(
     writer=writer,
     project_dir=Path(project_dir),
     output_dir=Path(output_dir),
-    log=True
+    log=False
 )
