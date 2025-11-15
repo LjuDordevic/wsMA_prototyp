@@ -45,6 +45,11 @@ print("filter: default definitions of symbol (loc & complete list for if cond) -
 for sn, def_loc, def_dep in info['def_dep']:
     print(f"{sn}, {def_loc}, ({', '.join(def_dep)})")
 
+print(f"\n - last conf")
+last_conf = transformer._get_last_config(info['sym_def'])
+print(last_conf)
+
+
 reader = KconfigReader("ZRTOS")
 writer = KconfigWriter("ZRTOS")
 input_file = Path(project_dir) / main_file
@@ -73,5 +78,5 @@ transformer.transform_all_files(
     writer=writer,
     project_dir=Path(project_dir),
     output_dir=Path(output_dir),
-    log=False
+    log=True
 )

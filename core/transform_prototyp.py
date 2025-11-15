@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Dict, Optional, Set
+from typing import List, Dict, Optional, Set, Tuple, Any
 from dataclasses import dataclass
 
 @dataclass
@@ -192,6 +192,9 @@ class KconfigTransformer:
                 
                 symbol_definitions_list.append((symbol_name, file, line, is_conf_def_flag, extracted_node_defaults))
 
+        #last_config_for_sym = self._get_last_config(symbol_definitions_list)
+        #configdefault_entries = self._get_cd_entries(symbol_definitions_list)
+        
         default_dependencies_list = []
 
         for entry in symbol_defaults[symbol_name]:
@@ -205,6 +208,8 @@ class KconfigTransformer:
             
         return {
             'sym_def' : symbol_definitions_list,
+            #'last_config': last_config_for_sym,
+            #'configdefaults': configdefault_entries,
             'def_dep' : default_dependencies_list
         }
     
@@ -252,6 +257,13 @@ class KconfigTransformer:
         # 5) Fallback: string representation
         return str(d_value)
 
+    def _get_last_config(self, ext_sym_def: List[Tuple]) -> Optional[Tuple]:
+        last_config = None
+        for entry in ext_sym_def:
+            if not entry[3]:
+                last_config = entry
+        return last_config      
+          
     def _get_all_source_files(self) -> List[Path]:
         """
         extract Kconfig files, that parser found 
