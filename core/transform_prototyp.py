@@ -282,8 +282,7 @@ class KconfigTransformer:
         
         return cd_entries
 
-    
-    def transform_config_default(self, cd_entries, reader, project_dir: Path) -> List:
+    def _get_transformed_config_defaults(self, cd_entries, reader, project_dir: Path) -> List:
         from kconfig_writer import KconfigLine
         transformed_lines = []
         

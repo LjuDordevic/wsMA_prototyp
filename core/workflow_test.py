@@ -56,7 +56,7 @@ print(cd_entries)
 reader = KconfigReader("ZRTOS")
 
 print(f"\n - transform cd entries")
-tcd = transformer.transform_config_default(cd_entries, reader, project_dir)
+tcd = transformer._get_transformed_config_defaults(cd_entries, reader, project_dir)
 print(tcd)
 
 writer = KconfigWriter("ZRTOS")
