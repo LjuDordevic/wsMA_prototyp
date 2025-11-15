@@ -359,7 +359,7 @@ class KconfigTransformer:
 
         return files    
 
-    def _transform_lines(self, lines: List, current_file: Path) -> List:
+    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info) -> List:
             """
             lines -> from reader 
             """
@@ -377,6 +377,12 @@ class KconfigTransformer:
                 
                 if line.line_type in ['config', 'menuconfig']:
                     current_symbol = line.content.get('symbol') # save sym name 
+                    #if current_symbol == last_conf_symbol:
+                    #    find its last line 
+                    #    call transform_cd() which add each entry from 
+                    #    cd_definition_info.get('transformed_entries_list')
+                    #    as neu line for this symbol, but dont overwrite something else
+                    #    in result.append(transformed)
                 
                 transformed = self._transform_single_line(line, current_symbol, current_file)
 
@@ -572,7 +578,30 @@ class KconfigTransformer:
         source_files = self._get_all_source_files()
         transformed_count = 0
         LINE_TYP_LOG = ("configdefault", "default")
-          
+        cd_definition_info = {}
+
+        print(f"/n")
+        print("extract configdefault symbols and for each get transformed lines and last config")
+        for cd in self.context.configdefault_symbols:
+            
+            if cd not in cd_definition_info:
+                cd_definition_info[cd] = []     # replace defaultdict
+
+            info = self.extract_symbol_info(self.context, cd)
+            last_config = self._get_last_config(info['sym_def'])
+            cd_default_lines = self._get_cd_entries(info['sym_def'])
+            tcd_list = self._get_transformed_config_defaults(cd_default_lines, reader, project_dir)
+            cd_all_sym = {
+               'last_config': last_config,
+               'cd_default_lines': cd_default_lines,
+               'transformed_entries_list': tcd_list
+            } 
+            cd_definition_info[cd].append(cd_all_sym)
+
+        print("here")
+        print(cd_definition_info)
+          #info = self.extract_symbol_info(self.context, 'FOO')
+
         for file_path in source_files:
             input_file = project_dir / file_path
             output_file = output_dir / file_path
@@ -591,7 +620,7 @@ class KconfigTransformer:
                         if line.line_type != 'empty' and line.line_type != 'other':
                             print(f"        -> Content: {line.content}")
 
-            transformed = self._transform_lines(lines, input_file)
+            transformed = self._transform_lines(lines, input_file, cd_definition_info)
             try:
                 writer.write(transformed, output_file)
                 transformed_count += 1

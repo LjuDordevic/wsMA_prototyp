@@ -50,13 +50,13 @@ last_conf = transformer._get_last_config(info['sym_def'])
 print(last_conf)
 
 print(f"\n - configdefault entries")
-cd_entries = transformer._get_cd_entries(info['sym_def'])
-print(cd_entries)
+cd_default_entries = transformer._get_cd_entries(info['sym_def'])
+print(cd_default_entries)
 
 reader = KconfigReader("ZRTOS")
 
 print(f"\n - transform cd entries")
-tcd = transformer._get_transformed_config_defaults(cd_entries, reader, project_dir)
+tcd = transformer._get_transformed_config_defaults(cd_default_entries, reader, project_dir)
 print(tcd)
 
 writer = KconfigWriter("ZRTOS")
