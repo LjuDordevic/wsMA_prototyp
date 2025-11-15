@@ -41,7 +41,7 @@ class KconfigTransformer:
         self.source_spec = source_spec.upper()  # maybe for some later checks 
         self.context: Optional[ExtParserContext] = None
    
-    def build_context_from_parser(self, parser_result: dict) -> ExtParserContext: 
+    def build_context_from_parser(self, parser_result: dict, log: bool) -> ExtParserContext: 
         konf = parser_result['kconf']
         symbol_infos = {}
         symbol_definitions = {}
@@ -49,7 +49,7 @@ class KconfigTransformer:
         symbol_orig_defaults = {}
         configdefault_symbols = set()
 
-        print(" call different attributs on symbols found in parser_result['unique_defined_syms']")
+        print(" call different attributes on symbols found in parser_result['unique_defined_syms']")
         
         for sym in parser_result['unique_defined_syms']:
             if sym.name not in (symbol_infos or symbol_definitions or symbol_defaults or symbol_orig_defaults):
@@ -138,7 +138,7 @@ class KconfigTransformer:
         )
         
         self.context = context
-        self._parser_context_log(self.context)
+        if log: self._log_parser_context(self.context)
         return context
 
     def extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
@@ -311,7 +311,7 @@ class KconfigTransformer:
             self.FILE_ALL_ADDED_LINES_SKW = self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB - self.FILE_SOURCE_KEYWORDS_ALL_NR   
             # call log
             transformed_lines = len(result)
-            self._file_log_and_reset(self.FILE_ALL_ADDED_LINES_SKW, transformed_lines)
+            self._log_file_and_reset_count(self.FILE_ALL_ADDED_LINES_SKW, transformed_lines)
             return result
         
     def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path):
@@ -516,8 +516,7 @@ class KconfigTransformer:
         print(f"----------------------------------------------------------------------")
         print(f"finished transforming: {transformed_count} files transformed")
 
-
-    def _file_log_and_reset(self, new_lines_skw : int, len_result : int):
+    def _log_file_and_reset_count(self, new_lines_skw : int, len_result : int):
         print(f"    FILE LOG --------------------------------------------------------------")
         print(f"    All source_keywords:        {self.FILE_SOURCE_NR}")
         print(f"    All osource_keywords:       {self.FILE_OSOURCE_NR}")
@@ -539,7 +538,7 @@ class KconfigTransformer:
         self.FILE_ALL_ADDED_LINES_SKW = 0
         self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
 
-    def _parser_context_log(self, given_context):
+    def _log_parser_context(self, given_context):
         
         print(f"\n For each symbol found in parser_result['unique_defined_syms']")
         print(f"    -> filter sym.name/.origin/.name_and_loc")
