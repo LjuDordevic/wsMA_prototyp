@@ -49,6 +49,9 @@ print(f"\n - last conf")
 last_conf = transformer._get_last_config(info['sym_def'])
 print(last_conf)
 
+print(f"\n - configdefault entries")
+cd_entries = transformer._get_cd_entries(info['sym_def'])
+print(cd_entries)
 
 reader = KconfigReader("ZRTOS")
 writer = KconfigWriter("ZRTOS")

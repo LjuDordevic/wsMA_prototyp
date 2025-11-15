@@ -263,7 +263,25 @@ class KconfigTransformer:
             if not entry[3]:
                 last_config = entry
         return last_config      
-          
+    
+    def _get_cd_entries(self, sym_def_list: List[Tuple]) -> List[Tuple[Tuple[str, int], List[str]]]:
+        cd_entries = []
+    
+        for entry in sym_def_list:
+            # entry[3] is_configdefault Flag
+            # entry[4] defaults_list
+            if entry[3]:  # True = configdefault
+                defaults_list = entry[4]
+             
+                for default_entry in defaults_list:
+                    loc = default_entry.get('loc')
+                    deps_ext = default_entry.get('deps_ext', [])
+                    
+                    if loc:  
+                        cd_entries.append((loc, deps_ext))
+        
+        return cd_entries
+
     def _get_all_source_files(self) -> List[Path]:
         """
         extract Kconfig files, that parser found 
