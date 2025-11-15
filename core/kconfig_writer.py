@@ -176,6 +176,24 @@ class KconfigReader:
         print(f"\n")
         print(f"Reader found: {len(lines)} lines in {str(file_path)}")
         return lines
+    
+    def read_single_line(self, file_path: Path, line_number: int) -> List[KconfigLine]:
+        if not file_path.exists():
+            print(f"Error: File not found: {file_path}")
+            return None
+        
+        try:
+            with open(file_path, 'r', encoding='utf-8') as f:
+                for current_line_num, raw_line in enumerate(f, start=1):
+                    if current_line_num == line_number:
+                        raw_line = raw_line.rstrip('\n\r')       
+                        kconfig_line = KconfigLine(raw_line, line_number)
+                        return kconfig_line
+        except Exception as e:
+            print(f"Error reading file {file_path}: {e}")
+            return None
+        
+        return None
 
 class KconfigWriter:   
     def __init__(self, spec_version: str):

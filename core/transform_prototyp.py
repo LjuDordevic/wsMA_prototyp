@@ -282,6 +282,59 @@ class KconfigTransformer:
         
         return cd_entries
 
+    
+    def transform_config_default(self, cd_entries, reader, project_dir: Path) -> List:
+        from kconfig_writer import KconfigLine
+        transformed_lines = []
+        
+        for loc, deps_ext in cd_entries:
+            file_path, line_number = loc
+            full_path = project_dir / Path(file_path)
+            print(loc)
+            print(full_path)
+            
+            # Read the specific line for default line of configdefault_entry
+            line_entry = reader.read_single_line(full_path, line_number)
+            
+            if line_entry is None:
+                print(f"Warning: Could not read line {line_number} from {file_path}")
+                continue
+            
+            # build if <...>
+            cond_full = self._create_extended_condition(line_entry.content.get('condition'), deps_ext)
+            
+            # build line
+            indent_str = " " * line_entry.indent
+            line_value = line_entry.content.get('value')
+
+            if cond_full:
+                transformed_content = f"{indent_str}default {line_value} if {cond_full}"
+            else:
+                transformed_content = f"{indent_str}default {line_value}"
+            
+            default_line = KconfigLine(transformed_content, line_number)
+            transformed_lines.append(default_line)
+
+        for line in transformed_lines:
+            print(f"\n    {line}")
+            if line.line_type != 'empty' and line.line_type != 'other':
+                print(f"        -> Content: {line.content}")
+        
+        return transformed_lines
+
+    def _create_extended_condition(self, original_condition, deps_ext) -> str:
+        conditions = []
+        
+        if original_condition:
+            conditions.append(original_condition)
+        
+        for dep in deps_ext:
+            if dep not in conditions:
+                conditions.append(dep)
+
+        return " && ".join(conditions) if conditions else ""
+
+
     def _get_all_source_files(self) -> List[Path]:
         """
         extract Kconfig files, that parser found 

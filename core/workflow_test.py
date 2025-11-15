@@ -54,6 +54,11 @@ cd_entries = transformer._get_cd_entries(info['sym_def'])
 print(cd_entries)
 
 reader = KconfigReader("ZRTOS")
+
+print(f"\n - transform cd entries")
+tcd = transformer.transform_config_default(cd_entries, reader, project_dir)
+print(tcd)
+
 writer = KconfigWriter("ZRTOS")
 input_file = Path(project_dir) / main_file
 output_file = Path(output_dir) / main_file
