@@ -65,4 +65,5 @@ Symbols: 4
 ********************************** linux ********************************** 
 TODO: als submodule 
 aktuell: cd ~/linux_kc_new/
+ohne make/puython nur direkt:
 ~/linux_kc_new/linux/scripts/kconfig/mconf '/home/ljd/wsMA_prototyp/exp_copy/KconfigZephyrRTOS'
