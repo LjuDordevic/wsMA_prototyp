@@ -6,9 +6,11 @@ from dataclasses import dataclass
 class ExtParserContext:
     symbol_infos: Dict[str, List[dict]]
     symbol_definitions: Dict[str, List[dict]]  # symbol_name -> [location1, location2, ...]
+    symbol_nr: int
     symbol_defaults: Dict[str, List[dict]]
     symbol_orig_defaults: Dict[str, List[dict]]
     configdefault_symbols: Set[str]
+    configdefault_symbols_nr: int
     parser_result: dict
     srctree: Path
 
@@ -130,7 +132,9 @@ class KconfigTransformer:
         context = ExtParserContext(
             symbol_infos = symbol_infos,
             symbol_definitions = symbol_definitions,
+            symbol_nr = len(symbol_definitions),
             configdefault_symbols = configdefault_symbols,
+            configdefault_symbols_nr = len(configdefault_symbols),
             symbol_defaults = symbol_defaults,
             symbol_orig_defaults = symbol_orig_defaults,
             parser_result=parser_result,
@@ -332,7 +336,6 @@ class KconfigTransformer:
                 conditions.append(dep)
 
         return " && ".join(conditions) if conditions else ""
-
 
     def _get_all_source_files(self) -> List[Path]:
         """
@@ -623,11 +626,14 @@ class KconfigTransformer:
     def _log_parser_context(self, given_context):
         
         print(f"\n For each symbol found in parser_result['unique_defined_syms']")
-        print(f"    -> filter sym.name/.origin/.name_and_loc")
-        print(f"    -> filter all sym.defaults")
-        print(f"    -> filter all sym.orig_defaults")
+        print(f"    -> call sym.name/.origin/.name_and_loc")
+        print(f"    -> call for each sym.nodes (.filename/.linenr/node/.defaults/is_configdefault")
+        print(f"    -> call all sym.defaults")
+        print(f"    -> call all sym.orig_defaults")
         print(f"\n------------ symbol_infos --------------------------------------------------")
         print(given_context.symbol_infos)
+        print(f"\n------------ symbol_definitions --------------------------------------------------")
+        print(given_context.symbol_definitions)
         print(f"\n------------ symbol_defaults -----------------------------------------------")
         print(given_context.symbol_defaults)
         print(f"\n------------ sym.orig_defaults ---------------------------------------------")
@@ -636,8 +642,8 @@ class KconfigTransformer:
         print(given_context.symbol_orig_defaults)
 
         print(f"\n")
-        print(f"    -> ExParserContext - symbols: {len(given_context.symbol_definitions)} ({', '.join(given_context.symbol_definitions.keys())})")
-        print(f"    -> ExParserContext - configdefaults: {len(given_context.configdefault_symbols)} ({', '.join(given_context.configdefault_symbols)})")
+        print(f"    -> ExParserContext - symbols: {given_context.symbol_nr} ({', '.join(given_context.symbol_definitions.keys())})")
+        print(f"    -> ExParserContext - configdefaults: {given_context.configdefault_symbols_nr} ({', '.join(given_context.configdefault_symbols)})")
         print(f"\n   Symbol definitions and corresponding locations in ExParserContext: ")
 
         for sym_name, definitions in given_context.symbol_definitions.items():
