@@ -48,6 +48,8 @@ class KconfigTransformer:
         symbol_defaults = {}
         symbol_orig_defaults = {}
         configdefault_symbols = set()
+
+        print(" call different attributs on symbols found in parser_result['unique_defined_syms']")
         
         for sym in parser_result['unique_defined_syms']:
             if sym.name not in (symbol_infos or symbol_definitions or symbol_defaults or symbol_orig_defaults):
@@ -124,19 +126,6 @@ class KconfigTransformer:
                 symbol_definitions[sym.name].append(location_info)
             
                 if is_configdefault: configdefault_symbols.add(sym.name)
-
-        print(f"\n For each symbol found in parser_result['unique_defined_syms']")
-        print(f"    -> filter sym.name/.origin/.name_and_loc")
-        print(f"    -> filter all sym.defaults")
-        print(f"    -> filter all sym.orig_defaults")
-        print(f"\n------------ symbol_infos --------------------------------------------------")
-        print(symbol_infos)
-        print(f"\n------------ symbol_defaults -----------------------------------------------")
-        print(symbol_defaults)
-        print(f"\n------------ sym.orig_defaults ---------------------------------------------")
-        print(f"these omit any dependencies propagated from 'depends on' and surrounding 'if's & strip location of default line")
-        #TODO: delete not needed
-        print(symbol_orig_defaults)
          
         context = ExtParserContext(
             symbol_infos = symbol_infos,
@@ -149,6 +138,7 @@ class KconfigTransformer:
         )
         
         self.context = context
+        self._parser_context_log(self.context)
         return context
 
     def extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
@@ -190,7 +180,6 @@ class KconfigTransformer:
                 * if deps_exp == y, means ther's no [if <exp>] after default value
                   also deps_exp collects every dependency - form the symbol itself, from if-block, from menu depends on ...
                 """
-
                 extracted_node_defaults = []
                 for (d_value, d_cond, d_loc) in node_defaults:
                     if_cond_ext = self._extract_dependencies(d_cond)
@@ -262,8 +251,6 @@ class KconfigTransformer:
 
         # 5) Fallback: string representation
         return str(d_value)
-
-
 
     def _get_all_source_files(self) -> List[Path]:
         """
@@ -487,28 +474,6 @@ class KconfigTransformer:
                 print("--------------------------------------------------")"""
             return line  
 
-    def _file_log_and_reset(self, new_lines_skw : int, len_result : int):
-        print(f"    FILE LOG --------------------------------------------------------------")
-        print(f"    All source_keywords:        {self.FILE_SOURCE_NR}")
-        print(f"    All osource_keywords:       {self.FILE_OSOURCE_NR}")
-        print(f"    All rsource_keywords:       {self.FILE_RSOURCE_NR}")
-        print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
-        print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
-        print(f"    SUM output source lines:    {self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB}")                                  
-        print(f"    Transformer Output:         {len_result} lines")
-        print(f"        Added new bc of def_*:      {self.FILE_DEF_KEYWORDS_COUNT}")
-        print(f"        Added new lines of source: -1 (= means one line was just overwritten)" if new_lines_skw < 0 \
-              else f"        Added new lines of source:  {new_lines_skw}")
-           
-        self.FILE_SOURCE_NR = 0
-        self.FILE_OSOURCE_NR = 0
-        self.FILE_RSOURCE_NR = 0
-        self.FILE_ORSOURCE_NR = 0
-        self.FILE_SOURCE_KEYWORDS_ALL_NR = 0
-        self.FILE_DEF_KEYWORDS_COUNT = 0
-        self.FILE_ALL_ADDED_LINES_SKW = 0
-        self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
-
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, log: bool):
         """
         1. get all source files parser found (these are all realtive to srctree)
@@ -550,3 +515,56 @@ class KconfigTransformer:
         
         print(f"----------------------------------------------------------------------")
         print(f"finished transforming: {transformed_count} files transformed")
+
+
+    def _file_log_and_reset(self, new_lines_skw : int, len_result : int):
+        print(f"    FILE LOG --------------------------------------------------------------")
+        print(f"    All source_keywords:        {self.FILE_SOURCE_NR}")
+        print(f"    All osource_keywords:       {self.FILE_OSOURCE_NR}")
+        print(f"    All rsource_keywords:       {self.FILE_RSOURCE_NR}")
+        print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
+        print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
+        print(f"    SUM output source lines:    {self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB}")                                  
+        print(f"    Transformer Output:         {len_result} lines")
+        print(f"        Added new bc of def_*:      {self.FILE_DEF_KEYWORDS_COUNT}")
+        print(f"        Added new lines of source: -1 (= means one line was just overwritten)" if new_lines_skw < 0 \
+              else f"        Added new lines of source:  {new_lines_skw}")
+           
+        self.FILE_SOURCE_NR = 0
+        self.FILE_OSOURCE_NR = 0
+        self.FILE_RSOURCE_NR = 0
+        self.FILE_ORSOURCE_NR = 0
+        self.FILE_SOURCE_KEYWORDS_ALL_NR = 0
+        self.FILE_DEF_KEYWORDS_COUNT = 0
+        self.FILE_ALL_ADDED_LINES_SKW = 0
+        self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
+
+    def _parser_context_log(self, given_context):
+        
+        print(f"\n For each symbol found in parser_result['unique_defined_syms']")
+        print(f"    -> filter sym.name/.origin/.name_and_loc")
+        print(f"    -> filter all sym.defaults")
+        print(f"    -> filter all sym.orig_defaults")
+        print(f"\n------------ symbol_infos --------------------------------------------------")
+        print(given_context.symbol_infos)
+        print(f"\n------------ symbol_defaults -----------------------------------------------")
+        print(given_context.symbol_defaults)
+        print(f"\n------------ sym.orig_defaults ---------------------------------------------")
+        print(f"these omit any dependencies propagated from 'depends on' and surrounding 'if's & strip location of default line")
+        #TODO: delete not needed
+        print(given_context.symbol_orig_defaults)
+
+        print(f"\n")
+        print(f"    -> ExParserContext - symbols: {len(given_context.symbol_definitions)} ({', '.join(given_context.symbol_definitions.keys())})")
+        print(f"    -> ExParserContext - configdefaults: {len(given_context.configdefault_symbols)} ({', '.join(given_context.configdefault_symbols)})")
+        print(f"\n   Symbol definitions and corresponding locations in ExParserContext: ")
+
+        for sym_name, definitions in given_context.symbol_definitions.items():
+            if len(definitions) >= 1:
+                print(f"   '{sym_name}' is defined x{len(definitions)}")
+                for defn in definitions:
+                    is_default = defn.get('is_configdefault', False)
+                    default_tag = " (as configdefault)" if is_default else ""
+                    file = defn.get('file') or "<unknown file>"
+                    line = defn.get('line') or "<unknown line>"
+                    print(f"     - {file}:{line}{default_tag}")
