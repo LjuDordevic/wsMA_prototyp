@@ -160,7 +160,7 @@ class KconfigTransformer:
         symbol_definitions_list = []
 
         if symbol_name in symbol_definitions:
-            for location_info in symbol_definitions[symbol_name]:
+            for location_info in symbol_definitions[symbol_name]: # filter symbol_def for given symbol 
                 file = location_info.get('file')
                 line = location_info.get('line')
                 is_conf_def_flag = location_info.get('is_configdefault')
@@ -290,12 +290,14 @@ class KconfigTransformer:
         from kconfig_writer import KconfigLine
         transformed_lines = []
         
+        print("transform all extracted <default lines> from conifgdefaults - add them together")
+
         for loc, deps_ext in cd_entries:
+            # transfom path from loc 
             file_path, line_number = loc
             full_path = project_dir / Path(file_path)
-            print(loc)
-            print(full_path)
-            
+            print(f"    default line entry: {loc} --> {full_path}")
+                    
             # Read the specific line for default line of configdefault_entry
             line_entry = reader.read_single_line(full_path, line_number)
             
@@ -317,7 +319,8 @@ class KconfigTransformer:
             
             default_line = KconfigLine(transformed_content, line_number)
             transformed_lines.append(default_line)
-
+        
+        print("print transformed lines")
         for line in transformed_lines:
             print(f"\n    {line}")
             if line.line_type != 'empty' and line.line_type != 'other':
@@ -375,34 +378,33 @@ class KconfigTransformer:
             while i < len(lines):
                 cd_processed = False
                 line = lines[i]
-                print(f"\n while counter i: {i} given line: {line}")
+                #print(f"\n while counter i: {i} given line: {line}")
                 
                 if line.line_type in ['config', 'menuconfig']:
-                    print("line is config/ menuconfig")
+                    #print("line is config/ menuconfig")
                     current_symbol = line.content.get('symbol')
-                    print(f"line's symbol: {current_symbol}")
+                    #print(f"line's symbol: {current_symbol}")
                     
                     if current_symbol and current_symbol in cd_definition_info:
                         cd_info_list = cd_definition_info[current_symbol]
-                        print(f"\ncd_info_list: {cd_info_list}")
+                        #print(f"\ncd_info_list: {cd_info_list}")
 
-                        # Durchlaufe alle Einträge für dieses Symbol (normalerweise nur einer)
                         for cd_entry in cd_info_list:
                             last_config = cd_entry.get('last_config')
-                            print(f"\nlast_config: {last_config}")
+                            #print(f"\nlast_config: {last_config}")
                             transformed_entries = cd_entry.get('transformed_entries_list', [])
-                            print(f"transformed_entries: {transformed_entries}")
+                            #print(f"transformed_entries: {transformed_entries}")
 
                             if last_config:
                                 last_conf_symbol = last_config[0]
                                 last_conf_file = last_config[1]
                                 last_conf_line = last_config[2]
-                                print(f"last_conf_symbol: {last_conf_symbol}")
-                                print(f"last_conf_file: {last_conf_file}")
-                                print(f"last_conf_line: {last_conf_line}") 
+                                #print(f"last_conf_symbol: {last_conf_symbol}")
+                                #print(f"last_conf_file: {last_conf_file}")
+                                #print(f"last_conf_line: {last_conf_line}") 
 
                                 last_conf_full_path = self.context.srctree / last_conf_file
-                                print(f"last_conf_full_path: {last_conf_full_path}")
+                                #print(f"last_conf_full_path: {last_conf_full_path}")
 
                                 if (current_symbol == last_conf_symbol and 
                                     line.line_number == last_conf_line and 
@@ -420,13 +422,13 @@ class KconfigTransformer:
                 if cd_processed:
                     continue
 
-                print(f"\nget transformed wenn line is not config/menuconfig:")
+                #print(f"\nget transformed wenn line is not config/menuconfig:")
                 transformed = self._transform_single_line(line, current_symbol, current_file)
                 
-                print(f"transformed: {transformed}")
+                #print(f"transformed: {transformed}")
                 
                 if transformed is None:
-                    print(f"transformed is non i++")
+                    #print(f"transformed is non i++")
                     i += 1
                     continue
                 
@@ -434,8 +436,9 @@ class KconfigTransformer:
                     result.extend(transformed) # 1:n (def_bool → bool + default)
                 else:
                     result.append(transformed) # 1:1         
+                #print(f"after {i} is result: {result}")
                 i += 1  # go to the next line
-                print(f"result: {result}")
+                
             
             # count how many lines were added to output file
             # = SUM of all lines matched through glob - SUM of all (r/or/o)source_keywords 
@@ -618,25 +621,6 @@ class KconfigTransformer:
         self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB += len(result_lines)
         
         return result_lines
-    
-    def _transform_configdefaults(self, line, current_sym) -> List:
-            kconf = self.context.parser_result['kconf']
-            
-            """for sym, definition in self.context.symbol_definitions.items():
-                if (sym == current_sym):
-                    print(f"   '{sym}' is defined x{len(definition)}")
-            
-            for node in kconf.node_iter(): 
-                
-                if not node.filename: continue
-                if not node.include_path: continue
-                #if not node.is_configdefault: continue
-                print(f"    {node.filename} and {node.include_path} and \n {node.item}")
-                #print(f"    {node.is_configdefault}\n and {node}") # DON'T DELETE FOR DEBUGGING
-                src_file, src_linenr = node.include_path[-1]
-                print(f"    -> From: {src_file} at {src_linenr}") # DON'T DELETE FOR DEBUGGING
-                print("--------------------------------------------------")"""
-            return line  
 
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, log: bool):
         """
@@ -653,8 +637,8 @@ class KconfigTransformer:
         LINE_TYP_LOG = ("configdefault", "default")
         cd_definition_info = {}
 
-        print(f"/n")
-        print("extract configdefault symbols and for each get transformed lines and last config")
+        print("\n3. Filter ExtParserContext")
+        print("extract all configdefault symbols and for each get transformed lines and last config")
         for cd in self.context.configdefault_symbols:
             
             if cd not in cd_definition_info:
@@ -671,10 +655,31 @@ class KconfigTransformer:
             } 
             cd_definition_info[cd].append(cd_all_sym)
 
-        print("here")
-        print(cd_definition_info)
-          #info = self.extract_symbol_info(self.context, 'FOO')
+            if log:
+                print(f"\ninfos about whole configdefault dictionary")
+                i = 0
+                while i < len(self.context.configdefault_symbols):
+                    print(f"configdefault: {cd}")
+                    print(f"'last_config': {cd_definition_info[cd][i].get('last_config')}")
+                    print(f"'cd_default_lines': {cd_definition_info[cd][i].get('cd_default_lines')}")
+                    print(f"'transformed_cd_default_lines': {cd_definition_info[cd][i].get('transformed_entries_list')}")
+                    i += 1
 
+                print(f"\nfilter: symbol definitions & each sym.node.defaults extracted ---------------------------------------------------------------")
+                for sn, file, line, cf_flag, extr_nd in info['sym_def']:
+                    print(f"{sn}, {file}, {line}, {cf_flag}, {extr_nd}")
+                print("filter: default definitions of symbol (loc & complete list for if cond) ------------------------------------------------------")
+                for sn, def_loc, def_dep in info['def_dep']:
+                    print(f"{sn}, {def_loc}, ({', '.join(def_dep)})")
+                print(f"\n - last conf")
+                print(last_config)
+                print(f"\n - configdefault entries")
+                print(cd_default_lines)   
+                print(f"\n - transformed cd entries")
+                print(tcd_list)             
+ 
+        print(f"\nfor each given file at source_files start building path output structur and call reader and writer")     
+        print(f"\n4. Transform all files - needs reader & writer")
         for file_path in source_files:
             input_file = project_dir / file_path
             output_file = output_dir / file_path
@@ -693,6 +698,7 @@ class KconfigTransformer:
                         if line.line_type != 'empty' and line.line_type != 'other':
                             print(f"        -> Content: {line.content}")
 
+            print("call _transform_lines(lines from reader, input, configdefault dict info)")
             transformed = self._transform_lines(lines, input_file, cd_definition_info)
             try:
                 writer.write(transformed, output_file)

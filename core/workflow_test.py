@@ -35,7 +35,7 @@ context = transformer.build_context_from_parser(
     log=True
 )
 
-print("\n3. Filter ExtParserContext")
+""" 
 print("filter: symbol definitions & each sym.node.defaults extracted ---------------------------------------------------------------")
 info = transformer.extract_symbol_info(context, 'FOO')
 for sn, file, line, cf_flag, extr_nd in info['sym_def']:
@@ -52,18 +52,16 @@ print(last_conf)
 print(f"\n - configdefault entries")
 cd_default_entries = transformer._get_cd_entries(info['sym_def'])
 print(cd_default_entries)
-
-reader = KconfigReader("ZRTOS")
-
 print(f"\n - transform cd entries")
 tcd = transformer._get_transformed_config_defaults(cd_default_entries, reader, project_dir)
 print(tcd)
-
+"""
+reader = KconfigReader("ZRTOS")
 writer = KconfigWriter("ZRTOS")
 input_file = Path(project_dir) / main_file
 output_file = Path(output_dir) / main_file
 
-print("\n4. Transform - needs reader & writer")
+
 """ 
 lines = reader.read_file(input_file)
 for line in lines:
@@ -77,9 +75,6 @@ transformed_lines = transformer._transform_lines(lines, input_file)
 print(f"\n5.  call writer - write transformed lines in {output_file}")
 writer.write(transformed_lines, output_file)
 """
-#transformer.get_all_source_files()
- 
-print(f"Transform all files")
 
 transformer.transform_all_files(
     reader=reader,
