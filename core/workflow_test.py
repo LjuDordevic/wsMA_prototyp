@@ -5,9 +5,9 @@ from kconfig_writer import KconfigReader, KconfigWriter
 from transform_prototyp import KconfigTransformer
 import pprint
 
-project_dir = "/home/ljd/wsMA_prototyp/exp_conf_def/"       #"/home/ljd/wsMA_prototyp/exp"
-output_dir = "/home/ljd/wsMA_prototyp/exp_conf_def_copy/"   #"/home/ljd/wsMA_prototyp/exp_copy"
-main_file = "Kconfig"                                       #"KconfigZephyrRTOS"
+project_dir = "/home/ljd/wsMA_prototyp/exp" #"/home/ljd/wsMA_prototyp/exp_conf_def/"       
+output_dir = "/home/ljd/wsMA_prototyp/exp_copy" #"/home/ljd/wsMA_prototyp/exp_conf_def_copy/"   
+main_file =  "KconfigZephyrRTOS" #"Kconfig"                                      
 
 picker = PickParser("ZRTOS")
 print(picker)

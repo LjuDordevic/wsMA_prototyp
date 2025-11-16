@@ -657,13 +657,12 @@ class KconfigTransformer:
 
             if log:
                 print(f"\ninfos about whole configdefault dictionary")
-                i = 0
-                while i < len(self.context.configdefault_symbols):
-                    print(f"configdefault: {cd}")
-                    print(f"'last_config': {cd_definition_info[cd][i].get('last_config')}")
-                    print(f"'cd_default_lines': {cd_definition_info[cd][i].get('cd_default_lines')}")
-                    print(f"'transformed_cd_default_lines': {cd_definition_info[cd][i].get('transformed_entries_list')}")
-                    i += 1
+
+                print(f"configdefault: {cd}")
+                print(f"'last_config': {cd_definition_info[cd][0].get('last_config')}")
+                print(f"'cd_default_lines': {cd_definition_info[cd][0].get('cd_default_lines')}")
+                print(f"'transformed_cd_default_lines': {cd_definition_info[cd][0].get('transformed_entries_list')}")
+               
 
                 print(f"\nfilter: symbol definitions & each sym.node.defaults extracted ---------------------------------------------------------------")
                 for sn, file, line, cf_flag, extr_nd in info['sym_def']:
