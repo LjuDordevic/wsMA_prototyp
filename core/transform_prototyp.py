@@ -371,40 +371,115 @@ class KconfigTransformer:
             result = []             # list for whole output  
             i = 0                   # counter
             current_symbol = None   
-            
-            while i < len(lines):   # as long as we got lines from the reader
-                line = lines[i]     # take one line at index i
+                
+            while i < len(lines):
+                cd_processed = False
+                line = lines[i]
+                print(f"\n while counter i: {i} given line: {line}")
                 
                 if line.line_type in ['config', 'menuconfig']:
-                    current_symbol = line.content.get('symbol') # save sym name 
-                    #if current_symbol == last_conf_symbol:
-                    #    find its last line 
-                    #    call transform_cd() which add each entry from 
-                    #    cd_definition_info.get('transformed_entries_list')
-                    #    as neu line for this symbol, but dont overwrite something else
-                    #    in result.append(transformed)
-                
-                transformed = self._transform_single_line(line, current_symbol, current_file)
+                    print("line is config/ menuconfig")
+                    current_symbol = line.content.get('symbol')
+                    print(f"line's symbol: {current_symbol}")
+                    
+                    if current_symbol and current_symbol in cd_definition_info:
+                        cd_info_list = cd_definition_info[current_symbol]
+                        print(f"\ncd_info_list: {cd_info_list}")
 
-                # line without transformation needed, go to the next line from the reader list    
+                        # Durchlaufe alle Einträge für dieses Symbol (normalerweise nur einer)
+                        for cd_entry in cd_info_list:
+                            last_config = cd_entry.get('last_config')
+                            print(f"\nlast_config: {last_config}")
+                            transformed_entries = cd_entry.get('transformed_entries_list', [])
+                            print(f"transformed_entries: {transformed_entries}")
+
+                            if last_config:
+                                last_conf_symbol = last_config[0]
+                                last_conf_file = last_config[1]
+                                last_conf_line = last_config[2]
+                                print(f"last_conf_symbol: {last_conf_symbol}")
+                                print(f"last_conf_file: {last_conf_file}")
+                                print(f"last_conf_line: {last_conf_line}") 
+
+                                last_conf_full_path = self.context.srctree / last_conf_file
+                                print(f"last_conf_full_path: {last_conf_full_path}")
+
+                                if (current_symbol == last_conf_symbol and 
+                                    line.line_number == last_conf_line and 
+                                    current_file == last_conf_full_path):
+                                    
+                                    print(f"    Found matching config for {current_symbol} at line {line.line_number}")
+                                    print(f"    Adding {len(transformed_entries)} configdefault entries")
+                                    
+                                    i = self.transform_cd(lines, i, transformed_entries, result, 
+                                                lambda l, s, f: self._transform_single_line(l, s, f))
+                                    print(f"i = self.transform_cd {i}")
+                                    cd_processed = True
+                                    break 
+                
+                if cd_processed:
+                    continue
+
+                print(f"\nget transformed wenn line is not config/menuconfig:")
+                transformed = self._transform_single_line(line, current_symbol, current_file)
+                
+                print(f"transformed: {transformed}")
+                
                 if transformed is None:
+                    print(f"transformed is non i++")
                     i += 1
                     continue
-                # is output list? -> extend, else: add one line
+                
                 if isinstance(transformed, list):
                     result.extend(transformed) # 1:n (def_bool → bool + default)
                 else:
                     result.append(transformed) # 1:1         
-                i += 1  # go to the next 
+                i += 1  # go to the next line
+                print(f"result: {result}")
             
             # count how many lines were added to output file
             # = SUM of all lines matched through glob - SUM of all (r/or/o)source_keywords 
             self.FILE_ALL_ADDED_LINES_SKW = self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB - self.FILE_SOURCE_KEYWORDS_ALL_NR   
-            # call log
             transformed_lines = len(result)
             self._log_file_and_reset_count(self.FILE_ALL_ADDED_LINES_SKW, transformed_lines)
             return result
+    
+    def transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
+       
+        line = lines[current_index]
+        current_symbol = line.content.get('symbol') if hasattr(line, 'content') else None
+        result.append(line)  # first line = config/menuconfig <symbol name>
+        block_end_index = current_index + 1
+
+        # find index for block end 
+        while block_end_index < len(lines):
+            next_line = lines[block_end_index]
+            
+            if next_line.indent == 0:
+                break
+            
+            if next_line.line_type in ['config', 'menuconfig']:
+                break
+                
+            block_end_index += 1
         
+        # call transfor_single_line for lines in block itself 
+        for idx in range(current_index + 1, block_end_index):
+            line = lines[idx]
+            
+            transformed = transform_func(line, current_symbol, None)
+            
+            if transformed is None:
+                continue
+                
+            if isinstance(transformed, list):
+                result.extend(transformed)
+            else:
+                result.append(transformed)
+        
+        result.extend(transformed_entries)   
+        return block_end_index
+
     def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path):
         """ 
         Returns:
@@ -417,8 +492,6 @@ class KconfigTransformer:
         elif line.line_type in self.SOURCE_KEYWORDS:
             self.FILE_SOURCE_KEYWORDS_ALL_NR += 1       # for each self.SOURCE_KEYWORDS -> count 1
             return self._transform_source_line(line, current_file)
-        elif line.line_type == 'configdefault':
-            return self._transform_configdefaults(line, current_symbol)
         else:
             return line    
 
