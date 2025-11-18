@@ -81,5 +81,6 @@ transformer.transform_all_files(
     writer=writer,
     project_dir=Path(project_dir),
     output_dir=Path(output_dir),
-    log=True
+    log=True,
+    log_lines=False
 )

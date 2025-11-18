@@ -37,6 +37,7 @@ class KconfigTransformer:
     FILE_ALL_ADDED_LINES_SKW = 0
     ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0
     FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
+    FILE_CONFIGDEFAULT_NR = 0
     
 
     def __init__(self, source_spec: str):
@@ -480,7 +481,8 @@ class KconfigTransformer:
             else:
                 result.append(transformed)
         
-        result.extend(transformed_entries)   
+        result.extend(transformed_entries) 
+        self.FILE_CONFIGDEFAULT_NR += len(transformed_entries)  
         return block_end_index
 
     def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path):
@@ -622,7 +624,7 @@ class KconfigTransformer:
         
         return result_lines
 
-    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, log: bool):
+    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, log: bool, log_lines: bool):
         """
         1. get all source files parser found (these are all realtive to srctree)
         2. build paths for input & output files
@@ -690,7 +692,7 @@ class KconfigTransformer:
             output_file.parent.mkdir(parents=True, exist_ok=True)
             lines = reader.read_file(input_file)
 
-            if log:
+            if log_lines:
                 for line in lines:
                     #if line.line_type in LINE_TYP_LOG:
                         print(f"    {line}")
@@ -717,10 +719,11 @@ class KconfigTransformer:
         print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
         print(f"    SUM output source lines:    {self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB}")                                  
         print(f"    Transformer Output:         {len_result} lines")
-        print(f"        Added new bc of def_*:      {self.FILE_DEF_KEYWORDS_COUNT}")
+        print(f"        Added new bc of def_*:           {self.FILE_DEF_KEYWORDS_COUNT}")
         print(f"        Added new lines of source: -1 (= means one line was just overwritten)" if new_lines_skw < 0 \
-              else f"        Added new lines of source:  {new_lines_skw}")
-           
+              else f"        Added new lines of source:       {new_lines_skw}")
+        print(f"        Added new bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")
+        print(f"        Removed   bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")   
         self.FILE_SOURCE_NR = 0
         self.FILE_OSOURCE_NR = 0
         self.FILE_RSOURCE_NR = 0
@@ -729,6 +732,7 @@ class KconfigTransformer:
         self.FILE_DEF_KEYWORDS_COUNT = 0
         self.FILE_ALL_ADDED_LINES_SKW = 0
         self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
+        self.FILE_CONFIGDEFAULT_NR = 0
 
     def _log_parser_context(self, given_context):
         
