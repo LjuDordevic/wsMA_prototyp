@@ -19,7 +19,7 @@ python3 -m venv venv_zephyr_rtos
 source venv_zephyr_rtos !!!!
 git submodule add https://github.com/zephyrproject-rtos/zephyr.git external/ZephyrRTOS
 pip install -e./external/ZephyrRTOS -> is not a valid editable requirement
-Use directly with python '~/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' KconfigZephyrRTOS
+Use directly with python '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' KconfigZephyrRTOS
 
 activate venv_zephyr_rtos
 mkdir expr_zrtos
@@ -67,3 +67,47 @@ TODO: als submodule
 aktuell: cd ~/linux_kc_new/
 ohne make/puython nur direkt:
 ~/linux_kc_new/linux/scripts/kconfig/mconf '/home/ljd/wsMA_prototyp/exp_copy/KconfigZephyrRTOS'
+
+********************************** /venv_zephyr_rtos/  ********************************** 
+-> wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.4/zephyr-sdk-0.17.4_linux-x86_64.tar.xz
+tar xvf zephyr-sdk-0.17.4_linux-x86_64.tar.xz
+cd zephyr-sdk-0.17.4/
+./setup.sh
+Zephyr SDK 0.17.4 Setup
+
+** NOTE **
+You only need to run this script once after extracting the Zephyr SDK
+distribution bundle archive.
+
+Install host tools [y/n]? y
+Register Zephyr SDK CMake package [y/n]? y
+
+Installing host tools ...
+
+Registering Zephyr SDK CMake package ...
+Zephyr-sdk (/home/ljd/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4/cmake)
+has been added to the user package registry in:
+~/.cmake/packages/Zephyr-sdk
+
+********************************** /venv_zrtos_demo/  **********************************
+https://docs.zephyrproject.org/latest/develop/getting_started/index.html
+mkdir ZRTOS_demo 
+~/wsMA_prototyp$ python3 -m venv venv_zrtos_demo
+source '/home/ljd/wsMA_prototyp/venv_zrtos_demo/bin/activate'
+sudo apt update
+sudo apt upgrade
+sudo apt install --no-install-recommends ninja-build gperf ccache dfu-util device-tree-compiler xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
+pip install west 
+west init 
+west update
+west zephyr-export
+Zephyr (/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/share/zephyr-package/cmake)
+has been added to the user package registry in:
+~/.cmake/packages/Zephyr
+
+ZephyrUnittest (/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/share/zephyrunittest-package/cmake)
+has been added to the user package registry in:
+~/.cmake/packages/ZephyrUnittest
+pip install west jsonschema pyelftools
+zephyr$ west build -b native_sim samples/hello_world
+west build -t transform
