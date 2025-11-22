@@ -19,6 +19,8 @@ class KconfigLine:
     # all keywords 
     def _detect_type(self) -> str:
         s = self.stripped
+        source_keyword_pattern = r'^(source|osource|rsource|orsource)\s+["\']'
+        source_match = re.match(source_keyword_pattern, s)
         
         if not s:
             return 'empty'
@@ -47,16 +49,8 @@ class KconfigLine:
             return 'if'
         elif s.startswith('endif'): 
             return 'endif'
-        
-        elif s.startswith('source '):
-            return 'source'
-        elif s.startswith('osource '):
-            return 'osource'
-        elif s.startswith('rsource '):
-            return 'rsource'
-        elif s.startswith('orsource '):
-            return 'orsource' 
-
+        elif source_match:
+            return source_match.group(1)
         elif s.startswith('bool') or s.startswith('boolean'):
             return 'type_bool'
         elif s.startswith('tristate'):
