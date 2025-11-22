@@ -358,8 +358,8 @@ class KconfigTransformer:
             file_path = Path(filename)
             files.append(file_path)
         print("    get_all_source_files: ")
-        for file in files:
-            print(f"    parser found: {file}")
+        #for file in files:
+        #    print(f"    parser found: {file}")
 
         return files    
 
@@ -381,6 +381,23 @@ class KconfigTransformer:
                 line = lines[i]
                 #print(f"\n while counter i: {i} given line: {line}")
                 
+                if line.line_type == 'if':
+                    if_contains_only_configdefault = self._if_block_contains_only_configdefault(lines, i)
+            
+                    if if_contains_only_configdefault:
+                        print(f"    Skipping if-endif block (only configdefaults) starting at line {line.line_number}")
+                        i = self._skip_if_block(lines, i)
+                        continue
+                
+                if line.line_type == 'configdefault':
+                    print(f"    Skipping configdefault block starting at line {line.line_number}")
+                    i += 1
+                    while i < len(lines) and lines[i].indent > line.indent:
+                        print(f"      Skipping line {lines[i].line_number}: {lines[i].line_type}")
+                        i += 1
+                    # i = 1. line after the block 
+                    continue
+
                 if line.line_type in ['config', 'menuconfig']:
                     #print("line is config/ menuconfig")
                     current_symbol = line.content.get('symbol')
@@ -467,7 +484,7 @@ class KconfigTransformer:
                 
             block_end_index += 1
         
-        # call transfor_single_line for lines in block itself 
+        # call transform_single_line for lines in block itself 
         for idx in range(current_index + 1, block_end_index):
             line = lines[idx]
             
@@ -628,15 +645,12 @@ class KconfigTransformer:
         """
         1. get all source files parser found (these are all realtive to srctree)
         2. build paths for input & output files
-
         """
         if self.context is None:
             raise RuntimeError("Context missing!")
         
-        # all paths are relative to srctree 
-        source_files = self._get_all_source_files()
+        source_files = self._get_all_source_files() # all paths are relative to srctree 
         transformed_count = 0
-        LINE_TYP_LOG = ("configdefault", "default")
         cd_definition_info = {}
 
         print("\n3. Filter ExtParserContext")
@@ -685,6 +699,7 @@ class KconfigTransformer:
             input_file = project_dir / file_path
             output_file = output_dir / file_path
             
+            print(f"test file: {input_file}")
             if not input_file.exists():
                 print(f"  Skip not found: {input_file}")
                 continue
@@ -701,8 +716,9 @@ class KconfigTransformer:
 
             print("call _transform_lines(lines from reader, input, configdefault dict info)")
             transformed = self._transform_lines(lines, input_file, cd_definition_info)
+            new_lines = self._remove_consecutive_empty_lines(transformed)
             try:
-                writer.write(transformed, output_file)
+                writer.write(new_lines, output_file)
                 transformed_count += 1
             except Exception as e:
                 print(f"     Error write: {e}")
@@ -742,19 +758,19 @@ class KconfigTransformer:
         print(f"    -> call all sym.defaults")
         print(f"    -> call all sym.orig_defaults")
         print(f"\n------------ symbol_infos --------------------------------------------------")
-        print(given_context.symbol_infos)
+        #print(given_context.symbol_infos)
         print(f"\n------------ symbol_definitions --------------------------------------------------")
-        print(given_context.symbol_definitions)
+        #print(given_context.symbol_definitions)
         print(f"\n------------ symbol_defaults -----------------------------------------------")
-        print(given_context.symbol_defaults)
+        #print(given_context.symbol_defaults)
         print(f"\n------------ sym.orig_defaults ---------------------------------------------")
         print(f"these omit any dependencies propagated from 'depends on' and surrounding 'if's & strip location of default line")
         #TODO: delete not needed
-        print(given_context.symbol_orig_defaults)
+        #print(given_context.symbol_orig_defaults)
 
         print(f"\n")
-        print(f"    -> ExParserContext - symbols: {given_context.symbol_nr} ({', '.join(given_context.symbol_definitions.keys())})")
-        print(f"    -> ExParserContext - configdefaults: {given_context.configdefault_symbols_nr} ({', '.join(given_context.configdefault_symbols)})")
+        print(f"    -> ExParserContext - symbols: {given_context.symbol_nr} ")#({', '.join(given_context.symbol_definitions.keys())})")
+        print(f"    -> ExParserContext - configdefaults: {given_context.configdefault_symbols_nr}({', '.join(given_context.configdefault_symbols)})")
         print(f"\n   Symbol definitions and corresponding locations in ExParserContext: ")
 
         for sym_name, definitions in given_context.symbol_definitions.items():
@@ -766,3 +782,82 @@ class KconfigTransformer:
                     file = defn.get('file') or "<unknown file>"
                     line = defn.get('line') or "<unknown line>"
                     print(f"     - {file}:{line}{default_tag}")
+
+    def _if_block_contains_only_configdefault(self, lines, if_start_indx) -> bool:
+        i = if_start_indx + 1
+        has_configdefault = False
+        nested_level = 1  
+    
+        while i < len(lines):
+            line = lines[i]
+
+            if line.line_type == 'if':
+                nested_level += 1
+                i += 1
+                continue
+            
+            if line.line_type == 'endif':
+                nested_level -= 1
+                if nested_level == 0:
+                    return has_configdefault
+                i += 1
+                continue
+            
+            if line.line_type in ['empty', 'comment']:
+                i += 1
+                continue
+            
+            if line.line_type == 'configdefault':
+                has_configdefault = True
+                i += 1
+                while i < len(lines) and lines[i].indent > line.indent:
+                    i += 1
+                continue
+            
+            if line.line_type not in ['empty', 'comment', 'configdefault', 'endif']:
+                return False
+            
+            i += 1
+        
+        return has_configdefault
+
+    def _skip_if_block(self, lines, if_start_index) -> int:
+        if_indent = lines[if_start_index].indent
+        i = if_start_index + 1
+        nested_level = 1  
+
+        while i < len(lines):
+            line = lines[i]
+
+            if line.line_type == 'if' and line.indent >= if_indent:
+                nested_level += 1
+            
+            elif line.line_type == 'endif' and line.indent == if_indent:
+                nested_level -= 1
+                if nested_level == 0:
+                    return i + 1  # index after endif
+            
+            i += 1
+
+        return i
+
+    def _remove_consecutive_empty_lines(self, lines):
+        """
+        transformation of configdefault can leave some unwanted empty lines,
+        so this function removes them 
+        """
+        cleaned = []
+        previous_line_empty = False
+        removed_nr = 0
+
+        for line in lines:
+            if line.line_type == 'empty':        # looking at empty line, so 
+                if previous_line_empty:
+                    removed_nr += 1
+                    continue                     # skip this empty line, go check the next one           
+                previous_line_empty = True       # if previous line wasn't empty, than set a flag on this one 
+            else:
+                previous_line_empty = False      # the line we are looking at it's not empty, so set the flag
+
+            cleaned.append(line)
+        return cleaned
