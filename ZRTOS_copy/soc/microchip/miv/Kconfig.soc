@@ -1,0 +1,11 @@
+# Copyright (c) 2024 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_MICROCHIP_MIV
+	bool
+
+config SOC_FAMILY
+	default "microchip_miv" if SOC_FAMILY_MICROCHIP_MIV
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/miv/soc/microchip/miv/miv/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/miv/soc/microchip/miv/polarfire/Kconfig.soc"

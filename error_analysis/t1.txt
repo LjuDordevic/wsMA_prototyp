@@ -1,0 +1,394 @@
+~/linux_kc_new$ ~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/ZRTOS_copy/Kconfig.zephyr
+boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:16: syntax error
+boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:16: invalid statement
+boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:17: invalid statement
+boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:18: unexpected 'choice' within if block
+boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:27: syntax error
+boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:27: invalid statement
+
+1. named choice - choice LV_COLOR_DEPTH
+2. choice within if block not allowed ?? -> doesn't recognise named choice, side effect error 
+
+boards/shields/adafruit_featherwing_128x32_oled/Kconfig.defconfig:22: syntax error
+boards/shields/adafruit_featherwing_128x32_oled/Kconfig.defconfig:22: invalid statement
+boards/shields/adafruit_featherwing_128x32_oled/Kconfig.defconfig:23: invalid statement
+boards/shields/adafruit_featherwing_128x32_oled/Kconfig.defconfig:24: unexpected 'choice' within if block
+boards/shields/adafruit_featherwing_128x32_oled/Kconfig.defconfig:30: syntax error
+boards/shields/adafruit_featherwing_128x32_oled/Kconfig.defconfig:30: invalid statement
+
+1. named choice LV_COLOR_DEPTH
+
+boards/shields/arduino_giga_display_shield/Kconfig.defconfig:20: syntax error
+boards/shields/arduino_giga_display_shield/Kconfig.defconfig:20: invalid statement
+boards/shields/arduino_giga_display_shield/Kconfig.defconfig:21: invalid statement
+boards/shields/arduino_giga_display_shield/Kconfig.defconfig:23: unexpected 'choice' within if block
+boards/shields/arduino_giga_display_shield/Kconfig.defconfig:27: syntax error
+boards/shields/arduino_giga_display_shield/Kconfig.defconfig:27: invalid statement
+
+1. named choice - choice LV_COLOR_DEPTH
+
+boards/shields/buydisplay_2_8_tft_touch_arduino/Kconfig.defconfig:16: syntax error
+boards/shields/buydisplay_2_8_tft_touch_arduino/Kconfig.defconfig:16: invalid statement
+boards/shields/buydisplay_2_8_tft_touch_arduino/Kconfig.defconfig:17: invalid statement
+boards/shields/buydisplay_2_8_tft_touch_arduino/Kconfig.defconfig:18: unexpected 'choice' within if block
+boards/shields/buydisplay_2_8_tft_touch_arduino/Kconfig.defconfig:27: syntax error
+boards/shields/buydisplay_2_8_tft_touch_arduino/Kconfig.defconfig:27: invalid statement
+
+1. LV_COLOR_DEPTH
+
+boards/shields/buydisplay_3_5_tft_touch_arduino/Kconfig.defconfig:16: syntax error
+boards/shields/buydisplay_3_5_tft_touch_arduino/Kconfig.defconfig:16: invalid statement
+boards/shields/buydisplay_3_5_tft_touch_arduino/Kconfig.defconfig:17: invalid statement
+boards/shields/buydisplay_3_5_tft_touch_arduino/Kconfig.defconfig:18: unexpected 'choice' within if block
+boards/shields/buydisplay_3_5_tft_touch_arduino/Kconfig.defconfig:27: syntax error
+boards/shields/buydisplay_3_5_tft_touch_arduino/Kconfig.defconfig:27: invalid statement
+
+1. LV_COLOR_DEPTH
+
+boards/shields/esp_8266/Kconfig.defconfig:10: syntax error
+boards/shields/esp_8266/Kconfig.defconfig:10: invalid statement
+boards/shields/esp_8266/Kconfig.defconfig:11: invalid statement
+boards/shields/esp_8266/Kconfig.defconfig:12: invalid statement
+boards/shields/esp_8266/Kconfig.defconfig:13: unexpected 'choice' within if block
+boards/shields/esp_8266/Kconfig.defconfig:15: syntax error
+boards/shields/esp_8266/Kconfig.defconfig:15: unknown statement "orsource"
+boards/shields/esp_8266/Kconfig.defconfig:16: unknown statement "orsource"
+boards/shields/esp_8266/Kconfig.defconfig:20: syntax error
+boards/shields/esp_8266/Kconfig.defconfig:20: invalid statement
+
+1. named choice - WIFI_ESP_AT_VERSION
+2. orsource
+
+boards/shields/g1120b0mipi/Kconfig.defconfig:31: syntax error
+boards/shields/g1120b0mipi/Kconfig.defconfig:31: invalid statement
+boards/shields/g1120b0mipi/Kconfig.defconfig:32: invalid statement
+boards/shields/g1120b0mipi/Kconfig.defconfig:33: unexpected 'choice' within if block
+boards/shields/g1120b0mipi/Kconfig.defconfig:37: syntax error
+boards/shields/g1120b0mipi/Kconfig.defconfig:37: invalid statement
+
+1. LV_COLOR_DEPTH
+
+boards/shields/inventek_eswifi/Kconfig.defconfig:10: syntax error
+boards/shields/inventek_eswifi/Kconfig.defconfig:10: unknown statement "orsource"
+boards/shields/inventek_eswifi/Kconfig.defconfig:11: unknown statement "orsource"
+boards/shields/inventek_eswifi/Kconfig.defconfig:13: invalid statement
+boards/shields/inventek_eswifi/Kconfig.defconfig:14: invalid statement
+boards/shields/inventek_eswifi/Kconfig.defconfig:15: invalid statement
+boards/shields/inventek_eswifi/Kconfig.defconfig:16: invalid statement
+boards/shields/inventek_eswifi/Kconfig.defconfig:17: unexpected 'choice' within if block
+boards/shields/inventek_eswifi/Kconfig.defconfig:21: syntax error
+boards/shields/inventek_eswifi/Kconfig.defconfig:21: invalid statement
+
+1. WIFI_ESWIFI_BUS
+choice WIFI_ESWIFI_BUS
+	default WIFI_ESWIFI_BUS_SPI if SHIELD_INVENTEK_ESWIFI_ARDUINO_SPI
+	default WIFI_ESWIFI_BUS_UART if SHIELD_INVENTEK_ESWIFI_ARDUINO_UART
+	depends on WIFI_ESWIFI
+endchoice
+
+boards/shields/lcd_par_s035/Kconfig.defconfig:14: syntax error
+boards/shields/lcd_par_s035/Kconfig.defconfig:14: invalid statement
+boards/shields/lcd_par_s035/Kconfig.defconfig:15: invalid statement
+boards/shields/lcd_par_s035/Kconfig.defconfig:16: unexpected 'choice' within if block
+boards/shields/lcd_par_s035/Kconfig.defconfig:31: syntax error
+boards/shields/lcd_par_s035/Kconfig.defconfig:31: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/ls0xx_generic/Kconfig.defconfig:19: syntax error
+boards/shields/ls0xx_generic/Kconfig.defconfig:19: invalid statement
+boards/shields/ls0xx_generic/Kconfig.defconfig:20: invalid statement
+boards/shields/ls0xx_generic/Kconfig.defconfig:21: unexpected 'choice' within if block
+boards/shields/ls0xx_generic/Kconfig.defconfig:27: syntax error
+boards/shields/ls0xx_generic/Kconfig.defconfig:27: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/m5stack_cardputer/Kconfig.defconfig:11: syntax error
+boards/shields/m5stack_cardputer/Kconfig.defconfig:11: invalid statement
+boards/shields/m5stack_cardputer/Kconfig.defconfig:12: invalid statement
+boards/shields/m5stack_cardputer/Kconfig.defconfig:13: unexpected 'choice' within if block
+boards/shields/m5stack_cardputer/Kconfig.defconfig:20: syntax error
+boards/shields/m5stack_cardputer/Kconfig.defconfig:20: invalid statement
+boards/shields/m5stack_cardputer/Kconfig.defconfig:21: invalid statement
+boards/shields/m5stack_cardputer/Kconfig.defconfig:22: unexpected 'choice' within if block
+boards/shields/m5stack_cardputer/Kconfig.defconfig:26: syntax error
+boards/shields/m5stack_cardputer/Kconfig.defconfig:26: invalid statement
+boards/shields/m5stack_cardputer/Kconfig.defconfig:28: invalid statement
+
+choice ST7789V_PIXEL_FORMAT
+	default ST7789V_RGB565
+endchoice
+LV_COLOR_DEPTH
+
+boards/shields/mikroe_wifi_bt_click/Kconfig.defconfig:10: syntax error
+boards/shields/mikroe_wifi_bt_click/Kconfig.defconfig:10: invalid statement
+boards/shields/mikroe_wifi_bt_click/Kconfig.defconfig:11: invalid statement
+boards/shields/mikroe_wifi_bt_click/Kconfig.defconfig:12: invalid statement
+boards/shields/mikroe_wifi_bt_click/Kconfig.defconfig:13: unexpected 'choice' within if block
+boards/shields/mikroe_wifi_bt_click/Kconfig.defconfig:19: syntax error
+boards/shields/mikroe_wifi_bt_click/Kconfig.defconfig:19: invalid statement
+
+choice WIFI_ESP_AT_VERSION
+	default WIFI_ESP_AT_VERSION_2_0
+	depends on WIFI_ESP_AT
+endchoice
+
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:8: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:8: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:9: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:10: unexpected 'choice' within if block
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:25: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:25: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:26: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:27: unexpected 'choice' within if block
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:29: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:29: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:30: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:31: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:40: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:40: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:42: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:48: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:48: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:49: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:50: unexpected 'choice' within if block
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:59: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:59: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:60: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:61: unexpected 'choice' within if block
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:63: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:63: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:64: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:65: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:74: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:74: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:76: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:82: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:82: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:83: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:84: unexpected 'choice' within if block
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:93: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:93: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:94: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:95: unexpected 'choice' within if block
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:97: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:97: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:98: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:99: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:125: syntax error
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:125: invalid statement
+boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:127: invalid statement
+
+choice BT_NXP_MODULE
+	default BT_NXP_IW416
+endchoice
+choice NXP_WIFI_PART
+	default NXP_IW416
+endchoice
+choice NXP_IW416_MODULE
+	default NXP_IW416_MURATA_1XK_M2
+endchoice
+choice BT_NXP_MODULE
+	default BT_NXP_NW612
+endchoice
+choice NXP_WIFI_PART
+	default NXP_IW61X
+endchoice
+choice NXP_IW61X_MODULE
+	default NXP_IW612_MURATA_2EL_M2
+endchoice
+choice BT_NXP_MODULE
+	default BT_NXP_IW610
+endchoice
+choice NXP_WIFI_PART
+	default NXP_IW610
+endchoice
+choice NXP_IW610_MODULE
+	default NXP_IW610_MURATA_2LL_M2
+endchoice
+
+boards/shields/rk043fn02h_ct/Kconfig.defconfig:34: syntax error
+boards/shields/rk043fn02h_ct/Kconfig.defconfig:34: invalid statement
+boards/shields/rk043fn02h_ct/Kconfig.defconfig:35: invalid statement
+boards/shields/rk043fn02h_ct/Kconfig.defconfig:36: unexpected 'choice' within if block
+boards/shields/rk043fn02h_ct/Kconfig.defconfig:44: syntax error
+boards/shields/rk043fn02h_ct/Kconfig.defconfig:44: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/rk043fn66hs_ctg/Kconfig.defconfig:37: syntax error
+boards/shields/rk043fn66hs_ctg/Kconfig.defconfig:37: invalid statement
+boards/shields/rk043fn66hs_ctg/Kconfig.defconfig:38: invalid statement
+boards/shields/rk043fn66hs_ctg/Kconfig.defconfig:39: unexpected 'choice' within if block
+boards/shields/rk043fn66hs_ctg/Kconfig.defconfig:47: syntax error
+boards/shields/rk043fn66hs_ctg/Kconfig.defconfig:47: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/rk055hdmipi4m/Kconfig.defconfig:46: syntax error
+boards/shields/rk055hdmipi4m/Kconfig.defconfig:46: invalid statement
+boards/shields/rk055hdmipi4m/Kconfig.defconfig:47: invalid statement
+boards/shields/rk055hdmipi4m/Kconfig.defconfig:48: unexpected 'choice' within if block
+boards/shields/rk055hdmipi4m/Kconfig.defconfig:52: syntax error
+boards/shields/rk055hdmipi4m/Kconfig.defconfig:52: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/rk055hdmipi4ma0/Kconfig.defconfig:48: syntax error
+boards/shields/rk055hdmipi4ma0/Kconfig.defconfig:48: invalid statement
+boards/shields/rk055hdmipi4ma0/Kconfig.defconfig:49: invalid statement
+boards/shields/rk055hdmipi4ma0/Kconfig.defconfig:50: unexpected 'choice' within if block
+boards/shields/rk055hdmipi4ma0/Kconfig.defconfig:54: syntax error
+boards/shields/rk055hdmipi4ma0/Kconfig.defconfig:54: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/rtk7eka6m3b00001bu/Kconfig.defconfig:33: syntax error
+boards/shields/rtk7eka6m3b00001bu/Kconfig.defconfig:33: invalid statement
+boards/shields/rtk7eka6m3b00001bu/Kconfig.defconfig:34: invalid statement
+boards/shields/rtk7eka6m3b00001bu/Kconfig.defconfig:35: unexpected 'choice' within if block
+boards/shields/rtk7eka6m3b00001bu/Kconfig.defconfig:39: syntax error
+boards/shields/rtk7eka6m3b00001bu/Kconfig.defconfig:39: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/rtklcdpar1s00001be/Kconfig.defconfig:28: syntax error
+boards/shields/rtklcdpar1s00001be/Kconfig.defconfig:28: invalid statement
+boards/shields/rtklcdpar1s00001be/Kconfig.defconfig:29: invalid statement
+boards/shields/rtklcdpar1s00001be/Kconfig.defconfig:30: unexpected 'choice' within if block
+boards/shields/rtklcdpar1s00001be/Kconfig.defconfig:34: syntax error
+boards/shields/rtklcdpar1s00001be/Kconfig.defconfig:34: unknown statement "orsource"
+boards/shields/rtklcdpar1s00001be/Kconfig.defconfig:35: unknown statement "orsource"
+boards/shields/rtklcdpar1s00001be/Kconfig.defconfig:37: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/rtkmipilcdb00000be/Kconfig.defconfig:51: syntax error
+boards/shields/rtkmipilcdb00000be/Kconfig.defconfig:51: invalid statement
+boards/shields/rtkmipilcdb00000be/Kconfig.defconfig:52: invalid statement
+boards/shields/rtkmipilcdb00000be/Kconfig.defconfig:53: unexpected 'choice' within if block
+boards/shields/rtkmipilcdb00000be/Kconfig.defconfig:57: syntax error
+boards/shields/rtkmipilcdb00000be/Kconfig.defconfig:57: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/seeed_xiao_expansion_board/Kconfig.defconfig:19: syntax error
+boards/shields/seeed_xiao_expansion_board/Kconfig.defconfig:19: invalid statement
+boards/shields/seeed_xiao_expansion_board/Kconfig.defconfig:20: invalid statement
+boards/shields/seeed_xiao_expansion_board/Kconfig.defconfig:21: unexpected 'choice' within if block
+boards/shields/seeed_xiao_expansion_board/Kconfig.defconfig:27: syntax error
+boards/shields/seeed_xiao_expansion_board/Kconfig.defconfig:27: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/seeed_xiao_round_display/Kconfig.defconfig:13: syntax error
+boards/shields/seeed_xiao_round_display/Kconfig.defconfig:13: invalid statement
+boards/shields/seeed_xiao_round_display/Kconfig.defconfig:14: invalid statement
+boards/shields/seeed_xiao_round_display/Kconfig.defconfig:15: unexpected 'choice' within if block
+boards/shields/seeed_xiao_round_display/Kconfig.defconfig:20: syntax error
+boards/shields/seeed_xiao_round_display/Kconfig.defconfig:20: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/sparkfun_sara_r4/Kconfig.defconfig:17: syntax error
+boards/shields/sparkfun_sara_r4/Kconfig.defconfig:17: invalid statement
+boards/shields/sparkfun_sara_r4/Kconfig.defconfig:18: invalid statement
+boards/shields/sparkfun_sara_r4/Kconfig.defconfig:19: unexpected 'choice' within if block
+boards/shields/sparkfun_sara_r4/Kconfig.defconfig:40: syntax error
+boards/shields/sparkfun_sara_r4/Kconfig.defconfig:40: invalid statement
+
+choice MODEM_UBLOX_SARA_VARIANT
+	default MODEM_UBLOX_SARA_R4
+endchoice
+
+boards/shields/ssd1306/Kconfig.defconfig:23: syntax error
+boards/shields/ssd1306/Kconfig.defconfig:23: invalid statement
+boards/shields/ssd1306/Kconfig.defconfig:24: invalid statement
+boards/shields/ssd1306/Kconfig.defconfig:25: unexpected 'choice' within if block
+boards/shields/ssd1306/Kconfig.defconfig:31: syntax error
+boards/shields/ssd1306/Kconfig.defconfig:31: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/st7789v_generic/Kconfig.defconfig:8: syntax error
+boards/shields/st7789v_generic/Kconfig.defconfig:8: invalid statement
+boards/shields/st7789v_generic/Kconfig.defconfig:9: invalid statement
+boards/shields/st7789v_generic/Kconfig.defconfig:10: invalid statement
+boards/shields/st7789v_generic/Kconfig.defconfig:11: unexpected 'choice' within if block
+boards/shields/st7789v_generic/Kconfig.defconfig:19: syntax error
+boards/shields/st7789v_generic/Kconfig.defconfig:19: invalid statement
+boards/shields/st7789v_generic/Kconfig.defconfig:20: invalid statement
+boards/shields/st7789v_generic/Kconfig.defconfig:21: unexpected 'choice' within if block
+boards/shields/st7789v_generic/Kconfig.defconfig:25: syntax error
+boards/shields/st7789v_generic/Kconfig.defconfig:25: invalid statement
+boards/shields/st7789v_generic/Kconfig.defconfig:27: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/st_b_lcd40_dsi1_mb1166/Kconfig.defconfig:7: syntax error
+boards/shields/st_b_lcd40_dsi1_mb1166/Kconfig.defconfig:7: unknown statement "orsource"
+boards/shields/st_b_lcd40_dsi1_mb1166/Kconfig.defconfig:8: unknown statement "orsource"
+boards/shields/st_b_lcd40_dsi1_mb1166/Kconfig.defconfig:24: syntax error
+boards/shields/st_b_lcd40_dsi1_mb1166/Kconfig.defconfig:24: invalid statement
+boards/shields/st_b_lcd40_dsi1_mb1166/Kconfig.defconfig:25: invalid statement
+boards/shields/st_b_lcd40_dsi1_mb1166/Kconfig.defconfig:26: unexpected 'choice' within if block
+boards/shields/st_b_lcd40_dsi1_mb1166/Kconfig.defconfig:30: syntax error
+boards/shields/st_b_lcd40_dsi1_mb1166/Kconfig.defconfig:30: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/st_lcd_dsi_mb1835/Kconfig.defconfig:19: syntax error
+boards/shields/st_lcd_dsi_mb1835/Kconfig.defconfig:19: invalid statement
+boards/shields/st_lcd_dsi_mb1835/Kconfig.defconfig:20: invalid statement
+boards/shields/st_lcd_dsi_mb1835/Kconfig.defconfig:21: unexpected 'choice' within if block
+boards/shields/st_lcd_dsi_mb1835/Kconfig.defconfig:25: syntax error
+boards/shields/st_lcd_dsi_mb1835/Kconfig.defconfig:25: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/waveshare_dsi_lcd/Kconfig.defconfig:25: syntax error
+boards/shields/waveshare_dsi_lcd/Kconfig.defconfig:25: invalid statement
+boards/shields/waveshare_dsi_lcd/Kconfig.defconfig:26: invalid statement
+boards/shields/waveshare_dsi_lcd/Kconfig.defconfig:27: unexpected 'choice' within if block
+boards/shields/waveshare_dsi_lcd/Kconfig.defconfig:33: syntax error
+boards/shields/waveshare_dsi_lcd/Kconfig.defconfig:33: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/waveshare_epaper/Kconfig.defconfig:23: syntax error
+boards/shields/waveshare_epaper/Kconfig.defconfig:23: invalid statement
+boards/shields/waveshare_epaper/Kconfig.defconfig:24: invalid statement
+boards/shields/waveshare_epaper/Kconfig.defconfig:25: unexpected 'choice' within if block
+boards/shields/waveshare_epaper/Kconfig.defconfig:34: syntax error
+boards/shields/waveshare_epaper/Kconfig.defconfig:34: invalid statement
+
+LV_COLOR_DEPTH
+
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:8: syntax error
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:8: invalid statement
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:9: invalid statement
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:10: unexpected 'choice' within if block
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:20: syntax error
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:20: invalid statement
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:21: invalid statement
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:22: unexpected 'choice' within if block
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:26: syntax error
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:26: invalid statement
+boards/shields/waveshare_pico_lcd_1_14/Kconfig.defconfig:28: invalid statement
+
+choice ST7789V_PIXEL_FORMAT
+	default ST7789V_RGB565
+endchoice
+choice LV_COLOR_DEPTH
+
+boards/shields/waveshare_pico_oled_1_3/Kconfig.defconfig:16: syntax error
+boards/shields/waveshare_pico_oled_1_3/Kconfig.defconfig:16: invalid statement
+boards/shields/waveshare_pico_oled_1_3/Kconfig.defconfig:17: invalid statement
+boards/shields/waveshare_pico_oled_1_3/Kconfig.defconfig:18: unexpected 'choice' within if block
+boards/shields/waveshare_pico_oled_1_3/Kconfig.defconfig:24: syntax error
+boards/shields/waveshare_pico_oled_1_3/Kconfig.defconfig:24: invalid statement
+
+LV_COLOR_DEPTH
+
+/home/ljd/wsMA_prototyp/ZRTOS_copy/Kconfig.zephyr:79: can't open file "/soc/Kconfig.defconfig"

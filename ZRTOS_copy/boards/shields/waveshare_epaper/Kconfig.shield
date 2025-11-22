@@ -1,0 +1,34 @@
+# Copyright (c) 2019 Linaro Limited
+# SPDX-License-Identifier: Apache-2.0
+
+config SHIELD_WAVESHARE_EPAPER_GDEH029A1
+ bool
+ default $(shields_list_contains,waveshare_epaper_gdeh029a1)
+
+config SHIELD_WAVESHARE_EPAPER_GDEH0213B1
+ bool
+ default $(shields_list_contains,waveshare_epaper_gdeh0213b1)
+
+config SHIELD_WAVESHARE_EPAPER_GDEH0213B72
+ bool
+ default $(shields_list_contains,waveshare_epaper_gdeh0213b72)
+
+config SHIELD_WAVESHARE_EPAPER_GDEW075T7
+ bool
+ default $(shields_list_contains,waveshare_epaper_gdew075t7)
+
+config SHIELD_WAVESHARE_EPAPER_GDEH0154A07
+ bool
+ default $(shields_list_contains,waveshare_epaper_gdeh0154a07)
+
+config SHIELD_WAVESHARE_EPAPER_GDEW042T2
+ bool
+ default $(shields_list_contains,waveshare_epaper_gdew042t2)
+
+config SHIELD_WAVESHARE_EPAPER_GDEW042T2_P
+ bool
+ default $(shields_list_contains,waveshare_epaper_gdew042t2-p)
+
+config SHIELD_WAVESHARE_EPAPER_GDEY0213B74
+ bool
+ default $(shields_list_contains,waveshare_epaper_gdey0213b74)

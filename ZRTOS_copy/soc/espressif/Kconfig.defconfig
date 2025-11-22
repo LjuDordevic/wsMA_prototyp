@@ -1,0 +1,21 @@
+# Copyright (c) 2023 Espressif Systems (Shanghai) Co., Ltd.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_ESPRESSIF_ESP32
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/espressif/soc/espressif/common/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/espressif/soc/espressif/esp32/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/espressif/soc/espressif/esp32c2/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/espressif/soc/espressif/esp32c3/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/espressif/soc/espressif/esp32c6/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/espressif/soc/espressif/esp32h2/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/espressif/soc/espressif/esp32s2/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/espressif/soc/espressif/esp32s3/Kconfig.defconfig"
+
+config HAS_FLASH_LOAD_OFFSET
+	default y
+
+config FLASH_LOAD_OFFSET
+	default $(dt_node_reg_addr_hex,$(dt_nodelabel_path,boot_partition)) if ESP_SIMPLE_BOOT
+
+endif # SOC_FAMILY_ESPRESSIF_ESP32

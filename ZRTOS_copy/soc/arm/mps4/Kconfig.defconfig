@@ -1,0 +1,12 @@
+# Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_MPS4
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default $(dt_node_int_prop_int,$(dt_nodelabel_path,sysclk),clock-frequency)
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/mps4/soc/arm/mps4/Kconfig.defconfig.mps4_corstone315"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/mps4/soc/arm/mps4/Kconfig.defconfig.mps4_corstone320"
+
+endif # SOC_SERIES_MPS4

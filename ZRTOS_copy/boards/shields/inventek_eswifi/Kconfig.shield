@@ -1,0 +1,14 @@
+# Copyright (c) 2020 ATL Electronics
+# SPDX-License-Identifier: Apache-2.0
+
+config SHIELD_INVENTEK_ESWIFI
+ bool
+ default $(shields_list_contains,inventek_eswifi)
+
+config SHIELD_INVENTEK_ESWIFI_ARDUINO_SPI
+ bool
+ default $(shields_list_contains,inventek_eswifi_arduino_spi)
+
+config SHIELD_INVENTEK_ESWIFI_ARDUINO_UART
+ bool
+ default $(shields_list_contains,inventek_eswifi_arduino_uart)

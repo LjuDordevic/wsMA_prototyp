@@ -1,0 +1,11 @@
+# Copyright (c) 2025 Core Devices LLC
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_SF32
+
+config BUILD_OUTPUT_HEX
+	default y
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/sifli/sf32/soc/sifli/sf32/sf32lb52x/Kconfig.defconfig"
+
+endif # SOC_FAMILY_SF32

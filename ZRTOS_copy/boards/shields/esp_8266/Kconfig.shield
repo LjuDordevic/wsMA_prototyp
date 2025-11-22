@@ -1,0 +1,14 @@
+# Copyright (c) 2020 Gerson Fernando Budke <nandojve@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config SHIELD_ESP_8266
+ bool
+ default $(shields_list_contains,esp_8266)
+
+config SHIELD_ESP_8266_ARDUINO
+ bool
+ default $(shields_list_contains,esp_8266_arduino)
+
+config SHIELD_ESP_8266_MIKROBUS
+ bool
+ default $(shields_list_contains,esp_8266_mikrobus)

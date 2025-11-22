@@ -1,0 +1,17 @@
+# Copyright (c) 2024 Renesas Electronics Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_RENESAS_RZ
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/soc/renesas/rz/rza2m/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/soc/renesas/rz/rza3ul/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/soc/renesas/rz/rzg2l/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/soc/renesas/rz/rzg2ul/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/soc/renesas/rz/rzg3s/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/soc/renesas/rz/rzn2l/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/soc/renesas/rz/rzt2l/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/soc/renesas/rz/rzt2m/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/soc/renesas/rz/rzv2l/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/soc/renesas/rz/rzv2n/Kconfig.defconfig"
+
+endif # SOC_FAMILY_RENESAS_RZ

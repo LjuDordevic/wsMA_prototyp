@@ -1,0 +1,31 @@
+# ST Microelectronics STM32H5 MCU line
+
+# Copyright (c) 2023 STMicroelectronics
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_STM32H5X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h5x/soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h503xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h5x/soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h523xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h5x/soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h533xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h5x/soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h562xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h5x/soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h563xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h5x/soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h573xx"
+
+config ICACHE
+	default y
+
+config DCACHE
+	default y if !SOC_STM32H503XX
+
+config CACHE_MANAGEMENT
+	default y
+
+choice CACHE_TYPE
+	default EXTERNAL_CACHE
+endchoice
+
+config ROM_START_OFFSET
+	default 0x400 if BOOTLOADER_MCUBOOT
+
+endif # SOC_SERIES_STM32H5X

@@ -1,0 +1,19 @@
+# Copyright 2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_KINETIS
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/k2x/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/k32lx/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/k6x/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/k8x/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/ke1xf/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/ke1xz/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/kl2x/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/kv5x/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/kwx/Kconfig.defconfig"
+
+config WDT_DISABLE_AT_BOOT
+	default y
+
+endif # SOC_FAMILY_KINETIS

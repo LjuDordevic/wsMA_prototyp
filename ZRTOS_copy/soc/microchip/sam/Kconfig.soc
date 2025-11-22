@@ -1,0 +1,14 @@
+# Copyright (C) 2025 Microchip Technology Inc. and its subsidiaries
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+config SOC_FAMILY_MICROCHIP_SAM
+	bool
+
+config SOC_FAMILY
+	default "microchip_sam" if SOC_FAMILY_MICROCHIP_SAM
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/sam/soc/microchip/sam/sam_d5x_e5x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/sam/soc/microchip/sam/sama7/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/sam/soc/microchip/sam/sama7g5/Kconfig.soc"

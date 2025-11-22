@@ -1,0 +1,9 @@
+# Copyright 2025 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_MCXE
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/mcx/mcxe/soc/nxp/mcx/mcxe/mcxe24x/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/mcx/mcxe/soc/nxp/mcx/mcxe/mcxe31x/Kconfig"
+
+endif # SOC_FAMILY_MCXE

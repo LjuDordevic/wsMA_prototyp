@@ -1,0 +1,13 @@
+#
+# Copyright 2021 Huawei France Technologies SASU
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+if SOC_FAMILY_ROCKCHIP
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/rockchip/rk35/soc/rockchip/rk35/rk3568/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/rockchip/rk35/soc/rockchip/rk35/rk3588/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/rockchip/rk35/soc/rockchip/rk35/rk3588s/Kconfig"
+
+endif # SOC_FAMILY_ROCKCHIP

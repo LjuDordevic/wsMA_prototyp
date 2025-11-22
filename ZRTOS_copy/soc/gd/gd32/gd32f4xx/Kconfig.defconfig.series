@@ -1,0 +1,11 @@
+# Copyright (c) 2021, Teslabs Engineering S.L.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_GD32F4XX
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/gd/gd32/gd32f4xx/soc/gd/gd32/gd32f4xx/Kconfig.defconfig.gd32f405"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/gd/gd32/gd32f4xx/soc/gd/gd32/gd32f4xx/Kconfig.defconfig.gd32f407"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/gd/gd32/gd32f4xx/soc/gd/gd32/gd32f4xx/Kconfig.defconfig.gd32f450"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/gd/gd32/gd32f4xx/soc/gd/gd32/gd32f4xx/Kconfig.defconfig.gd32f470"
+
+endif # SOC_SERIES_GD32F4XX

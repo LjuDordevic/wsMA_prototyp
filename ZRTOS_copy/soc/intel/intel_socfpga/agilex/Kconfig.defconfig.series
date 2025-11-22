@@ -1,0 +1,8 @@
+# Copyright (c) 2021-2024 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_AGILEX
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/intel/intel_socfpga/agilex/soc/intel/intel_socfpga/agilex/Kconfig.defconfig.agilex"
+
+endif # SOC_SERIES_AGILEX

@@ -1,0 +1,6 @@
+# Copyright (c) 2023 Joseph Yates
+# SPDX-License-Identifier: Apache-2.0
+
+config SHIELD_WAVESHARE_PICO_UPS_B
+ bool
+ default $(shields_list_contains,waveshare_pico_ups_b)

@@ -1,0 +1,14 @@
+# Nordic Semiconductor nRF53 MCU line
+
+# Copyright (c) 2019 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_NRF53X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf53/soc/nordic/nrf53/Kconfig.defconfig.nrf5340_CPUAPP_QKAA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf53/soc/nordic/nrf53/Kconfig.defconfig.nrf5340_CPUNET_QKAA"
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default $(dt_nodelabel_int_prop,rtc1,clock-frequency)
+
+endif # SOC_SERIES_NRF53X

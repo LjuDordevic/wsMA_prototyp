@@ -1,0 +1,14 @@
+# Copyright (c) 2023 Nuvoton Technology Corporation.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_NUMAKER
+	bool
+
+config SOC_FAMILY
+	default "numaker" if SOC_FAMILY_NUMAKER
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nuvoton/numaker/soc/nuvoton/numaker/m2l31x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nuvoton/numaker/soc/nuvoton/numaker/m333x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nuvoton/numaker/soc/nuvoton/numaker/m46x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nuvoton/numaker/soc/nuvoton/numaker/m55m1x/Kconfig.soc"

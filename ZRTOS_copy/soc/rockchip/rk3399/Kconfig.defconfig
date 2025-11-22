@@ -1,0 +1,11 @@
+#
+# Copyright 2022 Huawei France Technologies SASU
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+if SOC_SERIES_RK3399
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/rockchip/rk3399/soc/rockchip/rk3399/Kconfig.defconfig.rk3399"
+
+endif # SOC_SERIES_RK3399

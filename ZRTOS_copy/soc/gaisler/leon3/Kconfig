@@ -1,0 +1,8 @@
+# Copyright (c) 2019-2020 Cobham Gaisler AB
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_LEON3
+	select SPARC
+	select SOC_SPARC_LEON
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/gaisler/leon3/soc/gaisler/Kconfig"

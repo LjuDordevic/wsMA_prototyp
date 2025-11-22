@@ -1,0 +1,15 @@
+# Copyright 2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_NXP_IMXRT
+	bool
+
+config SOC_FAMILY
+	default "nxp_imxrt" if SOC_FAMILY_NXP_IMXRT
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imxrt/soc/nxp/imxrt/imxrt10xx/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imxrt/soc/nxp/imxrt/imxrt118x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imxrt/soc/nxp/imxrt/imxrt11xx/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imxrt/soc/nxp/imxrt/imxrt5xx/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imxrt/soc/nxp/imxrt/imxrt6xx/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imxrt/soc/nxp/imxrt/imxrt7xx/Kconfig.soc"

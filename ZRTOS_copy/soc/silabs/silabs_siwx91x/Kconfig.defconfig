@@ -1,0 +1,32 @@
+# Copyright (c) 2024 Silicon Laboratories Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_SILABS_SIWX91X
+
+if SILABS_SIWX91X_NWP
+
+# WiseConnect create threads with realtime priority. Default (10kHz) clock tick
+# prevent proper use of the system with these threads.
+config SYS_CLOCK_TICKS_PER_SEC
+	default 1024
+
+# Wiseconnect needs more than 1024 bytes of main stack size to initialize
+# (especially with PM)
+
+config NUM_PREEMPT_PRIORITIES
+	default 56
+
+config CMSIS_V2_THREAD_DYNAMIC_MAX_COUNT
+	default 2
+
+config CMSIS_V2_THREAD_DYNAMIC_STACK_SIZE
+	default 1024
+
+config CMSIS_V2_THREAD_MAX_STACK_SIZE
+	default 2048
+
+endif
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_siwx91x/soc/silabs/silabs_siwx91x/siwg917/Kconfig.defconfig"
+
+endif # SOC_FAMILY_SILABS_SIWX91X

@@ -1,0 +1,8 @@
+# Copyright (c) 2022-2024 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_CYCLONEV
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/intel/intel_socfpga_std/cyclonev/soc/intel/intel_socfpga_std/cyclonev/Kconfig.defconfig.cyclonev"
+
+endif # SOC_SERIES_CYCLONEV

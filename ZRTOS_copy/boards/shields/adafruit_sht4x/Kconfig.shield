@@ -1,0 +1,6 @@
+# Copyright (c) 2025 Jonas Berg
+# SPDX-License-Identifier: Apache-2.0
+
+config SHIELD_ADAFRUIT_SHT4X
+ bool
+ default $(shields_list_contains,adafruit_sht4x)

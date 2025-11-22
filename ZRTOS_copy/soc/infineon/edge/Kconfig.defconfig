@@ -1,0 +1,12 @@
+# Copyright (c) 2025 Infineon Technologies AG,
+# or an affiliate of Infineon Technologies AG.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# PSOC CAT1B Configuration
+
+if SOC_FAMILY_INFINEON_EDGE
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/infineon/edge/soc/infineon/edge/pse84/Kconfig.defconfig"
+
+endif # SOC_FAMILY_INFINEON_EDGE

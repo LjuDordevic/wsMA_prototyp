@@ -1,0 +1,11 @@
+# Raspberry Pi (RP) MCU line
+
+# Copyright (c) 2021 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_RPI_PICO
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/raspberrypi/rpi_pico/soc/raspberrypi/rpi_pico/rp2040/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/raspberrypi/rpi_pico/soc/raspberrypi/rpi_pico/rp2350/Kconfig.defconfig"
+
+endif # SOC_FAMILY_RPI_PICO

@@ -1,0 +1,11 @@
+# Load Zephyr Arch Kconfig descriptions.
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/arch/arch/rx/Kconfig"
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/arch/arch/x86/Kconfig"
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/arch/arch/xtensa/Kconfig"
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/arch/arch/sparc/Kconfig"
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/arch/arch/riscv/Kconfig"
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/arch/arch/posix/Kconfig"
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/arch/arch/mips/Kconfig"
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/arch/arch/arm64/Kconfig"
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/arch/arch/arm/Kconfig"
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/arch/arch/arc/Kconfig"

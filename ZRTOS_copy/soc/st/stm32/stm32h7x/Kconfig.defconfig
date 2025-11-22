@@ -1,0 +1,41 @@
+# ST Microelectronics STM32H7 MCU line
+
+# Copyright (c) 2019 Linaro  Limited
+# Copyright (c) 2022 SILA Embedded Solutions GmbH <office@embedded-solutions.at>
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32H7 series
+
+if SOC_SERIES_STM32H7X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h723xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h725xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h730xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h735xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h742xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h743xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h745xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h747xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h750xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h753xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h755xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h757xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h7a3xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h7b0xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32h7x/soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h7b3xx"
+
+config ROM_START_OFFSET
+	default 0x400 if BOOTLOADER_MCUBOOT
+	default 0x0   if !BOOTLOADER_MCUBOOT
+
+config CACHE_MANAGEMENT
+	default y if CPU_CORTEX_M7
+
+if LVGL
+
+config LV_DRAW_DMA2D_HAL_INCLUDE
+	default "stm32h7xx.h"
+
+endif # LVGL
+
+endif # SOC_SERIES_STM32H7X

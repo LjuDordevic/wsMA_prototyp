@@ -1,0 +1,22 @@
+# Copyright (c) 2020 Gerson Fernando Budke <nandojve@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if SHIELD_ESP_8266 || \
+	SHIELD_ESP_8266_ARDUINO || \
+	SHIELD_ESP_8266_MIKROBUS
+
+if NETWORKING
+
+choice WIFI_ESP_AT_VERSION
+	default WIFI_ESP_AT_VERSION_1_7
+	depends on WIFI_ESP_AT
+endchoice
+
+orsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/boards/shields/esp_8266/boards/shields/esp_8266/boards/disco_l475_iot1.defconfig"
+orsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/boards/shields/esp_8266/boards/shields/esp_8266/boards/sam4e_xpro.defconfig"
+
+endif # NETWORKING
+
+endif   # SHIELD_ESP_8266 || \
+	# SHIELD_ESP_8266_ARDUINO || \
+	# SHIELD_ESP_8266_MIKROBUS

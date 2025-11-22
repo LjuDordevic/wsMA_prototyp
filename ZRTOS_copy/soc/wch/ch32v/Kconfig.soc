@@ -1,0 +1,15 @@
+# Copyright (c) 2024 Michael Hope
+# Copyright (c) 2024 Jianxiong Gu
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_CH32V
+	bool
+
+config SOC_FAMILY
+	default "ch32v" if SOC_FAMILY_CH32V
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/wch/ch32v/soc/wch/ch32v/ch32v00x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/wch/ch32v/soc/wch/ch32v/qingke_v2a/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/wch/ch32v/soc/wch/ch32v/qingke_v4b/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/wch/ch32v/soc/wch/ch32v/qingke_v4c/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/wch/ch32v/soc/wch/ch32v/qingke_v4f/Kconfig.soc"

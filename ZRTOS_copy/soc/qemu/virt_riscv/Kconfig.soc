@@ -1,0 +1,12 @@
+# Copyright (c) 2024 Antmicro <www.antmicro.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_QEMU_VIRT_RISCV
+	bool
+
+config SOC_FAMILY
+	default "qemu_virt_riscv" if SOC_FAMILY_QEMU_VIRT_RISCV
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/qemu/virt_riscv/soc/qemu/virt_riscv/qemu_virt_riscv32/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/qemu/virt_riscv/soc/qemu/virt_riscv/qemu_virt_riscv32e/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/qemu/virt_riscv/soc/qemu/virt_riscv/qemu_virt_riscv64/Kconfig.soc"

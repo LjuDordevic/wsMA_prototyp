@@ -111,3 +111,33 @@ has been added to the user package registry in:
 pip install west jsonschema pyelftools
 zephyr$ west build -b native_sim samples/hello_world
 west build -t transform
+
+# ZRTOS_demo -> /home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/cmake/modules/kconfig.cmake
+there is already:
+# Export each `ZEPHYR_<module>_KCONFIG` to Kconfig.
+# APP_DIR: Path to the main image (sysbuild) or synonym for APPLICATION_SOURCE_DIR (non-sysbuild)
+zephyr_get(APP_DIR VAR APP_DIR APPLICATION_SOURCE_DIR)
+# Load the module Kconfig file into CMake
+include("${KCONFIG_BINARY_DIR}/kconfig_module_dirs.cmake")
+set(COMMON_KCONFIG_ENV_SETTINGS
+  PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+  srctree=${ZEPHYR_BASE}
+  ${kconfig_env_dirs}  ...) --> modules variables that weren't recognized when the skript was run as standalone 
+                              # build/Kconfig/Kconfig.modules:2: Could not open '/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/' (in 'osource "$(ZEPHYR_ACPICA_KCONFIG)"')
+                              # kconfig_module_dirs.cmake -> list append kconfig_env_dirs
+
+foreach(kconfig_target
+    ${KCONFIG_TARGETS}
+    ${EXTRA_KCONFIG_TARGETS}
+    )
+  add_custom_target(...)
+
+* add target:
+set(EXTRA_KCONFIG_TARGET_COMMAND_FOR_transform
+  ${CMAKE_CURRENT_LIST_DIR}/../core/kconfig_transform_wrapper.py
+)
+set_ifndef(KCONFIG_TARGETS menuconfig guiconfig hardenconfig traceconfig transform)
+
+Then in: ZRTOS_demo/zephyr 
+west build -b native_sim samples/hello_world
+west build -t transform

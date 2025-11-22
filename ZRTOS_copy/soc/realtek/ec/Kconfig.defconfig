@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright (c) 2024 Realtek Semiconductor Corporation, SIBG-SD7
+#
+
+if SOC_FAMILY_REALTEK_EC
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/realtek/ec/soc/realtek/ec/rts5912/Kconfig.defconfig.series"
+
+endif # SOC_FAMILY_REALTEK_EC

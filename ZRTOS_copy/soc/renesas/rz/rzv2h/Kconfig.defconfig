@@ -1,0 +1,9 @@
+# Copyright (c) 2025 Renesas Electronics Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_RZV2H
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/rzv2h/soc/renesas/rz/rzv2h/Kconfig.defconfig.rzv2h_cm33"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rz/rzv2h/soc/renesas/rz/rzv2h/Kconfig.defconfig.rzv2h_cr8"
+
+endif # SOC_SERIES_RZV2H

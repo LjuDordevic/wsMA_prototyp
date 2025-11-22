@@ -1,0 +1,14 @@
+# PSOC CAT1A Configuration
+
+# Copyright (c) 2024 Cypress Semiconductor Corporation.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_INFINEON_CAT1A
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/infineon/cat1a/soc/infineon/cat1a/psoc6_01/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/infineon/cat1a/soc/infineon/cat1a/psoc6_02/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/infineon/cat1a/soc/infineon/cat1a/psoc6_03/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/infineon/cat1a/soc/infineon/cat1a/psoc6_04/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/infineon/cat1a/soc/infineon/cat1a/psoc6_legacy/Kconfig.defconfig"
+
+endif # SOC_FAMILY_INFINEON_CAT1A

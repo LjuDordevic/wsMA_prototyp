@@ -1,0 +1,29 @@
+# Atmel SAM0 MCU family configuration options
+
+# Copyright (c) 2017 Google LLC.
+# Copyright (c) 2024 Gerson Fernando Budke <nandojve@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_ATMEL_SAM0
+	select ASF
+	select HAS_SEGGER_RTT if ZEPHYR_SEGGER_MODULE
+
+if SOC_FAMILY_ATMEL_SAM0
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/common/Kconfig.samd2x"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/common/Kconfig.samd5x"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/common/Kconfig.saml2x"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/samc20/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/samc21/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/samd20/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/samd21/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/samd51/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/same51/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/same53/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/same54/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/saml21/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/samr21/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/samr34/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam0/soc/atmel/sam0/samr35/Kconfig"
+
+endif # SOC_FAMILY_ATMEL_SAM0

@@ -1,0 +1,2 @@
+# Load board Kconfig descriptions.
+osource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/build/Kconfig/boards/boards/native/native_sim/Kconfig.native_sim"

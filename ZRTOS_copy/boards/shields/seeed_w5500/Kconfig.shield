@@ -1,0 +1,6 @@
+# Copyright (c) 2024 Marcin Niestroj
+# SPDX-License-Identifier: Apache-2.0
+
+config SHIELD_SEEED_W5500
+ bool
+ default $(shields_list_contains,seeed_w5500)

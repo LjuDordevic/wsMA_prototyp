@@ -1,0 +1,9 @@
+# Copyright 2022 HNU-ESNL
+# Copyright 2022 openEuler SIG-Zephyr
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_RK3568
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/rockchip/rk35/rk3568/soc/rockchip/rk35/rk3568/Kconfig.defconfig.rk3568"
+
+endif # SOC_SERIES_RK3568

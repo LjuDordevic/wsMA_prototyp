@@ -1,0 +1,9 @@
+# Copyright 2024-2025 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imxrt/imxrt7xx/soc/nxp/imxrt/imxrt7xx/cm33/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imxrt/imxrt7xx/soc/nxp/imxrt/imxrt7xx/hifi1/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imxrt/imxrt7xx/soc/nxp/imxrt/imxrt7xx/hifi4/Kconfig.defconfig"
+
+config MFD
+	default y if DT_HAS_NXP_LP_FLEXCOMM_ENABLED

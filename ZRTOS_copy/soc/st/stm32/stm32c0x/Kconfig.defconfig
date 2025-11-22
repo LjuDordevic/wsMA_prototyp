@@ -1,0 +1,25 @@
+# STMicroelectronics STM32C0 MCU line
+
+# Copyright (c) 2023 Benjamin Björnsson <benjamin.bjornsson@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_STM32C0X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32c0x/soc/st/stm32/stm32c0x/Kconfig.defconfig.stm32c011xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32c0x/soc/st/stm32/stm32c0x/Kconfig.defconfig.stm32c031xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32c0x/soc/st/stm32/stm32c0x/Kconfig.defconfig.stm32c051xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32c0x/soc/st/stm32/stm32c0x/Kconfig.defconfig.stm32c071xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32c0x/soc/st/stm32/stm32c0x/Kconfig.defconfig.stm32c091xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32c0x/soc/st/stm32/stm32c0x/Kconfig.defconfig.stm32c092xx"
+
+if PM
+
+config COUNTER
+	default y
+
+config COUNTER_RTC_STM32_SUBSECONDS
+	default y if DT_HAS_ST_STM32_RTC_ENABLED
+
+endif # PM
+
+endif # SOC_SERIES_STM32C0X

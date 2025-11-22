@@ -1,0 +1,14 @@
+# Copyright (c) 2024 Synopsys, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_NSIM_HS
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/hs/soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/hs/soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs5x"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/hs/soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs5x_smp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/hs/soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs6x"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/hs/soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs6x_smp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/hs/soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs_mpuv6"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/hs/soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs_smp"
+
+endif # SOC_SERIES_NSIM_HS
