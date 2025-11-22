@@ -11,3 +11,4 @@ exp_conf_def_copy/
 ZRTOS_copy
 ZRTOS_demo/
 venv_zrtos_demo/
+core/single_file.py
