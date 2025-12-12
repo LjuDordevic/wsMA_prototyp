@@ -1,6 +1,7 @@
 from pathlib import Path
 from typing import List, Dict, Optional, Set, Tuple, Any
 from dataclasses import dataclass
+import excel_writer
 
 @dataclass
 class ExtParserContext:
@@ -363,10 +364,11 @@ class KconfigTransformer:
 
         return files    
 
-    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info) -> List:
+    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info):
             """
             lines -> from reader 
             """
+            len_reader_input = len(lines)
             print(f"start transforming lines")
             print(f"    Reader Input: {len(lines)} lines")
             if self.context is None:
@@ -461,9 +463,10 @@ class KconfigTransformer:
             # count how many lines were added to output file
             # = SUM of all lines matched through glob - SUM of all (r/or/o)source_keywords 
             self.FILE_ALL_ADDED_LINES_SKW = self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB - self.FILE_SOURCE_KEYWORDS_ALL_NR   
-            transformed_lines = len(result)
-            self._log_file_and_reset_count(self.FILE_ALL_ADDED_LINES_SKW, transformed_lines)
-            return result
+            len_transformed_lines = len(result)
+            # EXCEL stats
+            stats = self._log_file_and_reset_count(self.FILE_ALL_ADDED_LINES_SKW, current_file, len_reader_input, len_transformed_lines)
+            return result, stats
     
     def transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
        
@@ -646,6 +649,7 @@ class KconfigTransformer:
         1. get all source files parser found (these are all realtive to srctree)
         2. build paths for input & output files
         """
+        excel_stats = []
         if self.context is None:
             raise RuntimeError("Context missing!")
         
@@ -715,7 +719,11 @@ class KconfigTransformer:
                             print(f"        -> Content: {line.content}")
 
             print("call _transform_lines(lines from reader, input, configdefault dict info)")
-            transformed = self._transform_lines(lines, input_file, cd_definition_info)
+            transformed, stats = self._transform_lines(lines, input_file, cd_definition_info)
+            
+            excel_stats.append(stats)
+            excel_writer.write_to_excel(excel_stats, "/home/ljd/wsMA_prototyp/results.xlsx")
+            
             new_lines = self._remove_consecutive_empty_lines(transformed)
             try:
                 writer.write(new_lines, output_file)
@@ -725,9 +733,12 @@ class KconfigTransformer:
         
         print(f"----------------------------------------------------------------------")
         print(f"finished transforming: {transformed_count} files transformed")
+        return excel_stats
 
-    def _log_file_and_reset_count(self, new_lines_skw : int, len_result : int):
+    def _log_file_and_reset_count(self, new_lines_skw : int, current_file : Path, len_input : int, len_result : int):
         print(f"    FILE LOG --------------------------------------------------------------")
+        #print(f"    File:                      {str(current_file)}")
+        print(f"    Reader input                {len_input} lines")
         print(f"    All source_keywords:        {self.FILE_SOURCE_NR}")
         print(f"    All osource_keywords:       {self.FILE_OSOURCE_NR}")
         print(f"    All rsource_keywords:       {self.FILE_RSOURCE_NR}")
@@ -740,6 +751,20 @@ class KconfigTransformer:
               else f"        Added new lines of source:       {new_lines_skw}")
         print(f"        Added new bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")
         print(f"        Removed   bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")   
+
+        # STORE FOR EXCEL
+        file_stats_excel = {
+            'test file' : str(current_file),
+            'input'     : len_input,
+            'output'    : len_result,
+            'source_keyword' : self.FILE_SOURCE_NR,
+            'osource_keyword' : self.FILE_OSOURCE_NR,
+            'rource_keyword' : self.FILE_RSOURCE_NR,
+            'orource_keyword' : self.FILE_ORSOURCE_NR,
+            'new lines bc source': new_lines_skw,
+            'new lines bc cd': self.FILE_CONFIGDEFAULT_NR
+        }
+
         self.FILE_SOURCE_NR = 0
         self.FILE_OSOURCE_NR = 0
         self.FILE_RSOURCE_NR = 0
@@ -750,6 +775,8 @@ class KconfigTransformer:
         self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
         self.FILE_CONFIGDEFAULT_NR = 0
 
+        return file_stats_excel
+        
     def _log_parser_context(self, given_context):
         
         print(f"\n For each symbol found in parser_result['unique_defined_syms']")

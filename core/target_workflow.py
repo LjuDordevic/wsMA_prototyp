@@ -3,6 +3,7 @@ from pick_parser import PickParser
 from zrtos_parser import ZRTOSParser
 from kconfig_writer import KconfigReader, KconfigWriter
 from transform_prototyp import KconfigTransformer
+import excel_writer
 import sys
 import pprint
 import os
@@ -66,7 +67,7 @@ def main():
     reader = KconfigReader("ZRTOS")
     writer = KconfigWriter("ZRTOS")
 
-    transformer.transform_all_files(
+    excel_data = transformer.transform_all_files(
         reader=reader,
         writer=writer,
         project_dir=Path(project_dir),
@@ -74,6 +75,8 @@ def main():
         log=True,
         log_lines=False
     )    
+
+    #excel_writer.write_excel(excel_data, "/home/ljd/wsMA_prototyp/results.xlsx")
 
     return 0
 
