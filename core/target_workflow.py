@@ -9,12 +9,16 @@ import os
 
 def main():
     log_file = "/home/ljd/wsMA_prototyp/transform.log"
-    sys.stoutput = open(log_file, "w")
+    sys.stdout = open(log_file, "w")
     sys.stderr = sys.stdout 
 
     project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr"
     main_file = "Kconfig"
-    output_dir = "/home/ljd/wsMA_prototyp/ZRTOS_copy"
+    output_dir = "/home/ljd/wsMA_prototyp/ZRTOS_copy2"
+
+    print("=" * 100)
+    print("TRNASFORMATION PROTOTYP LOG")
+    print("=" * 100)
 
     print("VARS: ")
     vars = ['ZEPHYR_BASE', 'WORKING_DIRECTORY', 'PROJECT_BINARY_DIR', 
@@ -26,9 +30,15 @@ def main():
         value = os.environ.get(key, '<NOT SET>')
         print(f"  {key}='{value}'")
 
+    print("=" * 100)
+    print(f"Root: {project_dir}")
+    print(f"Main file: {main_file}")
+    print(f"Output dir: {output_dir}")
+    print("=" * 100)
+    
     picker = PickParser("ZRTOS")
-    print(picker)
     parser = ZRTOSParser(picker.kconfiglib_version)
+    print(parser)
 
     try:
         parser_result = parser.parse_files(project_dir, main_file)
@@ -37,8 +47,33 @@ def main():
         print(f"Files: {len(parser_result['kconf'].kconfig_filenames)}")
     except Exception as e:
         print(f"Parser error {e}")
+        import traceback
+        traceback.print_exc()
+        sys.exit(1)
 
-    sys.stdout.close()
+    transformer = KconfigTransformer(source_spec="ZRTOS")
+    print("\n2. Bild ExtParserContext FROM PARSER RESULTS")
+    print(f" Transformer used: {transformer.source_spec}")
+
+    context = transformer.build_context_from_parser(
+        parser_result,
+        log=True
+    )
+
+    print("=" * 100)
+    print(f"Build context finished")
+
+    reader = KconfigReader("ZRTOS")
+    writer = KconfigWriter("ZRTOS")
+
+    transformer.transform_all_files(
+        reader=reader,
+        writer=writer,
+        project_dir=Path(project_dir),
+        output_dir=Path(output_dir),
+        log=True,
+        log_lines=False
+    )    
 
     return 0
 
