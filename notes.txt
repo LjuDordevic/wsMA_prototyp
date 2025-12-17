@@ -141,3 +141,5 @@ set_ifndef(KCONFIG_TARGETS menuconfig guiconfig hardenconfig traceconfig transfo
 Then in: ZRTOS_demo/zephyr 
 west build -b native_sim samples/hello_world
 west build -t transform
+
+for excel: pip install openpyxl
