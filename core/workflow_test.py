@@ -14,10 +14,13 @@ import os
 #main_file =  "Kconfig"  
 #project_dir = "/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/"       
 #output_dir = "/home/ljd/wsMA_prototyp/ZRTOS_copy/"   
-project_dir = "/home/ljd/wsMA_prototyp/exp_A"       
-output_dir = "/home/ljd/wsMA_prototyp/exp_B"   
+#project_dir = "/home/ljd/wsMA_prototyp/exp_A"       
+#output_dir = "/home/ljd/wsMA_prototyp/exp_B"   
+project_dir = "/home/ljd/wsMA_prototyp/experiment_dec"       
+output_dir = "/home/ljd/wsMA_prototyp/experiment_dec_copy"   
 main_file =  "Kconfig"  
 os.environ["srctree"] = project_dir
+print(os.environ["srctree"])
 picker = PickParser("ZRTOS")
 print(picker)
 print("-" * 50)
