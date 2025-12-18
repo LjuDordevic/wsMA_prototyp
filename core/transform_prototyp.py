@@ -25,7 +25,7 @@ class KconfigTransformer:
     output: source "exp_u1/Kconfig"  (1 line overwrite)
             source "exp_u1/Kconfig2" (1 line added)
     """
-    DEF_KEYWORDS = ('def_bool', 'def_string', 'def_int', 'def_hex')
+    DEF_KEYWORDS = ('def_string', 'def_int', 'def_hex')
     FILE_DEF_KEYWORDS_COUNT = 0
     PROJECT_DEF_KEYWORDS_COUNT = 0
     SOURCE_KEYWORDS = ('source', 'osource', 'rsource', 'orsource')
