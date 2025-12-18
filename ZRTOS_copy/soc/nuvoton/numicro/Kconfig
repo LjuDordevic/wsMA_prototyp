@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright (c) 2020 Linumiz
+# Author: Saravanan Sekar <saravanan@linumiz.com>
+
+config SOC_FAMILY_NUMICRO
+	select SOC_RESET_HOOK
+
+if SOC_FAMILY_NUMICRO
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nuvoton/numicro/soc/nuvoton/numicro/m48x/Kconfig"
+
+endif # SOC_FAMILY_NUMICRO

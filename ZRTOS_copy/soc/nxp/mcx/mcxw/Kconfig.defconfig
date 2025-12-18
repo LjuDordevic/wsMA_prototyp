@@ -1,0 +1,12 @@
+# Copyright 2023-2025 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/mcx/mcxw/soc/nxp/mcx/mcxw/mcxw2xx/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/mcx/mcxw/soc/nxp/mcx/mcxw/mcxw7xx/Kconfig.defconfig"
+
+if SOC_FAMILY_MCXW
+
+config CORTEX_M_SYSTICK
+	default n if MCUX_LPTMR_TIMER
+
+endif # SOC_FAMILY_MCXW

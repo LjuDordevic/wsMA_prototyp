@@ -1,7 +1,0 @@
-
-#
-# main
-#
-CONFIG_CY=y
-CONFIG_FOO=y
-# end of main

@@ -1,0 +1,23 @@
+# Nordic Semiconductor nRF52 MCU line
+
+# Copyright (c) 2016-2018 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_NRF52X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52805_CAAA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52810_QFAA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52811_QFAA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52820_QDAA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52832_CIAA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52832_QFAA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52832_QFAB"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52833_QDAA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52833_QIAA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52840_QFAA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf52/soc/nordic/nrf52/Kconfig.defconfig.nrf52840_QIAA"
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default $(dt_nodelabel_int_prop,rtc1,clock-frequency)
+
+endif # SOC_SERIES_NRF52X

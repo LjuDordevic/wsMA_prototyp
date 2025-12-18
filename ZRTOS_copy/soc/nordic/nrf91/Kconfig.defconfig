@@ -1,0 +1,16 @@
+# Nordic Semiconductor nRF91 MCU line
+
+# Copyright (c) 2018 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_NRF91X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf91/soc/nordic/nrf91/Kconfig.defconfig.nrf9131_LACA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf91/soc/nordic/nrf91/Kconfig.defconfig.nrf9151_LACA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf91/soc/nordic/nrf91/Kconfig.defconfig.nrf9160_SICA"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nordic/nrf91/soc/nordic/nrf91/Kconfig.defconfig.nrf9161_LACA"
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default $(dt_nodelabel_int_prop,rtc1,clock-frequency)
+
+endif # SOC_SERIES_NRF91X

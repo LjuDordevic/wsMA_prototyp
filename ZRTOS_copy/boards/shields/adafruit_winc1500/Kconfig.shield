@@ -1,0 +1,6 @@
+# Copyright (c) 2020 Kim Bøndergaard <kim.bondergaard@prevas.dk>, Prevas A/S
+# SPDX-License-Identifier: Apache-2.0
+
+config SHIELD_ADAFRUIT_WINC1500
+ bool
+ default $(shields_list_contains,adafruit_winc1500)

@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright (c) 2023 Antmicro <www.antmicro.com>
+
+if SOC_FAMILY_AMBIQ
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/ambiq/soc/ambiq/apollo2x/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/ambiq/soc/ambiq/apollo3x/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/ambiq/soc/ambiq/apollo4x/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/ambiq/soc/ambiq/apollo5x/Kconfig"
+
+endif # SOC_FAMILY_AMBIQ

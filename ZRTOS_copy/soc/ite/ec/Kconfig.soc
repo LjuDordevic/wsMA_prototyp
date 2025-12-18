@@ -1,0 +1,11 @@
+# Copyright (c) 2020 ITE Corporation. All Rights Reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_ITE_EC
+	bool
+
+config SOC_FAMILY
+	default "ite_ec" if SOC_FAMILY_ITE_EC
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/ite/ec/soc/ite/ec/it51xxx/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/ite/ec/soc/ite/ec/it8xxx2/Kconfig.soc"

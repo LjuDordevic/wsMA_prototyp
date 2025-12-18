@@ -1,0 +1,12 @@
+# Copyright (c) 2024 Silicon Laboratories Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg21/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg22/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg23/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg24/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg26/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg27/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg28/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg29/Kconfig.defconfig"
+

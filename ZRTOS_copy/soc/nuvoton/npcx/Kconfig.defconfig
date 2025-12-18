@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+
+# Copyright (c) 2020 Nuvoton Technology Corporation.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_NPCX
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nuvoton/npcx/soc/nuvoton/npcx/npck3/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nuvoton/npcx/soc/nuvoton/npcx/npcx4/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nuvoton/npcx/soc/nuvoton/npcx/npcx7/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nuvoton/npcx/soc/nuvoton/npcx/npcx9/Kconfig.defconfig"
+
+endif # SOC_FAMILY_NPCX

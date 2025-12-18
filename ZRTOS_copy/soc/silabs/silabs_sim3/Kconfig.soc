@@ -1,0 +1,8 @@
+# Copyright (c) 2024 GARDENA GmbH
+#
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_SILABS_SIM3
+	bool
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_sim3/soc/silabs/silabs_sim3/sim3u/Kconfig.soc"

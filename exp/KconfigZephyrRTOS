@@ -1,10 +1,26 @@
 menu "main"
 
+config AA
+  bool "set"
+  default y
+
+config BB
+  bool "get"
+  depends on AA
+  default y if FOO
+
+config C
+  def_bool n
+
 config CY
-  def_bool y
+  def_bool y if CN
 
 config CN
-  def_bool n
+  def_bool n if C
+
+config DEFSTRING
+  def_string "x"
+  prompt "prompt"
 
 config TEST
   int "set def"
@@ -12,12 +28,17 @@ config TEST
 
 config FOO
   bool "first Option"
-  depends on CN
 
 config FOO
-  default y
+  bool "seconf"
+  default n
 
-configdefault FOO
-  default 5 if CY
-
+#source "exp_u1/*"
+orsource "Kconfig3"
+orsource "Kconfig4"
+osource "Kconfig5"
+#source "/home/ljd/wsMA_prototyp/exp_copy/exp_u1/*"
+#source "/home/ljd/wsMA_prototyp/exp/exp_u1/Kconfig?"
+#source "exp_u2/*"
+#source "${SRCTREE}/exp_u1/*"
 endmenu

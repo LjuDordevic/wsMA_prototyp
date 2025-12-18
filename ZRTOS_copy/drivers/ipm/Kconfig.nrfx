@@ -1,0 +1,41 @@
+# nRF IPM driver configuration
+
+# Copyright (c) 2019 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if IPM_NRFX
+
+nrfx_ipc_num = 0
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 1
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 2
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 3
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 4
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 5
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 6
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 7
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 8
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 9
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 10
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 11
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 12
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 13
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 14
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+nrfx_ipc_num = 15
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/ipm/drivers/ipm/Kconfig.nrfx_ipc_channel"
+
+endif # IPM_NRFX

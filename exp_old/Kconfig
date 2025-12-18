@@ -1,0 +1,10 @@
+config FOO
+  string "FOO"
+  default "first"
+
+config BARR
+  def_bool y
+
+config FOO
+  default "second"
+

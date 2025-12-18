@@ -1,0 +1,27 @@
+# GATT Services
+
+# Copyright (c) 2018 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+menu "GATT Services"
+	depends on BT_CONN
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/bluetooth/services/subsys/bluetooth/services/Kconfig.ans"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/bluetooth/services/subsys/bluetooth/services/Kconfig.dis"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/bluetooth/services/subsys/bluetooth/services/Kconfig.cts"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/bluetooth/services/subsys/bluetooth/services/Kconfig.hrs"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/bluetooth/services/subsys/bluetooth/services/Kconfig.tps"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/bluetooth/services/subsys/bluetooth/services/nus/Kconfig.nus"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/bluetooth/services/subsys/bluetooth/services/ias/Kconfig.ias"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/bluetooth/services/subsys/bluetooth/services/ots/Kconfig"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/bluetooth/services/subsys/bluetooth/services/bas/Kconfig.bas"
+
+endmenu

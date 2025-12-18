@@ -1,0 +1,17 @@
+# Copyright (c) 2024 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_ARM || SOC_FAMILY_ARM64
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/soc/arm/beetle/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/soc/arm/designstart/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/soc/arm/fvp_aem/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/soc/arm/fvp_aemv8r/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/soc/arm/mps2/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/soc/arm/mps3/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/soc/arm/mps4/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/soc/arm/musca/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/soc/arm/qemu_cortex_a53/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/arm/soc/arm/qemu_virt_arm64/Kconfig"
+
+endif # SOC_FAMILY_ARM || SOC_FAMILY_ARM64

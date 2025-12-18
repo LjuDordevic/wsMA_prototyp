@@ -1,0 +1,9 @@
+# TI SimpleLink MSP432P4XX
+# Copyright (c) 2017, Linaro Ltd
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_MSP432P4XX
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/ti/simplelink/msp432p4xx/soc/ti/simplelink/msp432p4xx/Kconfig.defconfig.msp432p401r"
+
+endif # SOC_SERIES_MSP432P4XX

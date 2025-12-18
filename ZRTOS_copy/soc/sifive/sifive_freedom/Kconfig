@@ -1,0 +1,11 @@
+# Copyright (c) 2024 Nordic Semiconductor ASA
+# Copyright (c) 2024 Antmicro <www.antmicro.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_SIFIVE_FREEDOM
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/sifive/sifive_freedom/soc/sifive/sifive_freedom/fe300/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/sifive/sifive_freedom/soc/sifive/sifive_freedom/fu500/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/sifive/sifive_freedom/soc/sifive/sifive_freedom/fu700/Kconfig"
+
+endif # SOC_FAMILY_SIFIVE_FREEDOM

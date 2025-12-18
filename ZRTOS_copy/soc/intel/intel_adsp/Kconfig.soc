@@ -1,0 +1,13 @@
+# Intel CAVS SoC series selection
+#
+# Copyright (c) 2020-2024 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_INTEL_ADSP
+	bool
+
+config SOC_FAMILY
+	default "intel_adsp" if SOC_FAMILY_INTEL_ADSP
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/intel/intel_adsp/soc/intel/intel_adsp/ace/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/intel/intel_adsp/soc/intel/intel_adsp/cavs/Kconfig.soc"

@@ -1,0 +1,19 @@
+# Raspberry Pi RP2040 MCU line
+
+# Copyright (c) 2021 Nordic Semiconductor ASA
+# Copyright (c) 2021 Yonatan Schachter
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_RP2040
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/raspberrypi/rpi_pico/rp2040/soc/raspberrypi/rpi_pico/rp2040/Kconfig.defconfig.rp2040"
+
+config NUM_IRQS
+	default 26
+
+DT_CLK_SYS_PATH := $(dt_nodelabel_path,clk_sys)
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default $(dt_node_int_prop_int,$(DT_CLK_SYS_PATH),clock-frequency)
+
+endif # SOC_SERIES_RP2040

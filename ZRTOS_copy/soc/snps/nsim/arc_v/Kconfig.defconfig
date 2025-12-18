@@ -1,0 +1,9 @@
+# Copyright (c) 2024 Synopsys, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_NSIM_ARC_V
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_v/soc/snps/nsim/arc_v/rhx/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_v/soc/snps/nsim/arc_v/rmx/Kconfig.defconfig"
+
+endif # SOC_FAMILY_NSIM_ARC_V

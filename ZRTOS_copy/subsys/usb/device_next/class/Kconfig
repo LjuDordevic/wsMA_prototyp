@@ -1,0 +1,15 @@
+# Copyright (c) 2022 Nordic Semiconductor ASA
+#
+# SPDX-License-Identifier: Apache-2.0
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.loopback"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.cdc_acm"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.cdc_ecm"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.cdc_ncm"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.bt"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.msc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.uac2"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.hid"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.midi2"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.dfu"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/usb/device_next/class/subsys/usb/device_next/class/Kconfig.uvc"

@@ -1,0 +1,14 @@
+# Copyright (c) 2017 Christian Taedcke
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_SILABS_S2
+	bool
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg21/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg22/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg23/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg24/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg26/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg27/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg28/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s2/soc/silabs/silabs_s2/xg29/Kconfig.soc"

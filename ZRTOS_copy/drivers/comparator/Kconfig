@@ -1,0 +1,36 @@
+# Copyright (c) 2024 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig COMPARATOR
+	bool "Comparator drivers"
+	help
+	  Enable comparator driver configuration.
+
+if COMPARATOR
+
+module = COMPARATOR
+module-str = comparator
+source "subsys/logging/Kconfig.template.log_config"
+
+config COMPARATOR_INIT_PRIORITY
+	int "COMPARATOR init priority"
+	default KERNEL_INIT_PRIORITY_DEVICE
+	help
+	  Comparator device driver initialization priority.
+
+# zephyr-keep-sorted-start
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.fake_comp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.it51xxx_vcmp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.mchp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.mcux_acmp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.nrf_comp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.nrf_lpcomp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.nxp_cmp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.renesas_ra"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.renesas_rx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.shell"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.silabs_acmp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/comparator/drivers/comparator/Kconfig.stm32_comp"
+# zephyr-keep-sorted-stop
+
+endif # COMPARATOR

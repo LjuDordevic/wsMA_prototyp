@@ -1,0 +1,17 @@
+# Copyright (c) 2024 Gerson Fernando Budke <nandojve@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_ATMEL_SAM
+	select ASF
+	select HAS_SEGGER_RTT if ZEPHYR_SEGGER_MODULE
+
+if SOC_FAMILY_ATMEL_SAM
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam/soc/atmel/sam/common/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam/soc/atmel/sam/sam3x/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam/soc/atmel/sam/sam4e/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam/soc/atmel/sam/sam4l/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam/soc/atmel/sam/sam4s/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/atmel/sam/soc/atmel/sam/samx7x/Kconfig"
+
+endif # SOC_FAMILY_ATMEL_SAM

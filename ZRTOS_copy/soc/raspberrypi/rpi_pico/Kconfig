@@ -1,0 +1,17 @@
+# Raspberry Pi (RP) MCU line
+
+# Copyright (c) 2021 Nordic Semiconductor ASA
+# Copyright (c) 2021 Yonatan Schachter
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_RPI_PICO
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/raspberrypi/rpi_pico/soc/raspberrypi/rpi_pico/rp2040/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/raspberrypi/rpi_pico/soc/raspberrypi/rpi_pico/rp2350/Kconfig"
+
+config RPI_PICO_ROM_BOOTLOADER
+	bool
+	default y
+	depends on RETENTION_BOOT_MODE
+
+endif # SOC_FAMILY_RPI_PICO

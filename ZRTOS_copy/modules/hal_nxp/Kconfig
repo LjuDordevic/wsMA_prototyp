@@ -1,0 +1,12 @@
+#
+# Copyright (c) 2021 Linaro, Limited
+# Copyright 2025 NXP
+#
+# SPDX-License-Identifier: Apache-2.0
+
+config ZEPHYR_HAL_NXP_MODULE
+	bool
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/modules/hal_nxp/modules/hal_nxp/imx/Kconfig.imx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/modules/hal_nxp/modules/hal_nxp/s32/Kconfig.nxp_s32"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/modules/hal_nxp/modules/hal_nxp/mcux/Kconfig.mcux"

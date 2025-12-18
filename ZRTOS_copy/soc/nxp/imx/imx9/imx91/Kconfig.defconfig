@@ -1,0 +1,8 @@
+# Copyright 2025 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_IMX9
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imx/imx9/imx91/soc/nxp/imx/imx9/imx91/Kconfig.defconfig.mimx91"
+
+endif # SOC_SERIES_IMX9

@@ -1,0 +1,18 @@
+# STMicroelectronics STM32F3 MCU line
+
+# Copyright (c) 2016 RnDity Sp. z o.o.
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32F3 series
+
+if SOC_SERIES_STM32F3X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f3x/soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f302x8"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f3x/soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f302xc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f3x/soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f303x(b-c)"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f3x/soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f303x8"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f3x/soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f303xe"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f3x/soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f334x8"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f3x/soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f373xc"
+
+endif # SOC_SERIES_STM32F3X

@@ -11,6 +11,7 @@ Successfully installed kconfiglib-14.1.1a4
 -> cd exp/ -> python test.py 
 Symbols: 3
 -> cd .. -> echo "-e ./external/ZephyrKconfiglib" > requirements.txt
+python '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' '/home/ljd/wsMA_prototyp/exp/KconfigZephyrRTOS'
 
 **********************************zephyr-rtos/zephyr ********************************** 
 deactivate venv
@@ -18,7 +19,34 @@ python3 -m venv venv_zephyr_rtos
 source venv_zephyr_rtos !!!!
 git submodule add https://github.com/zephyrproject-rtos/zephyr.git external/ZephyrRTOS
 pip install -e./external/ZephyrRTOS -> is not a valid editable requirement
-Use directly with python '~/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' KconfigZephyrRTOS
+Use directly with python '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' KconfigZephyrRTOS
+
+activate venv_zephyr_rtos
+mkdir expr_zrtos
+cd expr_zrtos
+pip install west 
+west init -m https://github.com/zephyrproject-rtos/zephyr.git
+west update
+sudo apt install cmake
+west zephyr-export
+--> Zephyr has been added to the user package registry in:
+~/.cmake/packages/Zephyr
+--> ZephyrUnittest
+has been added to the user package registry in:
+~/.cmake/packages/ZephyrUnittest
+
+source '/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/zephyr-env.sh'    !!!
+mkdir app
+cd app
+src -> main.C
+CMakeLists.txt
+prj.conf
+["KCONFIG_BINARY_DIR"] --> erst nach erfolgreichen build
+pip install west jsonschema pyelftools
+sudo apt install ninja-build
+pip install -r '/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/scripts/requirements.txt'
+west build -b native_sim .
+sudo apt install gcc-multilib g++-multilib libc6-dev-i386
 
 **********************************espressif/esp-idf-kconfig ********************************** 
 
@@ -33,3 +61,99 @@ Successfully installed esp-idf-kconfig-3.3.0 markdown-it-py-4.0.0 mdurl-0.1.2 py
 IMPORTANT: set export KCONFIG_PARSER_VERSION='2' in venv/bin/activate  
 -> /exp$ python test.py 
 Symbols: 4
+
+********************************** linux ********************************** 
+TODO: als submodule 
+aktuell: cd ~/linux_kc_new/
+ohne make/puython nur direkt:
+~/linux_kc_new/linux/scripts/kconfig/mconf '/home/ljd/wsMA_prototyp/exp_copy/KconfigZephyrRTOS'
+
+********************************** /venv_zephyr_rtos/  ********************************** 
+-> wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.4/zephyr-sdk-0.17.4_linux-x86_64.tar.xz
+tar xvf zephyr-sdk-0.17.4_linux-x86_64.tar.xz
+cd zephyr-sdk-0.17.4/
+./setup.sh
+Zephyr SDK 0.17.4 Setup
+
+** NOTE **
+You only need to run this script once after extracting the Zephyr SDK
+distribution bundle archive.
+
+Install host tools [y/n]? y
+Register Zephyr SDK CMake package [y/n]? y
+
+Installing host tools ...
+
+Registering Zephyr SDK CMake package ...
+Zephyr-sdk (/home/ljd/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4/cmake)
+has been added to the user package registry in:
+~/.cmake/packages/Zephyr-sdk
+
+********************************** /venv_zrtos_demo/  **********************************
+https://docs.zephyrproject.org/latest/develop/getting_started/index.html
+mkdir ZRTOS_demo 
+~/wsMA_prototyp$ python3 -m venv venv_zrtos_demo
+source '/home/ljd/wsMA_prototyp/venv_zrtos_demo/bin/activate'
+sudo apt update
+sudo apt upgrade
+sudo apt install --no-install-recommends ninja-build gperf ccache dfu-util device-tree-compiler xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
+pip install west 
+west init 
+west update
+west zephyr-export
+Zephyr (/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/share/zephyr-package/cmake)
+has been added to the user package registry in:
+~/.cmake/packages/Zephyr
+
+ZephyrUnittest (/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/share/zephyrunittest-package/cmake)
+has been added to the user package registry in:
+~/.cmake/packages/ZephyrUnittest
+pip install west jsonschema pyelftools
+zephyr$ west build -b native_sim samples/hello_world
+west build -t transform
+
+# ZRTOS_demo -> /home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/cmake/modules/kconfig.cmake
+there is already:
+# Export each `ZEPHYR_<module>_KCONFIG` to Kconfig.
+# APP_DIR: Path to the main image (sysbuild) or synonym for APPLICATION_SOURCE_DIR (non-sysbuild)
+zephyr_get(APP_DIR VAR APP_DIR APPLICATION_SOURCE_DIR)
+# Load the module Kconfig file into CMake
+include("${KCONFIG_BINARY_DIR}/kconfig_module_dirs.cmake")
+set(COMMON_KCONFIG_ENV_SETTINGS
+  PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+  srctree=${ZEPHYR_BASE}
+  ${kconfig_env_dirs}  ...) --> modules variables that weren't recognized when the skript was run as standalone 
+                              # build/Kconfig/Kconfig.modules:2: Could not open '/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/' (in 'osource "$(ZEPHYR_ACPICA_KCONFIG)"')
+                              # kconfig_module_dirs.cmake -> list append kconfig_env_dirs
+
+foreach(kconfig_target
+    ${KCONFIG_TARGETS}
+    ${EXTRA_KCONFIG_TARGETS}
+    )
+  add_custom_target(...)
+
+* add target:
+set(EXTRA_KCONFIG_TARGET_COMMAND_FOR_transform
+  ${CMAKE_CURRENT_LIST_DIR}/../core/target_workflow.py
+)
+set_ifndef(KCONFIG_TARGETS menuconfig guiconfig hardenconfig traceconfig transform)
+
+Then in: ZRTOS_demo/zephyr 
+west build -b native_sim samples/hello_world
+west build -t transform
+
+for excel: pip install openpyxl
+---
+python /home/ljd/wsMA_prototyp/core/workflow_test.py
+export srctree="/home/ljd/wsMA_prototyp/experiment_dec"
+python /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/experiment_dec_copy/Kconfig
+
+#-----
+FOR NAMED CHOICE TRANSFORMATION:
+- missing choice symbol filter 
+'unique_choices': [<choice NAMED_CH, bool, "pick", mode y, CH_A selected, visibility y, Kconfig:1, uo2/Kconfig:4>],
+'unique_defined_syms': [<symbol CH_A, bool, "Op A", value y, visibility y, choice symbol, direct deps y, Kconfig:4>,
+                         <symbol CH_B, bool, "Op B", value n, visibility y, choice symbol, direct deps y, Kconfig:6>,
+                         <symbol AAA, bool, "AAA", value n, visibility y, direct deps y, uo2/Kconfig:1>,
+                         <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo2/Kconfig:6>,
+                         <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo2/Kconfig:8>]

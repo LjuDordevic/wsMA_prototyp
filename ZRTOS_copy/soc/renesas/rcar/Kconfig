@@ -1,0 +1,10 @@
+# Renesas R-Car SoC line
+# Copyright (c) 2021 IoT.bzh
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_RENESAS_RCAR
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rcar/soc/renesas/rcar/rcar_gen3/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/renesas/rcar/soc/renesas/rcar/rcar_gen4/Kconfig"
+
+endif # SOC_FAMILY_RENESAS_RCAR

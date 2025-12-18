@@ -1,0 +1,12 @@
+# Copyright (c) 2025 Microchip Technology Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_MICROCHIP_PIC32CX_SG
+	bool
+
+config SOC_FAMILY
+	default "microchip_pic32cx_sg" if SOC_FAMILY_MICROCHIP_PIC32CX_SG
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/pic32c/pic32cx_sg/soc/microchip/pic32c/pic32cx_sg/pic32cx_sg41/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/pic32c/pic32cx_sg/soc/microchip/pic32c/pic32cx_sg/pic32cx_sg60/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/pic32c/pic32cx_sg/soc/microchip/pic32c/pic32cx_sg/pic32cx_sg61/Kconfig.soc"

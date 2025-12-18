@@ -1,0 +1,29 @@
+# ST Microelectronics STM32L0 MCU line
+
+# Copyright (c) 2018 Endre Karlson <endre.karlson@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32L0 series
+
+if SOC_SERIES_STM32L0X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l010x4"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l010x6"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l010x8"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l010xb"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l011xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l031xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l051xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l053xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l071xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l072xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l073xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l081xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l0x/soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l083xx"
+
+# adjust the fallback because of the LSI oscillator characteristics
+config TASK_WDT_HW_FALLBACK_DELAY
+	depends on TASK_WDT_HW_FALLBACK
+	default 200
+
+endif # SOC_SERIES_STM32L0X

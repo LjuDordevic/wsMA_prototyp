@@ -1,0 +1,30 @@
+# ST Microelectronics STM32F0 MCU line
+
+# Copyright (c) 2017 RnDity Sp. z o.o.
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32F0 series
+
+if SOC_SERIES_STM32F0X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f030x4"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f030x6"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f030x8"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f030xc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f031x6"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f042x6"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f051x8"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f070xb"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f072xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f091xc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f0x/soc/st/stm32/stm32f0x/Kconfig.defconfig.stm32f098xx"
+
+config SRAM_VECTOR_TABLE
+	default y
+
+# adjust the fallback because of the LSI oscillator characteristics
+config TASK_WDT_HW_FALLBACK_DELAY
+	depends on TASK_WDT_HW_FALLBACK
+	default 100
+
+endif # SOC_SERIES_STM32F0X

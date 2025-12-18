@@ -1,0 +1,49 @@
+# STMicroelectronics STM32F4 MCU line
+
+# Copyright (c) 2016 Linaro Limited
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32F4 series
+
+if SOC_SERIES_STM32F4X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f401xc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f401xd"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f401xe"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f405xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f407xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f410xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f411xe"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f412rx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f412xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f413xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f415xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f417xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f423xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f427xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f429xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f437xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f439xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f446xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f469xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f4x/soc/st/stm32/stm32f4x/Kconfig.defconfig.stm32f479xx"
+
+# adjust the fallback because of the LSI oscaillator characteristics
+config TASK_WDT_HW_FALLBACK_DELAY
+	depends on TASK_WDT_HW_FALLBACK
+	default 200
+
+if PM
+
+config COUNTER
+	default y
+
+config COUNTER_RTC_STM32_SUBSECONDS
+	default y if DT_HAS_ST_STM32_RTC_ENABLED
+
+config IDLE_STACK_SIZE
+	default 512
+
+endif # PM
+
+endif # SOC_SERIES_STM32F4X

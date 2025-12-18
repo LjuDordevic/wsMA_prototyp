@@ -1,0 +1,27 @@
+# STMicroelectronics STM32L1 MCU line
+
+# Copyright (c) 2019 Linaro Ltd.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_STM32L1X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l1x/soc/st/stm32/stm32l1x/Kconfig.defconfig.stm32l100xb"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l1x/soc/st/stm32/stm32l1x/Kconfig.defconfig.stm32l151xb"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l1x/soc/st/stm32/stm32l1x/Kconfig.defconfig.stm32l151xba"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l1x/soc/st/stm32/stm32l1x/Kconfig.defconfig.stm32l151xc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l1x/soc/st/stm32/stm32l1x/Kconfig.defconfig.stm32l152xc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32l1x/soc/st/stm32/stm32l1x/Kconfig.defconfig.stm32l152xe"
+
+# adjust the fallback because of the LSI oscaillator characteristics
+config TASK_WDT_HW_FALLBACK_DELAY
+	depends on TASK_WDT_HW_FALLBACK
+	default 200
+
+if PM
+
+config COUNTER
+	default y
+
+endif # PM
+
+endif # SOC_SERIES_STM32L1X

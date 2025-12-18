@@ -1,0 +1,27 @@
+# Analog Devices MAX32xxx MCU family
+
+# Copyright (c) 2023-2024 Analog Devices, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_MAX32
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32650"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32655"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32657"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32660"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32662"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32666"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32670"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32672"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32675"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32680"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max32690"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max78000"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/adi/max32/soc/adi/max32/Kconfig.defconfig.max78002"
+
+choice PM_PREWAKEUP_CONV_MODE
+	default PM_PREWAKEUP_CONV_MODE_CEIL
+
+endchoice # PM_PREWAKEUP_CONV_MODE
+
+endif # SOC_FAMILY_MAX32

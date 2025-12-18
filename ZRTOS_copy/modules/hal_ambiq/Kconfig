@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright (c) 2023 Antmicro <www.antmicro.com>
+# Copyright (c) 2025, Ambiq Micro Inc. <www.ambiq.com>
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/modules/hal_ambiq/modules/hal_ambiq/Kconfig.hal"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/modules/hal_ambiq/modules/hal_ambiq/Kconfig.components"

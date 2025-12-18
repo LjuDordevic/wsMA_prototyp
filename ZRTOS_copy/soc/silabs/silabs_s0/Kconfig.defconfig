@@ -1,0 +1,6 @@
+# Copyright (c) 2024 Silicon Laboratories Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s0/soc/silabs/silabs_s0/efm32hg/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s0/soc/silabs/silabs_s0/efm32tg/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/silabs/silabs_s0/soc/silabs/silabs_s0/efm32wg/Kconfig.defconfig"

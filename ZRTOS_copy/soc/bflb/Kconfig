@@ -1,0 +1,11 @@
+# Copyright (c) 2021-2025 ATL Electronics
+#
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_BFLB
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/bflb/soc/bflb/bl60x/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/bflb/soc/bflb/bl61x/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/bflb/soc/bflb/bl70x/Kconfig"
+
+endif # SOC_FAMILY_BFLB

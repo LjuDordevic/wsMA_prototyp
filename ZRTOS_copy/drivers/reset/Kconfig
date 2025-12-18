@@ -1,0 +1,47 @@
+# Reset Controller driver configuration options
+
+# Copyright (c) 2022 Andrei-Edward Popa <andrei.popa105@yahoo.com>
+# SPDX-License-Identifier: Apache-2.0
+
+#
+# Reset Controller options
+#
+menuconfig RESET
+	bool "Reset Controller drivers"
+	help
+	  Reset Controller drivers. Reset node represents a region containing
+	  information about reset controller device. The typical use-case is
+	  for some other node's drivers to acquire a reference to the reset
+	  controller node together with some reset information.
+
+if RESET
+
+config RESET_INIT_PRIORITY
+	int "Reset Controller driver init priority"
+	default 35
+	help
+	  This option controls the priority of the reset controller device
+	  initialization. Higher priority ensures that the device is
+	  initialized earlier in the startup cycle. If unsure, leave at default
+	  value
+
+comment "Reset Controller Drivers"
+
+# zephyr-keep-sorted-start
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.aspeed"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.gd32"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.intel_socfpga"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.lpc_syscon"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.mchp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.mchp_mss"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.mmio"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.npcx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.numaker"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.nxp_mrcc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.nxp_rstctl"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.rpi_pico"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.sf32lb"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/drivers/reset/drivers/reset/Kconfig.stm32"
+# zephyr-keep-sorted-stop
+
+endif # RESET

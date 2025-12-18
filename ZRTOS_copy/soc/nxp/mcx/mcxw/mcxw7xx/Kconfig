@@ -1,0 +1,9 @@
+# Copyright 2025 NXP
+#
+# SPDX-License-Identifier: Apache-2.0
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/mcx/mcxw/mcxw7xx/soc/nxp/common/Kconfig.nbu"
+
+config MCUX_CORE_SUFFIX
+	default "_cm33_core0" if SOC_MCXW727C_CPU0
+	default "_cm33_core1" if SOC_MCXW727C_CPU1

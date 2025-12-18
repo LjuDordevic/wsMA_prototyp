@@ -1,0 +1,13 @@
+# STMicroelectronics STM32F2 MCU line
+
+# Copyright (c) 2018 qianfan Zhao <qianfanguijin@163.com>
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32F2 series
+
+if SOC_SERIES_STM32F2X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f2x/soc/st/stm32/stm32f2x/Kconfig.defconfig.stm32f205xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f2x/soc/st/stm32/stm32f2x/Kconfig.defconfig.stm32f207xx"
+
+endif # SOC_SERIES_STM32F2X

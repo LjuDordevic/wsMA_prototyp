@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2020 Broadcom.
+#
+
+if SOC_FAMILY_BCMVK
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/brcm/bcmvk/soc/brcm/bcmvk/valkyrie/Kconfig.defconfig"
+
+endif # SOC_FAMILY_BCMVK

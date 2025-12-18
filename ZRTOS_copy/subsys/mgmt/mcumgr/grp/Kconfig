@@ -1,0 +1,23 @@
+# Copyright Runtime.io 2018. All rights reserved.
+# Copyright Nordic Semiconductor ASA 2020-2022. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/mgmt/mcumgr/grp/subsys/mgmt/mcumgr/grp/fs_mgmt/Kconfig"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/mgmt/mcumgr/grp/subsys/mgmt/mcumgr/grp/img_mgmt/Kconfig"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/mgmt/mcumgr/grp/subsys/mgmt/mcumgr/grp/img_mgmt_client/Kconfig"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/mgmt/mcumgr/grp/subsys/mgmt/mcumgr/grp/os_mgmt/Kconfig"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/mgmt/mcumgr/grp/subsys/mgmt/mcumgr/grp/os_mgmt_client/Kconfig"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/mgmt/mcumgr/grp/subsys/mgmt/mcumgr/grp/shell_mgmt/Kconfig"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/mgmt/mcumgr/grp/subsys/mgmt/mcumgr/grp/stat_mgmt/Kconfig"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/mgmt/mcumgr/grp/subsys/mgmt/mcumgr/grp/zephyr_basic/Kconfig"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/mgmt/mcumgr/grp/subsys/mgmt/mcumgr/grp/settings_mgmt/Kconfig"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/mgmt/mcumgr/grp/subsys/mgmt/mcumgr/grp/enum_mgmt/Kconfig"

@@ -1,0 +1,6 @@
+# Copyright 2025 Google LLC
+# SPDX-License-Identifier: Apache-2.0
+
+config SHIELD_ARDUINO_MODULINO_PIXELS
+ bool
+ default $(shields_list_contains,arduino_modulino_pixels)

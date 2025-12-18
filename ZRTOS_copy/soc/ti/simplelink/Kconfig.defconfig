@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2017 Zephyr Contributors
+
+if SOC_FAMILY_TI_SIMPLELINK
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/ti/simplelink/soc/ti/simplelink/cc13x2_cc26x2/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/ti/simplelink/soc/ti/simplelink/cc13x2x7_cc26x2x7/Kconfig.defconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/ti/simplelink/soc/ti/simplelink/cc23x0/Kconfig.defconfig"
+
+endif # SOC_FAMILY_TI_SIMPLELINK

@@ -1,0 +1,13 @@
+# Copyright (c) 2024 Synopsys, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_NSIM_ARC_CLASSIC
+	bool
+
+config SOC_FAMILY
+	default "nsim_arc_classic" if SOC_FAMILY_NSIM_ARC_CLASSIC
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/soc/snps/nsim/arc_classic/em/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/soc/snps/nsim/arc_classic/hs/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/soc/snps/nsim/arc_classic/sem/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/snps/nsim/arc_classic/soc/snps/nsim/arc_classic/vpx5/Kconfig.soc"

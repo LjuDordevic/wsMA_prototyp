@@ -1,0 +1,23 @@
+# Copyright (c) 2021 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+menu "Backends"
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.adsp"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.adsp_mtrace"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.ble"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.efi_console"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.fs"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.mqtt"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.native_posix"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.net"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.ws"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.rtt"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.spinel"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.swo"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.uart"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.xtensa_sim"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.multidomain"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/subsys/logging/backends/subsys/logging/backends/Kconfig.semihost"
+
+endmenu

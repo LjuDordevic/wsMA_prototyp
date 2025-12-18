@@ -1,0 +1,18 @@
+# Copyright 2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_NXP_IMX
+	select HAS_SEGGER_RTT if ZEPHYR_SEGGER_MODULE
+
+if SOC_FAMILY_NXP_IMX
+
+# Source series Kconfig files first, so SOCs
+# can override the defaults given here
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imx/soc/nxp/imx/imx6sx/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imx/soc/nxp/imx/imx7d/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imx/soc/nxp/imx/imx8/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imx/soc/nxp/imx/imx8m/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imx/soc/nxp/imx/imx8ulp/Kconfig"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/imx/soc/nxp/imx/imx8x/Kconfig"
+
+endif # SOC_FAMILY_NXP_IMX

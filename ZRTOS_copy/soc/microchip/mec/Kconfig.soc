@@ -1,0 +1,16 @@
+# Microchip MEC172x, MEC1501 MCU line
+
+# Copyright (c) 2018 Intel Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_MICROCHIP_MEC
+	bool
+
+config SOC_FAMILY
+	default "microchip_mec" if SOC_FAMILY_MICROCHIP_MEC
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/mec/soc/microchip/mec/mec15xx/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/mec/soc/microchip/mec/mec172x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/mec/soc/microchip/mec/mec174x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/mec/soc/microchip/mec/mec175x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/microchip/mec/soc/microchip/mec/mech172x/Kconfig.soc"

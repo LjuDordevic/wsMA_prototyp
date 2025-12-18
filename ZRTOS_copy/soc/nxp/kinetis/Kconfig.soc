@@ -1,0 +1,18 @@
+# Copyright 2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_KINETIS
+	bool
+
+config SOC_FAMILY
+	default "nxp_kinetis" if SOC_FAMILY_KINETIS
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/k2x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/k32lx/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/k6x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/k8x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/ke1xf/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/ke1xz/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/kl2x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/kv5x/Kconfig.soc"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/nxp/kinetis/soc/nxp/kinetis/kwx/Kconfig.soc"

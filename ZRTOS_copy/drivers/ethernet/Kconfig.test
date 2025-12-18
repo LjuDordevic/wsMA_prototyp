@@ -1,0 +1,7 @@
+# Copyright (c) 2024 TOKITA Hiroshi
+# SPDX-License-Identifier: Apache-2.0
+
+config ETH_TEST
+ bool
+ default DT_HAS_VND_ETHERNET_ENABLED
+	depends on DT_HAS_VND_ETHERNET_ENABLED

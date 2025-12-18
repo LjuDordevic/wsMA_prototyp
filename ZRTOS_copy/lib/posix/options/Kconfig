@@ -1,0 +1,39 @@
+# Copyright (c) 2018 Intel Corporation
+# Copyright (c) 2023 Meta
+# Copyright (c) 2024 Tenstorrent AI ULC
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# zephyr-keep-sorted-start
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.aio"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.barrier"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.device_io"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.fd_mgmt"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.file_system_r"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.fs"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.mem"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.mqueue"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.net"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.proc1"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.procN"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.pthread"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.rwlock"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.sched"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.semaphore"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.signal"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.spinlock"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.sync_io"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.timer"
+# zephyr-keep-sorted-stop
+
+menu "X/Open system interfaces"
+
+# zephyr-keep-sorted-start
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.xsi_realtime"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.xsi_single_process"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.xsi_streams"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.xsi_system_logging"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/lib/posix/options/lib/posix/options/Kconfig.xsi_threads_ext"
+# zephyr-keep-sorted-stop
+
+endmenu # "X/Open system interfaces"

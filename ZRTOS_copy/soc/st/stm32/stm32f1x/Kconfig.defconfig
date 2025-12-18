@@ -1,0 +1,27 @@
+# ST Microelectronics STM32F1 MCU line
+
+# Copyright (c) 2016 Open-RnD Sp. z o.o.
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32F1 series
+
+if SOC_SERIES_STM32F1X
+
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f1x/soc/st/stm32/stm32f1x/Kconfig.defconfig.stm32f100xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f1x/soc/st/stm32/stm32f1x/Kconfig.defconfig.stm32f103xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f1x/soc/st/stm32/stm32f1x/Kconfig.defconfig.stm32f105xx"
+rsource "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/soc/st/stm32/stm32f1x/soc/st/stm32/stm32f1x/Kconfig.defconfig.stm32f107xc"
+
+# adjust the fallback because of the LSI oscaillator characteristics
+config TASK_WDT_HW_FALLBACK_DELAY
+	depends on TASK_WDT_HW_FALLBACK
+	default 200
+
+if PM
+
+config COUNTER
+	default y
+
+endif # PM
+
+endif # SOC_SERIES_STM32F1X

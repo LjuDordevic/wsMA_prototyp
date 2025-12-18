@@ -1,0 +1,4 @@
+config U2
+  def_bool y
+
+source "exp_u3/*"
