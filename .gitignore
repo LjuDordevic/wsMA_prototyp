@@ -17,3 +17,4 @@ ZRTOS_copy2/
 test_dir/experiment_dec_copy/
 results.xlsx
 transform.log
+venv_esp_idf/
