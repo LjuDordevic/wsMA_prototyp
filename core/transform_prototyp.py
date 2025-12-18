@@ -12,6 +12,9 @@ class ExtParserContext:
     symbol_orig_defaults: Dict[str, List[dict]]
     configdefault_symbols: Set[str]
     configdefault_symbols_nr: int
+    choice_infos: Dict[str, List[dict]]
+    choice_definitions = Dict[str, List[dict]] # choice_name -> [location1, location2, ...]
+    choice_nr: int
     parser_result: dict
     srctree: Path
 
@@ -55,6 +58,8 @@ class KconfigTransformer:
         symbol_defaults = {}
         symbol_orig_defaults = {}
         configdefault_symbols = set()
+        choice_infos = {}
+        choice_definitions = {}
 
         print(" call different attributes on symbols found in parser_result['unique_defined_syms']")
         
@@ -134,6 +139,29 @@ class KconfigTransformer:
             
                 if is_configdefault: configdefault_symbols.add(sym.name)
          
+        for choice in parser_result['named_choices']:
+            if choice.name not in (symbol_infos or symbol_definitions or symbol_defaults or symbol_orig_defaults):
+                print(choice.name)
+                choice_infos[sym.name] = []
+                choice_definitions[sym.name] = []
+            
+            choice_infos ={
+                'choice.name' : choice.name,
+                'choice.origin' : choice.origin,
+                'choice.name_and_loc' : choice.name_and_loc
+            }  
+            choice_infos[choice.name].append(symbol_info)
+
+            for node in choice.nodes:
+                is_configdefault = getattr(node, 'is_configdefault', False)
+                
+                location_info = {
+                    'file': node.filename if hasattr(node, 'filename') else None,
+                    'line': node.linenr if hasattr(node, 'linenr') else None,
+                    'node': node,
+                }
+                choice_definitions[choice.name].append(location_info)
+
         context = ExtParserContext(
             symbol_infos = symbol_infos,
             symbol_definitions = symbol_definitions,
@@ -142,6 +170,9 @@ class KconfigTransformer:
             configdefault_symbols_nr = len(configdefault_symbols),
             symbol_defaults = symbol_defaults,
             symbol_orig_defaults = symbol_orig_defaults,
+            choice_infos = choice_infos,
+            choice_definitions = choice_definitions,
+            choice_nr = len(choice_definitions),
             parser_result=parser_result,
             srctree=Path(konf.srctree)
         )
@@ -149,6 +180,10 @@ class KconfigTransformer:
         self.context = context
         if log: self._log_parser_context(self.context)
         return context
+
+    def extract_named_choice_info(self, context: ExtParserContext, choice_name: str):
+        choice_infos = context.choice_infos
+        choice_definitions = context-choice_definitions
 
     def extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
        
