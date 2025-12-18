@@ -13,7 +13,7 @@ class ExtParserContext:
     configdefault_symbols: Set[str]
     configdefault_symbols_nr: int
     choice_infos: Dict[str, List[dict]]
-    choice_definitions = Dict[str, List[dict]] # choice_name -> [location1, location2, ...]
+    choice_definitions : Dict[str, List[dict]] # choice_name -> [location1, location2, ...]
     choice_nr: int
     parser_result: dict
     srctree: Path
@@ -139,18 +139,17 @@ class KconfigTransformer:
             
                 if is_configdefault: configdefault_symbols.add(sym.name)
          
-        for choice in parser_result['named_choices']:
-            if choice.name not in (symbol_infos or symbol_definitions or symbol_defaults or symbol_orig_defaults):
+        for choice in parser_result['unique_choices']:
+            if choice.name not in (choice_infos or choice_definitions):
                 print(choice.name)
-                choice_infos[sym.name] = []
-                choice_definitions[sym.name] = []
+                choice_infos[choice.name] = []
+                choice_definitions[choice.name] = []
             
-            choice_infos ={
+            choice_info ={
                 'choice.name' : choice.name,
-                'choice.origin' : choice.origin,
                 'choice.name_and_loc' : choice.name_and_loc
             }  
-            choice_infos[choice.name].append(symbol_info)
+            choice_infos[choice.name].append(choice_info)
 
             for node in choice.nodes:
                 is_configdefault = getattr(node, 'is_configdefault', False)
@@ -181,9 +180,39 @@ class KconfigTransformer:
         if log: self._log_parser_context(self.context)
         return context
 
-    def extract_named_choice_info(self, context: ExtParserContext, choice_name: str):
+    def extract_named_choice_info(self, choice_name: str):
+        context = self.context
         choice_infos = context.choice_infos
-        choice_definitions = context-choice_definitions
+        choice_definitions = context.choice_definitions
+        if choice_name not in choice_infos:
+            return {
+            'choice_def': []
+            }
+        
+        choice_definitions_list = []
+        if choice_name in choice_definitions:
+            for location_info in choice_definitions[choice_name]:
+                file = location_info.get('file')
+                line = location_info.get('line')
+                node = location_info.get('node')
+            
+                choice_definitions_list.append({
+                    'choice_name' : choice_name, 
+                    'file' : file, 
+                    'line' : line, 
+                    'node': node
+                })
+
+                print("choice definition ------------------------------------------------------")
+                print(f"choice: {choice_name}")
+                print(f"file: {file}")
+                print(f"line: {line}")
+                print(f"node: {node}")
+
+        return {
+            'choice_def': choice_definitions_list
+        }
+        
 
     def extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
        

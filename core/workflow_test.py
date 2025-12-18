@@ -88,6 +88,8 @@ print(f"\n5.  call writer - write transformed lines in {output_file}")
 writer.write(transformed_lines, output_file)
 """
 
+transformer.extract_named_choice_info("NAMED_CH")
+
 transformer.transform_all_files(
     reader=reader,
     writer=writer,

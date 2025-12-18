@@ -147,3 +147,13 @@ for excel: pip install openpyxl
 python /home/ljd/wsMA_prototyp/core/workflow_test.py
 export srctree="/home/ljd/wsMA_prototyp/experiment_dec"
 python /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/experiment_dec_copy/Kconfig
+
+#-----
+FOR NAMED CHOICE TRANSFORMATION:
+- missing choice symbol filter 
+'unique_choices': [<choice NAMED_CH, bool, "pick", mode y, CH_A selected, visibility y, Kconfig:1, uo2/Kconfig:4>],
+'unique_defined_syms': [<symbol CH_A, bool, "Op A", value y, visibility y, choice symbol, direct deps y, Kconfig:4>,
+                         <symbol CH_B, bool, "Op B", value n, visibility y, choice symbol, direct deps y, Kconfig:6>,
+                         <symbol AAA, bool, "AAA", value n, visibility y, direct deps y, uo2/Kconfig:1>,
+                         <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo2/Kconfig:6>,
+                         <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo2/Kconfig:8>]

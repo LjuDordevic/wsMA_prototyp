@@ -1,2 +1,10 @@
-source "uo1/Kconfig*"
-rsource "uo1/Kconfig"
+config AAA 
+  bool "AAA"
+
+choice NAMED_CH
+  depends on AAA
+  config CH_C
+    bool "Op C" 
+  config CH_D
+    bool "Op D" 
+endchoice 

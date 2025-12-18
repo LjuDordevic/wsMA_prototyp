@@ -1,1 +1,10 @@
+choice NAMED_CH
+  prompt "pick"
+  bool 
+  config CH_A 
+    bool "Op A"
+  config CH_B
+    bool "Op B"
+endchoice   
+
 source "uo2/Kconfig"
