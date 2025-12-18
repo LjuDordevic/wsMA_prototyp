@@ -1,2 +1,2 @@
 source "uo1/Kconfig*"
-
+rsource "uo1/Kconfig"

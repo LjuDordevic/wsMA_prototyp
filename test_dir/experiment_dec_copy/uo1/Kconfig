@@ -1,3 +1,0 @@
-config UO1_A
-  bool
-  default y

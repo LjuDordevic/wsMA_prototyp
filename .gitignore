@@ -14,3 +14,4 @@ venv_zrtos_demo/
 core/single_file.py
 ZRTOS_copy2/
 .vscode/
+test_dir/experiment_dec_copy/

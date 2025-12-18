@@ -1,5 +1,0 @@
-source "uo1/Kconfig"
-source "uo1/Kconfig1"
-source "uo1/Kconfig2"
-source "uo1/Kconfig3"
-

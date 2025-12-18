@@ -1,4 +1,1 @@
 source "uo2/Kconfig"
-source "uo3/Kconfig"
-source "uo4/Kconfig*"
-source "uo5/Kconfig*"

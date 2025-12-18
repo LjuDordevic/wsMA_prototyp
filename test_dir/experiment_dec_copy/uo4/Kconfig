@@ -1,3 +1,0 @@
-config R 
-  int 
-  default 5
