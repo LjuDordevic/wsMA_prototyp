@@ -143,3 +143,7 @@ west build -b native_sim samples/hello_world
 west build -t transform
 
 for excel: pip install openpyxl
+---
+python /home/ljd/wsMA_prototyp/core/workflow_test.py
+export srctree="/home/ljd/wsMA_prototyp/experiment_dec"
+python /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/experiment_dec_copy/Kconfig

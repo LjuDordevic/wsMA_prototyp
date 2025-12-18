@@ -1,0 +1,3 @@
+config UO1_B
+  bool
+  default y

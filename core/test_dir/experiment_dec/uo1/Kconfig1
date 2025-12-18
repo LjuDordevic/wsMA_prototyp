@@ -1,0 +1,2 @@
+config C 
+  def_string "hi"

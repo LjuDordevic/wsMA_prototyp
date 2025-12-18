@@ -1,0 +1,3 @@
+config H
+  string
+  default "lol"
