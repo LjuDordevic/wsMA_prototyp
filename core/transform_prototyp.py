@@ -33,7 +33,7 @@ class KconfigTransformer:
     FILE_OSOURCE_NR = 0
     FILE_RSOURCE_NR = 0
     FILE_ORSOURCE_NR = 0
-    FILE_SOURCE_OUT = 0
+    FILE_SOURCE_OUT_DIFF = 0
     FILE_OSOURCE_OUT = 0
     FILE_RSOURCE_OUT = 0
     FILE_ORSOURCE_OUT = 0
@@ -41,7 +41,6 @@ class KconfigTransformer:
     FILE_SOURCE_KEYWORDS_ALL_NR = 0
     FILE_ALL_ADDED_LINES_SKW = 0
     ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0
-    FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
     FILE_CONFIGDEFAULT_NR = 0
     
 
@@ -373,8 +372,7 @@ class KconfigTransformer:
             lines -> from reader 
             """
             len_reader_input = len(lines)
-            print(f"start transforming lines")
-            print(f"    Reader Input: {len(lines)} lines")
+            print(f"start transforming {len(lines)} input lines")
             if self.context is None:
                 raise RuntimeError("call build_context_from_parser() first")
             
@@ -462,14 +460,10 @@ class KconfigTransformer:
                     result.append(transformed) # 1:1         
                 #print(f"after {i} is result: {result}")
                 i += 1  # go to the next line
-                
-            
-            # count how many lines were added to output file
-            # = SUM of all lines matched through glob - SUM of all (r/or/o)source_keywords 
-            self.FILE_ALL_ADDED_LINES_SKW = self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB 
+                            
             len_transformed_lines = len(result)
             # EXCEL stats
-            stats = self._log_file_and_reset_count(self.NEW_BC_GLOB, current_file, len_reader_input, len_transformed_lines)
+            stats = self._log_file_and_reset_count(self.FILE_SOURCE_OUT_DIFF, current_file, len_reader_input, len_transformed_lines)
             return result, stats
     
     def transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
@@ -568,8 +562,8 @@ class KconfigTransformer:
         source_keyword = match.group(1)
         pattern = match.group(2)
         has_glob = any(c in pattern for c in ['*', '?', '[', ']', '!'])
-        print("hello")
-        print(has_glob)
+        #print("hello")
+        #print(has_glob)
 
         # COUNT each keyword in file
         if source_keyword == "source": self.FILE_SOURCE_NR += 1
@@ -578,16 +572,19 @@ class KconfigTransformer:
         elif source_keyword == "orsource": self.FILE_ORSOURCE_NR += 1       
 
         # no glob -> copy line to the output as it is 
+        # but skip (o)r(o)source because these have to be transformed to source before retzrning the line
         if not has_glob and not source_keyword == 'rsource' \
             and not source_keyword == 'orsource' and not source_keyword == 'osource':
-            self.FILE_SOURCE_OUT +=1    # output: 1 copied source line 
-            #self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = self.FILE_SOURCE_OUT - self.FILE_SOURCE_NR 
-            print(f"ALLRES no GM: {self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB}")
+            # this is just for TERMINAL LOGGING OF EACH LINE, 
+            # FILE_SOURCE_OUT_DIFF is always 1, because at each line you only have 1 source keyword 
+            # But I wanted to have information about each line
+            #self.FILE_SOURCE_OUT_DIFF +=1    # output: 1 copied source line 
+            print(f"    source without glob: 1")
+            #self.FILE_SOURCE_OUT_DIFF = 0    # reset for next line
             return line
 
         print(f"    GLOB LOG --------------------------------------------------------------")
-        if source_keyword == "rsource" or "orsource" or "osource": print(f"    Resolve {source_keyword}: {pattern}")
-        else: print(f"    Resolve glob: {pattern}")
+        print(f"    Resolve {source_keyword}: {pattern}")
         
         matched_files = []
         if self.context is not None:
@@ -618,9 +615,7 @@ class KconfigTransformer:
                     continue
                
         if not matched_files:
-            print(f"      no files found for the: {pattern}")
-            #self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB +=1    #TODO: maybe another counter and rename this = output source lines
-            
+            print(f"      no files found for the: {pattern}")            
             if source_keyword == "orsource" or source_keyword == "osource":
                 new_line_text = f'#{indent_str}source "{pattern}"' # comment, but transform ((o)r/o)source and path before? 
                 new_line = KconfigLine(new_line_text, line.line_number)
@@ -628,6 +623,7 @@ class KconfigTransformer:
             return line
         
         # bild source for each found file #TODO: check sorted
+        # and after that calculate the output diff.-> if 1 source keyword matches 5 --> Diff: 4 new lines in output
         result_lines = []
         for matched_file in sorted(set(matched_files)):
 
@@ -643,21 +639,21 @@ class KconfigTransformer:
                 print(f"      -> {transform_to_abs}")
                 continue
             else:
+                # for source keyword just print  
                 new_line_text = f'{indent_str}{source_keyword} "{matched_file}"'
                 new_line = KconfigLine(new_line_text, line.line_number)
                 result_lines.append(new_line)
                 print(f"      -> {matched_file}")
 
-        # for resolve glob log - one keyword matched 
+        # for resolve glob log - one keyword matched <len(result_lines) > files
         self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB += len(result_lines)   
         print(f"    Files matching: {self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB} (using {source_keyword})")
+        
+        # for file log, save diff. when source matches more files (1:n)
         self.NEW_BC_GLOB = self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB - 1
+        self.FILE_SOURCE_OUT_DIFF += self.NEW_BC_GLOB  # sum all diff for 1 file, reset after FILE logging
+        
         self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0 # set back for the next line with keyword
-        
-        # for file log
-        self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = len(result_lines) - 1
-        self.FILE_SOURCE_OUT += self.NEW_BC_GLOB 
-        
         return result_lines
 
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, log: bool, log_lines: bool):
@@ -761,7 +757,6 @@ class KconfigTransformer:
         print(f"    All rsource_keywords:       {self.FILE_RSOURCE_NR}")
         print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
         print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
-        print(f"    SUM output source lines:    {self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB}")  
         print(f"    -----------------------------------------------------------------------")
         print(f"    Transformer Output:         {len_result} lines")
         print(f"    -----------------------------------------------------------------------")
@@ -791,9 +786,9 @@ class KconfigTransformer:
         self.FILE_SOURCE_KEYWORDS_ALL_NR = 0
         self.FILE_DEF_KEYWORDS_COUNT = 0
         self.FILE_ALL_ADDED_LINES_SKW = 0
-        self.FILE_ALL_SOURCE_KEYWORDS_RESULT_OF_GLOB = 0
         self.FILE_CONFIGDEFAULT_NR = 0
         self.NEW_BC_GLOB = 0
+        self.FILE_SOURCE_OUT_DIFF = 0
 
         return file_stats_excel
         
