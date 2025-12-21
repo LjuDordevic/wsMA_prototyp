@@ -9,16 +9,16 @@ import os
 #project_dir = "/home/ljd/wsMA_prototyp/exp" 
 #output_dir = "/home/ljd/wsMA_prototyp/exp_copy"   
 #main_file =  "KconfigZephyrRTOS"                                   
-#project_dir = "/home/ljd/wsMA_prototyp/test_dir/exp_conf_def/"       
-#output_dir = "/home/ljd/wsMA_prototyp/test_dir/exp_conf_def_copy/"   
+#project_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_conf_def/"       
+#output_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_conf_def_copy/"   
 #main_file =  "Kconfig"  
 #project_dir = "/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/"  # old 
 #project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr"   # documented  
 #output_dir = "/home/ljd/wsMA_prototyp/ZRTOS_copy/"   
-#project_dir = "/home/ljd/wsMA_prototyp/test_dir/exp_A"       
-#output_dir = "/home/ljd/wsMA_prototyp/test_dir/exp_B"   
-project_dir = "/home/ljd/wsMA_prototyp/test_dir/experiment_dec"       
-output_dir = "/home/ljd/wsMA_prototyp/test_dir/experiment_dec_copy"   
+#project_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_A"       
+#output_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_B"   
+project_dir = "/home/ljd/wsMA_prototyp/test_dir_old/experiment_dec"       
+output_dir = "/home/ljd/wsMA_prototyp/test_dir_old/experiment_dec_copy"   
 main_file =  "Kconfig"  
 os.environ["srctree"] = project_dir
 print(os.environ["srctree"])
