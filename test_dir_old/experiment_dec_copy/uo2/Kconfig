@@ -1,0 +1,10 @@
+config AAA 
+  bool "AAA"
+
+choice NAMED_CH
+  depends on AAA
+  config CH_C
+    bool "Op C" 
+  config CH_D
+    bool "Op D" 
+endchoice 

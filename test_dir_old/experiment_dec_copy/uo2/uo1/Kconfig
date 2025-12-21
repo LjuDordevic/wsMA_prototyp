@@ -1,0 +1,2 @@
+config UO1_B
+  def_bool y

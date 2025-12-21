@@ -1,0 +1,2 @@
+config G 
+  bool "G"
