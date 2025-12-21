@@ -1,0 +1,5 @@
+config A
+  string
+  default "xS"
+
+source "esp_A_u1/*"

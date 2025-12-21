@@ -1,0 +1,21 @@
+menu "test"
+  depends on U1
+
+if CY
+configdefault FOO
+  default y if CN
+endif
+
+configdefault FOO
+  default CY
+
+if C
+configdefault FOO
+  default CY && AA
+endif
+
+endmenu
+
+config U1
+  bool 
+  default y

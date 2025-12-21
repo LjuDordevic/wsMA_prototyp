@@ -1,0 +1,11 @@
+config FOO
+  bool "first Option"
+
+config FOO
+  bool
+  default n
+  default y if CN && CY && U1
+  default CY if U1
+  default CY && AA if C && U1
+
+source "cf_u1/Kconfig1"

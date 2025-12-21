@@ -1,0 +1,3 @@
+config AAA
+  bool
+  default y

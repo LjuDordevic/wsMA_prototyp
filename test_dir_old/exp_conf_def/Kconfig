@@ -1,0 +1,7 @@
+config FOO
+  bool "first Option"
+
+config FOO
+  def_bool n
+
+source "cf_u1/*"
