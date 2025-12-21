@@ -1,8 +1,8 @@
 from pathlib import Path
-from pick_parser import PickParser
-from zrtos_parser import ZRTOSParser
-from kconfig_writer import KconfigReader, KconfigWriter
-from transform_prototyp import KconfigTransformer
+from ..pick_parser import PickParser
+from ..zrtos_parser import ZRTOSParser
+from ..kconfig_writer import KconfigReader, KconfigWriter
+from ..transform_prototyp import KconfigTransformer
 import pprint
 import os
 
