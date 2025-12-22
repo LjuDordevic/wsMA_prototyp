@@ -94,9 +94,9 @@ class KconfigLine:
         elif s.startswith('option env'):
             return 'option env'
         elif s.startswith('option allnoconfig_y'):
-            return 'option allnoconfig_y'
+            return 'allnoconfig_y'
         elif s.startswith('option defconfig_list'):
-            return 'option defconfig_list'        
+            return 'defconfig_list'        
         elif s.startswith('option modules'):
             return 'option modules'
         elif s.startswith('modules'):

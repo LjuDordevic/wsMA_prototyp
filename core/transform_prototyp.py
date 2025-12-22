@@ -51,6 +51,8 @@ class KconfigTransformer:
     OPTION_MODULES_COUNTER = 0
     OPTION_MODULES_INFO = []
     FILE_OPT_ENV = 0
+    FILE_OPT_ALLNONCONG = 0
+    FILE_OPT_DEFCONFIG = 0
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -591,6 +593,10 @@ class KconfigTransformer:
             self.FILE_OPT_ENV += 1
             return self._transform_opt_env(line)
         else:
+            if line.line_type == "allnoconfig_y":
+                self.FILE_OPT_ALLNONCONG += 1
+            if line.line_type == "defconfig_list":
+                self.FILE_OPT_DEFCONFIG += 1
             return line    
 
     def _transform_def_keyword(self, line) -> List:
@@ -890,9 +896,14 @@ class KconfigTransformer:
         print(f"finished transforming: {transformed_count} files transformed")
         print(f"----------------------------------------------------------------------")
         if self.OPTION_MODULES_INFO:
-            print("info about option modules-attr: ")
+            print("info about option-attr: ")
             for info in self.OPTION_MODULES_INFO:
-                print(f"{info['counter']} option modules-attr found at line {info['line']} in {info['file']}")
+                print(f"    {info['counter']} option modules-attr found at line {info['line']} in {info['file']}")
+            print(f"    allnoconfig_y: {self.FILE_OPT_ALLNONCONG}")
+            print(f"    defconfig_list: {self.FILE_OPT_DEFCONFIG}")
+        
+        self.FILE_OPT_DEFCONFIG = 0
+        self.FILE_OPT_ALLNONCONG = 0
         self.OPTION_MODULES_COUNTER = 0
         self.OPTION_MODULES_INFO.clear()
         return excel_stats
