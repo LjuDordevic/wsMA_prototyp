@@ -899,7 +899,7 @@ class KconfigTransformer:
             print("info about option-attr: ")
             for info in self.OPTION_MODULES_INFO:
                 print(f"    {info['counter']} option modules-attr found at line {info['line']} in {info['file']}")
-            print(f"    allnoconfig_y: {self.FILE_OPT_ALLNONCONG}")
+            print(f"    allnoconfig_y:  {self.FILE_OPT_ALLNONCONG}")
             print(f"    defconfig_list: {self.FILE_OPT_DEFCONFIG}")
         
         self.FILE_OPT_DEFCONFIG = 0
