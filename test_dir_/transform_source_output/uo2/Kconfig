@@ -1,0 +1,15 @@
+source "uo1/Kconfig"
+source "uo2/uo1/Kconfig"
+
+comment "(o)source/(o)rsource"
+
+comment "next subfolder"
+source "uo3/Kconfig"
+source "uo3/Kconfig1"
+source "uo3/Kconfig2"
+source "uo3/Kconfig3"
+source "uo3/Kconfig41"
+
+comment "more glob"
+source "uo5/AKconfig"
+source "uo5/BKconfig"

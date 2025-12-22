@@ -1,0 +1,4 @@
+config OPTION_W2
+  string
+  default "W2"
+  prompt "W2"

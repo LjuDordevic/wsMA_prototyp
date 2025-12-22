@@ -1,0 +1,4 @@
+config OPTION_F
+  string
+  default "F"
+  prompt "F"

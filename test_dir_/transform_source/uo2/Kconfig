@@ -8,5 +8,5 @@ orsource "uo22/Kconfig"
 comment "next subfolder"
 source "uo3/K*"
 
-comment "more wildcards"
+comment "more glob"
 source "uo5/[!CD]*"

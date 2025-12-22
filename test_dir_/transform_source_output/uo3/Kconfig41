@@ -1,0 +1,4 @@
+config OPTION_G
+  string
+  default "G"
+  prompt "G"

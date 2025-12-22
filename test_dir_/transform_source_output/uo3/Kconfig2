@@ -1,0 +1,4 @@
+config OPTION_E
+  string
+  default "E"
+  prompt "E"

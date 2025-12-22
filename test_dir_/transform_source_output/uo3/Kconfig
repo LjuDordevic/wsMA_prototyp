@@ -1,0 +1,4 @@
+config OPTION_C
+  int
+  default 5
+  prompt "C"
