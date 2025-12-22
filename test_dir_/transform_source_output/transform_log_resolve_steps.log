@@ -1,0 +1,487 @@
+====================================================================================================
+TRNASFORMATION PROTOTYP LOG
+====================================================================================================
+    Root: /home/ljd/wsMA_prototyp/test_dir_/transform_source
+    Main file: Kconfig
+    Output dir: /home/ljd/wsMA_prototyp/test_dir_/transform_source_output
+====================================================================================================
+START using parser: 
+  spec_version: ZRTOS
+  kconfig_folder: /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig
+  kconfiglib_version: <module 'kconfiglib' from '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/kconfiglib.py'>
+1.  Parser Output: 
+{'choices': [],
+ 'comments': [<menu node for comment, prompt "(o)source/(o)rsource" (visibility y), deps y, has next, uo2/Kconfig:4>,
+              <menu node for comment, prompt "next subfolder" (visibility y), deps y, has next, uo2/Kconfig:8>,
+              <menu node for comment, prompt "more glob" (visibility y), deps y, has next, uo2/Kconfig:11>],
+ 'const_syms': {'D': <symbol D, unknown, value "D", constant>,
+                'E': <symbol E, unknown, value "E", constant>,
+                'F': <symbol F, unknown, value "F", constant>,
+                'G': <symbol G, unknown, value "G", constant>,
+                'W1': <symbol W1, unknown, value "W1", constant>,
+                'W2': <symbol W2, unknown, value "W2", constant>,
+                'm': <symbol m, bool, value m, constant>,
+                'n': <symbol n, bool, value n, constant>,
+                'y': <symbol y, bool, value y, constant>},
+ 'defined_syms': [<symbol OPTION_A, string, "Option in uo1/Kconfig", value "", visibility y, direct deps y, uo1/Kconfig:1>,
+                  <symbol OPTION_B, string, "Option in uo2/uo1/Kconfig", value "", visibility y, direct deps y, uo2/uo1/Kconfig:1>,
+                  <symbol OPTION_C, int, "C", value "5", visibility y, direct deps y, uo3/Kconfig:1>,
+                  <symbol OPTION_D, string, "D", value "D", visibility y, direct deps y, uo3/Kconfig1:1>,
+                  <symbol OPTION_E, string, "E", value "E", visibility y, direct deps y, uo3/Kconfig2:1>,
+                  <symbol OPTION_F, string, "F", value "F", visibility y, direct deps y, uo3/Kconfig3:1>,
+                  <symbol OPTION_G, string, "G", value "G", visibility y, direct deps y, uo3/Kconfig41:1>,
+                  <symbol OPTION_W1, string, "W1", value "W1", visibility y, direct deps y, uo5/AKconfig:1>,
+                  <symbol OPTION_W2, string, "W2", value "W2", visibility y, direct deps y, uo5/BKconfig:1>],
+ 'kconf': <configuration with 11 symbols, main menu prompt "Test source-Option", srctree "/home/ljd/wsMA_prototyp/test_dir_/transform_source", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
+ 'menus': [],
+ 'missing_syms': [],
+ 'named_choices': {},
+ 'syms': {'5': <symbol 5, unknown, value "5", visibility n, direct deps n, undefined>,
+          'MODULES': <symbol MODULES, unknown, value "MODULES", visibility n, is the modules symbol, direct deps n, undefined>,
+          'OPTION_A': <symbol OPTION_A, string, "Option in uo1/Kconfig", value "", visibility y, direct deps y, uo1/Kconfig:1>,
+          'OPTION_B': <symbol OPTION_B, string, "Option in uo2/uo1/Kconfig", value "", visibility y, direct deps y, uo2/uo1/Kconfig:1>,
+          'OPTION_C': <symbol OPTION_C, int, "C", value "5", visibility y, direct deps y, uo3/Kconfig:1>,
+          'OPTION_D': <symbol OPTION_D, string, "D", value "D", visibility y, direct deps y, uo3/Kconfig1:1>,
+          'OPTION_E': <symbol OPTION_E, string, "E", value "E", visibility y, direct deps y, uo3/Kconfig2:1>,
+          'OPTION_F': <symbol OPTION_F, string, "F", value "F", visibility y, direct deps y, uo3/Kconfig3:1>,
+          'OPTION_G': <symbol OPTION_G, string, "G", value "G", visibility y, direct deps y, uo3/Kconfig41:1>,
+          'OPTION_W1': <symbol OPTION_W1, string, "W1", value "W1", visibility y, direct deps y, uo5/AKconfig:1>,
+          'OPTION_W2': <symbol OPTION_W2, string, "W2", value "W2", visibility y, direct deps y, uo5/BKconfig:1>},
+ 'top_node': <menu node for menu, prompt "Test source-Option" (visibility y), deps y, 'visible if' deps y, has child, Kconfig:1>,
+ 'unique_choices': [],
+ 'unique_defined_syms': [<symbol OPTION_A, string, "Option in uo1/Kconfig", value "", visibility y, direct deps y, uo1/Kconfig:1>,
+                         <symbol OPTION_B, string, "Option in uo2/uo1/Kconfig", value "", visibility y, direct deps y, uo2/uo1/Kconfig:1>,
+                         <symbol OPTION_C, int, "C", value "5", visibility y, direct deps y, uo3/Kconfig:1>,
+                         <symbol OPTION_D, string, "D", value "D", visibility y, direct deps y, uo3/Kconfig1:1>,
+                         <symbol OPTION_E, string, "E", value "E", visibility y, direct deps y, uo3/Kconfig2:1>,
+                         <symbol OPTION_F, string, "F", value "F", visibility y, direct deps y, uo3/Kconfig3:1>,
+                         <symbol OPTION_G, string, "G", value "G", visibility y, direct deps y, uo3/Kconfig41:1>,
+                         <symbol OPTION_W1, string, "W1", value "W1", visibility y, direct deps y, uo5/AKconfig:1>,
+                         <symbol OPTION_W2, string, "W2", value "W2", visibility y, direct deps y, uo5/BKconfig:1>]}
+--------------------------------------------------
+   Parser found: 9 defined syms
+   Parser found: 9 unique defined syms
+   Parser found: 11 files
+--------------------------------------------------
+
+2. Bild ExtParserContext FROM PARSER RESULTS
+ Transformer used: ZRTOS
+ call different attributes on symbols found in parser_result['unique_defined_syms']
+
+ For each symbol found in parser_result['unique_defined_syms']
+    -> call sym.name/.origin/.name_and_loc
+    -> call for each sym.nodes (.filename/.linenr/node/.defaults/is_configdefault
+    -> call all sym.defaults
+    -> call all sym.orig_defaults
+
+------------ symbol_infos --------------------------------------------------
+OPTION_A: [{'sym.name': 'OPTION_A', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'OPTION_A (defined at uo1/Kconfig:1)'}]
+OPTION_B: [{'sym.name': 'OPTION_B', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'OPTION_B (defined at uo2/uo1/Kconfig:1)'}]
+OPTION_C: [{'sym.name': 'OPTION_C', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig', 2)), 'sym.name_and_loc': 'OPTION_C (defined at uo3/Kconfig:1)'}]
+OPTION_D: [{'sym.name': 'OPTION_D', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig1', 2)), 'sym.name_and_loc': 'OPTION_D (defined at uo3/Kconfig1:1)'}]
+OPTION_E: [{'sym.name': 'OPTION_E', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig2', 2)), 'sym.name_and_loc': 'OPTION_E (defined at uo3/Kconfig2:1)'}]
+OPTION_F: [{'sym.name': 'OPTION_F', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig3', 2)), 'sym.name_and_loc': 'OPTION_F (defined at uo3/Kconfig3:1)'}]
+OPTION_G: [{'sym.name': 'OPTION_G', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig41', 2)), 'sym.name_and_loc': 'OPTION_G (defined at uo3/Kconfig41:1)'}]
+OPTION_W1: [{'sym.name': 'OPTION_W1', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/AKconfig', 2)), 'sym.name_and_loc': 'OPTION_W1 (defined at uo5/AKconfig:1)'}]
+OPTION_W2: [{'sym.name': 'OPTION_W2', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/BKconfig', 2)), 'sym.name_and_loc': 'OPTION_W2 (defined at uo5/BKconfig:1)'}]
+
+------------ symbol_definitions --------------------------------------------------
+OPTION_A: [{'file': 'uo1/Kconfig', 'line': 1, 'node': <menu node for symbol OPTION_A, prompt "Option in uo1/Kconfig" (visibility y), deps y, has next, uo1/Kconfig:1>, 'node.defaults': [], 'is_configdefault': False}]
+OPTION_B: [{'file': 'uo2/uo1/Kconfig', 'line': 1, 'node': <menu node for symbol OPTION_B, prompt "Option in uo2/uo1/Kconfig" (visibility y), deps y, has next, uo2/uo1/Kconfig:1>, 'node.defaults': [], 'is_configdefault': False}]
+OPTION_C: [{'file': 'uo3/Kconfig', 'line': 1, 'node': <menu node for symbol OPTION_C, prompt "C" (visibility y), deps y, has next, uo3/Kconfig:1>, 'node.defaults': [(<symbol 5, unknown, value "5", visibility n, direct deps n, undefined>, <symbol y, bool, value y, constant>, ('uo3/Kconfig', 2))], 'is_configdefault': False}]
+OPTION_D: [{'file': 'uo3/Kconfig1', 'line': 1, 'node': <menu node for symbol OPTION_D, prompt "D" (visibility y), deps y, has next, uo3/Kconfig1:1>, 'node.defaults': [(<symbol D, unknown, value "D", constant>, <symbol y, bool, value y, constant>, ('uo3/Kconfig1', 2))], 'is_configdefault': False}]
+OPTION_E: [{'file': 'uo3/Kconfig2', 'line': 1, 'node': <menu node for symbol OPTION_E, prompt "E" (visibility y), deps y, has next, uo3/Kconfig2:1>, 'node.defaults': [(<symbol E, unknown, value "E", constant>, <symbol y, bool, value y, constant>, ('uo3/Kconfig2', 2))], 'is_configdefault': False}]
+OPTION_F: [{'file': 'uo3/Kconfig3', 'line': 1, 'node': <menu node for symbol OPTION_F, prompt "F" (visibility y), deps y, has next, uo3/Kconfig3:1>, 'node.defaults': [(<symbol F, unknown, value "F", constant>, <symbol y, bool, value y, constant>, ('uo3/Kconfig3', 2))], 'is_configdefault': False}]
+OPTION_G: [{'file': 'uo3/Kconfig41', 'line': 1, 'node': <menu node for symbol OPTION_G, prompt "G" (visibility y), deps y, has next, uo3/Kconfig41:1>, 'node.defaults': [(<symbol G, unknown, value "G", constant>, <symbol y, bool, value y, constant>, ('uo3/Kconfig41', 2))], 'is_configdefault': False}]
+OPTION_W1: [{'file': 'uo5/AKconfig', 'line': 1, 'node': <menu node for symbol OPTION_W1, prompt "W1" (visibility y), deps y, has next, uo5/AKconfig:1>, 'node.defaults': [(<symbol W1, unknown, value "W1", constant>, <symbol y, bool, value y, constant>, ('uo5/AKconfig', 2))], 'is_configdefault': False}]
+OPTION_W2: [{'file': 'uo5/BKconfig', 'line': 1, 'node': <menu node for symbol OPTION_W2, prompt "W2" (visibility y), deps y, uo5/BKconfig:1>, 'node.defaults': [(<symbol W2, unknown, value "W2", constant>, <symbol y, bool, value y, constant>, ('uo5/BKconfig', 2))], 'is_configdefault': False}]
+
+------------ symbol_defaults -----------------------------------------------
+OPTION_C: [{'sym.default': (<symbol 5, unknown, value "5", visibility n, direct deps n, undefined>, <symbol y, bool, value y, constant>, ('uo3/Kconfig', 2))}]
+OPTION_D: [{'sym.default': (<symbol D, unknown, value "D", constant>, <symbol y, bool, value y, constant>, ('uo3/Kconfig1', 2))}]
+OPTION_E: [{'sym.default': (<symbol E, unknown, value "E", constant>, <symbol y, bool, value y, constant>, ('uo3/Kconfig2', 2))}]
+OPTION_F: [{'sym.default': (<symbol F, unknown, value "F", constant>, <symbol y, bool, value y, constant>, ('uo3/Kconfig3', 2))}]
+OPTION_G: [{'sym.default': (<symbol G, unknown, value "G", constant>, <symbol y, bool, value y, constant>, ('uo3/Kconfig41', 2))}]
+OPTION_W1: [{'sym.default': (<symbol W1, unknown, value "W1", constant>, <symbol y, bool, value y, constant>, ('uo5/AKconfig', 2))}]
+OPTION_W2: [{'sym.default': (<symbol W2, unknown, value "W2", constant>, <symbol y, bool, value y, constant>, ('uo5/BKconfig', 2))}]
+
+
+    -> ExParserContext - symbols: 9 
+    -> ExParserContext - configdefaults: 0()
+
+   Symbol definitions and corresponding locations in ExParserContext: 
+   'OPTION_A' is defined x1
+     - uo1/Kconfig:1
+   'OPTION_B' is defined x1
+     - uo2/uo1/Kconfig:1
+   'OPTION_C' is defined x1
+     - uo3/Kconfig:1
+   'OPTION_D' is defined x1
+     - uo3/Kconfig1:1
+   'OPTION_E' is defined x1
+     - uo3/Kconfig2:1
+   'OPTION_F' is defined x1
+     - uo3/Kconfig3:1
+   'OPTION_G' is defined x1
+     - uo3/Kconfig41:1
+   'OPTION_W1' is defined x1
+     - uo5/AKconfig:1
+   'OPTION_W2' is defined x1
+     - uo5/BKconfig:1
+    get_all_source_files: 
+
+3. Filter ExtParserContext
+extract all configdefault symbols and for each get transformed lines and last config
+
+for each given file at source_files start building path output structur and call reader and writer
+
+4. Transform all files - needs reader & writer
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/Kconfig
+
+
+Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 3 input lines
+    source without glob: 1
+    FILE LOG --------------------------------------------------------------
+    Reader input                3 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        1
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    -----------------------------------------------------------------------
+    Transformer Output:         3 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/Kconfig
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/Kconfig
+
+
+Reader found: 12 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 12 input lines
+    source without glob: 1
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: uo1/Kconfig at line 2
+        ---- RESOLVE LOG ------------------------------------------------------
+        rsource includes node for: OPTION_B
+        node's file: uo2/uo1/Kconfig
+        node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 2))
+        -> relevant is where node was sourced from: uo2/Kconfig at line 2
+        resolved: 
+      -> uo2/uo1/Kconfig
+    Files matching: 1 (using rsource)
+    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/uo1/Kconfig
+    transformed iglob list (relative paths): ['uo2/uo1/Kconfig']
+    CHECK OK: transformed iglob list == list of matched_files through iteration
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: u06/Kconfig at line 5
+      no files found for the: u06/Kconfig
+    iglob didn't find anything
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve orsource: uo22/Kconfig at line 6
+      no files found for the: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/uo22/Kconfig
+    iglob didn't find anything
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve source: uo3/K* at line 9
+        ---- RESOLVE LOG ------------------------------------------------------
+        source includes node for: OPTION_C
+        node's file: uo3/Kconfig
+        node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 9))
+        -> relevant is where node was sourced from: uo2/Kconfig at line 9
+        resolved: 
+        ---- RESOLVE LOG ------------------------------------------------------
+        source includes node for: OPTION_D
+        node's file: uo3/Kconfig1
+        node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 9))
+        -> relevant is where node was sourced from: uo2/Kconfig at line 9
+        resolved: 
+        ---- RESOLVE LOG ------------------------------------------------------
+        source includes node for: OPTION_E
+        node's file: uo3/Kconfig2
+        node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 9))
+        -> relevant is where node was sourced from: uo2/Kconfig at line 9
+        resolved: 
+        ---- RESOLVE LOG ------------------------------------------------------
+        source includes node for: OPTION_F
+        node's file: uo3/Kconfig3
+        node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 9))
+        -> relevant is where node was sourced from: uo2/Kconfig at line 9
+        resolved: 
+        ---- RESOLVE LOG ------------------------------------------------------
+        source includes node for: OPTION_G
+        node's file: uo3/Kconfig41
+        node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 9))
+        -> relevant is where node was sourced from: uo2/Kconfig at line 9
+        resolved: 
+      -> uo3/Kconfig
+      -> uo3/Kconfig1
+      -> uo3/Kconfig2
+      -> uo3/Kconfig3
+      -> uo3/Kconfig41
+    Files matching: 5 (using source)
+    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig
+    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig1
+    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig2
+    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig3
+    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig41
+    transformed iglob list (relative paths): ['uo3/Kconfig', 'uo3/Kconfig1', 'uo3/Kconfig2', 'uo3/Kconfig3', 'uo3/Kconfig41']
+    CHECK OK: transformed iglob list == list of matched_files through iteration
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve source: uo5/[!CD]* at line 12
+        ---- RESOLVE LOG ------------------------------------------------------
+        source includes node for: OPTION_W1
+        node's file: uo5/AKconfig
+        node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 12))
+        -> relevant is where node was sourced from: uo2/Kconfig at line 12
+        resolved: 
+        ---- RESOLVE LOG ------------------------------------------------------
+        source includes node for: OPTION_W2
+        node's file: uo5/BKconfig
+        node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 12))
+        -> relevant is where node was sourced from: uo2/Kconfig at line 12
+        resolved: 
+      -> uo5/AKconfig
+      -> uo5/BKconfig
+    Files matching: 2 (using source)
+    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/AKconfig
+    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/BKconfig
+    transformed iglob list (relative paths): ['uo5/AKconfig', 'uo5/BKconfig']
+    CHECK OK: transformed iglob list == list of matched_files through iteration
+    FILE LOG --------------------------------------------------------------
+    Reader input                12 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        3
+    All osource_keywords:       1
+    All rsource_keywords:       1
+    All orsource_keywords:      1
+    SUM (r/or/o)source lines:   6
+    -----------------------------------------------------------------------
+    Transformer Output:         15 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new lines of source:       5
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 2
+        Done writting 15 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo2/Kconfig
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo1/Kconfig
+
+
+Reader found: 2 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo1/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 2 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                2 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    -----------------------------------------------------------------------
+    Transformer Output:         2 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 2 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo1/Kconfig
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/uo1/Kconfig
+
+
+Reader found: 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/uo1/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 4 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve orsource: NoKconfig at line 4
+      no files found for the: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/uo1/NoKconfig
+    iglob didn't find anything
+    FILE LOG --------------------------------------------------------------
+    Reader input                4 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      1
+    SUM (r/or/o)source lines:   1
+    -----------------------------------------------------------------------
+    Transformer Output:         3 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 1
+        Done writting 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo2/uo1/Kconfig
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig
+
+
+Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 3 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                3 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    -----------------------------------------------------------------------
+    Transformer Output:         4 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           1
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig1
+
+
+Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig1
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 3 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                3 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    -----------------------------------------------------------------------
+    Transformer Output:         4 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           1
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig1
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig2
+
+
+Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig2
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 3 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                3 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    -----------------------------------------------------------------------
+    Transformer Output:         4 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           1
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig2
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig3
+
+
+Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig3
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 3 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                3 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    -----------------------------------------------------------------------
+    Transformer Output:         4 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           1
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig3
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig41
+
+
+Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig41
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 3 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                3 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    -----------------------------------------------------------------------
+    Transformer Output:         4 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           1
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig41
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/AKconfig
+
+
+Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/AKconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 3 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                3 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    -----------------------------------------------------------------------
+    Transformer Output:         4 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           1
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo5/AKconfig
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/BKconfig
+
+
+Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/BKconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 3 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                3 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    -----------------------------------------------------------------------
+    Transformer Output:         4 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           1
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo5/BKconfig
+----------------------------------------------------------------------
+finished transforming: 11 files transformed
+----------------------------------------------------------------------

@@ -1,0 +1,8 @@
+In directory linux_kc_new:
+git clone --depth 1 https://github.com/torvalds/linux.git
+sudo apt-get install build-essential libncurses-dev bison flex
+check clone with: cd linux -> make menuconfig -> OK
+
+Then call the transformed specification:
+~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/Kconfig
+~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/test_dir_/transform_def_output/Kconfig

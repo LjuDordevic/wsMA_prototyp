@@ -1,7 +1,9 @@
 from pathlib import Path
+from posixpath import join, dirname
 from typing import List, Dict, Optional, Set, Tuple, Any
 from dataclasses import dataclass
 import excel_writer
+from glob import iglob
 
 @dataclass
 class ExtParserContext:
@@ -576,12 +578,12 @@ class KconfigTransformer:
             - List[KconfigLine]: 1:n
         """
         if line.line_type in self.DEF_KEYWORDS:
-            self.FILE_DEF_KEYWORDS_COUNT += 1           # for each def_* -> count 1 one added line   
+            self.FILE_DEF_KEYWORDS_COUNT += 1                               # for each def_* -> count 1 one added line   
             return self._transform_def_keyword(line)
         elif line.line_type in self.SOURCE_KEYWORDS:
             # count all source keywords 
-            self.FILE_SOURCE_KEYWORDS_ALL_NR += 1       # for each self.SOURCE_KEYWORDS -> count 1
-            return self._transform_source_line(line, current_file)
+            self.FILE_SOURCE_KEYWORDS_ALL_NR += 1                           # for each self.SOURCE_KEYWORDS -> count 1, so that we have SUM of all 
+            return self._transform_source_line(line, current_file, True)    # if last parameter == True, than there is log for resolving and also iglob check is active 
         elif line.line_type == "option modules":
             return self._transform_opt_modules(line, current_file)
         else:
@@ -618,20 +620,18 @@ class KconfigTransformer:
             
         return [typ_line, default_line]
 
-    def _transform_source_line(self, line, current_file) -> List:
+    def _transform_source_line(self, line, current_file, resolve_log: Optional[bool]) -> List:
         from kconfig_writer import KconfigLine
         import re, os
 
-        match = re.match(r'(source|osource|rsource|orsource)\s+["\']([^"\']+)["\']', line.stripped)
+        # GET needed information
+        match = re.match(r'(source|osource|rsource|orsource)\s+["\']([^"\']+)["\']', line.stripped) # Future work: I think there is no need to check for both types: ' and ". I think only " is allowed 
         if not match:
-            print(f"error at source line: {line}")
-        
+            print(f"error at source line: {line}")      
         indent_str = ' ' * line.indent
         source_keyword = match.group(1)
         pattern = match.group(2)
         has_glob = any(c in pattern for c in ['*', '?', '[', ']', '!'])
-        #print("hello")
-        #print(has_glob)
 
         # COUNT each keyword in file
         if source_keyword == "source": self.FILE_SOURCE_NR += 1
@@ -639,53 +639,79 @@ class KconfigTransformer:
         elif source_keyword == "rsource": self.FILE_RSOURCE_NR += 1  
         elif source_keyword == "orsource": self.FILE_ORSOURCE_NR += 1       
 
-        # no glob -> copy line to the output as it is 
-        # but skip (o)r(o)source because these have to be transformed to source before retzrning the line
+        # NO GLOB -> copy line as it is to the output! BUT skip this for (o)r/(o)source because these have to be transformed to source before returning the line
         if not has_glob and not source_keyword == 'rsource' \
             and not source_keyword == 'orsource' and not source_keyword == 'osource':
-            # this is just for TERMINAL LOGGING OF EACH LINE, 
-            # FILE_SOURCE_OUT_DIFF is always 1, because at each line you only have 1 source keyword 
-            # But I wanted to have information about each line
-            #self.FILE_SOURCE_OUT_DIFF +=1    # output: 1 copied source line 
-            print(f"    source without glob: 1")
-            #self.FILE_SOURCE_OUT_DIFF = 0    # reset for next line
+            print(f"    source without glob: 1")    # this is just for LOGGING, no need of using FILE_SOURCE_OUT_DIFF, because it's always 1 line that we look at and return
             return line
-
-        print(f"    GLOB LOG --------------------------------------------------------------")
-        print(f"    Resolve {source_keyword}: {pattern}")
         
-        matched_files = []
+        # GLOB
+        print(f"    GLOB LOG ----------------------------------------------------------------------------")
+        print(f"    Resolve {source_keyword}: {pattern} at line {line.line_number}")
+        
+        # RESOLVE 
+        matched_files = []          # we only need matched_files, that we get through node iteration 
+        filenames = []              # this is just to show that both ways (matched and iglob) work 
+        iglob_with_rel_path = []    # so that we can compare lists - matched_files and filenames (but filenames are transformed to SRCTREE relative path)
         if self.context is not None:
             kconf = self.context.parser_result['kconf']
             srctree = Path(kconf.srctree or "")
-            current_abs = Path(current_file).resolve()
+            current_file_abs_path = Path(current_file).resolve()
+            current_line_nr = line.line_number
             
-            # iterate over all nodes in tree - From: {src_file} at {src_linenr}
+            # ITERATE over all nodes in menutree 
+            # main idea: for each node look were it's included from (-> From: {src_file} at {src_linenr})
+            # MATCHED = when current_file (==src_file) is at exacly current_line_nr (==src_linenr) (example in the comment)
+            """
+            when there is: source "uo3/K*" at current_file = uo2/Kconfig, line 9
+            than look for all nodes that have ('uo2/Kconfig', 9) as last element in node.include_path
+            AND add their node.filename to the matched_files 
+            
+            older explanation: 
+            # when current file == src_file (meaning file with source_keyword), 
+            # --- to compare we use absolute paths from these (current_abs and src_abs)
+            # AND line at current file == include location (got this from src_linenr)
+            # then add node.filename to the list (== string after source_keywords)
+            """
             for node in kconf.node_iter(): 
                 
                 if not node.filename: continue
                 if not node.include_path: continue
-                #print(f"    {node.filename}\n and {node.include_path}\n and {node}") # DON'T DELETE FOR DEBUGGING
-                
-                # file and line where this node was sourced from
-                src_file, src_linenr = node.include_path[-1]
-                #print(f"    -> From: {src_file} at {src_linenr}") # DON'T DELETE FOR DEBUGGING
 
-                # absolute path from source file
-                src_abs = (srctree / src_file).resolve() \
+                src_file, src_linenr = node.include_path[-1] # file and line where this node was sourced from
+
+                # create absolute path from source file
+                src_file_abs_path = (srctree / src_file).resolve() \
                     if not os.path.isabs(src_file) else Path(src_file).resolve()
 
-                # current file == src_file which has source_keyword 
-                # AND line at current file == include location in src_linenr 
-                # add node.filename to the list (== string after source_keywords)
-                if src_abs.samefile(current_abs) and line.line_number == src_linenr:
+                if src_file_abs_path.samefile(current_file_abs_path) and current_line_nr == src_linenr:
                     matched_files.append(node.filename)
+                    if resolve_log:
+                        print(f"        ---- RESOLVE LOG ------------------------------------------------------")
+                        print(f"        {source_keyword} includes node for: {node.item.name}")
+                        print(f"        node's file: {node.filename}")
+                        print(f"        node's include paths: {node.include_path}") 
+                        print(f"        -> relevant is where node was sourced from: {src_file} at line {src_linenr}") 
+                        print(f"        resolved: ")
                     continue
-               
+            
+            if resolve_log:
+                # use iglob (exacly as kconfiglib) just to show that both ways work 
+                if source_keyword == "rsource" or source_keyword == "orsource":
+                    pattern = join(dirname(current_file), pattern)
+                filenames = sorted(iglob(join(srctree, pattern)))
+                # iglob returnes abs path -> convert to SRCTREE-relative path
+                for file in filenames:
+                    iglob_with_rel_path.append(str(Path(file).relative_to(os.environ["srctree"])))
+            
         if not matched_files:
+            # don't just comment the line, instead skip -> no output line, when there is no match 
             print(f"      no files found for the: {pattern}")   
-            self.FILE_O_SOURCE_KEYWORDS_NO_MATCH += 1
 
+            if not filenames:
+                print(f"    iglob didn't find anything")
+
+            self.FILE_O_SOURCE_KEYWORDS_NO_MATCH += 1
             """
             if source_keyword == "orsource" or source_keyword == "osource":
                 new_line_text = f'#{indent_str}source "{pattern}"' # comment, but transform ((o)r/o)source and path before? 
@@ -694,21 +720,19 @@ class KconfigTransformer:
             """
             return None
         
-        # bild source for each found file #TODO: check sorted
-        # and after that calculate the output diff.-> if 1 source keyword matches 5 --> Diff: 4 new lines in output
+        # bild source for each found file, after that calculate the output diff.-> if 1 source keyword matches 5 --> Diff: 4 new lines in output
         result_lines = []
-        for matched_file in sorted(set(matched_files)):
-
+        for matched_file in matched_files:
+            # matched_files - don't need to be sorted, already sorted through previous node iteration 
             if source_keyword == 'rsource' or source_keyword == 'orsource' or source_keyword == 'osource':
                 #base_dir = Path(current_file).parent
                 #transform_to_abs = Path(matched_file).resolve()   WRONG 
-                #print(f'HERE {base_dir} + {matched_file}')
-                transform_to_abs = matched_file
-                #print(f'HERE2 {transform_to_abs}')
-                new_line_text = f'{indent_str}source "{transform_to_abs}"'
+                #print(f'HERE {base_dir} + {matched_file}')^       WRONG
+                #print(f'HERE2 {transform_to_abs}')                WRONG
+                new_line_text = f'{indent_str}source "{matched_file}"'
                 new_line = KconfigLine(new_line_text, line.line_number)
                 result_lines.append(new_line)
-                print(f"      -> {transform_to_abs}")
+                print(f"      -> {matched_file}")
                 continue
             else:
                 # for source keyword just print  
@@ -716,10 +740,19 @@ class KconfigTransformer:
                 new_line = KconfigLine(new_line_text, line.line_number)
                 result_lines.append(new_line)
                 print(f"      -> {matched_file}")
-
-        # for resolve glob log - one keyword matched <len(result_lines) > files
+        
+        # for glob log:
         self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB += len(result_lines)   
         print(f"    Files matching: {self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB} (using {source_keyword})")
+
+        if resolve_log:
+            for file in filenames:
+                print(f"    iglob found: {file}")
+            print(f"    transformed iglob list (relative paths): {iglob_with_rel_path}")
+            if matched_files == iglob_with_rel_path:
+                print(f"    CHECK OK: transformed iglob list == list of matched_files through iteration")
+            else: 
+                raise RuntimeError("check source matching")
         
         # for file log, save diff. when source matches more files (1:n)
         self.NEW_BC_GLOB = self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB - 1
@@ -835,9 +868,10 @@ class KconfigTransformer:
         print(f"----------------------------------------------------------------------")
         print(f"finished transforming: {transformed_count} files transformed")
         print(f"----------------------------------------------------------------------")
-        print("info about option modules-attr: ")
-        for info in self.OPTION_MODULES_INFO:
-            print(f"{info['counter']} option modules-attr found at line {info['line']} in {info['file']}")
+        if self.OPTION_MODULES_INFO:
+            print("info about option modules-attr: ")
+            for info in self.OPTION_MODULES_INFO:
+                print(f"{info['counter']} option modules-attr found at line {info['line']} in {info['file']}")
         self.OPTION_MODULES_COUNTER = 0
         self.OPTION_MODULES_INFO.clear()
         return excel_stats
