@@ -1,0 +1,21 @@
+mainmenu "Test def_*"
+
+option MODULES
+  def_bool y 
+  option modules  
+
+config OPTION1
+  def_bool y
+  prompt "option bool"
+
+config OPTION2
+  def_tristate m
+  prompt "option tristate"
+
+config OPTION1
+  def_int 5
+  prompt "option int"
+
+config OPTION1
+  def_bool y
+  prompt "option 1"
