@@ -50,6 +50,7 @@ class KconfigTransformer:
     FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
     OPTION_MODULES_COUNTER = 0
     OPTION_MODULES_INFO = []
+    FILE_OPT_ENV = 0
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -578,14 +579,17 @@ class KconfigTransformer:
             - List[KconfigLine]: 1:n
         """
         if line.line_type in self.DEF_KEYWORDS:
-            self.FILE_DEF_KEYWORDS_COUNT += 1                               # for each def_* -> count 1 one added line   
+            self.FILE_DEF_KEYWORDS_COUNT += 1                                            # for each def_* -> count 1 one added line   
             return self._transform_def_keyword(line)
         elif line.line_type in self.SOURCE_KEYWORDS:
             # count all source keywords 
-            self.FILE_SOURCE_KEYWORDS_ALL_NR += 1                           # for each self.SOURCE_KEYWORDS -> count 1, so that we have SUM of all 
+            self.FILE_SOURCE_KEYWORDS_ALL_NR += 1                                        # for each self.SOURCE_KEYWORDS -> count 1, so that we have SUM of all 
             return self._transform_source_line(line, current_file, resolve_log=False)    # if last parameter == True, than there is log for resolving and also iglob check is active 
         elif line.line_type == "option modules":
             return self._transform_opt_modules(line, current_file)
+        elif line.line_type == "option env":
+            self.FILE_OPT_ENV += 1
+            return self._transform_opt_env(line)
         else:
             return line    
 
@@ -762,6 +766,7 @@ class KconfigTransformer:
         return result_lines
 
     def _transform_opt_modules(self, line, current_file):
+        # option modules --> modules
         from kconfig_writer import KconfigLine 
         indent_str = ' ' * line.indent
         new_line_text = f'{indent_str}modules'
@@ -774,6 +779,22 @@ class KconfigTransformer:
             'file': current_file
         })
         return new_line
+
+    def _transform_opt_env(self, line):
+        # option env="<value>" --> default "$(<value>)"
+        from kconfig_writer import KconfigLine  # avoid circular import
+        indent_str = ' ' * line.indent
+        env_var = line.content.get('env')
+        #env_value = os.environ.get(env_var) WRONG
+
+        default_text = f"{indent_str}default \"$({env_var})\""
+            
+        default_line = KconfigLine(
+            default_text,
+            line.line_number  
+        )
+            
+        return default_line
 
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
                             log: bool, log_lines: bool, log_excel_after_each_file: bool, log_excel_output: Optional[str]):
@@ -886,6 +907,7 @@ class KconfigTransformer:
         print(f"    All rsource_keywords:       {self.FILE_RSOURCE_NR}")
         print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
         print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
+        print(f"    All \"option env\" attr:      {self.FILE_OPT_ENV}")
         print(f"    -----------------------------------------------------------------------")
         print(f"    Transformer Output:         {len_result} lines")
         print(f"    -----------------------------------------------------------------------")
@@ -921,6 +943,7 @@ class KconfigTransformer:
         self.NEW_BC_GLOB = 0
         self.FILE_SOURCE_OUT_DIFF = 0
         self.FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
+        self.FILE_OPT_ENV = 0
 
         return file_stats_excel
         

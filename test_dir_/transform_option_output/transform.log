@@ -1,0 +1,122 @@
+====================================================================================================
+TRNASFORMATION PROTOTYP LOG
+====================================================================================================
+    Root: /home/ljd/wsMA_prototyp/test_dir_/transform_option
+    Main file: Kconfig
+    Output dir: /home/ljd/wsMA_prototyp/test_dir_/transform_option_output
+====================================================================================================
+START using parser: 
+  spec_version: ZRTOS
+  kconfig_folder: /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig
+  kconfiglib_version: <module 'kconfiglib' from '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/kconfiglib.py'>
+1.  Parser Output: 
+warning: OPTION_A (defined at Kconfig:11) has leading or trailing whitespace in its prompt
+Kconfig:17: warning: Kconfiglib expands environment variables in strings directly, meaning you do not need 'option env=...' "bounce" symbols. For compatibility with the C tools, rename OPTION_AA to ENV_A (so that the symbol name matches the environment variable name).
+{'choices': [],
+ 'comments': [],
+ 'const_syms': {'i7-1260P': <symbol i7-1260P, unknown, value "i7-1260P", constant>,
+                'm': <symbol m, tristate, value m, constant>,
+                'n': <symbol n, tristate, value n, constant>,
+                'y': <symbol y, tristate, value y, constant>},
+ 'defined_syms': [<symbol MODULES, bool, value y, visibility n, is the modules symbol, direct deps y, Kconfig:3>,
+                  <symbol OPTION_M, tristate, "Option with type tristate", value m, visibility y, direct deps y, Kconfig:7>,
+                  <symbol OPTION_A, string, "set default through", value "i7-1260P", visibility y, direct deps y, Kconfig:11>,
+                  <symbol OPTION_AA, string, "set default through option env", value "i7-1260P", visibility y, from environment variable ENV_A, direct deps y, Kconfig:15>],
+ 'kconf': <configuration with 4 symbols, main menu prompt "Test option attr", srctree "/home/ljd/wsMA_prototyp/test_dir_/transform_option", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
+ 'menus': [],
+ 'missing_syms': [],
+ 'named_choices': {},
+ 'syms': {'MODULES': <symbol MODULES, bool, value y, visibility n, is the modules symbol, direct deps y, Kconfig:3>,
+          'OPTION_A': <symbol OPTION_A, string, "set default through", value "i7-1260P", visibility y, direct deps y, Kconfig:11>,
+          'OPTION_AA': <symbol OPTION_AA, string, "set default through option env", value "i7-1260P", visibility y, from environment variable ENV_A, direct deps y, Kconfig:15>,
+          'OPTION_M': <symbol OPTION_M, tristate, "Option with type tristate", value m, visibility y, direct deps y, Kconfig:7>},
+ 'top_node': <menu node for menu, prompt "Test option attr" (visibility y), deps y, 'visible if' deps y, has child, Kconfig:1>,
+ 'unique_choices': [],
+ 'unique_defined_syms': [<symbol MODULES, bool, value y, visibility n, is the modules symbol, direct deps y, Kconfig:3>,
+                         <symbol OPTION_M, tristate, "Option with type tristate", value m, visibility y, direct deps y, Kconfig:7>,
+                         <symbol OPTION_A, string, "set default through", value "i7-1260P", visibility y, direct deps y, Kconfig:11>,
+                         <symbol OPTION_AA, string, "set default through option env", value "i7-1260P", visibility y, from environment variable ENV_A, direct deps y, Kconfig:15>]}
+--------------------------------------------------
+   Parser found: 4 defined syms
+   Parser found: 4 unique defined syms
+   Parser found: 1 files
+--------------------------------------------------
+
+2. Bild ExtParserContext FROM PARSER RESULTS
+ Transformer used: ZRTOS
+ call different attributes on symbols found in parser_result['unique_defined_syms']
+
+ For each symbol found in parser_result['unique_defined_syms']
+    -> call sym.name/.origin/.name_and_loc
+    -> call for each sym.nodes (.filename/.linenr/node/.defaults/is_configdefault
+    -> call all sym.defaults
+    -> call all sym.orig_defaults
+
+------------ symbol_infos --------------------------------------------------
+MODULES: [{'sym.name': 'MODULES', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_option/Kconfig', 4)), 'sym.name_and_loc': 'MODULES (defined at Kconfig:3)'}]
+OPTION_M: [{'sym.name': 'OPTION_M', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_option/Kconfig', 8)), 'sym.name_and_loc': 'OPTION_M (defined at Kconfig:7)'}]
+OPTION_A: [{'sym.name': 'OPTION_A', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_option/Kconfig', 13)), 'sym.name_and_loc': 'OPTION_A (defined at Kconfig:11)'}]
+OPTION_AA: [{'sym.name': 'OPTION_AA', 'sym.origin': None, 'sym.name_and_loc': 'OPTION_AA (defined at Kconfig:15)'}]
+
+------------ symbol_definitions --------------------------------------------------
+MODULES: [{'file': 'Kconfig', 'line': 3, 'node': <menu node for symbol MODULES, deps y, has next, Kconfig:3>, 'node.defaults': [(<symbol y, tristate, value y, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 4))], 'is_configdefault': False}]
+OPTION_M: [{'file': 'Kconfig', 'line': 7, 'node': <menu node for symbol OPTION_M, prompt "Option with type tristate" (visibility y), deps y, has next, Kconfig:7>, 'node.defaults': [(<symbol m, tristate, value m, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 8))], 'is_configdefault': False}]
+OPTION_A: [{'file': 'Kconfig', 'line': 11, 'node': <menu node for symbol OPTION_A, prompt "set default through" (visibility y), deps y, has next, Kconfig:11>, 'node.defaults': [(<symbol i7-1260P, unknown, value "i7-1260P", constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 13))], 'is_configdefault': False}]
+OPTION_AA: [{'file': 'Kconfig', 'line': 15, 'node': <menu node for symbol OPTION_AA, prompt "set default through option env" (visibility y), deps y, Kconfig:15>, 'node.defaults': [(<symbol i7-1260P, unknown, value "i7-1260P", constant>, <symbol y, tristate, value y, constant>, 'env[ENV_A]')], 'is_configdefault': False}]
+
+------------ symbol_defaults -----------------------------------------------
+MODULES: [{'sym.default': (<symbol y, tristate, value y, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 4))}]
+OPTION_M: [{'sym.default': (<symbol m, tristate, value m, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 8))}]
+OPTION_A: [{'sym.default': (<symbol i7-1260P, unknown, value "i7-1260P", constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 13))}]
+OPTION_AA: [{'sym.default': (<symbol i7-1260P, unknown, value "i7-1260P", constant>, <symbol y, tristate, value y, constant>, 'env[ENV_A]')}]
+
+
+    -> ExParserContext - symbols: 4 
+    -> ExParserContext - configdefaults: 0()
+
+   Symbol definitions and corresponding locations in ExParserContext: 
+   'MODULES' is defined x1
+     - Kconfig:3
+   'OPTION_M' is defined x1
+     - Kconfig:7
+   'OPTION_A' is defined x1
+     - Kconfig:11
+   'OPTION_AA' is defined x1
+     - Kconfig:15
+    get_all_source_files: 
+
+3. Filter ExtParserContext
+extract all configdefault symbols and for each get transformed lines and last config
+
+for each given file at source_files start building path output structur and call reader and writer
+
+4. Transform all files - needs reader & writer
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_option/Kconfig
+
+
+Reader found: 17 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_option/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 17 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                17 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      1
+    -----------------------------------------------------------------------
+    Transformer Output:         17 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 17 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_option_output/Kconfig
+----------------------------------------------------------------------
+finished transforming: 1 files transformed
+----------------------------------------------------------------------
+info about option modules-attr: 
+1 option modules-attr found at line 5 in /home/ljd/wsMA_prototyp/test_dir_/transform_option/Kconfig

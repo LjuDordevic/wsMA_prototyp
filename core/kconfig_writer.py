@@ -91,12 +91,12 @@ class KconfigLine:
         elif s.startswith('visible if '):
             return 'visible if'
         
-        elif s.startswith('allnoconfig_y'):
-            return 'allnoconfig_y'
-        elif s.startswith('defconfig_list'):
-            return 'defconfig_list'
         elif s.startswith('option env'):
             return 'option env'
+        elif s.startswith('option allnoconfig_y'):
+            return 'option allnoconfig_y'
+        elif s.startswith('option defconfig_list'):
+            return 'option defconfig_list'        
         elif s.startswith('option modules'):
             return 'option modules'
         elif s.startswith('modules'):
@@ -145,7 +145,9 @@ class KconfigLine:
             #print(f"split_rest: {split_rest}")
             content['default_value'] = split_rest[0].strip()
             content['condition'] = split_rest[1].strip() if len(split_rest) > 1 else None
-            
+        
+        elif self.line_type == 'option env':
+            content['env'] = line_stripped.split('"')[1]
         return content
     
     def __repr__(self):

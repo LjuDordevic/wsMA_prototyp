@@ -1,0 +1,17 @@
+mainmenu "Test option attr"
+
+config MODULES
+  def_bool y
+  option modules
+
+config OPTION_M
+  def_tristate m
+  prompt "Option with type tristate"
+
+config OPTION_A
+  string "set default through $()"  
+  default "$(ENV_A)"
+
+config OPTION_AA
+  string "set default through option env"  
+  option env="ENV_A"

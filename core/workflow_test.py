@@ -33,11 +33,16 @@ def main():
     #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source"       
     #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output"  
 
-    log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output/transform.log"
-    project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
-    output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
+    #log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output/transform.log"
+    #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
+    #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
 
-    main_file =  "Kconfig"  
+    log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_option_output/transform.log"
+    project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option"       
+    output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option_output"  
+    os.environ["ENV_A"] = "i7-1260P"
+
+    main_file = "Kconfig"  
     os.environ["srctree"] = project_dir
     
     sys.stdout = open(log_file, "w")
