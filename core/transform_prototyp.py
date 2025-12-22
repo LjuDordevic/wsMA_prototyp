@@ -583,7 +583,7 @@ class KconfigTransformer:
         elif line.line_type in self.SOURCE_KEYWORDS:
             # count all source keywords 
             self.FILE_SOURCE_KEYWORDS_ALL_NR += 1                           # for each self.SOURCE_KEYWORDS -> count 1, so that we have SUM of all 
-            return self._transform_source_line(line, current_file, True)    # if last parameter == True, than there is log for resolving and also iglob check is active 
+            return self._transform_source_line(line, current_file, resolve_log=False)    # if last parameter == True, than there is log for resolving and also iglob check is active 
         elif line.line_type == "option modules":
             return self._transform_opt_modules(line, current_file)
         else:

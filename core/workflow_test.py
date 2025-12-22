@@ -25,17 +25,17 @@ import sys
 def main():
 
     #log_file = "/home/ljd/wsMA_prototyp/test_dir_/test_glob/test_glob.log"
-    log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_source_output/transform_log_resolve_steps.log"
-    project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source"       
+    #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_source_output/transform_log_resolve_steps.log"
+    #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source"       
     #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/test_glob"  
 
     #log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output/transform.log"
     #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source"       
-    output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output"  
+    #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output"  
 
-    #log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output/transform.log"
-    #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
-    #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
+    log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output/transform.log"
+    project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
+    output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
 
     main_file =  "Kconfig"  
     os.environ["srctree"] = project_dir

@@ -1,0 +1,137 @@
+====================================================================================================
+TRNASFORMATION PROTOTYP LOG
+====================================================================================================
+    Root: /home/ljd/wsMA_prototyp/test_dir_/transform_def
+    Main file: Kconfig
+    Output dir: /home/ljd/wsMA_prototyp/test_dir_/transform_def_output
+====================================================================================================
+START using parser: 
+  spec_version: ZRTOS
+  kconfig_folder: /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig
+  kconfiglib_version: <module 'kconfiglib' from '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/kconfiglib.py'>
+1.  Parser Output: 
+{'choices': [],
+ 'comments': [],
+ 'const_syms': {'m': <symbol m, tristate, value m, constant>,
+                'n': <symbol n, tristate, value n, constant>,
+                'text': <symbol text, unknown, value "text", constant>,
+                'y': <symbol y, tristate, value y, constant>},
+ 'defined_syms': [<symbol MODULES, bool, value y, visibility n, is the modules symbol, direct deps y, Kconfig:3>,
+                  <symbol OPTION1, bool, "option bool", value y, visibility y, direct deps y, Kconfig:7>,
+                  <symbol OPTION2, tristate, "option tristate", value n, visibility y, direct deps y, Kconfig:11>,
+                  <symbol OPTION3, int, "option int", value "5", visibility y, direct deps y, Kconfig:15>,
+                  <symbol OPTION4, hex, "option hex", value "0x8000000", visibility y, direct deps y, Kconfig:19>,
+                  <symbol OPTION5, string, "option string", value "text", visibility y, direct deps y, Kconfig:23>],
+ 'kconf': <configuration with 8 symbols, main menu prompt "Test def_*", srctree "/home/ljd/wsMA_prototyp/test_dir_/transform_def", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
+ 'menus': [],
+ 'missing_syms': [],
+ 'named_choices': {},
+ 'syms': {'0x8000000': <symbol 0x8000000, unknown, value "0x8000000", visibility n, direct deps n, undefined>,
+          '5': <symbol 5, unknown, value "5", visibility n, direct deps n, undefined>,
+          'MODULES': <symbol MODULES, bool, value y, visibility n, is the modules symbol, direct deps y, Kconfig:3>,
+          'OPTION1': <symbol OPTION1, bool, "option bool", value y, visibility y, direct deps y, Kconfig:7>,
+          'OPTION2': <symbol OPTION2, tristate, "option tristate", value n, visibility y, direct deps y, Kconfig:11>,
+          'OPTION3': <symbol OPTION3, int, "option int", value "5", visibility y, direct deps y, Kconfig:15>,
+          'OPTION4': <symbol OPTION4, hex, "option hex", value "0x8000000", visibility y, direct deps y, Kconfig:19>,
+          'OPTION5': <symbol OPTION5, string, "option string", value "text", visibility y, direct deps y, Kconfig:23>},
+ 'top_node': <menu node for menu, prompt "Test def_*" (visibility y), deps y, 'visible if' deps y, has child, Kconfig:1>,
+ 'unique_choices': [],
+ 'unique_defined_syms': [<symbol MODULES, bool, value y, visibility n, is the modules symbol, direct deps y, Kconfig:3>,
+                         <symbol OPTION1, bool, "option bool", value y, visibility y, direct deps y, Kconfig:7>,
+                         <symbol OPTION2, tristate, "option tristate", value n, visibility y, direct deps y, Kconfig:11>,
+                         <symbol OPTION3, int, "option int", value "5", visibility y, direct deps y, Kconfig:15>,
+                         <symbol OPTION4, hex, "option hex", value "0x8000000", visibility y, direct deps y, Kconfig:19>,
+                         <symbol OPTION5, string, "option string", value "text", visibility y, direct deps y, Kconfig:23>]}
+--------------------------------------------------
+   Parser found: 6 defined syms
+   Parser found: 6 unique defined syms
+   Parser found: 1 files
+--------------------------------------------------
+
+2. Bild ExtParserContext FROM PARSER RESULTS
+ Transformer used: ZRTOS
+ call different attributes on symbols found in parser_result['unique_defined_syms']
+
+ For each symbol found in parser_result['unique_defined_syms']
+    -> call sym.name/.origin/.name_and_loc
+    -> call for each sym.nodes (.filename/.linenr/node/.defaults/is_configdefault
+    -> call all sym.defaults
+    -> call all sym.orig_defaults
+
+------------ symbol_infos --------------------------------------------------
+MODULES: [{'sym.name': 'MODULES', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig', 4)), 'sym.name_and_loc': 'MODULES (defined at Kconfig:3)'}]
+OPTION1: [{'sym.name': 'OPTION1', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig', 8)), 'sym.name_and_loc': 'OPTION1 (defined at Kconfig:7)'}]
+OPTION2: [{'sym.name': 'OPTION2', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'OPTION2 (defined at Kconfig:11)'}]
+OPTION3: [{'sym.name': 'OPTION3', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig', 16)), 'sym.name_and_loc': 'OPTION3 (defined at Kconfig:15)'}]
+OPTION4: [{'sym.name': 'OPTION4', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig', 20)), 'sym.name_and_loc': 'OPTION4 (defined at Kconfig:19)'}]
+OPTION5: [{'sym.name': 'OPTION5', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig', 24)), 'sym.name_and_loc': 'OPTION5 (defined at Kconfig:23)'}]
+
+------------ symbol_definitions --------------------------------------------------
+MODULES: [{'file': 'Kconfig', 'line': 3, 'node': <menu node for symbol MODULES, deps y, has next, Kconfig:3>, 'node.defaults': [(<symbol y, tristate, value y, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 4))], 'is_configdefault': False}]
+OPTION1: [{'file': 'Kconfig', 'line': 7, 'node': <menu node for symbol OPTION1, prompt "option bool" (visibility y), deps y, has next, Kconfig:7>, 'node.defaults': [(<symbol y, tristate, value y, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 8))], 'is_configdefault': False}]
+OPTION2: [{'file': 'Kconfig', 'line': 11, 'node': <menu node for symbol OPTION2, prompt "option tristate" (visibility y), deps y, has next, Kconfig:11>, 'node.defaults': [(<symbol n, tristate, value n, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 12))], 'is_configdefault': False}]
+OPTION3: [{'file': 'Kconfig', 'line': 15, 'node': <menu node for symbol OPTION3, prompt "option int" (visibility y), deps y, has next, Kconfig:15>, 'node.defaults': [(<symbol 5, unknown, value "5", visibility n, direct deps n, undefined>, <symbol y, tristate, value y, constant>, ('Kconfig', 16))], 'is_configdefault': False}]
+OPTION4: [{'file': 'Kconfig', 'line': 19, 'node': <menu node for symbol OPTION4, prompt "option hex" (visibility y), deps y, has next, Kconfig:19>, 'node.defaults': [(<symbol 0x8000000, unknown, value "0x8000000", visibility n, direct deps n, undefined>, <symbol y, tristate, value y, constant>, ('Kconfig', 20))], 'is_configdefault': False}]
+OPTION5: [{'file': 'Kconfig', 'line': 23, 'node': <menu node for symbol OPTION5, prompt "option string" (visibility y), deps y, Kconfig:23>, 'node.defaults': [(<symbol text, unknown, value "text", constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 24))], 'is_configdefault': False}]
+
+------------ symbol_defaults -----------------------------------------------
+MODULES: [{'sym.default': (<symbol y, tristate, value y, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 4))}]
+OPTION1: [{'sym.default': (<symbol y, tristate, value y, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 8))}]
+OPTION2: [{'sym.default': (<symbol n, tristate, value n, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 12))}]
+OPTION3: [{'sym.default': (<symbol 5, unknown, value "5", visibility n, direct deps n, undefined>, <symbol y, tristate, value y, constant>, ('Kconfig', 16))}]
+OPTION4: [{'sym.default': (<symbol 0x8000000, unknown, value "0x8000000", visibility n, direct deps n, undefined>, <symbol y, tristate, value y, constant>, ('Kconfig', 20))}]
+OPTION5: [{'sym.default': (<symbol text, unknown, value "text", constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 24))}]
+
+
+    -> ExParserContext - symbols: 6 
+    -> ExParserContext - configdefaults: 0()
+
+   Symbol definitions and corresponding locations in ExParserContext: 
+   'MODULES' is defined x1
+     - Kconfig:3
+   'OPTION1' is defined x1
+     - Kconfig:7
+   'OPTION2' is defined x1
+     - Kconfig:11
+   'OPTION3' is defined x1
+     - Kconfig:15
+   'OPTION4' is defined x1
+     - Kconfig:19
+   'OPTION5' is defined x1
+     - Kconfig:23
+    get_all_source_files: 
+
+3. Filter ExtParserContext
+extract all configdefault symbols and for each get transformed lines and last config
+
+for each given file at source_files start building path output structur and call reader and writer
+
+4. Transform all files - needs reader & writer
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig
+
+
+Reader found: 25 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 25 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                25 lines
+    -----------------------------------------------------------------------
+    All source_keywords:        0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    -----------------------------------------------------------------------
+    Transformer Output:         28 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           3
+        Added new lines of source:       0
+        Added new bc of config_default:  0
+        Removed   bc of config_default:  0
+        Removed no match for o(r)source: 0
+        Done writting 28 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_def_output/Kconfig
+----------------------------------------------------------------------
+finished transforming: 1 files transformed
+----------------------------------------------------------------------
+info about option modules-attr: 
+1 option modules-attr found at line 5 in /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig

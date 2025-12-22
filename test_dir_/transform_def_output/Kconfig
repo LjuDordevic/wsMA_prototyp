@@ -2,7 +2,7 @@ mainmenu "Test def_*"
 
 config MODULES
   def_bool y 
-  option modules  
+  modules
 
 config OPTION1
   def_bool y
@@ -13,13 +13,16 @@ config OPTION2
   prompt "option tristate"
 
 config OPTION3
-  def_int 5
+  int
+  default 5
   prompt "option int"
 
 config OPTION4
-  def_hex 0x8000000
+  hex
+  default 0x8000000
   prompt "option hex"
 
 config OPTION5
-  def_string "text"
+  string
+  default "text"
   prompt "option string"
