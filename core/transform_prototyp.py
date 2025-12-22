@@ -45,6 +45,7 @@ class KconfigTransformer:
     FILE_ALL_ADDED_LINES_SKW = 0
     ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0
     FILE_CONFIGDEFAULT_NR = 0
+    FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
     
 
     def __init__(self, source_spec: str):
@@ -679,12 +680,16 @@ class KconfigTransformer:
                     continue
                
         if not matched_files:
-            print(f"      no files found for the: {pattern}")            
+            print(f"      no files found for the: {pattern}")   
+            self.FILE_O_SOURCE_KEYWORDS_NO_MATCH += 1
+
+            """
             if source_keyword == "orsource" or source_keyword == "osource":
                 new_line_text = f'#{indent_str}source "{pattern}"' # comment, but transform ((o)r/o)source and path before? 
                 new_line = KconfigLine(new_line_text, line.line_number)
                 return new_line
-            return line
+            """
+            return None
         
         # bild source for each found file #TODO: check sorted
         # and after that calculate the output diff.-> if 1 source keyword matches 5 --> Diff: 4 new lines in output
@@ -720,7 +725,8 @@ class KconfigTransformer:
         self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0 # set back for the next line with keyword
         return result_lines
 
-    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, log: bool, log_lines: bool):
+    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
+                            log: bool, log_lines: bool, log_excel_after_each_file: bool, log_excel_output: Optional[str]):
         """
         1. get all source files parser found (these are all realtive to srctree)
         2. build paths for input & output files
@@ -798,7 +804,9 @@ class KconfigTransformer:
             transformed, stats = self._transform_lines(lines, input_file, cd_definition_info)
             
             excel_stats.append(stats)
-            excel_writer.write_to_excel(excel_stats, "/home/ljd/wsMA_prototyp/results.xlsx")
+
+            if log_excel_after_each_file:
+                excel_writer.write_to_excel(excel_stats, log_excel_output)
             
             new_lines = self._remove_consecutive_empty_lines(transformed)
             try:
@@ -828,7 +836,8 @@ class KconfigTransformer:
         print(f"        Added new lines of source: -1 (= means one line was just overwritten)" if new_lines_skw < 0 \
               else f"        Added new lines of source:       {new_lines_skw}")
         print(f"        Added new bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")
-        print(f"        Removed   bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")   
+        print(f"        Removed   bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}") 
+        print(f"        Removed no match for o(r)source: {self.FILE_O_SOURCE_KEYWORDS_NO_MATCH}")   
 
         # STORE FOR EXCEL
         file_stats_excel = {
@@ -840,7 +849,8 @@ class KconfigTransformer:
             'rource_keyword' : self.FILE_RSOURCE_NR,
             'orource_keyword' : self.FILE_ORSOURCE_NR,
             'new lines bc source': new_lines_skw,
-            'new lines bc cd': self.FILE_CONFIGDEFAULT_NR
+            'new lines bc cd': self.FILE_CONFIGDEFAULT_NR,
+            'removed bc o(r)source': self.FILE_O_SOURCE_KEYWORDS_NO_MATCH
         }
 
         self.FILE_SOURCE_NR = 0
@@ -853,6 +863,7 @@ class KconfigTransformer:
         self.FILE_CONFIGDEFAULT_NR = 0
         self.NEW_BC_GLOB = 0
         self.FILE_SOURCE_OUT_DIFF = 0
+        self.FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
 
         return file_stats_excel
         

@@ -73,7 +73,9 @@ def main():
         project_dir=Path(project_dir),
         output_dir=Path(output_dir),
         log=True,
-        log_lines=False
+        log_lines=False,
+        log_excel_after_each_file=True,
+        log_excel_output="/home/ljd/wsMA_prototyp/results.xlsx"
     )    
 
     #excel_writer.write_excel(excel_data, "/home/ljd/wsMA_prototyp/results.xlsx")
