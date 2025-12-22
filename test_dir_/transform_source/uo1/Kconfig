@@ -1,0 +1,2 @@
+config OPTION_A
+  string "Option in uo1/Kconfig"

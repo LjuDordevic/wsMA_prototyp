@@ -1,0 +1,3 @@
+config OPTION_W3
+  def_string "W3"
+  prompt "W3"

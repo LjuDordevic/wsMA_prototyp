@@ -1,0 +1,3 @@
+config OPTION_W2
+  def_string "W2"
+  prompt "W2"

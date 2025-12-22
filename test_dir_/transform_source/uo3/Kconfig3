@@ -1,0 +1,3 @@
+config OPTION_F
+  def_string "F"
+  prompt "F"

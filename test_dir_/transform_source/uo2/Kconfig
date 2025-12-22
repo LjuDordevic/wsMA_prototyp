@@ -1,0 +1,12 @@
+source "uo1/Kconfig"
+rsource "uo1/Kconfig"
+
+comment "(o)source/(o)rsource"
+osource "u06/Kconfig"
+orsource "uo22/Kconfig"
+
+comment "next subfolder"
+source "uo3/K*"
+
+comment "more wildcards"
+source "uo5/[!CD]*"

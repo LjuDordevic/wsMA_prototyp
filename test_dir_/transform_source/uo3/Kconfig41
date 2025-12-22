@@ -1,0 +1,3 @@
+config OPTION_G
+  def_string "G"
+  prompt "G"

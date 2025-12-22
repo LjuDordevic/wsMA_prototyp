@@ -1,0 +1,3 @@
+config OPTION_D 
+  def_string "D"
+  prompt "D"

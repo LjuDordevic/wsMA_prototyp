@@ -1,8 +1,8 @@
 from pathlib import Path
-from ..pick_parser import PickParser
-from ..zrtos_parser import ZRTOSParser
-from ..kconfig_writer import KconfigReader, KconfigWriter
-from ..transform_prototyp import KconfigTransformer
+from pick_parser import PickParser
+from zrtos_parser import ZRTOSParser
+from kconfig_writer import KconfigReader, KconfigWriter
+from transform_prototyp import KconfigTransformer
 import pprint
 import os
 
@@ -17,8 +17,8 @@ import os
 #output_dir = "/home/ljd/wsMA_prototyp/ZRTOS_copy/"   
 #project_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_A"       
 #output_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_B"   
-project_dir = "/home/ljd/wsMA_prototyp/test_dir_old/experiment_dec"       
-output_dir = "/home/ljd/wsMA_prototyp/test_dir_old/experiment_dec_copy"   
+project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source"       
+output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output"   
 main_file =  "Kconfig"  
 os.environ["srctree"] = project_dir
 print(os.environ["srctree"])

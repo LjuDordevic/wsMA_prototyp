@@ -1,0 +1,3 @@
+config OPTION_E
+  def_string "E"
+  prompt "E"
