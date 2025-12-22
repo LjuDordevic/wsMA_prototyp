@@ -865,13 +865,21 @@ class KconfigTransformer:
         print(f"    -> call all sym.orig_defaults")
         print(f"\n------------ symbol_infos --------------------------------------------------")
         #print(given_context.symbol_infos)
+        for symbol_name, infos in given_context.symbol_infos.items():
+            for symbol_info in infos:
+                print(f"{symbol_name}: [{symbol_info}]")
         print(f"\n------------ symbol_definitions --------------------------------------------------")
         #print(given_context.symbol_definitions)
+        for symbol_name, definitions in given_context.symbol_definitions.items():
+            for definition in definitions:
+                print(f"{symbol_name}: [{definition}]")
         print(f"\n------------ symbol_defaults -----------------------------------------------")
         #print(given_context.symbol_defaults)
-        print(f"\n------------ sym.orig_defaults ---------------------------------------------")
-        print(f"these omit any dependencies propagated from 'depends on' and surrounding 'if's & strip location of default line")
-        #TODO: delete not needed
+        for symbol_name, defaults in given_context.symbol_defaults.items():
+            for default in defaults:
+                print(f"{symbol_name}: [{default}]")
+        #print(f"\n------------ sym.orig_defaults ---------------------------------------------")
+        #print(f"these omit any dependencies propagated from 'depends on' and surrounding 'if's & strip location of default line")
         #print(given_context.symbol_orig_defaults)
 
         print(f"\n")
