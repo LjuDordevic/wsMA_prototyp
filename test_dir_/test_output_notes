@@ -2,11 +2,35 @@ In directory linux_kc_new:
 git clone --depth 1 https://github.com/torvalds/linux.git
 sudo apt-get install build-essential libncurses-dev bison flex
 check clone with: cd linux -> make menuconfig -> OK
+--------------------------------------------------------------------------------------------------------------------------------------------------
 
+To check if the specifications work before transformation:
+Before calling menuconfig, you have to set SRCTREE every time:
+------------------------------
+export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_source"
+/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/test_dir_/transform_source/Kconfig
+------------------------------
+export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_def"
+/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig
+------------------------------
+export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_option" 
+export ENV_A="i7-1260P"
+/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/test_dir_/transform_option/Kconfig
+
+--------------------------------------------------------------------------------------------------------------------------------------------------
+
+To check the transformed specification:
 Before calling mconf, you have to set SRCTREE every time:
+------------------------------
 export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_source_output"
-export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"
-
-Then call the transformed specification:
 ~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/Kconfig
+------------------------------
+export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"
 ~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/test_dir_/transform_def_output/Kconfig
+------------------------------
+export ENV_A="i7-1260P"
+export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_option_output" 
+~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/test_dir_/transform_option_output/Kconfig
+------------------------------
+
+
