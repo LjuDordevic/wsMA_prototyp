@@ -5,6 +5,7 @@ from kconfig_writer import KconfigReader, KconfigWriter
 from transform_prototyp import KconfigTransformer
 import pprint
 import os
+import sys
 
 #project_dir = "/home/ljd/wsMA_prototyp/exp" 
 #output_dir = "/home/ljd/wsMA_prototyp/exp_copy"   
@@ -17,36 +18,69 @@ import os
 #output_dir = "/home/ljd/wsMA_prototyp/ZRTOS_copy/"   
 #project_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_A"       
 #output_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_B"   
-project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source"       
-output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output"   
-main_file =  "Kconfig"  
-os.environ["srctree"] = project_dir
-print(os.environ["srctree"])
-picker = PickParser("ZRTOS")
-print(picker)
-print("-" * 50)
-
 #picker._test_kconfiglib(project_dir, main_file)
 #result = picker._parse_only(project_dir, main_file)
+#transformer.extract_named_choice_info("NAMED_CH")
 
-print("1.  Parser Output: ")
-parser = ZRTOSParser(picker.kconfiglib_version)
-parser_result = parser.parse_files(project_dir, main_file)
-pprint.pprint(parser_result)
-print("-" * 50)
-print(f"   Parser found: {len(parser_result['defined_syms'])} defined syms")
-print(f"   Parser found: {len(parser_result['unique_defined_syms'])} unique defined syms")
-print(f"   Parser found: {len(parser_result['kconf'].kconfig_filenames)} files")
-print("-" * 50)
+def main():
+    log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output/transform.log"
+    sys.stdout = open(log_file, "w")
+    sys.stderr = sys.stdout 
 
-transformer = KconfigTransformer(source_spec="ZRTOS")
-print("\n2. Bild ExtParserContext FROM PARSER RESULTS")
-print(f" Transformer used: {transformer.source_spec}")
+    project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source"       
+    output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output"   
+    main_file =  "Kconfig"  
+    os.environ["srctree"] = project_dir
 
-context = transformer.build_context_from_parser(
-    parser_result,
-    log=True
-)
+    print("=" * 100)
+    print("TRNASFORMATION PROTOTYP LOG")
+    print("=" * 100)
+    print(f"    Root: {project_dir}")
+    print(f"    Main file: {main_file}")
+    print(f"    Output dir: {output_dir}")
+    print("=" * 100)
+
+    picker = PickParser("ZRTOS")
+    print(picker)
+
+    print("1.  Parser Output: ")
+    parser = ZRTOSParser(picker.kconfiglib_version)
+    
+    parser_result = parser.parse_files(project_dir, main_file)
+    pprint.pprint(parser_result)
+    print("-" * 50)
+    print(f"   Parser found: {len(parser_result['defined_syms'])} defined syms")
+    print(f"   Parser found: {len(parser_result['unique_defined_syms'])} unique defined syms")
+    print(f"   Parser found: {len(parser_result['kconf'].kconfig_filenames)} files")
+    print("-" * 50)
+
+    transformer = KconfigTransformer(source_spec="ZRTOS")
+    print("\n2. Bild ExtParserContext FROM PARSER RESULTS")
+    print(f" Transformer used: {transformer.source_spec}")
+
+    context = transformer.build_context_from_parser(
+        parser_result,
+        log=True
+    )
+
+    reader = KconfigReader("ZRTOS")
+    writer = KconfigWriter("ZRTOS")
+    #input_file = Path(project_dir) / main_file
+    #output_file = Path(output_dir) / main_file
+
+    transformer.transform_all_files(
+        reader=reader,
+        writer=writer,
+        project_dir=Path(project_dir),
+        output_dir=Path(output_dir),
+        log=True,
+        log_lines=False
+    )
+
+    return 0
+
+if __name__ == '__main__':
+    sys.exit(main())
 
 """ 
 print("filter: symbol definitions & each sym.node.defaults extracted ---------------------------------------------------------------")
@@ -69,11 +103,6 @@ print(f"\n - transform cd entries")
 tcd = transformer._get_transformed_config_defaults(cd_default_entries, reader, project_dir)
 print(tcd)
 """
-reader = KconfigReader("ZRTOS")
-writer = KconfigWriter("ZRTOS")
-input_file = Path(project_dir) / main_file
-output_file = Path(output_dir) / main_file
-
 
 """ 
 lines = reader.read_file(input_file)
@@ -88,14 +117,3 @@ transformed_lines = transformer._transform_lines(lines, input_file)
 print(f"\n5.  call writer - write transformed lines in {output_file}")
 writer.write(transformed_lines, output_file)
 """
-
-transformer.extract_named_choice_info("NAMED_CH")
-
-transformer.transform_all_files(
-    reader=reader,
-    writer=writer,
-    project_dir=Path(project_dir),
-    output_dir=Path(output_dir),
-    log=True,
-    log_lines=False
-)
