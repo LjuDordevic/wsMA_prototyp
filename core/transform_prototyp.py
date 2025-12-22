@@ -46,7 +46,8 @@ class KconfigTransformer:
     ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0
     FILE_CONFIGDEFAULT_NR = 0
     FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
-    
+    OPTION_MODULES_COUNTER = 0
+    OPTION_MODULES_INFO = []
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -581,6 +582,8 @@ class KconfigTransformer:
             # count all source keywords 
             self.FILE_SOURCE_KEYWORDS_ALL_NR += 1       # for each self.SOURCE_KEYWORDS -> count 1
             return self._transform_source_line(line, current_file)
+        elif line.line_type == "option modules":
+            return self._transform_opt_modules(line, current_file)
         else:
             return line    
 
@@ -725,6 +728,20 @@ class KconfigTransformer:
         self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0 # set back for the next line with keyword
         return result_lines
 
+    def _transform_opt_modules(self, line, current_file):
+        from kconfig_writer import KconfigLine 
+        indent_str = ' ' * line.indent
+        new_line_text = f'{indent_str}modules'
+        new_line = KconfigLine(new_line_text, line.line_number)
+        self.OPTION_MODULES_COUNTER += 1 
+
+        self.OPTION_MODULES_INFO.append({
+            'counter': self.OPTION_MODULES_COUNTER, 
+            'line': line.line_number, 
+            'file': current_file
+        })
+        return new_line
+
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
                             log: bool, log_lines: bool, log_excel_after_each_file: bool, log_excel_output: Optional[str]):
         """
@@ -817,6 +834,12 @@ class KconfigTransformer:
         
         print(f"----------------------------------------------------------------------")
         print(f"finished transforming: {transformed_count} files transformed")
+        print(f"----------------------------------------------------------------------")
+        print("info about option modules-attr: ")
+        for info in self.OPTION_MODULES_INFO:
+            print(f"{info['counter']} option modules-attr found at line {info['line']} in {info['file']}")
+        self.OPTION_MODULES_COUNTER = 0
+        self.OPTION_MODULES_INFO.clear()
         return excel_stats
 
     def _log_file_and_reset_count(self, new_lines_skw : int, current_file : Path, len_input : int, len_result : int):

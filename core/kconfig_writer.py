@@ -99,7 +99,8 @@ class KconfigLine:
             return 'option env'
         elif s.startswith('option modules'):
             return 'option modules'
-
+        elif s.startswith('modules'):
+            return 'modules'
         else:
             return 'other'
     
