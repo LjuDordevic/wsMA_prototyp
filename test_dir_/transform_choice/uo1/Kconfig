@@ -1,8 +1,9 @@
 config AAA 
   bool "AAA"
+  default y
 
 config OPT_Z
-  bool "Z"
+  def_bool y
 
 if OPT_Z
 
@@ -11,7 +12,6 @@ config Z1
 
 choice NAMED_CH
   depends on AAA
-  default CH_C
   config CH_C
     bool "Op C" 
   config CH_D

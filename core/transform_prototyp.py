@@ -153,24 +153,26 @@ class KconfigTransformer:
             
             choice_info ={
                 'choice.name' : choice.name,
-                'choice.type' : choice.type,
-                'choice.name_and_loc' : choice.name_and_loc,
+                #'choice.type' : choice.type,
+                #'choice.name_and_loc' : choice.name_and_loc,
                 'choice.syms': choice.syms,
-                'choice.direct_dep': choice.direct_dep,
-                'choice.orig_defaults': choice.orig_defaults
+                #'choice.direct_dep': choice.direct_dep,
+                #'choice.orig_defaults': choice.orig_defaults
             }  
             choice_infos[choice.name].append(choice_info)
-            print()
-            print(f"here {choice.name_and_loc}: {choice_info}")
+            print(f"chinfo: {choice.name_and_loc}: {choice_info}")
 
             for node in choice.nodes:
                 
                 location_info = {
                     'file': node.filename if hasattr(node, 'filename') else None,
                     'line': node.linenr if hasattr(node, 'linenr') else None,
-                    'node': node,
-                    'node.defaults': node.defaults,
-                    'node.item.dd': node.item.orig_defaults
+                    'node.prompt': node.prompt,
+                    #'node.defaults': node.defaults,
+                    'node.item.dd': node.item.direct_dep,
+                    'node.dep': node.dep,
+                    #'node.item.name': node.item.name
+    
                 }
                 choice_definitions[choice.name].append(location_info)
 
@@ -990,6 +992,16 @@ class KconfigTransformer:
         #print(f"\n------------ sym.orig_defaults ---------------------------------------------")
         #print(f"these omit any dependencies propagated from 'depends on' and surrounding 'if's & strip location of default line")
         #print(given_context.symbol_orig_defaults)
+        print(f"\n------------ choice_infos -----------------------------------------------")
+        for choice_name, infos in given_context.choice_infos.items():
+            print(f"{choice_name}")
+            for info in infos:
+                for sym in info.get('choice.syms', []) or []:
+                    print(f"    [{repr(sym)}]")
+        print(f"\n------------ choice_definitions -----------------------------------------------")
+        for choice_name, definitions in given_context.choice_definitions.items():
+            for definition in definitions:
+                print(f"{choice_name}: [{repr(definition)}]")
 
         print(f"\n")
         print(f"    -> ExParserContext - symbols: {given_context.symbol_nr} ")#({', '.join(given_context.symbol_definitions.keys())})")
