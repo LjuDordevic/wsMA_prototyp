@@ -17,6 +17,7 @@ class ExtParserContext:
     choice_infos: Dict[str, List[dict]]
     choice_definitions : Dict[str, List[dict]] # choice_name -> [location1, location2, ...]
     choice_nr: int
+    choice_dep: Dict[str, List[dict]]
     parser_result: dict
     srctree: Path
 
@@ -67,6 +68,7 @@ class KconfigTransformer:
         configdefault_symbols = set()
         choice_infos = {}
         choice_definitions = {}
+        choice_dep = {}
 
         print(" call different attributes on symbols found in parser_result['unique_defined_syms']")
         
@@ -147,10 +149,11 @@ class KconfigTransformer:
                 if is_configdefault: configdefault_symbols.add(sym.name)
          
         for choice in parser_result['unique_choices']:
-            if choice.name not in (choice_infos or choice_definitions):
+            if choice.name not in (choice_infos or choice_definitions or choice_dep):
                 choice_infos[choice.name] = []
                 choice_definitions[choice.name] = []
-            
+                choice_dep[choice.name] = []
+
             choice_info ={
                 'choice.name' : choice.name,
                 #'choice.type' : choice.type,
@@ -160,10 +163,10 @@ class KconfigTransformer:
                 #'choice.orig_defaults': choice.orig_defaults
             }  
             choice_infos[choice.name].append(choice_info)
-            print(f"chinfo: {choice.name_and_loc}: {choice_info}")
+            #print(f"chinfo: {choice.name_and_loc}: {choice_info}")
 
             for node in choice.nodes:
-                
+
                 location_info = {
                     'file': node.filename if hasattr(node, 'filename') else None,
                     'line': node.linenr if hasattr(node, 'linenr') else None,
@@ -174,7 +177,14 @@ class KconfigTransformer:
                     #'node.item.name': node.item.name
     
                 }
+
+                dep_info = {
+                    'node.defaults': node.defaults,
+                    'node.dep': node.dep,
+                }
+
                 choice_definitions[choice.name].append(location_info)
+                choice_dep[choice.name].append(dep_info)
 
         context = ExtParserContext(
             symbol_infos = symbol_infos,
@@ -187,6 +197,7 @@ class KconfigTransformer:
             choice_infos = choice_infos,
             choice_definitions = choice_definitions,
             choice_nr = len(choice_definitions),
+            choice_dep = choice_dep,
             parser_result=parser_result,
             srctree=Path(konf.srctree)
         )
@@ -199,34 +210,44 @@ class KconfigTransformer:
         context = self.context
         choice_infos = context.choice_infos
         choice_definitions = context.choice_definitions
-        syms = choice_infos.get('choice.syms')
-        direct_deps = choice_infos.get('choice.direct_dep')
+        choice_deps = context.choice_dep
 
-        print("-----------------")
-        print(choice_infos)
-        print(choice_definitions)
-        print(choice_name)
-        print("-----------------")
-        #print(str(choice_name in choice_definitions))
-        print(f"syms {syms}")
-        print(f"dd {direct_deps}")
+        print("------H-----------")
+        print(f"context.choice_infos:       {choice_infos}")
+        print(f"context.choice_definitions: {choice_definitions}")
+        print(f"context.choice_deps:        {choice_deps}\n")
 
         if choice_name not in choice_infos:
             return {
             'choice_def': []
             }
         
-        choice_definitions_list = []
-        if choice_name in choice_definitions:
-            for location_info in choice_definitions[choice_name]:
-                file = location_info.get('file')
-                line = location_info.get('line')
-                node = location_info.get('node')           
-                choice_definitions_list.append((choice_name, file, line, node))
+        default_dependencies_extracted_list = []
+        node_dep_extracted_list = []
 
-        print(choice_definitions_list)
+        print(f"choice_deps[{choice_name}]:")
+        for entry in choice_deps[choice_name]:
+            default_tuple = entry['node.defaults']
+            print(f"node.defaults:   {default_tuple}")
+            for default in default_tuple:
+                default_dependencies = default[1]
+                dependencies = self._extract_dependencies(default_dependencies)
+                default_dependencies_extracted_list.append(dependencies)
+             
+            dep_tuple = entry['node.dep']
+            print(f"node.dep:        {repr(dep_tuple)}")
+            extr_dep_dependencies = self._extract_dependencies(dep_tuple)
+            node_dep_extracted_list.append(extr_dep_dependencies)
+
+        print(f"def dependencies extr: {default_dependencies_extracted_list}")
+        print(f"dep dependencies extr: {node_dep_extracted_list}")
+        
+        choice_all_dep_list = []
+        choice_all_dep_list.append((choice_name, default_dependencies_extracted_list, node_dep_extracted_list))
+    
+        print()
         return {
-            'choice_def': choice_definitions_list
+            'choice_def': choice_all_dep_list
         }
         
 
@@ -473,6 +494,9 @@ class KconfigTransformer:
                         i = self._skip_if_block(lines, i)
                         continue
                 
+                #if line.line_type == 'named_choice':
+                 #   choice_info = choice_definition_info:
+
                 if line.line_type == 'configdefault':
                     print(f"    Skipping configdefault block starting at line {line.line_number}")
                     i += 1

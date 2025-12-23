@@ -9,6 +9,7 @@ choice NAMED_CH
     bool "Op B"
 endchoice   
 
+source "uo1/Kconfig"
 #choice 
 #  prompt "pick tristate choice"
 #  tristate  
@@ -18,4 +19,3 @@ endchoice
 #    tristate  "Op T2"
 #endchoice  
 
-source "uo1/Kconfig"

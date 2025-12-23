@@ -81,12 +81,12 @@ def main():
         parser_result,
         log=True
     )
-
+    
     info = transformer.extract_named_choice_info('NAMED_CH')
-    print("choice definition ------------------------------------------------------")
+    """ print("choice definition ------------------------------------------------------")
     for cn, file, line, node in info['choice_def']:
         print(f"{cn}, {file}, {line}, {node}")
-    print("\n")
+    print("\n")"""
 
     reader = KconfigReader("ZRTOS")
     writer = KconfigWriter("ZRTOS")
