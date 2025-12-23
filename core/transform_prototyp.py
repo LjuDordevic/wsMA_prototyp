@@ -153,8 +153,11 @@ class KconfigTransformer:
             
             choice_info ={
                 'choice.name' : choice.name,
+                'choice.type' : choice.type,
                 'choice.name_and_loc' : choice.name_and_loc,
-                'choice.syms': choice.syms
+                'choice.syms': choice.syms,
+                'choice.direct_dep': choice.direct_dep,
+                'choice.orig_defaults': choice.orig_defaults
             }  
             choice_infos[choice.name].append(choice_info)
             print()
@@ -166,6 +169,8 @@ class KconfigTransformer:
                     'file': node.filename if hasattr(node, 'filename') else None,
                     'line': node.linenr if hasattr(node, 'linenr') else None,
                     'node': node,
+                    'node.defaults': node.defaults,
+                    'node.item.dd': node.item.orig_defaults
                 }
                 choice_definitions[choice.name].append(location_info)
 
@@ -193,12 +198,16 @@ class KconfigTransformer:
         choice_infos = context.choice_infos
         choice_definitions = context.choice_definitions
         syms = choice_infos.get('choice.syms')
+        direct_deps = choice_infos.get('choice.direct_dep')
 
+        print("-----------------")
         print(choice_infos)
         print(choice_definitions)
         print(choice_name)
-        print(str(choice_name in choice_definitions))
-        print(syms)
+        print("-----------------")
+        #print(str(choice_name in choice_definitions))
+        print(f"syms {syms}")
+        print(f"dd {direct_deps}")
 
         if choice_name not in choice_infos:
             return {

@@ -10,9 +10,9 @@ START using parser:
   kconfig_folder: /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig
   kconfiglib_version: <module 'kconfiglib' from '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/kconfiglib.py'>
 1.  Parser Output: 
-{'choices': [<choice NAMED_CH, bool, "pick bool named choice", mode y, CH_A selected, visibility y, Kconfig:3, uo1/Kconfig:4>,
+{'choices': [<choice NAMED_CH, bool, "pick bool named choice", mode y, CH_A selected, visibility y, Kconfig:3, uo1/Kconfig:12>,
              <choice, bool, "pick tristate choice", mode y, CH_T1 selected, visibility y, Kconfig:12>,
-             <choice NAMED_CH, bool, "pick bool named choice", mode y, CH_A selected, visibility y, Kconfig:3, uo1/Kconfig:4>],
+             <choice NAMED_CH, bool, "pick bool named choice", mode y, CH_A selected, visibility y, Kconfig:3, uo1/Kconfig:12>],
  'comments': [],
  'const_syms': {'m': <symbol m, bool, value m, constant>,
                 'n': <symbol n, bool, value n, constant>,
@@ -22,33 +22,39 @@ START using parser:
                   <symbol CH_T1, bool, "Op T1", value y, visibility y, choice symbol, direct deps y, Kconfig:15>,
                   <symbol CH_T2, bool, "Op T2", value n, visibility y, choice symbol, direct deps y, Kconfig:17>,
                   <symbol AAA, bool, "AAA", value n, visibility y, direct deps y, uo1/Kconfig:1>,
-                  <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:6>,
-                  <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:8>],
- 'kconf': <configuration with 8 symbols, main menu prompt "Test (named) choice", srctree "/home/ljd/wsMA_prototyp/test_dir_/transform_choice", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
+                  <symbol OPT_Z, bool, "Z", value n, visibility y, direct deps y, uo1/Kconfig:4>,
+                  <symbol Z1, bool, "Z1", value n, visibility n, direct deps n, uo1/Kconfig:9>,
+                  <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:15>,
+                  <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:17>],
+ 'kconf': <configuration with 10 symbols, main menu prompt "Test (named) choice", srctree "/home/ljd/wsMA_prototyp/test_dir_/transform_choice", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
  'menus': [],
  'missing_syms': [],
- 'named_choices': {'NAMED_CH': <choice NAMED_CH, bool, "pick bool named choice", mode y, CH_A selected, visibility y, Kconfig:3, uo1/Kconfig:4>},
+ 'named_choices': {'NAMED_CH': <choice NAMED_CH, bool, "pick bool named choice", mode y, CH_A selected, visibility y, Kconfig:3, uo1/Kconfig:12>},
  'syms': {'AAA': <symbol AAA, bool, "AAA", value n, visibility y, direct deps y, uo1/Kconfig:1>,
           'CH_A': <symbol CH_A, bool, "Op A", value y, visibility y, choice symbol, direct deps y, Kconfig:6>,
           'CH_B': <symbol CH_B, bool, "Op B", value n, visibility y, choice symbol, direct deps y, Kconfig:8>,
-          'CH_C': <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:6>,
-          'CH_D': <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:8>,
+          'CH_C': <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:15>,
+          'CH_D': <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:17>,
           'CH_T1': <symbol CH_T1, bool, "Op T1", value y, visibility y, choice symbol, direct deps y, Kconfig:15>,
           'CH_T2': <symbol CH_T2, bool, "Op T2", value n, visibility y, choice symbol, direct deps y, Kconfig:17>,
-          'MODULES': <symbol MODULES, unknown, value "MODULES", visibility n, is the modules symbol, direct deps n, undefined>},
+          'MODULES': <symbol MODULES, unknown, value "MODULES", visibility n, is the modules symbol, direct deps n, undefined>,
+          'OPT_Z': <symbol OPT_Z, bool, "Z", value n, visibility y, direct deps y, uo1/Kconfig:4>,
+          'Z1': <symbol Z1, bool, "Z1", value n, visibility n, direct deps n, uo1/Kconfig:9>},
  'top_node': <menu node for menu, prompt "Test (named) choice" (visibility y), deps y, 'visible if' deps y, has child, Kconfig:1>,
- 'unique_choices': [<choice NAMED_CH, bool, "pick bool named choice", mode y, CH_A selected, visibility y, Kconfig:3, uo1/Kconfig:4>,
+ 'unique_choices': [<choice NAMED_CH, bool, "pick bool named choice", mode y, CH_A selected, visibility y, Kconfig:3, uo1/Kconfig:12>,
                     <choice, bool, "pick tristate choice", mode y, CH_T1 selected, visibility y, Kconfig:12>],
  'unique_defined_syms': [<symbol CH_A, bool, "Op A", value y, visibility y, choice symbol, direct deps y, Kconfig:6>,
                          <symbol CH_B, bool, "Op B", value n, visibility y, choice symbol, direct deps y, Kconfig:8>,
                          <symbol CH_T1, bool, "Op T1", value y, visibility y, choice symbol, direct deps y, Kconfig:15>,
                          <symbol CH_T2, bool, "Op T2", value n, visibility y, choice symbol, direct deps y, Kconfig:17>,
                          <symbol AAA, bool, "AAA", value n, visibility y, direct deps y, uo1/Kconfig:1>,
-                         <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:6>,
-                         <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:8>]}
+                         <symbol OPT_Z, bool, "Z", value n, visibility y, direct deps y, uo1/Kconfig:4>,
+                         <symbol Z1, bool, "Z1", value n, visibility n, direct deps n, uo1/Kconfig:9>,
+                         <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:15>,
+                         <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:17>]}
 --------------------------------------------------
-   Parser found: 7 defined syms
-   Parser found: 7 unique defined syms
+   Parser found: 9 defined syms
+   Parser found: 9 unique defined syms
    Parser found: 2 files
 --------------------------------------------------
 
@@ -56,9 +62,9 @@ START using parser:
  Transformer used: ZRTOS
  call different attributes on symbols found in parser_result['unique_defined_syms']
 
-here <choice NAMED_CH> (defined at Kconfig:3, uo1/Kconfig:4): {'choice.name': 'NAMED_CH', 'choice.name_and_loc': '<choice NAMED_CH> (defined at Kconfig:3, uo1/Kconfig:4)', 'choice.syms': [<symbol CH_A, bool, "Op A", value y, visibility y, choice symbol, direct deps y, Kconfig:6>, <symbol CH_B, bool, "Op B", value n, visibility y, choice symbol, direct deps y, Kconfig:8>, <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:6>, <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:8>]}
+here <choice NAMED_CH> (defined at Kconfig:3, uo1/Kconfig:12): {'choice.name': 'NAMED_CH', 'choice.type': 3, 'choice.name_and_loc': '<choice NAMED_CH> (defined at Kconfig:3, uo1/Kconfig:12)', 'choice.syms': [<symbol CH_A, bool, "Op A", value y, visibility y, choice symbol, direct deps y, Kconfig:6>, <symbol CH_B, bool, "Op B", value n, visibility y, choice symbol, direct deps y, Kconfig:8>, <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:15>, <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:17>], 'choice.direct_dep': <symbol y, bool, value y, constant>, 'choice.orig_defaults': [(<symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:15>, <symbol y, bool, value y, constant>)]}
 
-here <choice> (defined at Kconfig:12): {'choice.name': None, 'choice.name_and_loc': '<choice> (defined at Kconfig:12)', 'choice.syms': [<symbol CH_T1, bool, "Op T1", value y, visibility y, choice symbol, direct deps y, Kconfig:15>, <symbol CH_T2, bool, "Op T2", value n, visibility y, choice symbol, direct deps y, Kconfig:17>]}
+here <choice> (defined at Kconfig:12): {'choice.name': None, 'choice.type': 3, 'choice.name_and_loc': '<choice> (defined at Kconfig:12)', 'choice.syms': [<symbol CH_T1, bool, "Op T1", value y, visibility y, choice symbol, direct deps y, Kconfig:15>, <symbol CH_T2, bool, "Op T2", value n, visibility y, choice symbol, direct deps y, Kconfig:17>], 'choice.direct_dep': <symbol y, bool, value y, constant>, 'choice.orig_defaults': []}
 
  For each symbol found in parser_result['unique_defined_syms']
     -> call sym.name/.origin/.name_and_loc
@@ -72,22 +78,26 @@ CH_B: [{'sym.name': 'CH_B', 'sym.origin': ('unset', None), 'sym.name_and_loc': '
 CH_T1: [{'sym.name': 'CH_T1', 'sym.origin': ('default', None), 'sym.name_and_loc': 'CH_T1 (defined at Kconfig:15)'}]
 CH_T2: [{'sym.name': 'CH_T2', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'CH_T2 (defined at Kconfig:17)'}]
 AAA: [{'sym.name': 'AAA', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'AAA (defined at uo1/Kconfig:1)'}]
-CH_C: [{'sym.name': 'CH_C', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'CH_C (defined at uo1/Kconfig:6)'}]
-CH_D: [{'sym.name': 'CH_D', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'CH_D (defined at uo1/Kconfig:8)'}]
+OPT_Z: [{'sym.name': 'OPT_Z', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'OPT_Z (defined at uo1/Kconfig:4)'}]
+Z1: [{'sym.name': 'Z1', 'sym.origin': None, 'sym.name_and_loc': 'Z1 (defined at uo1/Kconfig:9)'}]
+CH_C: [{'sym.name': 'CH_C', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'CH_C (defined at uo1/Kconfig:15)'}]
+CH_D: [{'sym.name': 'CH_D', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'CH_D (defined at uo1/Kconfig:17)'}]
 
 ------------ symbol_definitions --------------------------------------------------
 CH_A: [{'file': 'Kconfig', 'line': 6, 'node': <menu node for symbol CH_A, prompt "Op A" (visibility y), deps y, has next, Kconfig:6>, 'node.defaults': [], 'is_configdefault': False}]
 CH_B: [{'file': 'Kconfig', 'line': 8, 'node': <menu node for symbol CH_B, prompt "Op B" (visibility y), deps y, Kconfig:8>, 'node.defaults': [], 'is_configdefault': False}]
 CH_T1: [{'file': 'Kconfig', 'line': 15, 'node': <menu node for symbol CH_T1, prompt "Op T1" (visibility y), deps y, has next, Kconfig:15>, 'node.defaults': [], 'is_configdefault': False}]
 CH_T2: [{'file': 'Kconfig', 'line': 17, 'node': <menu node for symbol CH_T2, prompt "Op T2" (visibility y), deps y, Kconfig:17>, 'node.defaults': [], 'is_configdefault': False}]
-AAA: [{'file': 'uo1/Kconfig', 'line': 1, 'node': <menu node for symbol AAA, prompt "AAA" (visibility y), deps y, has child, uo1/Kconfig:1>, 'node.defaults': [], 'is_configdefault': False}]
-CH_C: [{'file': 'uo1/Kconfig', 'line': 6, 'node': <menu node for symbol CH_C, prompt "Op C" (visibility y), deps y, has next, uo1/Kconfig:6>, 'node.defaults': [], 'is_configdefault': False}]
-CH_D: [{'file': 'uo1/Kconfig', 'line': 8, 'node': <menu node for symbol CH_D, prompt "Op D" (visibility y), deps y, uo1/Kconfig:8>, 'node.defaults': [], 'is_configdefault': False}]
+AAA: [{'file': 'uo1/Kconfig', 'line': 1, 'node': <menu node for symbol AAA, prompt "AAA" (visibility y), deps y, has next, uo1/Kconfig:1>, 'node.defaults': [], 'is_configdefault': False}]
+OPT_Z: [{'file': 'uo1/Kconfig', 'line': 4, 'node': <menu node for symbol OPT_Z, prompt "Z" (visibility y), deps y, has child, uo1/Kconfig:4>, 'node.defaults': [], 'is_configdefault': False}]
+Z1: [{'file': 'uo1/Kconfig', 'line': 9, 'node': <menu node for symbol Z1, prompt "Z1" (visibility n), deps n, has next, uo1/Kconfig:9>, 'node.defaults': [], 'is_configdefault': False}]
+CH_C: [{'file': 'uo1/Kconfig', 'line': 15, 'node': <menu node for symbol CH_C, prompt "Op C" (visibility y), deps y, has next, uo1/Kconfig:15>, 'node.defaults': [], 'is_configdefault': False}]
+CH_D: [{'file': 'uo1/Kconfig', 'line': 17, 'node': <menu node for symbol CH_D, prompt "Op D" (visibility y), deps y, uo1/Kconfig:17>, 'node.defaults': [], 'is_configdefault': False}]
 
 ------------ symbol_defaults -----------------------------------------------
 
 
-    -> ExParserContext - symbols: 7 
+    -> ExParserContext - symbols: 9 
     -> ExParserContext - configdefaults: 0()
 
    Symbol definitions and corresponding locations in ExParserContext: 
@@ -101,22 +111,29 @@ CH_D: [{'file': 'uo1/Kconfig', 'line': 8, 'node': <menu node for symbol CH_D, pr
      - Kconfig:17
    'AAA' is defined x1
      - uo1/Kconfig:1
+   'OPT_Z' is defined x1
+     - uo1/Kconfig:4
+   'Z1' is defined x1
+     - uo1/Kconfig:9
    'CH_C' is defined x1
-     - uo1/Kconfig:6
+     - uo1/Kconfig:15
    'CH_D' is defined x1
-     - uo1/Kconfig:8
-{'NAMED_CH': [{'choice.name': 'NAMED_CH', 'choice.name_and_loc': '<choice NAMED_CH> (defined at Kconfig:3, uo1/Kconfig:4)', 'choice.syms': [<symbol CH_A, bool, "Op A", value y, visibility y, choice symbol, direct deps y, Kconfig:6>, <symbol CH_B, bool, "Op B", value n, visibility y, choice symbol, direct deps y, Kconfig:8>, <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:6>, <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:8>]}], None: [{'choice.name': None, 'choice.name_and_loc': '<choice> (defined at Kconfig:12)', 'choice.syms': [<symbol CH_T1, bool, "Op T1", value y, visibility y, choice symbol, direct deps y, Kconfig:15>, <symbol CH_T2, bool, "Op T2", value n, visibility y, choice symbol, direct deps y, Kconfig:17>]}]}
-{'NAMED_CH': [{'file': 'Kconfig', 'line': 3, 'node': <menu node for choice NAMED_CH, prompt "pick bool named choice" (visibility y), deps y, has child, has next, Kconfig:3>}, {'file': 'uo1/Kconfig', 'line': 4, 'node': <menu node for choice NAMED_CH, deps n, has child, uo1/Kconfig:4>}], None: [{'file': 'Kconfig', 'line': 12, 'node': <menu node for choice, prompt "pick tristate choice" (visibility y), deps y, has child, has next, Kconfig:12>}]}
+     - uo1/Kconfig:17
+-----------------
+{'NAMED_CH': [{'choice.name': 'NAMED_CH', 'choice.type': 3, 'choice.name_and_loc': '<choice NAMED_CH> (defined at Kconfig:3, uo1/Kconfig:12)', 'choice.syms': [<symbol CH_A, bool, "Op A", value y, visibility y, choice symbol, direct deps y, Kconfig:6>, <symbol CH_B, bool, "Op B", value n, visibility y, choice symbol, direct deps y, Kconfig:8>, <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:15>, <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:17>], 'choice.direct_dep': <symbol y, bool, value y, constant>, 'choice.orig_defaults': [(<symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:15>, <symbol y, bool, value y, constant>)]}], None: [{'choice.name': None, 'choice.type': 3, 'choice.name_and_loc': '<choice> (defined at Kconfig:12)', 'choice.syms': [<symbol CH_T1, bool, "Op T1", value y, visibility y, choice symbol, direct deps y, Kconfig:15>, <symbol CH_T2, bool, "Op T2", value n, visibility y, choice symbol, direct deps y, Kconfig:17>], 'choice.direct_dep': <symbol y, bool, value y, constant>, 'choice.orig_defaults': []}]}
+{'NAMED_CH': [{'file': 'Kconfig', 'line': 3, 'node': <menu node for choice NAMED_CH, prompt "pick bool named choice" (visibility y), deps y, has child, has next, Kconfig:3>, 'node.defaults': [], 'node.item.dd': [(<symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:15>, <symbol y, bool, value y, constant>)]}, {'file': 'uo1/Kconfig', 'line': 12, 'node': <menu node for choice NAMED_CH, deps n, has child, uo1/Kconfig:12>, 'node.defaults': [(<symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:15>, (2, <symbol AAA, bool, "AAA", value n, visibility y, direct deps y, uo1/Kconfig:1>, <symbol OPT_Z, bool, "Z", value n, visibility y, direct deps y, uo1/Kconfig:4>), ('uo1/Kconfig', 14))], 'node.item.dd': [(<symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:15>, <symbol y, bool, value y, constant>)]}], None: [{'file': 'Kconfig', 'line': 12, 'node': <menu node for choice, prompt "pick tristate choice" (visibility y), deps y, has child, has next, Kconfig:12>, 'node.defaults': [], 'node.item.dd': []}]}
 NAMED_CH
-True
-None
-[('NAMED_CH', 'Kconfig', 3, <menu node for choice NAMED_CH, prompt "pick bool named choice" (visibility y), deps y, has child, has next, Kconfig:3>), ('NAMED_CH', 'uo1/Kconfig', 4, <menu node for choice NAMED_CH, deps n, has child, uo1/Kconfig:4>)]
+-----------------
+syms None
+dd None
+[('NAMED_CH', 'Kconfig', 3, <menu node for choice NAMED_CH, prompt "pick bool named choice" (visibility y), deps y, has child, has next, Kconfig:3>), ('NAMED_CH', 'uo1/Kconfig', 12, <menu node for choice NAMED_CH, deps n, has child, uo1/Kconfig:12>)]
 choice definition ------------------------------------------------------
 NAMED_CH, Kconfig, 3, choice NAMED_CH
 	bool "pick bool named choice"
-NAMED_CH, uo1/Kconfig, 4, choice NAMED_CH
+NAMED_CH, uo1/Kconfig, 12, choice NAMED_CH
 	bool
-	depends on AAA
+	default CH_C
+	depends on AAA && OPT_Z
 
 
     get_all_source_files: 
@@ -155,11 +172,11 @@ start transforming 21 input lines
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
 
 
-Reader found: 10 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
+Reader found: 20 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
 call _transform_lines(lines from reader, input, configdefault dict info)
-start transforming 10 input lines
+start transforming 20 input lines
     FILE LOG --------------------------------------------------------------
-    Reader input                10 lines
+    Reader input                20 lines
     -----------------------------------------------------------------------
     All source_keywords:        0
     All osource_keywords:       0
@@ -168,14 +185,14 @@ start transforming 10 input lines
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
     -----------------------------------------------------------------------
-    Transformer Output:         10 lines
+    Transformer Output:         20 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
         Added new lines of source:       0
         Added new bc of config_default:  0
         Removed   bc of config_default:  0
         Removed no match for o(r)source: 0
-        Done writting 10 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/uo1/Kconfig
+        Done writting 20 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/uo1/Kconfig
 ----------------------------------------------------------------------
 finished transforming: 2 files transformed
 ----------------------------------------------------------------------
