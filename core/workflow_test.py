@@ -37,10 +37,14 @@ def main():
     #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
     #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
 
-    log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_option_output/transform.log"
-    project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option"       
-    output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option_output"  
-    os.environ["ENV_A"] = "i7-1260P"
+    #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_option_output/transform.log"
+    #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option"       
+    #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option_output"  
+    #os.environ["ENV_A"] = "i7-1260P"
+
+    log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/transform.log"
+    project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice"
+    output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output"
 
     main_file = "Kconfig"  
     os.environ["srctree"] = project_dir
@@ -77,6 +81,12 @@ def main():
         parser_result,
         log=True
     )
+
+    info = transformer.extract_named_choice_info('NAMED_CH')
+    print("choice definition ------------------------------------------------------")
+    for cn, file, line, node in info['choice_def']:
+        print(f"{cn}, {file}, {line}, {node}")
+    print("\n")
 
     reader = KconfigReader("ZRTOS")
     writer = KconfigWriter("ZRTOS")

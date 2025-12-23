@@ -148,18 +148,19 @@ class KconfigTransformer:
          
         for choice in parser_result['unique_choices']:
             if choice.name not in (choice_infos or choice_definitions):
-                print(choice.name)
                 choice_infos[choice.name] = []
                 choice_definitions[choice.name] = []
             
             choice_info ={
                 'choice.name' : choice.name,
-                'choice.name_and_loc' : choice.name_and_loc
+                'choice.name_and_loc' : choice.name_and_loc,
+                'choice.syms': choice.syms
             }  
             choice_infos[choice.name].append(choice_info)
+            print()
+            print(f"here {choice.name_and_loc}: {choice_info}")
 
             for node in choice.nodes:
-                is_configdefault = getattr(node, 'is_configdefault', False)
                 
                 location_info = {
                     'file': node.filename if hasattr(node, 'filename') else None,
@@ -191,6 +192,14 @@ class KconfigTransformer:
         context = self.context
         choice_infos = context.choice_infos
         choice_definitions = context.choice_definitions
+        syms = choice_infos.get('choice.syms')
+
+        print(choice_infos)
+        print(choice_definitions)
+        print(choice_name)
+        print(str(choice_name in choice_definitions))
+        print(syms)
+
         if choice_name not in choice_infos:
             return {
             'choice_def': []
@@ -201,21 +210,10 @@ class KconfigTransformer:
             for location_info in choice_definitions[choice_name]:
                 file = location_info.get('file')
                 line = location_info.get('line')
-                node = location_info.get('node')
-            
-                choice_definitions_list.append({
-                    'choice_name' : choice_name, 
-                    'file' : file, 
-                    'line' : line, 
-                    'node': node
-                })
+                node = location_info.get('node')           
+                choice_definitions_list.append((choice_name, file, line, node))
 
-                print("choice definition ------------------------------------------------------")
-                print(f"choice: {choice_name}")
-                print(f"file: {file}")
-                print(f"line: {line}")
-                print(f"node: {node}")
-
+        print(choice_definitions_list)
         return {
             'choice_def': choice_definitions_list
         }
