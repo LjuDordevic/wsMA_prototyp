@@ -168,8 +168,8 @@ class KconfigTransformer:
                     'file': node.filename if hasattr(node, 'filename') else None,
                     'line': node.linenr if hasattr(node, 'linenr') else None,
                     'node.prompt': node.prompt,
-                    #'node.defaults': node.defaults,
-                    'node.item.dd': node.item.direct_dep,
+                    'node.defaults': node.defaults,
+                    #'node.item.dd': node.item.direct_dep,
                     'node.dep': node.dep,
                     #'node.item.name': node.item.name
     
