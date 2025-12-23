@@ -468,7 +468,7 @@ class KconfigTransformer:
 
         return files    
 
-    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info):
+    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info, choice_definition_info):
             """
             lines -> from reader 
             """
@@ -483,6 +483,7 @@ class KconfigTransformer:
                 
             while i < len(lines):
                 cd_processed = False
+                choice_processed = False
                 line = lines[i]
                 #print(f"\n while counter i: {i} given line: {line}")
                 
@@ -493,9 +494,6 @@ class KconfigTransformer:
                         print(f"    Skipping if-endif block (only configdefaults) starting at line {line.line_number}")
                         i = self._skip_if_block(lines, i)
                         continue
-                
-                #if line.line_type == 'named_choice':
-                 #   choice_info = choice_definition_info:
 
                 if line.line_type == 'configdefault':
                     print(f"    Skipping configdefault block starting at line {line.line_number}")
@@ -504,6 +502,31 @@ class KconfigTransformer:
                         print(f"      Skipping line {lines[i].line_number}: {lines[i].line_type}")
                         i += 1
                     # i = 1. line after the block 
+                    continue
+
+                if line.line_type == 'named_choice':
+                    choice_name = line.content.get('name')
+                    
+                    if choice_name and choice_name in choice_definition_info:
+                        choice_info = choice_definition_info[choice_name]
+                        
+                        # FIRST DEF?
+                        if choice_info['choice_def']:
+                            first_def = self.context.choice_definitions[choice_name][0]
+                            first_def_file = self.context.srctree / first_def['file']
+                            first_def_line = first_def['line']
+                            
+                            if (current_file == first_def_file and 
+                                line.line_number == first_def_line):
+                                
+                                print(f"    Found first definition of choice {choice_name} at line {line.line_number}")
+                                print(f"    Processing choice transformation")
+                                
+                                i = self.transform_choice(lines, i, choice_info, result, 
+                                                    lambda l, s, f: self._transform_single_line(l, s, f))
+                                choice_processed = True
+                
+                if choice_processed:
                     continue
 
                 if line.line_type in ['config', 'menuconfig']:
@@ -570,6 +593,8 @@ class KconfigTransformer:
             stats = self._log_file_and_reset_count(self.FILE_SOURCE_OUT_DIFF, current_file, len_reader_input, len_transformed_lines)
             return result, stats
     
+    # transform choice
+
     def transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
        
         line = lines[current_index]
@@ -848,6 +873,7 @@ class KconfigTransformer:
         source_files = self._get_all_source_files() # all paths are relative to srctree 
         transformed_count = 0
         cd_definition_info = {}
+        choice_definition_info = {}
 
         print("\n3. Filter ExtParserContext")
         print("extract all configdefault symbols and for each get transformed lines and last config")
@@ -888,7 +914,24 @@ class KconfigTransformer:
                 print(cd_default_lines)   
                 print(f"\n - transformed cd entries")
                 print(tcd_list)             
- 
+
+        for choice_name in self.context.choice_definitions.keys():
+            if choice_name not in choice_definition_info:
+                choice_definition_info[choice_name] = {}
+            
+            choice_info = self.extract_named_choice_info(choice_name)
+            
+            # Get all config entries for this choice
+            choice_configs = self._get_all_choice_configs(choice_name, reader, project_dir)
+            choice_info['choice_configs'] = choice_configs
+            
+            choice_definition_info[choice_name] = choice_info
+            
+            if log:
+                print(f"\n  named choice: {choice_name}")
+                print(f"    'choice_def': {choice_info.get('choice_def')}")
+                print(f"    'choice_configs': {len(choice_configs)} config entries")
+
         print(f"\nfor each given file at source_files start building path output structur and call reader and writer")     
         print(f"\n4. Transform all files - needs reader & writer")
         for file_path in source_files:
@@ -911,7 +954,7 @@ class KconfigTransformer:
                             print(f"        -> Content: {line.content}")
 
             print("call _transform_lines(lines from reader, input, configdefault dict info)")
-            transformed, stats = self._transform_lines(lines, input_file, cd_definition_info)
+            transformed, stats = self._transform_lines(lines, input_file, cd_definition_info, choice_definition_info)
             
             excel_stats.append(stats)
 
@@ -940,6 +983,8 @@ class KconfigTransformer:
         self.OPTION_MODULES_COUNTER = 0
         self.OPTION_MODULES_INFO.clear()
         return excel_stats
+
+   # get all choices configs
 
     def _log_file_and_reset_count(self, new_lines_skw : int, current_file : Path, len_input : int, len_result : int):
         print(f"    FILE LOG --------------------------------------------------------------")
