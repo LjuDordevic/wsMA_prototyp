@@ -40,7 +40,10 @@ class KconfigLine:
         elif s.startswith('menuconfig '):
             return 'menuconfig'
         elif s.startswith('choice'):
-            return 'choice'
+            if re.match(r'^choice\s+\w+', s):
+                return 'named_choice'
+            else:
+                return 'choice'
         elif s.startswith('endchoice'): 
             return 'endchoice'
         elif s.startswith('configdefault '):
@@ -148,6 +151,10 @@ class KconfigLine:
         
         elif self.line_type == 'option env':
             content['env'] = line_stripped.split('"')[1]
+
+        elif self.line_type == 'named_choice':
+            match = re.match(r'^choice\s+(\w+)', line_stripped)
+            content['name'] = match.group(1)
         return content
     
     def __repr__(self):
