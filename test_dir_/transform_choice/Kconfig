@@ -1,8 +1,14 @@
 mainmenu "Test (named) choice"
 
+config OPT_Y
+  def_bool y
+
 choice NAMED_CH
+  bool
   prompt "pick bool named choice"
-  bool 
+  default CH_A 
+  depends on OPT_Y
+  optional
   config CH_A 
     bool "Op A"
   config CH_B

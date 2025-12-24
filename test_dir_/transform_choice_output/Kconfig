@@ -1,13 +1,24 @@
 mainmenu "Test (named) choice"
 
+config OPT_Y
+  def_bool y
+
 choice NAMED_CH
   prompt "pick bool named choice"
-  bool 
+  default CH_A 
+  depends on OPT_Y
+  depends on AAA if OPT_Z
+  default CH_C if BB && AAA && OPT_Z
   config CH_A 
     bool "Op A"
   config CH_B
     bool "Op B"
-endchoice   
+  config CH_C
+    bool "Op C" 
+  endif
+  config CH_D
+    bool "Op D" 
+endchoice
 
 source "uo1/Kconfig"
 #choice 

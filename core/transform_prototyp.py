@@ -761,6 +761,59 @@ class KconfigTransformer:
         print(f"\nFinal result has {len(result)} lines")
         #-------------------------------------------------------------------------------------------------------------------------
         # ADD all configs in choice block
+        # 1. TRACK configs already present in this choice block
+        existing_configs = set()
+
+        idx = first_ch_config_idx
+        while idx is not None and idx < block_end_index:
+            line_item = lines[idx]
+            print(f"Track existing configs: {line_item}")
+            # Stop at endchoice
+            if line_item.line_type == 'endchoice':
+                break
+
+            # Start of a config/menuconfig block
+            if line_item.line_type in ('config', 'menuconfig'):
+                sym_name = line_item.content.get('symbol')
+                if sym_name:
+                    existing_configs.add(sym_name)  # list of existing 
+
+                # Process the whole config block
+                while idx < block_end_index:
+                    current = lines[idx]
+                    print(f"current: {current}")
+
+                    # Stop if next config or endchoice starts
+                    if (current.line_type in ('config', 'menuconfig', 'endchoice') and current is not line_item):
+                        break
+
+                    transformed = transform_func(current, None, None)
+                    if transformed is not None:
+                        if isinstance(transformed, list):
+                            result.extend(transformed)
+                        else:
+                            result.append(transformed)
+                    idx += 1
+                continue
+            idx += 1
+
+        print(f"result: {result}")
+        # 2. ADD configs from other files 
+        added_configs = 0
+        for config_entry in choice_configs:
+            config_symbol = config_entry.get('symbol')
+
+            # Skip configs already present
+            if config_symbol in existing_configs:
+                continue
+
+            for config_line in config_entry.get('block', []):
+                result.append(config_line)
+
+            added_configs += 1
+            print(f"      Added config {config_symbol} from {config_entry.get('file')}")
+
+        print(f"    Added {added_configs} config entries from other choice definitions")
 
         # ADD endchoice -------------------------------------------------------------------------------------------------------------------------
         result.append(end_line)
