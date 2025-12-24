@@ -116,3 +116,79 @@ choice
   endif 
 endchoice   
 #---------------------------
+When 2 definitions with multiple depends on und defaults 
+1) #-------------------------------------------
+mainmenu "Test (named) choice"
+
+config OPT_Y
+  def_bool y
+
+choice NAMED_CH
+  bool
+  prompt "pick bool named choice"
+  default CH_A 
+  depends on OPT_Y
+  optional
+  config CH_A 
+    bool "Op A"
+  config CH_B
+    bool "Op B"
+endchoice   
+
+source "uo1/Kconfig"
+2) #-------------------------------------------
+config AAA 
+  bool "AAA"
+  default y
+
+config OPT_Z
+  def_bool y
+
+config BB
+  def_bool y
+
+if OPT_Z
+
+config Z1
+  bool "Z1"
+
+choice NAMED_CH
+  depends on AAA
+  default CH_C if BB
+  config CH_C
+    bool "Op C" 
+  config CH_D
+    bool "Op D" 
+endchoice 
+endif
+#-------------------------------------------
+THEN Transformation right now:
+
+mainmenu "Test (named) choice"
+
+config OPT_Y
+  def_bool y
+
+choice NAMED_CH
+  prompt "pick bool named choice"
+  default CH_A 
+  depends on OPT_Y
+  depends on OPT_Y && AAA && OPT_Z            (this one is build from parser result)
+  default CH_A if OPT_Y && BB && AAA && OPT_Z (this one also, but it's not right, where is be CH_C)
+  config CH_A 
+    bool "Op A"
+  config CH_B
+    bool "Op B"
+  config CH_C
+    bool "Op C" 
+  config CH_D
+    bool "Op D" 
+endchoice 
+
+SHOULD:
+choice NAMED_CH
+  prompt "pick bool named choice"
+  default CH_A 
+  depends on OPT_Y 
+  depends on AAA && OPT_Z 
+  default CH_C if BB && AAA && OPT_Z 
