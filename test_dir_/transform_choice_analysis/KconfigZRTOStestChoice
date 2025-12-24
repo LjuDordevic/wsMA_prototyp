@@ -1,0 +1,21 @@
+mainmenu "Test (named) choice"
+
+config OP_Y
+  def_bool y
+menuconfig CH_C
+  bool "CH_C"
+
+choice 
+  prompt "pick bool named choice"
+  default CH_A
+  comment "some choice"
+  config CH_A 
+    bool "Op A"
+  config CH_B
+    bool "Op B"
+  if OP_Y
+    config CH_C1
+        bool "CH_C1"
+        depends on CH_C
+  endif 
+endchoice   

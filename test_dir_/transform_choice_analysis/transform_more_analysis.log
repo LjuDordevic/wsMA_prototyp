@@ -1,0 +1,118 @@
+# This was not generated automatically 
+
+#----- Kconfiglib-specification:
+mainmenu "Test (named) choice"
+
+config OP_Y
+  def_bool y
+
+choice NAMED_CH
+  bool
+  prompt "pick bool named choice"
+  optional
+  default CH_A
+  comment "some choice"
+  config CH_A 
+    bool "Op A"
+  config CH_B
+    bool "Op B"
+  if OP_Y
+    menuconfig CH_C
+        bool "CH_C"
+    config CH_C1
+        bool "CH_C1"
+        depends on CH_C
+  endif 
+endchoice   
+#---------------------------
+It can be read through ZRTOS-Kconfiglib menuconfig:
+-> menuconfig CH_C is read as element, and CH_C1 as it's subelement
+-> So:
+[named]choice_opt::= choice [<choice_name>] <choice_att>
+    (<(menu)config_opt> | <comment_opt> | <if_opt>)
+endchoice
+#---------------------------
+But Linux mconf:
+~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/test_dir_/transform_choice_analysis/KconfigZRTOStestChoice
+
+KconfigZRTOStestChoice:6: syntax error                  -> choice NAMED_CH
+KconfigZRTOStestChoice:6: invalid statement             -> no named choice options allowed
+KconfigZRTOStestChoice:7: invalid statement             -> bool -> no typ attr
+KconfigZRTOStestChoice:8: invalid statement             -> ? 
+KconfigZRTOStestChoice:9: unknown statement "optional"  -> no optional attr allowed 
+KconfigZRTOStestChoice:10: invalid statement            -> ?
+KconfigZRTOStestChoice:23: syntax error                 -> ?
+KconfigZRTOStestChoice:23: invalid statement            -> ? 
+                                                          (? = probablly bc of other errors)
+
+#----- when Kconfiglib-specification:
+mainmenu "Test (named) choice"
+
+config OP_Y
+  def_bool y
+
+choice 
+  prompt "pick bool named choice"
+  default CH_A
+  comment "some choice"
+  config CH_A 
+    bool "Op A"
+  config CH_B
+    bool "Op B"
+  if OP_Y
+    menuconfig CH_C
+        bool "CH_C"
+    config CH_C1
+        bool "CH_C1"
+        depends on CH_C
+  endif 
+endchoice   
+#---------------------------
+Linux mconf:
+KconfigZRTOStestChoice:15: syntax error        -> menuconfig as choice option not allowed 
+KconfigZRTOStestChoice:15: invalid statement   -> 
+KconfigZRTOStestChoice:16: invalid statement   -> 
+
+IF YOU TRY TO FIX through menuconfig -> config
+meaning:
+  if OP_Y
+    config CH_C
+        bool "CH_C"
+    config CH_C1
+        bool "CH_C1"
+        depends on CH_C
+  endif 
+
+THEN: 
+error: recursive dependency detected!
+        symbol <choice> unknown is visible depending on CH_C1
+        symbol CH_C1 depends on CH_C
+        symbol CH_C is part of choice block at /home/ljd/wsMA_prototyp/test_dir_/transform_choice_analysis/KconfigZRTOStestChoice:6
+For a resolution refer to Documentation/kbuild/kconfig-language.rst
+subsection "Kconfig recursive dependency limitations"
+
+SO SOLUTION: put menuconfig outside of choice 
+this specification can be read through mconf:
+#---------------------------
+mainmenu "Test (named) choice"
+
+config OP_Y
+  def_bool y
+menuconfig CH_C
+  bool "CH_C"
+
+choice 
+  prompt "pick bool named choice"
+  default CH_A
+  comment "some choice"
+  config CH_A 
+    bool "Op A"
+  config CH_B
+    bool "Op B"
+  if OP_Y
+    config CH_C1
+        bool "CH_C1"
+        depends on CH_C
+  endif 
+endchoice   
+#---------------------------
