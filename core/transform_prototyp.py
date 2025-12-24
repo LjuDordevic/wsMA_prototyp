@@ -594,6 +594,58 @@ class KconfigTransformer:
             return result, stats
     
     # transform choice
+    def transform_choice(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
+        from kconfig_writer import KconfigLine
+        
+        line = lines[current_index]
+        choice_name = line.content.get('name')
+        result.append(line)     # -> save only line: choice <name>
+
+  
+        print(f"lines: {lines}")
+        print(F"line {line} {current_index}")
+        print(f"result: {result}")
+       
+        # EXTEND DEPENDENCIES for depends on & default line -----------------------------------------------------------------
+        choice_name_from_info, default_deps_list, node_deps_list = choice_info['choice_def'][0]
+        all_node_deps = []
+        all_default_deps = []
+
+        for dep_list in node_deps_list:
+            for dep in dep_list:
+                if dep != 'y' and dep not in all_node_deps:
+                    all_node_deps.append(dep)
+        
+        for dep_list in default_deps_list:
+            for dep in dep_list:
+                if dep != 'y' and dep not in all_default_deps:
+                    all_default_deps.append(dep)
+        
+        print(f"all_node_deps: {all_node_deps}")
+        print(f"all_default_deps: {all_default_deps}")
+        end_line = None
+        # FIND endchoice indx ----------------------------------------------------------------------------------------------
+        block_end_index = current_index + 1
+        while block_end_index < len(lines):
+            next_line = lines[block_end_index]   
+            if next_line.line_type == 'endchoice':
+                # copy this line, so that we can add it at the end of result 
+                indent_str = ' ' * (next_line.indent)   
+                new_line_text = f'{indent_str}endchoice'
+                end_line = KconfigLine(new_line_text, next_line.line_number, line_type='endchoice')
+                block_end_index += 1
+                break
+            block_end_index += 1
+        
+        # here 
+
+        # ADD endchoice -------------------------------------------------------------------------------------------------------------------------
+        result.append(end_line)
+
+        for line in result:
+            print(line)
+
+        return block_end_index
 
     def transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
        

@@ -82,7 +82,7 @@ def main():
         log=True
     )
     
-    info = transformer.extract_named_choice_info('NAMED_CH')
+    #info = transformer.extract_named_choice_info('NAMED_CH')
     """ print("choice definition ------------------------------------------------------")
     for cn, file, line, node in info['choice_def']:
         print(f"{cn}, {file}, {line}, {node}")

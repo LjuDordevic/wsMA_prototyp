@@ -1,12 +1,12 @@
 from pathlib import Path
-from typing import List
+from typing import List, Optional
 import re
 
 class KconfigLine:
     """
     one line
     """
-    def __init__(self, raw_text: str, line_number: int):
+    def __init__(self, raw_text: str, line_number: int, line_type: str = None):
         self.raw_text = raw_text
         self.line_number = line_number
         self.stripped = raw_text.strip()
