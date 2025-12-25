@@ -676,7 +676,7 @@ class KconfigTransformer:
             # Group configs by choice_line to identify which definition they belong to
             configs_by_definition = {}
             for cfg in choice_configs:
-                cfg_choice_line = cfg.get('choice_line')  # ← Umbenannt, um Konflikt zu vermeiden
+                cfg_choice_line = cfg.get('choice_line') 
                 if cfg_choice_line not in configs_by_definition:
                     configs_by_definition[cfg_choice_line] = []
                 configs_by_definition[cfg_choice_line].append(cfg)
@@ -811,12 +811,7 @@ class KconfigTransformer:
             entry_type = entry.get('type', 'config')  # Default to 'config' for backward compatibility
             
             if entry_type == 'if_block':
-                # Check if any symbol in this if-block already exists
                 symbols_in_if = entry.get('symbols', [])
-                if any(sym in existing_configs for sym in symbols_in_if):
-                    print(f"      Skipping if-block (symbols already present): {symbols_in_if}")
-                    continue
-                
                 # Add all symbols to existing_configs
                 for sym in symbols_in_if:
                     existing_configs.add(sym)
