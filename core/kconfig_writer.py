@@ -25,7 +25,7 @@ class KconfigLine:
         if not s:
             return 'empty'
         elif s.startswith('#'):
-            return 'comment'
+            return 'commented'
         elif s.startswith('mainmenu '):
             return 'mainmenu'
         elif s.startswith('menu '):
@@ -119,6 +119,11 @@ class KconfigLine:
 
         if self.line_type == 'config':
             match = re.match(r'config\s+(\w+)', line_stripped)
+            if match:
+                content['symbol'] = match.group(1)
+
+        if self.line_type == 'menuconfig':
+            match = re.match(r'menuconfig\s+(\w+)', line_stripped)
             if match:
                 content['symbol'] = match.group(1)
 

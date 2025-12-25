@@ -192,3 +192,99 @@ choice NAMED_CH
   depends on OPT_Y 
   depends on AAA && OPT_Z 
   default CH_C if BB && AAA && OPT_Z 
+
+#-------------------------------------------
+Transformation right now:
+
+choice NAMED_CH
+  bool
+  prompt "pick bool named choice"
+  default CH_A 
+  depends on OPT_Y
+  optional
+  config CH_A 
+    bool "Op A"
+  config CH_B
+    bool "Op B"
+endchoice   
+choice NAMED_CH
+  depends on AAA
+  default CH_C if BB
+  if BB
+  config CH_C
+    bool "Op C" 
+  endif
+  config CH_D
+    bool "Op D" 
+endchoice 
+--> 
+choice NAMED_CH
+  prompt "pick bool named choice"
+  default CH_A 
+  depends on OPT_Y
+  depends on AAA if OPT_Z
+  default CH_C if BB && AAA && OPT_Z
+  config CH_A 
+    bool "Op A"
+  config CH_B
+    bool "Op B"
+  if BB
+  config CH_C
+    bool "Op C" 
+  endif
+  config CH_D
+    bool "Op D" 
+endchoice
+
+Open Problem: menuconfig elements inside choice block and inside if 
+choice NAMED_CH
+  depends on AAA
+  default CH_C if BB
+  if BB
+  config CH_C
+    bool "Op C" 
+  menuconfig MC1
+    bool "M"
+  endif
+  menuconfig MC2
+    bool "MC2"
+      config CMC2
+        bool "cMCx"
+      config CMC2
+        bool "cMCxx"
+  config CH_D
+    bool "Op D" 
+endchoice 
+Solution:
+- menuconfig Zeilen bei _get_all_choice_configs 
+in separate liste spiechern und ggf. durch if Bedingungen ergänzen 
+- dann später bei transform choice nach dem choice block hinzufügen (result.append am Ende)
+
+choice NAMED_CH
+  depends on AAA
+  default CH_C if BB
+  if BB
+  config CH_C
+    bool "Op C" 
+  menuconfig MC1
+    bool "M"
+  endif
+  menuconfig MC2
+    bool "MC2"
+      config CMC2
+        bool "cMCx"
+      config CMC3
+        bool "cMCxx"
+  config CH_D
+    bool "Op D" 
+endchoice
+
+# MANGEL:
+Den Abstand wird nicht richtig erkannt, also wenn die Spezifikation 
+zu große Einrückung zu CM2 und CM3:
+menuconfig MC2
+    bool "MC2"
+      config CMC2
+        bool "cMCx"
+      config CMC3
+        bool "cMCxx"

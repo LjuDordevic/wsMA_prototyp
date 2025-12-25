@@ -19,7 +19,15 @@ choice NAMED_CH
   if BB
   config CH_C
     bool "Op C" 
+  menuconfig MC1
+    bool "M"
   endif
+  menuconfig MC2
+    bool "MC2"
+  config CMC2
+    bool "cMCx"
+  config CMC3
+    bool "cMCxx"
   config CH_D
     bool "Op D" 
 endchoice 

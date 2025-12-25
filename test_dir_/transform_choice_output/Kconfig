@@ -3,7 +3,7 @@ mainmenu "Test (named) choice"
 config OPT_Y
   def_bool y
 
-choice NAMED_CH
+choice
   prompt "pick bool named choice"
   default CH_A 
   depends on OPT_Y
@@ -17,9 +17,17 @@ choice NAMED_CH
   config CH_C
     bool "Op C" 
   endif
+  config CMC2
+    bool "cMCx"
+  config CMC3
+    bool "cMCxx"
   config CH_D
     bool "Op D" 
 endchoice
+  menuconfig MC1
+    bool "M"
+  menuconfig MC2
+    bool "MC2"
 
 source "uo1/Kconfig"
 #choice 
