@@ -25,13 +25,12 @@ START using parser:
                   <symbol Z1, bool, "Z1", value n, visibility y, direct deps y, uo1/Kconfig:13>,
                   <symbol CH_C, bool, "Op C", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:20>,
                   <symbol CH_D, bool, "Op D", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:23>],
- 'kconf': <configuration with 11 symbols, main menu prompt "Test (named) choice", srctree "/home/ljd/wsMA_prototyp/test_dir_/transform_choice", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
+ 'kconf': <configuration with 10 symbols, main menu prompt "Test (named) choice", srctree "/home/ljd/wsMA_prototyp/test_dir_/transform_choice", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
  'menus': [],
  'missing_syms': [],
  'named_choices': {'NAMED_CH': <choice NAMED_CH, bool, "pick bool named choice", mode n, visibility y, optional, Kconfig:6, uo1/Kconfig:16>},
  'syms': {'AAA': <symbol AAA, bool, "AAA", value y, visibility y, direct deps y, uo1/Kconfig:1>,
           'BB': <symbol BB, bool, value y, visibility n, direct deps y, uo1/Kconfig:8>,
-          'CCC': <symbol CCC, unknown, value "CCC", visibility n, direct deps n, undefined>,
           'CH_A': <symbol CH_A, bool, "Op A", value n, visibility n, choice symbol, direct deps n, Kconfig:12>,
           'CH_B': <symbol CH_B, bool, "Op B", value n, visibility n, choice symbol, direct deps n, Kconfig:14>,
           'CH_C': <symbol CH_C, bool, "Op C", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:20>,
@@ -147,21 +146,40 @@ def dependencies extr: [['OPT_Y'], ['BB', 'AAA', 'OPT_Z']]
 dep dependencies extr: [['OPT_Y'], ['AAA', 'OPT_Z']]
 
 
+=== _get_all_choice_configs for NAMED_CH ===
+  Found 2 definitions:
+    [0] file=Kconfig, line=6
+    [1] file=uo1/Kconfig, line=16
+
+  Processing definition [0]: Kconfig:6
+    Looking for file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
+    File exists, reading...
+
 
 Reader found: 27 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
+    Read 27 lines
+    Found choice at line index 5, line_number=6
   DEBUG: Found choice NAMED_CH at Kconfig:6
   DEBUG: choice_default_lines: [KconfigLine(default, line=9, indent=2)]
   DEBUG: choice_depends_lines: [KconfigLine(depends_on, line=10, indent=2)]
-  DEBUG: Adding config CH_A with 1 defaults, 1 depends
-  DEBUG: Adding config CH_B with 1 defaults, 1 depends
+  DEBUG: Adding config CH_A
+  DEBUG: Adding config CH_B
+  Finished processing definition [0]
+
+  Processing definition [1]: uo1/Kconfig:16
+    Looking for file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
+    File exists, reading...
 
 
 Reader found: 26 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
+    Read 26 lines
+    Found choice at line index 15, line_number=16
   DEBUG: Found choice NAMED_CH at uo1/Kconfig:16
   DEBUG: choice_default_lines: [KconfigLine(default, line=18, indent=2)]
   DEBUG: choice_depends_lines: [KconfigLine(depends_on, line=17, indent=2)]
-  DEBUG: Adding config CH_C with 1 defaults, 1 depends
-  DEBUG: Adding config CH_D with 1 defaults, 1 depends
+  DEBUG: Adding if-block with configs ['CH_C']
+  DEBUG: Adding config CH_D
+  Finished processing definition [1]
   DEBUG: Total entries collected: 4
 
   named choice: NAMED_CH
@@ -184,7 +202,11 @@ current_indx: 6 - block endidx 16
 current_indx: 6 - choice_attr_end: 11
 PROCESS attr [KconfigLine(mainmenu, line=1, indent=0), KconfigLine(empty, line=2, indent=0), KconfigLine(config, line=3, indent=0), KconfigLine(def_bool, line=4, indent=2), KconfigLine(empty, line=5, indent=0), KconfigLine(named_choice, line=6, indent=0), KconfigLine(prompt, line=8, indent=2), KconfigLine(default, line=9, indent=2), KconfigLine(depends_on, line=10, indent=2)]
 choice_def [('NAMED_CH', [['OPT_Y'], ['BB', 'AAA', 'OPT_Z']], [['OPT_Y'], ['AAA', 'OPT_Z']])]
-choice_configs [{'symbol': 'CH_A', 'file': 'Kconfig', 'line': 12, 'choice_line': 6, 'block': [KconfigLine(config, line=12, indent=2), KconfigLine(type_bool, line=13, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2)]}, {'symbol': 'CH_B', 'file': 'Kconfig', 'line': 14, 'choice_line': 6, 'block': [KconfigLine(config, line=14, indent=2), KconfigLine(type_bool, line=15, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2)]}, {'symbol': 'CH_C', 'file': 'uo1/Kconfig', 'line': 20, 'choice_line': 16, 'block': [KconfigLine(config, line=20, indent=2), KconfigLine(type_bool, line=21, indent=4), KconfigLine(endif, line=22, indent=2)], 'default_lines': [KconfigLine(default, line=18, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=17, indent=2)]}, {'symbol': 'CH_D', 'file': 'uo1/Kconfig', 'line': 23, 'choice_line': 16, 'block': [KconfigLine(config, line=23, indent=2), KconfigLine(type_bool, line=24, indent=4)], 'default_lines': [KconfigLine(default, line=18, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=17, indent=2)]}]
+choice_configs [{'type': 'config', 'symbol': 'CH_A', 'file': 'Kconfig', 'line': 12, 'choice_line': 6, 'block': [KconfigLine(config, line=12, indent=2), KconfigLine(type_bool, line=13, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2)]}, {'type': 'config', 'symbol': 'CH_B', 'file': 'Kconfig', 'line': 14, 'choice_line': 6, 'block': [KconfigLine(config, line=14, indent=2), KconfigLine(type_bool, line=15, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2)]}, {'type': 'if_block', 'symbols': ['CH_C'], 'file': 'uo1/Kconfig', 'line': 19, 'choice_line': 16, 'block': [KconfigLine(if, line=19, indent=2), KconfigLine(config, line=20, indent=2), KconfigLine(type_bool, line=21, indent=4), KconfigLine(endif, line=22, indent=2)], 'default_lines': [KconfigLine(default, line=18, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=17, indent=2)]}, {'type': 'config', 'symbol': 'CH_D', 'file': 'uo1/Kconfig', 'line': 23, 'choice_line': 16, 'block': [KconfigLine(config, line=23, indent=2), KconfigLine(type_bool, line=24, indent=4)], 'default_lines': [KconfigLine(default, line=18, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=17, indent=2)]}]
+  [0] type=config, symbol=CH_A, symbols=None, choice_line=6
+  [1] type=config, symbol=CH_B, symbols=None, choice_line=6
+  [2] type=if_block, symbol=None, symbols=['CH_C'], choice_line=16
+  [3] type=config, symbol=CH_D, symbols=None, choice_line=16
 all_default_deps: [['OPT_Y'], ['BB', 'AAA', 'OPT_Z']]
 all_node_deps: [['OPT_Y'], ['AAA', 'OPT_Z']]
 Found 2 choice definitions at lines: [6, 16]
@@ -192,7 +214,9 @@ Found 2 choice definitions at lines: [6, 16]
 Processing definition 1 at line 16
   default_deps: ['BB', 'AAA', 'OPT_Z']
   node_deps: ['AAA', 'OPT_Z']
-  configs: ['CH_C', 'CH_D']
+  entries in this def:
+    if_block with symbols: ['CH_C']
+    config: CH_D
   Added depends: depends on AAA if OPT_Z
   Added default: default CH_C if BB && AAA && OPT_Z
 
@@ -207,9 +231,9 @@ current: KconfigLine(type_bool, line=15, indent=4)
 current: KconfigLine(endchoice, line=16, indent=0)
 Track existing configs: KconfigLine(endchoice, line=16, indent=0)
 result: [KconfigLine(mainmenu, line=1, indent=0), KconfigLine(empty, line=2, indent=0), KconfigLine(config, line=3, indent=0), KconfigLine(def_bool, line=4, indent=2), KconfigLine(empty, line=5, indent=0), KconfigLine(named_choice, line=6, indent=0), KconfigLine(prompt, line=8, indent=2), KconfigLine(default, line=9, indent=2), KconfigLine(depends_on, line=10, indent=2), KconfigLine(depends_on, line=17, indent=2), KconfigLine(default, line=18, indent=2), KconfigLine(config, line=12, indent=2), KconfigLine(type_bool, line=13, indent=4), KconfigLine(config, line=14, indent=2), KconfigLine(type_bool, line=15, indent=4)]
-      Added config CH_C from uo1/Kconfig
+      Added if-block with configs ['CH_C'] from uo1/Kconfig
       Added config CH_D from uo1/Kconfig
-    Added 2 config entries from other choice definitions
+    Added 2 entries from other choice definitions
     source without glob: 1
     FILE LOG --------------------------------------------------------------
     Reader input                27 lines
@@ -221,14 +245,14 @@ result: [KconfigLine(mainmenu, line=1, indent=0), KconfigLine(empty, line=2, ind
     SUM (r/or/o)source lines:   1
     All "option env" attr:      0
     -----------------------------------------------------------------------
-    Transformer Output:         32 lines
+    Transformer Output:         33 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
         Added new lines of source:       0
         Added new bc of config_default:  0
         Removed   bc of config_default:  0
         Removed no match for o(r)source: 0
-        Done writting 32 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/Kconfig
+        Done writting 33 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/Kconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
 
 

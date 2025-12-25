@@ -16,8 +16,10 @@ config Z1
 choice NAMED_CH
   depends on AAA
   default CH_C if BB
+  if BB
   config CH_C
     bool "Op C" 
+  endif
   config CH_D
     bool "Op D" 
 endchoice 

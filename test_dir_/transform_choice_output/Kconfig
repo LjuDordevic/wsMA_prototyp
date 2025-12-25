@@ -13,6 +13,7 @@ choice NAMED_CH
     bool "Op A"
   config CH_B
     bool "Op B"
+  if BB
   config CH_C
     bool "Op C" 
   endif
