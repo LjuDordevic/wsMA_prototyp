@@ -621,7 +621,7 @@ class KconfigTransformer:
             return result, stats
     
     # transform choice
-    def transform_choice1(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
+    def transform_choice(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
         from kconfig_writer import KconfigLine
         
         choice_line = lines[current_index]        
@@ -718,11 +718,12 @@ class KconfigTransformer:
             # Sort by choice_line to get definitions in order
             sorted_def_lines = sorted(configs_by_definition.keys())
             print(f"Found {len(sorted_def_lines)} choice definitions at lines: {sorted_def_lines}")
-            
             # Process each definition (skip the first one, index 0)
             for def_idx in range(1, len(sorted_def_lines)):
+                depends_from_def = []
                 choice_line_num = sorted_def_lines[def_idx]
                 configs_in_this_def = configs_by_definition[choice_line_num]
+                
                 
                 # Get dependencies for this definition
                 default_deps = all_default_deps[def_idx] if def_idx < len(all_default_deps) else []
@@ -757,7 +758,7 @@ class KconfigTransformer:
                         if additional:
                             new_line = (
                                 f"{' ' * (choice_line.indent + 2)}"
-                                f"depends on {base_cond} if {' && '.join(additional)}"
+                                f"depends on {base_cond} && {' && '.join(additional)}"
                             )
                         else:
                             new_line = (
@@ -765,6 +766,8 @@ class KconfigTransformer:
                                 f"depends on {base_cond}"
                             )
                         result.append(KconfigLine(new_line, dep_line.line_number))
+                        depends_from_def.append(KconfigLine(new_line, dep_line.line_number))
+                        print(f"depdsksakl {depends_from_def}")
                         print(f"  Added depends: {new_line.strip()}")
 
                     # -------- default ----------
@@ -857,7 +860,16 @@ class KconfigTransformer:
                 
                 # Collect menuconfigs to add after endchoice
                 for mc_info in menuconfigs_in_if:
-                    menuconfigs_to_add_after.append(mc_info)
+                    mc_symbol = mc_info.get('symbol')
+
+                    if mc_symbol in existing_configs:
+                        continue
+
+                    mc_info_copy = dict(mc_info)
+                    mc_info_copy['depends_from_def'] = depends_from_def
+                    menuconfigs_to_add_after.append(mc_info_copy)
+                    #menuconfigs_to_add_after.append(mc_info)
+                    existing_configs.add(mc_symbol)
                 
                 # Mark configs as existing
                 for cfg in configs_in_if:
@@ -868,7 +880,7 @@ class KconfigTransformer:
             elif entry_type == 'menuconfig':
                 # Menuconfig - collect to add after endchoice
                 config_symbol = entry.get('symbol')
-                
+
                 if config_symbol in existing_configs:
                     continue
                 
@@ -877,6 +889,7 @@ class KconfigTransformer:
                     'block': entry.get('block', []),
                     'if_condition': entry.get('if_condition'),
                     'depends_lines': entry.get('depends_lines', []),
+                    'depends_from_def': depends_from_def,
                     'node_deps': all_node_deps[def_idx] if def_idx < len(all_node_deps) else []
                 })
                 
@@ -911,31 +924,22 @@ class KconfigTransformer:
             if_cond = mc_info.get('if_condition')
             depends_lines = mc_info.get('depends_lines', [])
             node_deps = mc_info.get('node_deps', [])
+            depends_from_def = mc_info.get('depends_from_def', [])
             
-            print(f"    Adding menuconfig {mc_symbol}, if_condition={if_cond}")
+            print(f"    Adding menuconfig {mc_symbol}, depends_from_def={depends_from_def}")
             
             # Add menuconfig line
             result.append(mc_block[0])  # First line is menuconfig declaration
             
             # Modify prompt line to add if condition if needed
-            for i, line in enumerate(mc_block[1:], 1):
-                if line.line_type == 'prompt' and if_cond:
-                    # Add if condition to prompt
-                    raw = line.raw_text.strip()
-                    new_line = f"{' ' * line.indent}{raw} if {if_cond}"
-                    result.append(KconfigLine(new_line, line.line_number))
-                elif line.line_type == 'depends_on' and node_deps:
-                    # Extend depends with node_deps
-                    raw = line.raw_text.strip()
-                    base_cond = raw[len('depends on'):].strip()
-                    additional = [d for d in node_deps if d not in base_cond and d != 'y']
-                    if additional:
-                        new_line = f"{' ' * line.indent}depends on {base_cond} if {' && '.join(additional)}"
-                        result.append(KconfigLine(new_line, line.line_number))
-                    else:
-                        result.append(line)
-                else:
-                    result.append(line)
+            for line in mc_block[1:]:
+                result.append(line)
+            for dep_line in depends_from_def:
+                raw = dep_line.raw_text.strip()
+                new_line = f"{' ' * (line.indent)}{raw}"
+                print(f"hello {new_line}")
+                print(line.indent)
+                result.append(KconfigLine(new_line, dep_line.line_number))
         
         return block_end_index
 

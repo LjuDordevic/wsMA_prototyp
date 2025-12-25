@@ -7,7 +7,7 @@ choice
   prompt "pick bool named choice"
   default CH_A 
   depends on OPT_Y
-  depends on AAA if OPT_Z
+  depends on AAA && OPT_Z
   default CH_C if BB && AAA && OPT_Z
   config CH_A 
     bool "Op A"
@@ -26,8 +26,10 @@ choice
 endchoice
   menuconfig MC1
     bool "M"
+    depends on AAA && OPT_Z
   menuconfig MC2
     bool "MC2"
+    depends on AAA && OPT_Z
 
 source "uo1/Kconfig"
 #choice 

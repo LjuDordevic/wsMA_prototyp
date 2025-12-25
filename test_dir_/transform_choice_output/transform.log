@@ -244,6 +244,14 @@ current_indx: 6 - choice_attr_end: 11
 PROCESS attr [KconfigLine(mainmenu, line=1, indent=0), KconfigLine(empty, line=2, indent=0), KconfigLine(config, line=3, indent=0), KconfigLine(def_bool, line=4, indent=2), KconfigLine(empty, line=5, indent=0), KconfigLine(choice, line=6, indent=0), KconfigLine(prompt, line=8, indent=2), KconfigLine(default, line=9, indent=2), KconfigLine(depends_on, line=10, indent=2)]
 choice_def [('NAMED_CH', [['OPT_Y'], ['BB', 'AAA', 'OPT_Z']], [['OPT_Y'], ['AAA', 'OPT_Z']])]
 choice_configs length: 7
+choice_configs [{'type': 'config', 'symbol': 'CH_A', 'file': 'Kconfig', 'line': 12, 'choice_line': 6, 'block': [KconfigLine(config, line=12, indent=2), KconfigLine(type_bool, line=13, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_B', 'file': 'Kconfig', 'line': 14, 'choice_line': 6, 'block': [KconfigLine(config, line=14, indent=2), KconfigLine(type_bool, line=15, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2)], 'if_condition': None}, {'type': 'if_block', 'configs': ['CH_C'], 'menuconfigs': [{'symbol': 'MC1', 'block': [KconfigLine(menuconfig, line=22, indent=2), KconfigLine(type_bool, line=23, indent=4)], 'if_condition': 'BB'}], 'file': 'uo1/Kconfig', 'line': 19, 'choice_line': 16, 'block': [KconfigLine(if, line=19, indent=2), KconfigLine(config, line=20, indent=2), KconfigLine(type_bool, line=21, indent=4), KconfigLine(endif, line=24, indent=2)], 'default_lines': [KconfigLine(default, line=18, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=17, indent=2)]}, {'type': 'menuconfig', 'symbol': 'MC2', 'file': 'uo1/Kconfig', 'line': 25, 'choice_line': 16, 'block': [KconfigLine(menuconfig, line=25, indent=2), KconfigLine(type_bool, line=26, indent=4)], 'default_lines': [KconfigLine(default, line=18, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=17, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CMC2', 'file': 'uo1/Kconfig', 'line': 27, 'choice_line': 16, 'block': [KconfigLine(config, line=27, indent=2), KconfigLine(type_bool, line=28, indent=4)], 'default_lines': [KconfigLine(default, line=18, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=17, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CMC3', 'file': 'uo1/Kconfig', 'line': 29, 'choice_line': 16, 'block': [KconfigLine(config, line=29, indent=2), KconfigLine(type_bool, line=30, indent=4)], 'default_lines': [KconfigLine(default, line=18, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=17, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_D', 'file': 'uo1/Kconfig', 'line': 31, 'choice_line': 16, 'block': [KconfigLine(config, line=31, indent=2), KconfigLine(type_bool, line=32, indent=4)], 'default_lines': [KconfigLine(default, line=18, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=17, indent=2)], 'if_condition': None}]
+  [0] type=config, symbol=CH_A, symbols=None, choice_line=6
+  [1] type=config, symbol=CH_B, symbols=None, choice_line=6
+  [2] type=if_block, symbol=None, symbols=None, choice_line=16
+  [3] type=menuconfig, symbol=MC2, symbols=None, choice_line=16
+  [4] type=config, symbol=CMC2, symbols=None, choice_line=16
+  [5] type=config, symbol=CMC3, symbols=None, choice_line=16
+  [6] type=config, symbol=CH_D, symbols=None, choice_line=16
 all_default_deps: [['OPT_Y'], ['BB', 'AAA', 'OPT_Z']]
 all_node_deps: [['OPT_Y'], ['AAA', 'OPT_Z']]
 Found 2 choice definitions at lines: [6, 16]
@@ -257,7 +265,8 @@ Processing definition 1 at line 16
     config: CMC2
     config: CMC3
     config: CH_D
-  Added depends: depends on AAA if OPT_Z
+depdsksakl [KconfigLine(depends_on, line=17, indent=2)]
+  Added depends: depends on AAA && OPT_Z
   Added default: default CH_C if BB && AAA && OPT_Z
 
 Final result has 11 lines before adding configs
@@ -279,8 +288,12 @@ result after first definition: 15 lines
     Added 5 entries from other choice definitions
 
   Adding 2 menuconfigs after endchoice
-    Adding menuconfig MC1, if_condition=BB
-    Adding menuconfig MC2, if_condition=None
+    Adding menuconfig MC1, depends_from_def=[KconfigLine(depends_on, line=17, indent=2)]
+hello     depends on AAA && OPT_Z
+4
+    Adding menuconfig MC2, depends_from_def=[KconfigLine(depends_on, line=17, indent=2)]
+hello     depends on AAA && OPT_Z
+4
     source without glob: 1
     FILE LOG --------------------------------------------------------------
     Reader input                27 lines
@@ -292,14 +305,14 @@ result after first definition: 15 lines
     SUM (r/or/o)source lines:   1
     All "option env" attr:      0
     -----------------------------------------------------------------------
-    Transformer Output:         41 lines
+    Transformer Output:         43 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
         Added new lines of source:       0
         Added new bc of config_default:  0
         Removed   bc of config_default:  0
         Removed no match for o(r)source: 0
-        Done writting 41 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/Kconfig
+        Done writting 43 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/Kconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
 
 
