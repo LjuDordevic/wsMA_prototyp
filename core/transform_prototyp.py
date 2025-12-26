@@ -251,7 +251,6 @@ class KconfigTransformer:
             'choice_def': choice_all_dep_list
         }
         
-
     def extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
        
         symbol_infos = context.symbol_infos
@@ -620,7 +619,6 @@ class KconfigTransformer:
             stats = self._log_file_and_reset_count(self.FILE_SOURCE_OUT_DIFF, current_file, len_reader_input, len_transformed_lines)
             return result, stats
     
-    # transform choice
     def transform_choice(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
         from kconfig_writer import KconfigLine
         
@@ -942,10 +940,6 @@ class KconfigTransformer:
                 result.append(KconfigLine(new_line, dep_line.line_number))
         
         return block_end_index
-
-    # neu
-    #def transform_choice(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
-
 
     def transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
        
