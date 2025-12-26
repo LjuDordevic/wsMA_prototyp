@@ -217,22 +217,3 @@ class KconfigWriter:
                 f.write(line.raw_text + '\n') # add EOL 
                  
         print(f"        Done writting {len(lines)} lines in {output_path}")
-
-if __name__ == "__main__":
-    reader = KconfigReader("ZRTOS")
-    writer = KconfigWriter("ZRTOS")
-    input_path = Path("/home/ljd/wsMA_prototyp/exp/KconfigZephyrRTOS")
-    
-    if input_path.exists():
-        print(f"Read: {input_path}")
-        lines = reader.read_file(input_path)
-
-        for line in lines:
-            print(f"  {line}")
-            if line.line_type != 'empty' and line.line_type != 'other':
-                print(f"    → Content: {line.content}")
-        print(f"Found: {len(lines)} lines in {str(input_path)}")
-        output_path = Path("/home/ljd/wsMA_prototyp/exp_copy/KconfigZephyrRTOS")
-        writer.write(lines, "", output_path)
-    else:
-        print(f"Not found: {input_path}")
