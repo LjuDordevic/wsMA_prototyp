@@ -1,7 +1,7 @@
 mainmenu "Test (named) choice"
 
 config OPT_Y
-  def_bool y
+  bool "depends on OPT_Yn"
 
 choice
   prompt "pick bool named choice"

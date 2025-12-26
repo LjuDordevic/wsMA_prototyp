@@ -3,14 +3,11 @@ config AAA
   default y
 
 config OPT_Z
-  def_bool y
+  bool "if OPT_Z"
 
 config BB
-  def_bool y
+  bool "if BB"
 
 if OPT_Z
-
-config Z1
-  bool "Z1"
 
 endif

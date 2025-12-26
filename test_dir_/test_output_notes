@@ -15,7 +15,10 @@ export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_def"
 ------------------------------
 export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_option" 
 export ENV_A="i7-1260P"
-/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/test_dir_/transform_option/Kconfig
+/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py test_dir_/transform_option/Kconfig
+------------------------------
+export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_choice" 
+/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
 
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -32,5 +35,7 @@ export ENV_A="i7-1260P"
 export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_option_output" 
 ~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/test_dir_/transform_option_output/Kconfig
 ------------------------------
+export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output"  
+~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/Kconfig
 
 
