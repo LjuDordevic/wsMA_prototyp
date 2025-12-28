@@ -50,7 +50,7 @@ START using parser:
 
 2. Bild ExtParserContext FROM PARSER RESULTS
  Transformer used: ZRTOS
- call different attributes on symbols found in parser_result['unique_defined_syms']
+ call different attributes on options found in parser_result['unique_defined_syms']
 
  For each symbol found in parser_result['unique_defined_syms']
     -> call sym.name/.origin/.name_and_loc
@@ -82,9 +82,9 @@ OPTION3: [{'sym.default': (<symbol 5, unknown, value "5", visibility n, direct d
 OPTION4: [{'sym.default': (<symbol 0x8000000, unknown, value "0x8000000", visibility n, direct deps n, undefined>, <symbol y, tristate, value y, constant>, ('Kconfig', 20))}]
 OPTION5: [{'sym.default': (<symbol text, unknown, value "text", constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 24))}]
 
+------------ choice_infos -----------------------------------------------
 
-    -> ExParserContext - symbols: 6 
-    -> ExParserContext - configdefaults: 0()
+------------ choice_definitions -----------------------------------------------
 
    Symbol definitions and corresponding locations in ExParserContext: 
    'MODULES' is defined x1
@@ -102,7 +102,8 @@ OPTION5: [{'sym.default': (<symbol text, unknown, value "text", constant>, <symb
     get_all_source_files: 
 
 3. Filter ExtParserContext
-extract all configdefault symbols and for each get transformed lines and last config
+extract all configdefault options and for each get transformed lines and last config
+extract infos for named choices - their definition & entries
 
 for each given file at source_files start building path output structur and call reader and writer
 
@@ -116,22 +117,39 @@ start transforming 25 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                25 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         28 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           3
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 28 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_def_output/Kconfig
 ----------------------------------------------------------------------
 finished transforming: 1 files transformed
 ----------------------------------------------------------------------
-info about option modules-attr: 
-1 option modules-attr found at line 5 in /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig
+Overall parser info: 
+    -> ExParserContext - unique options: 6
+    -> ExParserContext - configdefaults: 0 ()
+    -> ExParserContext - unique choices: 0
+    -> ExParserContext - named choices:  0
+----------------------------------------------------------------------
+    1 option modules-attr found at line 5 in /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig
+----------------------------------------------------------------------
+count options/attr that are not transformed: 
+    allnoconfig_y:  0
+    defconfig_list: 0
+    warning:        0
+    set:            0
+    set default:    0
