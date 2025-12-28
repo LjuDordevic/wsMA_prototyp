@@ -12,8 +12,8 @@ class ExtParserContext:
     symbol_nr: int
     symbol_defaults: Dict[str, List[dict]]
     symbol_orig_defaults: Dict[str, List[dict]]
-    configdefault_symbols: Set[str]
-    configdefault_symbols_nr: int
+    configdefault_options: Set[str]
+    configdefault_options_nr: int
     choice_infos: Dict[str, List[dict]]
     choice_definitions : Dict[str, List[dict]] # choice_name -> [location1, location2, ...]
     choice_nr: int
@@ -48,6 +48,7 @@ class KconfigTransformer:
     FILE_ALL_ADDED_LINES_SKW = 0
     ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0
     FILE_CONFIGDEFAULT_NR = 0
+    FILE_REMOVED_BC_CONFIGDEFAULT = 0
     FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
     OPTION_MODULES_COUNTER = 0
     OPTION_MODULES_INFO = []
@@ -66,12 +67,12 @@ class KconfigTransformer:
         symbol_definitions = {}
         symbol_defaults = {}
         symbol_orig_defaults = {}
-        configdefault_symbols = set()
+        configdefault_options = set()
         choice_infos = {}
         choice_definitions = {}
         choice_dep = {}
 
-        print(" call different attributes on symbols found in parser_result['unique_defined_syms']")
+        print(" call different attributes on options found in parser_result['unique_defined_syms']")
         
         for sym in parser_result['unique_defined_syms']:
             if sym.name not in (symbol_infos or symbol_definitions or symbol_defaults or symbol_orig_defaults):
@@ -147,7 +148,7 @@ class KconfigTransformer:
                 }
                 symbol_definitions[sym.name].append(location_info)
             
-                if is_configdefault: configdefault_symbols.add(sym.name)
+                if is_configdefault: configdefault_options.add(sym.name)
          
         for choice in parser_result['unique_choices']:
             if choice.name not in (choice_infos or choice_definitions or choice_dep):
@@ -191,8 +192,8 @@ class KconfigTransformer:
             symbol_infos = symbol_infos,
             symbol_definitions = symbol_definitions,
             symbol_nr = len(symbol_definitions),
-            configdefault_symbols = configdefault_symbols,
-            configdefault_symbols_nr = len(configdefault_symbols),
+            configdefault_options = configdefault_options,
+            configdefault_options_nr = len(configdefault_options),
             symbol_defaults = symbol_defaults,
             symbol_orig_defaults = symbol_orig_defaults,
             choice_infos = choice_infos,
@@ -468,7 +469,7 @@ class KconfigTransformer:
 
         return files    
 
-    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info, choice_definition_info):
+    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info, choice_definition_info, resolve_log):
             """
             lines -> from reader 
             """
@@ -547,7 +548,7 @@ class KconfigTransformer:
                             print(f"    processed_choices now: {self.PROCESSED_CHOICES}")
 
                             i = self.transform_choice(lines, i, choice_info, result, 
-                                                lambda l, s, f: self._transform_single_line(l, s, f))
+                                                lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
                             #choice_processed = True
                             continue
 
@@ -589,7 +590,7 @@ class KconfigTransformer:
                                     print(f"    Adding {len(transformed_entries)} configdefault entries")
                                     
                                     i = self.transform_cd(lines, i, transformed_entries, result, 
-                                                lambda l, s, f: self._transform_single_line(l, s, f))
+                                                lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
                                     #print(f"i = self.transform_cd {i}")
                                     cd_processed = True
                                     break 
@@ -598,7 +599,7 @@ class KconfigTransformer:
                     continue
 
                 #print(f"\nget transformed wenn line is not config/menuconfig:")
-                transformed = self._transform_single_line(line, current_symbol, current_file)
+                transformed = self._transform_single_line(line, current_symbol, current_file, resolve_log)
                 
                 #print(f"transformed: {transformed}")
                 
@@ -616,8 +617,8 @@ class KconfigTransformer:
                             
             len_transformed_lines = len(result)
             # EXCEL stats
-            stats = self._log_file_and_reset_count(self.FILE_SOURCE_OUT_DIFF, current_file, len_reader_input, len_transformed_lines)
-            return result, stats
+            #stats = self._log_file_and_reset_count(self.FILE_SOURCE_OUT_DIFF, current_file, len_reader_input, len_transformed_lines)
+            return result, self.FILE_SOURCE_OUT_DIFF, len_reader_input, len_transformed_lines
     
     def transform_choice(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
         from kconfig_writer import KconfigLine
@@ -978,19 +979,19 @@ class KconfigTransformer:
         self.FILE_CONFIGDEFAULT_NR += len(transformed_entries)  
         return block_end_index
 
-    def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path):
+    def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path, resolve_log: None):
         """ 
         Returns:
             - KconfigLine: 1:1
             - List[KconfigLine]: 1:n
         """
         if line.line_type in self.DEF_KEYWORDS:
-            self.FILE_DEF_KEYWORDS_COUNT += 1                                            # for each def_* -> count 1 one added line   
+            self.FILE_DEF_KEYWORDS_COUNT += 1                                      # for each def_* -> count 1 one added line   
             return self._transform_def_keyword(line)
         elif line.line_type in self.SOURCE_KEYWORDS:
             # count all source keywords 
-            self.FILE_SOURCE_KEYWORDS_ALL_NR += 1                                        # for each self.SOURCE_KEYWORDS -> count 1, so that we have SUM of all 
-            return self._transform_source_line(line, current_file, resolve_log=True)    # if last parameter == True, than there is log for resolving and also iglob check is active 
+            self.FILE_SOURCE_KEYWORDS_ALL_NR += 1                                  # for each self.SOURCE_KEYWORDS -> count 1, so that we have SUM of all 
+            return self._transform_source_line(line, current_file, resolve_log)    # if resolve_log == True, than there is log for resolving and also iglob check is active 
         elif line.line_type == "option modules":
             return self._transform_opt_modules(line, current_file)
         elif line.line_type == "option env":
@@ -1034,7 +1035,7 @@ class KconfigTransformer:
             
         return [typ_line, default_line]
 
-    def _transform_source_line(self, line, current_file, resolve_log: Optional[bool]) -> List:
+    def _transform_source_line(self, line, current_file, resolve_log) -> List:
         from kconfig_writer import KconfigLine
         import re, os
 
@@ -1099,25 +1100,20 @@ class KconfigTransformer:
                 src_file_abs_path = (srctree / src_file).resolve() \
                     if not os.path.isabs(src_file) else Path(src_file).resolve()
 
-                if src_file_abs_path.samefile(current_file_abs_path) and current_line_nr == src_linenr:
+                if src_file_abs_path.samefile(current_file_abs_path) and current_line_nr == src_linenr and node.filename not in matched_files:
                     matched_files.append(node.filename)
-
-
-                    #if node.item.name:
-                    #    node_item_name = node.item.name
 
                     if resolve_log:
                         print(f"        ---- RESOLVE LOG ------------------------------------------------------")
-                     #   print(f"        {source_keyword} includes node for: {node_item_name}")
                         print(f"        node's file: {node.filename}")
                         print(f"        node's include paths: {node.include_path}") 
-                        print(f"        node: --- \n    {node}\n        ---")
+                        #print(f"        node: --- \n    {node}\n        ---")
                         print(f"        -> relevant is where node was sourced from: {src_file} at line {src_linenr}") 
                         print(f"        resolved: ")
                     continue
             
             if resolve_log:
-                # use iglob (exacly as kconfiglib) just to show that both ways work 
+                # use iglob (exacly as kconfiglib) just to show/check that both ways work 
                 if source_keyword == "rsource" or source_keyword == "orsource":
                     pattern = join(dirname(current_file), pattern)
                 filenames = sorted(iglob(join(srctree, pattern)))
@@ -1167,11 +1163,12 @@ class KconfigTransformer:
         print(f"    Files matching: {self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB} (using {source_keyword})")
 
         if resolve_log:
+            print(f"        ---- CHECK RESOLVE LOG with iglob------------------------------------------------------")
             for file in filenames:
-                print(f"    iglob found: {file}")
-            print(f"    transformed iglob list (relative paths): {iglob_with_rel_path}")
+                print(f"        iglob found: {file}")
+            print(f"            transformed iglob list (relative paths): {iglob_with_rel_path}")
             if matched_files == iglob_with_rel_path:
-                print(f"    CHECK OK: transformed iglob list == list of matched_files through iteration")
+                print(f"        CHECK OK: transformed iglob list == list of matched_files through iteration")
             else: 
                 raise RuntimeError("check source matching")
         
@@ -1214,10 +1211,11 @@ class KconfigTransformer:
         return default_line
 
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
-                            log: bool, log_lines: bool, log_excel_after_each_file: bool, log_excel_output: Optional[str]):
+                            log: bool, log_lines: bool, log_and_check_resolve_glob: bool, log_excel_after_each_file: bool, log_excel_output: None):
         """
         1. get all source files parser found (these are all realtive to srctree)
-        2. build paths for input & output files
+        2. Filter ExtParserContext -> get needed infos for transformation of configdefault and named choice options 
+        3. build paths for input & output files
         """
         excel_stats = []
         if self.context is None:
@@ -1229,8 +1227,8 @@ class KconfigTransformer:
         choice_definition_info = {}
 
         print("\n3. Filter ExtParserContext")
-        print("extract all configdefault symbols and for each get transformed lines and last config")
-        for cd in self.context.configdefault_symbols:
+        print("extract all configdefault options and for each get transformed lines and last config")
+        for cd in self.context.configdefault_options:
             
             if cd not in cd_definition_info:
                 cd_definition_info[cd] = []     # replace defaultdict
@@ -1268,6 +1266,7 @@ class KconfigTransformer:
                 print(f"\n - transformed cd entries")
                 print(tcd_list)             
 
+        print("extract infos for named choices - their definition & entries")
         for choice_name in self.context.choice_definitions.keys():
             if choice_name not in choice_definition_info:
                 choice_definition_info[choice_name] = {}
@@ -1307,14 +1306,20 @@ class KconfigTransformer:
                             print(f"        -> Content: {line.content}")
 
             print("call _transform_lines(lines from reader, input, configdefault dict info)")
-            transformed, stats = self._transform_lines(lines, input_file, cd_definition_info, choice_definition_info)
-            
-            excel_stats.append(stats)
+            # also collect not only transformed lines but some statistics 
+            transformed, source_out_diff, len_reader_input, len_transformed_lines \
+                  = self._transform_lines(lines, input_file, cd_definition_info, choice_definition_info, log_and_check_resolve_glob)
+             
+            # TODO: add new_lines to excel stats 
+            new_lines = self._remove_consecutive_empty_lines(transformed)
+            removed_executive_lines_nr = self.FILE_REMOVED_BC_CONFIGDEFAULT
 
+            stats = self._log_file_and_reset_count(source_out_diff, input_file, len_reader_input, len_transformed_lines, removed_executive_lines_nr)
+
+            excel_stats.append(stats)
             if log_excel_after_each_file:
                 excel_writer.write_to_excel(excel_stats, log_excel_output)
             
-            new_lines = self._remove_consecutive_empty_lines(transformed)
             try:
                 writer.write(new_lines, output_file)
                 transformed_count += 1
@@ -1557,7 +1562,7 @@ class KconfigTransformer:
         print(f"  DEBUG: Total entries collected: {len(all_entries)}")
         return all_entries
 
-    def _log_file_and_reset_count(self, new_lines_skw : int, current_file : Path, len_input : int, len_result : int):
+    def _log_file_and_reset_count(self, new_lines_skw : int, current_file : Path, len_input : int, len_result : int, removed_executive_lines_nr: int):
         print(f"    FILE LOG --------------------------------------------------------------")
         #print(f"    File:                      {str(current_file)}")
         print(f"    Reader input                {len_input} lines")
@@ -1575,7 +1580,7 @@ class KconfigTransformer:
         print(f"        Added new lines of source: -1 (= means one line was just overwritten)" if new_lines_skw < 0 \
               else f"        Added new lines of source:       {new_lines_skw}")
         print(f"        Added new bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")
-        print(f"        Removed   bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}") 
+        print(f"        Removed   bc of config_default:  {removed_executive_lines_nr}") 
         print(f"        Removed no match for o(r)source: {self.FILE_O_SOURCE_KEYWORDS_NO_MATCH}")   
 
         # STORE FOR EXCEL
@@ -1600,6 +1605,7 @@ class KconfigTransformer:
         self.FILE_DEF_KEYWORDS_COUNT = 0
         self.FILE_ALL_ADDED_LINES_SKW = 0
         self.FILE_CONFIGDEFAULT_NR = 0
+        self.FILE_REMOVED_BC_CONFIGDEFAULT = 0
         self.NEW_BC_GLOB = 0
         self.FILE_SOURCE_OUT_DIFF = 0
         self.FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
@@ -1645,7 +1651,7 @@ class KconfigTransformer:
 
         print(f"\n")
         print(f"    -> ExParserContext - symbols: {given_context.symbol_nr} ")#({', '.join(given_context.symbol_definitions.keys())})")
-        print(f"    -> ExParserContext - configdefaults: {given_context.configdefault_symbols_nr}({', '.join(given_context.configdefault_symbols)})")
+        print(f"    -> ExParserContext - configdefaults: {given_context.configdefault_options_nr}({', '.join(given_context.configdefault_options)})")
         print(f"\n   Symbol definitions and corresponding locations in ExParserContext: ")
 
         for sym_name, definitions in given_context.symbol_definitions.items():
@@ -1721,10 +1727,11 @@ class KconfigTransformer:
         transformation of configdefault can leave some unwanted empty lines,
         so this function removes them 
         """
+        print("=== _remove_consecutive_empty_lines ===")
         cleaned = []
         previous_line_empty = False
         removed_nr = 0
-
+        previous_len = len(lines)
         for line in lines:
             if line.line_type == 'empty':        # looking at empty line, so 
                 if previous_line_empty:
@@ -1735,4 +1742,7 @@ class KconfigTransformer:
                 previous_line_empty = False      # the line we are looking at it's not empty, so set the flag
 
             cleaned.append(line)
+        
+        self.FILE_REMOVED_BC_CONFIGDEFAULT = previous_len - len(cleaned)
+        print(f"{self.FILE_REMOVED_BC_CONFIGDEFAULT} = {previous_len} - {len(cleaned)}")
         return cleaned

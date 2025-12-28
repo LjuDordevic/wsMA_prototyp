@@ -7,7 +7,7 @@ config A
 
 if CY
 configdefault FOO
-  default y if CN
+  default n if CN
 endif
 
 configdefault FOO
@@ -23,3 +23,12 @@ endmenu
 config U1
   bool 
   default y
+
+config C 
+  bool "Op C"
+
+config CY
+  def_bool y
+
+config CN
+  def_bool n

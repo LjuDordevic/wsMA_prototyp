@@ -21,7 +21,10 @@ START using parser:
                   <symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:9, uo1/Kconfig1:13, uo1/Kconfig1:17>,
                   <symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:9, uo1/Kconfig1:13, uo1/Kconfig1:17>,
                   <symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:9, uo1/Kconfig1:13, uo1/Kconfig1:17>,
-                  <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>],
+                  <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>,
+                  <symbol C, bool, "Op C", value n, visibility y, direct deps y, uo1/Kconfig1:27>,
+                  <symbol CY, bool, value y, visibility n, direct deps y, uo1/Kconfig1:30>,
+                  <symbol CN, bool, value n, visibility n, direct deps y, uo1/Kconfig1:33>],
  'kconf': <configuration with 9 symbols, main menu prompt "Test configdefault", srctree "/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
  'menus': [<menu node for menu, prompt "test" (visibility y), deps y, 'visible if' deps y, has child, has next, uo1/Kconfig1:1>],
  'missing_syms': [],
@@ -29,9 +32,9 @@ START using parser:
  'syms': {'5': <symbol 5, unknown, value "5", visibility n, direct deps n, undefined>,
           'A': <symbol A, int, "Opt A", value "5", visibility y, direct deps y, uo1/Kconfig1:4>,
           'AA': <symbol AA, unknown, value "AA", visibility n, direct deps n, undefined>,
-          'C': <symbol C, unknown, value "C", visibility n, direct deps n, undefined>,
-          'CN': <symbol CN, unknown, value "CN", visibility n, direct deps n, undefined>,
-          'CY': <symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>,
+          'C': <symbol C, bool, "Op C", value n, visibility y, direct deps y, uo1/Kconfig1:27>,
+          'CN': <symbol CN, bool, value n, visibility n, direct deps y, uo1/Kconfig1:33>,
+          'CY': <symbol CY, bool, value y, visibility n, direct deps y, uo1/Kconfig1:30>,
           'FOO': <symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:9, uo1/Kconfig1:13, uo1/Kconfig1:17>,
           'MODULES': <symbol MODULES, unknown, value "MODULES", visibility n, is the modules symbol, direct deps n, undefined>,
           'U1': <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>},
@@ -39,16 +42,19 @@ START using parser:
  'unique_choices': [],
  'unique_defined_syms': [<symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:9, uo1/Kconfig1:13, uo1/Kconfig1:17>,
                          <symbol A, int, "Opt A", value "5", visibility y, direct deps y, uo1/Kconfig1:4>,
-                         <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>]}
+                         <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>,
+                         <symbol C, bool, "Op C", value n, visibility y, direct deps y, uo1/Kconfig1:27>,
+                         <symbol CY, bool, value y, visibility n, direct deps y, uo1/Kconfig1:30>,
+                         <symbol CN, bool, value n, visibility n, direct deps y, uo1/Kconfig1:33>]}
 --------------------------------------------------
-   Parser found: 7 defined syms
-   Parser found: 3 unique defined syms
+   Parser found: 10 defined syms
+   Parser found: 6 unique defined syms
    Parser found: 2 files
 --------------------------------------------------
 
 2. Bild ExtParserContext FROM PARSER RESULTS
  Transformer used: ZRTOS
- call different attributes on symbols found in parser_result['unique_defined_syms']
+ call different attributes on options found in parser_result['unique_defined_syms']
 
  For each symbol found in parser_result['unique_defined_syms']
     -> call sym.name/.origin/.name_and_loc
@@ -60,30 +66,38 @@ START using parser:
 FOO: [{'sym.name': 'FOO', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'FOO (defined at Kconfig:3, Kconfig:6, uo1/Kconfig1:9, uo1/Kconfig1:13, uo1/Kconfig1:17)'}]
 A: [{'sym.name': 'A', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1', 5)), 'sym.name_and_loc': 'A (defined at uo1/Kconfig1:4)'}]
 U1: [{'sym.name': 'U1', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1', 25)), 'sym.name_and_loc': 'U1 (defined at uo1/Kconfig1:23)'}]
+C: [{'sym.name': 'C', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'C (defined at uo1/Kconfig1:27)'}]
+CY: [{'sym.name': 'CY', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1', 31)), 'sym.name_and_loc': 'CY (defined at uo1/Kconfig1:30)'}]
+CN: [{'sym.name': 'CN', 'sym.origin': None, 'sym.name_and_loc': 'CN (defined at uo1/Kconfig1:33)'}]
 
 ------------ symbol_definitions --------------------------------------------------
 FOO: [{'file': 'Kconfig', 'line': 3, 'node': <menu node for symbol FOO, prompt "first Option" (visibility y), deps y, has next, Kconfig:3>, 'node.defaults': [], 'is_configdefault': False}]
 FOO: [{'file': 'Kconfig', 'line': 6, 'node': <menu node for symbol FOO, deps y, has next, Kconfig:6>, 'node.defaults': [(<symbol n, bool, value n, constant>, <symbol y, bool, value y, constant>, ('Kconfig', 7))], 'is_configdefault': False}]
-FOO: [{'file': 'uo1/Kconfig1', 'line': 9, 'node': <menu node for symbol FOO, deps n, has next, uo1/Kconfig1:9>, 'node.defaults': [(<symbol y, bool, value y, constant>, (2, <symbol CN, unknown, value "CN", visibility n, direct deps n, undefined>, (2, <symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>)), ('uo1/Kconfig1', 10))], 'is_configdefault': True}]
-FOO: [{'file': 'uo1/Kconfig1', 'line': 13, 'node': <menu node for symbol FOO, deps y, has next, uo1/Kconfig1:13>, 'node.defaults': [(<symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>, ('uo1/Kconfig1', 14))], 'is_configdefault': True}]
-FOO: [{'file': 'uo1/Kconfig1', 'line': 17, 'node': <menu node for symbol FOO, deps n, uo1/Kconfig1:17>, 'node.defaults': [((2, <symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol AA, unknown, value "AA", visibility n, direct deps n, undefined>), (2, <symbol C, unknown, value "C", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>), ('uo1/Kconfig1', 18))], 'is_configdefault': True}]
+FOO: [{'file': 'uo1/Kconfig1', 'line': 9, 'node': <menu node for symbol FOO, deps y, has next, uo1/Kconfig1:9>, 'node.defaults': [(<symbol n, bool, value n, constant>, (2, <symbol CN, bool, value n, visibility n, direct deps y, uo1/Kconfig1:33>, (2, <symbol CY, bool, value y, visibility n, direct deps y, uo1/Kconfig1:30>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>)), ('uo1/Kconfig1', 10))], 'is_configdefault': True}]
+FOO: [{'file': 'uo1/Kconfig1', 'line': 13, 'node': <menu node for symbol FOO, deps y, has next, uo1/Kconfig1:13>, 'node.defaults': [(<symbol CY, bool, value y, visibility n, direct deps y, uo1/Kconfig1:30>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>, ('uo1/Kconfig1', 14))], 'is_configdefault': True}]
+FOO: [{'file': 'uo1/Kconfig1', 'line': 17, 'node': <menu node for symbol FOO, deps n, uo1/Kconfig1:17>, 'node.defaults': [((2, <symbol CY, bool, value y, visibility n, direct deps y, uo1/Kconfig1:30>, <symbol AA, unknown, value "AA", visibility n, direct deps n, undefined>), (2, <symbol C, bool, "Op C", value n, visibility y, direct deps y, uo1/Kconfig1:27>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>), ('uo1/Kconfig1', 18))], 'is_configdefault': True}]
 A: [{'file': 'uo1/Kconfig1', 'line': 4, 'node': <menu node for symbol A, prompt "Opt A" (visibility y), deps y, has next, uo1/Kconfig1:4>, 'node.defaults': [(<symbol 5, unknown, value "5", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>, ('uo1/Kconfig1', 5))], 'is_configdefault': False}]
-U1: [{'file': 'uo1/Kconfig1', 'line': 23, 'node': <menu node for symbol U1, deps y, uo1/Kconfig1:23>, 'node.defaults': [(<symbol y, bool, value y, constant>, <symbol y, bool, value y, constant>, ('uo1/Kconfig1', 25))], 'is_configdefault': False}]
+U1: [{'file': 'uo1/Kconfig1', 'line': 23, 'node': <menu node for symbol U1, deps y, has next, uo1/Kconfig1:23>, 'node.defaults': [(<symbol y, bool, value y, constant>, <symbol y, bool, value y, constant>, ('uo1/Kconfig1', 25))], 'is_configdefault': False}]
+C: [{'file': 'uo1/Kconfig1', 'line': 27, 'node': <menu node for symbol C, prompt "Op C" (visibility y), deps y, has next, uo1/Kconfig1:27>, 'node.defaults': [], 'is_configdefault': False}]
+CY: [{'file': 'uo1/Kconfig1', 'line': 30, 'node': <menu node for symbol CY, deps y, has next, uo1/Kconfig1:30>, 'node.defaults': [(<symbol y, bool, value y, constant>, <symbol y, bool, value y, constant>, ('uo1/Kconfig1', 31))], 'is_configdefault': False}]
+CN: [{'file': 'uo1/Kconfig1', 'line': 33, 'node': <menu node for symbol CN, deps y, uo1/Kconfig1:33>, 'node.defaults': [(<symbol n, bool, value n, constant>, <symbol y, bool, value y, constant>, ('uo1/Kconfig1', 34))], 'is_configdefault': False}]
 
 ------------ symbol_defaults -----------------------------------------------
 FOO: [{'sym.default': (<symbol n, bool, value n, constant>, <symbol y, bool, value y, constant>, ('Kconfig', 7))}]
-FOO: [{'sym.default': (<symbol y, bool, value y, constant>, (2, <symbol CN, unknown, value "CN", visibility n, direct deps n, undefined>, (2, <symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>)), ('uo1/Kconfig1', 10))}]
-FOO: [{'sym.default': (<symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>, ('uo1/Kconfig1', 14))}]
-FOO: [{'sym.default': ((2, <symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol AA, unknown, value "AA", visibility n, direct deps n, undefined>), (2, <symbol C, unknown, value "C", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>), ('uo1/Kconfig1', 18))}]
+FOO: [{'sym.default': (<symbol n, bool, value n, constant>, (2, <symbol CN, bool, value n, visibility n, direct deps y, uo1/Kconfig1:33>, (2, <symbol CY, bool, value y, visibility n, direct deps y, uo1/Kconfig1:30>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>)), ('uo1/Kconfig1', 10))}]
+FOO: [{'sym.default': (<symbol CY, bool, value y, visibility n, direct deps y, uo1/Kconfig1:30>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>, ('uo1/Kconfig1', 14))}]
+FOO: [{'sym.default': ((2, <symbol CY, bool, value y, visibility n, direct deps y, uo1/Kconfig1:30>, <symbol AA, unknown, value "AA", visibility n, direct deps n, undefined>), (2, <symbol C, bool, "Op C", value n, visibility y, direct deps y, uo1/Kconfig1:27>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>), ('uo1/Kconfig1', 18))}]
 A: [{'sym.default': (<symbol 5, unknown, value "5", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:23>, ('uo1/Kconfig1', 5))}]
 U1: [{'sym.default': (<symbol y, bool, value y, constant>, <symbol y, bool, value y, constant>, ('uo1/Kconfig1', 25))}]
+CY: [{'sym.default': (<symbol y, bool, value y, constant>, <symbol y, bool, value y, constant>, ('uo1/Kconfig1', 31))}]
+CN: [{'sym.default': (<symbol n, bool, value n, constant>, <symbol y, bool, value y, constant>, ('uo1/Kconfig1', 34))}]
 
 ------------ choice_infos -----------------------------------------------
 
 ------------ choice_definitions -----------------------------------------------
 
 
-    -> ExParserContext - symbols: 3 
+    -> ExParserContext - symbols: 6 
     -> ExParserContext - configdefaults: 1(FOO)
 
    Symbol definitions and corresponding locations in ExParserContext: 
@@ -97,10 +111,16 @@ U1: [{'sym.default': (<symbol y, bool, value y, constant>, <symbol y, bool, valu
      - uo1/Kconfig1:4
    'U1' is defined x1
      - uo1/Kconfig1:23
+   'C' is defined x1
+     - uo1/Kconfig1:27
+   'CY' is defined x1
+     - uo1/Kconfig1:30
+   'CN' is defined x1
+     - uo1/Kconfig1:33
     get_all_source_files: 
 
 3. Filter ExtParserContext
-extract all configdefault symbols and for each get transformed lines and last config
+extract all configdefault options and for each get transformed lines and last config
 transform all extracted <default lines> from conifgdefaults - add them together
     default line entry: ('uo1/Kconfig1', 10) --> /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
     default line entry: ('uo1/Kconfig1', 14) --> /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
@@ -108,7 +128,7 @@ transform all extracted <default lines> from conifgdefaults - add them together
 print transformed lines
 
     KconfigLine(default, line=10, indent=2)
-        -> Content: {'value': 'y && CN && CY && U1', 'condition': None}
+        -> Content: {'value': 'n && CN && CY && U1', 'condition': None}
 
     KconfigLine(default, line=14, indent=2)
         -> Content: {'value': 'CY && U1', 'condition': None}
@@ -125,7 +145,7 @@ configdefault: FOO
 filter: symbol definitions & each sym.node.defaults extracted ---------------------------------------------------------------
 FOO, Kconfig, 3, False, []
 FOO, Kconfig, 6, False, [{'value_ext': 'n', 'deps_ext': ['y'], 'loc': ('Kconfig', 7)}]
-FOO, uo1/Kconfig1, 9, True, [{'value_ext': 'y', 'deps_ext': ['CN', 'CY', 'U1'], 'loc': ('uo1/Kconfig1', 10)}]
+FOO, uo1/Kconfig1, 9, True, [{'value_ext': 'n', 'deps_ext': ['CN', 'CY', 'U1'], 'loc': ('uo1/Kconfig1', 10)}]
 FOO, uo1/Kconfig1, 13, True, [{'value_ext': 'CY', 'deps_ext': ['U1'], 'loc': ('uo1/Kconfig1', 14)}]
 FOO, uo1/Kconfig1, 17, True, [{'value_ext': 'expr', 'deps_ext': ['C', 'U1'], 'loc': ('uo1/Kconfig1', 18)}]
 filter: default definitions of symbol (loc & complete list for if cond) ------------------------------------------------------
@@ -142,6 +162,7 @@ FOO, ('uo1/Kconfig1', 18), (C, U1)
 
  - transformed cd entries
 [KconfigLine(default, line=10, indent=2), KconfigLine(default, line=14, indent=2), KconfigLine(default, line=18, indent=2)]
+extract infos for named choices - their definition & entries
 
 for each given file at source_files start building path output structur and call reader and writer
 
@@ -154,7 +175,12 @@ call _transform_lines(lines from reader, input, configdefault dict info)
 start transforming 9 input lines
     Found matching config for FOO at line 6
     Adding 3 configdefault entries
-    source without glob: 1
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve source: uo1/* at line 9
+      -> uo1/Kconfig1
+    Files matching: 1 (using source)
+=== _remove_consecutive_empty_lines ===
+0 = 12 - 12
     FILE LOG --------------------------------------------------------------
     Reader input                9 lines
     -----------------------------------------------------------------------
@@ -170,21 +196,23 @@ start transforming 9 input lines
         Added new bc of def_*:           0
         Added new lines of source:       0
         Added new bc of config_default:  3
-        Removed   bc of config_default:  3
+        Removed   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 12 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/Kconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
 
 
-Reader found: 25 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
+Reader found: 34 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
 call _transform_lines(lines from reader, input, configdefault dict info)
-start transforming 25 input lines
+start transforming 34 input lines
     Skipping if-endif block (only configdefaults) starting at line 8
     Skipping configdefault block starting at line 13
       Skipping line 14: default
     Skipping if-endif block (only configdefaults) starting at line 16
+=== _remove_consecutive_empty_lines ===
+3 = 25 - 22
     FILE LOG --------------------------------------------------------------
-    Reader input                25 lines
+    Reader input                34 lines
     -----------------------------------------------------------------------
     All source_keywords:        0
     All osource_keywords:       0
@@ -193,14 +221,14 @@ start transforming 25 input lines
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
     -----------------------------------------------------------------------
-    Transformer Output:         16 lines
+    Transformer Output:         25 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Removed   bc of config_default:  3
         Removed no match for o(r)source: 0
-        Done writting 13 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/uo1/Kconfig1
+        Done writting 22 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/uo1/Kconfig1
 ----------------------------------------------------------------------
 finished transforming: 2 files transformed
 ----------------------------------------------------------------------

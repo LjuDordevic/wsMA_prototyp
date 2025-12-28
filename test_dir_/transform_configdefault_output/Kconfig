@@ -5,7 +5,7 @@ config FOO
 
 config FOO
   def_bool n
-  default y && CN && CY && U1
+  default n && CN && CY && U1
   default CY && U1
   default CY && AA && C && U1
 
