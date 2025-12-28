@@ -104,6 +104,12 @@ class KconfigLine:
             return 'option modules'
         elif s.startswith('modules'):
             return 'modules'
+        elif s.startswith('warning'):
+            return 'warning'
+        elif s.startswith('set '):
+            return 'set'
+        elif s.startswith('set default '):
+            return 'set_default'
         else:
             return 'other'
     

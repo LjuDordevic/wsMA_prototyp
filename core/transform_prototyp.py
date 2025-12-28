@@ -17,6 +17,7 @@ class ExtParserContext:
     choice_infos: Dict[str, List[dict]]
     choice_definitions : Dict[str, List[dict]] # choice_name -> [location1, location2, ...]
     choice_nr: int
+    named_choices_nr: int
     choice_dep: Dict[str, List[dict]]
     parser_result: dict
     srctree: Path
@@ -58,6 +59,12 @@ class KconfigTransformer:
     FILE_OPT_ALLNONCONG = 0
     FILE_OPT_DEFCONFIG = 0
     PROCESSED_CHOICES = set()
+    FILE_OPTIONAL_CHOICE_ATTR = 0
+    FILE_WARNING_ATTR = 0
+    FILE_SET_OPTION = 0
+    FILE_SET_DEFAULT_OPTION = 0
+    FILE_SKIP_CHOICE_TYP_DEF_BOOL = 0       # Linux doesn't allow typ definion as choice attr 
+    FILE_SKIP_CHOICE_TYP_DEF_TRISTATE = 0
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -73,6 +80,9 @@ class KconfigTransformer:
         choice_infos = {}
         choice_definitions = {}
         choice_dep = {}
+        unique_syms_nr = len(parser_result['unique_defined_syms'])
+        unique_choice_nr = len(parser_result['unique_choices'])
+        unique_named_choices_nr = len(parser_result['named_choices'])
 
         print(" call different attributes on options found in parser_result['unique_defined_syms']")
         
@@ -193,17 +203,18 @@ class KconfigTransformer:
         context = ExtParserContext(
             symbol_infos = symbol_infos,
             symbol_definitions = symbol_definitions,
-            symbol_nr = len(symbol_definitions),
+            symbol_nr = unique_syms_nr, #len(symbol_definitions),
             configdefault_options = configdefault_options,
             configdefault_options_nr = len(configdefault_options),
             symbol_defaults = symbol_defaults,
             symbol_orig_defaults = symbol_orig_defaults,
             choice_infos = choice_infos,
             choice_definitions = choice_definitions,
-            choice_nr = len(choice_definitions),
+            choice_nr = unique_choice_nr, #len(choice_definitions),
+            named_choices_nr = unique_named_choices_nr,
             choice_dep = choice_dep,
             parser_result=parser_result,
-            srctree=Path(konf.srctree)
+            srctree=Path(konf.srctree), 
         )
         
         self.context = context
@@ -672,7 +683,14 @@ class KconfigTransformer:
             line_item = lines[idx]
 
             # SKIP: type attr (bool/tristate) & optional attr
-            if line_item.line_type in ('type_bool', 'type_tristate', 'optional'):
+            if line_item.line_type == 'optional':
+                self.FILE_OPTIONAL_CHOICE_ATTR += 1 
+                continue
+            if line_item.line_type == 'type_bool':
+                self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE += 1
+                continue
+            if line_item.line_type == 'type_tristate':
+                self.FILE_SKIP_CHOICE_TYP_DEF_BOOL += 1
                 continue
             
             # everything else: prompt, default, depends on, help -> copy/transform as usual (because it's a first definition)
@@ -999,6 +1017,7 @@ class KconfigTransformer:
             self.FILE_SOURCE_KEYWORDS_ALL_NR += 1                                  # for each self.SOURCE_KEYWORDS -> count 1, so that we have SUM of all 
             return self._transform_source_line(line, current_file, resolve_log)    # if resolve_log == True, than there is log for resolving and also iglob check is active 
         elif line.line_type == "option modules":
+            self.OPTION_MODULES_COUNTER += 1
             return self._transform_opt_modules(line, current_file)
         elif line.line_type == "option env":
             self.FILE_OPT_ENV += 1
@@ -1008,6 +1027,12 @@ class KconfigTransformer:
                 self.FILE_OPT_ALLNONCONG += 1
             if line.line_type == "defconfig_list":
                 self.FILE_OPT_DEFCONFIG += 1
+            if line.line_type == "warning":
+                self.FILE_WARNING_ATTR += 1
+            if line.line_type == "set":
+                self.FILE_SET_OPTION += 1
+            if line.line_type == "set_default":
+                self.FILE_SET_DEFAULT_OPTION += 1
             return line    
 
     def _transform_def_keyword(self, line) -> List:
@@ -1196,10 +1221,8 @@ class KconfigTransformer:
         indent_str = ' ' * line.indent
         new_line_text = f'{indent_str}modules'
         new_line = KconfigLine(new_line_text, line.line_number)
-        self.OPTION_MODULES_COUNTER += 1 
 
         self.OPTION_MODULES_INFO.append({
-            'counter': self.OPTION_MODULES_COUNTER, 
             'line': line.line_number, 
             'file': current_file
         })
@@ -1340,17 +1363,32 @@ class KconfigTransformer:
         print(f"----------------------------------------------------------------------")
         print(f"finished transforming: {transformed_count} files transformed")
         print(f"----------------------------------------------------------------------")
+        print("Overall parser info: ")
+        print(f"    -> ExParserContext - unique options: {self.context.symbol_nr}")
+        print(f"    -> ExParserContext - configdefaults: {self.context.configdefault_options_nr} ({', '.join(self.context.configdefault_options)})")
+        print(f"    -> ExParserContext - unique choices: {self.context.choice_nr}")
+        print(f"    -> ExParserContext - named choices:  {self.context.named_choices_nr}")
+        print(f"----------------------------------------------------------------------")
         if self.OPTION_MODULES_INFO:
-            print("info about option-attr: ")
             for info in self.OPTION_MODULES_INFO:
-                print(f"    {info['counter']} option modules-attr found at line {info['line']} in {info['file']}")
-            print(f"    allnoconfig_y:  {self.FILE_OPT_ALLNONCONG}")
-            print(f"    defconfig_list: {self.FILE_OPT_DEFCONFIG}")
-        
+                print(f"    {self.OPTION_MODULES_COUNTER} option modules-attr found at line {info['line']} in {info['file']}")
+        else:
+            print(f"    option modules: 0")          
+        print(f"----------------------------------------------------------------------")
+        print("count options/attr that are not transformed: ")
+        print(f"    allnoconfig_y:  {self.FILE_OPT_ALLNONCONG}")        
+        print(f"    defconfig_list: {self.FILE_OPT_DEFCONFIG}")
+        print(f"    warning:        {self.FILE_WARNING_ATTR}")
+        print(f"    set:            {self.FILE_SET_OPTION}")
+        print(f"    set default:    {self.FILE_SET_DEFAULT_OPTION}")
+
         self.FILE_OPT_DEFCONFIG = 0
         self.FILE_OPT_ALLNONCONG = 0
         self.OPTION_MODULES_COUNTER = 0
         self.OPTION_MODULES_INFO.clear()
+        self.FILE_WARNING_ATTR = 0
+        self.FILE_SET_OPTION = 0
+        self.FILE_SET_DEFAULT_OPTION = 0
         return excel_stats
 
     # TODO: check again 
@@ -1585,6 +1623,9 @@ class KconfigTransformer:
         print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
         print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
         print(f"    All \"option env\" attr:      {self.FILE_OPT_ENV}")
+        print(f"    All optional choice attr:   {self.FILE_OPTIONAL_CHOICE_ATTR}")
+        print(f"    All bool     choice attr:   {self.FILE_SKIP_CHOICE_TYP_DEF_BOOL}")
+        print(f"    All tristate choice attr:   {self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE}")
         print(f"    -----------------------------------------------------------------------")
         print(f"    Transformer Output:         {len_result} lines")
         print(f"    -----------------------------------------------------------------------")
@@ -1624,6 +1665,12 @@ class KconfigTransformer:
         self.FILE_SOURCE_OUT_DIFF = 0
         self.FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
         self.FILE_OPT_ENV = 0
+        self.FILE_OPTIONAL_CHOICE_ATTR = 0
+        self.FILE_WARNING_ATTR = 0
+        self.FILE_SET_OPTION = 0
+        self.FILE_SET_DEFAULT_OPTION = 0
+        self.FILE_SKIP_CHOICE_TYP_DEF_BOOL = 0
+        self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE = 0
 
         return file_stats_excel
         
@@ -1662,12 +1709,8 @@ class KconfigTransformer:
         for choice_name, definitions in given_context.choice_definitions.items():
             for definition in definitions:
                 print(f"{choice_name}: [{repr(definition)}]")
-
-        print(f"\n")
-        print(f"    -> ExParserContext - symbols: {given_context.symbol_nr} ")#({', '.join(given_context.symbol_definitions.keys())})")
-        print(f"    -> ExParserContext - configdefaults: {given_context.configdefault_options_nr}({', '.join(given_context.configdefault_options)})")
+       
         print(f"\n   Symbol definitions and corresponding locations in ExParserContext: ")
-
         for sym_name, definitions in given_context.symbol_definitions.items():
             if len(definitions) >= 1:
                 print(f"   '{sym_name}' is defined x{len(definitions)}")

@@ -96,10 +96,6 @@ CN: [{'sym.default': (<symbol n, bool, value n, constant>, <symbol y, bool, valu
 
 ------------ choice_definitions -----------------------------------------------
 
-
-    -> ExParserContext - symbols: 6 
-    -> ExParserContext - configdefaults: 1(FOO)
-
    Symbol definitions and corresponding locations in ExParserContext: 
    'FOO' is defined x5
      - Kconfig:3
@@ -189,6 +185,9 @@ start transforming 9 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   1
     All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         12 lines
     -----------------------------------------------------------------------
@@ -218,6 +217,9 @@ start transforming 34 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         25 lines
     -----------------------------------------------------------------------
@@ -230,3 +232,17 @@ start transforming 34 input lines
 ----------------------------------------------------------------------
 finished transforming: 2 files transformed
 ----------------------------------------------------------------------
+Overall parser info: 
+    -> ExParserContext - unique options: 6
+    -> ExParserContext - configdefaults: 1 (FOO)
+    -> ExParserContext - unique choices: 0
+    -> ExParserContext - named choices:  0
+----------------------------------------------------------------------
+    option modules: 0
+----------------------------------------------------------------------
+count options/attr that are not transformed: 
+    allnoconfig_y:  0
+    defconfig_list: 0
+    warning:        0
+    set:            0
+    set default:    0
