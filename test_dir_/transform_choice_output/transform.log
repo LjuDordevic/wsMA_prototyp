@@ -67,7 +67,7 @@ START using parser:
 
 2. Bild ExtParserContext FROM PARSER RESULTS
  Transformer used: ZRTOS
- call different attributes on symbols found in parser_result['unique_defined_syms']
+ call different attributes on options found in parser_result['unique_defined_syms']
 
  For each symbol found in parser_result['unique_defined_syms']
     -> call sym.name/.origin/.name_and_loc
@@ -121,10 +121,6 @@ NAMED_CH
 NAMED_CH: [{'file': 'Kconfig', 'line': 6, 'node.prompt': ('pick bool named choice', <symbol OPT_Y, bool, "depends on OPT_Yn", value n, visibility y, direct deps y, Kconfig:3>), 'node.defaults': [(<symbol CH_A, bool, "Op A", value n, visibility n, choice symbol, direct deps n, Kconfig:12>, <symbol OPT_Y, bool, "depends on OPT_Yn", value n, visibility y, direct deps y, Kconfig:3>, ('Kconfig', 9))], 'node.dep': <symbol OPT_Y, bool, "depends on OPT_Yn", value n, visibility y, direct deps y, Kconfig:3>}]
 NAMED_CH: [{'file': 'uo1/Kconfig', 'line': 13, 'node.prompt': None, 'node.defaults': [(<symbol CH_C, bool, "Op C", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:17>, (2, <symbol BB, bool, "if BB", value n, visibility y, direct deps y, uo1/Kconfig:8>, (2, <symbol AAA, bool, "AAA", value y, visibility y, direct deps y, uo1/Kconfig:1>, <symbol OPT_Z, bool, "if OPT_Z", value n, visibility y, direct deps y, uo1/Kconfig:5>)), ('uo1/Kconfig', 15))], 'node.dep': (2, <symbol AAA, bool, "AAA", value y, visibility y, direct deps y, uo1/Kconfig:1>, <symbol OPT_Z, bool, "if OPT_Z", value n, visibility y, direct deps y, uo1/Kconfig:5>)}]
 
-
-    -> ExParserContext - symbols: 12 
-    -> ExParserContext - configdefaults: 0()
-
    Symbol definitions and corresponding locations in ExParserContext: 
    'OPT_Y' is defined x1
      - Kconfig:3
@@ -153,7 +149,8 @@ NAMED_CH: [{'file': 'uo1/Kconfig', 'line': 13, 'node.prompt': None, 'node.defaul
     get_all_source_files: 
 
 3. Filter ExtParserContext
-extract all configdefault symbols and for each get transformed lines and last config
+extract all configdefault options and for each get transformed lines and last config
+extract infos for named choices - their definition & entries
 ------H-----------
 context.choice_infos:       {'NAMED_CH': [{'choice.name': 'NAMED_CH', 'choice.syms': [<symbol CH_A, bool, "Op A", value n, visibility n, choice symbol, direct deps n, Kconfig:12>, <symbol CH_B, bool, "Op B", value n, visibility n, choice symbol, direct deps n, Kconfig:14>, <symbol CH_C, bool, "Op C", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:17>, <symbol MC1, bool, "M", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:19>, <symbol MC2, bool, "MC2", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:22>, <symbol CMC2, bool, "cMCx", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:24>, <symbol CMC3, bool, "cMCxx", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:26>, <symbol CH_D, bool, "Op D", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:28>]}]}
 context.choice_definitions: {'NAMED_CH': [{'file': 'Kconfig', 'line': 6, 'node.prompt': ('pick bool named choice', <symbol OPT_Y, bool, "depends on OPT_Yn", value n, visibility y, direct deps y, Kconfig:3>), 'node.defaults': [(<symbol CH_A, bool, "Op A", value n, visibility n, choice symbol, direct deps n, Kconfig:12>, <symbol OPT_Y, bool, "depends on OPT_Yn", value n, visibility y, direct deps y, Kconfig:3>, ('Kconfig', 9))], 'node.dep': <symbol OPT_Y, bool, "depends on OPT_Yn", value n, visibility y, direct deps y, Kconfig:3>}, {'file': 'uo1/Kconfig', 'line': 13, 'node.prompt': None, 'node.defaults': [(<symbol CH_C, bool, "Op C", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:17>, (2, <symbol BB, bool, "if BB", value n, visibility y, direct deps y, uo1/Kconfig:8>, (2, <symbol AAA, bool, "AAA", value y, visibility y, direct deps y, uo1/Kconfig:1>, <symbol OPT_Z, bool, "if OPT_Z", value n, visibility y, direct deps y, uo1/Kconfig:5>)), ('uo1/Kconfig', 15))], 'node.dep': (2, <symbol AAA, bool, "AAA", value y, visibility y, direct deps y, uo1/Kconfig:1>, <symbol OPT_Z, bool, "if OPT_Z", value n, visibility y, direct deps y, uo1/Kconfig:5>)}]}
@@ -220,11 +217,7 @@ test file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
 Reader found: 27 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
 call _transform_lines(lines from reader, input, configdefault dict info)
 start transforming 27 input lines
-kdkls
-kdkls3
-    processed_choices vor if: set()
-kdkls5
-kdkls6
+    processed_choices before if: set()
     Found first definition of choice NAMED_CH at line 6
     Processing choice transformation
     processed_choices now: {'NAMED_CH'}
@@ -255,7 +248,6 @@ Processing definition 1 at line 13
     config: CMC2
     config: CMC3
     config: CH_D
-depdsksakl [KconfigLine(depends_on, line=14, indent=2)]
   Added depends: depends on AAA && OPT_Z
   Added default: default CH_C if BB && AAA && OPT_Z
 
@@ -279,28 +271,32 @@ result after first definition: 15 lines
 
   Adding 2 menuconfigs after endchoice
     Adding menuconfig MC1, depends_from_def=[KconfigLine(depends_on, line=14, indent=2)]
-hello     depends on AAA && OPT_Z
-4
+    new line:     depends on AAA && OPT_Z
     Adding menuconfig MC2, depends_from_def=[KconfigLine(depends_on, line=14, indent=2)]
-hello     depends on AAA && OPT_Z
-4
+    new line:     depends on AAA && OPT_Z
     source without glob: 1
     FILE LOG --------------------------------------------------------------
     Reader input                27 lines
     -----------------------------------------------------------------------
-    All source_keywords:        1
+    All source without glob:    1
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   1
     All "option env" attr:      0
+    All optional choice attr:   1
+    All bool     choice attr:   0
+    All tristate choice attr:   1
     -----------------------------------------------------------------------
     Transformer Output:         43 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
         Done writting 43 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/Kconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
@@ -309,29 +305,46 @@ test file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
 Reader found: 31 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
 call _transform_lines(lines from reader, input, configdefault dict info)
 start transforming 31 input lines
-kdkls
-kdkls3
-    processed_choices vor if: {'NAMED_CH'}
-kdkls4
+    processed_choices before if: {'NAMED_CH'}
     Skipping non-first definition of choice NAMED_CH at line 13
     FILE LOG --------------------------------------------------------------
     Reader input                31 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         13 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Added new bc of named choice:    18
+        Removed bc of config_default:    0
+        Removed bc of named choice:      18
         Removed no match for o(r)source: 0
         Done writting 13 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/uo1/Kconfig
 ----------------------------------------------------------------------
 finished transforming: 2 files transformed
 ----------------------------------------------------------------------
+Overall parser info: 
+    -> ExParserContext - unique options: 12
+    -> ExParserContext - configdefaults: 0 ()
+    -> ExParserContext - unique choices: 1
+    -> ExParserContext - named choices:  1
+----------------------------------------------------------------------
+    option modules: 0
+----------------------------------------------------------------------
+count options/attr that are not transformed: 
+    allnoconfig_y:  0
+    defconfig_list: 0
+    warning:        0
+    set:            0
+    set default:    0

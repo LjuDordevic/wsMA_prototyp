@@ -59,12 +59,13 @@ class KconfigTransformer:
     FILE_OPT_ALLNONCONG = 0
     FILE_OPT_DEFCONFIG = 0
     PROCESSED_CHOICES = set()
-    FILE_OPTIONAL_CHOICE_ATTR = 0
+    FILE_SKIP_OPTIONAL_CHOICE_ATTR = 0
     FILE_WARNING_ATTR = 0
     FILE_SET_OPTION = 0
     FILE_SET_DEFAULT_OPTION = 0
     FILE_SKIP_CHOICE_TYP_DEF_BOOL = 0       # Linux doesn't allow typ definion as choice attr 
     FILE_SKIP_CHOICE_TYP_DEF_TRISTATE = 0
+    FILE_SKIPPED_BC_NAMED_CHOICE = 0
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -524,40 +525,37 @@ class KconfigTransformer:
 
                 if line.line_type == 'named_choice':
                     choice_name = line.content.get('name')
-                    print("kdkls")
                     
                     if not choice_name or choice_name not in choice_definition_info:
-                        print("kdkls2")
                         pass  
   
                     else:
-                        print("kdkls3")
                         choice_info = choice_definition_info[choice_name]
-                        # FIRST DEF?
-                        #if choice_info['choice_def']:
                         
-                        print(f"    processed_choices vor if: {self.PROCESSED_CHOICES}")
+                        print(f"    processed_choices before if: {self.PROCESSED_CHOICES}")
 
                         if choice_name in self.PROCESSED_CHOICES:
-                            print("kdkls4")
-
                             print(f"    Skipping non-first definition of choice {choice_name} at line {line.line_number}")
                             # Skip until endchoice
+                            #print(f"    before_i {i}")
+                            self.FILE_SKIPPED_BC_NAMED_CHOICE += 1 # the choice line itself
                             i += 1
                             while i < len(lines) and lines[i].line_type != 'endchoice':
+                                #print(f"        {lines[i]}")
+                                self.FILE_SKIPPED_BC_NAMED_CHOICE += 1
                                 i += 1
                             i += 1  # consume endchoice
+                            self.FILE_SKIPPED_BC_NAMED_CHOICE += 1
+                            #print(f"    after {i}")
+                            
                             continue
                         
-                        print("kdkls5")
                         first_def = self.context.choice_definitions[choice_name][0]
                         first_def_file = self.context.srctree / first_def['file']
                         first_def_line = first_def['line']
                             
                         if (current_file == first_def_file and 
                             line.line_number == first_def_line):
-                            print("kdkls6")
-
                                 
                             print(f"    Found first definition of choice {choice_name} at line {line.line_number}")
                             print(f"    Processing choice transformation")
@@ -684,7 +682,7 @@ class KconfigTransformer:
 
             # SKIP: type attr (bool/tristate) & optional attr
             if line_item.line_type == 'optional':
-                self.FILE_OPTIONAL_CHOICE_ATTR += 1 
+                self.FILE_SKIP_OPTIONAL_CHOICE_ATTR += 1 
                 continue
             if line_item.line_type == 'type_bool':
                 self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE += 1
@@ -791,7 +789,7 @@ class KconfigTransformer:
                             )
                         result.append(KconfigLine(new_line, dep_line.line_number))
                         depends_from_def.append(KconfigLine(new_line, dep_line.line_number))
-                        print(f"depdsksakl {depends_from_def}")
+                        #print(f"depdsksakl {depends_from_def}")
                         print(f"  Added depends: {new_line.strip()}")
 
                     # -------- default ----------
@@ -961,8 +959,8 @@ class KconfigTransformer:
             for dep_line in depends_from_def:
                 raw = dep_line.raw_text.strip()
                 new_line = f"{' ' * (line.indent)}{raw}"
-                print(f"hello {new_line}")
-                print(line.indent)
+                print(f"    new line: {new_line}")
+                #print(line.indent)
                 result.append(KconfigLine(new_line, dep_line.line_number))
         
         return block_end_index
@@ -1623,7 +1621,7 @@ class KconfigTransformer:
         print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
         print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
         print(f"    All \"option env\" attr:      {self.FILE_OPT_ENV}")
-        print(f"    All optional choice attr:   {self.FILE_OPTIONAL_CHOICE_ATTR}")
+        print(f"    All optional choice attr:   {self.FILE_SKIP_OPTIONAL_CHOICE_ATTR}")
         print(f"    All bool     choice attr:   {self.FILE_SKIP_CHOICE_TYP_DEF_BOOL}")
         print(f"    All tristate choice attr:   {self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE}")
         print(f"    -----------------------------------------------------------------------")
@@ -1632,9 +1630,12 @@ class KconfigTransformer:
         print(f"        Added new bc of def_*:           {self.FILE_DEF_KEYWORDS_COUNT}")
         print(f"        Added new lines of source:       {new_lines_skw}")
         print(f"        Added new bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")
-        #print(f"        Removed   bc of config_default:  {self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES}") 
-        print(f"        Skipped   bc of config_default:  {self.FILE_SKIPPED_BC_CONFIGDEFAULT}") 
+        print(f"        Added new bc of named choice:    {self.FILE_SKIPPED_BC_NAMED_CHOICE}") 
+    #print(f"        Removed consecutive empty lines:  {self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES}") 
+        print(f"        Removed bc of config_default:    {self.FILE_SKIPPED_BC_CONFIGDEFAULT}") 
+        print(f"        Removed bc of named choice:      {self.FILE_SKIPPED_BC_NAMED_CHOICE}") 
         print(f"        Removed no match for o(r)source: {self.FILE_O_SOURCE_KEYWORDS_NO_MATCH}")   
+        
         
         # STORE FOR EXCEL
         file_stats_excel = {
@@ -1665,12 +1666,13 @@ class KconfigTransformer:
         self.FILE_SOURCE_OUT_DIFF = 0
         self.FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
         self.FILE_OPT_ENV = 0
-        self.FILE_OPTIONAL_CHOICE_ATTR = 0
+        self.FILE_SKIP_OPTIONAL_CHOICE_ATTR = 0
         self.FILE_WARNING_ATTR = 0
         self.FILE_SET_OPTION = 0
         self.FILE_SET_DEFAULT_OPTION = 0
         self.FILE_SKIP_CHOICE_TYP_DEF_BOOL = 0
         self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE = 0
+        self.FILE_SKIPPED_BC_NAMED_CHOICE = 0
 
         return file_stats_excel
         
