@@ -5,12 +5,8 @@ config FOO
 
 config FOO
   def_bool n
-  default y if CN && CY && U1
-  default CY if U1
-  default CY && AA if C && U1
+  default y && CN && CY && U1
+  default CY && U1
+  default CY && AA && C && U1
 
-source "uo1/Kconfig1"
-source "uo1/Kconfig1"
-source "uo1/Kconfig1"
-source "uo1/Kconfig1"
 source "uo1/Kconfig1"

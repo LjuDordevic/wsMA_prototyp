@@ -6,4 +6,4 @@ config FOO
 config FOO
   def_bool n
 
-source "uo1/*"
+source "uo1/Kconfig1"

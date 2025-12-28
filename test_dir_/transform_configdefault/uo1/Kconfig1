@@ -1,6 +1,10 @@
 menu "test"
   depends on U1
 
+config A 
+  def_int 5 
+  prompt "Opt A"
+
 if CY
 configdefault FOO
   default y if CN

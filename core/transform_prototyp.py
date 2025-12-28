@@ -419,7 +419,7 @@ class KconfigTransformer:
             line_value = line_entry.content.get('value')
 
             if cond_full:
-                transformed_content = f"{indent_str}default {line_value} if {cond_full}"
+                transformed_content = f"{indent_str}default {line_value} && {cond_full}"
             else:
                 transformed_content = f"{indent_str}default {line_value}"
             
@@ -1111,6 +1111,7 @@ class KconfigTransformer:
                      #   print(f"        {source_keyword} includes node for: {node_item_name}")
                         print(f"        node's file: {node.filename}")
                         print(f"        node's include paths: {node.include_path}") 
+                        print(f"        node: --- \n    {node}\n        ---")
                         print(f"        -> relevant is where node was sourced from: {src_file} at line {src_linenr}") 
                         print(f"        resolved: ")
                     continue

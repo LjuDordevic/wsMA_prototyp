@@ -1,6 +1,11 @@
 menu "test"
   depends on U1
 
+config A 
+  int
+  default 5
+  prompt "Opt A"
+
 endmenu
 
 config U1
