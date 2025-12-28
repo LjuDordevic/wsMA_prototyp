@@ -179,12 +179,11 @@ start transforming 9 input lines
     Resolve source: uo1/* at line 9
       -> uo1/Kconfig1
     Files matching: 1 (using source)
-=== _remove_consecutive_empty_lines ===
-0 = 12 - 12
     FILE LOG --------------------------------------------------------------
     Reader input                9 lines
     -----------------------------------------------------------------------
-    All source_keywords:        1
+    All source without glob:    0
+    All source using glob:      1
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
@@ -196,7 +195,7 @@ start transforming 9 input lines
         Added new bc of def_*:           0
         Added new lines of source:       0
         Added new bc of config_default:  3
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 12 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/Kconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
@@ -209,12 +208,11 @@ start transforming 34 input lines
     Skipping configdefault block starting at line 13
       Skipping line 14: default
     Skipping if-endif block (only configdefaults) starting at line 16
-=== _remove_consecutive_empty_lines ===
-3 = 25 - 22
     FILE LOG --------------------------------------------------------------
     Reader input                34 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
@@ -226,7 +224,7 @@ start transforming 34 input lines
         Added new bc of def_*:           1
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  3
+        Skipped   bc of config_default:  10
         Removed no match for o(r)source: 0
         Done writting 22 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/uo1/Kconfig1
 ----------------------------------------------------------------------

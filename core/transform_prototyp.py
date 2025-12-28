@@ -36,6 +36,7 @@ class KconfigTransformer:
     PROJECT_DEF_KEYWORDS_COUNT = 0
     SOURCE_KEYWORDS = ('source', 'osource', 'rsource', 'orsource')
     FILE_SOURCE_NR = 0
+    FILE_SOURCE_W_GLOB = 0
     FILE_OSOURCE_NR = 0
     FILE_RSOURCE_NR = 0
     FILE_ORSOURCE_NR = 0
@@ -48,7 +49,8 @@ class KconfigTransformer:
     FILE_ALL_ADDED_LINES_SKW = 0
     ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0
     FILE_CONFIGDEFAULT_NR = 0
-    FILE_REMOVED_BC_CONFIGDEFAULT = 0
+    FILE_REMOVED_CONSECUTIVE_EMPTY_LINES = 0
+    FILE_SKIPPED_BC_CONFIGDEFAULT = 0
     FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
     OPTION_MODULES_COUNTER = 0
     OPTION_MODULES_INFO = []
@@ -492,14 +494,19 @@ class KconfigTransformer:
             
                     if if_contains_only_configdefault:
                         print(f"    Skipping if-endif block (only configdefaults) starting at line {line.line_number}")
+                        old_i = i
                         i = self._skip_if_block(lines, i)
+                        self.FILE_SKIPPED_BC_CONFIGDEFAULT += (i - old_i)
                         continue
 
                 if line.line_type == 'configdefault':
                     print(f"    Skipping configdefault block starting at line {line.line_number}")
+                    self.FILE_SKIPPED_BC_CONFIGDEFAULT += 1 # the configdefault line itself
                     i += 1
+
                     while i < len(lines) and lines[i].indent > line.indent:
                         print(f"      Skipping line {lines[i].line_number}: {lines[i].line_type}")
+                        self.FILE_SKIPPED_BC_CONFIGDEFAULT += 1
                         i += 1
                     # i = 1. line after the block 
                     continue
@@ -989,7 +996,6 @@ class KconfigTransformer:
             self.FILE_DEF_KEYWORDS_COUNT += 1                                      # for each def_* -> count 1 one added line   
             return self._transform_def_keyword(line)
         elif line.line_type in self.SOURCE_KEYWORDS:
-            # count all source keywords 
             self.FILE_SOURCE_KEYWORDS_ALL_NR += 1                                  # for each self.SOURCE_KEYWORDS -> count 1, so that we have SUM of all 
             return self._transform_source_line(line, current_file, resolve_log)    # if resolve_log == True, than there is log for resolving and also iglob check is active 
         elif line.line_type == "option modules":
@@ -1049,17 +1055,22 @@ class KconfigTransformer:
         has_glob = any(c in pattern for c in ['*', '?', '[', ']', '!'])
 
         # COUNT each keyword in file
-        if source_keyword == "source": self.FILE_SOURCE_NR += 1
-        elif source_keyword == "osource": self.FILE_OSOURCE_NR += 1
+        if source_keyword == "osource": self.FILE_OSOURCE_NR += 1
         elif source_keyword == "rsource": self.FILE_RSOURCE_NR += 1  
-        elif source_keyword == "orsource": self.FILE_ORSOURCE_NR += 1       
+        elif source_keyword == "orsource": self.FILE_ORSOURCE_NR += 1      
+
+        # COUNT source with and without glob
+        if has_glob and source_keyword == "source":
+            self.FILE_SOURCE_W_GLOB += 1
+        if not has_glob and source_keyword == "source":
+            self.FILE_SOURCE_NR += 1 
 
         # NO GLOB -> copy line as it is to the output! BUT skip this for (o)r/(o)source because these have to be transformed to source before returning the line
         if not has_glob and not source_keyword == 'rsource' \
             and not source_keyword == 'orsource' and not source_keyword == 'osource':
             print(f"    source without glob: 1")    # this is just for LOGGING, no need of using FILE_SOURCE_OUT_DIFF, because it's always 1 line that we look at and return
             return line
-        
+
         # GLOB
         print(f"    GLOB LOG ----------------------------------------------------------------------------")
         print(f"    Resolve {source_keyword}: {pattern} at line {line.line_number}")
@@ -1312,9 +1323,9 @@ class KconfigTransformer:
              
             # TODO: add new_lines to excel stats 
             new_lines = self._remove_consecutive_empty_lines(transformed)
-            removed_executive_lines_nr = self.FILE_REMOVED_BC_CONFIGDEFAULT
+            #removed_consecutive_lines_nr = self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES
 
-            stats = self._log_file_and_reset_count(source_out_diff, input_file, len_reader_input, len_transformed_lines, removed_executive_lines_nr)
+            stats = self._log_file_and_reset_count(source_out_diff, input_file, len_reader_input, len_transformed_lines)
 
             excel_stats.append(stats)
             if log_excel_after_each_file:
@@ -1562,12 +1573,13 @@ class KconfigTransformer:
         print(f"  DEBUG: Total entries collected: {len(all_entries)}")
         return all_entries
 
-    def _log_file_and_reset_count(self, new_lines_skw : int, current_file : Path, len_input : int, len_result : int, removed_executive_lines_nr: int):
+    def _log_file_and_reset_count(self, new_lines_skw : int, current_file : Path, len_input : int, len_result : int):
         print(f"    FILE LOG --------------------------------------------------------------")
         #print(f"    File:                      {str(current_file)}")
         print(f"    Reader input                {len_input} lines")
         print(f"    -----------------------------------------------------------------------")
-        print(f"    All source_keywords:        {self.FILE_SOURCE_NR}")
+        print(f"    All source without glob:    {self.FILE_SOURCE_NR}")
+        print(f"    All source using glob:      {self.FILE_SOURCE_W_GLOB}")
         print(f"    All osource_keywords:       {self.FILE_OSOURCE_NR}")
         print(f"    All rsource_keywords:       {self.FILE_RSOURCE_NR}")
         print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
@@ -1577,12 +1589,12 @@ class KconfigTransformer:
         print(f"    Transformer Output:         {len_result} lines")
         print(f"    -----------------------------------------------------------------------")
         print(f"        Added new bc of def_*:           {self.FILE_DEF_KEYWORDS_COUNT}")
-        print(f"        Added new lines of source: -1 (= means one line was just overwritten)" if new_lines_skw < 0 \
-              else f"        Added new lines of source:       {new_lines_skw}")
+        print(f"        Added new lines of source:       {new_lines_skw}")
         print(f"        Added new bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")
-        print(f"        Removed   bc of config_default:  {removed_executive_lines_nr}") 
+        #print(f"        Removed   bc of config_default:  {self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES}") 
+        print(f"        Skipped   bc of config_default:  {self.FILE_SKIPPED_BC_CONFIGDEFAULT}") 
         print(f"        Removed no match for o(r)source: {self.FILE_O_SOURCE_KEYWORDS_NO_MATCH}")   
-
+        
         # STORE FOR EXCEL
         file_stats_excel = {
             'test file' : str(current_file),
@@ -1598,6 +1610,7 @@ class KconfigTransformer:
         }
 
         self.FILE_SOURCE_NR = 0
+        self.FILE_SOURCE_W_GLOB = 0
         self.FILE_OSOURCE_NR = 0
         self.FILE_RSOURCE_NR = 0
         self.FILE_ORSOURCE_NR = 0
@@ -1605,7 +1618,8 @@ class KconfigTransformer:
         self.FILE_DEF_KEYWORDS_COUNT = 0
         self.FILE_ALL_ADDED_LINES_SKW = 0
         self.FILE_CONFIGDEFAULT_NR = 0
-        self.FILE_REMOVED_BC_CONFIGDEFAULT = 0
+        self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES = 0
+        self.FILE_SKIPPED_BC_CONFIGDEFAULT = 0
         self.NEW_BC_GLOB = 0
         self.FILE_SOURCE_OUT_DIFF = 0
         self.FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
@@ -1727,7 +1741,6 @@ class KconfigTransformer:
         transformation of configdefault can leave some unwanted empty lines,
         so this function removes them 
         """
-        print("=== _remove_consecutive_empty_lines ===")
         cleaned = []
         previous_line_empty = False
         removed_nr = 0
@@ -1743,6 +1756,7 @@ class KconfigTransformer:
 
             cleaned.append(line)
         
-        self.FILE_REMOVED_BC_CONFIGDEFAULT = previous_len - len(cleaned)
-        print(f"{self.FILE_REMOVED_BC_CONFIGDEFAULT} = {previous_len} - {len(cleaned)}")
+        # this lines are already counted through self.FILE_SKIPPED_BC_CONFIGDEFAULT
+        self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES = previous_len - len(cleaned)
+        #print(f"{self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES} = {previous_len} - {len(cleaned)}")
         return cleaned
