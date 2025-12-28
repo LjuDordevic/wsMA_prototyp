@@ -6,6 +6,7 @@ check clone with: cd linux -> make menuconfig -> OK
 
 To check if the specifications work before transformation:
 Before calling menuconfig, you have to set SRCTREE every time:
+also don't forget to source the right venv: [...]/venv_zephyr_rtos/bin/activate
 ------------------------------
 export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_source"
 /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/test_dir_/transform_source/Kconfig
@@ -19,7 +20,9 @@ export ENV_A="i7-1260P"
 ------------------------------
 export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_choice" 
 /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
-
+------------------------------
+export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault"
+/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/Kconfig
 --------------------------------------------------------------------------------------------------------------------------------------------------
 
 To check the transformed specification:
