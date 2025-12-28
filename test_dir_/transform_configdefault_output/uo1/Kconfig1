@@ -1,0 +1,8 @@
+menu "test"
+  depends on U1
+
+endmenu
+
+config U1
+  bool 
+  default y

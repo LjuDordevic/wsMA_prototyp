@@ -1,0 +1,16 @@
+mainmenu "Test configdefault"
+
+config FOO
+  bool "first Option"
+
+config FOO
+  def_bool n
+  default y if CN && CY && U1
+  default CY if U1
+  default CY && AA if C && U1
+
+source "uo1/Kconfig1"
+source "uo1/Kconfig1"
+source "uo1/Kconfig1"
+source "uo1/Kconfig1"
+source "uo1/Kconfig1"

@@ -1,0 +1,9 @@
+mainmenu "Test configdefault"
+
+config FOO
+  bool "first Option"
+
+config FOO
+  def_bool n
+
+source "uo1/*"

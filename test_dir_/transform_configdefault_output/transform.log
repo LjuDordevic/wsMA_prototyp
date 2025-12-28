@@ -1,0 +1,200 @@
+====================================================================================================
+TRNASFORMATION PROTOTYP LOG
+====================================================================================================
+    Root: /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault
+    Main file: Kconfig
+    Output dir: /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output
+====================================================================================================
+START using parser: 
+  spec_version: ZRTOS
+  kconfig_folder: /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig
+  kconfiglib_version: <module 'kconfiglib' from '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/kconfiglib.py'>
+1.  Parser Output: 
+{'choices': [],
+ 'comments': [],
+ 'const_syms': {'m': <symbol m, bool, value m, constant>,
+                'n': <symbol n, bool, value n, constant>,
+                'y': <symbol y, bool, value y, constant>},
+ 'defined_syms': [<symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:5, uo1/Kconfig1:9, uo1/Kconfig1:13>,
+                  <symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:5, uo1/Kconfig1:9, uo1/Kconfig1:13>,
+                  <symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:5, uo1/Kconfig1:9, uo1/Kconfig1:13>,
+                  <symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:5, uo1/Kconfig1:9, uo1/Kconfig1:13>,
+                  <symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:5, uo1/Kconfig1:9, uo1/Kconfig1:13>,
+                  <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:19>],
+ 'kconf': <configuration with 7 symbols, main menu prompt "Test configdefault", srctree "/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
+ 'menus': [<menu node for menu, prompt "test" (visibility y), deps y, 'visible if' deps y, has child, has next, uo1/Kconfig1:1>],
+ 'missing_syms': [],
+ 'named_choices': {},
+ 'syms': {'AA': <symbol AA, unknown, value "AA", visibility n, direct deps n, undefined>,
+          'C': <symbol C, unknown, value "C", visibility n, direct deps n, undefined>,
+          'CN': <symbol CN, unknown, value "CN", visibility n, direct deps n, undefined>,
+          'CY': <symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>,
+          'FOO': <symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:5, uo1/Kconfig1:9, uo1/Kconfig1:13>,
+          'MODULES': <symbol MODULES, unknown, value "MODULES", visibility n, is the modules symbol, direct deps n, undefined>,
+          'U1': <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:19>},
+ 'top_node': <menu node for menu, prompt "Test configdefault" (visibility y), deps y, 'visible if' deps y, has child, Kconfig:1>,
+ 'unique_choices': [],
+ 'unique_defined_syms': [<symbol FOO, bool, "first Option", value n, visibility y, direct deps y, Kconfig:3, Kconfig:6, uo1/Kconfig1:5, uo1/Kconfig1:9, uo1/Kconfig1:13>,
+                         <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:19>]}
+--------------------------------------------------
+   Parser found: 6 defined syms
+   Parser found: 2 unique defined syms
+   Parser found: 2 files
+--------------------------------------------------
+
+2. Bild ExtParserContext FROM PARSER RESULTS
+ Transformer used: ZRTOS
+ call different attributes on symbols found in parser_result['unique_defined_syms']
+
+ For each symbol found in parser_result['unique_defined_syms']
+    -> call sym.name/.origin/.name_and_loc
+    -> call for each sym.nodes (.filename/.linenr/node/.defaults/is_configdefault
+    -> call all sym.defaults
+    -> call all sym.orig_defaults
+
+------------ symbol_infos --------------------------------------------------
+FOO: [{'sym.name': 'FOO', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'FOO (defined at Kconfig:3, Kconfig:6, uo1/Kconfig1:5, uo1/Kconfig1:9, uo1/Kconfig1:13)'}]
+U1: [{'sym.name': 'U1', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1', 21)), 'sym.name_and_loc': 'U1 (defined at uo1/Kconfig1:19)'}]
+
+------------ symbol_definitions --------------------------------------------------
+FOO: [{'file': 'Kconfig', 'line': 3, 'node': <menu node for symbol FOO, prompt "first Option" (visibility y), deps y, has next, Kconfig:3>, 'node.defaults': [], 'is_configdefault': False}]
+FOO: [{'file': 'Kconfig', 'line': 6, 'node': <menu node for symbol FOO, deps y, has next, Kconfig:6>, 'node.defaults': [(<symbol n, bool, value n, constant>, <symbol y, bool, value y, constant>, ('Kconfig', 7))], 'is_configdefault': False}]
+FOO: [{'file': 'uo1/Kconfig1', 'line': 5, 'node': <menu node for symbol FOO, deps n, has next, uo1/Kconfig1:5>, 'node.defaults': [(<symbol y, bool, value y, constant>, (2, <symbol CN, unknown, value "CN", visibility n, direct deps n, undefined>, (2, <symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:19>)), ('uo1/Kconfig1', 6))], 'is_configdefault': True}]
+FOO: [{'file': 'uo1/Kconfig1', 'line': 9, 'node': <menu node for symbol FOO, deps y, has next, uo1/Kconfig1:9>, 'node.defaults': [(<symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:19>, ('uo1/Kconfig1', 10))], 'is_configdefault': True}]
+FOO: [{'file': 'uo1/Kconfig1', 'line': 13, 'node': <menu node for symbol FOO, deps n, uo1/Kconfig1:13>, 'node.defaults': [((2, <symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol AA, unknown, value "AA", visibility n, direct deps n, undefined>), (2, <symbol C, unknown, value "C", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:19>), ('uo1/Kconfig1', 14))], 'is_configdefault': True}]
+U1: [{'file': 'uo1/Kconfig1', 'line': 19, 'node': <menu node for symbol U1, deps y, uo1/Kconfig1:19>, 'node.defaults': [(<symbol y, bool, value y, constant>, <symbol y, bool, value y, constant>, ('uo1/Kconfig1', 21))], 'is_configdefault': False}]
+
+------------ symbol_defaults -----------------------------------------------
+FOO: [{'sym.default': (<symbol n, bool, value n, constant>, <symbol y, bool, value y, constant>, ('Kconfig', 7))}]
+FOO: [{'sym.default': (<symbol y, bool, value y, constant>, (2, <symbol CN, unknown, value "CN", visibility n, direct deps n, undefined>, (2, <symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:19>)), ('uo1/Kconfig1', 6))}]
+FOO: [{'sym.default': (<symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:19>, ('uo1/Kconfig1', 10))}]
+FOO: [{'sym.default': ((2, <symbol CY, unknown, value "CY", visibility n, direct deps n, undefined>, <symbol AA, unknown, value "AA", visibility n, direct deps n, undefined>), (2, <symbol C, unknown, value "C", visibility n, direct deps n, undefined>, <symbol U1, bool, value y, visibility n, direct deps y, uo1/Kconfig1:19>), ('uo1/Kconfig1', 14))}]
+U1: [{'sym.default': (<symbol y, bool, value y, constant>, <symbol y, bool, value y, constant>, ('uo1/Kconfig1', 21))}]
+
+------------ choice_infos -----------------------------------------------
+
+------------ choice_definitions -----------------------------------------------
+
+
+    -> ExParserContext - symbols: 2 
+    -> ExParserContext - configdefaults: 1(FOO)
+
+   Symbol definitions and corresponding locations in ExParserContext: 
+   'FOO' is defined x5
+     - Kconfig:3
+     - Kconfig:6
+     - uo1/Kconfig1:5 (as configdefault)
+     - uo1/Kconfig1:9 (as configdefault)
+     - uo1/Kconfig1:13 (as configdefault)
+   'U1' is defined x1
+     - uo1/Kconfig1:19
+    get_all_source_files: 
+
+3. Filter ExtParserContext
+extract all configdefault symbols and for each get transformed lines and last config
+transform all extracted <default lines> from conifgdefaults - add them together
+    default line entry: ('uo1/Kconfig1', 6) --> /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
+    default line entry: ('uo1/Kconfig1', 10) --> /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
+    default line entry: ('uo1/Kconfig1', 14) --> /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
+print transformed lines
+
+    KconfigLine(default, line=6, indent=2)
+        -> Content: {'value': 'y', 'condition': 'CN && CY && U1'}
+
+    KconfigLine(default, line=10, indent=2)
+        -> Content: {'value': 'CY', 'condition': 'U1'}
+
+    KconfigLine(default, line=14, indent=2)
+        -> Content: {'value': 'CY && AA', 'condition': 'C && U1'}
+
+infos about whole configdefault dictionary
+configdefault: FOO
+'last_config': ('FOO', 'Kconfig', 6, False, [{'value_ext': 'n', 'deps_ext': ['y'], 'loc': ('Kconfig', 7)}])
+'cd_default_lines': [(('uo1/Kconfig1', 6), ['CN', 'CY', 'U1']), (('uo1/Kconfig1', 10), ['U1']), (('uo1/Kconfig1', 14), ['C', 'U1'])]
+'transformed_cd_default_lines': [KconfigLine(default, line=6, indent=2), KconfigLine(default, line=10, indent=2), KconfigLine(default, line=14, indent=2)]
+
+filter: symbol definitions & each sym.node.defaults extracted ---------------------------------------------------------------
+FOO, Kconfig, 3, False, []
+FOO, Kconfig, 6, False, [{'value_ext': 'n', 'deps_ext': ['y'], 'loc': ('Kconfig', 7)}]
+FOO, uo1/Kconfig1, 5, True, [{'value_ext': 'y', 'deps_ext': ['CN', 'CY', 'U1'], 'loc': ('uo1/Kconfig1', 6)}]
+FOO, uo1/Kconfig1, 9, True, [{'value_ext': 'CY', 'deps_ext': ['U1'], 'loc': ('uo1/Kconfig1', 10)}]
+FOO, uo1/Kconfig1, 13, True, [{'value_ext': 'expr', 'deps_ext': ['C', 'U1'], 'loc': ('uo1/Kconfig1', 14)}]
+filter: default definitions of symbol (loc & complete list for if cond) ------------------------------------------------------
+FOO, ('Kconfig', 7), (y)
+FOO, ('uo1/Kconfig1', 6), (CN, CY, U1)
+FOO, ('uo1/Kconfig1', 10), (U1)
+FOO, ('uo1/Kconfig1', 14), (C, U1)
+
+ - last conf
+('FOO', 'Kconfig', 6, False, [{'value_ext': 'n', 'deps_ext': ['y'], 'loc': ('Kconfig', 7)}])
+
+ - configdefault entries
+[(('uo1/Kconfig1', 6), ['CN', 'CY', 'U1']), (('uo1/Kconfig1', 10), ['U1']), (('uo1/Kconfig1', 14), ['C', 'U1'])]
+
+ - transformed cd entries
+[KconfigLine(default, line=6, indent=2), KconfigLine(default, line=10, indent=2), KconfigLine(default, line=14, indent=2)]
+
+for each given file at source_files start building path output structur and call reader and writer
+
+4. Transform all files - needs reader & writer
+test file: /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/Kconfig
+
+
+Reader found: 9 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 9 input lines
+    Found matching config for FOO at line 6
+    Adding 3 configdefault entries
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve source: uo1/* at line 9
+        ---- RESOLVE LOG ------------------------------------------------------
+        node's file: uo1/Kconfig1
+        node's include paths: (('Kconfig', 9),)
+        -> relevant is where node was sourced from: Kconfig at line 9
+        resolved: 
+        ---- RESOLVE LOG ------------------------------------------------------
+        node's file: uo1/Kconfig1
+        node's include paths: (('Kconfig', 9),)
+        -> relevant is where node was sourced from: Kconfig at line 9
+        resolved: 
+        ---- RESOLVE LOG ------------------------------------------------------
+        node's file: uo1/Kconfig1
+        node's include paths: (('Kconfig', 9),)
+        -> relevant is where node was sourced from: Kconfig at line 9
+        resolved: 
+        ---- RESOLVE LOG ------------------------------------------------------
+        node's file: uo1/Kconfig1
+        node's include paths: (('Kconfig', 9),)
+        -> relevant is where node was sourced from: Kconfig at line 9
+        resolved: 
+        ---- RESOLVE LOG ------------------------------------------------------
+        node's file: uo1/Kconfig1
+        node's include paths: (('Kconfig', 9),)
+        -> relevant is where node was sourced from: Kconfig at line 9
+        resolved: 
+      -> uo1/Kconfig1
+      -> uo1/Kconfig1
+      -> uo1/Kconfig1
+      -> uo1/Kconfig1
+      -> uo1/Kconfig1
+    Files matching: 5 (using source)
+    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
+    transformed iglob list (relative paths): ['uo1/Kconfig1']
+Traceback (most recent call last):
+  File "/home/ljd/wsMA_prototyp/core/workflow_test.py", line 114, in <module>
+    sys.exit(main())
+             ^^^^^^
+  File "/home/ljd/wsMA_prototyp/core/workflow_test.py", line 100, in main
+    transformer.transform_all_files(
+  File "/home/ljd/wsMA_prototyp/core/transform_prototyp.py", line 1309, in transform_all_files
+    transformed, stats = self._transform_lines(lines, input_file, cd_definition_info, choice_definition_info)
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ljd/wsMA_prototyp/core/transform_prototyp.py", line 601, in _transform_lines
+    transformed = self._transform_single_line(line, current_symbol, current_file)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ljd/wsMA_prototyp/core/transform_prototyp.py", line 993, in _transform_single_line
+    return self._transform_source_line(line, current_file, resolve_log=True)    # if last parameter == True, than there is log for resolving and also iglob check is active 
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ljd/wsMA_prototyp/core/transform_prototyp.py", line 1175, in _transform_source_line
+    raise RuntimeError("check source matching")
+RuntimeError: check source matching
