@@ -66,7 +66,7 @@ START using parser:
 
 2. Bild ExtParserContext FROM PARSER RESULTS
  Transformer used: ZRTOS
- call different attributes on symbols found in parser_result['unique_defined_syms']
+ call different attributes on options found in parser_result['unique_defined_syms']
 
  For each symbol found in parser_result['unique_defined_syms']
     -> call sym.name/.origin/.name_and_loc
@@ -105,9 +105,9 @@ OPTION_G: [{'sym.default': (<symbol G, unknown, value "G", constant>, <symbol y,
 OPTION_W1: [{'sym.default': (<symbol W1, unknown, value "W1", constant>, <symbol y, bool, value y, constant>, ('uo5/AKconfig', 2))}]
 OPTION_W2: [{'sym.default': (<symbol W2, unknown, value "W2", constant>, <symbol y, bool, value y, constant>, ('uo5/BKconfig', 2))}]
 
+------------ choice_infos -----------------------------------------------
 
-    -> ExParserContext - symbols: 9 
-    -> ExParserContext - configdefaults: 0()
+------------ choice_definitions -----------------------------------------------
 
    Symbol definitions and corresponding locations in ExParserContext: 
    'OPTION_A' is defined x1
@@ -131,7 +131,8 @@ OPTION_W2: [{'sym.default': (<symbol W2, unknown, value "W2", constant>, <symbol
     get_all_source_files: 
 
 3. Filter ExtParserContext
-extract all configdefault symbols and for each get transformed lines and last config
+extract all configdefault options and for each get transformed lines and last config
+extract infos for named choices - their definition & entries
 
 for each given file at source_files start building path output structur and call reader and writer
 
@@ -146,18 +147,23 @@ start transforming 3 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                3 lines
     -----------------------------------------------------------------------
-    All source_keywords:        1
+    All source without glob:    1
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         3 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/Kconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/Kconfig
@@ -170,16 +176,16 @@ start transforming 12 input lines
     GLOB LOG ----------------------------------------------------------------------------
     Resolve rsource: uo1/Kconfig at line 2
         ---- RESOLVE LOG ------------------------------------------------------
-        rsource includes node for: OPTION_B
         node's file: uo2/uo1/Kconfig
         node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 2))
         -> relevant is where node was sourced from: uo2/Kconfig at line 2
         resolved: 
       -> uo2/uo1/Kconfig
     Files matching: 1 (using rsource)
-    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/uo1/Kconfig
-    transformed iglob list (relative paths): ['uo2/uo1/Kconfig']
-    CHECK OK: transformed iglob list == list of matched_files through iteration
+        ---- CHECK RESOLVE LOG with iglob------------------------------------------------------
+        iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/uo1/Kconfig
+            transformed iglob list (relative paths): ['uo2/uo1/Kconfig']
+        CHECK OK: transformed iglob list == list of matched_files through iteration
     GLOB LOG ----------------------------------------------------------------------------
     Resolve osource: u06/Kconfig at line 5
       no files found for the: u06/Kconfig
@@ -191,31 +197,26 @@ start transforming 12 input lines
     GLOB LOG ----------------------------------------------------------------------------
     Resolve source: uo3/K* at line 9
         ---- RESOLVE LOG ------------------------------------------------------
-        source includes node for: OPTION_C
         node's file: uo3/Kconfig
         node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 9))
         -> relevant is where node was sourced from: uo2/Kconfig at line 9
         resolved: 
         ---- RESOLVE LOG ------------------------------------------------------
-        source includes node for: OPTION_D
         node's file: uo3/Kconfig1
         node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 9))
         -> relevant is where node was sourced from: uo2/Kconfig at line 9
         resolved: 
         ---- RESOLVE LOG ------------------------------------------------------
-        source includes node for: OPTION_E
         node's file: uo3/Kconfig2
         node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 9))
         -> relevant is where node was sourced from: uo2/Kconfig at line 9
         resolved: 
         ---- RESOLVE LOG ------------------------------------------------------
-        source includes node for: OPTION_F
         node's file: uo3/Kconfig3
         node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 9))
         -> relevant is where node was sourced from: uo2/Kconfig at line 9
         resolved: 
         ---- RESOLVE LOG ------------------------------------------------------
-        source includes node for: OPTION_G
         node's file: uo3/Kconfig41
         node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 9))
         -> relevant is where node was sourced from: uo2/Kconfig at line 9
@@ -226,23 +227,22 @@ start transforming 12 input lines
       -> uo3/Kconfig3
       -> uo3/Kconfig41
     Files matching: 5 (using source)
-    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig
-    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig1
-    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig2
-    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig3
-    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig41
-    transformed iglob list (relative paths): ['uo3/Kconfig', 'uo3/Kconfig1', 'uo3/Kconfig2', 'uo3/Kconfig3', 'uo3/Kconfig41']
-    CHECK OK: transformed iglob list == list of matched_files through iteration
+        ---- CHECK RESOLVE LOG with iglob------------------------------------------------------
+        iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig
+        iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig1
+        iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig2
+        iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig3
+        iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig41
+            transformed iglob list (relative paths): ['uo3/Kconfig', 'uo3/Kconfig1', 'uo3/Kconfig2', 'uo3/Kconfig3', 'uo3/Kconfig41']
+        CHECK OK: transformed iglob list == list of matched_files through iteration
     GLOB LOG ----------------------------------------------------------------------------
     Resolve source: uo5/[!CD]* at line 12
         ---- RESOLVE LOG ------------------------------------------------------
-        source includes node for: OPTION_W1
         node's file: uo5/AKconfig
         node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 12))
         -> relevant is where node was sourced from: uo2/Kconfig at line 12
         resolved: 
         ---- RESOLVE LOG ------------------------------------------------------
-        source includes node for: OPTION_W2
         node's file: uo5/BKconfig
         node's include paths: (('Kconfig', 3), ('uo2/Kconfig', 12))
         -> relevant is where node was sourced from: uo2/Kconfig at line 12
@@ -250,25 +250,31 @@ start transforming 12 input lines
       -> uo5/AKconfig
       -> uo5/BKconfig
     Files matching: 2 (using source)
-    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/AKconfig
-    iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/BKconfig
-    transformed iglob list (relative paths): ['uo5/AKconfig', 'uo5/BKconfig']
-    CHECK OK: transformed iglob list == list of matched_files through iteration
+        ---- CHECK RESOLVE LOG with iglob------------------------------------------------------
+        iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/AKconfig
+        iglob found: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/BKconfig
+            transformed iglob list (relative paths): ['uo5/AKconfig', 'uo5/BKconfig']
+        CHECK OK: transformed iglob list == list of matched_files through iteration
     FILE LOG --------------------------------------------------------------
     Reader input                12 lines
     -----------------------------------------------------------------------
-    All source_keywords:        3
+    All source without glob:    1
+    All source using glob:      2
     All osource_keywords:       1
     All rsource_keywords:       1
     All orsource_keywords:      1
     SUM (r/or/o)source lines:   6
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         15 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
         Added new lines of source:       5
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 2
         Done writting 15 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo2/Kconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo1/Kconfig
@@ -280,18 +286,23 @@ start transforming 2 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                2 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         2 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 2 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo1/Kconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/uo1/Kconfig
@@ -307,18 +318,23 @@ start transforming 4 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                4 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      1
     SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         3 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 1
         Done writting 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo2/uo1/Kconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig
@@ -330,18 +346,23 @@ start transforming 3 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                3 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig1
@@ -353,18 +374,23 @@ start transforming 3 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                3 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig1
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig2
@@ -376,18 +402,23 @@ start transforming 3 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                3 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig2
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig3
@@ -399,18 +430,23 @@ start transforming 3 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                3 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig3
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig41
@@ -422,18 +458,23 @@ start transforming 3 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                3 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig41
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/AKconfig
@@ -445,18 +486,23 @@ start transforming 3 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                3 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo5/AKconfig
 test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/BKconfig
@@ -468,20 +514,39 @@ start transforming 3 input lines
     FILE LOG --------------------------------------------------------------
     Reader input                3 lines
     -----------------------------------------------------------------------
-    All source_keywords:        0
+    All source without glob:    0
+    All source using glob:      0
     All osource_keywords:       0
     All rsource_keywords:       0
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    All optional choice attr:   0
+    All bool     choice attr:   0
+    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
         Added new lines of source:       0
         Added new bc of config_default:  0
-        Removed   bc of config_default:  0
+        Skipped   bc of config_default:  0
         Removed no match for o(r)source: 0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo5/BKconfig
 ----------------------------------------------------------------------
 finished transforming: 11 files transformed
 ----------------------------------------------------------------------
+Overall parser info: 
+    -> ExParserContext - unique options: 9
+    -> ExParserContext - configdefaults: 0 ()
+    -> ExParserContext - unique choices: 0
+    -> ExParserContext - named choices:  0
+----------------------------------------------------------------------
+    option modules: 0
+----------------------------------------------------------------------
+count options/attr that are not transformed: 
+    allnoconfig_y:  0
+    defconfig_list: 0
+    warning:        0
+    set:            0
+    set default:    0
