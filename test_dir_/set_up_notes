@@ -40,5 +40,6 @@ export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_option_output"
 ------------------------------
 export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output"  
 ~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/Kconfig
-
-
+------------------------------
+export srctree="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output"
+~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/Kconfig
