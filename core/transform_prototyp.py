@@ -26,11 +26,6 @@ class KconfigTransformer:
     """
     build context based on parser_result
     transform lines
-
-    FOR SOURCE_KEYWORDS_TRANSFORMED 
-    input:  source "exp_u1/*" (1 line)
-    output: source "exp_u1/Kconfig"  (1 line overwrite)
-            source "exp_u1/Kconfig2" (1 line added)
     """
     DEF_KEYWORDS = ('def_string', 'def_int', 'def_hex')
     FILE_DEF_KEYWORDS_COUNT = 0
@@ -72,7 +67,7 @@ class KconfigTransformer:
         self.source_spec = source_spec.upper()  # maybe for some later checks 
         self.context: Optional[ExtParserContext] = None
    
-    def build_context_from_parser(self, parser_result: dict, log: bool) -> ExtParserContext: 
+    def _build_context_from_parser(self, parser_result: dict, log: bool) -> ExtParserContext: 
         konf = parser_result['kconf']
         symbol_infos = {}
         symbol_definitions = {}
@@ -223,7 +218,7 @@ class KconfigTransformer:
         if log: self._log_parser_context(self.context)
         return context
 
-    def extract_named_choice_info(self, choice_name: str):
+    def _extract_named_choice_info(self, choice_name: str):
         context = self.context
         choice_infos = context.choice_infos
         choice_definitions = context.choice_definitions
@@ -267,7 +262,7 @@ class KconfigTransformer:
             'choice_def': choice_all_dep_list
         }
         
-    def extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
+    def _extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
        
         symbol_infos = context.symbol_infos
         symbol_definitions = context.symbol_definitions
@@ -564,13 +559,13 @@ class KconfigTransformer:
                             self.PROCESSED_CHOICES.add(choice_name)
                             print(f"    processed_choices now: {self.PROCESSED_CHOICES}")
 
-                            i = self.transform_named_choice(lines, i, choice_info, result, 
+                            i = self._transform_named_choice(lines, i, choice_info, result, 
                                                 lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
                             #choice_processed = True
                             continue
                 
                 if line.line_type == 'choice':
-                    i = self.transform_choice(lines, i, result, 
+                    i = self._transform_choice(lines, i, result, 
                                                 lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
                     continue
 
@@ -607,7 +602,7 @@ class KconfigTransformer:
                                     print(f"    Found matching config for {current_symbol} at line {line.line_number}")
                                     print(f"    Adding {len(transformed_entries)} configdefault entries")
                                     
-                                    i = self.transform_cd(lines, i, transformed_entries, result, 
+                                    i = self._transform_cd(lines, i, transformed_entries, result, 
                                                 lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
                                     #print(f"i = self.transform_cd {i}")
                                     cd_processed = True
@@ -638,7 +633,7 @@ class KconfigTransformer:
             #stats = self._log_file_and_reset_count(self.FILE_SOURCE_OUT_DIFF, current_file, len_reader_input, len_transformed_lines)
             return result, self.FILE_SOURCE_OUT_DIFF, len_reader_input, len_transformed_lines
 
-    def transform_choice(self, lines: List, current_index: int, result: List, transform_func) -> int:
+    def _transform_choice(self, lines: List, current_index: int, result: List, transform_func) -> int:
         from kconfig_writer import KconfigLine
         import re
 
@@ -708,7 +703,7 @@ class KconfigTransformer:
 
             # IF CONFIG INSIDE CHOICE is type tristate 
             if line_item.line_type == 'type_tristate':
-                line_item = self.transform_bool_to_tristate_choice_typ(line_item)
+                line_item = self._transform_bool_to_tristate_choice_typ(line_item)
 
             # everything else: copy/transform as usual (because it's a first definition)
             transformed = transform_func(line_item, None, None)
@@ -728,7 +723,7 @@ class KconfigTransformer:
         print(f"PROCESS choice: {result}")
         return block_end_index
 
-    def transform_named_choice(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
+    def _transform_named_choice(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
         from kconfig_writer import KconfigLine
         
         choice_line = lines[current_index]        
@@ -1093,7 +1088,7 @@ class KconfigTransformer:
 
         return block_end_index
 
-    def transform_bool_to_tristate_choice_typ(self, line_item):
+    def _transform_bool_to_tristate_choice_typ(self, line_item):
         from kconfig_writer import KconfigLine
         import re
 
@@ -1107,7 +1102,7 @@ class KconfigTransformer:
             new_line_text = f'{indent_str}bool'
         return KconfigLine(new_line_text, line_item.line_number)
 
-    def transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
+    def _transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
        
         line = lines[current_index]
         current_symbol = line.content.get('symbol') if hasattr(line, 'content') else None
@@ -1383,154 +1378,7 @@ class KconfigTransformer:
         )
             
         return default_line
-
-    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
-                            log: bool, log_lines: bool, log_and_check_resolve_glob: bool, log_excel_after_each_file: bool, log_excel_output: None):
-        """
-        1. get all source files parser found (these are all realtive to srctree)
-        2. Filter ExtParserContext -> get needed infos for transformation of configdefault and named choice options 
-        3. build paths for input & output files
-        """
-        excel_stats = []
-        if self.context is None:
-            raise RuntimeError("Context missing!")
-        
-        source_files = self._get_all_source_files() # all paths are relative to srctree 
-        transformed_count = 0
-        cd_definition_info = {}
-        choice_definition_info = {}
-
-        print("\n3. Filter ExtParserContext")
-        print("extract all configdefault options and for each get transformed lines and last config")
-        for cd in self.context.configdefault_options:
-            
-            if cd not in cd_definition_info:
-                cd_definition_info[cd] = []     # replace defaultdict
-
-            info = self.extract_symbol_info(self.context, cd)
-            last_config = self._get_last_config(info['sym_def'])
-            cd_default_lines = self._get_cd_entries(info['sym_def'])
-            tcd_list = self._get_transformed_config_defaults(cd_default_lines, reader, project_dir)
-            cd_all_sym = {
-               'last_config': last_config,
-               'cd_default_lines': cd_default_lines,
-               'transformed_entries_list': tcd_list
-            } 
-            cd_definition_info[cd].append(cd_all_sym)
-
-            if log:
-                print(f"\ninfos about whole configdefault dictionary")
-
-                print(f"configdefault: {cd}")
-                print(f"'last_config': {cd_definition_info[cd][0].get('last_config')}")
-                print(f"'cd_default_lines': {cd_definition_info[cd][0].get('cd_default_lines')}")
-                print(f"'transformed_cd_default_lines': {cd_definition_info[cd][0].get('transformed_entries_list')}")
-               
-
-                print(f"\nfilter: symbol definitions & each sym.node.defaults extracted ---------------------------------------------------------------")
-                for sn, file, line, cf_flag, extr_nd in info['sym_def']:
-                    print(f"{sn}, {file}, {line}, {cf_flag}, {extr_nd}")
-                print("filter: default definitions of symbol (loc & complete list for if cond) ------------------------------------------------------")
-                for sn, def_loc, def_dep in info['def_dep']:
-                    print(f"{sn}, {def_loc}, ({', '.join(def_dep)})")
-                print(f"\n - last conf")
-                print(last_config)
-                print(f"\n - configdefault entries")
-                print(cd_default_lines)   
-                print(f"\n - transformed cd entries")
-                print(tcd_list)             
-
-        print("extract infos for named choices - their definition & entries")
-        for choice_name in self.context.choice_definitions.keys():
-            if choice_name not in choice_definition_info:
-                choice_definition_info[choice_name] = {}
-            
-            choice_info = self.extract_named_choice_info(choice_name)
-       
-            # Get all config entries for this choice
-            choice_configs = self._get_all_choice_configs(choice_name, reader, project_dir)
-            choice_info['choice_configs'] = choice_configs
-            
-            choice_definition_info[choice_name] = choice_info
-            
-            if log:
-                print(f"\n  named choice: {choice_name}")
-                print(f"    'choice_def': {choice_info.get('choice_def')}")
-                print(f"    'choice_configs': {len(choice_configs)} config entries")
-
-        print(f"\nfor each given file at source_files start building path output structur and call reader and writer")     
-        print(f"\n4. Transform all files - needs reader & writer")
-        for file_path in source_files:
-            input_file = project_dir / file_path
-            output_file = output_dir / file_path
-            
-            print(f"test file: {input_file}")
-            if not input_file.exists():
-                print(f"  Skip not found: {input_file}")
-                continue
-            
-            output_file.parent.mkdir(parents=True, exist_ok=True)
-            lines = reader.read_file(input_file)
-
-            if log_lines:
-                for line in lines:
-                    #if line.line_type in LINE_TYP_LOG:
-                        print(f"    {line}")
-                        if line.line_type != 'empty' and line.line_type != 'other':
-                            print(f"        -> Content: {line.content}")
-
-            print("call _transform_lines(lines from reader, input, configdefault dict info)")
-            # also collect not only transformed lines but some statistics 
-            transformed, source_out_diff, len_reader_input, len_transformed_lines \
-                  = self._transform_lines(lines, input_file, cd_definition_info, choice_definition_info, log_and_check_resolve_glob)
-             
-            # TODO: add new_lines to excel stats 
-            new_lines = self._remove_consecutive_empty_lines(transformed)
-            #removed_consecutive_lines_nr = self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES
-
-            stats = self._log_file_and_reset_count(source_out_diff, input_file, len_reader_input, len_transformed_lines)
-
-            excel_stats.append(stats)
-            if log_excel_after_each_file:
-                excel_writer.write_to_excel(excel_stats, log_excel_output)
-            
-            try:
-                writer.write(new_lines, output_file)
-                transformed_count += 1
-            except Exception as e:
-                print(f"     Error write: {e}")
-        
-        print(f"----------------------------------------------------------------------")
-        print(f"finished transforming: {transformed_count} files transformed")
-        print(f"----------------------------------------------------------------------")
-        print("Overall parser info: ")
-        print(f"    -> ExParserContext - unique options: {self.context.symbol_nr}")
-        print(f"    -> ExParserContext - configdefaults: {self.context.configdefault_options_nr} ({', '.join(self.context.configdefault_options)})")
-        print(f"    -> ExParserContext - unique choices: {self.context.choice_nr}")
-        print(f"    -> ExParserContext - named choices:  {self.context.named_choices_nr}")
-        print(f"----------------------------------------------------------------------")
-        if self.OPTION_MODULES_INFO:
-            for info in self.OPTION_MODULES_INFO:
-                print(f"    {self.OPTION_MODULES_COUNTER} option modules-attr found at line {info['line']} in {info['file']}")
-        else:
-            print(f"    option modules: 0")          
-        print(f"----------------------------------------------------------------------")
-        print("count options/attr that are not transformed: ")
-        print(f"    allnoconfig_y:  {self.FILE_OPT_ALLNONCONG}")        
-        print(f"    defconfig_list: {self.FILE_OPT_DEFCONFIG}")
-        print(f"    warning:        {self.FILE_WARNING_ATTR}")
-        print(f"    set:            {self.FILE_SET_OPTION}")
-        print(f"    set default:    {self.FILE_SET_DEFAULT_OPTION}")
-
-        self.FILE_OPT_DEFCONFIG = 0
-        self.FILE_OPT_ALLNONCONG = 0
-        self.OPTION_MODULES_COUNTER = 0
-        self.OPTION_MODULES_INFO.clear()
-        self.FILE_WARNING_ATTR = 0
-        self.FILE_SET_OPTION = 0
-        self.FILE_SET_DEFAULT_OPTION = 0
-        return excel_stats
-
+    
     # TODO: check again 
     def _get_all_choice_configs(self, choice_name: str, reader, project_dir: Path):
         """
@@ -1947,3 +1795,150 @@ class KconfigTransformer:
         self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES = previous_len - len(cleaned)
         #print(f"{self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES} = {previous_len} - {len(cleaned)}")
         return cleaned
+
+    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
+                            log: bool, log_lines: bool, log_and_check_resolve_glob: bool, log_excel_after_each_file: bool, log_excel_output: None):
+        """
+        1. get all source files parser found (these are all realtive to srctree)
+        2. Filter ExtParserContext -> get needed infos for transformation of configdefault and named choice options 
+        3. build paths for input & output files
+        """
+        excel_stats = []
+        if self.context is None:
+            raise RuntimeError("Context missing!")
+        
+        source_files = self._get_all_source_files() # all paths are relative to srctree 
+        transformed_count = 0
+        cd_definition_info = {}
+        choice_definition_info = {}
+
+        print("\n3. Filter ExtParserContext")
+        print("extract all configdefault options and for each get transformed lines and last config")
+        for cd in self.context.configdefault_options:
+            
+            if cd not in cd_definition_info:
+                cd_definition_info[cd] = []     # replace defaultdict
+
+            info = self._extract_symbol_info(self.context, cd)
+            last_config = self._get_last_config(info['sym_def'])
+            cd_default_lines = self._get_cd_entries(info['sym_def'])
+            tcd_list = self._get_transformed_config_defaults(cd_default_lines, reader, project_dir)
+            cd_all_sym = {
+               'last_config': last_config,
+               'cd_default_lines': cd_default_lines,
+               'transformed_entries_list': tcd_list
+            } 
+            cd_definition_info[cd].append(cd_all_sym)
+
+            if log:
+                print(f"\ninfos about whole configdefault dictionary")
+
+                print(f"configdefault: {cd}")
+                print(f"'last_config': {cd_definition_info[cd][0].get('last_config')}")
+                print(f"'cd_default_lines': {cd_definition_info[cd][0].get('cd_default_lines')}")
+                print(f"'transformed_cd_default_lines': {cd_definition_info[cd][0].get('transformed_entries_list')}")
+               
+
+                print(f"\nfilter: symbol definitions & each sym.node.defaults extracted ---------------------------------------------------------------")
+                for sn, file, line, cf_flag, extr_nd in info['sym_def']:
+                    print(f"{sn}, {file}, {line}, {cf_flag}, {extr_nd}")
+                print("filter: default definitions of symbol (loc & complete list for if cond) ------------------------------------------------------")
+                for sn, def_loc, def_dep in info['def_dep']:
+                    print(f"{sn}, {def_loc}, ({', '.join(def_dep)})")
+                print(f"\n - last conf")
+                print(last_config)
+                print(f"\n - configdefault entries")
+                print(cd_default_lines)   
+                print(f"\n - transformed cd entries")
+                print(tcd_list)             
+
+        print("extract infos for named choices - their definition & entries")
+        for choice_name in self.context.choice_definitions.keys():
+            if choice_name not in choice_definition_info:
+                choice_definition_info[choice_name] = {}
+            
+            choice_info = self._extract_named_choice_info(choice_name)
+       
+            # Get all config entries for this choice
+            choice_configs = self._get_all_choice_configs(choice_name, reader, project_dir)
+            choice_info['choice_configs'] = choice_configs
+            
+            choice_definition_info[choice_name] = choice_info
+            
+            if log:
+                print(f"\n  named choice: {choice_name}")
+                print(f"    'choice_def': {choice_info.get('choice_def')}")
+                print(f"    'choice_configs': {len(choice_configs)} config entries")
+
+        print(f"\nfor each given file at source_files start building path output structur and call reader and writer")     
+        print(f"\n4. Transform all files - needs reader & writer")
+        for file_path in source_files:
+            input_file = project_dir / file_path
+            output_file = output_dir / file_path
+            
+            print(f"test file: {input_file}")
+            if not input_file.exists():
+                print(f"  Skip not found: {input_file}")
+                continue
+            
+            output_file.parent.mkdir(parents=True, exist_ok=True)
+            lines = reader.read_file(input_file)
+
+            if log_lines:
+                for line in lines:
+                    #if line.line_type in LINE_TYP_LOG:
+                        print(f"    {line}")
+                        if line.line_type != 'empty' and line.line_type != 'other':
+                            print(f"        -> Content: {line.content}")
+
+            print("call _transform_lines(lines from reader, input, configdefault dict info)")
+            # also collect not only transformed lines but some statistics 
+            transformed, source_out_diff, len_reader_input, len_transformed_lines \
+                  = self._transform_lines(lines, input_file, cd_definition_info, choice_definition_info, log_and_check_resolve_glob)
+             
+            # TODO: add new_lines to excel stats 
+            new_lines = self._remove_consecutive_empty_lines(transformed)
+            #removed_consecutive_lines_nr = self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES
+
+            stats = self._log_file_and_reset_count(source_out_diff, input_file, len_reader_input, len_transformed_lines)
+
+            excel_stats.append(stats)
+            if log_excel_after_each_file:
+                excel_writer.write_to_excel(excel_stats, log_excel_output)
+            
+            try:
+                writer.write(new_lines, output_file)
+                transformed_count += 1
+            except Exception as e:
+                print(f"     Error write: {e}")
+        
+        print(f"----------------------------------------------------------------------")
+        print(f"finished transforming: {transformed_count} files transformed")
+        print(f"----------------------------------------------------------------------")
+        print("Overall parser info: ")
+        print(f"    -> ExParserContext - unique options: {self.context.symbol_nr}")
+        print(f"    -> ExParserContext - configdefaults: {self.context.configdefault_options_nr} ({', '.join(self.context.configdefault_options)})")
+        print(f"    -> ExParserContext - unique choices: {self.context.choice_nr}")
+        print(f"    -> ExParserContext - named choices:  {self.context.named_choices_nr}")
+        print(f"----------------------------------------------------------------------")
+        if self.OPTION_MODULES_INFO:
+            for info in self.OPTION_MODULES_INFO:
+                print(f"    {self.OPTION_MODULES_COUNTER} option modules-attr found at line {info['line']} in {info['file']}")
+        else:
+            print(f"    option modules: 0")          
+        print(f"----------------------------------------------------------------------")
+        print("count options/attr that are not transformed: ")
+        print(f"    allnoconfig_y:  {self.FILE_OPT_ALLNONCONG}")        
+        print(f"    defconfig_list: {self.FILE_OPT_DEFCONFIG}")
+        print(f"    warning:        {self.FILE_WARNING_ATTR}")
+        print(f"    set:            {self.FILE_SET_OPTION}")
+        print(f"    set default:    {self.FILE_SET_DEFAULT_OPTION}")
+
+        self.FILE_OPT_DEFCONFIG = 0
+        self.FILE_OPT_ALLNONCONG = 0
+        self.OPTION_MODULES_COUNTER = 0
+        self.OPTION_MODULES_INFO.clear()
+        self.FILE_WARNING_ATTR = 0
+        self.FILE_SET_OPTION = 0
+        self.FILE_SET_DEFAULT_OPTION = 0
+        return excel_stats

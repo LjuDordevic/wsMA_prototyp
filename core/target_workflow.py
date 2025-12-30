@@ -56,7 +56,7 @@ def main():
     print("\n2. Bild ExtParserContext FROM PARSER RESULTS")
     print(f" Transformer used: {transformer.source_spec}")
 
-    context = transformer.build_context_from_parser(
+    context = transformer._build_context_from_parser(
         parser_result,
         log=True
     )
