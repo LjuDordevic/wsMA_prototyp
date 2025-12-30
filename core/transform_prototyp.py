@@ -218,7 +218,7 @@ class KconfigTransformer:
         
         default_dependencies_extracted_list = []
         node_dep_extracted_list = []
-        if log:
+        if log_cd_nc_details:
             print("------H-----------")
             print(f"context.choice_infos:       {choice_infos}")
             print(f"context.choice_definitions: {choice_definitions}")
@@ -1453,8 +1453,8 @@ class KconfigTransformer:
                         j += 1
                     
                     print(f"  DEBUG: Found choice {choice_name} at {choice_file}:{choice_line}")
-                    print(f"  DEBUG: choice_default_lines: {choice_default_lines}")
-                    print(f"  DEBUG: choice_depends_lines: {choice_depends_lines}")
+                    #print(f"  DEBUG: choice_default_lines: {choice_default_lines}")
+                    #print(f"  DEBUG: choice_depends_lines: {choice_depends_lines}")
                     
                     # Now collect all configs AND if-blocks in this choice block
                     if first_config_idx is not None:
@@ -1539,7 +1539,7 @@ class KconfigTransformer:
                                     'depends_lines': choice_depends_lines.copy(),
                                 })
                                 
-                                print(f"  DEBUG: Adding if-block with configs {if_configs} and menuconfigs {[mc['symbol'] for mc in if_menuconfigs]}")
+                                #print(f"  DEBUG: Adding if-block with configs {if_configs} and menuconfigs {[mc['symbol'] for mc in if_menuconfigs]}")
                                 k = m
                             
                             # Handle standalone configs/menuconfigs (not inside if)
@@ -1564,7 +1564,7 @@ class KconfigTransformer:
                                     config_block.append(next_line)
                                     m += 1
                                 
-                                print(f"  DEBUG: Adding {'menuconfig' if is_menuconfig else 'config'} {sym_name}")
+                                #print(f"  DEBUG: Adding {'menuconfig' if is_menuconfig else 'config'} {sym_name}")
                                 
                                 all_entries.append({
                                     'type': 'menuconfig' if is_menuconfig else 'config',
