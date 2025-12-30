@@ -7,37 +7,43 @@ choice
   prompt "pick bool named choice"
   default CH_A 
   depends on OPT_Y
-  depends on AAA && OPT_Z
-  default CH_C if BB && AAA && OPT_Z
+  depends on OPT_AAA && OPT_ZZZ
+  default CH_C if OPT_BBB && OPT_AAA && OPT_ZZZ
+  depends on OPT_ZZZ
+  default E if OPT_ZZZ
   config CH_A 
     bool "Op A"
   config CH_B
     bool "Op B"
-  if BB
+  if OPT_DDD
   config CH_C
     bool "Op C" 
   endif
   config CMC2
-    bool "cMCx"
+    bool "CMC2"
+    depends on MC2
   config CMC3
-    bool "cMCxx"
+    bool "CMC3"
+    depends on MC2
+  config CH_E
+    bool "Op E"
   config CH_D
-    bool "Op D" 
+    bool "Op D"
 endchoice
   menuconfig MC1
     bool "M"
-    depends on AAA && OPT_Z
+    depends on OPT_AAA && OPT_ZZZ
   menuconfig MC2
     bool "MC2"
-    depends on AAA && OPT_Z
+    depends on OPT_AAA && OPT_ZZZ
 
 source "uo1/Kconfig"
-#choice 
-#  prompt "pick tristate choice"
-#  tristate  
-#  config CH_T1
-#    tristate "Op T1"
-#  config CH_T2
-#    tristate  "Op T2"
-#endchoice  
+
+choice 
+  prompt "pick tristate choice"
+  config CH_T1
+    bool "Op T1"
+  config CH_T2
+    bool "Op T2"
+endchoice
 

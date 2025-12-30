@@ -1,13 +1,22 @@
-config AAA 
-  bool "AAA"
+config OPT_AAA 
+  bool "Op AAA"
   default y
 
-config OPT_Z
-  bool "if OPT_Z"
+config OPT_BBB
+  bool "Op BBB"
 
-config BB
-  bool "if BB"
+config OPT_CCC
+  bool "Op CCC"
 
-if OPT_Z
+config OPT_DDD
+  bool "if DDD"
 
+config OPT_EEE
+  bool "Op EEE"
+
+config OPT_ZZZ
+  bool "if OPT_ZZZ"
+
+if OPT_ZZZ
 endif
+

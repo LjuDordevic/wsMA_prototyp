@@ -16,12 +16,13 @@ choice NAMED_CH
 endchoice   
 
 source "uo1/Kconfig"
-#choice 
-#  prompt "pick tristate choice"
-#  tristate  
-#  config CH_T1
-#    tristate "Op T1"
-#  config CH_T2
-#    tristate  "Op T2"
-#endchoice  
+
+choice 
+  prompt "pick tristate choice"
+  tristate  
+  config CH_T1
+    tristate "Op T1"
+  config CH_T2
+    tristate "Op T2"
+endchoice  
 

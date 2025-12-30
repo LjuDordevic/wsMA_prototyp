@@ -66,6 +66,7 @@ class KconfigTransformer:
     FILE_SKIP_CHOICE_TYP_DEF_BOOL = 0       # Linux doesn't allow typ definion as choice attr 
     FILE_SKIP_CHOICE_TYP_DEF_TRISTATE = 0
     FILE_SKIPPED_BC_NAMED_CHOICE = 0
+    FILE_ADDED_BC_NAMED_CHOICE = 0
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -532,10 +533,10 @@ class KconfigTransformer:
                     else:
                         choice_info = choice_definition_info[choice_name]
                         
-                        print(f"    processed_choices before if: {self.PROCESSED_CHOICES}")
+                        #print(f"    processed_choices before if: {self.PROCESSED_CHOICES}")
 
                         if choice_name in self.PROCESSED_CHOICES:
-                            print(f"    Skipping non-first definition of choice {choice_name} at line {line.line_number}")
+                            print(f"    Skipping non-first definition of choice {choice_name} at line {line.line_number}, {current_file}")
                             # Skip until endchoice
                             #print(f"    before_i {i}")
                             self.FILE_SKIPPED_BC_NAMED_CHOICE += 1 # the choice line itself
@@ -563,14 +564,15 @@ class KconfigTransformer:
                             self.PROCESSED_CHOICES.add(choice_name)
                             print(f"    processed_choices now: {self.PROCESSED_CHOICES}")
 
-                            i = self.transform_choice(lines, i, choice_info, result, 
+                            i = self.transform_named_choice(lines, i, choice_info, result, 
                                                 lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
                             #choice_processed = True
                             continue
-
                 
-                #if choice_processed:
-                #    continue
+                if line.line_type == 'choice':
+                    i = self.transform_choice(lines, i, result, 
+                                                lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
+                    continue
 
                 if line.line_type in ['config', 'menuconfig']:
                     #print("line is config/ menuconfig")
@@ -635,8 +637,98 @@ class KconfigTransformer:
             # EXCEL stats
             #stats = self._log_file_and_reset_count(self.FILE_SOURCE_OUT_DIFF, current_file, len_reader_input, len_transformed_lines)
             return result, self.FILE_SOURCE_OUT_DIFF, len_reader_input, len_transformed_lines
-    
-    def transform_choice(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
+
+    def transform_choice(self, lines: List, current_index: int, result: List, transform_func) -> int:
+        from kconfig_writer import KconfigLine
+        import re
+
+        choice_line = lines[current_index]        
+        result.append(choice_line)
+
+        #find endblock 
+        end_line = None
+        block_end_index = current_index + 1
+        while block_end_index < len(lines):
+            next_line = lines[block_end_index]   
+            if next_line.line_type == 'endchoice':
+                # copy this line, so that we can add it at the end of result 
+                indent_str = ' ' * (next_line.indent)   
+                new_line_text = f'{indent_str}endchoice'
+                end_line = KconfigLine(new_line_text, next_line.line_number, line_type='endchoice')
+                block_end_index += 1
+                break
+            block_end_index += 1
+        
+        # FIND line where first config/if starts
+        first_ch_config_idx = None
+        for idx in range(current_index + 1, block_end_index):
+            if lines[idx].line_type in ['config', 'if']:
+                first_ch_config_idx = idx
+                break
+        
+        # CHOICE ATTR
+        choice_attr_end = first_ch_config_idx if first_ch_config_idx is not None else block_end_index - 1
+        print(f"current_indx: {current_index + 1} - choice_attr_end: {choice_attr_end}")
+        
+        idx = current_index + 1
+        while idx < choice_attr_end:
+            line_item = lines[idx]
+
+            # SKIP: type attr (bool/tristate) & optional attr
+            if line_item.line_type == 'optional':
+                self.FILE_SKIP_OPTIONAL_CHOICE_ATTR += 1 
+                idx += 1
+                continue
+            if line_item.line_type == 'type_tristate':
+                self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE += 1
+                idx += 1
+                continue
+            if line_item.line_type == 'type_bool':
+                self.FILE_SKIP_CHOICE_TYP_DEF_BOOL += 1
+                idx += 1
+                continue
+
+            # everything else: copy/transform as usual (because it's a first definition)
+            transformed = transform_func(line_item, None, None)
+            if transformed is None:
+                idx += 1
+                continue
+
+            if isinstance(transformed, list):
+                result.extend(transformed)
+            else:
+                result.append(transformed)  
+            
+            idx += 1
+
+        # CHOICE ELEMENTS
+        while idx < block_end_index - 1 and lines[current_index].line_type != 'endchoice':
+            
+            line_item = lines[idx]
+
+            # IF CONFIG INSIDE CHOICE is type tristate 
+            if line_item.line_type == 'type_tristate':
+                line_item = self.transform_bool_to_tristate_choice_typ(line_item)
+
+            # everything else: copy/transform as usual (because it's a first definition)
+            transformed = transform_func(line_item, None, None)
+            if transformed is None:
+                idx += 1
+                continue
+
+            if isinstance(transformed, list):
+                result.extend(transformed)
+            else:
+                result.append(transformed)  
+            
+            idx += 1
+
+        result.append(end_line)
+
+        print(f"PROCESS choice: {result}")
+        return block_end_index
+
+    def transform_named_choice(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
         from kconfig_writer import KconfigLine
         
         choice_line = lines[current_index]        
@@ -684,10 +776,10 @@ class KconfigTransformer:
             if line_item.line_type == 'optional':
                 self.FILE_SKIP_OPTIONAL_CHOICE_ATTR += 1 
                 continue
-            if line_item.line_type == 'type_bool':
+            if line_item.line_type == 'type_tristate':
                 self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE += 1
                 continue
-            if line_item.line_type == 'type_tristate':
+            if line_item.line_type == 'type_bool':
                 self.FILE_SKIP_CHOICE_TYP_DEF_BOOL += 1
                 continue
             
@@ -740,12 +832,14 @@ class KconfigTransformer:
             # Sort by choice_line to get definitions in order
             sorted_def_lines = sorted(configs_by_definition.keys())
             print(f"Found {len(sorted_def_lines)} choice definitions at lines: {sorted_def_lines}")
+            
+            depends_by_choice_line = {}  # Map: choice_line -> depends_from_def Liste
+            
             # Process each definition (skip the first one, index 0)
             for def_idx in range(1, len(sorted_def_lines)):
                 depends_from_def = []
                 choice_line_num = sorted_def_lines[def_idx]
                 configs_in_this_def = configs_by_definition[choice_line_num]
-                
                 
                 # Get dependencies for this definition
                 default_deps = all_default_deps[def_idx] if def_idx < len(all_default_deps) else []
@@ -790,10 +884,16 @@ class KconfigTransformer:
                         result.append(KconfigLine(new_line, dep_line.line_number))
                         depends_from_def.append(KconfigLine(new_line, dep_line.line_number))
                         #print(f"depdsksakl {depends_from_def}")
-                        print(f"  Added depends: {new_line.strip()}")
-
+                        print(f"  Added: {new_line.strip()}")
+                    
+                    print(f"    Added depends on: {len(depends_from_def)}")
+                    self.FILE_ADDED_BC_NAMED_CHOICE += len(depends_from_def)
+                    # depends on for the line 
+                    depends_by_choice_line[choice_line_num] = depends_from_def
+                    
                     # -------- default ----------
                     for def_line in representative_cfg.get('default_lines', []):
+                        added_def_counter = 0           # for each definition start from 0
                         raw = def_line.raw_text.strip()
                         rest = raw[len('default'):].strip()
 
@@ -823,10 +923,15 @@ class KconfigTransformer:
                             )
 
                         result.append(KconfigLine(new_line, def_line.line_number))
+                        added_def_counter += 1
                         print(f"  Added default: {new_line.strip()}")
 
+                    print(f"    Added default: {added_def_counter}")
+                    self.FILE_ADDED_BC_NAMED_CHOICE += added_def_counter
+
         print(f"\nFinal result has {len(result)} lines before adding configs")
-        
+        print(f"    Added Lines bc named choice {self.FILE_ADDED_BC_NAMED_CHOICE}")
+
         # ADD all configs in choice block
         # 1. TRACK configs already present in this choice block
         existing_configs = set()
@@ -848,11 +953,17 @@ class KconfigTransformer:
                 # Process the whole config block
                 while idx < block_end_index:
                     current = lines[idx]
-                    print(f"current: {current}")
+                    #print(f"current: {current}")
 
                     # Stop if next config or endchoice starts
-                    if (current.line_type in ('config', 'menuconfig', 'endchoice') and current is not line_item):
+                    if (current.line_type in ('config', 'menuconfig', 'endchoice', 'comment') and current is not line_item):
                         break
+
+                    # TODO: This handles choice type switch: tristate -> bool. But only for the attrs of choice itselfelf
+                    #       but for the choice/menuconfigs from other choice definitions are not handled  
+                    # IF MENU/CONFIG INSIDE CHOICE is type tristate -> type bool  
+                    #if current.line_type == 'type_tristate':
+                    #    current = self.transform_bool_to_tristate_choice_typ(current)
 
                     transformed = transform_func(current, None, None)
                     if transformed is not None:
@@ -868,8 +979,11 @@ class KconfigTransformer:
         
         # 2. ADD entries (configs/ifs/ but menuconfig shoild be skipped) from other definitions
         added_items = 0
+        added_lines = 0
+
         for entry in choice_configs:
             entry_type = entry.get('type', 'config')
+            entry_choice_line = entry.get('choice_line')
             
             if entry_type == 'if_block':
                 # Add entire if-block (contains configs, maybe menuconfigs)
@@ -879,6 +993,7 @@ class KconfigTransformer:
                 # Add the if-block to the choice
                 for line in entry.get('block', []):
                     result.append(line)
+                    added_lines += 1
                 
                 # Collect menuconfigs to add after endchoice
                 for mc_info in menuconfigs_in_if:
@@ -888,17 +1003,17 @@ class KconfigTransformer:
                         continue
 
                     mc_info_copy = dict(mc_info)
-                    mc_info_copy['depends_from_def'] = depends_from_def
+                    mc_info_copy['depends_from_def'] = depends_by_choice_line.get(entry_choice_line, [])
                     menuconfigs_to_add_after.append(mc_info_copy)
-                    #menuconfigs_to_add_after.append(mc_info)
                     existing_configs.add(mc_symbol)
                 
-                # Mark configs as existing
+                # Mark configs as existing - because it would be added as standalone 
                 for cfg in configs_in_if:
                     existing_configs.add(cfg)
                 added_items += 1
                 print(f"      Added if-block with configs {configs_in_if} from {entry.get('file')}")
             
+            # mc outside if 
             elif entry_type == 'menuconfig':
                 # Menuconfig - collect to add after endchoice
                 config_symbol = entry.get('symbol')
@@ -911,7 +1026,7 @@ class KconfigTransformer:
                     'block': entry.get('block', []),
                     'if_condition': entry.get('if_condition'),
                     'depends_lines': entry.get('depends_lines', []),
-                    'depends_from_def': depends_from_def,
+                    'depends_from_def': depends_by_choice_line.get(entry_choice_line, []),
                     'node_deps': all_node_deps[def_idx] if def_idx < len(all_node_deps) else []
                 })
                 
@@ -928,17 +1043,20 @@ class KconfigTransformer:
                 
                 for config_line in entry.get('block', []):
                     result.append(config_line)
+                    added_lines += 1
                 
                 existing_configs.add(config_symbol)
                 added_items += 1
                 print(f"      Added config {config_symbol} from {entry.get('file')}")
 
         print(f"    Added {added_items} entries from other choice definitions")
+        print(f"    Added {added_lines} lines from other choice definitions")
 
         # ADD endchoice
         result.append(end_line)
         
         # ADD menuconfigs after endchoice
+        menuconfig_lines_added = 0
         print(f"\n  Adding {len(menuconfigs_to_add_after)} menuconfigs after endchoice")
         for mc_info in menuconfigs_to_add_after:
             mc_symbol = mc_info['symbol']
@@ -950,20 +1068,44 @@ class KconfigTransformer:
             
             print(f"    Adding menuconfig {mc_symbol}, depends_from_def={depends_from_def}")
             
+            mc_lines_counter = 0
             # Add menuconfig line
             result.append(mc_block[0])  # First line is menuconfig declaration
+            mc_lines_counter += 1
             
             # Modify prompt line to add if condition if needed
             for line in mc_block[1:]:
                 result.append(line)
+                mc_lines_counter += 1
             for dep_line in depends_from_def:
                 raw = dep_line.raw_text.strip()
                 new_line = f"{' ' * (line.indent)}{raw}"
-                print(f"    new line: {new_line}")
+                print(f"        new line: {new_line}")
                 #print(line.indent)
                 result.append(KconfigLine(new_line, dep_line.line_number))
-        
+                mc_lines_counter += 1
+            
+            menuconfig_lines_added += mc_lines_counter
+        print(f"    Added {menuconfig_lines_added} menuconfig lines (after endchoice) from other choice definitions")
+        self.FILE_ADDED_BC_NAMED_CHOICE += (menuconfig_lines_added + added_lines)
+        print(f"    Added Total Lines bc named choice {self.FILE_ADDED_BC_NAMED_CHOICE}")
+
+
         return block_end_index
+
+    def transform_bool_to_tristate_choice_typ(self, line_item):
+        from kconfig_writer import KconfigLine
+        import re
+
+        indent_str = ' ' * (line_item.indent)   
+        match = re.match(r'tristate\s+["\']([^"\']+)["\']', line_item.stripped) 
+        # actually it wouldn't be right for choice_conifg to not have prompt 
+        if match:
+            line_text = match.group(1)
+            new_line_text = f'{indent_str}bool "{line_text}"'
+        else:
+            new_line_text = f'{indent_str}bool'
+        return KconfigLine(new_line_text, line_item.line_number)
 
     def transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
        
@@ -1621,21 +1763,20 @@ class KconfigTransformer:
         print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
         print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
         print(f"    All \"option env\" attr:      {self.FILE_OPT_ENV}")
-        print(f"    All optional choice attr:   {self.FILE_SKIP_OPTIONAL_CHOICE_ATTR}")
-        print(f"    All bool     choice attr:   {self.FILE_SKIP_CHOICE_TYP_DEF_BOOL}")
-        print(f"    All tristate choice attr:   {self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE}")
         print(f"    -----------------------------------------------------------------------")
         print(f"    Transformer Output:         {len_result} lines")
         print(f"    -----------------------------------------------------------------------")
         print(f"        Added new bc of def_*:           {self.FILE_DEF_KEYWORDS_COUNT}")
         print(f"        Added new lines of source:       {new_lines_skw}")
         print(f"        Added new bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")
-        print(f"        Added new bc of named choice:    {self.FILE_SKIPPED_BC_NAMED_CHOICE}") 
+        print(f"        Added new bc of named choice:    {self.FILE_ADDED_BC_NAMED_CHOICE}") 
     #print(f"        Removed consecutive empty lines:  {self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES}") 
         print(f"        Removed bc of config_default:    {self.FILE_SKIPPED_BC_CONFIGDEFAULT}") 
         print(f"        Removed bc of named choice:      {self.FILE_SKIPPED_BC_NAMED_CHOICE}") 
-        print(f"        Removed no match for o(r)source: {self.FILE_O_SOURCE_KEYWORDS_NO_MATCH}")   
-        
+        print(f"        Removed no match for o(r)source: {self.FILE_O_SOURCE_KEYWORDS_NO_MATCH}")  
+        print(f"        Removed optional choice attr:    {self.FILE_SKIP_OPTIONAL_CHOICE_ATTR}")
+        print(f"        Removed bool     choice attr:    {self.FILE_SKIP_CHOICE_TYP_DEF_BOOL}")
+        print(f"        Removed tristate choice attr:    {self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE}") 
         
         # STORE FOR EXCEL
         file_stats_excel = {
@@ -1673,6 +1814,7 @@ class KconfigTransformer:
         self.FILE_SKIP_CHOICE_TYP_DEF_BOOL = 0
         self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE = 0
         self.FILE_SKIPPED_BC_NAMED_CHOICE = 0
+        self.FILE_ADDED_BC_NAMED_CHOICE = 0
 
         return file_stats_excel
         
