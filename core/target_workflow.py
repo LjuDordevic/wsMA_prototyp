@@ -73,9 +73,9 @@ def main():
         project_dir=Path(project_dir),
         output_dir=Path(output_dir),
         log=True,
-        log_cd_nc_details=False,
         log_lines=False,
         log_and_check_resolve_glob=False,
+        log_cd_nc_details=False,
         log_excel_after_each_file=True,
         log_excel_output="/home/ljd/wsMA_prototyp/results.xlsx"
     )    
