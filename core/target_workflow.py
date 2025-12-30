@@ -9,13 +9,13 @@ import pprint
 import os
 
 def main():
-    log_file = "/home/ljd/wsMA_prototyp/transform.log"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/transform1.log"
     sys.stdout = open(log_file, "w")
     sys.stderr = sys.stdout 
 
     project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr"
     main_file = "Kconfig"
-    output_dir = "/home/ljd/wsMA_prototyp/ZRTOS_copy2"
+    output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_copy1"
 
     print("=" * 100)
     print("TRNASFORMATION PROTOTYP LOG")
@@ -58,7 +58,7 @@ def main():
 
     context = transformer._build_context_from_parser(
         parser_result,
-        log=True
+        log=False
     )
 
     print("=" * 100)
@@ -73,6 +73,7 @@ def main():
         project_dir=Path(project_dir),
         output_dir=Path(output_dir),
         log=True,
+        log_cd_nc_details=False,
         log_lines=False,
         log_and_check_resolve_glob=False,
         log_excel_after_each_file=True,

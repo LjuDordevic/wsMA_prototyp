@@ -133,19 +133,6 @@ class KconfigTransformer:
                 is_configdefault = getattr(node, 'is_configdefault', False)
                 #print(node.is_configdefault)               
                 
-                """ 
-                if node.defaults and len(node.defaults)>=1:   
-                    print("DEBUG")
-                    print(len(node.defaults))
-                    print(node.defaults)        
-                    node_default_dep = self._extract_dependencies(node.defaults[1])
-                    node_default_loc = node.defaults[2]
-                    print(node_default_dep)
-                    print(node_default_loc)
-                else:
-                    node_default_dep = None
-                    node_default_loc = None
-                """
                 location_info = {
                     'file': node.filename if hasattr(node, 'filename') else None,
                     'line': node.linenr if hasattr(node, 'linenr') else None,
@@ -218,16 +205,11 @@ class KconfigTransformer:
         if log: self._log_parser_context(self.context)
         return context
 
-    def _extract_named_choice_info(self, choice_name: str):
+    def _extract_named_choice_info(self, choice_name: str, log: bool):
         context = self.context
         choice_infos = context.choice_infos
         choice_definitions = context.choice_definitions
-        choice_deps = context.choice_dep
-
-        print("------H-----------")
-        print(f"context.choice_infos:       {choice_infos}")
-        print(f"context.choice_definitions: {choice_definitions}")
-        print(f"context.choice_deps:        {choice_deps}\n")
+        choice_deps = context.choice_dep    
 
         if choice_name not in choice_infos:
             return {
@@ -236,23 +218,29 @@ class KconfigTransformer:
         
         default_dependencies_extracted_list = []
         node_dep_extracted_list = []
-
-        print(f"choice_deps[{choice_name}]:")
+        if log:
+            print("------H-----------")
+            print(f"context.choice_infos:       {choice_infos}")
+            print(f"context.choice_definitions: {choice_definitions}")
+            print(f"context.choice_deps:        {choice_deps}\n")
+            print(f"choice_deps[{choice_name}]:")
+        
         for entry in choice_deps[choice_name]:
             default_tuple = entry['node.defaults']
-            print(f"node.defaults:   {default_tuple}")
+            #print(f"node.defaults:   {default_tuple}")
             for default in default_tuple:
                 default_dependencies = default[1]
                 dependencies = self._extract_dependencies(default_dependencies)
                 default_dependencies_extracted_list.append(dependencies)
              
             dep_tuple = entry['node.dep']
-            print(f"node.dep:        {repr(dep_tuple)}")
+            #print(f"node.dep:        {repr(dep_tuple)}")
             extr_dep_dependencies = self._extract_dependencies(dep_tuple)
             node_dep_extracted_list.append(extr_dep_dependencies)
 
-        print(f"def dependencies extr: {default_dependencies_extracted_list}")
-        print(f"dep dependencies extr: {node_dep_extracted_list}")
+        if log:
+            print(f"def dependencies extr: {default_dependencies_extracted_list}")
+            print(f"dep dependencies extr: {node_dep_extracted_list}")
         
         choice_all_dep_list = []
         choice_all_dep_list.append((choice_name, default_dependencies_extracted_list, node_dep_extracted_list))
@@ -723,7 +711,7 @@ class KconfigTransformer:
         print(f"PROCESS choice: {result}")
         return block_end_index
 
-    def _transform_named_choice(self, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
+    def _transform_named_choice(self, log_debug: bool, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
         from kconfig_writer import KconfigLine
         
         choice_line = lines[current_index]        
@@ -788,7 +776,7 @@ class KconfigTransformer:
             else:
                 result.append(transformed)  
         
-        print(f"PROCESS attr {result}")
+        #print(f"PROCESS attr {result}")
 
         # PROCESS: ADD ATTR OF OTHER DEFINITIONS ----------------------------------------------------------------------------------------------
         # TODO: function die umgehende if und depends on von menus verbindet, ggb. die lines aus dem File wo sich die 2. definition befindet, result.append(self.get_dep_from_other_def)
@@ -799,11 +787,12 @@ class KconfigTransformer:
         # WRONG: from parser overall, user default_dependencies_extracted_list, node_dep_extracted_list) -> 'choice_def': choice_all_dep_list
         choice_def = choice_info.get('choice_def')
         choice_configs = choice_info.get('choice_configs', [])
-        print(f"choice_def {choice_def}")
-        print(f"choice_configs length: {len(choice_configs)}")
-        print(f"choice_configs {choice_configs}")
-        for idx, cfg in enumerate(choice_configs):
-            print(f"  [{idx}] type={cfg.get('type')}, symbol={cfg.get('symbol')}, symbols={cfg.get('symbols')}, choice_line={cfg.get('choice_line')}")
+        if log_debug:
+            print(f"choice_def {choice_def}")
+            print(f"choice_configs length: {len(choice_configs)}")
+            print(f"choice_configs {choice_configs}")
+            for idx, cfg in enumerate(choice_configs):
+                print(f"  [{idx}] type={cfg.get('type')}, symbol={cfg.get('symbol')}, symbols={cfg.get('symbols')}, choice_line={cfg.get('choice_line')}")
 
         menuconfigs_to_add_after = []  # Collect menuconfigs to add after endchoice
 
@@ -813,8 +802,9 @@ class KconfigTransformer:
             # Unpack the single entry
             _, all_default_deps, all_node_deps = choice_def[0]
             
-            print(f"all_default_deps: {all_default_deps}")
-            print(f"all_node_deps: {all_node_deps}")
+            if log_debug:
+                print(f"all_default_deps: {all_default_deps}")
+                print(f"all_node_deps: {all_node_deps}")
             
             # Group configs by choice_line to identify which definition they belong to
             configs_by_definition = {}
@@ -841,16 +831,17 @@ class KconfigTransformer:
                 node_deps = all_node_deps[def_idx] if def_idx < len(all_node_deps) else []
                 
                 print(f"\nProcessing definition {def_idx} at line {choice_line_num}")
-                print(f"  default_deps: {default_deps}")
-                print(f"  node_deps: {node_deps}")
-                #print(f"  configs: {[c['symbol'] for c in configs_in_this_def]}")
-                print(f"  entries in this def:")
-                for c in configs_in_this_def:
-                    if c.get('type') == 'if_block':
-                        print(f"    if_block with configs: {c.get('configs')} and menuconfigs: {[mc['symbol'] for mc in c.get('menuconfigs', [])]}")
-                    else:
-                        print(f"    {c.get('type')}: {c.get('symbol')}")
-                
+                if log_debug:
+                    print(f"  default_deps: {default_deps}")
+                    print(f"  node_deps: {node_deps}")
+                    #print(f"  configs: {[c['symbol'] for c in configs_in_this_def]}")
+                    print(f"  entries in this def:")
+                    for c in configs_in_this_def:
+                        if c.get('type') == 'if_block':
+                            print(f"    if_block with configs: {c.get('configs')} and menuconfigs: {[mc['symbol'] for mc in c.get('menuconfigs', [])]}")
+                        else:
+                            print(f"    {c.get('type')}: {c.get('symbol')}")
+                    
                 # Take the first entry's lines as representative for this definition
                 # (since all configs in same definition have same choice-level attributes)
                 if configs_in_this_def:
@@ -879,7 +870,7 @@ class KconfigTransformer:
                         result.append(KconfigLine(new_line, dep_line.line_number))
                         depends_from_def.append(KconfigLine(new_line, dep_line.line_number))
                         #print(f"depdsksakl {depends_from_def}")
-                        print(f"  Added: {new_line.strip()}")
+                        if log_debug: print(f"  Added: {new_line.strip()}")
                     
                     print(f"    Added depends on: {len(depends_from_def)}")
                     self.FILE_ADDED_BC_NAMED_CHOICE += len(depends_from_def)
@@ -919,13 +910,14 @@ class KconfigTransformer:
 
                         result.append(KconfigLine(new_line, def_line.line_number))
                         added_def_counter += 1
-                        print(f"  Added default: {new_line.strip()}")
+                        if log_debug: print(f"  Added default: {new_line.strip()}")
 
                     print(f"    Added default: {added_def_counter}")
                     self.FILE_ADDED_BC_NAMED_CHOICE += added_def_counter
 
-        print(f"\nFinal result has {len(result)} lines before adding configs")
-        print(f"    Added Lines bc named choice {self.FILE_ADDED_BC_NAMED_CHOICE}")
+        if log_debug:
+            print(f"\nFinal result has {len(result)} lines before adding configs")
+            print(f"    Added Lines bc named choice {self.FILE_ADDED_BC_NAMED_CHOICE}")
 
         # ADD all configs in choice block
         # 1. TRACK configs already present in this choice block
@@ -934,7 +926,7 @@ class KconfigTransformer:
         idx = first_ch_config_idx
         while idx is not None and idx < block_end_index:
             line_item = lines[idx]
-            print(f"Track existing configs: {line_item}")
+            if log_debug: print(f"Track existing configs: {line_item}")
             # Stop at endchoice
             if line_item.line_type == 'endchoice':
                 break
@@ -970,7 +962,7 @@ class KconfigTransformer:
                 continue
             idx += 1
 
-        print(f"result after first definition: {len(result)} lines")
+        #print(f"result after first definition: {len(result)} lines")
         
         # 2. ADD entries (configs/ifs/ but menuconfig shoild be skipped) from other definitions
         added_items = 0
@@ -1648,7 +1640,7 @@ class KconfigTransformer:
             'removed_bc_orsource': self.FILE_O_SOURCE_KEYWORDS_NO_MATCH,
             'removed_lines_bc_cd': self.FILE_SKIPPED_BC_CONFIGDEFAULT,
             'removed_lines_bc_named_choice': self.FILE_SKIPPED_BC_NAMED_CHOICE,
-            
+
             'removed_optional_choice_attr': self.FILE_SKIP_OPTIONAL_CHOICE_ATTR,
             'removed_bool_choice_attr': self.FILE_SKIP_CHOICE_TYP_DEF_BOOL,
             'removed_tristate_choice_attr': self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE
@@ -1711,6 +1703,7 @@ class KconfigTransformer:
             for info in infos:
                 for sym in info.get('choice.syms', []) or []:
                     print(f"    [{repr(sym)}]")
+        
         print(f"\n------------ choice_definitions -----------------------------------------------")
         for choice_name, definitions in given_context.choice_definitions.items():
             for definition in definitions:
@@ -1726,7 +1719,7 @@ class KconfigTransformer:
                     file = defn.get('file') or "<unknown file>"
                     line = defn.get('line') or "<unknown line>"
                     print(f"     - {file}:{line}{default_tag}")
-
+        
     def _if_block_contains_only_configdefault(self, lines, if_start_indx) -> bool:
         i = if_start_indx + 1
         has_configdefault = False
@@ -1811,7 +1804,8 @@ class KconfigTransformer:
         return cleaned
 
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
-                            log: bool, log_lines: bool, log_and_check_resolve_glob: bool, log_excel_after_each_file: bool, log_excel_output: None):
+                            log: bool, log_lines: bool, log_and_check_resolve_glob: bool, \
+                                log_cd_nc_details: bool, log_excel_after_each_file: bool, log_excel_output: None):
         """
         1. get all source files parser found (these are all realtive to srctree)
         2. Filter ExtParserContext -> get needed infos for transformation of configdefault and named choice options 
@@ -1844,7 +1838,7 @@ class KconfigTransformer:
             } 
             cd_definition_info[cd].append(cd_all_sym)
 
-            if log:
+            if log_cd_nc_details:
                 print(f"\ninfos about whole configdefault dictionary")
 
                 print(f"configdefault: {cd}")
@@ -1871,7 +1865,7 @@ class KconfigTransformer:
             if choice_name not in choice_definition_info:
                 choice_definition_info[choice_name] = {}
             
-            choice_info = self._extract_named_choice_info(choice_name)
+            choice_info = self._extract_named_choice_info(choice_name, log)
        
             # Get all config entries for this choice
             choice_configs = self._get_all_choice_configs(choice_name, reader, project_dir)
@@ -1879,7 +1873,7 @@ class KconfigTransformer:
             
             choice_definition_info[choice_name] = choice_info
             
-            if log:
+            if log_cd_nc_details:
                 print(f"\n  named choice: {choice_name}")
                 print(f"    'choice_def': {choice_info.get('choice_def')}")
                 print(f"    'choice_configs': {len(choice_configs)} config entries")
@@ -1890,7 +1884,7 @@ class KconfigTransformer:
             input_file = project_dir / file_path
             output_file = output_dir / file_path
             
-            print(f"test file: {input_file}")
+            #print(f"test file: {input_file}")
             if not input_file.exists():
                 print(f"  Skip not found: {input_file}")
                 continue
