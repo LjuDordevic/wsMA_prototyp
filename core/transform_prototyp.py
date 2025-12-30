@@ -547,7 +547,7 @@ class KconfigTransformer:
                             self.PROCESSED_CHOICES.add(choice_name)
                             print(f"    processed_choices now: {self.PROCESSED_CHOICES}")
 
-                            i = self._transform_named_choice(lines, i, choice_info, result, 
+                            i = self._transform_named_choice(False, lines, i, choice_info, result, 
                                                 lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
                             #choice_processed = True
                             continue
@@ -877,9 +877,9 @@ class KconfigTransformer:
                     # depends on for the line 
                     depends_by_choice_line[choice_line_num] = depends_from_def
                     
+                    added_def_counter = 0           # for each definition start from 0
                     # -------- default ----------
-                    for def_line in representative_cfg.get('default_lines', []):
-                        added_def_counter = 0           # for each definition start from 0
+                    for def_line in representative_cfg.get('default_lines', []):    
                         raw = def_line.raw_text.strip()
                         rest = raw[len('default'):].strip()
 
