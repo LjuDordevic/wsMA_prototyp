@@ -9,7 +9,7 @@ import pprint
 import os
 
 def main():
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/transform1.log"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_copy1/transform.log"
     sys.stdout = open(log_file, "w")
     sys.stderr = sys.stdout 
 
