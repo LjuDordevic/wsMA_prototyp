@@ -1615,7 +1615,7 @@ class KconfigTransformer:
         print(f"    Transformer Output:         {len_result} lines")
         print(f"    -----------------------------------------------------------------------")
         print(f"        Added new bc of def_*:           {self.FILE_DEF_KEYWORDS_COUNT}")
-        print(f"        Added new lines of source:       {new_lines_skw}")
+        print(f"        Added new bc of glob:            {new_lines_skw}")
         print(f"        Added new bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")
         print(f"        Added new bc of named choice:    {self.FILE_ADDED_BC_NAMED_CHOICE}") 
     #print(f"        Removed consecutive empty lines:  {self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES}") 
@@ -1631,13 +1631,27 @@ class KconfigTransformer:
             'test file' : str(current_file),
             'input'     : len_input,
             'output'    : len_result,
-            'source_keyword' : self.FILE_SOURCE_NR,
+            'source_keyword_wo_glob' : self.FILE_SOURCE_NR,
+            'source_keyword_w_glob' : self.FILE_SOURCE_W_GLOB,
             'osource_keyword' : self.FILE_OSOURCE_NR,
             'rource_keyword' : self.FILE_RSOURCE_NR,
             'orource_keyword' : self.FILE_ORSOURCE_NR,
-            'new lines bc source': new_lines_skw,
-            'new lines bc cd': self.FILE_CONFIGDEFAULT_NR,
-            'removed bc o(r)source': self.FILE_O_SOURCE_KEYWORDS_NO_MATCH
+            'sum_all_source' : self.FILE_SOURCE_KEYWORDS_ALL_NR,
+            'option_env' : self.FILE_OPT_ENV,
+
+            'new_lines_bc_of_def_': self.FILE_DEF_KEYWORDS_COUNT,
+
+            'new_lines_bc_of_glob': new_lines_skw,
+            'new_lines_bc_cd': self.FILE_CONFIGDEFAULT_NR,
+            'new_lines_bc_named_choice': self.FILE_ADDED_BC_NAMED_CHOICE,
+
+            'removed_bc_orsource': self.FILE_O_SOURCE_KEYWORDS_NO_MATCH,
+            'removed_lines_bc_cd': self.FILE_SKIPPED_BC_CONFIGDEFAULT,
+            'removed_lines_bc_named_choice': self.FILE_SKIPPED_BC_NAMED_CHOICE,
+            
+            'removed_optional_choice_attr': self.FILE_SKIP_OPTIONAL_CHOICE_ATTR,
+            'removed_bool_choice_attr': self.FILE_SKIP_CHOICE_TYP_DEF_BOOL,
+            'removed_tristate_choice_attr': self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE
         }
 
         self.FILE_SOURCE_NR = 0
