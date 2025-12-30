@@ -205,7 +205,7 @@ class KconfigTransformer:
         if log: self._log_parser_context(self.context)
         return context
 
-    def _extract_named_choice_info(self, choice_name: str, log: bool):
+    def _extract_named_choice_info(self, choice_name: str, log: bool, log_cd_nc_details: bool):
         context = self.context
         choice_infos = context.choice_infos
         choice_definitions = context.choice_definitions
@@ -1865,7 +1865,7 @@ class KconfigTransformer:
             if choice_name not in choice_definition_info:
                 choice_definition_info[choice_name] = {}
             
-            choice_info = self._extract_named_choice_info(choice_name, log)
+            choice_info = self._extract_named_choice_info(choice_name, log, log_cd_nc_details)
        
             # Get all config entries for this choice
             choice_configs = self._get_all_choice_configs(choice_name, reader, project_dir)
