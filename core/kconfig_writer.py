@@ -24,7 +24,7 @@ class KconfigLine:
         
         if not s:
             return 'empty'
-        elif s.startswith('#'):
+        elif re.match(r'^#\s+\w+', s):
             return 'commented'
         elif s.startswith('mainmenu '):
             return 'mainmenu'
