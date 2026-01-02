@@ -9,11 +9,7 @@ import sys
 import pprint
 import os
 
-def main():
-    timer = TransformTimer()
-    sys.stdout = open(log_file, "w")
-    sys.stderr = sys.stdout 
-    
+def main():    
     log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/transform.log"
     excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/results.xlsx"
     project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr"
@@ -22,6 +18,10 @@ def main():
 
     #project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr"
     #output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_copy1"
+
+    timer = TransformTimer()
+    sys.stdout = open(log_file, "w")
+    sys.stderr = sys.stdout 
 
     print("=" * 100)
     print("TRNASFORMATION PROTOTYP LOG")

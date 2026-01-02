@@ -825,6 +825,10 @@ class KconfigTransformer:
             sorted_def_lines = sorted(configs_by_definition.keys())
             print(f"Found {len(sorted_def_lines)} choice definitions at lines: {sorted_def_lines}")
             
+            def_index_by_line = {
+                line: idx for idx, line in enumerate(sorted_def_lines)
+            }
+
             depends_by_choice_line = {}  # Map: choice_line -> depends_from_def Liste
             
             # Process each definition (skip the first one, index 0)
@@ -1014,6 +1018,8 @@ class KconfigTransformer:
 
                 if config_symbol in existing_configs:
                     continue
+
+                def_idx_for_entry = def_index_by_line.get(entry_choice_line, 0)
                 
                 menuconfigs_to_add_after.append({
                     'symbol': config_symbol,
@@ -1021,7 +1027,7 @@ class KconfigTransformer:
                     'if_condition': entry.get('if_condition'),
                     'depends_lines': entry.get('depends_lines', []),
                     'depends_from_def': depends_by_choice_line.get(entry_choice_line, []),
-                    'node_deps': all_node_deps[def_idx] if def_idx < len(all_node_deps) else []
+                    'node_deps': all_node_deps[def_idx_for_entry] if def_idx_for_entry < len(all_node_deps) else []
                 })
                 
                 existing_configs.add(config_symbol)
