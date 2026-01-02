@@ -2,6 +2,7 @@ venv/
 venv_zephyr_rtos/
 venv_zrtos_demo/
 venv_esp_idf/
+venv_zrtos_demo1
 
 __pycache__/
 .vscode/
@@ -13,4 +14,4 @@ results.xlsx
 transform_demo.log
 
 ZRTOS_demo2/
-ZRTOS_demo3/
+ZRTOS_demo1/

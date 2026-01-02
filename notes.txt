@@ -89,6 +89,44 @@ Zephyr-sdk (/home/ljd/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4/cmake)
 has been added to the user package registry in:
 ~/.cmake/packages/Zephyr-sdk
 
+********************************** /venv_zrtos_demo1/  **********************************
+FÜR DIE ARBEIT:
+mkdir ZRTOS_demo1 
+~/wsMA_prototyp$ python3 -m venv venv_zrtos_demo1
+source '/home/ljd/wsMA_prototyp/venv_zrtos_demo1/bin/activate'
+sudo apt update
+sudo apt upgrade
+sudo apt install --no-install-recommends ninja-build gperf ccache dfu-util device-tree-compiler xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
+pip install openpyxl
+pip install west 
+
+cd ZRTOS_demo1
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.2.1
+--> --- Cloning manifest repository from https://github.com/zephyrproject-rtos/zephyr, rev. v4.2.1
+west update 
+west zephyr-export
+--> Zephyr (/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/share/zephyr-package/cmake)
+    has been added to the user package registry in:
+    ~/.cmake/packages/Zephyr
+
+    ZephyrUnittest (/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/share/zephyrunittest-package/cmake)
+    has been added to the user package registry in:
+    ~/.cmake/packages/ZephyrUnittest
+should be updated with a new target:
+[...]/ZRTOS_demo1/zephyr/cmake/modules/kconfig.cmake
+---> 
+    set(EXTRA_KCONFIG_TARGET_COMMAND_FOR_transform
+      ${CMAKE_CURRENT_LIST_DIR}/../core/target_workflow.py
+  )
+    set_ifndef(KCONFIG_TARGETS menuconfig guiconfig hardenconfig transform)
+Then cd to: ZRTOS_demo1/zephyr 
+west build -b native_sim samples/hello_world
+west build -t transform
+** IF you make changes on transform.py:
+(sometimes you have to delete zephyr/build folder)
+west build -p always -b native_sim samples/hello_world -> um CMake wieder zu starten 
+west build -t transform
+
 ********************************** /venv_zrtos_demo/  **********************************
 https://docs.zephyrproject.org/latest/develop/getting_started/index.html
 mkdir ZRTOS_demo 
