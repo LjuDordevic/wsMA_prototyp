@@ -108,9 +108,6 @@ extract infos for named choices - their definition & entries
 for each given file at source_files start building path output structur and call reader and writer
 
 4. Transform all files - needs reader & writer
-input file: /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig
-relative_normalized: Kconfig
-output file: /home/ljd/wsMA_prototyp/test_dir_/transform_def_output/Kconfig
 
 
 Reader found: 25 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig
@@ -160,14 +157,11 @@ count options/attr that are not transformed:
 
 ====================================================================================================
 TIMER REPORT:
-
 ====================================================================================================
-    Parser initialization.............................      0.00s
-    Got parser results................................      0.00s
-    Built context from parser results.................      0.00s
-    File transformation and excel log.................      0.00s
-
+    Parser initialization.............................    0.006812s
+    Got parser results................................    0.009044s
+    Built context from parser results.................    0.001275s
+    File transformation and excel log.................    0.003906s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................     0.01s
-
+    TOTAL TIME........................................   0.021041s ~ 0.02s
 ====================================================================================================
