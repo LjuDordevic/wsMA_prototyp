@@ -11,7 +11,7 @@ import os
 
 def main():    
     log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/transform.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/results.xlsx"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/results2.xlsx"
     project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr"
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo1_output"
     main_file = "Kconfig"
