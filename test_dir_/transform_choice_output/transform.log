@@ -314,7 +314,6 @@ Reader found: 28 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kco
 for each given file at source_files start building path output structur and call reader and writer
 
 4. Transform all files - needs reader & writer
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
 
 
 Reader found: 28 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
@@ -326,7 +325,6 @@ start transforming 28 input lines
 process lines until first choice config/if was found
 current_indx: 6 - block endidx 16
 current_indx: 6 - choice_attr_end: 11
-PROCESS attr [KconfigLine(mainmenu, line=1, indent=0), KconfigLine(empty, line=2, indent=0), KconfigLine(config, line=3, indent=0), KconfigLine(type_bool, line=4, indent=2), KconfigLine(empty, line=5, indent=0), KconfigLine(choice, line=6, indent=0), KconfigLine(prompt, line=8, indent=2), KconfigLine(default, line=9, indent=2), KconfigLine(depends_on, line=10, indent=2)]
 choice_def [('NAMED_CH', [['OPT_Y'], ['OPT_BBB', 'OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ']], [['OPT_Y'], ['OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ']])]
 choice_configs length: 8
 choice_configs [{'type': 'config', 'symbol': 'CH_A', 'file': 'Kconfig', 'line': 12, 'choice_line': 6, 'block': [KconfigLine(config, line=12, indent=2), KconfigLine(type_bool, line=13, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_B', 'file': 'Kconfig', 'line': 14, 'choice_line': 6, 'block': [KconfigLine(config, line=14, indent=2), KconfigLine(type_bool, line=15, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2)], 'if_condition': None}, {'type': 'if_block', 'configs': ['CH_C'], 'menuconfigs': [{'symbol': 'MC1', 'block': [KconfigLine(menuconfig, line=28, indent=2), KconfigLine(type_bool, line=29, indent=4)], 'if_condition': 'OPT_DDD'}], 'file': 'uo1/Kconfig', 'line': 25, 'choice_line': 21, 'block': [KconfigLine(if, line=25, indent=2), KconfigLine(config, line=26, indent=2), KconfigLine(type_bool, line=27, indent=4), KconfigLine(endif, line=30, indent=2)], 'default_lines': [KconfigLine(default, line=23, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=22, indent=2)]}, {'type': 'menuconfig', 'symbol': 'MC2', 'file': 'uo1/Kconfig', 'line': 32, 'choice_line': 21, 'block': [KconfigLine(menuconfig, line=32, indent=2), KconfigLine(type_bool, line=33, indent=4)], 'default_lines': [KconfigLine(default, line=23, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=22, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CMC2', 'file': 'uo1/Kconfig', 'line': 34, 'choice_line': 21, 'block': [KconfigLine(config, line=34, indent=2), KconfigLine(type_bool, line=35, indent=4), KconfigLine(depends_on, line=36, indent=4)], 'default_lines': [KconfigLine(default, line=23, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=22, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CMC3', 'file': 'uo1/Kconfig', 'line': 37, 'choice_line': 21, 'block': [KconfigLine(config, line=37, indent=2), KconfigLine(type_bool, line=38, indent=4), KconfigLine(depends_on, line=39, indent=4)], 'default_lines': [KconfigLine(default, line=23, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=22, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_E', 'file': 'uo1/Kconfig', 'line': 46, 'choice_line': 43, 'block': [KconfigLine(config, line=46, indent=2), KconfigLine(type_bool, line=47, indent=4)], 'default_lines': [KconfigLine(default, line=45, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=44, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_D', 'file': 'uo1/Kconfig', 'line': 48, 'choice_line': 43, 'block': [KconfigLine(config, line=48, indent=2), KconfigLine(type_bool, line=49, indent=4)], 'default_lines': [KconfigLine(default, line=45, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=44, indent=2)], 'if_condition': None}]
@@ -371,7 +369,6 @@ Final result has 13 lines before adding configs
 Track existing configs: KconfigLine(config, line=12, indent=2)
 Track existing configs: KconfigLine(config, line=14, indent=2)
 Track existing configs: KconfigLine(endchoice, line=16, indent=0)
-result after first definition: 17 lines
       Added if-block with configs ['CH_C'] from uo1/Kconfig
       Collected menuconfig MC2 from uo1/Kconfig (will add after endchoice)
       Added config CMC2 from uo1/Kconfig
@@ -405,7 +402,7 @@ PROCESS choice: [KconfigLine(mainmenu, line=1, indent=0), KconfigLine(empty, lin
     Transformer Output:         49 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
         Added new bc of named choice:    24
         Removed bc of config_default:    0
@@ -415,7 +412,6 @@ PROCESS choice: [KconfigLine(mainmenu, line=1, indent=0), KconfigLine(empty, lin
         Removed bool     choice attr:    1
         Removed tristate choice attr:    1
         Done writting 49 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/Kconfig
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
 
 
 Reader found: 50 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
@@ -437,7 +433,7 @@ start transforming 50 input lines
     Transformer Output:         22 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
         Added new bc of named choice:    0
         Removed bc of config_default:    0
@@ -464,3 +460,14 @@ count options/attr that are not transformed:
     warning:        0
     set:            0
     set default:    0
+
+====================================================================================================
+TIMER REPORT:
+====================================================================================================
+    Parser initialization.............................    0.002578s
+    Got parser results................................    0.003229s
+    Built context from parser results.................    0.001742s
+    File transformation and excel log.................    0.004149s
+----------------------------------------------------------------------------------------------------
+    TOTAL TIME........................................   0.011700s ~ 0.01s
+====================================================================================================

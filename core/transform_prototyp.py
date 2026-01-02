@@ -227,14 +227,14 @@ class KconfigTransformer:
         
         for entry in choice_deps[choice_name]:
             default_tuple = entry['node.defaults']
-            #print(f"node.defaults:   {default_tuple}")
+            if log_cd_nc_details: print(f"node.defaults:   {default_tuple}")
             for default in default_tuple:
                 default_dependencies = default[1]
                 dependencies = self._extract_dependencies(default_dependencies)
                 default_dependencies_extracted_list.append(dependencies)
              
             dep_tuple = entry['node.dep']
-            #print(f"node.dep:        {repr(dep_tuple)}")
+            if log_cd_nc_details: print(f"node.dep:        {repr(dep_tuple)}")
             extr_dep_dependencies = self._extract_dependencies(dep_tuple)
             node_dep_extracted_list.append(extr_dep_dependencies)
 
@@ -553,7 +553,8 @@ class KconfigTransformer:
                             self.PROCESSED_CHOICES.add(choice_name)
                             print(f"    processed_choices now: {self.PROCESSED_CHOICES}")
 
-                            i = self._transform_named_choice(False, lines, i, choice_info, result, 
+                            # IF THE FIRST PARAMETER = True, then we log DEBUG info 
+                            i = self._transform_named_choice(True, lines, i, choice_info, result, 
                                                 lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
                             #choice_processed = True
                             continue
@@ -1379,7 +1380,7 @@ class KconfigTransformer:
         return default_line
     
     # TODO: check again 
-    def _get_all_choice_configs(self, choice_name: str, reader, project_dir: Path):
+    def _get_all_choice_configs(self, choice_name: str, reader, project_dir: Path, log_cd_nc_details: bool):
         """
         Get all config entries for a named choice from all its definitions.
         
@@ -1460,8 +1461,9 @@ class KconfigTransformer:
                         j += 1
                     
                     print(f"  DEBUG: Found choice {choice_name} at {choice_file}:{choice_line}")
-                    #print(f"  DEBUG: choice_default_lines: {choice_default_lines}")
-                    #print(f"  DEBUG: choice_depends_lines: {choice_depends_lines}")
+                    if log_cd_nc_details:
+                        print(f"  DEBUG: choice_default_lines: {choice_default_lines}")
+                        print(f"  DEBUG: choice_depends_lines: {choice_depends_lines}")
                     
                     # Now collect all configs AND if-blocks in this choice block
                     if first_config_idx is not None:
@@ -1546,7 +1548,9 @@ class KconfigTransformer:
                                     'depends_lines': choice_depends_lines.copy(),
                                 })
                                 
-                                #print(f"  DEBUG: Adding if-block with configs {if_configs} and menuconfigs {[mc['symbol'] for mc in if_menuconfigs]}")
+                                if log_cd_nc_details:
+                                    print(f"  DEBUG: Adding if-block with configs {if_configs} and menuconfigs {[mc['symbol'] for mc in if_menuconfigs]}")
+                                
                                 k = m
                             
                             # Handle standalone configs/menuconfigs (not inside if)
@@ -1571,7 +1575,7 @@ class KconfigTransformer:
                                     config_block.append(next_line)
                                     m += 1
                                 
-                                #print(f"  DEBUG: Adding {'menuconfig' if is_menuconfig else 'config'} {sym_name}")
+                                if log_cd_nc_details: print(f"  DEBUG: Adding {'menuconfig' if is_menuconfig else 'config'} {sym_name}")
                                 
                                 all_entries.append({
                                     'type': 'menuconfig' if is_menuconfig else 'config',
@@ -1875,7 +1879,7 @@ class KconfigTransformer:
             choice_info = self._extract_named_choice_info(choice_name, log, log_cd_nc_details)
        
             # Get all config entries for this choice
-            choice_configs = self._get_all_choice_configs(choice_name, reader, project_dir)
+            choice_configs = self._get_all_choice_configs(choice_name, reader, project_dir, log_cd_nc_details)
             choice_info['choice_configs'] = choice_configs
             
             choice_definition_info[choice_name] = choice_info
