@@ -24,7 +24,7 @@ class TransformTimer:
             print(f"    {label:.<50}  {delta:>8.2f}s")
             prev_time = lap_time
 
-        print("\n" + "=" * 100)
+        print("\n" + "-" * 100)
         print(f"    {'TOTAL TIME':.<50} {total:>8.2f}s")
         print("\n" + "=" * 100)
 
