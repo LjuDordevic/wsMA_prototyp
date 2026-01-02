@@ -3,6 +3,7 @@ from pick_parser import PickParser
 from zrtos_parser import ZRTOSParser
 from kconfig_writer import KconfigReader, KconfigWriter
 from transform_prototyp import KconfigTransformer
+from time_writer import TransformTimer
 import pprint
 import os
 import sys
@@ -24,23 +25,25 @@ import sys
 
 def main():
 
+    timer = TransformTimer()
+
     #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_source_output/transform_log_resolve_steps.log"
     #log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output/transform.log"
     #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source"       
     #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output"  
 
-    #log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output/transform.log"
-    #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
-    #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
+    log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output/transform.log"
+    project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
+    output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
 
     #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_option_output/transform.log"
     #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option"       
     #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option_output"  
     #os.environ["ENV_A"] = "i7-1260P"
 
-    log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/transform.log"
-    project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice"
-    output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output"
+    #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/transform.log"
+    #project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice"
+    #output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output"
 
     #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/transform.log"
     #project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault"
@@ -64,8 +67,11 @@ def main():
 
     print("1.  Parser Output: ")
     parser = ZRTOSParser(picker.kconfiglib_version)
+    timer.lap("Parser initialization")
     
     parser_result = parser.parse_files(project_dir, main_file)
+    timer.lap("Got parser results")
+
     pprint.pprint(parser_result)
     print("-" * 50)
     print(f"   Parser found: {len(parser_result['defined_syms'])} defined syms")
@@ -82,6 +88,8 @@ def main():
         log=True
     )
     
+    timer.lap("Built context from parser results")
+
     #info = transformer.extract_named_choice_info('NAMED_CH')
     """ print("choice definition ------------------------------------------------------")
     for cn, file, line, node in info['choice_def']:
@@ -101,9 +109,13 @@ def main():
         log=True,
         log_lines=False,
         log_and_check_resolve_glob=False,
+        log_cd_nc_details=False,
         log_excel_after_each_file=False,
         log_excel_output="/home/ljd/wsMA_prototyp/results.xlsx"
-    )    
+    )   
+
+    timer.lap("File transformation and excel log")
+    timer.stop() 
 
     return 0
 

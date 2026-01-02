@@ -108,7 +108,9 @@ extract infos for named choices - their definition & entries
 for each given file at source_files start building path output structur and call reader and writer
 
 4. Transform all files - needs reader & writer
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig
+input file: /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig
+relative_normalized: Kconfig
+output file: /home/ljd/wsMA_prototyp/test_dir_/transform_def_output/Kconfig
 
 
 Reader found: 25 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig
@@ -124,17 +126,19 @@ start transforming 25 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         28 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           3
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 28 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_def_output/Kconfig
 ----------------------------------------------------------------------
 finished transforming: 1 files transformed
@@ -153,3 +157,17 @@ count options/attr that are not transformed:
     warning:        0
     set:            0
     set default:    0
+
+====================================================================================================
+TIMER REPORT:
+
+====================================================================================================
+    Parser initialization.............................      0.00s
+    Got parser results................................      0.00s
+    Built context from parser results.................      0.00s
+    File transformation and excel log.................      0.00s
+
+----------------------------------------------------------------------------------------------------
+    TOTAL TIME........................................     0.01s
+
+====================================================================================================

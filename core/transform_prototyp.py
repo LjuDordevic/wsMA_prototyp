@@ -1892,13 +1892,15 @@ class KconfigTransformer:
 
             # this solution bc of ../ in paths 
             try:
-                relative_normalized = input_file.relative_to(project_dir).resolve()
+                relative_normalized = input_file.relative_to(project_dir)
             except ValueError:
                 print(f"    Skip file outside project: {input_file}")
 
             output_file = output_dir / relative_normalized
             
-            #print(f"test file: {input_file}")
+            print(f"input file: {input_file}")
+            print(f"relative_normalized: {relative_normalized}")
+            print(f"output file: {output_file}")
             if not input_file.exists():
                 print(f"  Skip not found: {input_file}")
                 continue
