@@ -123,6 +123,7 @@ should be updated with a new target:
 Then in target_worflow.py:
   - check and update given paths for:
   -- project_dir/output_dir/main_file/log and excel file
+  - check which logging parameter in transformer.transform_all_files() you want to set on true 
 
 Then cd to: ZRTOS_demo1/zephyr 
 west build -b native_sim samples/hello_world
