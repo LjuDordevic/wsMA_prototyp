@@ -409,9 +409,15 @@ class KconfigTransformer:
             if line_entry is None:
                 print(f"Warning: Could not read line {line_number} from {file_path}")
                 continue
+
+            # Check if content exists
+            if line_entry.content is None:
+                print(f"Warning: Line {line_number} from {file_path} has no content")
+                continue
             
             # build if <...>
-            cond_full = self._create_extended_condition(line_entry.content.get('condition'), deps_ext)
+            content = line_entry.content or {}
+            cond_full = self._create_extended_condition(content.get('condition'), deps_ext)
             
             # build line
             indent_str = " " * line_entry.indent
@@ -1288,8 +1294,9 @@ class KconfigTransformer:
             # don't just comment the line, instead skip -> no output line, when there is no match 
             print(f"      no files found for the: {pattern}")   
 
-            if not filenames:
-                print(f"    iglob didn't find anything")
+            if resolve_log:
+                if not filenames:
+                    print(f"    iglob didn't find anything")
 
             self.FILE_O_SOURCE_KEYWORDS_NO_MATCH += 1
             """
@@ -1881,8 +1888,15 @@ class KconfigTransformer:
         print(f"\nfor each given file at source_files start building path output structur and call reader and writer")     
         print(f"\n4. Transform all files - needs reader & writer")
         for file_path in source_files:
-            input_file = project_dir / file_path
-            output_file = output_dir / file_path
+            input_file = (project_dir / file_path).resolve()
+
+            # this solution bc of ../ in paths 
+            try:
+                relative_normalized = input_file.relative_to(project_dir).resolve()
+            except ValueError:
+                print(f"    Skip file outside project: {input_file}")
+
+            output_file = output_dir / relative_normalized
             
             #print(f"test file: {input_file}")
             if not input_file.exists():
