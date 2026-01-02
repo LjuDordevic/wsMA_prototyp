@@ -24,7 +24,7 @@ def main():
     sys.stderr = sys.stdout 
 
     print("=" * 100)
-    print("TRNASFORMATION PROTOTYP LOG")
+    print("TRANSFORMATION PROTOTYP LOG")
     print("=" * 100)
 
     print("VARS: ")

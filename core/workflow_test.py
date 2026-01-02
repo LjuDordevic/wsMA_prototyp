@@ -55,7 +55,7 @@ def main():
     sys.stdout = open(log_file, "w")
     sys.stderr = sys.stdout 
     print("=" * 100)
-    print("TRNASFORMATION PROTOTYP LOG")
+    print("TRANSFORMATION PROTOTYP LOG")
     print("=" * 100)
     print(f"    Root: {project_dir}")
     print(f"    Main file: {main_file}")
