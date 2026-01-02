@@ -1,0 +1,9 @@
+# Copyright 2025 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_MCXE
+
+source "soc/nxp/mcx/mcxe/mcxe24x/Kconfig.defconfig"
+source "soc/nxp/mcx/mcxe/mcxe31x/Kconfig.defconfig"
+
+endif # SOC_FAMILY_MCXE

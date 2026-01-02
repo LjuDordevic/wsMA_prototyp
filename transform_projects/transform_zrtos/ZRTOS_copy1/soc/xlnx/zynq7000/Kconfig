@@ -1,0 +1,8 @@
+#
+# Copyright (c) 2021 Weidmueller Interface GmbH & Co. KG
+# SPDX-License-Identifier: Apache-2.0
+#
+
+if SOC_FAMILY_XILINX_ZYNQ7000
+
+endif # SOC_FAMILY_XILINX_ZYNQ7000

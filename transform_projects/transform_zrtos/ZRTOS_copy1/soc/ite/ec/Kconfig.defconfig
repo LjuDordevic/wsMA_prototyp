@@ -1,0 +1,10 @@
+# Copyright (c) 2020 ITE Corporation. All Rights Reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_ITE_EC
+
+choice PM_POLICY
+	default PM_POLICY_CUSTOM if SOC_FAMILY_ITE_EC
+endchoice
+
+endif # SOC_FAMILY_ITE_EC

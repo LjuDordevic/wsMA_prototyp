@@ -1,0 +1,15 @@
+# Copyright (c) 2018 Intel Corporation
+# Copyright (c) 2023 Meta
+# Copyright (c) 2024 Tenstorrent AI ULC
+#
+# SPDX-License-Identifier: Apache-2.0
+
+# zephyr-keep-sorted-start
+# zephyr-keep-sorted-stop
+
+menu "X/Open system interfaces"
+
+# zephyr-keep-sorted-start
+# zephyr-keep-sorted-stop
+
+endmenu # "X/Open system interfaces"

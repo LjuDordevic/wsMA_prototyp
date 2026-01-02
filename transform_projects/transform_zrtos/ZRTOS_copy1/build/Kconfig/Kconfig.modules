@@ -1,0 +1,283 @@
+menu "acpica (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/acpica)"
+config ZEPHYR_ACPICA_MODULE
+	bool
+	default y
+endmenu
+menu "cmsis (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/cmsis)"
+config ZEPHYR_CMSIS_MODULE
+	bool
+	default y
+endmenu
+menu "cmsis-dsp (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/cmsis-dsp)"
+config ZEPHYR_CMSIS_DSP_MODULE
+	bool
+	default y
+endmenu
+menu "cmsis-nn (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/cmsis-nn)"
+config ZEPHYR_CMSIS_NN_MODULE
+	bool
+	default y
+endmenu
+menu "cmsis_6 (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/cmsis_6)"
+config ZEPHYR_CMSIS_6_MODULE
+	bool
+	default y
+endmenu
+menu "fatfs (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/fs/fatfs)"
+config ZEPHYR_FATFS_MODULE
+	bool
+	default y
+endmenu
+config ZEPHYR_ADI_MODULE
+	bool
+	default y
+menu "hal_afbr (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/afbr)"
+config ZEPHYR_HAL_AFBR_MODULE
+	bool
+	default y
+
+config ZEPHYR_HAL_AFBR_MODULE_BLOBS
+	bool
+endmenu
+menu "hal_ambiq (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/ambiq)"
+config ZEPHYR_HAL_AMBIQ_MODULE
+	bool
+	default y
+endmenu
+config ZEPHYR_ATMEL_MODULE
+	bool
+	default y
+menu "hal_bouffalolab (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/bouffalolab)"
+config ZEPHYR_HAL_BOUFFALOLAB_MODULE
+	bool
+	default y
+endmenu
+menu "hal_espressif (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/espressif)"
+config ZEPHYR_HAL_ESPRESSIF_MODULE
+	bool
+	default y
+
+config ZEPHYR_HAL_ESPRESSIF_MODULE_BLOBS
+	bool
+endmenu
+menu "hal_ethos_u (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/ethos_u)"
+config ZEPHYR_HAL_ETHOS_U_MODULE
+	bool
+	default y
+endmenu
+menu "hal_gigadevice (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/gigadevice)"
+config ZEPHYR_HAL_GIGADEVICE_MODULE
+	bool
+	default y
+endmenu
+menu "hal_infineon (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/infineon)"
+config ZEPHYR_HAL_INFINEON_MODULE
+	bool
+	default y
+
+config ZEPHYR_HAL_INFINEON_MODULE_BLOBS
+	bool
+endmenu
+menu "hal_intel (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/intel)"
+config ZEPHYR_HAL_INTEL_MODULE
+	bool
+	default y
+endmenu
+config ZEPHYR_MICROCHIP_MODULE
+	bool
+	default y
+menu "hal_nordic (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/nordic)"
+config ZEPHYR_HAL_NORDIC_MODULE
+	bool
+	default y
+
+config ZEPHYR_HAL_NORDIC_MODULE_BLOBS
+	bool
+endmenu
+config ZEPHYR_NUVOTON_MODULE
+	bool
+	default y
+menu "hal_nxp (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/nxp)"
+config ZEPHYR_HAL_NXP_MODULE
+	bool
+	default y
+
+config ZEPHYR_HAL_NXP_MODULE_BLOBS
+	bool
+endmenu
+config ZEPHYR_OPENISA_MODULE
+	bool
+	default y
+config ZEPHYR_QUICKLOGIC_MODULE
+	bool
+	default y
+config ZEPHYR_HAL_RENESAS_MODULE
+	bool
+	default y
+
+config ZEPHYR_HAL_RENESAS_MODULE_BLOBS
+	bool
+menu "hal_rpi_pico (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/rpi_pico)"
+config ZEPHYR_HAL_RPI_PICO_MODULE
+	bool
+	default y
+endmenu
+menu "hal_sifli (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/sifli)"
+config ZEPHYR_HAL_SIFLI_MODULE
+	bool
+	default y
+endmenu
+menu "hal_silabs (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/silabs)"
+config ZEPHYR_HAL_SILABS_MODULE
+	bool
+	default y
+
+config ZEPHYR_HAL_SILABS_MODULE_BLOBS
+	bool
+endmenu
+menu "hal_st (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/st)"
+config ZEPHYR_HAL_ST_MODULE
+	bool
+	default y
+endmenu
+config ZEPHYR_HAL_STM32_MODULE
+	bool
+	default y
+
+config ZEPHYR_HAL_STM32_MODULE_BLOBS
+	bool
+menu "hal_tdk (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/tdk)"
+config ZEPHYR_HAL_TDK_MODULE
+	bool
+	default y
+endmenu
+menu "hal_telink (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/telink)"
+config ZEPHYR_HAL_TELINK_MODULE
+	bool
+	default y
+endmenu
+config ZEPHYR_TI_MODULE
+	bool
+	default y
+menu "hal_wch (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/hal/wch)"
+config ZEPHYR_HAL_WCH_MODULE
+	bool
+	default y
+endmenu
+config ZEPHYR_HAL_WURTHELEKTRONIK_MODULE
+	bool
+	default y
+config ZEPHYR_XTENSA_MODULE
+	bool
+	default y
+menu "hostap (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/hostap)"
+config ZEPHYR_HOSTAP_MODULE
+	bool
+	default y
+endmenu
+menu "liblc3 (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/liblc3)"
+config ZEPHYR_LIBLC3_MODULE
+	bool
+	default y
+endmenu
+config ZEPHYR_LIBMCTP_MODULE
+	bool
+	default y
+config ZEPHYR_LIBMETAL_MODULE
+	bool
+	default y
+menu "libsbc (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/libsbc)"
+config ZEPHYR_LIBSBC_MODULE
+	bool
+	default y
+endmenu
+menu "littlefs (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/fs/littlefs)"
+config ZEPHYR_LITTLEFS_MODULE
+	bool
+	default y
+endmenu
+menu "lora-basics-modem (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/lora-basics-modem)"
+config ZEPHYR_LORA_BASICS_MODEM_MODULE
+	bool
+	default y
+endmenu
+menu "loramac-node (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/loramac-node)"
+config ZEPHYR_LORAMAC_NODE_MODULE
+	bool
+	default y
+endmenu
+menu "lvgl (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/gui/lvgl)"
+config ZEPHYR_LVGL_MODULE
+	bool
+	default y
+endmenu
+menu "mbedtls (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/crypto/mbedtls)"
+config ZEPHYR_MBEDTLS_MODULE
+	bool
+	default y
+endmenu
+config ZEPHYR_MCUBOOT_MODULE
+	bool
+	default y
+config ZEPHYR_MIPI_SYS_T_MODULE
+	bool
+	default y
+menu "nanopb (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/nanopb)"
+config ZEPHYR_NANOPB_MODULE
+	bool
+	default y
+endmenu
+menu "nrf_wifi (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/nrf_wifi)"
+config ZEPHYR_NRF_WIFI_MODULE
+	bool
+	default y
+
+config ZEPHYR_NRF_WIFI_MODULE_BLOBS
+	bool
+endmenu
+config ZEPHYR_OPEN_AMP_MODULE
+	bool
+	default y
+menu "openthread (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/openthread)"
+config ZEPHYR_OPENTHREAD_MODULE
+	bool
+	default y
+endmenu
+menu "percepio (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/debug/percepio)"
+config ZEPHYR_PERCEPIO_MODULE
+	bool
+	default y
+endmenu
+menu "picolibc (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/picolibc)"
+config ZEPHYR_PICOLIBC_MODULE
+	bool
+	default y
+endmenu
+menu "segger (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/debug/segger)"
+config ZEPHYR_SEGGER_MODULE
+	bool
+	default y
+endmenu
+menu "trusted-firmware-a (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/tee/tf-a/trusted-firmware-a)"
+config ZEPHYR_TRUSTED_FIRMWARE_A_MODULE
+	bool
+	default y
+endmenu
+menu "trusted-firmware-m (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/tee/tf-m/trusted-firmware-m)"
+config ZEPHYR_TRUSTED_FIRMWARE_M_MODULE
+	bool
+	default y
+endmenu
+menu "uoscore-uedhoc (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/uoscore-uedhoc)"
+config ZEPHYR_UOSCORE_UEDHOC_MODULE
+	bool
+	default y
+endmenu
+menu "zcbor (/home/ljd/wsMA_prototyp/ZRTOS_demo/modules/lib/zcbor)"
+config ZEPHYR_ZCBOR_MODULE
+	bool
+	default y
+endmenu
+config ZEPHYR_NRF_HW_MODELS_MODULE
+	bool
+	default y

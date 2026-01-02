@@ -1,0 +1,25 @@
+# nRF IPM driver configuration
+
+# Copyright (c) 2019 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if IPM_NRFX
+
+nrfx_ipc_num = 0
+nrfx_ipc_num = 1
+nrfx_ipc_num = 2
+nrfx_ipc_num = 3
+nrfx_ipc_num = 4
+nrfx_ipc_num = 5
+nrfx_ipc_num = 6
+nrfx_ipc_num = 7
+nrfx_ipc_num = 8
+nrfx_ipc_num = 9
+nrfx_ipc_num = 10
+nrfx_ipc_num = 11
+nrfx_ipc_num = 12
+nrfx_ipc_num = 13
+nrfx_ipc_num = 14
+nrfx_ipc_num = 15
+
+endif # IPM_NRFX

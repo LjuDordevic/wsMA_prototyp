@@ -1,0 +1,5 @@
+# Copyright 2024-2025 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+config MFD
+	default y if DT_HAS_NXP_LP_FLEXCOMM_ENABLED

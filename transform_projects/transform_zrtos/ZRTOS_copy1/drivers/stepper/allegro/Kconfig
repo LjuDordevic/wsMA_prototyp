@@ -1,0 +1,7 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 Carl Zeiss Meditec AG
+# SPDX-License-Identifier: Apache-2.0
+
+comment "Allegro Stepper Drivers"
+
+# zephyr-keep-sorted-start
+# zephyr-keep-sorted-stop

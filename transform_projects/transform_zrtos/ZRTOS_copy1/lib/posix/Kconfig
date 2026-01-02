@@ -1,0 +1,36 @@
+# Copyright (c) 2024 Meta
+# Copyright (c) 2025 Tenstorrent AI ULC
+#
+# SPDX-License-Identifier: Apache-2.0
+
+menu "POSIX API Support"
+
+# POSIX Subprofile Definitions
+
+# Toolchain hooks for external implementations
+
+# POSIX C Library Extensions
+# This menu is for POSIX Option Groups that do not require OS support.
+menu "POSIX C Library Extensions"
+endmenu
+
+# POSIX System Interfaces
+menuconfig POSIX_SYSTEM_INTERFACES
+	bool "POSIX System Interfaces"
+	select NATIVE_LIBC_INCOMPATIBLE
+	help
+	  Select 'y' here to support POSIX System Interfaces within Zephyr.
+
+	  Options in this menu are organized by POSIX subprofiling Option Group.
+
+	  For more information, see
+	  https://pubs.opengroup.org/onlinepubs/9699919799/xrat/V4_subprofiles.html
+
+if POSIX_SYSTEM_INTERFACES
+
+# POSIX Shell utilities
+endif
+
+endmenu
+
+# Eventfd Support (not officially POSIX)
