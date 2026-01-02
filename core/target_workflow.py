@@ -4,18 +4,23 @@ from zrtos_parser import ZRTOSParser
 from kconfig_writer import KconfigReader, KconfigWriter
 from transform_prototyp import KconfigTransformer
 import excel_writer
+from time_writer import TransformTimer
 import sys
 import pprint
 import os
 
 def main():
+    timer = TransformTimer()
+
     log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_copy1/transform.log"
     sys.stdout = open(log_file, "w")
     sys.stderr = sys.stdout 
 
-    project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr"
+    #project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr"
+    #output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_copy1"
+    project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr"
+    output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo1_output"
     main_file = "Kconfig"
-    output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_copy1"
 
     print("=" * 100)
     print("TRNASFORMATION PROTOTYP LOG")
@@ -39,10 +44,12 @@ def main():
     
     picker = PickParser("ZRTOS")
     parser = ZRTOSParser(picker.kconfiglib_version)
+    timer.lap("Parser initialization")
     print(parser)
 
     try:
         parser_result = parser.parse_files(project_dir, main_file)
+        timer.lap("Got parser results")
         print(f"Defined symbols: {len(parser_result['defined_syms'])}")
         print(f"Unique symbols: {len(parser_result['unique_defined_syms'])}")
         print(f"Files: {len(parser_result['kconf'].kconfig_filenames)}")
@@ -60,7 +67,8 @@ def main():
         parser_result,
         log=False
     )
-
+    
+    timer.lap("Built context from parser results")
     print("=" * 100)
     print(f"Build context finished")
 
@@ -78,7 +86,11 @@ def main():
         log_cd_nc_details=False,
         log_excel_after_each_file=True,
         log_excel_output="/home/ljd/wsMA_prototyp/results.xlsx"
-    )    
+    )   
+
+    timer.lap("File transformation and excel log")
+
+    timer.stop()
 
     #excel_writer.write_excel(excel_data, "/home/ljd/wsMA_prototyp/results.xlsx")
 
