@@ -10,7 +10,7 @@ __pycache__/
 ZRTOS_demo/
 core/old_scripts/single_file.py
 
-results.xlsx
+results_old.xlsx
 transform_demo.log
 
 ZRTOS_demo2/
