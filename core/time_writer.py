@@ -18,4 +18,6 @@ class TransformTimer:
         print("TIMER REPORT:")
         print("\n" + "=" * 100)
 
+        return total
+
         
