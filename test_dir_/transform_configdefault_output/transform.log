@@ -163,7 +163,6 @@ extract infos for named choices - their definition & entries
 for each given file at source_files start building path output structur and call reader and writer
 
 4. Transform all files - needs reader & writer
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/Kconfig
 
 
 Reader found: 9 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/Kconfig
@@ -185,19 +184,20 @@ start transforming 9 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   1
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         12 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  3
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 12 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/Kconfig
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
 
 
 Reader found: 34 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault/uo1/Kconfig1
@@ -217,17 +217,19 @@ start transforming 34 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         25 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  10
+        Added new bc of named choice:    0
+        Removed bc of config_default:    10
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 22 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/uo1/Kconfig1
 ----------------------------------------------------------------------
 finished transforming: 2 files transformed
@@ -246,3 +248,14 @@ count options/attr that are not transformed:
     warning:        0
     set:            0
     set default:    0
+
+====================================================================================================
+TIMER REPORT:
+====================================================================================================
+    Parser initialization.............................    0.006398s
+    Got parser results................................    0.010489s
+    Built context from parser results.................    0.001050s
+    File transformation and excel log.................    0.005174s
+----------------------------------------------------------------------------------------------------
+    TOTAL TIME........................................   0.023115s ~ 0.02s
+====================================================================================================

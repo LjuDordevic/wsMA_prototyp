@@ -41,13 +41,13 @@ def main():
     #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option_output"  
     #os.environ["ENV_A"] = "i7-1260P"
 
-    log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/transform.log"
-    project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice"
-    output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output"
+    #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/transform.log"
+    #project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice"
+    #output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output"
 
-    #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/transform.log"
-    #project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault"
-    #output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output"
+    log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/transform.log"
+    project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault"
+    output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output"
     
     main_file = "Kconfig"  
     os.environ["srctree"] = project_dir
