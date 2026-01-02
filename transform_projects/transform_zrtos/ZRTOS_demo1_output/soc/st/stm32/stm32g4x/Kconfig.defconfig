@@ -1,0 +1,25 @@
+# STMicroelectronics STM32G4 MCU line
+
+# Copyright (c) 2019 Richard Osterloh <richard.osterloh@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_STM32G4X
+
+source "soc/st/stm32/stm32g4x/Kconfig.defconfig.stm32g431xx"
+source "soc/st/stm32/stm32g4x/Kconfig.defconfig.stm32g441xx"
+source "soc/st/stm32/stm32g4x/Kconfig.defconfig.stm32g473xx"
+source "soc/st/stm32/stm32g4x/Kconfig.defconfig.stm32g474xx"
+source "soc/st/stm32/stm32g4x/Kconfig.defconfig.stm32g483xx"
+source "soc/st/stm32/stm32g4x/Kconfig.defconfig.stm32g484xx"
+source "soc/st/stm32/stm32g4x/Kconfig.defconfig.stm32g491xx"
+source "soc/st/stm32/stm32g4x/Kconfig.defconfig.stm32g4a1xx"
+
+if PM
+config PM_DEVICE
+	default y
+
+config STM32_LPTIM_TIMER
+	default y
+endif # PM
+
+endif # SOC_SERIES_STM32G4X

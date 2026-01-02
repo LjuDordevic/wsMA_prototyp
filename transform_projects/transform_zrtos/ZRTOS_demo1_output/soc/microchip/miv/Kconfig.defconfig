@@ -1,0 +1,9 @@
+# Copyright (c) 2024 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_MICROCHIP_MIV
+
+source "soc/microchip/miv/miv/Kconfig.defconfig"
+source "soc/microchip/miv/polarfire/Kconfig.defconfig"
+
+endif # SOC_FAMILY_MICROCHIP_MIV

@@ -1,0 +1,15 @@
+# Copyright (c) 2022 Nordic Semiconductor ASA
+#
+# SPDX-License-Identifier: Apache-2.0
+
+source "subsys/usb/device_next/class/Kconfig.loopback"
+source "subsys/usb/device_next/class/Kconfig.cdc_acm"
+source "subsys/usb/device_next/class/Kconfig.cdc_ecm"
+source "subsys/usb/device_next/class/Kconfig.cdc_ncm"
+source "subsys/usb/device_next/class/Kconfig.bt"
+source "subsys/usb/device_next/class/Kconfig.msc"
+source "subsys/usb/device_next/class/Kconfig.uac2"
+source "subsys/usb/device_next/class/Kconfig.hid"
+source "subsys/usb/device_next/class/Kconfig.midi2"
+source "subsys/usb/device_next/class/Kconfig.dfu"
+source "subsys/usb/device_next/class/Kconfig.uvc"

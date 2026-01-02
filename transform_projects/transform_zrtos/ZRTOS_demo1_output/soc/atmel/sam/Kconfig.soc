@@ -1,0 +1,14 @@
+# Copyright (c) 2024 Gerson Fernando Budke <nandojve@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_ATMEL_SAM
+	bool
+
+config SOC_FAMILY
+	default "atmel_sam" if SOC_FAMILY_ATMEL_SAM
+
+source "soc/atmel/sam/sam3x/Kconfig.soc"
+source "soc/atmel/sam/sam4e/Kconfig.soc"
+source "soc/atmel/sam/sam4l/Kconfig.soc"
+source "soc/atmel/sam/sam4s/Kconfig.soc"
+source "soc/atmel/sam/samx7x/Kconfig.soc"

@@ -1,0 +1,27 @@
+# Copyright (c) 2023 TOKITA Hiroshi <tokita.hiroshi@fujitsu.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_RENESAS_RA
+
+source "soc/renesas/ra/ra2a1/Kconfig.defconfig"
+source "soc/renesas/ra/ra2l1/Kconfig.defconfig"
+source "soc/renesas/ra/ra4e1/Kconfig.defconfig"
+source "soc/renesas/ra/ra4e2/Kconfig.defconfig"
+source "soc/renesas/ra/ra4l1/Kconfig.defconfig"
+source "soc/renesas/ra/ra4m1/Kconfig.defconfig"
+source "soc/renesas/ra/ra4m2/Kconfig.defconfig"
+source "soc/renesas/ra/ra4m3/Kconfig.defconfig"
+source "soc/renesas/ra/ra4w1/Kconfig.defconfig"
+source "soc/renesas/ra/ra6e1/Kconfig.defconfig"
+source "soc/renesas/ra/ra6e2/Kconfig.defconfig"
+source "soc/renesas/ra/ra6m1/Kconfig.defconfig"
+source "soc/renesas/ra/ra6m2/Kconfig.defconfig"
+source "soc/renesas/ra/ra6m3/Kconfig.defconfig"
+source "soc/renesas/ra/ra6m4/Kconfig.defconfig"
+source "soc/renesas/ra/ra6m5/Kconfig.defconfig"
+source "soc/renesas/ra/ra8d1/Kconfig.defconfig"
+source "soc/renesas/ra/ra8m1/Kconfig.defconfig"
+source "soc/renesas/ra/ra8p1/Kconfig.defconfig"
+source "soc/renesas/ra/ra8t1/Kconfig.defconfig"
+
+endif # SOC_FAMILY_RENESAS_RA

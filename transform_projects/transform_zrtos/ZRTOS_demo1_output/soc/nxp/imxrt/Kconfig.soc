@@ -1,0 +1,15 @@
+# Copyright 2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_NXP_IMXRT
+	bool
+
+config SOC_FAMILY
+	default "nxp_imxrt" if SOC_FAMILY_NXP_IMXRT
+
+source "soc/nxp/imxrt/imxrt10xx/Kconfig.soc"
+source "soc/nxp/imxrt/imxrt118x/Kconfig.soc"
+source "soc/nxp/imxrt/imxrt11xx/Kconfig.soc"
+source "soc/nxp/imxrt/imxrt5xx/Kconfig.soc"
+source "soc/nxp/imxrt/imxrt6xx/Kconfig.soc"
+source "soc/nxp/imxrt/imxrt7xx/Kconfig.soc"

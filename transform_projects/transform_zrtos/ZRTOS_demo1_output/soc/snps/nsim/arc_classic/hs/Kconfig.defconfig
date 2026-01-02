@@ -1,0 +1,14 @@
+# Copyright (c) 2024 Synopsys, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_NSIM_HS
+
+source "soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs"
+source "soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs5x"
+source "soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs5x_smp"
+source "soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs6x"
+source "soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs6x_smp"
+source "soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs_mpuv6"
+source "soc/snps/nsim/arc_classic/hs/Kconfig.defconfig.hs_smp"
+
+endif # SOC_SERIES_NSIM_HS

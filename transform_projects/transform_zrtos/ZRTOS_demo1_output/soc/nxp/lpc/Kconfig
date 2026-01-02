@@ -1,0 +1,15 @@
+# Copyright 2017,2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_LPC
+	select HAS_SEGGER_RTT if ZEPHYR_SEGGER_MODULE
+	select CLOCK_CONTROL
+	select ARM
+
+if SOC_FAMILY_LPC
+source "soc/nxp/lpc/lpc11u6x/Kconfig"
+source "soc/nxp/lpc/lpc51u68/Kconfig"
+source "soc/nxp/lpc/lpc54xxx/Kconfig"
+source "soc/nxp/lpc/lpc55xxx/Kconfig"
+
+endif # SOC_FAMILY_LPC

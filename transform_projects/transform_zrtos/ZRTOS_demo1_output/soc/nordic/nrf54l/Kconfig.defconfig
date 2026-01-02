@@ -1,0 +1,105 @@
+# Nordic Semiconductor nRF54L MCU line
+
+# Copyright (c) 2024 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_NRF54LX
+
+source "soc/nordic/nrf54l/Kconfig.defconfig.nrf54l09_enga_cpuapp"
+source "soc/nordic/nrf54l/Kconfig.defconfig.nrf54l09_enga_cpuflpr"
+source "soc/nordic/nrf54l/Kconfig.defconfig.nrf54l20_enga_cpuapp"
+source "soc/nordic/nrf54l/Kconfig.defconfig.nrf54l20_enga_cpuflpr"
+source "soc/nordic/nrf54l/Kconfig.defconfig.nrf54l_05_10_15_cpuapp"
+source "soc/nordic/nrf54l/Kconfig.defconfig.nrf54l_05_10_15_cpuflpr"
+source "soc/nordic/nrf54l/Kconfig.defconfig.nrf54lm20a_enga_cpuapp"
+source "soc/nordic/nrf54l/Kconfig.defconfig.nrf54lm20a_enga_cpuflpr"
+
+if ARM
+
+config CORTEX_M_SYSTICK
+	default !NRF_GRTC_TIMER
+
+# Start SYSCOUNTER on driver init
+config NRF_GRTC_START_SYSCOUNTER
+	default NRF_GRTC_TIMER
+
+config CACHE_NRF_CACHE
+	default y if EXTERNAL_CACHE
+
+config CACHE_MANAGEMENT
+	default y
+
+# MPU-based null-pointer dereferencing detection cannot
+# be applied as the (0x0 - 0x400) is unmapped for this target.
+choice
+	default NULL_POINTER_EXCEPTION_DETECTION_NONE
+endchoice
+config NULL_POINTER_EXCEPTION_DETECTION_NONE
+	bool "No null pointer exception detection"
+	help
+	  Null pointer exception detection feature is not
+	  enabled.
+
+config NULL_POINTER_EXCEPTION_DETECTION_DWT
+	bool "Use DWT for null pointer exception detection"
+	depends on CPU_CORTEX_M_HAS_DWT
+	depends on !TRUSTED_EXECUTION_NONSECURE
+	select CORTEX_M_DWT
+	select CORTEX_M_NULL_POINTER_EXCEPTION
+	help
+	  Null pointer dereference detection implemented
+	  using the DWT unit functionality.
+	  Notes:
+	  - Not enabled for Non-Secure FW images, where
+	  null-pointer dereferencing is likely caught as
+	  a SecureFault.
+	  - Requires DWT functionality in the Cortex-M SoC
+	  implementation (1 comparator for ARMv7-M, 2 comparators
+	  for ARMv8-M).
+	  - Requires the Cortex-M core be in normal mode.
+
+config NULL_POINTER_EXCEPTION_DETECTION_MPU
+	bool "Use MPU for null pointer exception detection"
+	depends on !TRUSTED_EXECUTION_NONSECURE
+	depends on ARM_MPU
+	select CORTEX_M_NULL_POINTER_EXCEPTION
+	help
+	  Null pointer dereference detection implemented
+	  using MPU functionality.
+	  Notes:
+	  - Mutually exclusive to the DWT-based solution
+	  - Not enabled for Non-Secure FW images, where
+	  null-pointer dereferencing is likely caught as
+	  a SecureFault.
+	  - Requires MPU functionality to be present and
+	  enabled. The implementation consumes 1 MPU region.
+	  - In ARMv8-M, explicit null-pointer dereference
+	  detection with MPU requires, additionally, that
+	  the area: [0x0,
+	  CORTEX_M_NULL_POINTER_EXCEPTION_PAGE_SIZE)
+	  is not unmapped (covered by an MPU region already).
+	  If it is unmapped null-pointer dereferencing may
+	  still be indirectly detected (e.g. via a precise
+	  Bus access fault), but this is not guaranteed. A
+	  build-time message warns the user of this scenario.
+
+endchoice
+
+endif # ARM
+
+if RISCV
+
+DT_CHOSEN_Z_SRAM = zephyr,sram
+DT_CHOSEN_Z_CODE = zephyr,code-partition
+
+config BUILD_OUTPUT_ADJUST_LMA
+	depends on !XIP
+	default "$(dt_chosen_partition_addr_hex,$(DT_CHOSEN_Z_CODE)) - \
+		 $(dt_chosen_reg_addr_hex,$(DT_CHOSEN_Z_SRAM))"
+
+endif # RISCV
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default $(dt_nodelabel_int_prop,grtc,clock-frequency) if NRF_GRTC_TIMER
+
+endif # SOC_SERIES_NRF54LX

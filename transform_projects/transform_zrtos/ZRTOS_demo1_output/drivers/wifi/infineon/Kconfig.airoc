@@ -1,0 +1,102 @@
+# Copyright (c) 2023 Cypress Semiconductor Corporation (an Infineon company) or
+# an affiliate of Cypress Semiconductor Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig WIFI_AIROC
+	bool "Infineon AIROC SoC Wi-Fi support"
+	depends on DT_HAS_INFINEON_AIROC_WIFI_ENABLED
+	default y
+	select THREAD_CUSTOM_DATA
+	select WIFI_OFFLOAD
+	select NET_L2_ETHERNET
+	select NET_L2_WIFI_MGMT
+	select GPIO
+	select WIFI_USE_NATIVE_NETWORKING
+	select USE_INFINEON_ABSTRACTION_RTOS
+	help
+	  Enable Infineon AIROC SoC Wi-Fi support.
+
+if WIFI_AIROC
+
+config AIROC_WIFI_BUS_SDIO
+	bool
+	default y
+	depends on $(dt_compat_on_bus,$(DT_COMPAT_INFINEON_AIROC_WIFI),sd)
+	select SDHC
+	select SDIO_STACK
+	help
+	  Enable SDIO bus support.
+
+config AIROC_WIFI_BUS_SPI
+	bool
+	default y
+	depends on $(dt_compat_on_bus,$(DT_COMPAT_INFINEON_AIROC_WIFI),spi)
+	select SPI
+	help
+	  Enable SPI bus support
+
+config AIROC_WIFI6
+	bool
+
+config AIROC_WIFI_EVENT_TASK_STACK_SIZE
+	int "Event Task Stack Size"
+	default 4096
+
+config AIROC_WIFI_EVENT_TASK_PRIO
+	int "Event Task Priority"
+	default 4
+
+config AIROC_WLAN_MFG_FIRMWARE
+	bool "WLAN Manufacturing Firmware"
+	help
+	  Enable WLAN Manufacturing Firmware.
+
+config WHD_WIFI_COUNTRY
+	string "Wifi couuntry option"
+	default "WHD_COUNTRY_UNITED_STATES" if CYW55572 || CYW55500
+	default "WHD_COUNTRY_AUSTRALIA"
+	help
+	  Sets the country, this will operate in for wifi initialization
+	  parameters. See the wifi-host-driver's whd_country_code_t for legal options.
+
+config AIROC_WIFI_CUSTOM
+	bool "Custom CYW43xx device/module"
+	help
+	  Select Custom CYW43xx device/module. For this option,
+	  user must to provide path to FW, CLM and NVRAM for
+	  custom or vendor CYW43xx modules.
+
+choice
+	prompt "Select CYW43022 module"
+	depends on CYW43022 && !AIROC_WIFI_CUSTOM
+
+config CYW43022CUB
+	bool "CYW43022CUB"
+	help
+	  Infineon CYW43022CUB M2 module
+
+	  Detailed information about CYW43022CUB module you can find on
+	  https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/wi-fi-5-802.11ac/cyw43022/
+endchoice
+
+choice
+	prompt "Select CYW55500 module"
+	depends on CYW55500 && !AIROC_WIFI_CUSTOM
+
+config CYW955513SDM2WLIPA_SM
+	bool "CYW955513SDM2WLIPA_SM"
+	help
+	  Infineon CYW955513SDM2WLIPA (SM) module
+endchoice
+
+choice
+	prompt "Select CYW55572 module"
+	depends on CYW55572 && !AIROC_WIFI_CUSTOM
+
+config CYW955573M2IPA1_SM
+	bool "CYW955573M2IPA1_SM"
+	help
+	  Infineon CYW955573M2IPA1 (SM) module
+endchoice
+
+endif # AIROC_WIFI

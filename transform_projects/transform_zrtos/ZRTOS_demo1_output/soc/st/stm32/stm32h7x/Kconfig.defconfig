@@ -1,0 +1,38 @@
+# ST Microelectronics STM32H7 MCU line
+
+# Copyright (c) 2019 Linaro  Limited
+# Copyright (c) 2022 SILA Embedded Solutions GmbH <office@embedded-solutions.at>
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32H7 series
+
+if SOC_SERIES_STM32H7X
+
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h723xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h725xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h730xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h735xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h742xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h743xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h745xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h747xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h750xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h753xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h755xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h757xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h7a3xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h7b0xx"
+source "soc/st/stm32/stm32h7x/Kconfig.defconfig.stm32h7b3xx"
+
+config ROM_START_OFFSET
+	default 0x400 if BOOTLOADER_MCUBOOT
+	default 0x0   if !BOOTLOADER_MCUBOOT
+
+if LVGL
+
+config LV_DRAW_DMA2D_HAL_INCLUDE
+	default "stm32h7xx.h"
+
+endif # LVGL
+
+endif # SOC_SERIES_STM32H7X

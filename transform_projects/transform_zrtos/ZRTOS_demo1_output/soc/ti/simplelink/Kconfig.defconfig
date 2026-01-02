@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2017 Zephyr Contributors
+
+if SOC_FAMILY_TI_SIMPLELINK
+
+source "soc/ti/simplelink/cc13x2_cc26x2/Kconfig.defconfig"
+source "soc/ti/simplelink/cc13x2x7_cc26x2x7/Kconfig.defconfig"
+source "soc/ti/simplelink/cc23x0/Kconfig.defconfig"
+
+endif # SOC_FAMILY_TI_SIMPLELINK

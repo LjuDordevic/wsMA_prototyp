@@ -1,0 +1,4 @@
+# Copyright (c) 2024 Silicon Laboratories Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+source "soc/silabs/silabs_sim3/sim3u/Kconfig.defconfig"

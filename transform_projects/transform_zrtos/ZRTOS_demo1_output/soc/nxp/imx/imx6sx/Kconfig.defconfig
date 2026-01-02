@@ -1,0 +1,14 @@
+# i.MX 6SoloX core series
+
+# Copyright 2018,2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_IMX6SX
+
+config NUM_IRQS
+	# must be >= the highest interrupt number used
+	default 128
+
+source "soc/nxp/imx/imx6sx/Kconfig.defconfig.mcimx6x_m4"
+
+endif # SOC_SERIES_IMX6SX

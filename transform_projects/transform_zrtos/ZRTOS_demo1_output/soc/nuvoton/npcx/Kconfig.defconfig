@@ -1,0 +1,13 @@
+# SPDX-License-Identifier: Apache-2.0
+
+# Copyright (c) 2020 Nuvoton Technology Corporation.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_NPCX
+
+source "soc/nuvoton/npcx/npck3/Kconfig.defconfig"
+source "soc/nuvoton/npcx/npcx4/Kconfig.defconfig"
+source "soc/nuvoton/npcx/npcx7/Kconfig.defconfig"
+source "soc/nuvoton/npcx/npcx9/Kconfig.defconfig"
+
+endif # SOC_FAMILY_NPCX

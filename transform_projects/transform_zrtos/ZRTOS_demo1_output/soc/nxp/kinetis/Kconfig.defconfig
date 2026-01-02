@@ -1,0 +1,16 @@
+# Copyright 2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_KINETIS
+
+source "soc/nxp/kinetis/k2x/Kconfig.defconfig"
+source "soc/nxp/kinetis/k32lx/Kconfig.defconfig"
+source "soc/nxp/kinetis/k6x/Kconfig.defconfig"
+source "soc/nxp/kinetis/k8x/Kconfig.defconfig"
+source "soc/nxp/kinetis/ke1xf/Kconfig.defconfig"
+source "soc/nxp/kinetis/ke1xz/Kconfig.defconfig"
+source "soc/nxp/kinetis/kl2x/Kconfig.defconfig"
+source "soc/nxp/kinetis/kv5x/Kconfig.defconfig"
+source "soc/nxp/kinetis/kwx/Kconfig.defconfig"
+
+endif # SOC_FAMILY_KINETIS

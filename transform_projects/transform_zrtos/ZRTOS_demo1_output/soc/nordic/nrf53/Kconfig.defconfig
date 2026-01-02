@@ -1,0 +1,18 @@
+# Nordic Semiconductor nRF53 MCU line
+
+# Copyright (c) 2019 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_NRF53X
+
+source "soc/nordic/nrf53/Kconfig.defconfig.nrf5340_CPUAPP_QKAA"
+source "soc/nordic/nrf53/Kconfig.defconfig.nrf5340_CPUNET_QKAA"
+
+# If the kernel has timer support, enable the timer
+config NRF_RTC_TIMER
+	default y if SYS_CLOCK_EXISTS
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default $(dt_nodelabel_int_prop,rtc1,clock-frequency)
+
+endif # SOC_SERIES_NRF53X

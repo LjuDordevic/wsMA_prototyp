@@ -1,0 +1,9 @@
+# Copyright (c) 2020 ITE Corporation. All Rights Reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_ITE_EC
+
+source "soc/ite/ec/it51xxx/Kconfig.defconfig.series"
+source "soc/ite/ec/it8xxx2/Kconfig.defconfig.series"
+
+endif # SOC_FAMILY_ITE_EC

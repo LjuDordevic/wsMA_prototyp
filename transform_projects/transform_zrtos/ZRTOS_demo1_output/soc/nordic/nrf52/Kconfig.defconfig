@@ -1,0 +1,27 @@
+# Nordic Semiconductor nRF52 MCU line
+
+# Copyright (c) 2016-2018 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_NRF52X
+
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52805_CAAA"
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52810_QFAA"
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52811_QFAA"
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52820_QDAA"
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52832_CIAA"
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52832_QFAA"
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52832_QFAB"
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52833_QDAA"
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52833_QIAA"
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52840_QFAA"
+source "soc/nordic/nrf52/Kconfig.defconfig.nrf52840_QIAA"
+
+# If the kernel has timer support, enable the timer
+config NRF_RTC_TIMER
+	default y if SYS_CLOCK_EXISTS
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default $(dt_nodelabel_int_prop,rtc1,clock-frequency)
+
+endif # SOC_SERIES_NRF52X

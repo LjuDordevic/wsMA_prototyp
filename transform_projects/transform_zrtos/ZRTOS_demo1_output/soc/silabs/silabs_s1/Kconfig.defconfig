@@ -1,0 +1,12 @@
+# Copyright (c) 2024 Silicon Laboratories Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+source "soc/silabs/silabs_s1/efm32gg11b/Kconfig.defconfig"
+source "soc/silabs/silabs_s1/efm32gg12b/Kconfig.defconfig"
+source "soc/silabs/silabs_s1/efm32jg12b/Kconfig.defconfig"
+source "soc/silabs/silabs_s1/efm32pg12b/Kconfig.defconfig"
+source "soc/silabs/silabs_s1/efm32pg1b/Kconfig.defconfig"
+source "soc/silabs/silabs_s1/efr32bg13p/Kconfig.defconfig"
+source "soc/silabs/silabs_s1/efr32fg13p/Kconfig.defconfig"
+source "soc/silabs/silabs_s1/efr32fg1p/Kconfig.defconfig"
+source "soc/silabs/silabs_s1/efr32mg12p/Kconfig.defconfig"

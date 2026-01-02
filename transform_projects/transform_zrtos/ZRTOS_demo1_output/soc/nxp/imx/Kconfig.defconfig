@@ -1,0 +1,14 @@
+# Copyright 2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_NXP_IMX
+
+# Source series Kconfig files first, so SoCs
+# can override the defaults given here
+source "soc/nxp/imx/imx6sx/Kconfig.defconfig"
+source "soc/nxp/imx/imx7d/Kconfig.defconfig"
+source "soc/nxp/imx/imx8/Kconfig.defconfig"
+source "soc/nxp/imx/imx8ulp/Kconfig.defconfig"
+source "soc/nxp/imx/imx8x/Kconfig.defconfig"
+
+endif # SOC_FAMILY_NXP_IMX

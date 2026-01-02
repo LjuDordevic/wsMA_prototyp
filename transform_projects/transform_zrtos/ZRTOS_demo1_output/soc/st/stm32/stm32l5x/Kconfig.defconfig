@@ -1,0 +1,20 @@
+# ST Microelectronics STM32L5 MCU line
+
+# Copyright (c) 2020 Linaro Limited
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_STM32L5X
+
+source "soc/st/stm32/stm32l5x/Kconfig.defconfig.stm32l552xx"
+source "soc/st/stm32/stm32l5x/Kconfig.defconfig.stm32l562xx"
+
+config ICACHE
+	default y
+
+config CACHE_MANAGEMENT
+	default y
+
+config ROM_START_OFFSET
+	default 0x400 if BOOTLOADER_MCUBOOT
+
+endif # SOC_SERIES_STM32L5X

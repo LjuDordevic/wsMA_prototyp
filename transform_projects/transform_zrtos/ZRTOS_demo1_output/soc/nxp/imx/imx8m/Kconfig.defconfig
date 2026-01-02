@@ -1,0 +1,14 @@
+# Copyright 2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_IMX8M
+
+source "soc/nxp/imx/imx8m/Kconfig.defconfig.mimx8ml8_a53"
+source "soc/nxp/imx/imx8m/Kconfig.defconfig.mimx8ml8_adsp"
+source "soc/nxp/imx/imx8m/Kconfig.defconfig.mimx8ml8_m7"
+source "soc/nxp/imx/imx8m/Kconfig.defconfig.mimx8mm6_a53"
+source "soc/nxp/imx/imx8m/Kconfig.defconfig.mimx8mm6_m4"
+source "soc/nxp/imx/imx8m/Kconfig.defconfig.mimx8mn6_a53"
+source "soc/nxp/imx/imx8m/Kconfig.defconfig.mimx8mq6_m4"
+
+endif # SOC_SERIES_IMX8M

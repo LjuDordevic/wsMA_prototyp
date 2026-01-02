@@ -1,0 +1,20 @@
+# ST Microelectronics STM32F7 MCU line
+
+# Copyright (c) 2018 Yurii Hamann
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32F7 series
+
+if SOC_SERIES_STM32F7X
+
+source "soc/st/stm32/stm32f7x/Kconfig.defconfig.stm32f722xx"
+source "soc/st/stm32/stm32f7x/Kconfig.defconfig.stm32f723xx"
+source "soc/st/stm32/stm32f7x/Kconfig.defconfig.stm32f745xx"
+source "soc/st/stm32/stm32f7x/Kconfig.defconfig.stm32f746xx"
+source "soc/st/stm32/stm32f7x/Kconfig.defconfig.stm32f750xx"
+source "soc/st/stm32/stm32f7x/Kconfig.defconfig.stm32f756xx"
+source "soc/st/stm32/stm32f7x/Kconfig.defconfig.stm32f765xx"
+source "soc/st/stm32/stm32f7x/Kconfig.defconfig.stm32f767xx"
+source "soc/st/stm32/stm32f7x/Kconfig.defconfig.stm32f769xx"
+
+endif # SOC_SERIES_STM32F7X

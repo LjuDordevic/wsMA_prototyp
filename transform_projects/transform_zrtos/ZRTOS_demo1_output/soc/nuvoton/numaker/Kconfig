@@ -1,0 +1,14 @@
+# Copyright (c) 2023 Nuvoton Technology Corporation.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_NUMAKER
+	select SOC_RESET_HOOK
+
+if SOC_FAMILY_NUMAKER
+
+source "soc/nuvoton/numaker/m2l31x/Kconfig"
+source "soc/nuvoton/numaker/m46x/Kconfig"
+source "soc/nuvoton/numaker/m55m1x/Kconfig"
+
+endif # SOC_FAMILY_NUMAKER

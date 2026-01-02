@@ -1,0 +1,41 @@
+# SPDX-FileCopyrightText: Copyright (c) 2023 Carl Zeiss Meditec AG
+# SPDX-License-Identifier: Apache-2.0
+
+menuconfig STEPPER
+	bool "Stepper Controller"
+	help
+	  Enable stepper controller
+
+if STEPPER
+
+module = STEPPER
+module-str = stepper
+source "subsys/logging/Kconfig.template.log_config"
+
+config STEPPER_INIT_PRIORITY
+	int "Stepper Motor Controller init priority"
+	default 90
+	help
+	  Stepper motor controller initialization priority.
+
+config STEPPER_SHELL
+	bool "Stepper shell"
+	depends on SHELL
+	help
+	  Enable stepper shell for testing.
+
+comment "Stepper Driver Common"
+
+source "drivers/stepper/step_dir/Kconfig"
+
+comment "Stepper Drivers"
+
+# zephyr-keep-sorted-start
+source "drivers/stepper/Kconfig.fake"
+source "drivers/stepper/Kconfig.gpio"
+source "drivers/stepper/adi_tmc/Kconfig"
+source "drivers/stepper/allegro/Kconfig"
+source "drivers/stepper/ti/Kconfig"
+# zephyr-keep-sorted-stop
+
+endif

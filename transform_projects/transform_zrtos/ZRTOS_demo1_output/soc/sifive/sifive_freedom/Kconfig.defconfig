@@ -1,0 +1,11 @@
+# Copyright (c) 2024 Nordic Semiconductor ASA
+# Copyright (c) 2024 Antmicro <www.antmicro.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_SIFIVE_FREEDOM
+
+source "soc/sifive/sifive_freedom/fe300/Kconfig.defconfig"
+source "soc/sifive/sifive_freedom/fu500/Kconfig.defconfig"
+source "soc/sifive/sifive_freedom/fu700/Kconfig.defconfig"
+
+endif # SOC_FAMILY_SIFIVE_FREEDOM

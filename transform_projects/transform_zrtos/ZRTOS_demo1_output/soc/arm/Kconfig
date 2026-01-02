@@ -1,0 +1,17 @@
+# Copyright (c) 2024 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_ARM || SOC_FAMILY_ARM64
+
+source "soc/arm/beetle/Kconfig"
+source "soc/arm/designstart/Kconfig"
+source "soc/arm/fvp_aemv8a/Kconfig"
+source "soc/arm/fvp_aemv8r/Kconfig"
+source "soc/arm/mps2/Kconfig"
+source "soc/arm/mps3/Kconfig"
+source "soc/arm/mps4/Kconfig"
+source "soc/arm/musca/Kconfig"
+source "soc/arm/qemu_cortex_a53/Kconfig"
+source "soc/arm/qemu_virt_arm64/Kconfig"
+
+endif # SOC_FAMILY_ARM || SOC_FAMILY_ARM64

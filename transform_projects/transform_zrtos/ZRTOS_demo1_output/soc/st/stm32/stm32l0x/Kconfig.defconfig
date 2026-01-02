@@ -1,0 +1,28 @@
+# ST Microelectronics STM32L0 MCU line
+
+# Copyright (c) 2018 Endre Karlson <endre.karlson@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32L0 series
+
+if SOC_SERIES_STM32L0X
+
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l010x4"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l010x6"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l010x8"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l010xb"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l011xx"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l031xx"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l051xx"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l053xx"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l071xx"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l072xx"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l073xx"
+source "soc/st/stm32/stm32l0x/Kconfig.defconfig.stm32l081xx"
+
+# adjust the fallback because of the LSI oscillator characteristics
+config TASK_WDT_HW_FALLBACK_DELAY
+	depends on TASK_WDT_HW_FALLBACK
+	default 200
+
+endif # SOC_SERIES_STM32L0X

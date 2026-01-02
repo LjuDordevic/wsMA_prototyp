@@ -1,0 +1,22 @@
+# Analog Devices MAX32xxx MCU family
+
+# Copyright (c) 2023-2024 Analog Devices, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_MAX32
+
+source "soc/adi/max32/Kconfig.defconfig.max32650"
+source "soc/adi/max32/Kconfig.defconfig.max32655"
+source "soc/adi/max32/Kconfig.defconfig.max32657"
+source "soc/adi/max32/Kconfig.defconfig.max32660"
+source "soc/adi/max32/Kconfig.defconfig.max32662"
+source "soc/adi/max32/Kconfig.defconfig.max32666"
+source "soc/adi/max32/Kconfig.defconfig.max32670"
+source "soc/adi/max32/Kconfig.defconfig.max32672"
+source "soc/adi/max32/Kconfig.defconfig.max32675"
+source "soc/adi/max32/Kconfig.defconfig.max32680"
+source "soc/adi/max32/Kconfig.defconfig.max32690"
+source "soc/adi/max32/Kconfig.defconfig.max78000"
+source "soc/adi/max32/Kconfig.defconfig.max78002"
+
+endif # SOC_FAMILY_MAX32

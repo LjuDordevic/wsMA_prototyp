@@ -1,0 +1,34 @@
+# Copyright (c) 2021 Sateesh Kotapati
+# Copyright (c) 2025 Silicon Laboratories Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_EFR32MG24 || SOC_SERIES_MGM24
+
+config NUM_IRQS
+	# must be >= the highest interrupt number used
+	default 75
+
+config PM
+	default n
+	select UART_INTERRUPT_DRIVEN if SERIAL_SUPPORT_INTERRUPT
+
+choice
+	default PM_POLICY_DEFAULT
+	depends on PM
+endchoice
+config PM_POLICY_DEFAULT
+	bool "Default PM policy"
+	help
+	  This option selects the default PM policy. Default policy is based
+	  on CPU residency times and other constraints imposed by the drivers or
+	  application.
+
+config PM_POLICY_CUSTOM
+	bool "Custom PM Policy"
+	help
+	  This options allows applications to override the default policy with
+	  a custom implementation.
+
+endchoice
+
+endif

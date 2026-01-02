@@ -1,0 +1,63 @@
+# Copyright (c) 2023 Enphase Energy
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_AM6X
+
+config KERNEL_ENTRY
+	default "_vector_table" if SOC_SERIES_AM6X_R5
+
+# Workaround for not being able to have commas in macro arguments
+DT_CHOSEN_Z_FLASH := zephyr,flash
+
+config FLASH_SIZE
+	default $(dt_chosen_reg_size_int,$(DT_CHOSEN_Z_FLASH),0,K)
+
+config FLASH_BASE_ADDRESS
+	default $(dt_chosen_reg_addr_hex,$(DT_CHOSEN_Z_FLASH))
+
+config NUM_IRQS
+	default 64 if SOC_SERIES_AM6X_M4
+	default 280 if SOC_SERIES_AM6X_A53
+	default 512 if SOC_SERIES_AM6X_R5
+
+config SYS_CLOCK_HW_CYCLES_PER_SEC
+	default 400000000 if SOC_SERIES_AM6X_M4
+	default 200000000 if SOC_SERIES_AM6X_A53
+	default 19200000 if SOC_SERIES_AM6X_R5
+
+if SERIAL
+
+config UART_NS16550
+	default y
+
+config UART_NS16550_TI_K3
+	default y if SOC_SERIES_AM6X_M4
+	default y if SOC_SERIES_AM6X_R5
+
+choice
+	default UART_NS16550_VARIANT_NS16750
+endchoice
+config UART_NS16550_VARIANT_NS16550
+	bool "UART 16550 (16-bytes FIFO)"
+	help
+	  This enables support for 16-bytes FIFO if UART controller is 16550.
+
+config UART_NS16550_VARIANT_NS16750
+	bool "UART 16750 (64-bytes FIFO and auto flow control)"
+	help
+	  This enables support for 64-bytes FIFO and automatic hardware
+	  flow control if UART controller is 16750.
+
+config UART_NS16550_VARIANT_NS16950
+	bool "UART 16950 (128-bytes FIFO and auto flow control)"
+	help
+	  This enables support for 128-bytes FIFO and automatic hardware flow control.
+endchoice
+
+endif # SERIAL
+
+config BUILD_OUTPUT_BIN
+	default n if SOC_SERIES_AM6X_M4
+	default n if SOC_SERIES_AM6X_R5
+
+endif # SOC_SERIES_AM6X

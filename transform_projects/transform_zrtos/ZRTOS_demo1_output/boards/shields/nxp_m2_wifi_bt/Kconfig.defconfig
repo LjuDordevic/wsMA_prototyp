@@ -1,0 +1,351 @@
+# Copyright 2025 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SHIELD_NXP_M2_1XK_WIFI_BT
+
+if BT
+
+choice
+	default BT_NXP_IW416
+endchoice
+config BT_NXP_NW612
+	bool "NW612 firmware for NXP IW612 Chipset"
+	help
+	  NXP IW612 Chipset supports Wi-Fi? 802.11a/b/g/n/ac/ax + Bluetooth? 5.4
+	  BR/EDR/LE + IEEE802.1.5.4 up to 601 Mbps data rate on Wi-Fi? and 2Mbps
+	  data rate on Bluetooth?. 4-wire UART@3M baud is supported. PCM for
+	  audio is also supported.
+	  Details of the module could be found on https://www.nxp.com/products/
+	  wireless-connectivity/wi-fi-plus-bluetooth-plus-802-15-4/2-4-5-ghz-
+	  dual-band-1x1-wi-fi-6-802-11ax-plus-bluetooth-5-4-plus-802-15-4-tri-
+	  radio-solution:IW612.
+
+config BT_NXP_IW416
+	bool "NXP IW416 Chipset"
+	help
+	  NXP IW416 Chipset supports Wi-Fi4 + Bluetooth5.2
+	  Details of the module could be found on https://www.nxp.com/products/
+	  wireless-connectivity/wi-fi-plus-bluetooth-plus-802-15-4/2-4-5-ghz-
+	  dual-band-1x1-wi-fi-4-802-11n-plus-bluetooth-5-2-solution:IW416.
+
+config BT_NXP_IW610
+	bool "IW610 firmware for NXP IW610 Chipset"
+	help
+	  NXP IW610 Chipset supports Wi-Fi™ 802.11a/b/g/n/ac/ax HE20 + Bluetooth®. 5.4
+	  Low Energy + 802.15.4
+	  Details of the module could be found on https://www.nxp.com/products/
+	  wireless-connectivity/wi-fi-plus-bluetooth-plus-802-15-4/2-4-5ghz-
+	  dual-band-1x1-wi-fi-6-plus-bluetooth-low-energy-5-4-plus-802-15-4-tri-
+	  radio-solution:IW610
+
+endchoice
+
+endif # BT
+
+if WIFI
+
+config WIFI_NXP
+	default y
+
+config WIFI_NM_WPA_SUPPLICANT_11AX
+	default n
+
+config WIFI_NM_WPA_SUPPLICANT_11AC
+	default n
+
+choice
+	default NXP_IW416
+endchoice
+config NXP_RW610
+	bool "NXP RW610-based Chipset"
+	depends on SOC_SERIES_RW6XX
+	select NXP_FW_LOADER
+	select NXP_RF_IMU
+	help
+	  Select this option if you have a NXP RW610-based
+	  Wireless chip. This option will enable support
+	  for NXP RW610-based series boards.
+
+config NXP_88W8987
+	bool "NXP 88W8987 [EXPERIMENTAL]"
+	select EXPERIMENTAL
+	help
+	  Enable NXP 88W8987 Wi-Fi connectivity,
+	  More information about 88W8987 device you can find on
+	  https://www.nxp.com/products/wireless-connectivity/wi-fi-plus-bluetooth-plus-802-15-4/2-4-5-ghz-dual-band-1x1-wi-fi-5-802-11ac-plus-bluetooth-5-2-solution:88W8987
+
+config NXP_IW416
+	bool "NXP IW416 [EXPERIMENTAL]"
+	select EXPERIMENTAL
+	help
+	  Enable NXP IW416 Wi-Fi connectivity,
+	  More information about IW416 device you can find on
+	  https://www.nxp.com/products/wireless-connectivity/wi-fi-plus-bluetooth-plus-802-15-4/2-4-5-ghz-dual-band-1x1-wi-fi-4-802-11n-plus-bluetooth-5-2-solution:IW416
+
+config NXP_IW61X
+	bool "NXP IW61X [EXPERIMENTAL]"
+	select EXPERIMENTAL
+	help
+	  Enable NXP IW61X Wi-Fi connectivity,
+	  More information about IW61X device you can find on
+	  https://www.nxp.com/products/wireless-connectivity/wi-fi-plus-bluetooth-plus-802-15-4/2-4-5ghz-dual-band-1x1-wi-fi-6-802-11ax-plus-bluetooth-5-2-solution:IW611
+	  https://www.nxp.com/products/wireless-connectivity/wi-fi-plus-bluetooth-plus-802-15-4/2-4-5-ghz-dual-band-1x1-wi-fi-6-802-11ax-plus-bluetooth-5-2-plus-802-15-4-tri-radio-solution:IW612
+
+config NXP_88W8801
+	bool "NXP 88W8801 [EXPERIMENTAL]"
+	select EXPERIMENTAL
+	help
+	  Enable NXP 88W8801 Wi-Fi connectivity,
+	  More information about 88W8801 device you can find on
+	  https://www.nxp.com/products/wireless-connectivity/wi-fi-plus-bluetooth-plus-802-15-4/2-4-ghz-single-band-1x1-wi-fi-4-802-11n-solution:88W8801
+
+config NXP_IW610
+	bool "NXP IW610"
+	help
+	  Enable NXP IW610 Wi-Fi connectivity,
+	  More information about IW610 device you can find on
+	  https://www.nxp.com/products/wireless-connectivity/wi-fi-plus-bluetooth-plus-802-15-4/2-4-5ghz-dual-band-1x1-wi-fi-6-plus-bluetooth-low-energy-5-4-plus-802-15-4-tri-radio-solution:IW610
+
+endchoice
+
+choice
+	default NXP_IW416_MURATA_1XK_M2
+endchoice
+config NXP_IW416_AW_AM457_USD
+	bool "NXP IW416-AW-AM457-USD"
+	help
+	  Azurewave Type AM457 is a small and high performance module based on
+	  NXP IW416 combo chipset which supports Wi-Fi® 802.11a/b/g/n +
+	  Bluetooth® 5.2 BR/EDR/LE up to 150 Mbps PHY data rate on Wi-Fi® and
+	  3Mbps PHY data rate on Bluetooth®.
+
+	  Detailed information about Type AW AM457 module you can find on
+	  https://www.azurewave.com/wireless-modules-nxp.html
+
+config NXP_IW416_AW_AM457MA_M2
+	bool "NXP IW416-AW-AM457MA-M2"
+	help
+	  Azurewave Type AM457MA is a small and high performance module based on
+	  NXP IW416 combo chipset which supports Wi-Fi® 802.11a/b/g/n +
+	  Bluetooth® 5.2 BR/EDR/LE up to 150 Mbps PHY data rate on Wi-Fi® and
+	  3Mbps PHY data rate on Bluetooth®.
+
+	  Detailed information about Type AW AM457MA module you can find on
+	  https://www.azurewave.com/wireless-modules-nxp.html
+
+config NXP_IW416_AW_AM510_USD
+	bool "NXP IW416-AW-AM510-USD"
+	help
+	  Azurewave Type AM510 is a small and high performance module based on
+	  NXP IW416 combo chipset which supports Wi-Fi® 802.11a/b/g/n +
+	  Bluetooth® 5.2 BR/EDR/LE up to 150 Mbps PHY data rate on Wi-Fi® and
+	  3Mbps PHY data rate on Bluetooth®.
+
+	  Detailed information about Type AW AM510 module you can find on
+	  https://www.azurewave.com/wireless-modules-nxp.html
+
+config NXP_IW416_AW_AM510MA_M2
+	bool "NXP IW416-AW-AM510MA-M2"
+	help
+	  Azurewave Type AM510MA is a small and high performance module based on
+	  NXP IW416 combo chipset which supports Wi-Fi® 802.11a/b/g/n +
+	  Bluetooth® 5.2 BR/EDR/LE up to 150 Mbps PHY data rate on Wi-Fi® and
+	  3Mbps PHY data rate on Bluetooth®.
+
+	  Detailed information about Type AW AM510MA module you can find on
+	  https://www.azurewave.com/wireless-modules-nxp.html
+
+config NXP_IW416_MURATA_1XK_USD
+	bool "NXP IW416-MURATA-1XK-USD"
+	help
+	  Murata Type 1XK is a small and high performance module based on
+	  NXP IW416 combo chipset which supports Wi-Fi® 802.11a/b/g/n +
+	  Bluetooth® 5.2 BR/EDR/LE up to 150 Mbps PHY data rate on Wi-Fi® and
+	  3Mbps PHY data rate on Bluetooth®.
+
+	  Detailed information about Type 1XK module you can find on
+	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/type1xk
+	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/usd-m2-adapter
+
+config NXP_IW416_MURATA_1XK_M2
+	bool "NXP IW416-MURATA-1XK-M2"
+	help
+	  Murata Type 1XK is a small and high performance module based on
+	  NXP IW416 combo chipset which supports Wi-Fi® 802.11a/b/g/n +
+	  Bluetooth® 5.2 BR/EDR/LE up to 150 Mbps PHY data rate on Wi-Fi® and
+	  3Mbps PHY data rate on Bluetooth®.
+
+	  Detailed information about Type 1XK module you can find on
+	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/type1xk
+
+endchoice
+
+if WIFI_NM_HOSTAPD_AP
+
+config WIFI_NM_HOSTAPD_REGULATORY_REGION
+	default "WW"
+
+endif # WIFI_NM_HOSTAPD_AP
+
+endif # WIFI
+
+endif # SHIELD_NXP_M2_1XK_WIFI_BT
+
+if SHIELD_NXP_M2_2EL_WIFI_BT
+
+if BT
+
+endif # BT
+
+if WIFI
+
+config WIFI_NXP
+	default y
+
+choice
+	default NXP_IW612_MURATA_2EL_M2
+endchoice
+config NXP_IW612_MURATA_2EL_USD
+	bool "NXP IW612-MURATA-2EL-USD"
+	help
+	  Murata Type 2EL is a small and very high performance module based on
+	  NXP IW612 combo chipset which supports Wi-Fi® 802.11a/b/g/n/ac/ax +
+	  Bluetooth® 5.3 BR/EDR/LE + 802.15.4 up to 601Mbps PHY data rate on Wi-fi®
+	  and 2Mbps PHY data rate on Bluetooth®.
+
+	  Detailed information about Type 2EL module you can find on
+	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/type2el
+	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/usd-m2-adapter
+
+config NXP_IW612_MURATA_2EL_M2
+	bool "NXP IW612-MURATA-2EL-M2"
+	help
+	  Murata Type 2EL is a small and very high performance module based on
+	  NXP IW612 combo chipset which supports Wi-Fi® 802.11a/b/g/n/ac/ax +
+	  Bluetooth® 5.3 BR/EDR/LE + 802.15.4 up to 601Mbps PHY data rate on Wi-fi®
+	  and 2Mbps PHY data rate on Bluetooth®.
+
+	  Detailed information about Type 2EL module you can find on
+	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/type2el
+
+config NXP_IW611_MURATA_2DL_USD
+	bool "NXP IW611-MURATA-2DL-USD"
+	help
+	  Murata Type 2DL is a small and very high performance module based on
+	  NXP IW611 combo chipset which supports Wi-Fi® 802.11a/b/g/n/ac/ax +
+	  Bluetooth® 5.3 BR/EDR/LE up to 601Mbps PHY data rate on Wi-fi® and
+	  2Mbps PHY data rate on Bluetooth®.
+
+	  Detailed information about Type 2DL module you can find on
+	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/type2dl
+	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/usd-m2-adapter
+
+config NXP_IW611_MURATA_2DL_M2
+	bool "NXP IW611-MURATA-2DL-M2"
+	help
+	  Murata Type 2DL is a small and very high performance module based on
+	  NXP IW611 combo chipset which supports Wi-Fi® 802.11a/b/g/n/ac/ax +
+	  Bluetooth® 5.3 BR/EDR/LE up to 601Mbps PHY data rate on Wi-fi® and
+	  2Mbps PHY data rate on Bluetooth®.
+
+	  Detailed information about Type 2DL module you can find on
+	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/type2dl
+
+endchoice
+
+if WIFI_NM_HOSTAPD_AP
+
+config WIFI_NM_HOSTAPD_REGULATORY_REGION
+	default "WW"
+
+endif # WIFI_NM_HOSTAPD_AP
+
+endif # WIFI
+
+endif # SHIELD_NXP_M2_2EL_WIFI_BT
+
+if SHIELD_NXP_M2_2LL_WIFI_BT
+
+if BT
+
+endif # BT
+
+if WIFI
+
+config WIFI_NXP
+	default y
+
+choice
+	default NXP_IW610_MURATA_2LL_M2
+endchoice
+config NXP_IW610_MURATA_2LL_M2
+	bool "NXP IW610-MURATA-2LL-M2"
+	help
+	  Murata Type 2LL is a small and very high performance module based on NXP IW610G
+	  combo chipset which supports Wi-Fi™ 802.11a/b/g/n/ac/ax HE20 + Bluetooth®. 5.4
+	  Low Energy + 802.15.4 up to 114.7Mbps PHY data rate on Wi-Fi™ and 2Mbps PHY data
+	  rate on Bluetooth® Low Energy.
+
+	  Detailed information about Type 2LL module you can find on
+	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/type2ll
+
+config NXP_IW610_RD_USD
+	bool "NXP IW610-RD-USD [EXPERIMENTAL]"
+	select EXPERIMENTAL
+	help
+	  The IW610 Family features a 1x1 Dual-band (2.4 GHz / 5 GHz) Wi-Fi 6 radio subsystem,
+	  offering improved network efficiency, reduced latency and extended range compared to
+	  previous Wi-Fi standards. Its Bluetooth LE radio supports a high-speed data rate of
+	  2 Mbit/s, along with long-range communication and extended advertising for network
+	  commissioning and sensor aggregation.
+
+	  Detailed information about Type RD USD module you can find on
+	  https://www.nxp.com/part/IW610CHN
+
+endchoice
+
+if WIFI_NM_HOSTAPD_AP
+
+config WIFI_NM_HOSTAPD_REGULATORY_REGION
+	default "US"
+
+endif # WIFI_NM_HOSTAPD_AP
+
+endif # WIFI
+
+endif # SHIELD_NXP_M2_2LL_WIFI_BT
+
+if (BT_NXP_IW416) || (BT_NXP_NW612) || (BT_NXP_IW610) || (NXP_IW416) || (NXP_IW61X) || (NXP_IW610)
+
+if BT
+
+config SYSTEM_WORKQUEUE_STACK_SIZE
+	default 2048
+
+config BT_LONG_WQ_STACK_SIZE
+	default 2560
+
+config MAIN_STACK_SIZE
+	default 2560
+
+if SHELL
+
+config SHELL_STACK_SIZE
+	default 4096
+
+endif # SHELL
+
+endif # BT
+
+if WIFI_NXP
+
+if SHELL
+
+config NXP_WIFI_SHELL
+	default y
+
+endif # SHELL
+
+endif # WIFI_NXP
+
+endif

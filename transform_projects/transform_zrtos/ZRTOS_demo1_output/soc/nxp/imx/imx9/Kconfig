@@ -1,0 +1,9 @@
+# Copyright 2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_IMX9
+source "soc/nxp/imx/imx9/imx91/Kconfig"
+source "soc/nxp/imx/imx9/imx93/Kconfig"
+source "soc/nxp/imx/imx9/imx943/Kconfig"
+source "soc/nxp/imx/imx9/imx95/Kconfig"
+endif

@@ -1,0 +1,9 @@
+# Copyright (c) 2023 Nuvoton Technology Corporation.
+#
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_M46X
+
+source "soc/nuvoton/numaker/m46x/Kconfig.defconfig.m467"
+
+endif # SOC_SERIES_M46X

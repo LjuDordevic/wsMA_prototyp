@@ -1,0 +1,9 @@
+# Copyright (c) 2024 CISPA Helmholtz Center for Information Security gGmbH
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_OPENHWGROUP_CVA6
+
+source "soc/openhwgroup/cva6/cv32a6/Kconfig"
+source "soc/openhwgroup/cva6/cv64a6/Kconfig"
+
+endif # SOC_FAMILY_OPENHWGROUP_CVA6

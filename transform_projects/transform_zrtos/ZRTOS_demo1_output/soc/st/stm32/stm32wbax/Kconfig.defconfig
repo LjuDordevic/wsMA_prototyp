@@ -1,0 +1,165 @@
+# ST Microelectronics STM32WBA MCU line
+
+# Copyright (c) 2023 STMicroelectronics
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_STM32WBAX
+
+source "soc/st/stm32/stm32wbax/Kconfig.defconfig.stm32wba52xx"
+source "soc/st/stm32/stm32wbax/Kconfig.defconfig.stm32wba55xx"
+source "soc/st/stm32/stm32wbax/Kconfig.defconfig.stm32wba65xx"
+
+config ICACHE
+	default y
+
+config CACHE_MANAGEMENT
+	default y
+
+config STM32_LPTIM_TIMER
+	default y if PM
+
+config STM32_FLASH_PREFETCH
+	default y
+
+config BT_STM32WBA
+	select DYNAMIC_INTERRUPTS
+	select DYNAMIC_DIRECT_INTERRUPTS
+	select ENTROPY_GENERATOR
+	select USE_STM32_HAL_RAMCFG
+
+if BT_STM32WBA
+
+choice
+	default NEWLIB_LIBC
+endchoice
+config MINIMAL_LIBC
+	bool "Minimal C library"
+	depends on !REQUIRES_FULL_LIBC
+	depends on MINIMAL_LIBC_SUPPORTED
+	imply COMPILER_FREESTANDING
+	select COMMON_LIBC_ABORT
+	select COMMON_LIBC_STRNLEN
+	imply COMMON_LIBC_MALLOC
+	imply COMMON_LIBC_CALLOC
+	imply COMMON_LIBC_REALLOCARRAY
+	imply COMMON_LIBC_TIME
+	help
+	  Build with minimal C library.
+
+config PICOLIBC
+	bool "Picolibc library"
+	select COMMON_LIBC_ABORT
+	imply THREAD_LOCAL_STORAGE if ARCH_HAS_THREAD_LOCAL_STORAGE && TOOLCHAIN_SUPPORTS_THREAD_LOCAL_STORAGE
+	select LIBC_ERRNO if THREAD_LOCAL_STORAGE
+	select NEED_LIBC_MEM_PARTITION
+	select TC_PROVIDES_POSIX_C_LANG_SUPPORT_R
+	imply COMMON_LIBC_MALLOC
+	imply COMMON_LIBC_ABORT
+	imply COMMON_LIBC_TIME
+	depends on PICOLIBC_SUPPORTED
+	help
+	  Build with picolibc library. The picolibc library is built as
+	  a module if PICOLIBC_MODULE is set, otherwise picolibc is
+	  expected to be provided by the toolchain.
+
+config NEWLIB_LIBC
+	bool "Newlib C library"
+	select COMMON_LIBC_ABORT
+	depends on NEWLIB_LIBC_SUPPORTED
+	select NEED_LIBC_MEM_PARTITION
+	select TC_PROVIDES_POSIX_C_LANG_SUPPORT_R
+	imply POSIX_DEVICE_IO_ALIAS_CLOSE
+	imply POSIX_DEVICE_IO_ALIAS_OPEN
+	imply POSIX_DEVICE_IO_ALIAS_READ
+	imply POSIX_DEVICE_IO_ALIAS_WRITE
+	imply POSIX_FD_MGMT_ALIAS_LSEEK
+	imply POSIX_FILE_SYSTEM_ALIAS_FSTAT
+	imply POSIX_MULTI_PROCESS_ALIAS_GETPID
+	imply POSIX_SIGNALS_ALIAS_KILL
+	imply COMMON_LIBC_TIME
+	help
+	  Build with newlib library. The newlib library is expected to be
+	  part of the SDK in this case.
+
+config ARCMWDT_LIBC
+	bool "ARC MWDT C library"
+	depends on !NATIVE_APPLICATION
+	depends on "$(ZEPHYR_TOOLCHAIN_VARIANT)" = "arcmwdt"
+	select STATIC_INIT_GNU
+	help
+	  C library provided by ARC MWDT toolchain.
+
+config EXTERNAL_LIBC
+	bool "External C library"
+	help
+	  Build with external/user provided C library.
+
+config IAR_LIBC
+	bool "IAR C Runtime Library"
+	depends on IAR_LIBC_SUPPORTED
+	depends on "$(ZEPHYR_TOOLCHAIN_VARIANT)" = "iar"
+	select COMMON_LIBC_STRNLEN
+	select COMMON_LIBC_TIME
+	help
+	  Use the full IAR Compiler runtime libraries.
+	  A reduced Zephyr minimal libc will be used for library functionality
+	  not provided by the IAR C Runtime Library.
+
+endchoice
+
+choice
+	default LINKER_ORPHAN_SECTION_PLACE
+endchoice
+config LINKER_ORPHAN_SECTION_PLACE
+	bool "Place"
+	help
+	  Linker puts orphan sections in place without warnings
+	  or errors.
+
+config LINKER_ORPHAN_SECTION_WARN
+	bool "Warn"
+	help
+	  Linker places the orphan sections in output and issues
+	  warning about those sections.
+
+config LINKER_ORPHAN_SECTION_ERROR
+	bool "Error"
+	help
+	  Linker exits with error when an orphan section is found.
+
+endchoice
+
+config ENTROPY_STM32_CLK_CHECK
+	default n
+
+config FPU
+	default y
+
+config SYSTEM_WORKQUEUE_STACK_SIZE
+	default 2048
+
+endif
+
+if PM_S2RAM
+
+config COUNTER
+	default y
+
+config COUNTER_RTC_STM32_SUBSECONDS
+	default y
+
+config STM32_LPTIM_STDBY_TIMER
+	default y
+
+config TICKLESS_KERNEL
+	default y
+
+config COUNTER_RTC_STM32_SAVE_VALUE_BETWEEN_RESETS
+	default y
+
+config IDLE_STACK_SIZE
+	default 512
+
+endif
+
+endif # SOC_SERIES_STM32WBAX

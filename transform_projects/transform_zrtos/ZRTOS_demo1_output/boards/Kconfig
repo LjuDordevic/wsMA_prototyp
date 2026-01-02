@@ -1,0 +1,262 @@
+# SPDX-License-Identifier: Apache-2.0
+
+config BOARD
+	string
+	default "$(BOARD)"
+	help
+	  This option holds the name of the board and is used to locate the files
+	  related to the board in the source tree (under boards/).
+	  The Board is the first location where we search for a linker.ld file,
+	  if not found we look for the linker file in
+	  soc/<arch>/<family>/<series>
+
+config BOARD_REVISION
+ string
+ default "$(BOARD_REVISION)"
+	help
+	  If the BOARD has a revision field set, this is the revision.
+	  Otherwise, it is the empty string. For example, if BOARD is
+	  "plank@foo", this option will be "foo". If BOARD is "plank",
+	  this option will be the empty string.
+
+config BOARD_TARGET
+	string
+	default "$(BOARD)@$(BOARD_REVISION)$(BOARD_QUALIFIERS)" if "$(BOARD_REVISION)" != ""
+	default "$(BOARD)$(BOARD_QUALIFIERS)"
+	help
+	  Contains the board target (full string including name, revision, soc, cluster and
+	  variant) of the board being used.
+
+	  For example, if building for ``nrf5340dk/nrf5340/cpuapp`` then this will contain the
+	  value ``nrf5340dk/nrf5340/cpuapp``.
+
+config BOARD_DEPRECATED_RELEASE
+	string
+	help
+	  This hidden option is set in the board configuration and indicates
+	  the Zephyr release that the board configuration will be removed.
+	  When set, any build for that board will generate a clearly visible
+	  deprecation warning.
+	  When adding this to a BOARD, remember to follow the instructions in
+	  https://docs.zephyrproject.org/latest/develop/api/api_lifecycle.html#deprecated
+
+config QEMU_TARGET
+	bool
+	help
+	  Mark all QEMU targets with this variable for checking whether we are
+	  running in an emulated environment.
+
+config NET_DRIVERS
+	bool
+	default y if QEMU_TARGET && NETWORKING
+	help
+	  When building for a qemu target then NET_DRIVERS will be default
+	  enabled to allow for easy use of SLIP or PPP
+
+source "boards/Kconfig.v2"
+
+# Parse shields references
+# Don't do it as a menuconfig, as shield selection is a CMake feature.
+# This loads custom shields Kconfig (from BOARD_ROOT)
+# This loads Zephyr base shield defconfigs
+source "boards/shields/abrobot_esp32c3_oled/Kconfig.shield"
+source "boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.shield"
+source "boards/shields/adafruit_adalogger_featherwing/Kconfig.shield"
+source "boards/shields/adafruit_aw9523/Kconfig.shield"
+source "boards/shields/adafruit_data_logger/Kconfig.shield"
+source "boards/shields/adafruit_neopixel_grid_bff/Kconfig.shield"
+source "boards/shields/adafruit_pca9685/Kconfig.shield"
+source "boards/shields/adafruit_winc1500/Kconfig.shield"
+source "boards/shields/amg88xx/Kconfig.shield"
+source "boards/shields/arceli_eth_w5500/Kconfig.shield"
+source "boards/shields/arduino_giga_display_shield/Kconfig.shield"
+source "boards/shields/arduino_modulino_buttons/Kconfig.shield"
+source "boards/shields/arduino_modulino_smartleds/Kconfig.shield"
+source "boards/shields/arduino_uno_click/Kconfig.shield"
+source "boards/shields/atmel_rf2xx/Kconfig.shield"
+source "boards/shields/boostxl_ulpsense/Kconfig.shield"
+source "boards/shields/buydisplay_2_8_tft_touch_arduino/Kconfig.shield"
+source "boards/shields/buydisplay_3_5_tft_touch_arduino/Kconfig.shield"
+source "boards/shields/dac80508_evm/Kconfig.shield"
+source "boards/shields/dvp_20pin_ov7670/Kconfig.shield"
+source "boards/shields/dvp_fpc24_mt9m114/Kconfig.shield"
+source "boards/shields/esp_8266/Kconfig.shield"
+source "boards/shields/eval_ad4052_ardz/Kconfig.shield"
+source "boards/shields/eval_adxl362_ardz/Kconfig.shield"
+source "boards/shields/eval_adxl367_ardz/Kconfig.shield"
+source "boards/shields/eval_adxl372_ardz/Kconfig.shield"
+source "boards/shields/frdm_cr20a/Kconfig.shield"
+source "boards/shields/frdm_kw41z/Kconfig.shield"
+source "boards/shields/frdm_stbc_agm01/Kconfig.shield"
+source "boards/shields/ftdi_vm800c/Kconfig.shield"
+source "boards/shields/g1120b0mipi/Kconfig.shield"
+source "boards/shields/inventek_eswifi/Kconfig.shield"
+source "boards/shields/lcd_par_s035/Kconfig.shield"
+source "boards/shields/link_board_eth/Kconfig.shield"
+source "boards/shields/lmp90100_evb/Kconfig.shield"
+source "boards/shields/ls0xx_generic/Kconfig.shield"
+source "boards/shields/m5stack_cardputer/Kconfig.shield"
+source "boards/shields/m5stack_core2_ext/Kconfig.shield"
+source "boards/shields/max3421e/Kconfig.shield"
+source "boards/shields/max7219/Kconfig.shield"
+source "boards/shields/mcp2515/Kconfig.shield"
+source "boards/shields/mikroe_accel13_click/Kconfig.shield"
+source "boards/shields/mikroe_adc_click/Kconfig.shield"
+source "boards/shields/mikroe_ble_tiny_click/Kconfig.shield"
+source "boards/shields/mikroe_eth3_click/Kconfig.shield"
+source "boards/shields/mikroe_eth_click/Kconfig.shield"
+source "boards/shields/mikroe_lte_iot10_click/Kconfig.shield"
+source "boards/shields/mikroe_mcp2518fd_click/Kconfig.shield"
+source "boards/shields/mikroe_stepper_18_click/Kconfig.shield"
+source "boards/shields/mikroe_stepper_19_click/Kconfig.shield"
+source "boards/shields/mikroe_weather_click/Kconfig.shield"
+source "boards/shields/mikroe_wifi_bt_click/Kconfig.shield"
+source "boards/shields/npm1100_ek/Kconfig.shield"
+source "boards/shields/npm1300_ek/Kconfig.shield"
+source "boards/shields/npm2100_ek/Kconfig.shield"
+source "boards/shields/npm6001_ek/Kconfig.shield"
+source "boards/shields/nrf7002eb/Kconfig.shield"
+source "boards/shields/nrf7002ek/Kconfig.shield"
+source "boards/shields/nxp_adtja1101/Kconfig.shield"
+source "boards/shields/nxp_btb44_ov5640/Kconfig.shield"
+source "boards/shields/nxp_m2_wifi_bt/Kconfig.shield"
+source "boards/shields/openthread_rcp_arduino/Kconfig.shield"
+source "boards/shields/p3t1755dp_ard_i2c/Kconfig.shield"
+source "boards/shields/p3t1755dp_ard_i3c/Kconfig.shield"
+source "boards/shields/pmod_acl/Kconfig.shield"
+source "boards/shields/pmod_sd/Kconfig.shield"
+source "boards/shields/renesas_us159_da14531evz/Kconfig.shield"
+source "boards/shields/reyax_lora/Kconfig.shield"
+source "boards/shields/rk043fn02h_ct/Kconfig.shield"
+source "boards/shields/rk043fn66hs_ctg/Kconfig.shield"
+source "boards/shields/rk055hdmipi4m/Kconfig.shield"
+source "boards/shields/rk055hdmipi4ma0/Kconfig.shield"
+source "boards/shields/rpi_pico_uno_flexypin/Kconfig.shield"
+source "boards/shields/rtk7eka6m3b00001bu/Kconfig.shield"
+source "boards/shields/rtklcdpar1s00001be/Kconfig.shield"
+source "boards/shields/rtkmipilcdb00000be/Kconfig.shield"
+source "boards/shields/seeed_w5500/Kconfig.shield"
+source "boards/shields/seeed_xiao_expansion_board/Kconfig.shield"
+source "boards/shields/seeed_xiao_round_display/Kconfig.shield"
+source "boards/shields/semtech_sx1262mb2das/Kconfig.shield"
+source "boards/shields/semtech_sx1272mb2das/Kconfig.shield"
+source "boards/shields/semtech_sx1276mb1mas/Kconfig.shield"
+source "boards/shields/sparkfun_carrier_asset_tracker/Kconfig.shield"
+source "boards/shields/sparkfun_sara_r4/Kconfig.shield"
+source "boards/shields/ssd1306/Kconfig.shield"
+source "boards/shields/st7735r/Kconfig.shield"
+source "boards/shields/st7789v_generic/Kconfig.shield"
+source "boards/shields/st_b_cams_imx_mb1854/Kconfig.shield"
+source "boards/shields/st_b_cams_omv_mb1683/Kconfig.shield"
+source "boards/shields/st_b_lcd40_dsi1_mb1166/Kconfig.shield"
+source "boards/shields/st_mb1897_cam/Kconfig.shield"
+source "boards/shields/st_stm32f4dis_cam/Kconfig.shield"
+source "boards/shields/tcan4550evm/Kconfig.shield"
+source "boards/shields/ti_bp_bassensorsmkii/Kconfig.shield"
+source "boards/shields/v2c_daplink/Kconfig.shield"
+source "boards/shields/waveshare_epaper/Kconfig.shield"
+source "boards/shields/waveshare_pico_lcd_1_14/Kconfig.shield"
+source "boards/shields/waveshare_pico_oled_1_3/Kconfig.shield"
+source "boards/shields/waveshare_ups/Kconfig.shield"
+source "boards/shields/weact_ov2640_cam_module/Kconfig.shield"
+source "boards/shields/wnc_m14a2a/Kconfig.shield"
+source "boards/shields/x_nucleo_53l0a1/Kconfig.shield"
+source "boards/shields/x_nucleo_bnrg2a1/Kconfig.shield"
+source "boards/shields/x_nucleo_eeprma2/Kconfig.shield"
+source "boards/shields/x_nucleo_gfx01m2/Kconfig.shield"
+source "boards/shields/x_nucleo_idb05a1/Kconfig.shield"
+source "boards/shields/x_nucleo_iks01a1/Kconfig.shield"
+source "boards/shields/x_nucleo_iks01a2/Kconfig.shield"
+source "boards/shields/x_nucleo_iks01a3/Kconfig.shield"
+source "boards/shields/x_nucleo_iks02a1/Kconfig.shield"
+source "boards/shields/x_nucleo_iks4a1/Kconfig.shield"
+source "boards/shields/x_nucleo_wb05kn1/Kconfig.shield"
+
+menu "Board Options"
+config QEMU_ICOUNT
+	bool "QEMU icount mode"
+	depends on QEMU_TARGET
+	default y if !NETWORKING && !BT
+	help
+	  Enable QEMU virtual instruction counter. The virtual cpu will
+	  execute one instruction every 2^N ns of virtual time. This will
+	  give deterministic execution times from the guest point of view.
+
+config QEMU_ICOUNT_SHIFT
+	int "QEMU icount shift value"
+	depends on QEMU_ICOUNT
+	help
+	  The virtual CPU will execute one instruction every 2^N nanoseconds
+	  of virtual time, where N is the value provided here.
+
+config QEMU_ICOUNT_SLEEP
+	bool "QEMU icount sleep mode enable"
+	depends on QEMU_ICOUNT
+	help
+	  When the virtual CPU is sleeping, the virtual time will advance
+	  at default speed unless this option is set. With this option set,
+	  the virtual time will jump to the next timer deadline instantly
+	  whenever the virtual CPU goes to sleep mode and will not advance
+	  if no timer is enabled. This behavior gives deterministic execution
+	  times from the guest point of view.
+
+config QEMU_IVSHMEM_PLAIN_MEM_SIZE
+	int "QEMU ivshmem-plain shared memory size in mega-bytes"
+	default 1
+	depends on QEMU_TARGET && IVSHMEM && !IVSHMEM_DOORBELL
+	help
+	  This sets the size of the shared memory when using ivshmem-plain
+	  device in Qemu. Note that it's in mega-bytes, so 1 means 1M for Qemu
+	  etc..
+
+config QEMU_UEFI_BOOT
+	bool "QEMU uses UEFI to boot up"
+	default n
+	depends on BUILD_OUTPUT_EFI && QEMU_TARGET && X86_64
+	help
+	  This option indicates that QEMU will use UEFI bootable method
+	  to boot up.
+
+config QEMU_GDBSERVER_LISTEN_DEV
+	string "QEMU gdbserver listen device"
+	default "tcp::1234"
+	depends on QEMU_TARGET
+	help
+	  This options is passed onto QEMU as a parameter to `-gdb` option.
+	  The default value is equivalent to `-s` which is a shorthand for
+	  `-gdb tcp::1234`. An empty value omits the `-gdb` parameter altogether.
+	  This allows the injection of `-gdb` parameter from other sources such
+	  as the `QEMU_EXTRA_FLAGS` environment variable. Refer to application
+	  development doc and/or QEMU invocation doc for more info.
+
+config QEMU_EXTRA_FLAGS
+	string "QEMU extra flags"
+	depends on QEMU_TARGET
+	default ""
+	help
+	  This option is to pass onto QEMU an extra list of parameters
+	  to setup devices, for example to allocate interface for Zephyr
+	  GDBstub over serial with `-serial tcp:127.0.0.1:5678,server`
+
+config BOARD_REQUIRES_SERIAL_BACKEND_CDC_ACM
+	bool
+	help
+	  Indicates that a board has no other capabilities than to use the CDC
+	  ACM UART as a backend for logging or shell.
+
+config BOARD_SERIAL_BACKEND_CDC_ACM
+	bool "Board uses USB CDC ACM UART as serial backend"
+	depends on BOARD_REQUIRES_SERIAL_BACKEND_CDC_ACM
+	default y
+	help
+	  USB stack and CDC ACM UART are configured and initialized at boot
+	  time to be used as a backend for logging or shell.
+
+# There might not be any board options, hence the optional source
+endmenu
+
+config BOARD_HAS_TIMING_FUNCTIONS
+	bool
+	help
+	  Should be selected if board provides custom method for retrieving
+	  timestamps and cycle count.

@@ -1,0 +1,8 @@
+# Copyright (c) 2022 BrainCo Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_GD32L23X
+
+source "soc/gd/gd32/gd32l23x/Kconfig.defconfig.gd32l233"
+
+endif # SOC_SERIES_GD32L23X

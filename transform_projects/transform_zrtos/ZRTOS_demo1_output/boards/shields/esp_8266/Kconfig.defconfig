@@ -1,0 +1,38 @@
+# Copyright (c) 2020 Gerson Fernando Budke <nandojve@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+if SHIELD_ESP_8266 || \
+	SHIELD_ESP_8266_ARDUINO || \
+	SHIELD_ESP_8266_MIKROBUS
+
+if NETWORKING
+
+choice
+	default WIFI_ESP_AT_VERSION_1_7
+	depends on WIFI_ESP_AT
+endchoice
+config WIFI_ESP_AT_VERSION_1_7
+	bool "AT version 1.7"
+	help
+	  Use AT command set version 1.7.
+
+config WIFI_ESP_AT_VERSION_2_0
+	bool "AT version 2.0"
+	help
+	  Use AT command set version 2.0.
+
+config WIFI_ESP_AT_VERSION_2_1
+	bool "AT version 2.1"
+	help
+	  Use AT command set version 2.1.
+
+endchoice
+
+source "boards/shields/esp_8266/boards/disco_l475_iot1.defconfig"
+source "boards/shields/esp_8266/boards/sam4e_xpro.defconfig"
+
+endif # NETWORKING
+
+endif   # SHIELD_ESP_8266 || \
+	# SHIELD_ESP_8266_ARDUINO || \
+	# SHIELD_ESP_8266_MIKROBUS

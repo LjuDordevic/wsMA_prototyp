@@ -1,0 +1,41 @@
+# Copyright (c) 2025 Linaro Limited
+# SPDX-License-Identifier: Apache-2.0
+
+if SHIELD_M5STACK_CARDPUTER
+
+config INPUT
+	default y
+
+if DISK_DRIVERS
+
+config DISK_DRIVER_SDMMC
+	default y
+
+endif # DISK_DRIVERS
+
+if DISPLAY
+
+choice
+	default ST7789V_RGB565
+endchoice
+config ST7789V_RGB888
+	bool "RGB888"
+
+config ST7789V_RGB565
+	bool "RGB565"
+
+config ST7789V_BGR565
+	bool "BGR565"
+
+endchoice
+
+if LVGL
+
+config LV_Z_BITS_PER_PIXEL
+	default 16
+
+endif # LVGL
+
+endif # DISPLAY
+
+endif # SHIELD_M5STACK_CARDPUTER

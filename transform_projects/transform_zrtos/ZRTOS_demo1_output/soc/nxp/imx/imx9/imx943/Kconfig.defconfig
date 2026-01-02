@@ -1,0 +1,9 @@
+# Copyright 2025 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_IMX9
+
+source "soc/nxp/imx/imx9/imx943/Kconfig.defconfig.mimx94398.a55"
+source "soc/nxp/imx/imx9/imx943/Kconfig.defconfig.mimx94398.m33"
+
+endif # SOC_SERIES_IMX9

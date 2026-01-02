@@ -1,0 +1,8 @@
+# Copyright (c) 2024 EPAM Systems
+# SPDX-License-Identifier: Apache-2.0
+
+source "drivers/pinctrl/renesas/ra/Kconfig"
+source "drivers/pinctrl/renesas/rcar/Kconfig"
+source "drivers/pinctrl/renesas/rx/Kconfig"
+source "drivers/pinctrl/renesas/rz/Kconfig"
+source "drivers/pinctrl/renesas/smartbond/Kconfig"

@@ -1,0 +1,8 @@
+# Copyright (c) 2024 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_ANDES_V5
+
+source "soc/andestech/ae350/Kconfig.defconfig"
+
+endif # SOC_FAMILY_ANDES_V5

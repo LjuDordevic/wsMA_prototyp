@@ -1,0 +1,12 @@
+# Copyright (c) 2024, Microchip Technology Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_MICROCHIP_MEC
+
+source "soc/microchip/mec/mec15xx/Kconfig.defconfig.series"
+source "soc/microchip/mec/mec172x/Kconfig.defconfig.series"
+source "soc/microchip/mec/mec174x/Kconfig.defconfig.series"
+source "soc/microchip/mec/mec175x/Kconfig.defconfig.series"
+source "soc/microchip/mec/mech172x/Kconfig.defconfig.series"
+
+endif # SOC_FAMILY_MICROCHIP_MEC

@@ -1,0 +1,26 @@
+# Copyright (c) 2024 GARDENA GmbH
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_SILABS_S2
+
+config SOC_FAMILY_SILABS_S2
+	select HAS_SEGGER_RTT if ZEPHYR_SEGGER_MODULE
+	select BUILD_OUTPUT_HEX
+	select SOC_PREP_HOOK
+	select SOC_EARLY_INIT_HOOK
+
+source "soc/silabs/silabs_s2/efr32bg22/Kconfig"
+source "soc/silabs/silabs_s2/efr32bg27/Kconfig"
+source "soc/silabs/silabs_s2/efr32mg21/Kconfig"
+source "soc/silabs/silabs_s2/efr32zg23/Kconfig"
+source "soc/silabs/silabs_s2/xg24/Kconfig"
+source "soc/silabs/silabs_s2/xg29/Kconfig"
+
+config ARM_SECURE_FIRMWARE
+	default y
+
+config SILABS_DEVICE_IS_MODULE
+	bool
+	default n
+
+endif

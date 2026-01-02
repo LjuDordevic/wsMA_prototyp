@@ -1,0 +1,33 @@
+# Copyright (c) 2020 ATL Electronics
+# SPDX-License-Identifier: Apache-2.0
+
+if SHIELD_INVENTEK_ESWIFI || \
+	SHIELD_INVENTEK_ESWIFI_ARDUINO_SPI || \
+	SHIELD_INVENTEK_ESWIFI_ARDUINO_UART
+
+if NETWORKING
+
+source "boards/shields/inventek_eswifi/boards/frdm_k64f.defconfig"
+source "boards/shields/inventek_eswifi/boards/nucleo_f767zi.defconfig"
+
+choice
+	default WIFI_ESWIFI_BUS_SPI if SHIELD_INVENTEK_ESWIFI_ARDUINO_SPI
+	default WIFI_ESWIFI_BUS_UART if SHIELD_INVENTEK_ESWIFI_ARDUINO_UART
+	depends on WIFI_ESWIFI
+endchoice
+config WIFI_ESWIFI_BUS_SPI
+	bool "SPI Bus interface"
+	select SPI
+
+config WIFI_ESWIFI_BUS_UART
+	bool "UART Bus interface"
+	select SERIAL
+	select RING_BUFFER
+
+endchoice
+
+endif	# NETWORKING
+
+endif	# SHIELD_INVENTEK_ESWIFI || \
+	# SHIELD_INVENTEK_ESWIFI_ARDUINO_SPI || \
+	# SHIELD_INVENTEK_ESWIFI_ARDUINO_UART

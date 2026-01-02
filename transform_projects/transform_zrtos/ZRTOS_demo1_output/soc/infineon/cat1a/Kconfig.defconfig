@@ -1,0 +1,14 @@
+# PSOC CAT1A Configuration
+
+# Copyright (c) 2024 Cypress Semiconductor Corporation.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_INFINEON_CAT1A
+
+source "soc/infineon/cat1a/psoc6_01/Kconfig.defconfig"
+source "soc/infineon/cat1a/psoc6_02/Kconfig.defconfig"
+source "soc/infineon/cat1a/psoc6_03/Kconfig.defconfig"
+source "soc/infineon/cat1a/psoc6_04/Kconfig.defconfig"
+source "soc/infineon/cat1a/psoc6_legacy/Kconfig.defconfig"
+
+endif # SOC_FAMILY_INFINEON_CAT1A

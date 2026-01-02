@@ -1,0 +1,18 @@
+# STMicroelectronics STM32F3 MCU line
+
+# Copyright (c) 2016 RnDity Sp. z o.o.
+# SPDX-License-Identifier: Apache-2.0
+
+# Kconfig symbols common to STM32F3 series
+
+if SOC_SERIES_STM32F3X
+
+source "soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f302x8"
+source "soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f302xc"
+source "soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f303x(b-c)"
+source "soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f303x8"
+source "soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f303xe"
+source "soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f334x8"
+source "soc/st/stm32/stm32f3x/Kconfig.defconfig.stm32f373xc"
+
+endif # SOC_SERIES_STM32F3X

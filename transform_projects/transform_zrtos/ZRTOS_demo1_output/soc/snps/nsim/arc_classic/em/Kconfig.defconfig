@@ -1,0 +1,10 @@
+# Copyright (c) 2024 Synopsys, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_NSIM_EM
+
+source "soc/snps/nsim/arc_classic/em/Kconfig.defconfig.em"
+source "soc/snps/nsim/arc_classic/em/Kconfig.defconfig.em11d"
+source "soc/snps/nsim/arc_classic/em/Kconfig.defconfig.em7d_v22"
+
+endif # SOC_SERIES_NSIM_EM

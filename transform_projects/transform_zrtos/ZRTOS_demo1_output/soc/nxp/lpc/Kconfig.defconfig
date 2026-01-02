@@ -1,0 +1,14 @@
+# Copyright 2017,2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_LPC
+
+config BUILD_WITH_TFM
+	default y if TRUSTED_EXECUTION_NONSECURE
+
+source "soc/nxp/lpc/lpc11u6x/Kconfig.defconfig"
+source "soc/nxp/lpc/lpc51u68/Kconfig.defconfig"
+source "soc/nxp/lpc/lpc54xxx/Kconfig.defconfig"
+source "soc/nxp/lpc/lpc55xxx/Kconfig.defconfig"
+
+endif # SOC_FAMILY_LPC

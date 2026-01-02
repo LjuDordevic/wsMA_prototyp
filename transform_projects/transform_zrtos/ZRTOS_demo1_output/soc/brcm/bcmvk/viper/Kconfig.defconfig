@@ -1,0 +1,9 @@
+# Copyright 2020 Broadcom
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_VIPER
+
+source "soc/brcm/bcmvk/viper/Kconfig.defconfig.viper_bcm58402_a72"
+source "soc/brcm/bcmvk/viper/Kconfig.defconfig.viper_bcm58402_m7"
+
+endif # SOC_SERIES_VIPER

@@ -1,0 +1,41 @@
+# ST Microelectronics STM32H5 MCU line
+
+# Copyright (c) 2023 STMicroelectronics
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_SERIES_STM32H5X
+
+source "soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h503xx"
+source "soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h533xx"
+source "soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h562xx"
+source "soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h563xx"
+source "soc/st/stm32/stm32h5x/Kconfig.defconfig.stm32h573xx"
+
+config ICACHE
+	default y
+
+config DCACHE
+	default y if !SOC_STM32H503XX
+
+config CACHE_MANAGEMENT
+	default y
+
+choice
+	default EXTERNAL_CACHE
+endchoice
+config ARCH_CACHE
+	bool "Integrated cache controller"
+	help
+	  Integrated on-core cache controller
+
+config EXTERNAL_CACHE
+	bool "External cache controller"
+	help
+	  External cache controller
+
+endchoice
+
+config ROM_START_OFFSET
+	default 0x400 if BOOTLOADER_MCUBOOT
+
+endif # SOC_SERIES_STM32H5X
