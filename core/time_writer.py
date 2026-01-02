@@ -21,11 +21,11 @@ class TransformTimer:
         prev_time = 0
         for label, lap_time in self.laps:
             delta = lap_time - prev_time
-            print(f"    {label:.<50}  {delta:>8.2f}s")
+            print(f"    {label:.<50}  {delta:>10.6f}s")
             prev_time = lap_time
 
         print("\n" + "-" * 100)
-        print(f"    {'TOTAL TIME':.<50} {total:>8.2f}s")
+        print(f"    {'TOTAL TIME':.<50} {total:>10.6f}s ~ {total:<0.2f}s")
         print("\n" + "=" * 100)
 
         return total

@@ -137,7 +137,6 @@ extract infos for named choices - their definition & entries
 for each given file at source_files start building path output structur and call reader and writer
 
 4. Transform all files - needs reader & writer
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/Kconfig
 
 
 Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/Kconfig
@@ -154,19 +153,20 @@ start transforming 3 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   1
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         3 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/Kconfig
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/Kconfig
 
 
 Reader found: 12 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/Kconfig
@@ -180,11 +180,9 @@ start transforming 12 input lines
     GLOB LOG ----------------------------------------------------------------------------
     Resolve osource: u06/Kconfig at line 5
       no files found for the: u06/Kconfig
-    iglob didn't find anything
     GLOB LOG ----------------------------------------------------------------------------
     Resolve orsource: uo22/Kconfig at line 6
       no files found for the: uo22/Kconfig
-    iglob didn't find anything
     GLOB LOG ----------------------------------------------------------------------------
     Resolve source: uo3/K* at line 9
       -> uo3/Kconfig
@@ -208,19 +206,20 @@ start transforming 12 input lines
     All orsource_keywords:      1
     SUM (r/or/o)source lines:   6
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         15 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
-        Added new lines of source:       5
+        Added new bc of glob:            5
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 2
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 15 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo2/Kconfig
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo1/Kconfig
 
 
 Reader found: 2 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo1/Kconfig
@@ -236,19 +235,20 @@ start transforming 2 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         2 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 2 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo1/Kconfig
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/uo1/Kconfig
 
 
 Reader found: 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo2/uo1/Kconfig
@@ -257,7 +257,6 @@ start transforming 4 input lines
     GLOB LOG ----------------------------------------------------------------------------
     Resolve orsource: NoKconfig at line 4
       no files found for the: NoKconfig
-    iglob didn't find anything
     FILE LOG --------------------------------------------------------------
     Reader input                4 lines
     -----------------------------------------------------------------------
@@ -268,19 +267,20 @@ start transforming 4 input lines
     All orsource_keywords:      1
     SUM (r/or/o)source lines:   1
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         3 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo2/uo1/Kconfig
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig
 
 
 Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig
@@ -296,19 +296,20 @@ start transforming 3 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig1
 
 
 Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig1
@@ -324,19 +325,20 @@ start transforming 3 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig1
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig2
 
 
 Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig2
@@ -352,19 +354,20 @@ start transforming 3 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig2
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig3
 
 
 Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig3
@@ -380,19 +383,20 @@ start transforming 3 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig3
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig41
 
 
 Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo3/Kconfig41
@@ -408,19 +412,20 @@ start transforming 3 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo3/Kconfig41
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/AKconfig
 
 
 Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/AKconfig
@@ -436,19 +441,20 @@ start transforming 3 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo5/AKconfig
-test file: /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/BKconfig
 
 
 Reader found: 3 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source/uo5/BKconfig
@@ -464,17 +470,19 @@ start transforming 3 input lines
     All orsource_keywords:      0
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
-    All optional choice attr:   0
-    All bool     choice attr:   0
-    All tristate choice attr:   0
     -----------------------------------------------------------------------
     Transformer Output:         4 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           1
-        Added new lines of source:       0
+        Added new bc of glob:            0
         Added new bc of config_default:  0
-        Skipped   bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
         Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
         Done writting 4 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_source_output/uo5/BKconfig
 ----------------------------------------------------------------------
 finished transforming: 11 files transformed
@@ -493,3 +501,17 @@ count options/attr that are not transformed:
     warning:        0
     set:            0
     set default:    0
+
+====================================================================================================
+TIMER REPORT:
+
+====================================================================================================
+    Parser initialization.............................    0.002866s
+    Got parser results................................    0.003660s
+    Built context from parser results.................    0.001266s
+    File transformation and excel log.................    0.011316s
+
+----------------------------------------------------------------------------------------------------
+    TOTAL TIME........................................   0.019109s ~ 0.02s
+
+====================================================================================================

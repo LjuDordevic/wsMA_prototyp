@@ -1898,9 +1898,9 @@ class KconfigTransformer:
 
             output_file = output_dir / relative_normalized
             
-            print(f"input file: {input_file}")
-            print(f"relative_normalized: {relative_normalized}")
-            print(f"output file: {output_file}")
+            #print(f"\ninput file: {input_file}")
+            #print(f"relative_normalized: {relative_normalized}")
+            #print(f"output file: {output_file}")
             if not input_file.exists():
                 print(f"  Skip not found: {input_file}")
                 continue
