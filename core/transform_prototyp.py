@@ -1820,23 +1820,9 @@ class KconfigTransformer:
         #print(f"{self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES} = {previous_len} - {len(cleaned)}")
         return cleaned
 
-    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
-                            log: bool, log_lines: bool, log_and_check_resolve_glob: bool, \
-                                log_cd_nc_details: bool, log_excel_after_each_file: bool, log_excel_output: None):
-        """
-        1. get all source files parser found (these are all realtive to srctree)
-        2. Filter ExtParserContext -> get needed infos for transformation of configdefault and named choice options 
-        3. build paths for input & output files
-        """
-        excel_stats = []
-        if self.context is None:
-            raise RuntimeError("Context missing!")
-        
-        source_files = self._get_all_source_files() # all paths are relative to srctree 
-        transformed_count = 0
-        cd_definition_info = {}
-        choice_definition_info = {}
+    def _filter_cd_from_context(self, reader, project_dir, log_cd_nc_details):
 
+        cd_definition_info = {}
         print("\n3. Filter ExtParserContext")
         print("extract all configdefault options and for each get transformed lines and last config")
         for cd in self.context.configdefault_options:
@@ -1877,6 +1863,12 @@ class KconfigTransformer:
                 print(f"\n - transformed cd entries")
                 print(tcd_list)             
 
+        return cd_definition_info
+    
+    def _filter_nc_from_context(self, reader, project_dir, log, log_cd_nc_details):
+
+        choice_definition_info = {}
+        
         print("extract infos for named choices - their definition & entries")
         for choice_name in self.context.choice_definitions.keys():
             if choice_name not in choice_definition_info:
@@ -1894,6 +1886,28 @@ class KconfigTransformer:
                 print(f"\n  named choice: {choice_name}")
                 print(f"    'choice_def': {choice_info.get('choice_def')}")
                 print(f"    'choice_configs': {len(choice_configs)} config entries")
+
+
+        return choice_definition_info
+        
+    def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
+                            log: bool, log_lines: bool, log_and_check_resolve_glob: bool, \
+                                log_cd_nc_details: bool, log_excel_after_each_file: bool, log_excel_output: None):
+        """
+        1. get all source files parser found (these are all realtive to srctree)
+        2. Filter ExtParserContext -> get needed infos for transformation of configdefault and named choice options 
+        3. build paths for input & output files
+        """
+        excel_stats = []
+        transformed_count = 0
+
+        if self.context is None:
+            raise RuntimeError("Context missing!")
+        
+        # GET source_files & filtered info for configdefault & named choice 
+        source_files = self._get_all_source_files()             # all paths are relative to srctree 
+        cd_definition_info = self._filter_cd_from_context(reader, project_dir, log_cd_nc_details)
+        choice_definition_info = self._filter_nc_from_context(reader, project_dir, log, log_cd_nc_details)
 
         print(f"\nfor each given file at source_files start building path output structur and call reader and writer")     
         print(f"\n4. Transform all files - needs reader & writer")
