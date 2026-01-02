@@ -11,16 +11,17 @@ import os
 
 def main():
     timer = TransformTimer()
-
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_copy1/transform.log"
     sys.stdout = open(log_file, "w")
     sys.stderr = sys.stdout 
-
-    #project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr"
-    #output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_copy1"
+    
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/transform.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/results.xlsx"
     project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr"
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo1_output"
     main_file = "Kconfig"
+
+    #project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr"
+    #output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_copy1"
 
     print("=" * 100)
     print("TRNASFORMATION PROTOTYP LOG")
@@ -85,7 +86,7 @@ def main():
         log_and_check_resolve_glob=False,
         log_cd_nc_details=False,
         log_excel_after_each_file=True,
-        log_excel_output="/home/ljd/wsMA_prototyp/results.xlsx"
+        log_excel_output=excel_file
     )   
 
     timer.lap("File transformation and excel log")

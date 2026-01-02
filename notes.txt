@@ -119,6 +119,11 @@ should be updated with a new target:
       ${CMAKE_CURRENT_LIST_DIR}/../core/target_workflow.py
   )
     set_ifndef(KCONFIG_TARGETS menuconfig guiconfig hardenconfig transform)
+
+Then in target_worflow.py:
+  - check and update given paths for:
+  -- project_dir/output_dir/main_file/log and excel file
+
 Then cd to: ZRTOS_demo1/zephyr 
 west build -b native_sim samples/hello_world
 west build -t transform
