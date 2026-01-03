@@ -1644,7 +1644,7 @@ class KconfigTransformer:
             'source_keyword_w_glob' : self.FILE_SOURCE_W_GLOB,
             'osource_keyword' : self.FILE_OSOURCE_NR,
             'rource_keyword' : self.FILE_RSOURCE_NR,
-            'orource_keyword' : self.FILE_ORSOURCE_NR,
+            'orsource_keyword' : self.FILE_ORSOURCE_NR,
             'sum_all_source' : self.FILE_SOURCE_KEYWORDS_ALL_NR,
             'option_env' : self.FILE_OPT_ENV,
 
