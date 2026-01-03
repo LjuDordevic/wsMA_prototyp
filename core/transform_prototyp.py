@@ -745,13 +745,13 @@ class KconfigTransformer:
         
         # PROCESS: ATTR OF THE FIRST DEFINITION ----------------------------------------------------------------------------------------------
         # TODO: Kconfiglib can have menuconfig as choice elements (see wsMA_prototyp/test_dir_/transform_choice_analysis/transform_choice_analysis.log)
-        print(f"process lines until first choice config/if was found") 
+        print(f"process lines until first choice config/if/menuconfig was found") 
         print(f"current_indx: {current_index + 1} - block endidx {block_end_index}")
         
-        # FIND line where first config/if starts
+        # FIND line where first config/if starts ! Kconfiglib allows menuconfig as elements of choice Option
         first_ch_config_idx = None
         for idx in range(current_index + 1, block_end_index):
-            if lines[idx].line_type in ['config', 'if']:
+            if lines[idx].line_type in ['config', 'if', 'menuconfig']:
                 first_ch_config_idx = idx
                 break
         
