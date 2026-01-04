@@ -5,7 +5,7 @@ Root: /home/ljd/espcode/v5.5.2/esp-idf
 Main file: Kconfig
 Output dir: /home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output
 ====================================================================================================
-<espidf_parser.ESPIDFParser object at 0x7bc991e9c0b0>
+<espidf_parser.ESPIDFParser object at 0x79bcc8a0ec00>
 Defined symbols: 1131
 Unique symbols: 1131
 Files: 1
@@ -2676,7 +2676,7 @@ Track existing configs: KconfigLine(endchoice, line=374, indent=8)
     Added Total Lines bc named choice 0
     Found first definition of choice COMPILER_OPTIMIZATION_ASSERTION_LEVEL at line 376
     Processing choice transformation
-    processed_choices now: {'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_OPTIMIZATION'}
+    processed_choices now: {'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
 process lines until first choice config/if/menuconfig was found
 current_indx: 376 - block endidx 409
 current_indx: 376 - choice_attr_end: 389
@@ -2704,7 +2704,7 @@ Track existing configs: KconfigLine(endchoice, line=409, indent=8)
     Added Total Lines bc named choice 0
     Found first definition of choice COMPILER_FLOAT_LIB_FROM at line 426
     Processing choice transformation
-    processed_choices now: {'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_FLOAT_LIB_FROM', 'COMPILER_OPTIMIZATION'}
+    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
 process lines until first choice config/if/menuconfig was found
 current_indx: 426 - block endidx 444
 current_indx: 426 - choice_attr_end: 438
@@ -2730,7 +2730,7 @@ Track existing configs: KconfigLine(endchoice, line=444, indent=8)
     Added Total Lines bc named choice 0
     Found first definition of choice COMPILER_STACK_CHECK_MODE at line 505
     Processing choice transformation
-    processed_choices now: {'COMPILER_OPTIMIZATION', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE'}
+    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
 process lines until first choice config/if/menuconfig was found
 current_indx: 505 - block endidx 539
 current_indx: 505 - choice_attr_end: 530
@@ -2760,7 +2760,7 @@ Track existing configs: KconfigLine(endchoice, line=539, indent=8)
     Added Total Lines bc named choice 0
     Found first definition of choice COMPILER_RT_LIB at line 623
     Processing choice transformation
-    processed_choices now: {'COMPILER_RT_LIB', 'COMPILER_OPTIMIZATION', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE'}
+    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'COMPILER_RT_LIB', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
 process lines until first choice config/if/menuconfig was found
 current_indx: 623 - block endidx 643
 current_indx: 623 - choice_attr_end: 633
@@ -2788,7 +2788,7 @@ Track existing configs: KconfigLine(endchoice, line=643, indent=8)
     Added Total Lines bc named choice 0
     Found first definition of choice COMPILER_ORPHAN_SECTIONS at line 651
     Processing choice transformation
-    processed_choices now: {'COMPILER_RT_LIB', 'COMPILER_OPTIMIZATION', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_ORPHAN_SECTIONS', 'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE'}
+    processed_choices now: {'COMPILER_ORPHAN_SECTIONS', 'COMPILER_FLOAT_LIB_FROM', 'COMPILER_RT_LIB', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
 process lines until first choice config/if/menuconfig was found
 current_indx: 651 - block endidx 670
 current_indx: 651 - choice_attr_end: 660
@@ -2836,7 +2836,7 @@ Track existing configs: KconfigLine(endchoice, line=670, indent=8)
         Removed optional choice attr:    0
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
-Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output/results.xlsx
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/results.xlsx
         Done writting 703 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output/Kconfig
 ----------------------------------------------------------------------
 finished transforming: 1 files transformed
@@ -2859,8 +2859,8 @@ count options/attr that are not transformed:
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Built context from parser results.................    1.110776s
-    File transformation and excel log.................    0.127818s
+    Built context from parser results.................    1.218734s
+    File transformation and excel log.................    0.162279s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   1.238596s ~ 1.24s
+    TOTAL TIME........................................   1.381016s ~ 1.38s
 ====================================================================================================
