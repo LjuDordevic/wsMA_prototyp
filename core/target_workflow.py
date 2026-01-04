@@ -10,8 +10,8 @@ import pprint
 import os
 
 def main():    
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/transform.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/results2.xlsx"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/transform3.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/results3.xlsx"
     project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr"
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo1_output"
     main_file = "Kconfig"
@@ -26,7 +26,7 @@ def main():
     print("=" * 100)
     print("TRANSFORMATION PROTOTYP LOG")
     print("=" * 100)
-
+    print(f"{log_file}")
     print("VARS: ")
     vars = ['ZEPHYR_BASE', 'WORKING_DIRECTORY', 'PROJECT_BINARY_DIR', 
             'BOARD', 'srctree', 'KCONFIG_BINARY_DIR', 'ZEPHYR_ACPICA_KCONFIG']
