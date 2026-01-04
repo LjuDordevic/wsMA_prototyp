@@ -15,3 +15,6 @@ transform_demo.log
 
 ZRTOS_demo2/
 ZRTOS_demo1/
+
+ESP_IDF_demo
+venv_esp_idf_demo
