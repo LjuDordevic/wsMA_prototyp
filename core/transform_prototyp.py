@@ -110,7 +110,7 @@ class KconfigTransformer:
             """
             symbol_info ={
                 'sym.name' : sym.name,
-                'sym.origin' : sym.origin,
+                #'sym.origin' : sym.origin,
                 'sym.name_and_loc' : sym.name_and_loc
             }  
             symbol_infos[sym.name].append(symbol_info)
@@ -468,12 +468,12 @@ class KconfigTransformer:
             file_path = Path(filename)
             files.append(file_path)
         print("    get_all_source_files: ")
-        #for file in files:
-        #    print(f"    parser found: {file}")
+        for file in files:
+            print(f"    parser found: {file}")
 
         return files    
 
-    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info, choice_definition_info, resolve_log):
+    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info, choice_definition_info, log_and_check_resolve_glob):
             """
             lines -> from reader 
             """
@@ -555,13 +555,13 @@ class KconfigTransformer:
 
                             # IF THE FIRST PARAMETER = True, then we log DEBUG info 
                             i = self._transform_named_choice(True, lines, i, choice_info, result, 
-                                                lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
+                                                lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
                             #choice_processed = True
                             continue
                 
                 if line.line_type == 'choice':
                     i = self._transform_choice(lines, i, result, 
-                                                lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
+                                                lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
                     continue
 
                 if line.line_type in ['config', 'menuconfig']:
@@ -598,7 +598,7 @@ class KconfigTransformer:
                                     print(f"    Adding {len(transformed_entries)} configdefault entries")
                                     
                                     i = self._transform_cd(lines, i, transformed_entries, result, 
-                                                lambda l, s, f: self._transform_single_line(l, s, f, resolve_log))
+                                                lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
                                     #print(f"i = self.transform_cd {i}")
                                     cd_processed = True
                                     break 
@@ -607,7 +607,7 @@ class KconfigTransformer:
                     continue
 
                 #print(f"\nget transformed wenn line is not config/menuconfig:")
-                transformed = self._transform_single_line(line, current_symbol, current_file, resolve_log)
+                transformed = self._transform_single_line(line, current_symbol, current_file, log_and_check_resolve_glob)
                 
                 #print(f"transformed: {transformed}")
                 
@@ -745,13 +745,13 @@ class KconfigTransformer:
         
         # PROCESS: ATTR OF THE FIRST DEFINITION ----------------------------------------------------------------------------------------------
         # TODO: Kconfiglib can have menuconfig as choice elements (see wsMA_prototyp/test_dir_/transform_choice_analysis/transform_choice_analysis.log)
-        print(f"process lines until first choice config/if/menuconfig was found") 
+        print(f"process lines until first choice config/if was found") 
         print(f"current_indx: {current_index + 1} - block endidx {block_end_index}")
         
         # FIND line where first config/if starts ! Kconfiglib allows menuconfig as elements of choice Option
         first_ch_config_idx = None
         for idx in range(current_index + 1, block_end_index):
-            if lines[idx].line_type in ['config', 'if', 'menuconfig']:
+            if lines[idx].line_type in ['config', 'if']:
                 first_ch_config_idx = idx
                 break
         
@@ -1206,6 +1206,11 @@ class KconfigTransformer:
             
         return [typ_line, default_line]
 
+    def _replace_env_var(self, match):
+        import os
+        var_name = match.group(1)
+        return os.environ.get(var_name, match.group(0))
+
     def _transform_source_line(self, line, current_file, resolve_log) -> List:
         from kconfig_writer import KconfigLine
         import re, os
@@ -1240,6 +1245,18 @@ class KconfigTransformer:
         print(f"    GLOB LOG ----------------------------------------------------------------------------")
         print(f"    Resolve {source_keyword}: {pattern} at line {line.line_number}")
         
+        if pattern.startswith("./"):
+           #print(f"     patern starts with ./ -> remove ./")
+           pattern = pattern[2:]
+           #print(f"     new pattern {pattern}")   
+
+        if '$' in pattern:
+           #print(f"     patern has $ENV replace it")
+           pattern = re.sub(r"\$(\w+)", self._replace_env_var, pattern) 
+           #print(f"     new pattern {pattern}")   
+
+        #print("tests")
+
         # RESOLVE 
         matched_files = []          # we only need matched_files, that we get through node iteration 
         filenames = []              # this is just to show that both ways (matched and iglob) work 
@@ -1288,11 +1305,16 @@ class KconfigTransformer:
                         print(f"        resolved: ")
                     continue
             
+            # use iglob (exacly as kconfiglib) just to show/check that both ways work 
             if resolve_log:
-                # use iglob (exacly as kconfiglib) just to show/check that both ways work 
                 if source_keyword == "rsource" or source_keyword == "orsource":
                     pattern = join(dirname(current_file), pattern)
+                    #print(f"{pattern}")
+                    
+                #print(f"JOIN {join(srctree, pattern)}")
+
                 filenames = sorted(iglob(join(srctree, pattern)))
+                #print(f"{filenames}")
                 # iglob returnes abs path -> convert to SRCTREE-relative path
                 for file in filenames:
                     iglob_with_rel_path.append(str(Path(file).relative_to(os.environ["srctree"])))
@@ -1301,9 +1323,18 @@ class KconfigTransformer:
             # don't just comment the line, instead skip -> no output line, when there is no match 
             print(f"      no files found for the: {pattern}")   
 
-            if resolve_log:
+            if resolve_log:      
+                print(f"        ---- CHECK RESOLVE LOG with iglob------------------------------------------------------")
                 if not filenames:
                     print(f"    iglob didn't find anything")
+                else:
+                    for file in filenames:
+                        print(f"        iglob found: {file}")
+                    print(f"            transformed iglob list (relative paths): {iglob_with_rel_path}")
+                    if matched_files == iglob_with_rel_path:
+                        print(f"        CHECK OK: transformed iglob list == list of matched_files through iteration")
+                    else: 
+                        raise RuntimeError("check source matching")
 
             self.FILE_O_SOURCE_KEYWORDS_NO_MATCH += 1
             """
@@ -1338,16 +1369,6 @@ class KconfigTransformer:
         # for glob log:
         self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB += len(result_lines)   
         print(f"    Files matching: {self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB} (using {source_keyword})")
-
-        if resolve_log:
-            print(f"        ---- CHECK RESOLVE LOG with iglob------------------------------------------------------")
-            for file in filenames:
-                print(f"        iglob found: {file}")
-            print(f"            transformed iglob list (relative paths): {iglob_with_rel_path}")
-            if matched_files == iglob_with_rel_path:
-                print(f"        CHECK OK: transformed iglob list == list of matched_files through iteration")
-            else: 
-                raise RuntimeError("check source matching")
         
         # for file log, save diff. when source matches more files (1:n)
         self.NEW_BC_GLOB = self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB - 1
