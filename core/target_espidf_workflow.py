@@ -8,8 +8,8 @@ import sys
 import os 
 
 def main():    
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/transform.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/results.xlsx"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/transform.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/results.xlsx"
     project_dir = "/home/ljd/espcode/v5.5.2/esp-idf"
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output"
     main_file = "Kconfig"
@@ -27,11 +27,16 @@ def main():
     print("=" * 100)
     print("TRANSFORMATION PROTOTYP LOG")
     print("=" * 100)
+    print(f"{log_file}")
     print(f"Root: {project_dir}")
     print(f"Main file: {main_file}")
     print(f"Output dir: {output_dir}")
     print("=" * 100)
     
+    
+    print("PROJBUILD exists:",
+      os.path.exists(os.environ["COMPONENT_KCONFIGS_PROJBUILD_SOURCE_FILE"]))
+
     picker = PickParser("ESPIDF")
     parser = ESPIDFParser(picker.kconfiglib_version)
     print(parser)
@@ -47,7 +52,7 @@ def main():
         traceback.print_exc()
         sys.exit(1)
 
-    transformer = KconfigTransformer(source_spec="ZRTOS")
+    transformer = KconfigTransformer(source_spec="ESPIDF")
     print("\n2. Bild ExtParserContext FROM PARSER RESULTS")
     print(f" Transformer used: {transformer.source_spec}")
 
@@ -69,8 +74,8 @@ def main():
         project_dir=Path(project_dir),
         output_dir=Path(output_dir),
         log=True,
-        log_lines=True,
-        log_and_check_resolve_glob=True,
+        log_lines=False,
+        log_and_check_resolve_glob=False,
         log_cd_nc_details=False,
         log_excel_after_each_file=True,
         log_excel_output=excel_file

@@ -91,19 +91,29 @@ class PickParser:
 
         espidf_kcl_root = external_dir / "ESPIDFKconfig"
         espidf_kcl_folder = espidf_kcl_root / "esp_kconfiglib"
-            
-        assert(espidf_kcl_folder).exists(), f"esp_kconfiglib module not found in {espidf_kcl_root}"
+
+        assert espidf_kcl_folder.exists(), (
+            f"esp_kconfiglib module not found in {espidf_kcl_root}"
+        )
+
         self._kconfig_folder = espidf_kcl_folder
 
-        kcl_folder_str = espidf_kcl_root
+        # clear module cache
+        if 'esp_kconfiglib' in sys.modules:
+            del sys.modules['esp_kconfiglib']
+
+        kcl_folder_str = str(espidf_kcl_root)
         if kcl_folder_str not in sys.path:
-                sys.path.insert(0, kcl_folder_str)
+            sys.path.insert(0, kcl_folder_str)
 
         try:
-            from esp_kconfiglib import Kconfig as esp_kconfiglib
-            self.kconfiglib_version = esp_kconfiglib
+            from esp_kconfiglib import Kconfig
+            self.kconfiglib_version = Kconfig
         except ImportError as e:
-            raise ImportError(f"couldn't import from {kcl_folder_str}: {e}")
+            raise ImportError(
+                f"couldn't import from {kcl_folder_str}: {e}"
+            )
+
 
     def _load_kconfiglib(self):
         """

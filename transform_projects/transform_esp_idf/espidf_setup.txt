@@ -1,0 +1,50 @@
+********************************** venv_esp_idf_demo  **********************************
+Install Prerequisites: https://docs.espressif.com/projects/idf-im-ui/en/latest/prerequisites.html#linux
+Follow steps: https://docs.espressif.com/projects/vscode-esp-idf-extension/en/latest/installation.html 
+--> 
+    IDF_PATH = "[...]\espcode\v5.5.2\esp-idf"
+    IDF_TOOLS_PATH = "[...]\esptool\.espressif"
+    + another venv that ESP-IDF automatically makes: 
+    source [...]/esptool/.espressif/python_env/idf5.5_py3.12_env/bin/activate
+
+Code base for v5.5.2 in IDF_PATH
+Current directory '[...]/espcode/v5.5.2/esp-idf' is not buildable.
+  Change directories to one of the example projects in
+  '[...]/espcode/v5.5.2/esp-idf/examples' and try again.
+
+then mkdir /ESP_IDF_demo$ and cd there 
+-> copy hello_world from /v5.5.2/esp-idf/examples hier 
+-> source [...]/esptool/.espressif/python_env/idf5.5_py3.12_env/bin/activate
+-> then add custom target to ESP_IDF_demo/CMakeLists.txt
+    add_custom_target(transform
+        COMMAND python3 /home/ljd/wsMA_prototyp/core/target_espidf_worflow.py
+        WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+        COMMENT "Running transformation script..."
+    )
+    also in core/target_espidf_workflow.py
+    - check and update given paths for:
+    -- project_dir/output_dir/main_file/log and excel file
+    - check which logging parameter in transformer.transform_all_files() you want to set on true 
+
+-> then call: . [...]/espcode/v5.5.2/esp-idf/export.sh
+--> 
+    Checking "python3" ...
+    Python 3.12.3
+    "python3" has been detected
+    Activating ESP-IDF 5.5
+    Setting IDF_PATH to '[...]/espcode/v5.5.2/esp-idf'.
+    * Checking python version ... 3.12.3
+    * Checking python dependencies ... OK
+    * Deactivating the current ESP-IDF environment (if any) ... OK
+    * Establishing a new ESP-IDF environment ... OK
+    * Identifying shell ... bash
+    * Detecting outdated tools in system ... OK - no outdated tools found
+    * Shell completion ... Autocompletion code generated
+
+    Done! You can now compile ESP-IDF projects.
+    Go to the project directory and run:
+
+    idf.py build
+
+ -> then run idf.py build
+ -> then idf.py transform
