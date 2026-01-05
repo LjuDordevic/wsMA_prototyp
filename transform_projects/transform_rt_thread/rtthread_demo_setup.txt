@@ -1,0 +1,12 @@
+********************************** venv_rtthread  **********************************
+mkdir rtthread
+cd rtthread
+python3 -m venv venv_rtthread
+~/rtthread$ source [...]rtthread/venv_rtthread/bin/activate
+sudo apt install gcc gcc-arm-none-eabi binutils-arm-none-eabi scons libncurses5-dev qemu qemu-system-arm gdb-arm-none-eabi
+pip install kconfiglib
+pip install scons
+
+git clone https://github.com/RT-Thread/rt-thread.git
+python -m SCons --menuconfig
+
