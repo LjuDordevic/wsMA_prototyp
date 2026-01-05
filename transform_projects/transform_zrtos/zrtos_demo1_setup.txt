@@ -1,0 +1,90 @@
+FOR MORE INFO: https://docs.zephyrproject.org/latest/develop/getting_started/index.html
+********************************** /venv_zrtos_demo1/  **********************************
+Zephyr SDK 0.17.4 Setup
+0. -> wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.4/zephyr-sdk-0.17.4_linux-x86_64.tar.xz
+tar xvf zephyr-sdk-0.17.4_linux-x86_64.tar.xz
+cd zephyr-sdk-0.17.4/
+./setup.sh
+
+1. mkdir ZRTOS_demo1 
+~/wsMA_prototyp$ python3 -m venv venv_zrtos_demo1
+source '[...]/wsMA_prototyp/venv_zrtos_demo1/bin/activate'
+sudo apt update
+sudo apt upgrade
+sudo apt install --no-install-recommends ninja-build gperf ccache dfu-util device-tree-compiler xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
+pip install pyelftools (was needed later for west build native_sim ...)
+pip install openpyxl
+pip install west 
+
+2. cd ZRTOS_demo1
+west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.2.1
+--> --- Cloning manifest repository from https://github.com/zephyrproject-rtos/zephyr, rev. v4.2.1
+west update 
+west zephyr-export
+--> Zephyr ([...]/wsMA_prototyp/ZRTOS_demo1/zephyr/share/zephyr-package/cmake)
+    has been added to the user package registry in:
+    ~/.cmake/packages/Zephyr
+
+    ZephyrUnittest ([...]/wsMA_prototyp/ZRTOS_demo1/zephyr/share/zephyrunittest-package/cmake)
+    has been added to the user package registry in:
+    ~/.cmake/packages/ZephyrUnittest
+
+3. update with a new target:
+here: [...]/ZRTOS_demo1/zephyr/cmake/modules/kconfig.cmake
+---> 
+    set(EXTRA_KCONFIG_TARGET_COMMAND_FOR_transform
+    [...]/wsMA_prototyp/core/target_workflow.py
+    )
+    set_ifndef(KCONFIG_TARGETS menuconfig guiconfig hardenconfig transform)
+
+4. Then in target_worflow.py:
+  - check and update given paths for:
+  -- project_dir/output_dir/main_file/log and excel file
+  - check which logging parameter in transformer.transform_all_files() you want to set on true 
+
+5. Then cd to: ZRTOS_demo1/zephyr 
+west build -b native_sim samples/hello_world
+west build -t transform
+** IF you make changes on transform.py:
+(sometimes you have to delete zephyr/build folder)
+west build -p always -b native_sim samples/hello_world -> um CMake wieder zu starten 
+west build -t transform
+
+#####
+(venv_zrtos_demo1) ljd@HPENVYLJ:~/wsMA_prototyp/ZRTOS_demo1/zephyr$ west build -b native_sim samples/hello_world
+-- west build: generating a build system
+Loading Zephyr default modules (Zephyr base).
+-- Application: [...]/wsMA_prototyp/ZRTOS_demo1/zephyr/samples/hello_world
+-- CMake version: 3.28.3
+-- Found Python3: [...]/wsMA_prototyp/venv_zrtos_demo1/bin/python3 (found suitable version "3.12.3", minimum required is "3.10") found components: Interpreter 
+-- Cache files will be written to: [...]/.cache/zephyr
+-- Zephyr version: 4.2.1 ([...]/wsMA_prototyp/ZRTOS_demo1/zephyr)
+-- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+-- Board: native_sim, qualifiers: native
+-- ZEPHYR_TOOLCHAIN_VARIANT not set, trying to locate Zephyr SDK
+-- Found host-tools: zephyr 0.17.4 ([...]/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4)
+-- Found toolchain: host (gcc/ld)
+-- Found Dtc: [...]/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+-- Found BOARD.dts: [...]/wsMA_prototyp/ZRTOS_demo1/zephyr/boards/native/native_sim/native_sim.dts
+-- Generated zephyr.dts: [...]/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/zephyr.dts
+-- Generated pickled edt: [...]/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/edt.pickle
+-- Generated devicetree_generated.h: [...]/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/include/generated/zephyr/devicetree_generated.h
+Parsing [...]/wsMA_prototyp/ZRTOS_demo1/zephyr/Kconfig
+Loaded configuration '[...]/wsMA_prototyp/ZRTOS_demo1/zephyr/boards/native/native_sim/native_sim_defconfig'
+Merged configuration '[...]/wsMA_prototyp/ZRTOS_demo1/zephyr/samples/hello_world/prj.conf'
+Configuration saved to '[...]/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/.config'
+Kconfig header saved to '[...]/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/include/generated/zephyr/autoconf.h'
+-- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+-- The C compiler identification is GNU 13.3.0
+-- The CXX compiler identification is GNU 13.3.0
+-- The ASM compiler identification is GNU
+-- Found assembler: /usr/bin/gcc
+-- Using ccache: /usr/bin/ccache
+-- Found gen_kobject_list: [...]/wsMA_prototyp/ZRTOS_demo1/zephyr/scripts/build/gen_kobject_list.py
+-- Configuring done (21.6s)
+-- Generating done (0.1s)
+-- Build files have been written to: [...]/wsMA_prototyp/ZRTOS_demo1/zephyr/build
+-- west build: building application
+[...]
+####
+
