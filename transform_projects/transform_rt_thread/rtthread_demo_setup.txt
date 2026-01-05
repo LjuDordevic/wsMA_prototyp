@@ -10,3 +10,17 @@ pip install scons
 git clone https://github.com/RT-Thread/rt-thread.git
 python -m SCons --menuconfig
 
+didn't add script as target, instead manipulated the script target_rtthread_workflow.py
+so that it can correctly read [...]rtthread/rt-thread/bsp/qemu-vexpress-a9/Kconfig
+which calls Kconfig-specification outside of project root ([...]rtthread/rt-thread/bsp/qemu-vexpress-a9/)
+
+mainmenu "RT-Thread Project Configuration"
+BSP_DIR := .
+RTT_DIR := ../..
+PKGS_DIR := packages
+source "$(RTT_DIR)/Kconfig"
+osource "$PKGS_DIR/Kconfig"
+source "$(BSP_DIR)/drivers/Kconfig"
+
+called it from: 
+(wsMA_prototyp) ljd@HPENVYLJ:~/wsMA_prototyp/core$ python target_rtthread_workflow.py
