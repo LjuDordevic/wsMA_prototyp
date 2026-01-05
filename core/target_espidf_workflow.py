@@ -8,8 +8,8 @@ import sys
 import os 
 
 def main():    
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/transform.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/results.xlsx"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/transform2.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/results2.xlsx"
     project_dir = "/home/ljd/espcode/v5.5.2/esp-idf"
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output"
     main_file = "Kconfig"
