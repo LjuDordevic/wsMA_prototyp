@@ -1,0 +1,1785 @@
+====================================================================================================
+TRANSFORMATION PROTOTYP LOG
+====================================================================================================
+/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/transform3.log
+Root: /home/ljd/espcode/v5.5.2/esp-idf
+Main file: Kconfig
+Output dir: /home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output
+====================================================================================================
+PROJBUILD exists: True
+<espidf_parser.ESPIDFParser object at 0x7e0172695ac0>
+Defined symbols: 1131
+Unique symbols: 1131
+Files: 1
+
+2. Bild ExtParserContext FROM PARSER RESULTS
+ Transformer used: ESPIDF
+ call different attributes on options found in parser_result['unique_defined_syms']
+====================================================================================================
+Build context finished
+    get_all_source_files: 
+    parser found: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+
+3. Filter ExtParserContext
+extract all configdefault options and for each get transformed lines and last config
+extract infos for named choices - their definition & entries
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for APP_BUILD_TYPE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/Kconfig, line=180
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:180
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    File exists, reading...
+
+
+Reader found: 709 lines in /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    Read 709 lines
+    Found choice at line index 179, line_number=180
+  DEBUG: Found choice APP_BUILD_TYPE at /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:180
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for BOOTLOADER_COMPILER_OPTIMIZATION ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=18
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:18
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 17, line_number=18
+  DEBUG: Found choice BOOTLOADER_COMPILER_OPTIMIZATION at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:18
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: []
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for BOOTLOADER_LOG_VERSION ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log, line=3
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log:3
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log
+    File exists, reading...
+
+
+Reader found: 57 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log
+    Read 57 lines
+    Found choice at line index 2, line_number=3
+  DEBUG: Found choice BOOTLOADER_LOG_VERSION at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log:3
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for BOOTLOADER_LOG_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log, line=24
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log:24
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log
+    File exists, reading...
+
+
+Reader found: 57 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log
+    Read 57 lines
+    Found choice at line index 23, line_number=24
+  DEBUG: Found choice BOOTLOADER_LOG_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log:24
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 6
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for BOOTLOADER_LOG_TIMESTAMP_SOURCE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log.format, line=23
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log.format:23
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log.format
+    File exists, reading...
+
+
+Reader found: 64 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log.format
+    Read 64 lines
+    Found choice at line index 22, line_number=23
+  DEBUG: Found choice BOOTLOADER_LOG_TIMESTAMP_SOURCE at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log.format:23
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for BOOTLOADER_LOG_MODE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log.settings, line=9
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log.settings:9
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log.settings
+    File exists, reading...
+
+
+Reader found: 40 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log.settings
+    Read 40 lines
+    Found choice at line index 8, line_number=9
+  DEBUG: Found choice BOOTLOADER_LOG_MODE at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.log.settings:9
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['SOC_CONFIGURABLE_VDDSDIO_SUPPORTED']]
+dep dependencies extr: [['SOC_CONFIGURABLE_VDDSDIO_SUPPORTED']]
+
+
+=== _get_all_choice_configs for BOOTLOADER_VDDSDIO_BOOST ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=128
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:128
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 127, line_number=128
+  DEBUG: Found choice BOOTLOADER_VDDSDIO_BOOST at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:128
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['BOOTLOADER_FACTORY_RESET']]
+dep dependencies extr: [['BOOTLOADER_FACTORY_RESET']]
+
+
+=== _get_all_choice_configs for BOOTLOADER_FACTORY_RESET_PIN_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=180
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:180
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 179, line_number=180
+  DEBUG: Found choice BOOTLOADER_FACTORY_RESET_PIN_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:180
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['BOOTLOADER_APP_TEST']]
+dep dependencies extr: [['BOOTLOADER_APP_TEST']]
+
+
+=== _get_all_choice_configs for BOOTLOADER_APP_TEST_PIN_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=245
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:245
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 244, line_number=245
+  DEBUG: Found choice BOOTLOADER_APP_TEST_PIN_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:245
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['SECURE_BOOT_V1_ENABLED', 'SECURE_BOOT', 'SECURE_SIGNED_APPS_NO_SECURE_BOOT'], ['SECURE_BOOT_V2_RSA_SUPPORTED', 'SECURE_BOOT', 'SECURE_SIGNED_APPS_NO_SECURE_BOOT'], ['SECURE_BOOT_V2_ECC_SUPPORTED', 'SECURE_BOOT', 'SECURE_SIGNED_APPS_NO_SECURE_BOOT']]
+dep dependencies extr: [['SECURE_BOOT', 'SECURE_SIGNED_APPS_NO_SECURE_BOOT']]
+
+
+=== _get_all_choice_configs for SECURE_SIGNED_APPS_SCHEME ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=508
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:508
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 507, line_number=508
+  DEBUG: Found choice SECURE_SIGNED_APPS_SCHEME at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:508
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['SECURE_SIGNED_APPS_ECDSA_V2_SCHEME']]
+dep dependencies extr: [['SECURE_SIGNED_APPS_ECDSA_V2_SCHEME']]
+
+
+=== _get_all_choice_configs for SECURE_BOOT_ECDSA_KEY_LEN_SIZE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=551
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:551
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 550, line_number=551
+  DEBUG: Found choice SECURE_BOOT_ECDSA_KEY_LEN_SIZE at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:551
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['SECURE_BOOT_V2_PREFERRED', 'SECURE_BOOT']]
+dep dependencies extr: [['SECURE_BOOT']]
+
+
+=== _get_all_choice_configs for SECURE_BOOT_VERSION ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=621
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:621
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 620, line_number=621
+  DEBUG: Found choice SECURE_BOOT_VERSION at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:621
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['SECURE_BOOT_V1_ENABLED']]
+dep dependencies extr: [['SECURE_BOOT_V1_ENABLED']]
+
+
+=== _get_all_choice_configs for SECURE_BOOTLOADER_MODE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=654
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:654
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 653, line_number=654
+  DEBUG: Found choice SECURE_BOOTLOADER_MODE at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:654
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['SECURE_BOOTLOADER_REFLASHABLE']]
+dep dependencies extr: [['SECURE_BOOTLOADER_REFLASHABLE']]
+
+
+=== _get_all_choice_configs for SECURE_BOOTLOADER_KEY_ENCODING ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=787
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:787
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 786, line_number=787
+  DEBUG: Found choice SECURE_BOOTLOADER_KEY_ENCODING at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:787
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['SOC_FLASH_ENCRYPTION_XTS_AES_OPTIONS', 'SECURE_FLASH_ENC_ENABLED']]
+dep dependencies extr: [['SOC_FLASH_ENCRYPTION_XTS_AES_OPTIONS', 'SECURE_FLASH_ENC_ENABLED']]
+
+
+=== _get_all_choice_configs for SECURE_FLASH_ENCRYPTION_KEYSIZE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=835
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:835
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 834, line_number=835
+  DEBUG: Found choice SECURE_FLASH_ENCRYPTION_KEYSIZE at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:835
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['SECURE_FLASH_ENC_ENABLED']]
+dep dependencies extr: [['SECURE_FLASH_ENC_ENABLED']]
+
+
+=== _get_all_choice_configs for SECURE_FLASH_ENCRYPTION_MODE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=863
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:863
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 862, line_number=863
+  DEBUG: Found choice SECURE_FLASH_ENCRYPTION_MODE at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:863
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['SECURE_FLASH_PSEUDO_ROUND_FUNC']]
+dep dependencies extr: [['SECURE_FLASH_PSEUDO_ROUND_FUNC']]
+
+
+=== _get_all_choice_configs for SECURE_FLASH_PSEUDO_ROUND_FUNC_STRENGTH ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=1109
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:1109
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 1108, line_number=1109
+  DEBUG: Found choice SECURE_FLASH_PSEUDO_ROUND_FUNC_STRENGTH at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:1109
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['SECURE_ROM_DL_MODE_ENABLED', 'SECURE_BOOT_V2_ENABLED', 'SECURE_FLASH_ENC_ENABLED', 'IDF_TARGET_ESP32', 'ESP32_REV_MIN_FULL', '300'], ['SECURE_BOOT_V2_ENABLED', 'SECURE_FLASH_ENC_ENABLED', 'IDF_TARGET_ESP32', 'ESP32_REV_MIN_FULL', '300']]
+dep dependencies extr: [['SECURE_BOOT_V2_ENABLED', 'SECURE_FLASH_ENC_ENABLED', 'IDF_TARGET_ESP32', 'ESP32_REV_MIN_FULL', '300']]
+
+
+=== _get_all_choice_configs for SECURE_UART_ROM_DL_MODE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild, line=1149
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:1149
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 1205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild
+    Read 1205 lines
+    Found choice at line index 1148, line_number=1149
+  DEBUG: Found choice SECURE_UART_ROM_DL_MODE at /home/ljd/espcode/v5.5.2/esp-idf/components/bootloader/Kconfig.projbuild:1149
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['IDF_TARGET_ESP32']]
+dep dependencies extr: [['IDF_TARGET_ESP32']]
+
+
+=== _get_all_choice_configs for BOOT_ROM_LOG_SCHEME ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_rom/Kconfig.projbuild, line=6
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_rom/Kconfig.projbuild:6
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_rom/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 37 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_rom/Kconfig.projbuild
+    Read 37 lines
+    Found choice at line index 5, line_number=6
+  DEBUG: Found choice BOOT_ROM_LOG_SCHEME at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_rom/Kconfig.projbuild:6
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP'], ['ESPTOOLPY_OCT_FLASH', 'APP_BUILD_TYPE_PURE_RAM_APP']]
+dep dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+
+
+=== _get_all_choice_configs for ESPTOOLPY_FLASHMODE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild, line=39
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild:39
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild
+    Read 205 lines
+    Found choice at line index 38, line_number=39
+  DEBUG: Found choice ESPTOOLPY_FLASHMODE at /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild:39
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 5
+def dependencies extr: [['ESPTOOLPY_OCT_FLASH', 'APP_BUILD_TYPE_PURE_RAM_APP'], ['ESPTOOLPY_OCT_FLASH', 'APP_BUILD_TYPE_PURE_RAM_APP']]
+dep dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+
+
+=== _get_all_choice_configs for ESPTOOLPY_FLASH_SAMPLE_MODE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild, line=64
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild:64
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild
+    Read 205 lines
+    Found choice at line index 63, line_number=64
+  DEBUG: Found choice ESPTOOLPY_FLASH_SAMPLE_MODE at /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild:64
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+dep dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+
+
+=== _get_all_choice_configs for ESPTOOLPY_FLASHFREQ ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/../spi_flash/esp32/Kconfig.flash_freq, line=1
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/../spi_flash/esp32/Kconfig.flash_freq:1
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/../spi_flash/esp32/Kconfig.flash_freq
+    File exists, reading...
+
+
+Reader found: 12 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/../spi_flash/esp32/Kconfig.flash_freq
+    Read 12 lines
+    Found choice at line index 0, line_number=1
+  DEBUG: Found choice ESPTOOLPY_FLASHFREQ at /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/../spi_flash/esp32/Kconfig.flash_freq:1
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+dep dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+
+
+=== _get_all_choice_configs for ESPTOOLPY_FLASHSIZE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild, line=112
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild:112
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild
+    Read 205 lines
+    Found choice at line index 111, line_number=112
+  DEBUG: Found choice ESPTOOLPY_FLASHSIZE at /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild:112
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 8
+def dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+dep dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+
+
+=== _get_all_choice_configs for ESPTOOLPY_BEFORE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild, line=159
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild:159
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild
+    Read 205 lines
+    Found choice at line index 158, line_number=159
+  DEBUG: Found choice ESPTOOLPY_BEFORE at /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild:159
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+dep dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+
+
+=== _get_all_choice_configs for ESPTOOLPY_AFTER ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild, line=180
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild:180
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 205 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild
+    Read 205 lines
+    Found choice at line index 179, line_number=180
+  DEBUG: Found choice ESPTOOLPY_AFTER at /home/ljd/espcode/v5.5.2/esp-idf/components/esptool_py/Kconfig.projbuild:180
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for PARTITION_TABLE_TYPE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/partition_table/Kconfig.projbuild, line=3
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/partition_table/Kconfig.projbuild:3
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/partition_table/Kconfig.projbuild
+    File exists, reading...
+
+
+Reader found: 177 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/partition_table/Kconfig.projbuild
+    Read 177 lines
+    Found choice at line index 2, line_number=3
+  DEBUG: Found choice PARTITION_TABLE_TYPE at /home/ljd/espcode/v5.5.2/esp-idf/components/partition_table/Kconfig.projbuild:3
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 10
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for COMPILER_OPTIMIZATION ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/Kconfig, line=340
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:340
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    File exists, reading...
+
+
+Reader found: 709 lines in /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    Read 709 lines
+    Found choice at line index 339, line_number=340
+  DEBUG: Found choice COMPILER_OPTIMIZATION at /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:340
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for COMPILER_OPTIMIZATION_ASSERTION_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/Kconfig, line=376
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:376
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    File exists, reading...
+
+
+Reader found: 709 lines in /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    Read 709 lines
+    Found choice at line index 375, line_number=376
+  DEBUG: Found choice COMPILER_OPTIMIZATION_ASSERTION_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:376
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['ESP_ROM_HAS_RVFPLIB'], ['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for COMPILER_FLOAT_LIB_FROM ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/Kconfig, line=426
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:426
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    File exists, reading...
+
+
+Reader found: 709 lines in /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    Read 709 lines
+    Found choice at line index 425, line_number=426
+  DEBUG: Found choice COMPILER_FLOAT_LIB_FROM at /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:426
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for COMPILER_STACK_CHECK_MODE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/Kconfig, line=505
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:505
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    File exists, reading...
+
+
+Reader found: 709 lines in /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    Read 709 lines
+    Found choice at line index 504, line_number=505
+  DEBUG: Found choice COMPILER_STACK_CHECK_MODE at /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:505
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['IDF_TOOLCHAIN_CLANG'], ['IDF_TARGET_LINUX'], ['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for COMPILER_RT_LIB ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/Kconfig, line=623
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:623
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    File exists, reading...
+
+
+Reader found: 709 lines in /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    Read 709 lines
+    Found choice at line index 622, line_number=623
+  DEBUG: Found choice COMPILER_RT_LIB at /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:623
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['IDF_TARGET_LINUX']]
+dep dependencies extr: [['IDF_TARGET_LINUX']]
+
+
+=== _get_all_choice_configs for COMPILER_ORPHAN_SECTIONS ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/Kconfig, line=651
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:651
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    File exists, reading...
+
+
+Reader found: 709 lines in /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+    Read 709 lines
+    Found choice at line index 650, line_number=651
+  DEBUG: Found choice COMPILER_ORPHAN_SECTIONS at /home/ljd/espcode/v5.5.2/esp-idf/Kconfig:651
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['IDF_TARGET_ESP32']]
+dep dependencies extr: [['IDF_TARGET_ESP32']]
+
+
+=== _get_all_choice_configs for EFUSE_CODE_SCHEME_SELECTOR ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/efuse/Kconfig, line=51
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/efuse/Kconfig:51
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/efuse/Kconfig
+    File exists, reading...
+
+
+Reader found: 73 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/efuse/Kconfig
+    Read 73 lines
+    Found choice at line index 50, line_number=51
+  DEBUG: Found choice EFUSE_CODE_SCHEME_SELECTOR at /home/ljd/espcode/v5.5.2/esp-idf/components/efuse/Kconfig:51
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for ESP32_REV_MIN ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.hw_support, line=1
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.hw_support:1
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/port/esp32/Kconfig.hw_support
+    File exists, reading...
+
+
+Reader found: 85 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/port/esp32/Kconfig.hw_support
+    Read 85 lines
+    Found choice at line index 0, line_number=1
+  DEBUG: Found choice ESP32_REV_MIN at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.hw_support:1
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 6
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for ESP32_UNIVERSAL_MAC_ADDRESSES ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.mac, line=1
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.mac:1
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/port/esp32/Kconfig.mac
+    File exists, reading...
+
+
+Reader found: 38 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/port/esp32/Kconfig.mac
+    Read 38 lines
+    Found choice at line index 0, line_number=1
+  DEBUG: Found choice ESP32_UNIVERSAL_MAC_ADDRESSES at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.mac:1
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for RTC_CLK_SRC ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.rtc, line=1
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.rtc:1
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/port/esp32/Kconfig.rtc
+    File exists, reading...
+
+
+Reader found: 96 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/port/esp32/Kconfig.rtc
+    Read 96 lines
+    Found choice at line index 0, line_number=1
+  DEBUG: Found choice RTC_CLK_SRC at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.rtc:1
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['RTC_CLK_SRC_EXT_CRYS', 'ESP32_REV_MIN_FULL', '200']]
+dep dependencies extr: [['RTC_CLK_SRC_EXT_CRYS', 'ESP32_REV_MIN_FULL', '200']]
+
+
+=== _get_all_choice_configs for RTC_EXT_CRYST_ADDIT_CURRENT_METHOD ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.rtc, line=36
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.rtc:36
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/port/esp32/Kconfig.rtc
+    File exists, reading...
+
+
+Reader found: 96 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/port/esp32/Kconfig.rtc
+    Read 96 lines
+    Found choice at line index 35, line_number=36
+  DEBUG: Found choice RTC_EXT_CRYST_ADDIT_CURRENT_METHOD at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.rtc:36
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for XTAL_FREQ ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.xtal, line=1
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.xtal:1
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/port/esp32/Kconfig.xtal
+    File exists, reading...
+
+
+Reader found: 30 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/port/esp32/Kconfig.xtal
+    Read 30 lines
+    Found choice at line index 0, line_number=1
+  DEBUG: Found choice XTAL_FREQ at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./port/esp32/Kconfig.xtal:1
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['ESP_BROWNOUT_DET']]
+dep dependencies extr: [['ESP_BROWNOUT_DET']]
+
+
+=== _get_all_choice_configs for ESP_BROWNOUT_DET_LVL_SEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./power_supply/port/esp32/Kconfig.power, line=14
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./power_supply/port/esp32/Kconfig.power:14
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/power_supply/port/esp32/Kconfig.power
+    File exists, reading...
+
+
+Reader found: 68 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/power_supply/port/esp32/Kconfig.power
+    Read 68 lines
+    Found choice at line index 13, line_number=14
+  DEBUG: Found choice ESP_BROWNOUT_DET_LVL_SEL at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_hw_support/./power_supply/port/esp32/Kconfig.power:14
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 8
+def dependencies extr: [['ESP_CRYPTO_DPA_PROTECTION_AT_STARTUP', 'SOC_CRYPTO_DPA_PROTECTION_SUPPORTED']]
+dep dependencies extr: [['ESP_CRYPTO_DPA_PROTECTION_AT_STARTUP', 'SOC_CRYPTO_DPA_PROTECTION_SUPPORTED']]
+
+
+=== _get_all_choice_configs for ESP_CRYPTO_DPA_PROTECTION_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_security/Kconfig, line=16
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_security/Kconfig:16
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_security/Kconfig
+    File exists, reading...
+
+
+Reader found: 68 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_security/Kconfig
+    Read 68 lines
+    Found choice at line index 15, line_number=16
+  DEBUG: Found choice ESP_CRYPTO_DPA_PROTECTION_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_security/Kconfig:16
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['IDF_ENV_FPGA'], ['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for ESP_DEFAULT_CPU_FREQ_MHZ ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/./port/soc/esp32/Kconfig.cpu, line=1
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/./port/soc/esp32/Kconfig.cpu:1
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/port/soc/esp32/Kconfig.cpu
+    File exists, reading...
+
+
+Reader found: 24 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/port/soc/esp32/Kconfig.cpu
+    Read 24 lines
+    Found choice at line index 0, line_number=1
+  DEBUG: Found choice ESP_DEFAULT_CPU_FREQ_MHZ at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/./port/soc/esp32/Kconfig.cpu:1
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for ESP_SYSTEM_PANIC ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig, line=31
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:31
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    File exists, reading...
+
+
+Reader found: 693 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    Read 693 lines
+    Found choice at line index 30, line_number=31
+  DEBUG: Found choice ESP_SYSTEM_PANIC at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:31
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['IDF_TARGET_ARCH_RISCV']]
+dep dependencies extr: [['IDF_TARGET_ARCH_RISCV']]
+
+
+=== _get_all_choice_configs for ESP_BACKTRACING_METHOD ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig, line=127
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:127
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    File exists, reading...
+
+
+Reader found: 693 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    Read 693 lines
+    Found choice at line index 126, line_number=127
+  DEBUG: Found choice ESP_BACKTRACING_METHOD at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:127
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for ESP_MAIN_TASK_AFFINITY ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig, line=233
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:233
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    File exists, reading...
+
+
+Reader found: 693 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    Read 693 lines
+    Found choice at line index 232, line_number=233
+  DEBUG: Found choice ESP_MAIN_TASK_AFFINITY at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:233
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for ESP_CONSOLE_UART ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig, line=263
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:263
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    File exists, reading...
+
+
+Reader found: 693 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    Read 693 lines
+    Found choice at line index 262, line_number=263
+  DEBUG: Found choice ESP_CONSOLE_UART at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:263
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 5
+def dependencies extr: [['SOC_USB_SERIAL_JTAG_SUPPORTED']]
+dep dependencies extr: [['SOC_USB_SERIAL_JTAG_SUPPORTED']]
+
+
+=== _get_all_choice_configs for ESP_CONSOLE_SECONDARY ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig, line=296
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:296
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    File exists, reading...
+
+
+Reader found: 693 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    Read 693 lines
+    Found choice at line index 295, line_number=296
+  DEBUG: Found choice ESP_CONSOLE_SECONDARY at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:296
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['ESP_CONSOLE_UART_CUSTOM']]
+dep dependencies extr: [['ESP_CONSOLE_UART_CUSTOM']]
+
+
+=== _get_all_choice_configs for ESP_CONSOLE_UART_NUM ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig, line=329
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:329
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    File exists, reading...
+
+
+Reader found: 693 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    Read 693 lines
+    Found choice at line index 328, line_number=329
+  DEBUG: Found choice ESP_CONSOLE_UART_NUM at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:329
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for ESP_SYSTEM_CHECK_INT_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig, line=605
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:605
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    File exists, reading...
+
+
+Reader found: 693 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig
+    Read 693 lines
+    Found choice at line index 604, line_number=605
+  DEBUG: Found choice ESP_SYSTEM_CHECK_INT_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_system/Kconfig:605
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for ESP_TIMER_TASK_AFFINITY ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_timer/Kconfig, line=60
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_timer/Kconfig:60
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_timer/Kconfig
+    File exists, reading...
+
+
+Reader found: 125 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_timer/Kconfig
+    Read 125 lines
+    Found choice at line index 59, line_number=60
+  DEBUG: Found choice ESP_TIMER_TASK_AFFINITY at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_timer/Kconfig:60
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for ESP_TIMER_ISR_AFFINITY ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/esp_timer/Kconfig, line=81
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_timer/Kconfig:81
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/esp_timer/Kconfig
+    File exists, reading...
+
+
+Reader found: 125 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/esp_timer/Kconfig
+    Read 125 lines
+    Found choice at line index 80, line_number=81
+  DEBUG: Found choice ESP_TIMER_ISR_AFFINITY at /home/ljd/espcode/v5.5.2/esp-idf/components/esp_timer/Kconfig:81
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for FREERTOS_CHECK_STACKOVERFLOW ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig, line=51
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig:51
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig
+    File exists, reading...
+
+
+Reader found: 667 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig
+    Read 667 lines
+    Found choice at line index 50, line_number=51
+  DEBUG: Found choice FREERTOS_CHECK_STACKOVERFLOW at /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig:51
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['FREERTOS_USE_TIMERS']]
+dep dependencies extr: [['FREERTOS_USE_TIMERS']]
+
+
+=== _get_all_choice_configs for FREERTOS_TIMER_SERVICE_TASK_CORE_AFFINITY ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig, line=187
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig:187
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig
+    File exists, reading...
+
+
+Reader found: 667 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig
+    Read 667 lines
+    Found choice at line index 186, line_number=187
+  DEBUG: Found choice FREERTOS_TIMER_SERVICE_TASK_CORE_AFFINITY at /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig:187
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['FREERTOS_GENERATE_RUN_TIME_STATS', 'FREERTOS_SMP']]
+dep dependencies extr: [['FREERTOS_GENERATE_RUN_TIME_STATS', 'FREERTOS_SMP']]
+
+
+=== _get_all_choice_configs for FREERTOS_RUN_TIME_COUNTER_TYPE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig, line=300
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig:300
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig
+    File exists, reading...
+
+
+Reader found: 667 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig
+    Read 667 lines
+    Found choice at line index 299, line_number=300
+  DEBUG: Found choice FREERTOS_RUN_TIME_COUNTER_TYPE at /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig:300
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['FREERTOS_TICK_SUPPORT_CORETIMER'], ['FREERTOS_TICK_SUPPORT_SYSTIMER']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for FREERTOS_CORETIMER ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig, line=485
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig:485
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig
+    File exists, reading...
+
+
+Reader found: 667 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig
+    Read 667 lines
+    Found choice at line index 484, line_number=485
+  DEBUG: Found choice FREERTOS_CORETIMER at /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig:485
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['FREERTOS_GENERATE_RUN_TIME_STATS']]
+dep dependencies extr: [['FREERTOS_GENERATE_RUN_TIME_STATS']]
+
+
+=== _get_all_choice_configs for FREERTOS_RUN_TIME_STATS_CLK ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig, line=529
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig:529
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig
+    File exists, reading...
+
+
+Reader found: 667 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig
+    Read 667 lines
+    Found choice at line index 528, line_number=529
+  DEBUG: Found choice FREERTOS_RUN_TIME_STATS_CLK at /home/ljd/espcode/v5.5.2/esp-idf/components/freertos/Kconfig:529
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for HAL_DEFAULT_ASSERTION_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/hal/Kconfig, line=2
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/hal/Kconfig:2
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/hal/Kconfig
+    File exists, reading...
+
+
+Reader found: 105 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/hal/Kconfig
+    Read 105 lines
+    Found choice at line index 1, line_number=2
+  DEBUG: Found choice HAL_DEFAULT_ASSERTION_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/components/hal/Kconfig:2
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['LOG_DEFAULT_LEVEL_NONE', 'LOG_DEFAULT_LEVEL_ERROR', 'LOG_DEFAULT_LEVEL_WARN', 'LOG_DEFAULT_LEVEL_INFO', 'LOG_DEFAULT_LEVEL_DEBUG', 'LOG_DEFAULT_LEVEL_VERBOSE']]
+dep dependencies extr: [['LOG_DEFAULT_LEVEL_NONE', 'LOG_DEFAULT_LEVEL_ERROR', 'LOG_DEFAULT_LEVEL_WARN', 'LOG_DEFAULT_LEVEL_INFO', 'LOG_DEFAULT_LEVEL_DEBUG', 'LOG_DEFAULT_LEVEL_VERBOSE']]
+
+
+=== _get_all_choice_configs for HAL_LOG_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/hal/Kconfig, line=34
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/hal/Kconfig:34
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/hal/Kconfig
+    File exists, reading...
+
+
+Reader found: 105 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/hal/Kconfig
+    Read 105 lines
+    Found choice at line index 33, line_number=34
+  DEBUG: Found choice HAL_LOG_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/components/hal/Kconfig:34
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 6
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for HEAP_CORRUPTION_DETECTION ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/heap/Kconfig, line=3
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/heap/Kconfig:3
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/heap/Kconfig
+    File exists, reading...
+
+
+Reader found: 143 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/heap/Kconfig
+    Read 143 lines
+    Found choice at line index 2, line_number=3
+  DEBUG: Found choice HEAP_CORRUPTION_DETECTION at /home/ljd/espcode/v5.5.2/esp-idf/components/heap/Kconfig:3
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for HEAP_TRACING_DEST ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/heap/Kconfig, line=20
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/heap/Kconfig:20
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/heap/Kconfig
+    File exists, reading...
+
+
+Reader found: 143 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/heap/Kconfig
+    Read 143 lines
+    Found choice at line index 19, line_number=20
+  DEBUG: Found choice HEAP_TRACING_DEST at /home/ljd/espcode/v5.5.2/esp-idf/components/heap/Kconfig:20
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for LOG_VERSION ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig, line=3
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig:3
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig
+    File exists, reading...
+
+
+Reader found: 60 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig
+    Read 60 lines
+    Found choice at line index 2, line_number=3
+  DEBUG: Found choice LOG_VERSION at /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig:3
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for LOG_DEFAULT_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.level, line=3
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.level:3
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.level
+    File exists, reading...
+
+
+Reader found: 90 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.level
+    Read 90 lines
+    Found choice at line index 2, line_number=3
+  DEBUG: Found choice LOG_DEFAULT_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.level:3
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 6
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for LOG_MAXIMUM_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.level, line=41
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.level:41
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.level
+    File exists, reading...
+
+
+Reader found: 90 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.level
+    Read 90 lines
+    Found choice at line index 40, line_number=41
+  DEBUG: Found choice LOG_MAXIMUM_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.level:41
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 6
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for LOG_TAG_LEVEL_IMPL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/log/././Kconfig.level_settings, line=30
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/log/././Kconfig.level_settings:30
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.level_settings
+    File exists, reading...
+
+
+Reader found: 115 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.level_settings
+    Read 115 lines
+    Found choice at line index 29, line_number=30
+  DEBUG: Found choice LOG_TAG_LEVEL_IMPL at /home/ljd/espcode/v5.5.2/esp-idf/components/log/././Kconfig.level_settings:30
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['LOG_TAG_LEVEL_IMPL_CACHE_AND_LINKED_LIST']]
+dep dependencies extr: [['LOG_TAG_LEVEL_IMPL_CACHE_AND_LINKED_LIST']]
+
+
+=== _get_all_choice_configs for LOG_TAG_LEVEL_CACHE_IMPL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/log/././Kconfig.level_settings, line=74
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/log/././Kconfig.level_settings:74
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.level_settings
+    File exists, reading...
+
+
+Reader found: 115 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.level_settings
+    Read 115 lines
+    Found choice at line index 73, line_number=74
+  DEBUG: Found choice LOG_TAG_LEVEL_CACHE_IMPL at /home/ljd/espcode/v5.5.2/esp-idf/components/log/././Kconfig.level_settings:74
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for LOG_TIMESTAMP_SOURCE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.format, line=26
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.format:26
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.format
+    File exists, reading...
+
+
+Reader found: 97 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.format
+    Read 97 lines
+    Found choice at line index 25, line_number=26
+  DEBUG: Found choice LOG_TIMESTAMP_SOURCE at /home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.format:26
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 5
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for LOG_MODE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.settings, line=9
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.settings:9
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.settings
+    File exists, reading...
+
+
+Reader found: 40 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/log/Kconfig.settings
+    Read 40 lines
+    Found choice at line index 8, line_number=9
+  DEBUG: Found choice LOG_MODE at /home/ljd/espcode/v5.5.2/esp-idf/components/log/./Kconfig.settings:9
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for MBEDTLS_MEM_ALLOC_MODE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig, line=3
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig:3
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig
+    File exists, reading...
+
+
+Reader found: 1297 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig
+    Read 1297 lines
+    Found choice at line index 2, line_number=3
+  DEBUG: Found choice MBEDTLS_MEM_ALLOC_MODE at /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig:3
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 5
+def dependencies extr: [['MBEDTLS_DEBUG']]
+dep dependencies extr: [['MBEDTLS_DEBUG']]
+
+
+=== _get_all_choice_configs for MBEDTLS_DEBUG_LEVEL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig, line=150
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig:150
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig
+    File exists, reading...
+
+
+Reader found: 1297 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig
+    Read 1297 lines
+    Found choice at line index 149, line_number=150
+  DEBUG: Found choice MBEDTLS_DEBUG_LEVEL at /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig:150
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['MBEDTLS_CERTIFICATE_BUNDLE']]
+dep dependencies extr: [['MBEDTLS_CERTIFICATE_BUNDLE']]
+
+
+=== _get_all_choice_configs for MBEDTLS_DEFAULT_CERTIFICATE_BUNDLE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig, line=332
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig:332
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig
+    File exists, reading...
+
+
+Reader found: 1297 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig
+    Read 1297 lines
+    Found choice at line index 331, line_number=332
+  DEBUG: Found choice MBEDTLS_DEFAULT_CERTIFICATE_BUNDLE at /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig:332
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['MBEDTLS_AES_USE_PSEUDO_ROUND_FUNC']]
+dep dependencies extr: [['MBEDTLS_AES_USE_PSEUDO_ROUND_FUNC']]
+
+
+=== _get_all_choice_configs for MBEDTLS_AES_USE_PSEUDO_ROUND_FUNC_STRENGTH ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig, line=438
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig:438
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig
+    File exists, reading...
+
+
+Reader found: 1297 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig
+    Read 1297 lines
+    Found choice at line index 437, line_number=438
+  DEBUG: Found choice MBEDTLS_AES_USE_PSEUDO_ROUND_FUNC_STRENGTH at /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig:438
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for MBEDTLS_TLS_MODE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig, line=744
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig:744
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig
+    File exists, reading...
+
+
+Reader found: 1297 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig
+    Read 1297 lines
+    Found choice at line index 743, line_number=744
+  DEBUG: Found choice MBEDTLS_TLS_MODE at /home/ljd/espcode/v5.5.2/esp-idf/components/mbedtls/Kconfig:744
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for LIBC ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig, line=3
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig:3
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig
+    File exists, reading...
+
+
+Reader found: 167 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig
+    Read 167 lines
+    Found choice at line index 2, line_number=3
+  DEBUG: Found choice LIBC at /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig:3
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['VFS_SUPPORT_IO']]
+dep dependencies extr: [['VFS_SUPPORT_IO']]
+
+
+=== _get_all_choice_configs for LIBC_STDOUT_LINE_ENDING ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig, line=26
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig:26
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig
+    File exists, reading...
+
+
+Reader found: 167 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig
+    Read 167 lines
+    Found choice at line index 25, line_number=26
+  DEBUG: Found choice LIBC_STDOUT_LINE_ENDING at /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig:26
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['VFS_SUPPORT_IO']]
+dep dependencies extr: [['VFS_SUPPORT_IO']]
+
+
+=== _get_all_choice_configs for LIBC_STDIN_LINE_ENDING ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig, line=51
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig:51
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig
+    File exists, reading...
+
+
+Reader found: 167 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig
+    Read 167 lines
+    Found choice at line index 50, line_number=51
+  DEBUG: Found choice LIBC_STDIN_LINE_ENDING at /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig:51
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for LIBC_TIME_SYSCALL ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig, line=103
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig:103
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig
+    File exists, reading...
+
+
+Reader found: 167 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig
+    Read 167 lines
+    Found choice at line index 102, line_number=103
+  DEBUG: Found choice LIBC_TIME_SYSCALL at /home/ljd/espcode/v5.5.2/esp-idf/components/newlib/Kconfig:103
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+def dependencies extr: [['FREERTOS_UNICORE']]
+dep dependencies extr: [['FREERTOS_UNICORE']]
+
+
+=== _get_all_choice_configs for PTHREAD_TASK_CORE_DEFAULT ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/pthread/Kconfig, line=22
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/pthread/Kconfig:22
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/pthread/Kconfig
+    File exists, reading...
+
+
+Reader found: 49 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/pthread/Kconfig
+    Read 49 lines
+    Found choice at line index 21, line_number=22
+  DEBUG: Found choice PTHREAD_TASK_CORE_DEFAULT at /home/ljd/espcode/v5.5.2/esp-idf/components/pthread/Kconfig:22
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['IDF_TARGET_ESP32S3', 'IDF_TARGET_ESP32P4', 'ESPTOOLPY_OCT_FLASH', 'APP_BUILD_TYPE_PURE_RAM_APP']]
+dep dependencies extr: [['IDF_TARGET_ESP32S3', 'IDF_TARGET_ESP32P4', 'ESPTOOLPY_OCT_FLASH', 'APP_BUILD_TYPE_PURE_RAM_APP']]
+
+
+=== _get_all_choice_configs for SPI_FLASH_HPM ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig, line=36
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig:36
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig
+    File exists, reading...
+
+
+Reader found: 475 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig
+    Read 475 lines
+    Found choice at line index 35, line_number=36
+  DEBUG: Found choice SPI_FLASH_HPM at /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig:36
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+def dependencies extr: [['SPI_FLASH_HPM_ON', 'APP_BUILD_TYPE_PURE_RAM_APP']]
+dep dependencies extr: [['SPI_FLASH_HPM_ON', 'APP_BUILD_TYPE_PURE_RAM_APP']]
+
+
+=== _get_all_choice_configs for SPI_FLASH_HPM_DC ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig, line=65
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig:65
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig
+    File exists, reading...
+
+
+Reader found: 475 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig
+    Read 475 lines
+    Found choice at line index 64, line_number=65
+  DEBUG: Found choice SPI_FLASH_HPM_DC at /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig:65
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+def dependencies extr: [['APP_BUILD_TYPE_RAM', 'APP_BUILD_TYPE_PURE_RAM_APP'], ['APP_BUILD_TYPE_PURE_RAM_APP']]
+dep dependencies extr: [['APP_BUILD_TYPE_PURE_RAM_APP']]
+
+
+=== _get_all_choice_configs for SPI_FLASH_DANGEROUS_WRITE ===
+  Found 1 definitions:
+    [0] file=/home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig, line=271
+
+  Processing definition [0]: /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig:271
+    Looking for file: /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig
+    File exists, reading...
+
+
+Reader found: 475 lines in /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig
+    Read 475 lines
+    Found choice at line index 270, line_number=271
+  DEBUG: Found choice SPI_FLASH_DANGEROUS_WRITE at /home/ljd/espcode/v5.5.2/esp-idf/components/spi_flash/Kconfig:271
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 1
+
+for each given file at source_files start building path output structur and call reader and writer
+
+4. Transform all files - needs reader & writer
+
+
+Reader found: 709 lines in /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 709 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve orsource: ./components/soc/$IDF_TARGET/include/soc/Kconfig.soc_caps.in at line 7
+      no files found for the: components/soc/esp32/include/soc/Kconfig.soc_caps.in
+    Found first definition of choice APP_BUILD_TYPE at line 180
+    Processing choice transformation
+    processed_choices now: {'APP_BUILD_TYPE'}
+process lines until first choice config/if was found
+current_indx: 180 - block endidx 255
+current_indx: 180 - choice_attr_end: 241
+choice_def [('APP_BUILD_TYPE', [['y']], [['y']])]
+choice_configs length: 2
+choice_configs [{'type': 'config', 'symbol': 'APP_BUILD_TYPE_APP_2NDBOOT', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 242, 'choice_line': 180, 'block': [KconfigLine(config, line=242, indent=12), KconfigLine(type_bool, line=243, indent=16), KconfigLine(prompt, line=244, indent=16), KconfigLine(depends_on, line=245, indent=16), KconfigLine(select, line=246, indent=16), KconfigLine(select, line=247, indent=16), KconfigLine(select, line=248, indent=16), KconfigLine(empty, line=249, indent=0)], 'default_lines': [KconfigLine(default, line=182, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'APP_BUILD_TYPE_RAM', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 250, 'choice_line': 180, 'block': [KconfigLine(config, line=250, indent=12), KconfigLine(type_bool, line=251, indent=16), KconfigLine(prompt, line=252, indent=16), KconfigLine(select, line=253, indent=16), KconfigLine(empty, line=254, indent=0)], 'default_lines': [KconfigLine(default, line=182, indent=12)], 'depends_lines': [], 'if_condition': None}]
+  [0] type=config, symbol=APP_BUILD_TYPE_APP_2NDBOOT, symbols=None, choice_line=180
+  [1] type=config, symbol=APP_BUILD_TYPE_RAM, symbols=None, choice_line=180
+all_default_deps: [['y']]
+all_node_deps: [['y']]
+Found 1 choice definitions at lines: [180]
+
+Final result has 240 lines before adding configs
+    Added Lines bc named choice 0
+Track existing configs: KconfigLine(config, line=242, indent=12)
+Track existing configs: KconfigLine(config, line=250, indent=12)
+Track existing configs: KconfigLine(endchoice, line=255, indent=8)
+    Added 0 entries from other choice definitions
+    Added 0 lines from other choice definitions
+
+  Adding 0 menuconfigs after endchoice
+    Added 0 menuconfig lines (after endchoice) from other choice definitions
+    Added Total Lines bc named choice 0
+    source without glob: 1
+    Found first definition of choice COMPILER_OPTIMIZATION at line 340
+    Processing choice transformation
+    processed_choices now: {'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
+process lines until first choice config/if was found
+current_indx: 340 - block endidx 374
+current_indx: 340 - choice_attr_end: 364
+choice_def [('COMPILER_OPTIMIZATION', [['y']], [['y']])]
+choice_configs length: 4
+choice_configs [{'type': 'config', 'symbol': 'COMPILER_OPTIMIZATION_DEBUG', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 365, 'choice_line': 340, 'block': [KconfigLine(config, line=365, indent=12), KconfigLine(type_bool, line=366, indent=16)], 'default_lines': [KconfigLine(default, line=342, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_OPTIMIZATION_SIZE', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 367, 'choice_line': 340, 'block': [KconfigLine(config, line=367, indent=12), KconfigLine(type_bool, line=368, indent=16)], 'default_lines': [KconfigLine(default, line=342, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_OPTIMIZATION_PERF', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 369, 'choice_line': 340, 'block': [KconfigLine(config, line=369, indent=12), KconfigLine(type_bool, line=370, indent=16)], 'default_lines': [KconfigLine(default, line=342, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_OPTIMIZATION_NONE', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 371, 'choice_line': 340, 'block': [KconfigLine(config, line=371, indent=12), KconfigLine(type_bool, line=372, indent=16), KconfigLine(empty, line=373, indent=0)], 'default_lines': [KconfigLine(default, line=342, indent=12)], 'depends_lines': [], 'if_condition': None}]
+  [0] type=config, symbol=COMPILER_OPTIMIZATION_DEBUG, symbols=None, choice_line=340
+  [1] type=config, symbol=COMPILER_OPTIMIZATION_SIZE, symbols=None, choice_line=340
+  [2] type=config, symbol=COMPILER_OPTIMIZATION_PERF, symbols=None, choice_line=340
+  [3] type=config, symbol=COMPILER_OPTIMIZATION_NONE, symbols=None, choice_line=340
+all_default_deps: [['y']]
+all_node_deps: [['y']]
+Found 1 choice definitions at lines: [340]
+
+Final result has 363 lines before adding configs
+    Added Lines bc named choice 0
+Track existing configs: KconfigLine(config, line=365, indent=12)
+Track existing configs: KconfigLine(config, line=367, indent=12)
+Track existing configs: KconfigLine(config, line=369, indent=12)
+Track existing configs: KconfigLine(config, line=371, indent=12)
+Track existing configs: KconfigLine(endchoice, line=374, indent=8)
+    Added 0 entries from other choice definitions
+    Added 0 lines from other choice definitions
+
+  Adding 0 menuconfigs after endchoice
+    Added 0 menuconfig lines (after endchoice) from other choice definitions
+    Added Total Lines bc named choice 0
+    Found first definition of choice COMPILER_OPTIMIZATION_ASSERTION_LEVEL at line 376
+    Processing choice transformation
+    processed_choices now: {'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
+process lines until first choice config/if was found
+current_indx: 376 - block endidx 409
+current_indx: 376 - choice_attr_end: 389
+choice_def [('COMPILER_OPTIMIZATION_ASSERTION_LEVEL', [['y']], [['y']])]
+choice_configs length: 3
+choice_configs [{'type': 'config', 'symbol': 'COMPILER_OPTIMIZATION_ASSERTIONS_ENABLE', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 390, 'choice_line': 376, 'block': [KconfigLine(config, line=390, indent=12), KconfigLine(prompt, line=391, indent=16), KconfigLine(type_bool, line=392, indent=16), KconfigLine(help, line=393, indent=16), KconfigLine(other, line=394, indent=20), KconfigLine(empty, line=395, indent=0)], 'default_lines': [KconfigLine(default, line=378, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_OPTIMIZATION_ASSERTIONS_SILENT', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 396, 'choice_line': 376, 'block': [KconfigLine(config, line=396, indent=12), KconfigLine(prompt, line=397, indent=16), KconfigLine(type_bool, line=398, indent=16), KconfigLine(help, line=399, indent=16), KconfigLine(other, line=400, indent=20), KconfigLine(other, line=401, indent=20), KconfigLine(empty, line=402, indent=0)], 'default_lines': [KconfigLine(default, line=378, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_OPTIMIZATION_ASSERTIONS_DISABLE', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 403, 'choice_line': 376, 'block': [KconfigLine(config, line=403, indent=12), KconfigLine(prompt, line=404, indent=16), KconfigLine(type_bool, line=405, indent=16), KconfigLine(help, line=406, indent=16), KconfigLine(other, line=407, indent=20), KconfigLine(empty, line=408, indent=0)], 'default_lines': [KconfigLine(default, line=378, indent=12)], 'depends_lines': [], 'if_condition': None}]
+  [0] type=config, symbol=COMPILER_OPTIMIZATION_ASSERTIONS_ENABLE, symbols=None, choice_line=376
+  [1] type=config, symbol=COMPILER_OPTIMIZATION_ASSERTIONS_SILENT, symbols=None, choice_line=376
+  [2] type=config, symbol=COMPILER_OPTIMIZATION_ASSERTIONS_DISABLE, symbols=None, choice_line=376
+all_default_deps: [['y']]
+all_node_deps: [['y']]
+Found 1 choice definitions at lines: [376]
+
+Final result has 388 lines before adding configs
+    Added Lines bc named choice 0
+Track existing configs: KconfigLine(config, line=390, indent=12)
+Track existing configs: KconfigLine(config, line=396, indent=12)
+Track existing configs: KconfigLine(config, line=403, indent=12)
+Track existing configs: KconfigLine(endchoice, line=409, indent=8)
+    Added 0 entries from other choice definitions
+    Added 0 lines from other choice definitions
+
+  Adding 0 menuconfigs after endchoice
+    Added 0 menuconfig lines (after endchoice) from other choice definitions
+    Added Total Lines bc named choice 0
+    Found first definition of choice COMPILER_FLOAT_LIB_FROM at line 426
+    Processing choice transformation
+    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
+process lines until first choice config/if was found
+current_indx: 426 - block endidx 444
+current_indx: 426 - choice_attr_end: 438
+choice_def [('COMPILER_FLOAT_LIB_FROM', [['ESP_ROM_HAS_RVFPLIB'], ['y']], [['y']])]
+choice_configs length: 2
+choice_configs [{'type': 'config', 'symbol': 'COMPILER_FLOAT_LIB_FROM_GCCLIB', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 439, 'choice_line': 426, 'block': [KconfigLine(config, line=439, indent=12), KconfigLine(type_bool, line=440, indent=16)], 'default_lines': [KconfigLine(default, line=428, indent=12), KconfigLine(default, line=429, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_FLOAT_LIB_FROM_RVFPLIB', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 441, 'choice_line': 426, 'block': [KconfigLine(config, line=441, indent=12), KconfigLine(depends_on, line=442, indent=16), KconfigLine(type_bool, line=443, indent=16)], 'default_lines': [KconfigLine(default, line=428, indent=12), KconfigLine(default, line=429, indent=12)], 'depends_lines': [], 'if_condition': None}]
+  [0] type=config, symbol=COMPILER_FLOAT_LIB_FROM_GCCLIB, symbols=None, choice_line=426
+  [1] type=config, symbol=COMPILER_FLOAT_LIB_FROM_RVFPLIB, symbols=None, choice_line=426
+all_default_deps: [['ESP_ROM_HAS_RVFPLIB'], ['y']]
+all_node_deps: [['y']]
+Found 1 choice definitions at lines: [426]
+
+Final result has 437 lines before adding configs
+    Added Lines bc named choice 0
+Track existing configs: KconfigLine(config, line=439, indent=12)
+Track existing configs: KconfigLine(config, line=441, indent=12)
+Track existing configs: KconfigLine(endchoice, line=444, indent=8)
+    Added 0 entries from other choice definitions
+    Added 0 lines from other choice definitions
+
+  Adding 0 menuconfigs after endchoice
+    Added 0 menuconfig lines (after endchoice) from other choice definitions
+    Added Total Lines bc named choice 0
+    Found first definition of choice COMPILER_STACK_CHECK_MODE at line 505
+    Processing choice transformation
+    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_OPTIMIZATION'}
+process lines until first choice config/if was found
+current_indx: 505 - block endidx 539
+current_indx: 505 - choice_attr_end: 530
+choice_def [('COMPILER_STACK_CHECK_MODE', [['y']], [['y']])]
+choice_configs length: 4
+choice_configs [{'type': 'config', 'symbol': 'COMPILER_STACK_CHECK_MODE_NONE', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 531, 'choice_line': 505, 'block': [KconfigLine(config, line=531, indent=12), KconfigLine(type_bool, line=532, indent=16)], 'default_lines': [KconfigLine(default, line=507, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_STACK_CHECK_MODE_NORM', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 533, 'choice_line': 505, 'block': [KconfigLine(config, line=533, indent=12), KconfigLine(type_bool, line=534, indent=16)], 'default_lines': [KconfigLine(default, line=507, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_STACK_CHECK_MODE_STRONG', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 535, 'choice_line': 505, 'block': [KconfigLine(config, line=535, indent=12), KconfigLine(type_bool, line=536, indent=16)], 'default_lines': [KconfigLine(default, line=507, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_STACK_CHECK_MODE_ALL', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 537, 'choice_line': 505, 'block': [KconfigLine(config, line=537, indent=12), KconfigLine(type_bool, line=538, indent=16)], 'default_lines': [KconfigLine(default, line=507, indent=12)], 'depends_lines': [], 'if_condition': None}]
+  [0] type=config, symbol=COMPILER_STACK_CHECK_MODE_NONE, symbols=None, choice_line=505
+  [1] type=config, symbol=COMPILER_STACK_CHECK_MODE_NORM, symbols=None, choice_line=505
+  [2] type=config, symbol=COMPILER_STACK_CHECK_MODE_STRONG, symbols=None, choice_line=505
+  [3] type=config, symbol=COMPILER_STACK_CHECK_MODE_ALL, symbols=None, choice_line=505
+all_default_deps: [['y']]
+all_node_deps: [['y']]
+Found 1 choice definitions at lines: [505]
+
+Final result has 529 lines before adding configs
+    Added Lines bc named choice 0
+Track existing configs: KconfigLine(config, line=531, indent=12)
+Track existing configs: KconfigLine(config, line=533, indent=12)
+Track existing configs: KconfigLine(config, line=535, indent=12)
+Track existing configs: KconfigLine(config, line=537, indent=12)
+Track existing configs: KconfigLine(endchoice, line=539, indent=8)
+    Added 0 entries from other choice definitions
+    Added 0 lines from other choice definitions
+
+  Adding 0 menuconfigs after endchoice
+    Added 0 menuconfig lines (after endchoice) from other choice definitions
+    Added Total Lines bc named choice 0
+    Found first definition of choice COMPILER_RT_LIB at line 623
+    Processing choice transformation
+    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_OPTIMIZATION', 'COMPILER_RT_LIB'}
+process lines until first choice config/if was found
+current_indx: 623 - block endidx 643
+current_indx: 623 - choice_attr_end: 633
+choice_def [('COMPILER_RT_LIB', [['IDF_TOOLCHAIN_CLANG'], ['IDF_TARGET_LINUX'], ['y']], [['y']])]
+choice_configs length: 3
+choice_configs [{'type': 'config', 'symbol': 'COMPILER_RT_LIB_GCCLIB', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 634, 'choice_line': 623, 'block': [KconfigLine(config, line=634, indent=12), KconfigLine(depends_on, line=635, indent=16), KconfigLine(type_bool, line=636, indent=16)], 'default_lines': [KconfigLine(default, line=625, indent=12), KconfigLine(default, line=626, indent=12), KconfigLine(default, line=627, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_RT_LIB_CLANGRT', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 637, 'choice_line': 623, 'block': [KconfigLine(config, line=637, indent=12), KconfigLine(depends_on, line=638, indent=16), KconfigLine(type_bool, line=639, indent=16)], 'default_lines': [KconfigLine(default, line=625, indent=12), KconfigLine(default, line=626, indent=12), KconfigLine(default, line=627, indent=12)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_RT_LIB_HOST', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 640, 'choice_line': 623, 'block': [KconfigLine(config, line=640, indent=12), KconfigLine(depends_on, line=641, indent=16), KconfigLine(type_bool, line=642, indent=16)], 'default_lines': [KconfigLine(default, line=625, indent=12), KconfigLine(default, line=626, indent=12), KconfigLine(default, line=627, indent=12)], 'depends_lines': [], 'if_condition': None}]
+  [0] type=config, symbol=COMPILER_RT_LIB_GCCLIB, symbols=None, choice_line=623
+  [1] type=config, symbol=COMPILER_RT_LIB_CLANGRT, symbols=None, choice_line=623
+  [2] type=config, symbol=COMPILER_RT_LIB_HOST, symbols=None, choice_line=623
+all_default_deps: [['IDF_TOOLCHAIN_CLANG'], ['IDF_TARGET_LINUX'], ['y']]
+all_node_deps: [['y']]
+Found 1 choice definitions at lines: [623]
+
+Final result has 632 lines before adding configs
+    Added Lines bc named choice 0
+Track existing configs: KconfigLine(config, line=634, indent=12)
+Track existing configs: KconfigLine(config, line=637, indent=12)
+Track existing configs: KconfigLine(config, line=640, indent=12)
+Track existing configs: KconfigLine(endchoice, line=643, indent=8)
+    Added 0 entries from other choice definitions
+    Added 0 lines from other choice definitions
+
+  Adding 0 menuconfigs after endchoice
+    Added 0 menuconfig lines (after endchoice) from other choice definitions
+    Added Total Lines bc named choice 0
+    Found first definition of choice COMPILER_ORPHAN_SECTIONS at line 651
+    Processing choice transformation
+    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_OPTIMIZATION', 'COMPILER_ORPHAN_SECTIONS', 'COMPILER_RT_LIB'}
+process lines until first choice config/if was found
+current_indx: 651 - block endidx 670
+current_indx: 651 - choice_attr_end: 660
+choice_def [('COMPILER_ORPHAN_SECTIONS', [['IDF_TARGET_LINUX']], [['IDF_TARGET_LINUX']])]
+choice_configs length: 2
+choice_configs [{'type': 'config', 'symbol': 'COMPILER_ORPHAN_SECTIONS_WARNING', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 661, 'choice_line': 651, 'block': [KconfigLine(config, line=661, indent=12), KconfigLine(type_bool, line=662, indent=16), KconfigLine(help, line=663, indent=16), KconfigLine(other, line=664, indent=20), KconfigLine(empty, line=665, indent=0)], 'default_lines': [KconfigLine(default, line=653, indent=12)], 'depends_lines': [KconfigLine(depends_on, line=654, indent=12)], 'if_condition': None}, {'type': 'config', 'symbol': 'COMPILER_ORPHAN_SECTIONS_PLACE', 'file': '/home/ljd/espcode/v5.5.2/esp-idf/Kconfig', 'line': 666, 'choice_line': 651, 'block': [KconfigLine(config, line=666, indent=12), KconfigLine(type_bool, line=667, indent=16), KconfigLine(help, line=668, indent=16), KconfigLine(other, line=669, indent=20)], 'default_lines': [KconfigLine(default, line=653, indent=12)], 'depends_lines': [KconfigLine(depends_on, line=654, indent=12)], 'if_condition': None}]
+  [0] type=config, symbol=COMPILER_ORPHAN_SECTIONS_WARNING, symbols=None, choice_line=651
+  [1] type=config, symbol=COMPILER_ORPHAN_SECTIONS_PLACE, symbols=None, choice_line=651
+all_default_deps: [['IDF_TARGET_LINUX']]
+all_node_deps: [['IDF_TARGET_LINUX']]
+Found 1 choice definitions at lines: [651]
+
+Final result has 659 lines before adding configs
+    Added Lines bc named choice 0
+Track existing configs: KconfigLine(config, line=661, indent=12)
+Track existing configs: KconfigLine(config, line=666, indent=12)
+Track existing configs: KconfigLine(endchoice, line=670, indent=8)
+    Added 0 entries from other choice definitions
+    Added 0 lines from other choice definitions
+
+  Adding 0 menuconfigs after endchoice
+    Added 0 menuconfig lines (after endchoice) from other choice definitions
+    Added Total Lines bc named choice 0
+    source without glob: 1
+    FILE LOG --------------------------------------------------------------
+    Reader input                709 lines
+    -----------------------------------------------------------------------
+    All source without glob:    2
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      1
+    SUM (r/or/o)source lines:   3
+    All "option env" attr:      1
+    -----------------------------------------------------------------------
+    Transformer Output:         708 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/results3.xlsx
+        Done writting 703 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output/Kconfig
+----------------------------------------------------------------------
+finished transforming: 1 files transformed
+----------------------------------------------------------------------
+Overall parser info: 
+    -> ExParserContext - unique options: 1131
+    -> ExParserContext - configdefaults: 0 ()
+    -> ExParserContext - unique choices: 79
+    -> ExParserContext - named choices:  79
+----------------------------------------------------------------------
+    option modules: 0
+----------------------------------------------------------------------
+count options/attr that are not transformed: 
+    allnoconfig_y:  0
+    defconfig_list: 0
+    warning:        0
+    set:            0
+    set default:    0
+
+====================================================================================================
+TIMER REPORT:
+====================================================================================================
+    Built context from parser results.................    1.607991s
+    File transformation and excel log.................    0.199236s
+----------------------------------------------------------------------------------------------------
+    TOTAL TIME........................................   1.807231s ~ 1.81s
+====================================================================================================
