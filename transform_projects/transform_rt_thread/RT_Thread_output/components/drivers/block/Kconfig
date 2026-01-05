@@ -1,0 +1,7 @@
+menuconfig RT_USING_BLK
+    bool "Using Block device drivers"
+    default n
+
+if RT_USING_BLK
+    source "../../components/drivers/block/partitions/Kconfig"
+endif

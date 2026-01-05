@@ -1,0 +1,2 @@
+source "../../components/legacy/usb/Kconfig"
+source "../../components/legacy/fdt/Kconfig"

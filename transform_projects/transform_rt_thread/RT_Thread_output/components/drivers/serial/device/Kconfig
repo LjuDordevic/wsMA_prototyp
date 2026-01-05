@@ -1,0 +1,11 @@
+config RT_SERIAL_EARLY_HVC
+    bool "Early HVC"
+    default n
+
+config RT_SERIAL_PL011
+    bool "ARM PL011"
+    default n
+
+source "../../components/drivers/serial/device/8250/Kconfig"
+source "../../components/drivers/serial/device/virtual/Kconfig"
+

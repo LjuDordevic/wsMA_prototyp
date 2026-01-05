@@ -1,0 +1,7 @@
+menuconfig RT_INPUT_TOUCHSCREEN
+    bool "Touchscreens"
+    select RT_USING_TOUCH
+    default n
+
+if RT_INPUT_TOUCHSCREEN
+endif

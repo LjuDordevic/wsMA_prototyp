@@ -1,0 +1,51 @@
+menu "RT-Thread Components"
+
+config RT_USING_COMPONENTS_INIT
+    bool
+    default n
+
+config RT_USING_USER_MAIN
+    bool
+    default n
+
+    if RT_USING_USER_MAIN
+        config RT_MAIN_THREAD_STACK_SIZE
+            int "Set main thread stack size"
+            default 6144 if ARCH_CPU_64BIT
+            default 2048
+
+        config RT_MAIN_THREAD_PRIORITY
+            int "Set main thread priority"
+            default 4   if RT_THREAD_PRIORITY_8
+            default 10  if RT_THREAD_PRIORITY_32
+            default 85  if RT_THREAD_PRIORITY_256
+    endif
+
+config RT_USING_LEGACY
+    bool "Support legacy version for compatibility"
+    default n
+
+if RT_USING_CONSOLE
+source "../../components/finsh/Kconfig"
+endif
+
+if !RT_USING_NANO
+source "../../components/dfs/Kconfig"
+source "../../components/fal/Kconfig"
+source "../../components/drivers/Kconfig"
+source "../../components/libc/Kconfig"
+source "../../components/net/Kconfig"
+source "../../components/mprotect/Kconfig"
+source "../../components/utilities/Kconfig"
+endif
+
+if ARCH_MM_MMU
+source "../../components/mm/Kconfig"
+endif
+
+if RT_USING_SMART
+source "../../components/lwp/Kconfig"
+endif
+
+source "../../components/rust/Kconfig"
+endmenu

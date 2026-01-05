@@ -468,8 +468,8 @@ class KconfigTransformer:
             file_path = Path(filename)
             files.append(file_path)
         print("    get_all_source_files: ")
-        for file in files:
-            print(f"    parser found: {file}")
+        #for file in files:
+        #    print(f"    parser found: {file}")
 
         return files    
 
@@ -1264,7 +1264,13 @@ class KconfigTransformer:
         if self.context is not None:
             kconf = self.context.parser_result['kconf']
             srctree = Path(kconf.srctree or "")
-            current_file_abs_path = Path(current_file).resolve()
+
+            if current_file is None:
+                # FOR RTTHREAD: If current_file None -> use current dir 
+                current_file_abs_path = Path.cwd()
+                print(f"    WARNING: current_file is None, using cwd: {current_file_abs_path}")
+            else:
+                current_file_abs_path = Path(current_file).resolve()
             current_line_nr = line.line_number
             
             # ITERATE over all nodes in menutree 
@@ -1913,7 +1919,8 @@ class KconfigTransformer:
         
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
                             log: bool, log_lines: bool, log_and_check_resolve_glob: bool, \
-                                log_cd_nc_details: bool, log_excel_after_each_file: bool, log_excel_output: None):
+                                log_cd_nc_details: bool, log_excel_after_each_file: bool, log_excel_output: None, \
+                                    outside_file_relative_to: None):
         """
         1. get all source files parser found (these are all realtive to srctree)
         2. Filter ExtParserContext -> get needed infos for transformation of configdefault and named choice options 
@@ -1937,12 +1944,21 @@ class KconfigTransformer:
 
             # this solution bc of ../ in paths 
             try:
+                #print(f"\nDEBUG: input_file={input_file}")
+                #print(f"DEBUG: project_dir={project_dir}")
                 relative_normalized = input_file.relative_to(project_dir)
+                #print(f"DEBUG: relative_path={relative_normalized}")
+                #print(f"DEBUG: output_file would be={output_dir / relative_normalized}")
             except ValueError:
-                print(f"    Skip file outside project: {input_file}")
+                if outside_file_relative_to:
+                    relative_normalized = input_file.relative_to(Path(outside_file_relative_to))
+                    #print(relative_normalized)
+                else:
+                    print(f"    Skip file outside project: {input_file}")
 
             output_file = output_dir / relative_normalized
-            
+            #print(f"DEBUG: output_file would be={output_file}")
+                
             #print(f"\ninput file: {input_file}")
             #print(f"relative_normalized: {relative_normalized}")
             #print(f"output file: {output_file}")

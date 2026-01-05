@@ -1,0 +1,2 @@
+source "../../components/drivers/power/reset/Kconfig"
+source "../../components/drivers/power/supply/Kconfig"

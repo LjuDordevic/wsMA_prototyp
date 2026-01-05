@@ -1,0 +1,8 @@
+menu "Network"
+
+source "../../components/net/sal/Kconfig"
+source "../../components/net/netdev/Kconfig"
+source "../../components/net/lwip/Kconfig"
+source "../../components/net/at/Kconfig"
+
+endmenu

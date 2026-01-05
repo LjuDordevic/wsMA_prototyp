@@ -16,6 +16,11 @@ def main():
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output"
     main_file = "Kconfig"
 
+    # Because the main Kconfig in /bsp/qemu-vexpress-a9 refers to other Kconfig that are in ../ or ../..
+    # we give this as outside_file_relative_to to transform_all_files() 
+    # without this the output structur of transformation is not right 
+    rt_thread_root = "/home/ljd/rtthread/rt-thread"
+    
     # Ins Projektverzeichnis wechseln
     original_cwd = os.getcwd()
     os.chdir(project_dir)
@@ -88,7 +93,8 @@ def main():
             log_and_check_resolve_glob=False,
             log_cd_nc_details=False,
             log_excel_after_each_file=True,
-            log_excel_output=excel_file
+            log_excel_output=excel_file, 
+            outside_file_relative_to = rt_thread_root
         )   
 
         timer.lap("File transformation and excel log")

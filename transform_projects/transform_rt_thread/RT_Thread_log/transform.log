@@ -12,7 +12,7 @@ Environment variables:
   BSP_DIR=.
   PKGS_DIR=packages
 ====================================================================================================
-<zrtos_parser.ZRTOSParser object at 0x76438040d1f0>
+<zrtos_parser.ZRTOSParser object at 0x76fabbc8a2a0>
 Defined symbols: 1198
 Unique symbols: 1196
 Files: 118
@@ -442,7 +442,6 @@ start transforming 11 input lines
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
         Done writting 10 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/Kconfig
 
 
 Reader found: 4 lines in /home/ljd/rtthread/rt-thread/Kconfig
@@ -489,7 +488,6 @@ start transforming 4 input lines
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
         Done writting 4 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/src/Kconfig
 
 
 Reader found: 449 lines in /home/ljd/rtthread/rt-thread/src/Kconfig
@@ -523,8 +521,7 @@ start transforming 449 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 449 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/src/klibc/Kconfig
+        Done writting 449 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/src/Kconfig
 
 
 Reader found: 253 lines in /home/ljd/rtthread/rt-thread/src/klibc/Kconfig
@@ -554,8 +551,7 @@ start transforming 253 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 253 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/libcpu/Kconfig
+        Done writting 253 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/src/klibc/Kconfig
 
 
 Reader found: 309 lines in /home/ljd/rtthread/rt-thread/libcpu/Kconfig
@@ -589,8 +585,7 @@ start transforming 309 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 309 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/libcpu/aarch64/Kconfig
+        Done writting 309 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/libcpu/Kconfig
 
 
 Reader found: 25 lines in /home/ljd/rtthread/rt-thread/libcpu/aarch64/Kconfig
@@ -620,8 +615,7 @@ start transforming 25 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 25 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/Kconfig
+        Done writting 25 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/libcpu/aarch64/Kconfig
 
 
 Reader found: 52 lines in /home/ljd/rtthread/rt-thread/components/Kconfig
@@ -698,8 +692,7 @@ start transforming 52 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 51 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/finsh/Kconfig
+        Done writting 51 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/Kconfig
 
 
 Reader found: 97 lines in /home/ljd/rtthread/rt-thread/components/finsh/Kconfig
@@ -729,8 +722,7 @@ start transforming 97 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 97 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/dfs/Kconfig
+        Done writting 97 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/finsh/Kconfig
 
 
 Reader found: 272 lines in /home/ljd/rtthread/rt-thread/components/dfs/Kconfig
@@ -760,8 +752,7 @@ start transforming 272 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 272 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/fal/Kconfig
+        Done writting 272 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/dfs/Kconfig
 
 
 Reader found: 51 lines in /home/ljd/rtthread/rt-thread/components/fal/Kconfig
@@ -791,8 +782,7 @@ start transforming 51 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 51 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/Kconfig
+        Done writting 51 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/fal/Kconfig
 
 
 Reader found: 54 lines in /home/ljd/rtthread/rt-thread/components/drivers/Kconfig
@@ -1016,8 +1006,7 @@ start transforming 54 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 52 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/core/Kconfig
+        Done writting 52 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/Kconfig
 
 
 Reader found: 11 lines in /home/ljd/rtthread/rt-thread/components/drivers/core/Kconfig
@@ -1047,8 +1036,7 @@ start transforming 11 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/ipc/Kconfig
+        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/core/Kconfig
 
 
 Reader found: 25 lines in /home/ljd/rtthread/rt-thread/components/drivers/ipc/Kconfig
@@ -1078,8 +1066,7 @@ start transforming 25 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 25 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/serial/Kconfig
+        Done writting 25 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/ipc/Kconfig
 
 
 Reader found: 42 lines in /home/ljd/rtthread/rt-thread/components/drivers/serial/Kconfig
@@ -1113,8 +1100,7 @@ start transforming 42 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 42 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/serial/device/Kconfig
+        Done writting 42 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/serial/Kconfig
 
 
 Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/serial/device/Kconfig
@@ -1155,8 +1141,7 @@ start transforming 12 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/serial/device/8250/Kconfig
+        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/serial/device/Kconfig
 
 
 Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/serial/device/8250/Kconfig
@@ -1186,8 +1171,7 @@ start transforming 14 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/serial/device/virtual/Kconfig
+        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/serial/device/8250/Kconfig
 
 
 Reader found: 17 lines in /home/ljd/rtthread/rt-thread/components/drivers/serial/device/virtual/Kconfig
@@ -1219,8 +1203,7 @@ PROCESS choice: [KconfigLine(menuconfig, line=1, indent=0), KconfigLine(type_boo
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 17 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/can/Kconfig
+        Done writting 17 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/serial/device/virtual/Kconfig
 
 
 Reader found: 80 lines in /home/ljd/rtthread/rt-thread/components/drivers/can/Kconfig
@@ -1253,8 +1236,7 @@ start transforming 80 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 79 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/cputime/Kconfig
+        Done writting 79 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/can/Kconfig
 
 
 Reader found: 34 lines in /home/ljd/rtthread/rt-thread/components/drivers/cputime/Kconfig
@@ -1284,8 +1266,7 @@ start transforming 34 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 34 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/i2c/Kconfig
+        Done writting 34 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/cputime/Kconfig
 
 
 Reader found: 247 lines in /home/ljd/rtthread/rt-thread/components/drivers/i2c/Kconfig
@@ -1318,8 +1299,7 @@ start transforming 247 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 246 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/phy/Kconfig
+        Done writting 246 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/i2c/Kconfig
 
 
 Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/phy/Kconfig
@@ -1352,8 +1332,7 @@ start transforming 12 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/misc/Kconfig
+        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/phy/Kconfig
 
 
 Reader found: 45 lines in /home/ljd/rtthread/rt-thread/components/drivers/misc/Kconfig
@@ -1389,8 +1368,7 @@ start transforming 45 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 43 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/mtd/Kconfig
+        Done writting 43 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/misc/Kconfig
 
 
 Reader found: 30 lines in /home/ljd/rtthread/rt-thread/components/drivers/mtd/Kconfig
@@ -1420,8 +1398,7 @@ start transforming 30 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 30 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/pm/Kconfig
+        Done writting 30 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/mtd/Kconfig
 
 
 Reader found: 39 lines in /home/ljd/rtthread/rt-thread/components/drivers/pm/Kconfig
@@ -1451,8 +1428,7 @@ start transforming 39 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 39 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/rtc/Kconfig
+        Done writting 39 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pm/Kconfig
 
 
 Reader found: 90 lines in /home/ljd/rtthread/rt-thread/components/drivers/rtc/Kconfig
@@ -1485,8 +1461,7 @@ start transforming 90 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 89 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/sdio/Kconfig
+        Done writting 89 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/rtc/Kconfig
 
 
 Reader found: 36 lines in /home/ljd/rtthread/rt-thread/components/drivers/sdio/Kconfig
@@ -1520,8 +1495,7 @@ start transforming 36 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 36 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/sdio/host/Kconfig
+        Done writting 36 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/sdio/Kconfig
 
 
 Reader found: 22 lines in /home/ljd/rtthread/rt-thread/components/drivers/sdio/host/Kconfig
@@ -1554,8 +1528,7 @@ start transforming 22 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 21 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/spi/Kconfig
+        Done writting 21 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/sdio/host/Kconfig
 
 
 Reader found: 250 lines in /home/ljd/rtthread/rt-thread/components/drivers/spi/Kconfig
@@ -1588,8 +1561,7 @@ start transforming 250 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 249 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/watchdog/Kconfig
+        Done writting 249 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/spi/Kconfig
 
 
 Reader found: 20 lines in /home/ljd/rtthread/rt-thread/components/drivers/watchdog/Kconfig
@@ -1622,8 +1594,7 @@ start transforming 20 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/audio/Kconfig
+        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/watchdog/Kconfig
 
 
 Reader found: 18 lines in /home/ljd/rtthread/rt-thread/components/drivers/audio/Kconfig
@@ -1653,8 +1624,7 @@ start transforming 18 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 18 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/sensor/Kconfig
+        Done writting 18 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/audio/Kconfig
 
 
 Reader found: 15 lines in /home/ljd/rtthread/rt-thread/components/drivers/sensor/Kconfig
@@ -1684,8 +1654,7 @@ start transforming 15 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 15 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/touch/Kconfig
+        Done writting 15 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/sensor/Kconfig
 
 
 Reader found: 8 lines in /home/ljd/rtthread/rt-thread/components/drivers/touch/Kconfig
@@ -1715,8 +1684,7 @@ start transforming 8 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/graphic/Kconfig
+        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/touch/Kconfig
 
 
 Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/graphic/Kconfig
@@ -1758,8 +1726,7 @@ start transforming 14 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/graphic/backlight/Kconfig
+        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/graphic/Kconfig
 
 
 Reader found: 22 lines in /home/ljd/rtthread/rt-thread/components/drivers/graphic/backlight/Kconfig
@@ -1792,8 +1759,7 @@ start transforming 22 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 21 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/graphic/framebuffer/Kconfig
+        Done writting 21 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/graphic/backlight/Kconfig
 
 
 Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/graphic/framebuffer/Kconfig
@@ -1826,8 +1792,7 @@ start transforming 14 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/graphic/logo/Kconfig
+        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/graphic/framebuffer/Kconfig
 
 
 Reader found: 37 lines in /home/ljd/rtthread/rt-thread/components/drivers/graphic/logo/Kconfig
@@ -1866,8 +1831,7 @@ PROCESS choice: [KconfigLine(menuconfig, line=1, indent=0), KconfigLine(type_boo
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 35 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/hwcrypto/Kconfig
+        Done writting 35 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/graphic/logo/Kconfig
 
 
 Reader found: 169 lines in /home/ljd/rtthread/rt-thread/components/drivers/hwcrypto/Kconfig
@@ -1900,8 +1864,7 @@ start transforming 169 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 168 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/wlan/Kconfig
+        Done writting 168 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/hwcrypto/Kconfig
 
 
 Reader found: 154 lines in /home/ljd/rtthread/rt-thread/components/drivers/wlan/Kconfig
@@ -1931,8 +1894,7 @@ start transforming 154 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 154 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/led/Kconfig
+        Done writting 154 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/wlan/Kconfig
 
 
 Reader found: 28 lines in /home/ljd/rtthread/rt-thread/components/drivers/led/Kconfig
@@ -1965,8 +1927,7 @@ start transforming 28 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 27 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/input/Kconfig
+        Done writting 27 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/led/Kconfig
 
 
 Reader found: 36 lines in /home/ljd/rtthread/rt-thread/components/drivers/input/Kconfig
@@ -2012,8 +1973,7 @@ start transforming 36 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 36 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/input/joystick/Kconfig
+        Done writting 36 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/input/Kconfig
 
 
 Reader found: 7 lines in /home/ljd/rtthread/rt-thread/components/drivers/input/joystick/Kconfig
@@ -2046,8 +2006,7 @@ start transforming 7 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 6 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/input/keyboard/Kconfig
+        Done writting 6 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/input/joystick/Kconfig
 
 
 Reader found: 13 lines in /home/ljd/rtthread/rt-thread/components/drivers/input/keyboard/Kconfig
@@ -2080,8 +2039,7 @@ start transforming 13 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 12 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/input/misc/Kconfig
+        Done writting 12 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/input/keyboard/Kconfig
 
 
 Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/input/misc/Kconfig
@@ -2114,8 +2072,7 @@ start transforming 12 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/input/touchscreen/Kconfig
+        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/input/misc/Kconfig
 
 
 Reader found: 8 lines in /home/ljd/rtthread/rt-thread/components/drivers/input/touchscreen/Kconfig
@@ -2148,8 +2105,7 @@ start transforming 8 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 7 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/mailbox/Kconfig
+        Done writting 7 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/input/touchscreen/Kconfig
 
 
 Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/mailbox/Kconfig
@@ -2182,8 +2138,7 @@ start transforming 14 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/hwspinlock/Kconfig
+        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/mailbox/Kconfig
 
 
 Reader found: 15 lines in /home/ljd/rtthread/rt-thread/components/drivers/hwspinlock/Kconfig
@@ -2216,8 +2171,7 @@ start transforming 15 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/phye/Kconfig
+        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/hwspinlock/Kconfig
 
 
 Reader found: 20 lines in /home/ljd/rtthread/rt-thread/components/drivers/phye/Kconfig
@@ -2250,8 +2204,7 @@ start transforming 20 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/ata/Kconfig
+        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/phye/Kconfig
 
 
 Reader found: 22 lines in /home/ljd/rtthread/rt-thread/components/drivers/ata/Kconfig
@@ -2284,8 +2237,7 @@ start transforming 22 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 21 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/nvme/Kconfig
+        Done writting 21 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/ata/Kconfig
 
 
 Reader found: 23 lines in /home/ljd/rtthread/rt-thread/components/drivers/nvme/Kconfig
@@ -2318,8 +2270,7 @@ start transforming 23 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 22 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/block/Kconfig
+        Done writting 22 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/nvme/Kconfig
 
 
 Reader found: 7 lines in /home/ljd/rtthread/rt-thread/components/drivers/block/Kconfig
@@ -2353,8 +2304,7 @@ start transforming 7 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 7 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/block/partitions/Kconfig
+        Done writting 7 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/block/Kconfig
 
 
 Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/block/partitions/Kconfig
@@ -2384,8 +2334,7 @@ start transforming 12 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 12 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/scsi/Kconfig
+        Done writting 12 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/block/partitions/Kconfig
 
 
 Reader found: 20 lines in /home/ljd/rtthread/rt-thread/components/drivers/scsi/Kconfig
@@ -2418,8 +2367,7 @@ start transforming 20 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/firmware/Kconfig
+        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/scsi/Kconfig
 
 
 Reader found: 9 lines in /home/ljd/rtthread/rt-thread/components/drivers/firmware/Kconfig
@@ -2456,8 +2404,7 @@ start transforming 9 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/firmware/arm_scmi/Kconfig
+        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/firmware/Kconfig
 
 
 Reader found: 23 lines in /home/ljd/rtthread/rt-thread/components/drivers/firmware/arm_scmi/Kconfig
@@ -2487,8 +2434,7 @@ start transforming 23 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 23 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/hwcache/Kconfig
+        Done writting 23 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/firmware/arm_scmi/Kconfig
 
 
 Reader found: 9 lines in /home/ljd/rtthread/rt-thread/components/drivers/hwcache/Kconfig
@@ -2521,8 +2467,7 @@ start transforming 9 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/regulator/Kconfig
+        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/hwcache/Kconfig
 
 
 Reader found: 30 lines in /home/ljd/rtthread/rt-thread/components/drivers/regulator/Kconfig
@@ -2555,8 +2500,7 @@ start transforming 30 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 29 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/reset/Kconfig
+        Done writting 29 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/regulator/Kconfig
 
 
 Reader found: 20 lines in /home/ljd/rtthread/rt-thread/components/drivers/reset/Kconfig
@@ -2589,8 +2533,7 @@ start transforming 20 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/pmdomain/Kconfig
+        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/reset/Kconfig
 
 
 Reader found: 11 lines in /home/ljd/rtthread/rt-thread/components/drivers/pmdomain/Kconfig
@@ -2623,8 +2566,7 @@ start transforming 11 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 10 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/power/Kconfig
+        Done writting 10 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pmdomain/Kconfig
 
 
 Reader found: 2 lines in /home/ljd/rtthread/rt-thread/components/drivers/power/Kconfig
@@ -2662,8 +2604,7 @@ start transforming 2 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 2 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/power/reset/Kconfig
+        Done writting 2 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/power/Kconfig
 
 
 Reader found: 39 lines in /home/ljd/rtthread/rt-thread/components/drivers/power/reset/Kconfig
@@ -2696,8 +2637,7 @@ start transforming 39 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 38 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/power/supply/Kconfig
+        Done writting 38 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/power/reset/Kconfig
 
 
 Reader found: 35 lines in /home/ljd/rtthread/rt-thread/components/drivers/power/supply/Kconfig
@@ -2730,8 +2670,7 @@ start transforming 35 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 34 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/thermal/Kconfig
+        Done writting 34 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/power/supply/Kconfig
 
 
 Reader found: 34 lines in /home/ljd/rtthread/rt-thread/components/drivers/thermal/Kconfig
@@ -2767,8 +2706,7 @@ start transforming 34 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 32 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/virtio/Kconfig
+        Done writting 32 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/thermal/Kconfig
 
 
 Reader found: 43 lines in /home/ljd/rtthread/rt-thread/components/drivers/virtio/Kconfig
@@ -2798,8 +2736,7 @@ start transforming 43 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 43 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/nvmem/Kconfig
+        Done writting 43 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/virtio/Kconfig
 
 
 Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/nvmem/Kconfig
@@ -2832,8 +2769,7 @@ start transforming 12 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/dma/Kconfig
+        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/nvmem/Kconfig
 
 
 Reader found: 17 lines in /home/ljd/rtthread/rt-thread/components/drivers/dma/Kconfig
@@ -2866,8 +2802,7 @@ start transforming 17 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 16 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/mfd/Kconfig
+        Done writting 16 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/dma/Kconfig
 
 
 Reader found: 21 lines in /home/ljd/rtthread/rt-thread/components/drivers/mfd/Kconfig
@@ -2900,8 +2835,7 @@ start transforming 21 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 20 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/ofw/Kconfig
+        Done writting 20 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/mfd/Kconfig
 
 
 Reader found: 29 lines in /home/ljd/rtthread/rt-thread/components/drivers/ofw/Kconfig
@@ -2931,8 +2865,7 @@ start transforming 29 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 29 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/pci/Kconfig
+        Done writting 29 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/ofw/Kconfig
 
 
 Reader found: 49 lines in /home/ljd/rtthread/rt-thread/components/drivers/pci/Kconfig
@@ -2966,8 +2899,7 @@ start transforming 49 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 49 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/pci/host/Kconfig
+        Done writting 49 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pci/Kconfig
 
 
 Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/pci/host/Kconfig
@@ -3004,8 +2936,7 @@ start transforming 14 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/pci/host/dw/Kconfig
+        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pci/host/Kconfig
 
 
 Reader found: 13 lines in /home/ljd/rtthread/rt-thread/components/drivers/pci/host/dw/Kconfig
@@ -3035,8 +2966,7 @@ start transforming 13 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/pic/Kconfig
+        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pci/host/dw/Kconfig
 
 
 Reader found: 61 lines in /home/ljd/rtthread/rt-thread/components/drivers/pic/Kconfig
@@ -3069,8 +2999,7 @@ start transforming 61 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 60 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/pin/Kconfig
+        Done writting 60 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pic/Kconfig
 
 
 Reader found: 13 lines in /home/ljd/rtthread/rt-thread/components/drivers/pin/Kconfig
@@ -3103,8 +3032,7 @@ start transforming 13 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 12 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/pinctrl/Kconfig
+        Done writting 12 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pin/Kconfig
 
 
 Reader found: 20 lines in /home/ljd/rtthread/rt-thread/components/drivers/pinctrl/Kconfig
@@ -3137,8 +3065,7 @@ start transforming 20 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/ktime/Kconfig
+        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pinctrl/Kconfig
 
 
 Reader found: 3 lines in /home/ljd/rtthread/rt-thread/components/drivers/ktime/Kconfig
@@ -3168,8 +3095,7 @@ start transforming 3 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 3 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/clk/Kconfig
+        Done writting 3 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/ktime/Kconfig
 
 
 Reader found: 15 lines in /home/ljd/rtthread/rt-thread/components/drivers/clk/Kconfig
@@ -3202,8 +3128,7 @@ start transforming 15 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/hwtimer/Kconfig
+        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/clk/Kconfig
 
 
 Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/hwtimer/Kconfig
@@ -3236,8 +3161,7 @@ start transforming 14 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/usb/Kconfig
+        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/hwtimer/Kconfig
 
 
 Reader found: 1 lines in /home/ljd/rtthread/rt-thread/components/drivers/usb/Kconfig
@@ -3271,8 +3195,7 @@ start transforming 1 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 1 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/usb/cherryusb/Kconfig.rtt
+        Done writting 1 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/usb/Kconfig
 
 
 Reader found: 462 lines in /home/ljd/rtthread/rt-thread/components/drivers/usb/cherryusb/Kconfig.rtt
@@ -3310,8 +3233,7 @@ PROCESS choice: [KconfigLine(commented, line=1, indent=0), KconfigLine(menuconfi
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 462 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/libc/Kconfig
+        Done writting 462 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/usb/cherryusb/Kconfig.rtt
 
 
 Reader found: 16 lines in /home/ljd/rtthread/rt-thread/components/libc/Kconfig
@@ -3353,8 +3275,7 @@ start transforming 16 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 16 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/libc/compilers/common/Kconfig
+        Done writting 16 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/libc/Kconfig
 
 
 Reader found: 32 lines in /home/ljd/rtthread/rt-thread/components/libc/compilers/common/Kconfig
@@ -3384,8 +3305,7 @@ start transforming 32 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 32 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/libc/posix/Kconfig
+        Done writting 32 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/libc/compilers/common/Kconfig
 
 
 Reader found: 120 lines in /home/ljd/rtthread/rt-thread/components/libc/posix/Kconfig
@@ -3419,8 +3339,7 @@ start transforming 120 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 120 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/libc/posix/ipc/Kconfig
+        Done writting 120 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/libc/posix/Kconfig
 
 
 Reader found: 39 lines in /home/ljd/rtthread/rt-thread/components/libc/posix/ipc/Kconfig
@@ -3450,8 +3369,7 @@ start transforming 39 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 39 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/libc/cplusplus/Kconfig
+        Done writting 39 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/libc/posix/ipc/Kconfig
 
 
 Reader found: 23 lines in /home/ljd/rtthread/rt-thread/components/libc/cplusplus/Kconfig
@@ -3481,8 +3399,7 @@ start transforming 23 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 23 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/net/Kconfig
+        Done writting 23 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/libc/cplusplus/Kconfig
 
 
 Reader found: 8 lines in /home/ljd/rtthread/rt-thread/components/net/Kconfig
@@ -3528,8 +3445,7 @@ start transforming 8 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/net/sal/Kconfig
+        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/net/Kconfig
 
 
 Reader found: 46 lines in /home/ljd/rtthread/rt-thread/components/net/sal/Kconfig
@@ -3559,8 +3475,7 @@ start transforming 46 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 46 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/net/netdev/Kconfig
+        Done writting 46 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/net/sal/Kconfig
 
 
 Reader found: 45 lines in /home/ljd/rtthread/rt-thread/components/net/netdev/Kconfig
@@ -3590,8 +3505,7 @@ start transforming 45 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 45 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/net/lwip/Kconfig
+        Done writting 45 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/net/netdev/Kconfig
 
 
 Reader found: 408 lines in /home/ljd/rtthread/rt-thread/components/net/lwip/Kconfig
@@ -3621,8 +3535,7 @@ start transforming 408 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 408 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/net/at/Kconfig
+        Done writting 408 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/net/lwip/Kconfig
 
 
 Reader found: 77 lines in /home/ljd/rtthread/rt-thread/components/net/at/Kconfig
@@ -3652,8 +3565,7 @@ start transforming 77 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 77 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/mprotect/Kconfig
+        Done writting 77 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/net/at/Kconfig
 
 
 Reader found: 28 lines in /home/ljd/rtthread/rt-thread/components/mprotect/Kconfig
@@ -3683,8 +3595,7 @@ start transforming 28 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 28 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/utilities/Kconfig
+        Done writting 28 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/mprotect/Kconfig
 
 
 Reader found: 247 lines in /home/ljd/rtthread/rt-thread/components/utilities/Kconfig
@@ -3722,8 +3633,7 @@ start transforming 247 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 247 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/utilities/libadt/Kconfig
+        Done writting 247 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/utilities/Kconfig
 
 
 Reader found: 24 lines in /home/ljd/rtthread/rt-thread/components/utilities/libadt/Kconfig
@@ -3753,8 +3663,7 @@ start transforming 24 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 24 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/utilities/rt-link/Kconfig
+        Done writting 24 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/utilities/libadt/Kconfig
 
 
 Reader found: 25 lines in /home/ljd/rtthread/rt-thread/components/utilities/rt-link/Kconfig
@@ -3784,8 +3693,7 @@ start transforming 25 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 25 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/mm/Kconfig
+        Done writting 25 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/utilities/rt-link/Kconfig
 
 
 Reader found: 59 lines in /home/ljd/rtthread/rt-thread/components/mm/Kconfig
@@ -3815,8 +3723,7 @@ start transforming 59 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 59 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/lwp/Kconfig
+        Done writting 59 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/mm/Kconfig
 
 
 Reader found: 89 lines in /home/ljd/rtthread/rt-thread/components/lwp/Kconfig
@@ -3854,8 +3761,7 @@ start transforming 89 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 89 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/lwp/terminal/Kconfig
+        Done writting 89 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/lwp/Kconfig
 
 
 Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/lwp/terminal/Kconfig
@@ -3885,8 +3791,7 @@ start transforming 14 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/lwp/vdso/Kconfig
+        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/lwp/terminal/Kconfig
 
 
 Reader found: 4 lines in /home/ljd/rtthread/rt-thread/components/lwp/vdso/Kconfig
@@ -3916,8 +3821,7 @@ start transforming 4 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 4 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/legacy/Kconfig
+        Done writting 4 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/lwp/vdso/Kconfig
 
 
 Reader found: 2 lines in /home/ljd/rtthread/rt-thread/components/legacy/Kconfig
@@ -3955,8 +3859,7 @@ start transforming 2 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 2 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/legacy/usb/Kconfig
+        Done writting 2 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/legacy/Kconfig
 
 
 Reader found: 200 lines in /home/ljd/rtthread/rt-thread/components/legacy/usb/Kconfig
@@ -3986,8 +3889,7 @@ start transforming 200 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 200 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/legacy/fdt/Kconfig
+        Done writting 200 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/legacy/usb/Kconfig
 
 
 Reader found: 15 lines in /home/ljd/rtthread/rt-thread/components/legacy/fdt/Kconfig
@@ -4017,8 +3919,7 @@ start transforming 15 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 15 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/rust/Kconfig
+        Done writting 15 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/legacy/fdt/Kconfig
 
 
 Reader found: 26 lines in /home/ljd/rtthread/rt-thread/components/rust/Kconfig
@@ -4052,8 +3953,7 @@ start transforming 26 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 26 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/rust/examples/Kconfig
+        Done writting 26 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/rust/Kconfig
 
 
 Reader found: 104 lines in /home/ljd/rtthread/rt-thread/components/rust/examples/Kconfig
@@ -4083,8 +3983,7 @@ start transforming 104 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 104 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/Kconfig.utestcases
+        Done writting 104 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/rust/examples/Kconfig
 
 
 Reader found: 35 lines in /home/ljd/rtthread/rt-thread/Kconfig.utestcases
@@ -4162,8 +4061,7 @@ start transforming 35 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 35 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/src/utest/Kconfig
+        Done writting 35 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig.utestcases
 
 
 Reader found: 94 lines in /home/ljd/rtthread/rt-thread/src/utest/Kconfig
@@ -4205,8 +4103,7 @@ start transforming 94 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 94 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/src/utest/perf/Kconfig
+        Done writting 94 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/src/utest/Kconfig
 
 
 Reader found: 15 lines in /home/ljd/rtthread/rt-thread/src/utest/perf/Kconfig
@@ -4236,8 +4133,7 @@ start transforming 15 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 15 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/src/klibc/utest/Kconfig
+        Done writting 15 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/src/utest/perf/Kconfig
 
 
 Reader found: 4 lines in /home/ljd/rtthread/rt-thread/src/klibc/utest/Kconfig
@@ -4267,8 +4163,7 @@ start transforming 4 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 4 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/src/utest/smp/Kconfig
+        Done writting 4 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/src/klibc/utest/Kconfig
 
 
 Reader found: 23 lines in /home/ljd/rtthread/rt-thread/src/utest/smp/Kconfig
@@ -4298,8 +4193,7 @@ start transforming 23 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 23 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/core/utest/Kconfig
+        Done writting 23 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/src/utest/smp/Kconfig
 
 
 Reader found: 3 lines in /home/ljd/rtthread/rt-thread/components/drivers/core/utest/Kconfig
@@ -4329,8 +4223,7 @@ start transforming 3 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 3 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/audio/utest/Kconfig
+        Done writting 3 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/core/utest/Kconfig
 
 
 Reader found: 5 lines in /home/ljd/rtthread/rt-thread/components/drivers/audio/utest/Kconfig
@@ -4360,8 +4253,7 @@ start transforming 5 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 5 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/ipc/utest/Kconfig
+        Done writting 5 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/audio/utest/Kconfig
 
 
 Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/ipc/utest/Kconfig
@@ -4391,8 +4283,7 @@ start transforming 12 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 12 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/serial/utest/Kconfig
+        Done writting 12 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/ipc/utest/Kconfig
 
 
 Reader found: 56 lines in /home/ljd/rtthread/rt-thread/components/drivers/serial/utest/Kconfig
@@ -4422,8 +4313,7 @@ start transforming 56 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 56 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/drivers/smp_call/utest/Kconfig
+        Done writting 56 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/serial/utest/Kconfig
 
 
 Reader found: 8 lines in /home/ljd/rtthread/rt-thread/components/drivers/smp_call/utest/Kconfig
@@ -4453,8 +4343,7 @@ start transforming 8 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/dfs/utest/Kconfig
+        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/smp_call/utest/Kconfig
 
 
 Reader found: 44 lines in /home/ljd/rtthread/rt-thread/components/dfs/utest/Kconfig
@@ -4484,8 +4373,7 @@ start transforming 44 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 44 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/libc/cplusplus/utest/Kconfig
+        Done writting 44 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/dfs/utest/Kconfig
 
 
 Reader found: 9 lines in /home/ljd/rtthread/rt-thread/components/libc/cplusplus/utest/Kconfig
@@ -4515,8 +4403,7 @@ start transforming 9 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 9 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/net/utest/Kconfig
+        Done writting 9 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/libc/cplusplus/utest/Kconfig
 
 
 Reader found: 140 lines in /home/ljd/rtthread/rt-thread/components/net/utest/Kconfig
@@ -4546,8 +4433,7 @@ start transforming 140 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 140 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/components/utilities/utest/utest/Kconfig
+        Done writting 140 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/net/utest/Kconfig
 
 
 Reader found: 8 lines in /home/ljd/rtthread/rt-thread/components/utilities/utest/utest/Kconfig
@@ -4577,8 +4463,7 @@ start transforming 8 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/examples/utest/testcases/mm/Kconfig
+        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/utilities/utest/utest/Kconfig
 
 
 Reader found: 17 lines in /home/ljd/rtthread/rt-thread/examples/utest/testcases/mm/Kconfig
@@ -4608,8 +4493,7 @@ start transforming 17 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 17 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
-    Skip file outside project: /home/ljd/rtthread/rt-thread/examples/utest/testcases/tmpfs/Kconfig
+        Done writting 17 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/examples/utest/testcases/mm/Kconfig
 
 
 Reader found: 6 lines in /home/ljd/rtthread/rt-thread/examples/utest/testcases/tmpfs/Kconfig
@@ -4639,7 +4523,7 @@ start transforming 6 input lines
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
 Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results.xlsx
-        Done writting 6 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
+        Done writting 6 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/examples/utest/testcases/tmpfs/Kconfig
 
 
 Reader found: 136 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/drivers/Kconfig
@@ -4691,10 +4575,10 @@ count options/attr that are not transformed:
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.004546s
-    Got parser results................................    0.097956s
-    Built context from parser results.................    0.008137s
-    File transformation and excel log.................    9.135677s
+    Parser initialization.............................    0.002666s
+    Got parser results................................    0.076041s
+    Built context from parser results.................    0.005584s
+    File transformation and excel log.................    6.475980s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   9.246319s ~ 9.25s
+    TOTAL TIME........................................   6.560274s ~ 6.56s
 ====================================================================================================
