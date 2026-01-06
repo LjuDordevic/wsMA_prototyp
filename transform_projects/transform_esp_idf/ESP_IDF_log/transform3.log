@@ -7,7 +7,7 @@ Main file: Kconfig
 Output dir: /home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output
 ====================================================================================================
 PROJBUILD exists: True
-<espidf_parser.ESPIDFParser object at 0x7e0172695ac0>
+<espidf_parser.ESPIDFParser object at 0x78d369d00fe0>
 Defined symbols: 1131
 Unique symbols: 1131
 Files: 1
@@ -18,7 +18,6 @@ Files: 1
 ====================================================================================================
 Build context finished
     get_all_source_files: 
-    parser found: /home/ljd/espcode/v5.5.2/esp-idf/Kconfig
 
 3. Filter ExtParserContext
 extract all configdefault options and for each get transformed lines and last config
@@ -1565,7 +1564,7 @@ Track existing configs: KconfigLine(endchoice, line=255, indent=8)
     source without glob: 1
     Found first definition of choice COMPILER_OPTIMIZATION at line 340
     Processing choice transformation
-    processed_choices now: {'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
+    processed_choices now: {'COMPILER_OPTIMIZATION', 'APP_BUILD_TYPE'}
 process lines until first choice config/if was found
 current_indx: 340 - block endidx 374
 current_indx: 340 - choice_attr_end: 364
@@ -1595,7 +1594,7 @@ Track existing configs: KconfigLine(endchoice, line=374, indent=8)
     Added Total Lines bc named choice 0
     Found first definition of choice COMPILER_OPTIMIZATION_ASSERTION_LEVEL at line 376
     Processing choice transformation
-    processed_choices now: {'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
+    processed_choices now: {'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_OPTIMIZATION', 'APP_BUILD_TYPE'}
 process lines until first choice config/if was found
 current_indx: 376 - block endidx 409
 current_indx: 376 - choice_attr_end: 389
@@ -1623,7 +1622,7 @@ Track existing configs: KconfigLine(endchoice, line=409, indent=8)
     Added Total Lines bc named choice 0
     Found first definition of choice COMPILER_FLOAT_LIB_FROM at line 426
     Processing choice transformation
-    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION'}
+    processed_choices now: {'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_OPTIMIZATION', 'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE'}
 process lines until first choice config/if was found
 current_indx: 426 - block endidx 444
 current_indx: 426 - choice_attr_end: 438
@@ -1649,7 +1648,7 @@ Track existing configs: KconfigLine(endchoice, line=444, indent=8)
     Added Total Lines bc named choice 0
     Found first definition of choice COMPILER_STACK_CHECK_MODE at line 505
     Processing choice transformation
-    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_OPTIMIZATION'}
+    processed_choices now: {'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_OPTIMIZATION', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE'}
 process lines until first choice config/if was found
 current_indx: 505 - block endidx 539
 current_indx: 505 - choice_attr_end: 530
@@ -1679,7 +1678,7 @@ Track existing configs: KconfigLine(endchoice, line=539, indent=8)
     Added Total Lines bc named choice 0
     Found first definition of choice COMPILER_RT_LIB at line 623
     Processing choice transformation
-    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_OPTIMIZATION', 'COMPILER_RT_LIB'}
+    processed_choices now: {'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_OPTIMIZATION', 'COMPILER_RT_LIB', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE'}
 process lines until first choice config/if was found
 current_indx: 623 - block endidx 643
 current_indx: 623 - choice_attr_end: 633
@@ -1707,7 +1706,7 @@ Track existing configs: KconfigLine(endchoice, line=643, indent=8)
     Added Total Lines bc named choice 0
     Found first definition of choice COMPILER_ORPHAN_SECTIONS at line 651
     Processing choice transformation
-    processed_choices now: {'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE', 'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_OPTIMIZATION', 'COMPILER_ORPHAN_SECTIONS', 'COMPILER_RT_LIB'}
+    processed_choices now: {'COMPILER_OPTIMIZATION_ASSERTION_LEVEL', 'COMPILER_OPTIMIZATION', 'COMPILER_RT_LIB', 'COMPILER_STACK_CHECK_MODE', 'COMPILER_ORPHAN_SECTIONS', 'COMPILER_FLOAT_LIB_FROM', 'APP_BUILD_TYPE'}
 process lines until first choice config/if was found
 current_indx: 651 - block endidx 670
 current_indx: 651 - choice_attr_end: 660
@@ -1778,8 +1777,10 @@ count options/attr that are not transformed:
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Built context from parser results.................    1.607991s
-    File transformation and excel log.................    0.199236s
+    Parser initialization.............................    0.043586s
+    Got parser results................................    1.460490s
+    Built context from parser results.................    0.006454s
+    File transformation and excel log.................    0.204677s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   1.807231s ~ 1.81s
+    TOTAL TIME........................................   1.715210s ~ 1.72s
 ====================================================================================================
