@@ -1,0 +1,2 @@
+source "platforms/common/px4_work_queue/Kconfig"
+source "platforms/common/uORB/Kconfig"

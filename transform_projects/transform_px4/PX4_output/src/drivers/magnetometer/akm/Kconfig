@@ -1,0 +1,4 @@
+menu "AKM"
+    source "src/drivers/magnetometer/akm/ak09916/Kconfig"
+    source "src/drivers/magnetometer/akm/ak8963/Kconfig"
+endmenu

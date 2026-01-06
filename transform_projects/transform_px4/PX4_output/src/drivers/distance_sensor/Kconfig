@@ -1,0 +1,35 @@
+menu "Distance sensors"
+    menuconfig COMMON_DISTANCE_SENSOR
+        bool "Common distance sensor's"
+        default n
+        select DRIVERS_DISTANCE_SENSOR_LIGHTWARE_LASER_I2C
+        select DRIVERS_DISTANCE_SENSOR_LIGHTWARE_LASER_SERIAL
+        select DRIVERS_DISTANCE_SENSOR_LL40LS
+        select DRIVERS_DISTANCE_SENSOR_TF02PRO
+        select DRIVERS_DISTANCE_SENSOR_TFMINI
+        select DRIVERS_DISTANCE_SENSOR_ULANDING_RADAR
+        select DRIVERS_DISTANCE_SENSOR_VL53L0X
+        select DRIVERS_DISTANCE_SENSOR_VL53L1X
+        ---help---
+            Enable default set of distance sensor drivers
+
+    source "src/drivers/distance_sensor/cm8jl65/Kconfig"
+    source "src/drivers/distance_sensor/gy_us42/Kconfig"
+    source "src/drivers/distance_sensor/leddar_one/Kconfig"
+    source "src/drivers/distance_sensor/lightware_laser_i2c/Kconfig"
+    source "src/drivers/distance_sensor/lightware_laser_serial/Kconfig"
+    source "src/drivers/distance_sensor/lightware_sf45_serial/Kconfig"
+    source "src/drivers/distance_sensor/ll40ls/Kconfig"
+    source "src/drivers/distance_sensor/ll40ls_pwm/Kconfig"
+    source "src/drivers/distance_sensor/mappydot/Kconfig"
+    source "src/drivers/distance_sensor/mb12xx/Kconfig"
+    source "src/drivers/distance_sensor/pga460/Kconfig"
+    source "src/drivers/distance_sensor/srf02/Kconfig"
+    source "src/drivers/distance_sensor/srf05/Kconfig"
+    source "src/drivers/distance_sensor/teraranger/Kconfig"
+    source "src/drivers/distance_sensor/tf02pro/Kconfig"
+    source "src/drivers/distance_sensor/tfmini/Kconfig"
+    source "src/drivers/distance_sensor/ulanding_radar/Kconfig"
+    source "src/drivers/distance_sensor/vl53l0x/Kconfig"
+    source "src/drivers/distance_sensor/vl53l1x/Kconfig"
+endmenu

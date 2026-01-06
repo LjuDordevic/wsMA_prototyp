@@ -1,0 +1,4 @@
+menu "actuators"
+source "src/drivers/actuators/vertiq_io/Kconfig"
+source "src/drivers/actuators/voxl_esc/Kconfig"
+endmenu #actuators

@@ -1,0 +1,4 @@
+menu "GPIO"
+    source "src/drivers/gpio/mcp23009/Kconfig"
+    source "src/drivers/gpio/mcp23017/Kconfig"
+endmenu

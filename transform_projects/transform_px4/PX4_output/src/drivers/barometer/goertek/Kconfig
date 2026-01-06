@@ -1,0 +1,4 @@
+menu "Goertek"
+source "src/drivers/barometer/goertek/spa06/Kconfig"
+source "src/drivers/barometer/goertek/spl06/Kconfig"
+endmenu #Goertek

@@ -1,0 +1,5 @@
+menu "MUORB"
+depends on PLATFORM_QURT || PLATFORM_POSIX
+source "src/modules/muorb/apps/Kconfig"
+source "src/modules/muorb/slpi/Kconfig"
+endmenu #MUORB

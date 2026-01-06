@@ -1,0 +1,4 @@
+menu "NXP"
+source "src/drivers/imu/nxp/fxas21002c/Kconfig"
+source "src/drivers/imu/nxp/fxos8701cq/Kconfig"
+endmenu #NXP

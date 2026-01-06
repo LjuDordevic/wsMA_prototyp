@@ -1,0 +1,1 @@
+source "src/drivers/distance_sensor/broadcom/afbrs50/Kconfig"

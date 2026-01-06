@@ -1,0 +1,15 @@
+menu "RC"
+    menuconfig COMMON_RC
+        bool "Common RC"
+        default n
+        select DRIVERS_RC_CRSF_RC
+        select DRIVERS_RC_DSM_RC
+        select DRIVERS_RC_GHST_RC
+        select DRIVERS_RC_SBUS_RC
+        ---help---
+            Enable default set of radio control drivers
+    source "src/drivers/rc/crsf_rc/Kconfig"
+    source "src/drivers/rc/dsm_rc/Kconfig"
+    source "src/drivers/rc/ghst_rc/Kconfig"
+    source "src/drivers/rc/sbus_rc/Kconfig"
+endmenu

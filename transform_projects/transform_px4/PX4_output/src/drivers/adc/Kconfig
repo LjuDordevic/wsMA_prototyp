@@ -1,0 +1,6 @@
+menu "ADC"
+source "src/drivers/adc/ads1115/Kconfig"
+source "src/drivers/adc/ads7953/Kconfig"
+source "src/drivers/adc/board_adc/Kconfig"
+source "src/drivers/adc/tla2528/Kconfig"
+endmenu #ADC

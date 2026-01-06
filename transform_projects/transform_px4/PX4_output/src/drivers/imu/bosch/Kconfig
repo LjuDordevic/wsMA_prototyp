@@ -1,0 +1,7 @@
+menu "Bosch"
+source "src/drivers/imu/bosch/bmi055/Kconfig"
+source "src/drivers/imu/bosch/bmi085/Kconfig"
+source "src/drivers/imu/bosch/bmi088/Kconfig"
+source "src/drivers/imu/bosch/bmi088_i2c/Kconfig"
+source "src/drivers/imu/bosch/bmi270/Kconfig"
+endmenu #Bosch

@@ -1,0 +1,4 @@
+menu "Isentek"
+source "src/drivers/magnetometer/isentek/ist8308/Kconfig"
+source "src/drivers/magnetometer/isentek/ist8310/Kconfig"
+endmenu #Isentek

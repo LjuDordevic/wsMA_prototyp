@@ -1,0 +1,7 @@
+menu "Analog Devices"
+source "src/drivers/imu/analog_devices/adis16448/Kconfig"
+source "src/drivers/imu/analog_devices/adis16470/Kconfig"
+source "src/drivers/imu/analog_devices/adis16477/Kconfig"
+source "src/drivers/imu/analog_devices/adis16497/Kconfig"
+source "src/drivers/imu/analog_devices/adis16507/Kconfig"
+endmenu #Analog Devices

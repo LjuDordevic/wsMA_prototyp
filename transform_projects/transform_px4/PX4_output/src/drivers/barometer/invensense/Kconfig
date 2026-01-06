@@ -1,0 +1,4 @@
+menu "InvenSense"
+source "src/drivers/barometer/invensense/icp101xx/Kconfig"
+source "src/drivers/barometer/invensense/icp201xx/Kconfig"
+endmenu #InvenSense

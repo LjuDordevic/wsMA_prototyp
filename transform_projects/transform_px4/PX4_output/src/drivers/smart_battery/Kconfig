@@ -1,0 +1,3 @@
+menu "Smart battery"
+source "src/drivers/smart_battery/batmon/Kconfig"
+endmenu #Smart battery

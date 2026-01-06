@@ -1,0 +1,11 @@
+menu "OSD"
+    menuconfig COMMON_OSD
+        bool "Common OSD drivers"
+        default n
+        select DRIVERS_OSD_ATXXXX
+        select DRIVERS_OSD_MSP_OSD
+        ---help---
+            Enable default set of OSD drivers
+    source "src/drivers/osd/atxxxx/Kconfig"
+    source "src/drivers/osd/msp_osd/Kconfig"
+endmenu

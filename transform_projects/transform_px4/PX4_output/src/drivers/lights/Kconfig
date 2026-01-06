@@ -1,0 +1,19 @@
+menu "Lights"
+    menuconfig COMMON_LIGHT
+        bool "Common Light's"
+        default n
+        select DRIVERS_LIGHTS_RGBLED
+        select DRIVERS_LIGHTS_RGBLED_NCP5623C
+        select DRIVERS_LIGHTS_RGBLED_IS31FL3195
+        select DRIVERS_LIGHTS_RGBLED_LP5562
+        select DRIVERS_LIGHTS_RGBLED_AW2023
+        ---help---
+            Enable default set of light drivers
+    source "src/drivers/lights/neopixel/Kconfig"
+    source "src/drivers/lights/rgbled/Kconfig"
+    source "src/drivers/lights/rgbled_aw2023/Kconfig"
+    source "src/drivers/lights/rgbled_is31fl3195/Kconfig"
+    source "src/drivers/lights/rgbled_lp5562/Kconfig"
+    source "src/drivers/lights/rgbled_ncp5623c/Kconfig"
+    source "src/drivers/lights/rgbled_pwm/Kconfig"
+endmenu

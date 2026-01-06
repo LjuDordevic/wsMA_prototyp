@@ -1,0 +1,14 @@
+menu "Telemetry"
+    menuconfig COMMON_TELEMETRY
+        bool "Common telemetry module's"
+        default n
+        select DRIVERS_TELEMETRY_BST
+        select DRIVERS_TELEMETRY_FRSKY_TELEMETRY
+        select DRIVERS_TELEMETRY_HOTT
+        ---help---
+            Enable default set of telemetry drivers
+    source "src/drivers/telemetry/bst/Kconfig"
+    source "src/drivers/telemetry/frsky_telemetry/Kconfig"
+    source "src/drivers/telemetry/hott/Kconfig"
+    source "src/drivers/telemetry/iridiumsbd/Kconfig"
+endmenu

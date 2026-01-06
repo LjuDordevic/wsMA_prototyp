@@ -1,0 +1,8 @@
+menu "Power monitor"
+source "src/drivers/power_monitor/ina220/Kconfig"
+source "src/drivers/power_monitor/ina226/Kconfig"
+source "src/drivers/power_monitor/ina228/Kconfig"
+source "src/drivers/power_monitor/ina238/Kconfig"
+source "src/drivers/power_monitor/pm_selector_auterion/Kconfig"
+source "src/drivers/power_monitor/voxlpm/Kconfig"
+endmenu

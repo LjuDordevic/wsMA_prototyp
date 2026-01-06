@@ -1,0 +1,17 @@
+menu "Differential pressure"
+    menuconfig COMMON_DIFFERENTIAL_PRESSURE
+        bool "Common differential pressure module's"
+        default n
+        select DRIVERS_DIFFERENTIAL_PRESSURE_MS4525DO
+        select DRIVERS_DIFFERENTIAL_PRESSURE_MS5525DSO
+        select DRIVERS_DIFFERENTIAL_PRESSURE_SDP3X
+        ---help---
+            Enable default set of differential pressure drivers
+    source "src/drivers/differential_pressure/asp5033/Kconfig"
+    source "src/drivers/differential_pressure/auav/Kconfig"
+    source "src/drivers/differential_pressure/ets/Kconfig"
+    source "src/drivers/differential_pressure/ms4515/Kconfig"
+    source "src/drivers/differential_pressure/ms4525do/Kconfig"
+    source "src/drivers/differential_pressure/ms5525dso/Kconfig"
+    source "src/drivers/differential_pressure/sdp3x/Kconfig"
+endmenu

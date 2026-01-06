@@ -1,0 +1,4 @@
+menu "Bosch"
+    source "src/drivers/magnetometer/bosch/bmm150/Kconfig"
+    source "src/drivers/magnetometer/bosch/bmm350/Kconfig"
+endmenu

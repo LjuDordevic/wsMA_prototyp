@@ -1,0 +1,34 @@
+menu "Magnetometer"
+    menuconfig COMMON_MAGNETOMETER
+        bool "Common Magnetometer's"
+        default n
+        select DRIVERS_MAGNETOMETER_AKM_AK8963
+        select DRIVERS_MAGNETOMETER_AKM_AK09916
+        select DRIVERS_MAGNETOMETER_BOSCH_BMM150
+        select DRIVERS_MAGNETOMETER_BOSCH_BMM350
+        select DRIVERS_MAGNETOMETER_HMC5883
+        select DRIVERS_MAGNETOMETER_QMC5883L
+        select DRIVERS_MAGNETOMETER_QMC5883P
+        select DRIVERS_MAGNETOMETER_ISENTEK_IST8308
+        select DRIVERS_MAGNETOMETER_ISENTEK_IST8310
+        select DRIVERS_MAGNETOMETER_LIS3MDL
+        select DRIVERS_MAGNETOMETER_LSM303AGR
+        select DRIVERS_MAGNETOMETER_RM3100
+        select DRIVERS_MAGNETOMETER_MEMSIC_MMC5983MA
+        select DRIVERS_MAGNETOMETER_ST_IIS2MDC
+        ---help---
+            Enable default set of magnetometer drivers
+    source "src/drivers/magnetometer/akm/Kconfig"
+    source "src/drivers/magnetometer/bosch/Kconfig"
+    source "src/drivers/magnetometer/hmc5883/Kconfig"
+    source "src/drivers/magnetometer/isentek/Kconfig"
+    source "src/drivers/magnetometer/lis3mdl/Kconfig"
+    source "src/drivers/magnetometer/lsm303agr/Kconfig"
+    source "src/drivers/magnetometer/lsm9ds1_mag/Kconfig"
+    source "src/drivers/magnetometer/memsic/Kconfig"
+    source "src/drivers/magnetometer/qmc5883l/Kconfig"
+    source "src/drivers/magnetometer/qmc5883p/Kconfig"
+    source "src/drivers/magnetometer/rm3100/Kconfig"
+    source "src/drivers/magnetometer/st/Kconfig"
+    source "src/drivers/magnetometer/vtrantech/Kconfig"
+endmenu

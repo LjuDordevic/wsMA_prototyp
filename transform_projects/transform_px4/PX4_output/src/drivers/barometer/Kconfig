@@ -1,0 +1,32 @@
+menu "barometer"
+    menuconfig COMMON_BAROMETERS
+        bool "Common barometers"
+        default n
+        select DRIVERS_BAROMETER_BMP280
+        select DRIVERS_BAROMETER_BMP388
+        select DRIVERS_BAROMETER_BMP581
+        select DRIVERS_BAROMETER_DPS310
+        select DRIVERS_BAROMETER_LPS22HB
+        select DRIVERS_BAROMETER_LPS33HW
+        select DRIVERS_BAROMETER_MS5611
+        select DRIVERS_BAROMETER_MAIERTEK_MPC2520
+        select DRIVERS_BAROMETER_GOERTEK_SPL06
+        select DRIVERS_BAROMETER_GOERTEK_SPA06
+        select DRIVERS_BAROMETER_INVENSENSE_ICP101XX
+        select DRIVERS_BAROMETER_INVENSENSE_ICP201XX
+        ---help---
+            Enable default set of barometer drivers
+    source "src/drivers/barometer/bmp280/Kconfig"
+    source "src/drivers/barometer/bmp388/Kconfig"
+    source "src/drivers/barometer/bmp581/Kconfig"
+    source "src/drivers/barometer/dps310/Kconfig"
+    source "src/drivers/barometer/goertek/Kconfig"
+    source "src/drivers/barometer/invensense/Kconfig"
+    source "src/drivers/barometer/lps22hb/Kconfig"
+    source "src/drivers/barometer/lps25h/Kconfig"
+    source "src/drivers/barometer/lps33hw/Kconfig"
+    source "src/drivers/barometer/mpl3115a2/Kconfig"
+    source "src/drivers/barometer/ms5611/Kconfig"
+    source "src/drivers/barometer/ms5837/Kconfig"
+    source "src/drivers/barometer/tcbp001ta/Kconfig"
+endmenu #barometer

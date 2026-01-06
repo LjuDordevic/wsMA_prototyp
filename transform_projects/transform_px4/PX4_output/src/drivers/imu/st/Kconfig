@@ -1,0 +1,5 @@
+menu "ST"
+source "src/drivers/imu/st/l3gd20/Kconfig"
+source "src/drivers/imu/st/lsm303d/Kconfig"
+source "src/drivers/imu/st/lsm9ds1/Kconfig"
+endmenu #ST

@@ -1,0 +1,5 @@
+menu "qshell"
+depends on PLATFORM_QURT || PLATFORM_POSIX
+source "src/drivers/qshell/posix/Kconfig"
+source "src/drivers/qshell/qurt/Kconfig"
+endmenu #qshell

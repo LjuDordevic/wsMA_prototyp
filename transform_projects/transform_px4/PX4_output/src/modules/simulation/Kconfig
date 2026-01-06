@@ -1,0 +1,30 @@
+menu "Simulation"
+    menuconfig COMMON_SIMULATION
+        bool "Common simulation modules"
+        default n
+        depends on PLATFORM_POSIX
+        select MODULES_SIMULATION_BATTERY_SIMULATOR
+        select MODULES_SIMULATION_PWM_OUT_SIM
+        select MODULES_SIMULATION_SENSOR_AIRSPEED_SIM
+        select MODULES_SIMULATION_SENSOR_BARO_SIM
+        select MODULES_SIMULATION_SENSOR_GPS_SIM
+        select MODULES_SIMULATION_SENSOR_MAG_SIM
+        select MODULES_SIMULATION_SYSTEM_POWER_SIMULATOR
+        select MODULES_SIMULATION_SIMULATOR_MAVLINK
+        select MODULES_SIMULATION_SIMULATOR_SIH
+        ---help---
+            Enable default set of simulation modules
+    source "src/modules/simulation/battery_simulator/Kconfig"
+    source "src/modules/simulation/gz_bridge/Kconfig"
+    source "src/modules/simulation/gz_msgs/Kconfig"
+    source "src/modules/simulation/gz_plugins/Kconfig"
+    source "src/modules/simulation/pwm_out_sim/Kconfig"
+    source "src/modules/simulation/sensor_agp_sim/Kconfig"
+    source "src/modules/simulation/sensor_airspeed_sim/Kconfig"
+    source "src/modules/simulation/sensor_baro_sim/Kconfig"
+    source "src/modules/simulation/sensor_gps_sim/Kconfig"
+    source "src/modules/simulation/sensor_mag_sim/Kconfig"
+    source "src/modules/simulation/simulator_mavlink/Kconfig"
+    source "src/modules/simulation/simulator_sih/Kconfig"
+    source "src/modules/simulation/system_power_simulator/Kconfig"
+endmenu
