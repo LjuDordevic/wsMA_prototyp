@@ -1,0 +1,2 @@
+source "sys/usb/usbus/cdc/acm/Kconfig"
+source "sys/usb/usbus/cdc/ecm/Kconfig"

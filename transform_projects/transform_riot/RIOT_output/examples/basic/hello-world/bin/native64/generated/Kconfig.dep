@@ -1,0 +1,126 @@
+config USEMODULE_AUTO_INIT
+	bool
+	default y
+config USEMODULE_BOARD
+	bool
+	default y
+config USEMODULE_BOARD_COMMON_INIT
+	bool
+	default y
+config USEMODULE_BOARDS_COMMON_NATIVE
+	bool
+	default y
+config USEMODULE_CORE
+	bool
+	default y
+config USEMODULE_CORE_IDLE_THREAD
+	bool
+	default y
+config USEMODULE_CORE_INIT
+	bool
+	default y
+config USEMODULE_CORE_LIB
+	bool
+	default y
+config USEMODULE_CORE_MSG
+	bool
+	default y
+config USEMODULE_CORE_PANIC
+	bool
+	default y
+config USEMODULE_CORE_THREAD
+	bool
+	default y
+config USEMODULE_CPU
+	bool
+	default y
+config USEMODULE_FDCAN
+	bool
+	default y
+config USEMODULE_LIBC
+	bool
+	default y
+config USEMODULE_NATIVE_DRIVERS
+	bool
+	default y
+config USEMODULE_PERIPH
+	bool
+	default y
+config USEMODULE_PERIPH_COMMON
+	bool
+	default y
+config USEMODULE_PERIPH_GPIO
+	bool
+	default y
+config USEMODULE_PERIPH_GPIO_LINUX
+	bool
+	default y
+config USEMODULE_PERIPH_INIT
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_BUTTONS
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_GPIO
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_GPIO_LINUX
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED0
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED1
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED2
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED3
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED4
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED5
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED6
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LED7
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_LEDS
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_PM
+	bool
+	default y
+config USEMODULE_PERIPH_INIT_UART
+	bool
+	default y
+config USEMODULE_PERIPH_PM
+	bool
+	default y
+config USEMODULE_PERIPH_UART
+	bool
+	default y
+config USEMODULE_PREPROCESSOR
+	bool
+	default y
+config USEMODULE_PREPROCESSOR_SUCCESSOR
+	bool
+	default y
+config USEMODULE_STDIO
+	bool
+	default y
+config USEMODULE_STDIO_DEFAULT
+	bool
+	default y
+config USEMODULE_STDIO_NATIVE
+	bool
+	default y
+config USEMODULE_SYS
+	bool
+	default y

@@ -1,0 +1,60 @@
+# Copyright (c) 2020 HAW Hamburg
+#
+# This file is subject to the terms and conditions of the GNU Lesser
+# General Public License v2.1. See the file LICENSE in the top level
+# directory for more details.
+
+menu "Drivers"
+
+menu "Actuator Device Drivers"
+source "drivers/dfplayer/Kconfig"
+source "drivers/motor_driver/Kconfig"
+endmenu # Actuator Device Drivers
+
+menu "Display Device Drivers"
+source "drivers/ili9341/Kconfig"
+source "drivers/lcd/Kconfig"
+source "drivers/touch_dev_gestures/Kconfig"
+endmenu # Display Device Drivers
+
+menu "Miscellaneous Device Drivers"
+source "drivers/at/Kconfig"
+endmenu # Miscellaneous Device Drivers
+
+source "drivers/Kconfig.net"
+
+menu "Peripherals drivers"
+endmenu # Peripherals drivers
+
+menu "Sensor Device Drivers"
+source "drivers/ads1x1x/Kconfig"
+source "drivers/bmx055/Kconfig"
+source "drivers/fxos8700/Kconfig"
+source "drivers/gp2y10xx/Kconfig"
+source "drivers/hdc1000/Kconfig"
+source "drivers/hm330x/Kconfig"
+source "drivers/hsc/Kconfig"
+source "drivers/isl29020/Kconfig"
+source "drivers/l3g4200d/Kconfig"
+source "drivers/l3gxxxx/Kconfig"
+source "drivers/lm75/Kconfig"
+source "drivers/lpsxxx/Kconfig"
+source "drivers/mag3110/Kconfig"
+source "drivers/matrix_keypad/Kconfig"
+source "drivers/mma8x5x/Kconfig"
+source "drivers/opt3001/Kconfig"
+source "drivers/paa5100je/Kconfig"
+source "drivers/seesaw_soil/Kconfig"
+source "drivers/sht2x/Kconfig"
+source "drivers/sm_pwm_01c/Kconfig"
+source "drivers/sps30/Kconfig"
+source "drivers/tcs37727/Kconfig"
+source "drivers/tmp00x/Kconfig"
+source "drivers/vl6180x/Kconfig"
+endmenu # Sensor Device Drivers
+
+menu "Storage Device Drivers"
+source "drivers/mtd_sdcard/Kconfig"
+endmenu # Storage Device Drivers
+
+endmenu # Drivers

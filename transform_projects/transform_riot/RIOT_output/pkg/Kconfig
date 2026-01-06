@@ -1,0 +1,21 @@
+# Copyright (c) 2019 HAW Hamburg
+#
+# This file is subject to the terms and conditions of the GNU Lesser
+# General Public License v2.1. See the file LICENSE in the top level
+# directory for more details.
+#
+menu "Packages"
+
+source "pkg/flashdb/Kconfig"
+source "pkg/libfixmath/Kconfig"
+source "pkg/libschc/Kconfig"
+source "pkg/littlefs2/Kconfig"
+source "pkg/lvgl/Kconfig"
+source "pkg/mbedtls/Kconfig"
+source "pkg/semtech-loramac/Kconfig"
+source "pkg/tinydtls/Kconfig"
+source "pkg/tinyusb/Kconfig"
+source "pkg/tinyvcdiff/Kconfig"
+source "pkg/wakaama/Kconfig"
+
+endmenu # Packages

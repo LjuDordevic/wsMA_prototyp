@@ -1,0 +1,10 @@
+# Copyright (c) 2019 HAW Hamburg
+#
+# This file is subject to the terms and conditions of the GNU Lesser
+# General Public License v2.1. See the file LICENSE in the top level
+# directory for more details.
+
+source "sys/net/link_layer/csma_sender/Kconfig"
+source "sys/net/link_layer/ieee802154/Kconfig"
+source "sys/net/link_layer/l2filter/Kconfig"
+source "sys/net/link_layer/Kconfig.lorawan"

@@ -1,0 +1,56 @@
+mkdir riot
+cd riot
+python3 -m venv venv_riot
+source [...]/riot/venv_riot/bin/activate
+sudo apt install make gcc-multilib python3-serial python3-psutil wget unzip git openocd gdb-multiarch esptool podman-docker clangd clang
+
+git clone git@github.com:RIOT-OS/RIOT.git
+cd RIOT/examples/basic/hello-world/
+make 
+
+pip install openpyxl
+ADD TARGET in RIOT/makefiles/kconfig.mk
+-->
+    (at the end of file after:)
+    check-kconfig-errors: $(KCONFIG_OUT_CONFIG) $(KCONFIG_GENERATED_AUTOCONF_HEADER_C)
+    ifneq [...]
+    endif
+
+    KCONFIG_TRANSFORM_TOOL ?=  [...]/wsMA_prototyp/core/target_riot_workflow.py
+    KCONFIG_TRANSFORM_STAMP := $(GENERATED_DIR)/.kconfig_transform_done
+
+    # Only run transformation if Kconfig is enabled
+    ifneq (,$(SHOULD_RUN_KCONFIG))
+    # Add to build dependencies
+    BUILDDEPS += $(KCONFIG_TRANSFORM_STAMP)
+    
+    .PHONY: kconfig-transform
+    kconfig-transform: $(KCONFIG_TRANSFORM_STAMP)
+    
+    # Generate transformation stamp file
+    $(KCONFIG_TRANSFORM_STAMP): $(KCONFIG_OUT_CONFIG) $(KCONFIG_GENERATED_AUTOCONF_HEADER_C) $(GENERATED_DIR_DEP)
+        @$(COLOR_ECHO) "$(COLOR_GREEN)Running Kconfig transformation analysis...$(COLOR_RESET)"
+        $(Q)python3 $(KCONFIG_TRANSFORM_TOOL) \
+            --riotbase "$(RIOTBASE)" \
+            --appdir "$(APPDIR)" \
+            --board "$(BOARD)" \
+            --cpu "$(CPU)" \
+            --bindir "$(BINDIR)" \
+            --generated-dir "$(GENERATED_DIR)" \
+            --kconfig-out "$(KCONFIG_OUT_CONFIG)" \
+            --autoconf-header "$(KCONFIG_GENERATED_AUTOCONF_HEADER_C)" \
+            --kconfig-deps "$(KCONFIG_GENERATED_DEPENDENCIES)" \
+            --modules $(USEMODULE) \
+            --packages $(USEPKG) \
+            --features $(FEATURES_USED) \
+            $(if $(Q),--quiet)
+        @touch $@
+    
+    clean:
+        @rm -f $(KCONFIG_TRANSFORM_STAMP)
+
+    endif 
+    endif
+
+Then in RIOT/examples/basic/hello-world/ call
+ -> make kconfig-transform SHOULD_RUN_KCONFIG=1

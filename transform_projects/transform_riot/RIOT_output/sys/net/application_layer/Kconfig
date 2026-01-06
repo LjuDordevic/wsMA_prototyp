@@ -1,0 +1,32 @@
+# Copyright (c) 2020 HAW Hamburg
+#
+# This file is subject to the terms and conditions of the GNU Lesser
+# General Public License v2.1. See the file LICENSE in the top level
+# directory for more details.
+#
+menu "CoAP"
+
+source "sys/net/application_layer/unicoap/Kconfig"
+source "sys/net/application_layer/Kconfig.coap"
+source "sys/net/application_layer/gcoap/Kconfig"
+source "sys/net/application_layer/nanocoap/Kconfig"
+
+endmenu # CoAP
+
+source "sys/net/application_layer/cord/Kconfig"
+source "sys/net/application_layer/dhcpv6/Kconfig"
+source "sys/net/application_layer/dns/Kconfig"
+source "sys/net/application_layer/sock_dodtls/Kconfig"
+
+menu "MQTT-SN"
+
+source "sys/net/application_layer/asymcute/Kconfig"
+source "sys/net/application_layer/emcute/Kconfig"
+
+endmenu # MQTT-SN
+
+menu "Telnet"
+
+source "sys/net/application_layer/telnet/Kconfig"
+
+endmenu # Telnet

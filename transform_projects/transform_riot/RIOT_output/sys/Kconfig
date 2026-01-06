@@ -1,0 +1,21 @@
+# Copyright (c) 2019 HAW Hamburg
+#
+# This file is subject to the terms and conditions of the GNU Lesser
+# General Public License v2.1. See the file LICENSE in the top level
+# directory for more details.
+#
+menu "System"
+
+source "sys/auto_init/Kconfig"
+source "sys/can/Kconfig"
+source "sys/chunked_ringbuffer/Kconfig"
+source "sys/congure/Kconfig"
+source "sys/debug_irq_disable/Kconfig"
+source "sys/entropy_source/Kconfig"
+source "sys/net/Kconfig"
+source "sys/progress_bar/Kconfig"
+source "sys/shell/Kconfig"
+source "sys/shell_lock/Kconfig"
+source "sys/usb/Kconfig"
+
+endmenu # System

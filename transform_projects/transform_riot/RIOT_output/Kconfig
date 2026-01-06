@@ -1,0 +1,35 @@
+# Copyright (c) 2019 HAW Hamburg
+#
+# This file is subject to the terms and conditions of the GNU Lesser
+# General Public License v2.1. See the file LICENSE in the top level
+# directory for more details.
+#
+mainmenu "RIOT Configuration"
+
+# Load macro definitions
+
+# For now, get used modules as macros from this file (see kconfig.mk)
+source "examples/basic/hello-world/bin/native64/generated/Kconfig.dep"
+
+# Load first the application configuration, as it may declare symbols in priority
+
+# Load board configurations, which might override CPU's
+source "boards/native64/Kconfig"
+source "cpu/native/Kconfig"
+
+source "boards/Kconfig"
+source "cpu/Kconfig"
+
+source "core/Kconfig"
+source "drivers/Kconfig"
+source "sys/Kconfig"
+source "pkg/Kconfig"
+
+menu "External Modules"
+endmenu # External Modules
+
+menu "External Packages"
+endmenu # External Packages
+
+comment "Some configuration options may not be here. Use CFLAGS instead."
+comment "Ideally, make a PR to add them to the Kconfig."
