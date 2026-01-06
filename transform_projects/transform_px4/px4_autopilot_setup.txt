@@ -1,0 +1,10 @@
+mkdir px4 
+cd px4 
+python3 -m venv venv_px4
+source [...]/px4/venv_px4/bin/activate
+git clone git@github.com:PX4/PX4-Autopilot.git
+
+Didn't have to build the project 
+just made the script target_px4_workflow.py
+and called it from venv:
+(wsMA_prototyp) ljd@HPENVYLJ:~/wsMA_prototyp/core$ python target_px4_workflow.py
