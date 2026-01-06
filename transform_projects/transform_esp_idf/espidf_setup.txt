@@ -48,3 +48,39 @@ then mkdir /ESP_IDF_demo$ and cd there
 
  -> then run idf.py build
  -> then idf.py transform
+
+#################################################################################################
+This also resulted in parser only finding the 1 main Kconifg and not the 
+Kconfig references through orsource 
+
+add_custom_target(transform
+    COMMAND ${CMAKE_COMMAND} -E env
+        "PROJECT_DIR=${PROJECT_SOURCE_DIR}"
+        "BUILD_DIR=${PROJECT_BINARY_DIR}"
+        "IDF_PATH=$ENV{IDF_PATH}"
+        "IDF_TARGET=$ENV{IDF_TARGET}"
+        python3 /home/ljd/wsMA_prototyp/core/target_espidf_workflow.py
+    WORKING_DIRECTORY ${CMAKE_SOURCE_DIR}
+    DEPENDS app  
+    COMMENT "Running transformation script..."
+)
+
+in script:
+def main():    
+    build_dir = os.environ.get("BUILD_DIR")
+    idf_target = os.environ.get("IDF_TARGET", "esp32")
+    
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/transform3.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/results3.xlsx"
+    project_dir = "/home/ljd/espcode/v5.5.2/esp-idf"
+    output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output"
+    main_file = "Kconfig"
+    
+    kconfigs_in = f"{build_dir}/kconfigs.in"
+    kconfigs_projbuild_in = f"{build_dir}/kconfigs_projbuild.in"
+    
+    os.environ["IDF_ENV_FPGA"] = "false"
+    os.environ["srctree"] = project_dir
+    os.environ["IDF_TARGET"] = idf_target
+    os.environ["COMPONENT_KCONFIGS_SOURCE_FILE"] = kconfigs_in
+    os.environ["COMPONENT_KCONFIGS_PROJBUILD_SOURCE_FILE"] = kconfigs_projbuild_in
