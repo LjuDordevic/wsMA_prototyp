@@ -8,8 +8,8 @@ import sys
 import os 
 
 def main():    
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/transform3.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/results3.xlsx"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/transform.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/results.xlsx"
     project_dir = "/home/ljd/espcode/v5.5.2/esp-idf"
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output"
     main_file = "Kconfig"
@@ -39,10 +39,12 @@ def main():
 
     picker = PickParser("ESPIDF")
     parser = ESPIDFParser(picker.kconfiglib_version)
+    timer.lap("Parser initialization")
     print(parser)
 
     try:
         parser_result = parser.parse_files(project_dir, main_file)
+        timer.lap("Got parser results")
         print(f"Defined symbols: {len(parser_result['defined_syms'])}")
         print(f"Unique symbols: {len(parser_result['unique_defined_syms'])}")
         print(f"Files: {len(parser_result['kconf'].kconfig_filenames)}")
