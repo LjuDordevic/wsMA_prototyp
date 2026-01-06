@@ -7,7 +7,7 @@ Root: /home/ljd/riot/RIOT
 Main file: Kconfig
 Output dir: /home/ljd/wsMA_prototyp/transform_projects/transform_riot/RIOT_output
 ====================================================================================================
-<zrtos_parser.ZRTOSParser object at 0x7f3844951880>
+<zrtos_parser.ZRTOSParser object at 0x75c3bdbf9880>
 Defined symbols: 851
 Unique symbols: 843
 Files: 166
@@ -6331,10 +6331,10 @@ count options/attr that are not transformed:
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.005771s
-    Got parser results................................    0.213014s
-    Built context from parser results.................    0.008177s
-    File transformation and excel log.................    9.436531s
+    Parser initialization.............................    0.006512s
+    Got parser results................................    0.196755s
+    Built context from parser results.................    0.005590s
+    File transformation and excel log.................    6.903555s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   9.663494s ~ 9.66s
+    TOTAL TIME........................................   7.112414s ~ 7.11s
 ====================================================================================================
