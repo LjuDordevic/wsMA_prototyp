@@ -751,7 +751,7 @@ class KconfigTransformer:
         # FIND line where first config/if starts ! Kconfiglib allows menuconfig as elements of choice Option
         first_ch_config_idx = None
         for idx in range(current_index + 1, block_end_index):
-            if lines[idx].line_type in ['config', 'if']:
+            if lines[idx].line_type in ['config', 'if', 'menuconfig']:
                 first_ch_config_idx = idx
                 break
         
@@ -933,124 +933,225 @@ class KconfigTransformer:
         # ADD all configs in choice block
         # 1. TRACK configs already present in this choice block
         existing_configs = set()
-
-        idx = first_ch_config_idx
-        while idx is not None and idx < block_end_index:
-            line_item = lines[idx]
-            if log_debug: print(f"Track existing configs: {line_item}")
-            # Stop at endchoice
-            if line_item.line_type == 'endchoice':
-                break
-
-            # Start of a config/menuconfig block
-            if line_item.line_type in ('config', 'menuconfig'):
-                sym_name = line_item.content.get('symbol')
-                if sym_name:
-                    existing_configs.add(sym_name)  # list of existing 
-
-                # Process the whole config block
-                while idx < block_end_index:
-                    current = lines[idx]
-                    #print(f"current: {current}")
-
-                    # Stop if next config or endchoice starts
-                    if (current.line_type in ('config', 'menuconfig', 'endchoice', 'comment') and current is not line_item):
-                        break
-
-                    # TODO: This handles choice type switch: tristate -> bool. But only for the attrs of choice itselfelf
-                    #       but for the choice/menuconfigs from other choice definitions are not handled  
-                    # IF MENU/CONFIG INSIDE CHOICE is type tristate -> type bool  
-                    #if current.line_type == 'type_tristate':
-                    #    current = self.transform_bool_to_tristate_choice_typ(current)
-
-                    transformed = transform_func(current, None, None)
-                    if transformed is not None:
-                        if isinstance(transformed, list):
-                            result.extend(transformed)
-                        else:
-                            result.append(transformed)
-                    idx += 1
-                continue
-            idx += 1
-
-        #print(f"result after first definition: {len(result)} lines")
-        
-        # 2. ADD entries (configs/ifs/ but menuconfig shoild be skipped) from other definitions
+        menuconfigs_to_add_after = []  # Collect menuconfigs to add after endchoice
         added_items = 0
         added_lines = 0
-
-        for entry in choice_configs:
-            entry_type = entry.get('type', 'config')
-            entry_choice_line = entry.get('choice_line')
+        
+        # SPECIAL CASE: If there's only ONE definition, process sequentially
+        if len(sorted_def_lines) == 1:
+            print(f"Single definition detected - processing sequentially")
             
-            if entry_type == 'if_block':
-                # Add entire if-block (contains configs, maybe menuconfigs)
-                configs_in_if = entry.get('configs', [])
-                menuconfigs_in_if = entry.get('menuconfigs', [])
+            idx = first_ch_config_idx
+            while idx is not None and idx < block_end_index:
+                line_item = lines[idx]
                 
-                # Add the if-block to the choice
-                for line in entry.get('block', []):
-                    result.append(line)
-                    added_lines += 1
-                
-                # Collect menuconfigs to add after endchoice
-                for mc_info in menuconfigs_in_if:
-                    mc_symbol = mc_info.get('symbol')
+                # Stop at endchoice
+                if line_item.line_type == 'endchoice':
+                    break
 
-                    if mc_symbol in existing_configs:
+                # Handle menuconfig - collect for after endchoice
+                if line_item.line_type == 'menuconfig':
+                    sym_name = line_item.content.get('symbol')
+                    if sym_name:
+                        existing_configs.add(sym_name)
+                    
+                    menuconfig_block = []
+                    # Collect the entire menuconfig block
+                    while idx < block_end_index:
+                        current = lines[idx]
+                        
+                        # Stop if next config/menuconfig/if/endchoice starts
+                        if (current.line_type in ('config', 'menuconfig', 'if', 'endchoice', 'comment') 
+                            and current is not line_item):
+                            break
+                        
+                        menuconfig_block.append(current)
+                        idx += 1
+                    
+                    # Store for adding after endchoice
+                    menuconfigs_to_add_after.append({
+                        'symbol': sym_name,
+                        'block': menuconfig_block,
+                        'depends_from_def': []  # No extra deps for single definition
+                    })
+                    
+                    print(f"      Collected menuconfig {sym_name} ({len(menuconfig_block)} lines)")
+                    continue
+
+                # Handle if blocks - add directly to result
+                if line_item.line_type == 'if':
+                    if_block_lines = []
+                    if_start_idx = idx
+                    
+                    # Collect entire if block
+                    while idx < block_end_index:
+                        current = lines[idx]
+                        if_block_lines.append(current)
+                        
+                        if current.line_type == 'endif':
+                            idx += 1
+                            break
+                        idx += 1
+                    
+                    # Add if block to result
+                    for if_line in if_block_lines:
+                        transformed = transform_func(if_line, None, None)
+                        if transformed is not None:
+                            if isinstance(transformed, list):
+                                result.extend(transformed)
+                            else:
+                                result.append(transformed)
+                    
+                    print(f"      Added if-block ({len(if_block_lines)} lines)")
+                    continue
+
+                # Handle regular config - add directly to result
+                if line_item.line_type == 'config':
+                    sym_name = line_item.content.get('symbol')
+                    if sym_name:
+                        existing_configs.add(sym_name)
+
+                    # Process the whole config block
+                    while idx < block_end_index:
+                        current = lines[idx]
+
+                        # Stop if next config/menuconfig/if/endchoice starts
+                        if (current.line_type in ('config', 'if', 'menuconfig', 'endchoice', 'comment') 
+                            and current is not line_item):
+                            break
+
+                        transformed = transform_func(current, None, None)
+                        if transformed is not None:
+                            if isinstance(transformed, list):
+                                result.extend(transformed)
+                            else:
+                                result.append(transformed)
+                        idx += 1
+                    continue
+                
+                idx += 1
+            
+            print(f"    Single definition: processed all entries sequentially")
+        
+        else:
+            idx = first_ch_config_idx
+            while idx is not None and idx < block_end_index:
+                line_item = lines[idx]
+                if log_debug: print(f"Track existing configs: {line_item}")
+                # Stop at endchoice
+                if line_item.line_type == 'endchoice':
+                    break
+
+                # Start of a config/menuconfig block
+                if line_item.line_type in ('config', 'menuconfig'):
+                    sym_name = line_item.content.get('symbol')
+                    if sym_name:
+                        existing_configs.add(sym_name)  # list of existing 
+
+                    # Process the whole config block
+                    while idx < block_end_index:
+                        current = lines[idx]
+                        #print(f"current: {current}")
+
+                        # Stop if next config or endchoice starts
+                        if (current.line_type in ('config', 'if','menuconfig', 'endchoice', 'comment') and current is not line_item):
+                            break
+
+                        # TODO: This handles choice type switch: tristate -> bool. But only for the attrs of choice itselfelf
+                        #       but for the choice/menuconfigs from other choice definitions are not handled  
+                        # IF MENU/CONFIG INSIDE CHOICE is type tristate -> type bool  
+                        #if current.line_type == 'type_tristate':
+                        #    current = self.transform_bool_to_tristate_choice_typ(current)
+
+                        transformed = transform_func(current, None, None)
+                        if transformed is not None:
+                            if isinstance(transformed, list):
+                                result.extend(transformed)
+                            else:
+                                result.append(transformed)
+                        idx += 1
+                    continue
+                idx += 1
+
+            #print(f"result after first definition: {len(result)} lines")
+            
+            # 2. ADD entries (configs/ifs/ but menuconfig shoild be skipped) from other definitions
+
+
+            for entry in choice_configs:
+                entry_type = entry.get('type', 'config')
+                entry_choice_line = entry.get('choice_line')
+                
+                if entry_type == 'if_block':
+                    # Add entire if-block (contains configs, maybe menuconfigs)
+                    configs_in_if = entry.get('configs', [])
+                    print(f"configs_in_if {configs_in_if}")
+                    menuconfigs_in_if = entry.get('menuconfigs', [])
+                    print(f"menuconfigs_in_if {menuconfigs_in_if}")
+
+                    # Add the if-block to the choice
+                    for line in entry.get('block', []):
+                        result.append(line)
+                        added_lines += 1
+                    
+                    # Collect menuconfigs to add after endchoice
+                    for mc_info in menuconfigs_in_if:
+                        mc_symbol = mc_info.get('symbol')
+
+                        if mc_symbol in existing_configs:
+                            continue
+
+                        mc_info_copy = dict(mc_info)
+                        mc_info_copy['depends_from_def'] = depends_by_choice_line.get(entry_choice_line, [])
+                        menuconfigs_to_add_after.append(mc_info_copy)
+                        existing_configs.add(mc_symbol)
+                    
+                    # Mark configs as existing - because it would be added as standalone 
+                    for cfg in configs_in_if:
+                        existing_configs.add(cfg)
+                    added_items += 1
+                    print(f"      Added if-block with configs {configs_in_if} from {entry.get('file')}")
+                
+                # mc outside if 
+                elif entry_type == 'menuconfig':
+                    # Menuconfig - collect to add after endchoice
+                    config_symbol = entry.get('symbol')
+
+                    if config_symbol in existing_configs:
                         continue
 
-                    mc_info_copy = dict(mc_info)
-                    mc_info_copy['depends_from_def'] = depends_by_choice_line.get(entry_choice_line, [])
-                    menuconfigs_to_add_after.append(mc_info_copy)
-                    existing_configs.add(mc_symbol)
+                    def_idx_for_entry = def_index_by_line.get(entry_choice_line, 0)
+                    
+                    menuconfigs_to_add_after.append({
+                        'symbol': config_symbol,
+                        'block': entry.get('block', []),
+                        'if_condition': entry.get('if_condition'),
+                        'depends_lines': entry.get('depends_lines', []),
+                        'depends_from_def': depends_by_choice_line.get(entry_choice_line, []),
+                        'node_deps': all_node_deps[def_idx_for_entry] if def_idx_for_entry < len(all_node_deps) else []
+                    })
+                    
+                    existing_configs.add(config_symbol)
+                    added_items += 1
+                    print(f"      Collected menuconfig {config_symbol} from {entry.get('file')} (will add after endchoice)")
                 
-                # Mark configs as existing - because it would be added as standalone 
-                for cfg in configs_in_if:
-                    existing_configs.add(cfg)
-                added_items += 1
-                print(f"      Added if-block with configs {configs_in_if} from {entry.get('file')}")
-            
-            # mc outside if 
-            elif entry_type == 'menuconfig':
-                # Menuconfig - collect to add after endchoice
-                config_symbol = entry.get('symbol')
+                elif entry_type == 'config':
+                    config_symbol = entry.get('symbol')
+                    
+                    # Skip configs already present
+                    if config_symbol in existing_configs:
+                        continue
+                    
+                    for config_line in entry.get('block', []):
+                        result.append(config_line)
+                        added_lines += 1
+                    
+                    existing_configs.add(config_symbol)
+                    added_items += 1
+                    print(f"      Added config {config_symbol} from {entry.get('file')}")
 
-                if config_symbol in existing_configs:
-                    continue
-
-                def_idx_for_entry = def_index_by_line.get(entry_choice_line, 0)
-                
-                menuconfigs_to_add_after.append({
-                    'symbol': config_symbol,
-                    'block': entry.get('block', []),
-                    'if_condition': entry.get('if_condition'),
-                    'depends_lines': entry.get('depends_lines', []),
-                    'depends_from_def': depends_by_choice_line.get(entry_choice_line, []),
-                    'node_deps': all_node_deps[def_idx_for_entry] if def_idx_for_entry < len(all_node_deps) else []
-                })
-                
-                existing_configs.add(config_symbol)
-                added_items += 1
-                print(f"      Collected menuconfig {config_symbol} from {entry.get('file')} (will add after endchoice)")
-            
-            elif entry_type == 'config':
-                config_symbol = entry.get('symbol')
-                
-                # Skip configs already present
-                if config_symbol in existing_configs:
-                    continue
-                
-                for config_line in entry.get('block', []):
-                    result.append(config_line)
-                    added_lines += 1
-                
-                existing_configs.add(config_symbol)
-                added_items += 1
-                print(f"      Added config {config_symbol} from {entry.get('file')}")
-
-        print(f"    Added {added_items} entries from other choice definitions")
-        print(f"    Added {added_lines} lines from other choice definitions")
+            print(f"    Added {added_items} entries from other choice definitions")
+            print(f"    Added {added_lines} lines from other choice definitions")
 
         # ADD endchoice
         result.append(end_line)
@@ -1983,7 +2084,8 @@ class KconfigTransformer:
                   = self._transform_lines(lines, input_file, cd_definition_info, choice_definition_info, log_and_check_resolve_glob)
              
             # TODO: add new_lines to excel stats 
-            new_lines = self._remove_consecutive_empty_lines(transformed)
+            # DON'T NEED THIS FOR THE STATISTICS - it just makes a lot compilcated 
+            #new_lines = self._remove_consecutive_empty_lines(transformed)
             #removed_consecutive_lines_nr = self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES
 
             stats = self._log_file_and_reset_count(source_out_diff, input_file, len_reader_input, len_transformed_lines)
@@ -1993,7 +2095,7 @@ class KconfigTransformer:
                 excel_writer.write_to_excel(excel_stats, log_excel_output)
             
             try:
-                writer.write(new_lines, output_file)
+                writer.write(transformed, output_file)
                 transformed_count += 1
             except Exception as e:
                 print(f"     Error write: {e}")
