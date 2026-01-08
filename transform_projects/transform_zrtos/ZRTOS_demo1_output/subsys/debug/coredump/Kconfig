@@ -100,6 +100,7 @@ config DEBUG_COREDUMP_FLASH_CHUNK_SIZE
 	  Larger values can speed up writing due to fewer write operations
 	  being performed in total, but consume more memory.
 
+
 endif # DEBUG_COREDUMP_BACKEND_FLASH_PARTITION
 
 config DEBUG_COREDUMP_SHELL
@@ -164,5 +165,6 @@ config DEBUG_COREDUMP_THREAD_STACK_TOP_LIMIT
 	  See the description of the DEBUG_COREDUMP_THREAD_STACK_TOP option.
 	  The value -1 indicates that there is no limit, meaning that the stack
 	  is dumped till the end of its region.
+
 
 endif # DEBUG_COREDUMP

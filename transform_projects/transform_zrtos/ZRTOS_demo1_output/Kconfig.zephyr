@@ -7,6 +7,7 @@
 
 source "Kconfig.constants"
 
+
 # Include Kconfig.defconfig files first so that they can override defaults and
 # other symbol/choice properties by adding extra symbol/choice definitions.
 # After merging all definitions for a symbol/choice, Kconfig picks the first
@@ -65,6 +66,7 @@ source "boards/shields/x_nucleo_eeprma2/Kconfig.defconfig"
 source "boards/shields/x_nucleo_gfx01m2/Kconfig.defconfig"
 source "boards/shields/x_nucleo_idb05a1/Kconfig.defconfig"
 source "boards/shields/x_nucleo_wb05kn1/Kconfig.defconfig"
+
 
 # This loads Zephyr specific SoC root defconfigs
 source "$(KCONFIG_BINARY_DIR)/soc/Kconfig.defconfig"
@@ -1107,6 +1109,7 @@ config ENFORCE_ZEPHYR_STDINT
 	  on Zephyr code will be skipped.
 
 endmenu
+
 
 menu "Boot Options"
 

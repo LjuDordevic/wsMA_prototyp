@@ -1,6 +1,7 @@
 # Copyright 2025 Arm Limited and/or its affiliates <open-source-office@arm.com>
 # SPDX-License-Identifier: Apache-2.0
 
+
 config PINCTRL_ARM_MPS2
 	bool "Arm MPS2 pin controller driver"
 	default y

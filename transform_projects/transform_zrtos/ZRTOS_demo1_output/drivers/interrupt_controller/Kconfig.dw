@@ -19,6 +19,7 @@ menuconfig DW_ICTL
 	  controller which combines several sources of interrupt into one line
 	  that is then routed to the 1st level interrupt controller.
 
+
 if DW_ICTL
 
 config DW_ICTL_NAME

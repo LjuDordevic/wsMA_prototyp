@@ -1,6 +1,7 @@
 # Copyright (c) 2022 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
+
 config CRYPTO_MCHP_XEC_SYMCR
 	bool "Microchip XEC symmetric crypto (AES/Hash) driver"
 	default y

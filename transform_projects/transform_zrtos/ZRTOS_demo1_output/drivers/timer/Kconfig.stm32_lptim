@@ -18,6 +18,7 @@ menuconfig STM32_LPTIM_TIMER
 
 if STM32_LPTIM_TIMER
 
+
 config STM32_LPTIM_CLOCK
 	int
 	default 32768 if STM32_LPTIM_CLOCK_LSE

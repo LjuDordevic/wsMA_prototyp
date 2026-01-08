@@ -150,6 +150,7 @@ config WDOG_INIT
 	bool
 	default WDOG_ENABLE_AT_BOOT
 
+
 source "soc/nxp/kinetis/k2x/Kconfig"
 source "soc/nxp/kinetis/k32lx/Kconfig"
 source "soc/nxp/kinetis/k6x/Kconfig"

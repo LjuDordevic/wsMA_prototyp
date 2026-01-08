@@ -39,6 +39,7 @@ config NXP_WIFI_AUTO_INIT
 	help
 	  Automatically initialize NXP Wi-Fi driver and FW.
 
+
 choice
 	prompt "Select NXP 88W8987 module"
 	depends on NXP_88W8987 && !NXP_WIFI_CUSTOM
@@ -90,6 +91,7 @@ config NXP_88W8987_MURATA_1ZM_M2
 
 endchoice
 
+
 choice
 	prompt "Select NXP Wi-Fi Regulatory Domain"
 	depends on NXP_IW416 && !NXP_WIFI_CUSTOM
@@ -111,6 +113,7 @@ config NXP_IW416_REGION_US
 	bool "Regulatory domain US"
 
 endchoice
+
 
 choice
 	prompt "Select NXP Wi-Fi Regulatory Domain"
@@ -180,6 +183,7 @@ config NXP_88W8801_MURATA_2DS_M2
 	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/type2ds
 
 endchoice
+
 
 config NXP_WIFI_SHELL
 	bool "NXP Wi-Fi shell"

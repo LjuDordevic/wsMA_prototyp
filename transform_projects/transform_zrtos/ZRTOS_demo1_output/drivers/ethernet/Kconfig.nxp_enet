@@ -20,6 +20,7 @@ config ETH_NXP_ENET
 	help
 	  Enable NXP ENET Ethernet driver.
 
+
 if ETH_NXP_ENET
 
 config ETH_NXP_ENET_1G

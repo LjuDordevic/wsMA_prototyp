@@ -66,6 +66,8 @@ config AIROC_WIFI_CUSTOM
 	  user must to provide path to FW, CLM and NVRAM for
 	  custom or vendor CYW43xx modules.
 
+
+
 choice
 	prompt "Select CYW43022 module"
 	depends on CYW43022 && !AIROC_WIFI_CUSTOM
@@ -78,6 +80,9 @@ config CYW43022CUB
 	  Detailed information about CYW43022CUB module you can find on
 	  https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/wi-fi-5-802.11ac/cyw43022/
 endchoice
+
+
+
 
 choice
 	prompt "Select CYW55500 module"

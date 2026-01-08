@@ -11,4 +11,5 @@ config PM
 	default n
 	select UART_INTERRUPT_DRIVEN if SERIAL_SUPPORT_INTERRUPT
 
+
 endif

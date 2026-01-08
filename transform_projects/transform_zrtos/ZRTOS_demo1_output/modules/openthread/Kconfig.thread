@@ -39,6 +39,7 @@ config OPENTHREAD_JOINER_PSKD
 	depends on OPENTHREAD_JOINER_AUTOSTART
 	default "J01NME"
 
+
 config OPENTHREAD_MTD_SED
 	bool "SED - Sleepy End Device"
 	depends on OPENTHREAD_MTD

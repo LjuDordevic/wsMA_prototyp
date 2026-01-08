@@ -28,6 +28,7 @@ config SMBUS_INIT_PRIORITY
 	help
 	  SMBus device driver initialization priority.
 
+
 module = SMBUS
 module-str = smbus
 source "subsys/logging/Kconfig.template.log_config"

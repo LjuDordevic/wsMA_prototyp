@@ -25,6 +25,7 @@ config LV_Z_BITS_PER_PIXEL
 config LV_Z_FLUSH_THREAD
 	default n
 
+
 endif # LVGL
 
 source "boards/shields/rtklcdpar1s00001be/boards/ek_ra8p1_r7ka8p1kflcac_cm85.defconfig"

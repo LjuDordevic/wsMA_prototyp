@@ -11,6 +11,7 @@ config LV_Z_DOUBLE_VDB
 config LV_Z_BITS_PER_PIXEL
 	default 16
 
+
 # VDB size is 10% of the full screen size
 config LV_Z_VDB_SIZE
 	default 10

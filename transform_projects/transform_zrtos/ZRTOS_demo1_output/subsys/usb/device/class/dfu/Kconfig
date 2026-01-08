@@ -62,4 +62,5 @@ config USB_DFU_PERMANENT_DOWNLOAD
 	  Downloading the wrong image will cause a bricked device.
 	  Make sure there is some kind of recovery mechanism.
 
+
 endif # USB_DFU_CLASS

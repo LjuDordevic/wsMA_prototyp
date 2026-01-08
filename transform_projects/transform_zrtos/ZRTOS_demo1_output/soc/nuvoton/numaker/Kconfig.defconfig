@@ -4,6 +4,7 @@
 
 if SOC_FAMILY_NUMAKER
 
+
 config RESET
 	default y
 

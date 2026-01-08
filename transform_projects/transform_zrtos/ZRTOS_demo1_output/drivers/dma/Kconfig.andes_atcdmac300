@@ -3,6 +3,7 @@
 
 # SPDX-License-Identifier: Apache-2.0
 
+
 config DMA_ANDES_ATCDMAC300
 	bool "Using Andes ATCDMAC300 DMA driver"
 	default y

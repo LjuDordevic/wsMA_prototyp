@@ -84,6 +84,7 @@ config ETH_NATIVE_TAP_RX_TIMEOUT
 
 endif # ETH_NATIVE_TAP
 
+
 config ETH_NATIVE_POSIX
 	bool "Native POSIX Ethernet driver (deprecated)"
 	depends on ARCH_POSIX

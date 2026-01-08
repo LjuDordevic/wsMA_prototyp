@@ -38,6 +38,7 @@ config UART_NS16550_INTEL_LPSS_DMA
 	help
 	  This enables the usage of INTEL LPSS internal DMA for Async operations.
 
+
 config UART_NS16550_ACCESS_WORD_ONLY
 	bool "NS16550 only allows word access"
 	help

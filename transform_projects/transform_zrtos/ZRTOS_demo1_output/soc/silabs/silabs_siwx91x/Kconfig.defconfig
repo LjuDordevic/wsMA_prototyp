@@ -3,6 +3,9 @@
 
 if SOC_FAMILY_SILABS_SIWX91X
 
+
+
+
 config WISECONNECT_NETWORK_STACK
 	bool
 	select CMSIS_RTOS_V2

@@ -544,6 +544,7 @@ config ARCH_DEVICE_STATE_ALIGN
 	help
 	  This option controls alignment size of device state.
 
+
 config GEN_SW_ISR_TABLE
 	bool "Generate a software ISR table"
 	default y
@@ -1091,6 +1092,7 @@ config DCACHE_LINE_SIZE
 	  Size in bytes of a CPU d-cache line. If this is set to 0 the value is
 	  obtained from the 'd-cache-line-size' DT property instead if present.
 
+
 	  Detect automatically at runtime by selecting DCACHE_LINE_SIZE_DETECT.
 
 config ICACHE_LINE_SIZE_DETECT
@@ -1114,6 +1116,7 @@ config ICACHE_LINE_SIZE
 	  obtained from the 'i-cache-line-size' DT property instead if present.
 
 	  Detect automatically at runtime by selecting ICACHE_LINE_SIZE_DETECT.
+
 
 endmenu
 

@@ -1,6 +1,7 @@
 # Copyright (c) 2022 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
+
 config CRYPTO_INTEL_SHA
 	bool "Intel SHA driver"
 	default y

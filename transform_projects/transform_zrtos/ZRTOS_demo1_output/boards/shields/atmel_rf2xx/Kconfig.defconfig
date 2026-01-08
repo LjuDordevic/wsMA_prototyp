@@ -10,6 +10,7 @@ if SHIELD_ATMEL_RF2XX || \
 
 if NETWORKING
 
+
 endif	# NETWORKING
 
 endif	# SHIELD_ATMEL_RF2XX || \

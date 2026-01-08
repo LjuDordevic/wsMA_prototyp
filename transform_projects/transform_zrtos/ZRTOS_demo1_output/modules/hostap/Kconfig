@@ -122,6 +122,7 @@ endif
 config WIFI_NM_WPA_SUPPLICANT_WEP
 	bool "WEP (Legacy crypto) support"
 
+
 config WIFI_NM_WPA_SUPPLICANT_CRYPTO_MBEDTLS_PSA
 	bool "Crypto Platform Secure Architecture support for WiFi"
 	imply MBEDTLS_PSA_CRYPTO_C
@@ -310,6 +311,7 @@ config WIFI_NM_WPA_SUPPLICANT_BSS_MAX_IDLE_TIME
 
 config WIFI_NM_WPA_SUPPLICANT_NO_DEBUG
 	bool "Disable printing of debug messages, saves code size significantly"
+
 
 config WIFI_NM_WPA_SUPPLICANT_DPP
 	bool "WFA Easy Connect DPP"
@@ -527,6 +529,7 @@ config NW_SEL_RELIABILITY
 	bool
 	default y
 	depends on WIFI_NM_WPA_SUPPLICANT_NW_SEL_RELIABILITY
+
 
 config SAE_PWE_EARLY_EXIT
 	bool "Exit early if PWE if found"

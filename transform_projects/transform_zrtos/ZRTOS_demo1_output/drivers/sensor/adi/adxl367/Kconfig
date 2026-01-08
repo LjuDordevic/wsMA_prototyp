@@ -75,6 +75,7 @@ config ADXL367_INACTIVITY_DETECTION_MODE
 	help
 	  Enable Inactivity detection.
 
+
 config ADXL367_REFERENCED_ACTIVITY_DETECTION_MODE
 	bool "Use referenced activity detection"
 	default y

@@ -3,6 +3,7 @@
 # Copyright (c) 2023 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
+
 menuconfig TIMEAWARE_GPIO
 	bool "Timeaware GPIO driver"
 	help

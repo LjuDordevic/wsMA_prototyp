@@ -262,6 +262,7 @@ config AIROC_AUTOBAUD_MODE
 
 	  https://infineon.github.io/btsdk-docs/BT-SDK/AIROC-HCI-Firmware-Download.pdf
 
+
 # Change size of command lengths. It for vendor commands related to
 # firmware downloading.
 config BT_BUF_CMD_TX_SIZE

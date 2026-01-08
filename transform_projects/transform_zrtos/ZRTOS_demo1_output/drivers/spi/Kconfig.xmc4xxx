@@ -10,6 +10,7 @@ menuconfig SPI_XMC4XXX
 	help
 	  Enable XMC4XXX SPI driver.
 
+
 if SPI_XMC4XXX
 
 config SPI_XMC4XXX_INTERRUPT

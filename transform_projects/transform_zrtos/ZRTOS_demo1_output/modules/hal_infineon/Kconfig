@@ -46,6 +46,7 @@ config USE_INFINEON_SPI
 	help
 	  Enable Serial Peripheral Interface (SPI) HAL module driver for Infineon devices
 
+
 config USE_INFINEON_TIMER
 	bool
 	help

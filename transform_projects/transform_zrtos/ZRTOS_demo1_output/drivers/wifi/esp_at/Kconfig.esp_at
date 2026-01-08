@@ -131,6 +131,7 @@ config WIFI_ESP_AT_IP_MASK
 
 endif
 
+
 config WIFI_ESP_AT_DNS_USE
 	bool "Use DNS from ESP"
 	depends on DNS_RESOLVER

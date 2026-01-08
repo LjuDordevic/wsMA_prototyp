@@ -3,6 +3,7 @@
 # Copyright (c) 2024 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
+
 menu "SoC and Board Hooks"
 
 config SOC_RESET_HOOK

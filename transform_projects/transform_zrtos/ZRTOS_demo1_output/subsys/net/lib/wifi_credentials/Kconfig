@@ -73,6 +73,7 @@ config WIFI_CREDENTIALS_CONNECT_STORED_CONNECTION_TIMEOUT
 	help
 	   Wait period before falling back to the next entry in the list of stored SSIDs.
 
+
 if WIFI_NM_WPA_SUPPLICANT_CRYPTO_ENTERPRISE
 
 config WIFI_CREDENTIALS_RUNTIME_CERTIFICATES

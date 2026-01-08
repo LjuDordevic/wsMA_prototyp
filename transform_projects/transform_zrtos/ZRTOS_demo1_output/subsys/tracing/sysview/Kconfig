@@ -21,4 +21,5 @@ config SEGGER_SYSVIEW_APP_NAME
 config SEGGER_SYSVIEW_POST_MORTEM_MODE
 	bool "Post-mortem mode for SystemView"
 
+
 endif

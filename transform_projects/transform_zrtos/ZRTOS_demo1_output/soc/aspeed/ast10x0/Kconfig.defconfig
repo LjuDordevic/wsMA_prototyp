@@ -12,4 +12,5 @@ config ICACHE_LINE_SIZE
 config DCACHE_LINE_SIZE
 	default 32
 
+
 endif # SOC_SERIES_AST10X0

@@ -61,6 +61,7 @@ config TFM_NRF_NS_STORAGE
 
 endif # BUILD_WITH_TFM
 
+
 config NRF_MPU_FLASH_REGION_SIZE
 	hex
 	default 0x1000

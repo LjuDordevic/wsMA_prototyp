@@ -1,6 +1,7 @@
 # Copyright (c) 2024 Intel Corporation
 # SPDX-License-Identifier: Apache-2.0
 
+
 if SOC_INTEL_ACE30
 
 config MP_MAX_NUM_CPUS

@@ -230,6 +230,7 @@ config BT_CTLR_DF_SAMPLE_OFFSET_PHY_2M_SAMPLING_1US
 	  is 1 us. Decreasing the offset beyond the trigger of the AoA/AoD procedure will have
 	  no effect.
 
+
 config BT_CTLR_DF_SAMPLE_OFFSET_PHY_1M_SAMPLING_2US
 	int "CTE sampling offset relative for PHY 1M and 2US samples spacing"
 	depends on SOC_COMPATIBLE_NRF

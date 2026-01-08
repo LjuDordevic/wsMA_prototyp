@@ -133,6 +133,7 @@ config ZTEST_VERIFY_RUN_ALL
 	help
 	  This rule will fail the project if not all tests have been run.
 
+
 config ZTEST_COVERAGE_RESET_BEFORE_TESTS
 	bool "Performs coverage counters reset"
 	depends on COVERAGE_GCOV

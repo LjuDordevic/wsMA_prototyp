@@ -26,6 +26,7 @@ config ETH_LAN865X_INIT_PRIORITY
 	  LAN865X device driver initialization priority.
 	  Must be initialized after SPI.
 
+
 config ETH_LAN865X_IRQ_THREAD_STACK_SIZE
 	int "Stack size for a thread that processes IRQ"
 	default 512

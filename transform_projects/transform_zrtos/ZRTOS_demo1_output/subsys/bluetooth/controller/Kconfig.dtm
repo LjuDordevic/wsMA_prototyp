@@ -55,6 +55,7 @@ if BT_CTLR_DTM_HCI_DF_IQ_REPORT
 	  Maximum number of the DTM IQ Reports in pool. It depends on the upper tester
 	  test packets transmission interval.
 
+
 endif # BT_CTLR_DTM_HCI_DF_IQ_REPORT
 
 endif # BT_CTLR_DTM_HCI

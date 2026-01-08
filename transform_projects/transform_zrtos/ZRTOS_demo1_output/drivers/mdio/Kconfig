@@ -48,6 +48,7 @@ config MDIO_INIT_PRIORITY
 	help
 	  MDIO device driver initialization priority.
 
+
 module = MDIO
 module-str = mdio
 source "subsys/logging/Kconfig.template.log_config"

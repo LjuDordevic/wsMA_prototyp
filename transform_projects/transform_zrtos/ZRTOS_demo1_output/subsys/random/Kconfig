@@ -35,6 +35,9 @@ config TIMER_RANDOM_INITIAL_STATE
 	  Initial state value used by TIMER_RANDOM_GENERATOR and
 	  early random number genenator.
 
+
+
+
 DT_CHOSEN_Z_ENTROPY := zephyr,entropy
 config CSPRNG_AVAILABLE
 	bool
@@ -56,6 +59,7 @@ config CSPRNG_ENABLED
 	bool
 	default y
 	depends on ENTROPY_HAS_DRIVER
+
 
 config CS_CTR_DRBG_PERSONALIZATION
 	string "CTR-DRBG Personalization string"

@@ -17,6 +17,7 @@ config MODEM_UBLOX_SARA
 
 if MODEM_UBLOX_SARA
 
+
 config MODEM_UBLOX_SARA_R4_RX_STACK_SIZE
 	int "Stack size for the u-blox SARA-R4 modem driver RX thread"
 	default 1028

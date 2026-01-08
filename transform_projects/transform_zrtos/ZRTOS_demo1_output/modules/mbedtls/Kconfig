@@ -23,6 +23,7 @@ menuconfig MBEDTLS
 
 if MBEDTLS
 
+
 config CUSTOM_MBEDTLS_CFG_FILE
 	bool "Custom mbed TLS configuration file"
 	help
@@ -97,6 +98,7 @@ config MBEDTLS_DEBUG_LEVEL
 
 	  This makes Zephyr call mbedtls_debug_set_threshold() function during
 	  mbedTLS initialization, with the configured debug log level.
+
 
 config MBEDTLS_DEBUG_STRIP_NEWLINE
 	bool "Strip newlines"

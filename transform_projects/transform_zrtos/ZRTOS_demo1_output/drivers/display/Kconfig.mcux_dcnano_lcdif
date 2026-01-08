@@ -1,12 +1,14 @@
 # Copyright 2023 NXP
 # SPDX-License-Identifier: Apache-2.0
 
+
 menuconfig DISPLAY_MCUX_DCNANO_LCDIF
 	bool "MCUX DCNano LCDIF driver"
 	default y
 	depends on DT_HAS_NXP_DCNANO_LCDIF_ENABLED
 	help
 	  Enable support for mcux DCNano LCDIF driver.
+
 
 if DISPLAY_MCUX_DCNANO_LCDIF
 
@@ -22,6 +24,7 @@ config MCUX_DCNANO_LCDIF_FB_NUM
 	  framebuffers are allocated by the driver, and the application
 	  implements double framebuffering by always calling display_write with
 	  a buffer equal in size to the connected panel.
+
 
 config MCUX_DCNANO_LCDIF_MAINTAIN_CACHE
 	bool "Maintain cache coherency"

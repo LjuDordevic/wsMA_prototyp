@@ -53,6 +53,7 @@ config SEGGER_RTT_PRINTF_BUFFER_SIZE
 	int "Size of buffer for RTT printf to bulk-send chars via RTT"
 	default 64
 
+
 config SEGGER_RTT_MODE
 	int
 	default 2 if SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL
@@ -62,6 +63,7 @@ config SEGGER_RTT_MODE
 config SEGGER_RTT_MEMCPY_USE_BYTELOOP
 	bool "Use a simple byte-loop instead of standard memcpy"
 
+
 if SEGGER_RTT_SECTION_CUSTOM || SEGGER_RTT_SECTION_CUSTOM_DTS_REGION
 
 config SEGGER_RTT_SECTION_CUSTOM_NAME
@@ -69,5 +71,6 @@ config SEGGER_RTT_SECTION_CUSTOM_NAME
 	default ".rtt_buff_data"
 
 endif
+
 
 endif

@@ -3,6 +3,7 @@
 # Copyright (c) 2015 Wind River Systems, Inc.
 # SPDX-License-Identifier: Apache-2.0
 
+
 menu "System Monitoring Options"
 
 source "subsys/debug/thread_analyzer/Kconfig"
@@ -298,6 +299,7 @@ config OMIT_FRAME_POINTER
 
 	  If unsure, disable OVERRIDE_FRAME_POINTER_DEFAULT to allow the compiler
 	  to adopt sensible defaults for your architecture.
+
 
 #
 # Generic Debugging Options

@@ -5,4 +5,5 @@
 
 if SOC_FAMILY_NUMICRO
 
+
 endif # SOC_FAMILY_NUMICRO

@@ -195,12 +195,14 @@ if SHIELD_NXP_M2_2EL_WIFI_BT
 
 if BT
 
+
 endif # BT
 
 if WIFI
 
 config WIFI_NXP
 	default y
+
 
 choice
 	default NXP_IW612_MURATA_2EL_M2
@@ -268,12 +270,14 @@ if SHIELD_NXP_M2_2LL_WIFI_BT
 
 if BT
 
+
 endif # BT
 
 if WIFI
 
 config WIFI_NXP
 	default y
+
 
 choice
 	default NXP_IW610_MURATA_2LL_M2

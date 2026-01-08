@@ -28,6 +28,7 @@ config LV_DPI_DEF
 config LV_Z_FLUSH_THREAD
 	default y
 
+
 endif # LVGL
 
 endif # SHIELD_G1120B0MIPI

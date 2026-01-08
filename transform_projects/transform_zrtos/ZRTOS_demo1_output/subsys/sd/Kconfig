@@ -92,6 +92,7 @@ config SD_DATA_RETRIES
 	help
 	  Number of times to retry sending data to SD card in case of failure
 
+
 config SD_UHS_PROTOCOL
 	bool "Ultra high speed SD card protocol support"
 	default y if SDHC_SUPPORTS_UHS

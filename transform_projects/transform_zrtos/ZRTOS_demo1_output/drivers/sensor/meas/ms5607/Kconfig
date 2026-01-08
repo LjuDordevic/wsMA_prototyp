@@ -35,6 +35,7 @@ config MS5607_PRES_OVER_4096X
 
 endchoice
 
+
 choice
 	prompt "Temperature oversampling."
 	default MS5607_TEMP_OVER_2048X

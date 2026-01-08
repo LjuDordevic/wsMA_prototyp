@@ -144,6 +144,7 @@ config BT_BAP_BROADCAST_SRC_COUNT
 	  One broadcast source can send multiple streams
 	  (up to BT_BAP_BROADCAST_SRC_STREAM_COUNT per broadcast source).
 
+
 config BT_BAP_BROADCAST_SRC_STREAM_COUNT
 	int "Basic Audio Broadcast Source Stream count"
 	default 1

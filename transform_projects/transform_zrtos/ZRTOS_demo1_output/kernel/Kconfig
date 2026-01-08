@@ -910,6 +910,7 @@ config XIP
 	  supply a linker command file when building your image. Enabling this
 	  option increases both the code and data footprint of the image.
 
+
 menu "Security Options"
 
 config REQUIRES_STACK_CANARIES

@@ -5,6 +5,7 @@
 # device stack and CDC ACM instance to be used as the default serial backend
 # for logging or shell.
 
+
 menuconfig CDC_ACM_SERIAL_INITIALIZE_AT_BOOT
 	bool "Initialize USB device and CDC ACM UART at boot"
 	depends on USBD_CDC_ACM_CLASS

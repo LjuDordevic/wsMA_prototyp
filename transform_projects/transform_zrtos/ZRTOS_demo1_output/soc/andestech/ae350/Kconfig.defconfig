@@ -39,4 +39,5 @@ config NUM_2ND_LEVEL_AGGREGATORS
 config NUM_IRQS
 	default 116
 
+
 endif # SOC_SERIES_ANDES_AE350

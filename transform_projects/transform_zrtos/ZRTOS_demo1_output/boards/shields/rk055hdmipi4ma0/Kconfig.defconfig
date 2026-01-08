@@ -45,6 +45,7 @@ config LV_DPI_DEF
 config LV_Z_FLUSH_THREAD
 	default y
 
+
 endif # LVGL
 
 endif # SHIELD_RK055HDMIPI4MA0

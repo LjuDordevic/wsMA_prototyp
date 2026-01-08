@@ -20,6 +20,7 @@ config HAS_GD32_HAL
 
 if HAS_GD32_HAL
 
+
 config GD32_HAS_IRC_32K
 	bool
 	help

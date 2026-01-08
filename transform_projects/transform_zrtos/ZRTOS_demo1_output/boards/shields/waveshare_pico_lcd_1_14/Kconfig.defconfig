@@ -5,6 +5,7 @@ if SHIELD_WAVESHARE_PICO_LCD_1_14 || SHIELD_WAVESHARE_PICO_LCD_1_14_DISPLAY
 
 if DISPLAY
 
+
 if LVGL
 
 config LV_DPI_DEF
@@ -12,6 +13,8 @@ config LV_DPI_DEF
 
 config LV_Z_BITS_PER_PIXEL
 	default 16
+
+
 
 endif # LVGL
 

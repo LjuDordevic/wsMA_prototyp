@@ -212,6 +212,7 @@ config PM_DEVICE_SYSTEM_MANAGED
 	  the core wakes up from low power mode all suspended devices
 	  are resumed.
 
+
 endif # PM_DEVICE
 
 endmenu

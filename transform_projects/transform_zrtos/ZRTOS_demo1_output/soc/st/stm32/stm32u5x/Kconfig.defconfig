@@ -28,6 +28,7 @@ config DCACHE
 config CACHE_MANAGEMENT
 	default y
 
+
 if STM32_STOP3_LP_MODE
 
 config COUNTER

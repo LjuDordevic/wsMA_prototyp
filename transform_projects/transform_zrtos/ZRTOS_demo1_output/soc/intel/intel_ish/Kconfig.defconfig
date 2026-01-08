@@ -38,4 +38,5 @@ config APIC_TIMER_TSC_M
 endif
 endif
 
+
 endif # SOC_FAMILY_INTEL_ISH

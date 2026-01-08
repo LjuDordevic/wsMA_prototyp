@@ -31,6 +31,7 @@ config LV_DPI_DEF
 config LV_Z_FLUSH_THREAD
 	default y
 
+
 # Force display buffers to be aligned to cache line size (32 bytes)
 config LV_Z_VDB_ALIGN
 	default 32

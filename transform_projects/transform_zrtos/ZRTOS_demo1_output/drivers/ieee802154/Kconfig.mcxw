@@ -19,8 +19,10 @@ config IEEE802154_MCXW_RX_STACK_SIZE
 	int "Driver's internal RX thread stack size"
 	default 800
 
+
 config IEEE802154_MCXW_CSL_ACCURACY
 	int "Csl accuracy for delayed operations"
 	default 100
+
 
 endif

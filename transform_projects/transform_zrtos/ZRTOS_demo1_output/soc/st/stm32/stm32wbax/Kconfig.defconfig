@@ -15,6 +15,7 @@ config ICACHE
 config CACHE_MANAGEMENT
 	default y
 
+
 config STM32_LPTIM_TIMER
 	default y if PM
 

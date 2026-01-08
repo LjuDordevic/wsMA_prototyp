@@ -74,6 +74,7 @@ config LV_Z_USE_FILESYSTEM
 	help
 	  Enable LittlevGL file system
 
+
 config LV_COLOR_16_SWAP
 	bool "Swap the 2 bytes of RGB565 color."
 	depends on LV_COLOR_DEPTH_16
@@ -177,5 +178,6 @@ config LV_Z_PXP_INTERRUPT_PRIORITY
 source "modules/lvgl/Kconfig.memory"
 source "modules/lvgl/Kconfig.input"
 source "modules/lvgl/Kconfig.shell"
+
 
 endif

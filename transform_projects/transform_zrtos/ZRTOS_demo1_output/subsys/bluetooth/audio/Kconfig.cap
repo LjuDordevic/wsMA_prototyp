@@ -37,6 +37,7 @@ config BT_CAP_INITIATOR
 	help
 	  Enabling this will enable the CAP Initiator role.
 
+
 config BT_CAP_COMMANDER
 	bool "Common Audio Profile Initiator Role Support"
 	depends on (BT_BAP_BROADCAST_ASSISTANT && BT_BAP_SCAN_DELEGATOR && BT_CSIP_SET_COORDINATOR) || \

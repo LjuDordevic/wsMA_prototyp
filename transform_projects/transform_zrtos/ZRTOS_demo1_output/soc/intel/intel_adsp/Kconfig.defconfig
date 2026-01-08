@@ -45,6 +45,7 @@ endif
 config CACHE_MANAGEMENT
 	def_bool y
 
+
 config DCACHE_LINE_SIZE
 	default 64
 

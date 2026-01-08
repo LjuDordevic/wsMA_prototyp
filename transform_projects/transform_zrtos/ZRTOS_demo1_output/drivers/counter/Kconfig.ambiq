@@ -2,6 +2,7 @@
 #
 # Copyright (c) 2023 Antmicro <www.antmicro.com>
 
+
 config COUNTER_AMBIQ
 	bool "Ambiq Counter Driver"
 	default y

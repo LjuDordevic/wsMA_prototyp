@@ -72,6 +72,7 @@ menu "Engine features"
 config LWM2M_DTLS_SUPPORT
 	bool "DTLS support in the LwM2M client"
 
+
 config LWM2M_DNS_SUPPORT
 	bool "DNS support in the LwM2M client"
 	default y if DNS_RESOLVER
@@ -466,6 +467,7 @@ config LWM2M_RW_JSON_SUPPORT
 	depends on JSON_LIBRARY
 	help
 	  Include support for writing JSON data
+
 
 config LWM2M_RW_SENML_JSON_SUPPORT
 	bool "SENML JSON data format"

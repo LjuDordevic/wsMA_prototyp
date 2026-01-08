@@ -48,6 +48,7 @@ config SOC_MK66F18
 	select HAS_MCUX_RCM
 	select HAS_MCUX_LPUART
 
+
 if SOC_MK66F18
 
 config K6X_HSRUN

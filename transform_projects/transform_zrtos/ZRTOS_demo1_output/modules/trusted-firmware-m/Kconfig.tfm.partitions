@@ -76,4 +76,6 @@ config TFM_PARTITION_FIRMWARE_UPDATE
 	  options are handled by the build system in the trusted-firmware-m
 	  repository.
 
+
+
 endif # BUILD_WITH_TFM

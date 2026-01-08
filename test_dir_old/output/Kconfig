@@ -51,32 +51,6 @@ choice
 	  Selects if the stack or heap will be used for variables that are needed when processing
 	  requests.
 
-menuconfig MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_STACK
-	help
-	  Use a fixed size stack buffer, any user-supplied values longer than this will be
-	  rejected.
-
-	  Note that stack usage for parameter storage alone will be
-	  MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_STACK * 2, therefore the MCUmgr stack should
-	  be appropriately sized.
-
-config MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_STACK_ENTRIES
-	int "Maximum list item entries"
-	range 1 65535
-	default 16
-	help
-	  The number of maximum values in the list for the details command to support, each value
-	  occupies 2 bytes on the stack.
-
-endif # MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_STACK
-
-config MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_HEAP
-	bool "Heap (dynamic size)"
-	depends on COMMON_LIBC_MALLOC_ARENA_SIZE > 0
-	help
-	  Use dynamic heap memory allocation through malloc, if there is insufficient heap memory
-	  for the allocation then the request will be rejected.
-
 if MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_STACK
 
 config MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_STACK_ENTRIES
@@ -88,6 +62,13 @@ config MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_STACK_ENTRIES
 	  occupies 2 bytes on the stack.
 
 endif # MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_STACK
+config MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_HEAP
+	bool "Heap (dynamic size)"
+	depends on COMMON_LIBC_MALLOC_ARENA_SIZE > 0
+	help
+	  Use dynamic heap memory allocation through malloc, if there is insufficient heap memory
+	  for the allocation then the request will be rejected.
+
 endchoice
 menuconfig MCUMGR_GRP_ENUM_DETAILS_BUFFER_TYPE_STACK
 	bool "Stack (fixed size)"
@@ -122,6 +103,6 @@ endif # MCUMGR_GRP_ENUM_DETAILS
 
 module = MCUMGR_GRP_ENUM
 module-str = mcumgr_grp_enum
-source "subsys/logging/Kconfig.template.log_config"
+#source "subsys/logging/Kconfig.template.log_config"
 
 endif # MCUMGR_GRP_ENUM

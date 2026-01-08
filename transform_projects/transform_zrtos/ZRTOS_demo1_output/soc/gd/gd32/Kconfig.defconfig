@@ -3,6 +3,7 @@
 
 if SOC_FAMILY_GD_GD32
 
+
 config RESET
 	default y
 

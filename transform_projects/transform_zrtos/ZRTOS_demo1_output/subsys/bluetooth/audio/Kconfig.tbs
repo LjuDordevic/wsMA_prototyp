@@ -62,6 +62,7 @@ config BT_TBS_LOCK_TIMEOUT
 
 endif # BT_TBS
 
+
 ##################### Call Control Client #####################
 
 config BT_TBS_CLIENT_GTBS

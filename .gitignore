@@ -8,7 +8,7 @@ __pycache__/
 .vscode/
 
 ZRTOS_demo/
-core/old_scripts/single_file.py
+core/single_file.py
 
 results_old.xlsx
 transform_demo.log

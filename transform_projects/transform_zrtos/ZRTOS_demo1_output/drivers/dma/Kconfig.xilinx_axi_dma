@@ -10,6 +10,7 @@ config DMA_XILINX_AXI_DMA
 	help
 	  DMA driver for Xilinx AXI DMAs, usually found on FPGAs.
 
+
 config DMA_XILINX_AXI_DMA_DISABLE_CACHE_WHEN_ACCESSING_SG_DESCRIPTORS
 	bool "Disable data cache while accessing Scatter-Gather Descriptors."
 	depends on DMA_XILINX_AXI_DMA

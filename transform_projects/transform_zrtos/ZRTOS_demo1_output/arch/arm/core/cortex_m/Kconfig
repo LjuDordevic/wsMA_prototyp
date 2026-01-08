@@ -455,6 +455,7 @@ endmenu
 # Implement the null pointer detection using either the Data Watchpoint and
 # Trace Unit and the Debug Monitor Exception, or the Memory Protection Unit.
 
+
 config CORTEX_M_NULL_POINTER_EXCEPTION
 	bool
 	help

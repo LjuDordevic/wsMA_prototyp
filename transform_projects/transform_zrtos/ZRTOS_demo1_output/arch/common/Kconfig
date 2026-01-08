@@ -23,6 +23,7 @@ config ISR_TABLE_SHELL
 	help
 	  This option enables a shell command to dump the ISR tables.
 
+
 config ARM_MPU
 	bool "ARM MPU Support"
 	select MPU

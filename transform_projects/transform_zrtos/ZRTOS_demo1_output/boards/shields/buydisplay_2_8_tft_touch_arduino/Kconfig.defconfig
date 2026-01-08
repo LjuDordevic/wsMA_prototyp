@@ -13,6 +13,8 @@ config LV_Z_VDB_SIZE
 config LV_Z_BITS_PER_PIXEL
 	default 16
 
+
+
 config INPUT
 	default y
 

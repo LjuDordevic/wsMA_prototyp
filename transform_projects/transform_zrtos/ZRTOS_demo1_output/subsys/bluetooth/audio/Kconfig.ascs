@@ -63,4 +63,5 @@ config BT_ASCS_ASE_BUF_TIMEOUT
 	  an ASE read or dropping a notification if the ASE state is being accessed by another
 	  thread.
 
+
 endif # BT_ASCS

@@ -16,6 +16,7 @@ menuconfig WIFI_ESWIFI
 
 if WIFI_ESWIFI
 
+
 config WIFI_ESWIFI_MAX_DATA_SIZE
 	int "esWiFi message size"
 	default 1600

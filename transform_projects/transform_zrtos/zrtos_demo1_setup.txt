@@ -31,6 +31,19 @@ west zephyr-export
 
 3. update with a new target:
 here: [...]/ZRTOS_demo1/zephyr/cmake/modules/kconfig.cmake
+
+ZRTOS_demo1
+|-.west
+|- bootloader
+|- modules 
+|- tools 
+|- zephyr
+|  |-samples
+|  |  |-hello_world
+|  |-cmake
+|  |  |-modules
+|  |  |   |-kconfig.cmake
+
 ---> 
     set(EXTRA_KCONFIG_TARGET_COMMAND_FOR_transform
     [...]/wsMA_prototyp/core/target_workflow.py

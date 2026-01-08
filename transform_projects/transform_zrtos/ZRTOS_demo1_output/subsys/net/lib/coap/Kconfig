@@ -8,6 +8,7 @@ config COAP
 	help
 	  This option enables the CoAP implementation.
 
+
 if COAP
 
 # This setting is only used by unit test. Do not enable it in applications

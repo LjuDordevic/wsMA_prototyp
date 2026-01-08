@@ -20,6 +20,7 @@ config LV_DPI_DEF
 	default 120 if SHIELD_WAVESHARE_EPAPER_GDEW042T2
 	default 130
 
+
 config LV_Z_BITS_PER_PIXEL
 	default 1
 

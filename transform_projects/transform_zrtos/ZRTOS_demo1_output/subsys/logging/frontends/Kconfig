@@ -149,4 +149,5 @@ config LOG_FRONTEND_STMESP_TP_CHAN_BASE
 	help
 	  Do not change this value as it is aligned with host decoder (nrfutil trace).
 
+
 endmenu

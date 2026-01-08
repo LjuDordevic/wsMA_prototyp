@@ -13,6 +13,7 @@ config SYS_CLOCK_HW_CYCLES_PER_SEC
 	default 237500000 if CORTEX_M_SYSTICK
 	default 1000000 if MCUX_OS_TIMER
 
+
 # The existing SAI diver cannot initialize the PLL on the board,
 # so the PLL settings will not be performed in the driver.
 config I2S_HAS_PLL_SETTING

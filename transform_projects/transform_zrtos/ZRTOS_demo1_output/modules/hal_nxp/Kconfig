@@ -4,6 +4,7 @@
 #
 # SPDX-License-Identifier: Apache-2.0
 
+
 config ZEPHYR_HAL_NXP_MODULE
 	bool
 

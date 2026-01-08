@@ -63,4 +63,5 @@ config NXP_RF_IMU
 
 endif # IEEE802154
 
+
 endif # SOC_SERIES_MCXW

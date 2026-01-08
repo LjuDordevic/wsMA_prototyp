@@ -15,6 +15,7 @@ config INPUT_KBD_MATRIX_THREAD_STACK_SIZE
 	help
 	  Size of the stack used for the keyboard matrix thread.
 
+
 config INPUT_KBD_MATRIX_THREAD_PRIORITY
 	int "Priority for the keyboard matrix thread"
 	default 0

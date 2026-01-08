@@ -51,6 +51,7 @@ config DNS_RESOLVER_AI_MAX_ENTRIES
 	  Defines the max number of IP addresses per domain name
 	  resolution the DNS resolver can handle.
 
+
 config DNS_RESOLVER_MAX_SERVERS
 	int "Number of DNS server addresses"
 	range 1 NET_MAX_CONTEXTS

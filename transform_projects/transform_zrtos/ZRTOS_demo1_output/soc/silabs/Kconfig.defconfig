@@ -20,4 +20,6 @@ config CORTEX_M_SYSTICK
 config IDLE_STACK_SIZE
 	default 512 if SOC_GECKO_PM_BACKEND_PMGR
 
+
+
 endif

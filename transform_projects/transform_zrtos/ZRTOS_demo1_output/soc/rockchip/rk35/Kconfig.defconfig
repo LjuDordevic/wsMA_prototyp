@@ -6,4 +6,5 @@
 
 if SOC_FAMILY_ROCKCHIP
 
+
 endif

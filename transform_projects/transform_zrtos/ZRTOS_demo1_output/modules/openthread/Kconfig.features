@@ -3,6 +3,7 @@
 # Copyright (c) 2020 Nordic Semiconductor ASA
 # SPDX-License-Identifier: Apache-2.0
 
+
 config OPENTHREAD_THREAD_VERSION
 	string
 	default "1.1" if OPENTHREAD_THREAD_VERSION_1_1
@@ -272,6 +273,7 @@ config OPENTHREAD_PLATFORM_KEY_REF
 	  Enable usage of cryptographic key references instead of literal keys.
 	  This requires a crypto backend library that supports key references.
 
+
 config OPENTHREAD_PLATFORM_BOOTLOADER_MODE
 	bool
 	help
@@ -282,6 +284,7 @@ config OPENTHREAD_PLATFORM_NETIF
 
 config OPENTHREAD_PLATFORM_UDP
 	bool "Platform UDP support"
+
 
 config OPENTHREAD_POWER_SUPPLY
 	string

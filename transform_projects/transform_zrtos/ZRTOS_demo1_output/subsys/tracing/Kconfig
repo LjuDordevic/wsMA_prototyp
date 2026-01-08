@@ -65,6 +65,7 @@ config TRACING_USER
 
 endchoice
 
+
 config TRACING_CTF_TIMESTAMP
 	bool "CTF internal timestamp"
 	default y

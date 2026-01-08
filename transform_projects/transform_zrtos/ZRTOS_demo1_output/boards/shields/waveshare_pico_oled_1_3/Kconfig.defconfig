@@ -13,6 +13,7 @@ config LV_DPI_DEF
 config LV_Z_BITS_PER_PIXEL
 	default 1
 
+
 endif # LVGL
 
 endif # DISPLAY

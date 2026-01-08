@@ -84,4 +84,5 @@ config APPLICATION_INIT_PRIORITY
 	  This priority level is for end-user drivers such as sensors and display
 	  which have no inward dependencies.
 
+
 endmenu

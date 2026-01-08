@@ -12,6 +12,7 @@ config POSIX_FSYNC
 	  For more information, please see
 	  https://pubs.opengroup.org/onlinepubs/9699919799/functions/fsync.html
 
+
 config POSIX_SYNCHRONIZED_IO
 	bool "POSIX synchronized I/O"
 	select POSIX_FSYNC

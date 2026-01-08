@@ -41,4 +41,5 @@ config MIPI_DSI_MCUX_2L_SWAP16
 	  this Kconfig is enabled, the DSI expects RGB565 data in little endian
 	  format, which will then be byte swapped.
 
+
 endif # MIPI_DSI_MCUX_2L

@@ -31,6 +31,7 @@ config OPENTHREAD_SYS_INIT_PRIORITY
 	help
 	  This option sets the priority of the OpenThread system initialization.
 
+
 config OPENTHREAD_MANUAL_START
 	bool "Start OpenThread stack manually"
 	help
@@ -48,6 +49,7 @@ menuconfig OPENTHREAD_DEBUG
 	bool "OpenThread stack logging support"
 	help
 	  This option enables logging support for OpenThread.
+
 
 config OPENTHREAD_LOG_LEVEL
 	int
@@ -112,6 +114,7 @@ config OPENTHREAD_SHELL
 config MBEDTLS_PROMPTLESS
 	default y if !CUSTOM_OPENTHREAD_SECURITY
 
+
 config OPENTHREAD_MBEDTLS
 	bool
 	select MBEDTLS
@@ -156,6 +159,7 @@ config OPENTHREAD_COPROCESSOR
 	  Enable Co-Processor in OpenThread stack.
 
 if OPENTHREAD_COPROCESSOR
+
 
 config OPENTHREAD_COPROCESSOR_UART_RING_BUFFER_SIZE
 	int "Set Co-Processor UART ring buffer size"

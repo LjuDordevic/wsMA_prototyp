@@ -10,11 +10,17 @@ source "soc/silabs/silabs_s2/xg29/Kconfig.defconfig"
 
 if SOC_FAMILY_SILABS_S2
 
+
+
+
+
 # silabs_s2 uses simplicity_sdk hal library, which already have by default a zero latency
 # IRQs mechanism with a hardcoded value. In order to be aligned with simplicity_sdk, we
 # need to activate Zero Latency IRQ in Zephyr by default. The level (2) depends on the
 # hardcoded value in simplicity_sdk (CORE_ATOMIC_BASE_PRIORITY_LEVEL). Without this config,
 # if you use an IRQ with a priority of 0 or 1, irq_lock() and irq_unlock() have no effect
 # over this IRQ.
+
+
 
 endif

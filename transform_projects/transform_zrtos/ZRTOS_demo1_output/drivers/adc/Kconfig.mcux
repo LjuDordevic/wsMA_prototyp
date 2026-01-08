@@ -103,6 +103,7 @@ endif # ADC_MCUX_ADC16_ENABLE_EDMA
 
 endif # ADC_MCUX_ADC16
 
+
 if ADC_MCUX_LPADC
 
 config LPADC_DO_OFFSET_CALIBRATION
@@ -119,5 +120,6 @@ config LPADC_CHANNEL_COUNT
 	  The user can reduce this value if their application uses fewer than
 	  15 ADC channels. This value corresponds to how many of the CMD
 	  registers can be configured within the ADC.
+
 
 endif # ADC_MCUX_LPADC

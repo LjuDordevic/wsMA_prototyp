@@ -76,6 +76,7 @@ config SPI_NOR_SLEEP_ERASE_MS
 	  The delay between polling while waiting for the flash to finish
 	  an erase operation.
 
+
 config SPI_NOR_FLASH_LAYOUT_PAGE_SIZE
 	int "Page size to use for FLASH_LAYOUT feature"
 	default 65536

@@ -1314,6 +1314,7 @@ config BT_MESH_OD_PRIV_PROXY_CLI
 	  of On-Demand Private Proxy Servers. The state determines if the peers will
 	  advertise the Private Network Identity type after receiving a Solicitation PDU.
 
+
 config BT_MESH_OD_PRIV_PROXY_CLI_TIMEOUT
 	int "Solicitation PDU RPL Configuration Client model timeout in milliseconds"
 	default 5000

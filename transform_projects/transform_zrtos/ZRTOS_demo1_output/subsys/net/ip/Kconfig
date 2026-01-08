@@ -853,6 +853,7 @@ config NET_BUF_TX_COUNT
 	  Each data buffer will occupy CONFIG_NET_BUF_DATA_SIZE + smallish
 	  header (sizeof(struct net_buf)) amount of data.
 
+
 config NET_BUF_DATA_SIZE
 	int "Size of each network data fragment"
 	default 128

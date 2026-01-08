@@ -3,6 +3,7 @@
 # Copyright 2018,2024 NXP
 # SPDX-License-Identifier: Apache-2.0
 
+
 config SOC_SERIES_IMX6SX
 	bool
 	select SOC_FAMILY_NXP_IMX

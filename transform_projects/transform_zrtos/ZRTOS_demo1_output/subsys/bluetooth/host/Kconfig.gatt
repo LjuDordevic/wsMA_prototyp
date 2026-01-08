@@ -58,6 +58,7 @@ config BT_EATT_MAX
 	help
 	  Number of Enhanced ATT bearers available.
 
+
 config BT_EATT_AUTO_CONNECT
 	bool "Automatically connect EATT bearers when a link is established"
 	default y

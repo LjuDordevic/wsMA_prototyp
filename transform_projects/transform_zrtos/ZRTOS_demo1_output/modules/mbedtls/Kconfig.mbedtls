@@ -522,6 +522,7 @@ config MBEDTLS_SSL_EXTENDED_MASTER_SECRET
 	  which ensures that master secrets are different for every
 	  connection and every session.
 
+
 config MBEDTLS_PSA_CRYPTO_EXTERNAL_RNG_ALLOW_NON_CSPRNG
 	bool "Allow non cryptographically secure random sources (for test only!)"
 	depends on MBEDTLS_PSA_CRYPTO_EXTERNAL_RNG
@@ -613,6 +614,7 @@ config MBEDTLS_SSL_DTLS_CONNECTION_ID
 	  Enable support for the DTLS Connection ID extension
 	  which allows to identify DTLS connections across changes
 	  in the underlying transport.
+
 
 config MBEDTLS_NIST_KW_C
 	bool "NIST key wrap"

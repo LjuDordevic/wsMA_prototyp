@@ -43,6 +43,7 @@ config SOC_ATMEL_SAML_OSC16M
 
 # NOTE: XOSC is not currently supported
 
+
 choice
 	prompt "Main clock reference"
 	default SOC_ATMEL_SAML_OPENLOOP_AS_MAIN

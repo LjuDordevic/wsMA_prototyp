@@ -33,6 +33,7 @@ config ETH_NXP_ENET_QOS_MAC_UNIQUE_MAC_ADDRESS
 	help
 	  Enable Unique MAC address support based on device UUID.
 
+
 config ETH_NXP_ENET_QOS_TX_BUFFER_DESCRIPTORS
 	int "Number of tx buffer descriptors"
 	default 16

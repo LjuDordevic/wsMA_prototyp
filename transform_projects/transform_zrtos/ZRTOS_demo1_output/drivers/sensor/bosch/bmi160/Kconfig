@@ -215,6 +215,7 @@ config BMI160_GYRO_ODR_3200
 	bool "3200 Hz"
 endchoice
 
+
 config EMUL_BMI160
 	bool "Emulate a Bosch BMI160 accelerometer"
 	default y

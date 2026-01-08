@@ -3,6 +3,7 @@
 # Copyright (c) 2023 Renesas Electronics Corporation
 # SPDX-License-Identifier: Apache-2.0
 
+
 config ENTROPY_SMARTBOND_TRNG
 	bool "Renesas Smartbond MCU Family True Random Number Generator (TRNG) Driver"
 	default y
