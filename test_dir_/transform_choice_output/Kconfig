@@ -10,9 +10,10 @@ choice
   depends on OPT_TTT
   depends on OPT_AAA && OPT_ZZZ
   default CH_C if OPT_BBB && OPT_AAA && OPT_ZZZ
+  prompt "P1" if OPT_AAA && OPT_ZZZ
   depends on OPT_ZZZ
   default E if OPT_ZZZ
-  prompt "P1"
+  prompt "P2" if OPT_ZZZ
   help 
     Some awesome help text  
     that should be transformed 

@@ -886,7 +886,18 @@ class KconfigTransformer:
                             d for d in node_deps
                             if d not in base_cond and d != 'y'
                         ]
-                        print(f"additional_from_depends_on: {additional}")
+                        print(f"additional_from_depends_on: {additional} + {base_cond}")
+                        """
+                        Because if you don't take base_cond -> prompt cond is wrong 
+                        additional_from_depends_on: ['OPT_ZZZ']
+                        Added: depends on OPT_AAA && OPT_ZZZ
+                        additional_from_default: ['OPT_AAA', 'OPT_ZZZ']
+                        Added default: default CH_C if OPT_BBB && OPT_AAA && OPT_ZZZ
+                        choice_prompts: [KconfigLine(prompt, line=22, indent=2), KconfigLine(prompt, line=48, indent=2)]
+                        Added new_prompt: prompt "P1" if OPT_ZZZ
+                        !! SHOULD BE prompt "P1" if OPT_AAA && OPT_ZZZ
+                        """
+                        collect_additional_from_depends_on.append(base_cond)    # append bc only one 
                         collect_additional_from_depends_on.extend(additional)
                         if additional:
                             new_line = (
@@ -957,8 +968,8 @@ class KconfigTransformer:
                         collect_additional = collect_additional_from_default
 
                 if choice_prompts:
-                    print(choice_prompts)
-                    line = choice_prompts[0]
+                    print(f"choice_prompts: {choice_prompts}")
+                    line = choice_prompts[def_idx-1]
                     line_text = line.content.get('prompt_text')
                     add = None
                     if collect_additional: 
@@ -971,12 +982,12 @@ class KconfigTransformer:
                         new_prompt_line=KconfigLine(new_prompt_line_text, line.line_number)
                         result.append(new_prompt_line)
                         self.FILE_ADDED_BC_NAMED_CHOICE += 1
-                        print(f"Added new_prompt {new_prompt_line_text.strip()}")
+                        print(f"Added new_prompt: {new_prompt_line_text.strip()}")
                     else:
                         result.append(line)
-                        print(f"Added old_prompt{line.raw_text}")
+                        print(f"Added old_prompt: {line.raw_text}")
                         self.FILE_ADDED_BC_NAMED_CHOICE += 1
-                    #print(f"heeee {line} + {} + {add}")
+                        #print(f"heeee {line} + {} + {add}")
             
             """ 
             # move this up for each def, so that we can add conditions from if/menu

@@ -45,6 +45,7 @@ endchoice
 endif
 
 choice NAMED_CH
+  prompt "P2"
   depends on OPT_ZZZ
   default E 
   config CH_E
@@ -54,7 +55,7 @@ choice NAMED_CH
 endchoice
 
 choice SINGLE_DEF
-  prompt "P2"
+  prompt "P3 - single"
   help 
     Some awesome help text nr. 2 
     that should be transformed 

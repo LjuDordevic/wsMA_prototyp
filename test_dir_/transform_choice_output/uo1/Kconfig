@@ -22,7 +22,7 @@ endif
 
 
 choice
-  prompt "P2"
+  prompt "P3 - single"
   help 
     Some awesome help text nr. 2 
     that should be transformed 
