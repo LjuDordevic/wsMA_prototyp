@@ -17,6 +17,9 @@ choice
 	default LV_COLOR_DEPTH_32
 endchoice
   default LV_COLOR_DEPTH_16 if LVGL && SHIELD_ARDUINO_GIGA_DISPLAY_SHIELD
+  prompt "Color depth" if LVGL && SHIELD_ARDUINO_GIGA_DISPLAY_SHIELD
+			help
+				Color depth to be used.
 			config LV_COLOR_DEPTH_32
 				bool "32: XRGB8888"
 			config LV_COLOR_DEPTH_24

@@ -20,11 +20,15 @@ if SOC_MKW40Z4 || SOC_MKW41Z4
 choice
 	default CTR_DRBG_CSPRNG_GENERATOR
 endchoice
+	help
+	  Platform dependent cryptographically secure random number support.
 endchoice
 
 choice
 	default XOSHIRO_RANDOM_GENERATOR
 endchoice
+	help
+	  Platform dependent non-cryptographically secure random number support.
 endchoice
 
 # The flash option register (FOPT) boot options

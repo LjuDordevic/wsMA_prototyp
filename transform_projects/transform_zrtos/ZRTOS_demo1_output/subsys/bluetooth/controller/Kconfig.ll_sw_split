@@ -692,6 +692,7 @@ choice
 	default BT_CTLR_OPTIMIZE_FOR_SPEED
 
   depends on !LTO && BT_LL_SW_SPLIT && HAS_BT_CTLR && BT_HCI && BT
+  prompt "Optimization options" if !LTO && BT_LL_SW_SPLIT && HAS_BT_CTLR && BT_HCI && BT
 config BT_CTLR_OPTIMIZE_FOR_APP_DEFAULT
 	bool "Optimize for application defaults"
 	help

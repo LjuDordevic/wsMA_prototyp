@@ -16,6 +16,8 @@ choice
 	default PM_POLICY_DEFAULT
 	depends on PM
 endchoice
+	help
+	  Select the idle state power management policy.
 endchoice
 
 endif

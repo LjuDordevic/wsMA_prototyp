@@ -35,6 +35,12 @@ config CACHE_MANAGEMENT
 choice
 	default NULL_POINTER_EXCEPTION_DETECTION_NONE
 endchoice
+	help
+	  There are 2 implementations available, one based
+	  on DWT and the other based on MPU. Use this choice
+	  symbol to select one of the options. By default the
+	  feature is disabled. In the test suite the feature
+	  is enabled and the DWT-based solution is preferred.
 endchoice
 
 endif # ARM

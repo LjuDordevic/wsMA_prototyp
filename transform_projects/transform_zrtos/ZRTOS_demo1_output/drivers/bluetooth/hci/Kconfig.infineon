@@ -12,6 +12,7 @@ choice
 	prompt "Select AIROC part"
 
   depends on !AIROC_WIFI_CUSTOM && WIFI_AIROC
+  prompt "Select AIROC part" if !AIROC_WIFI_CUSTOM && WIFI_AIROC
 config CYW4343W
 	bool "CYW4343W"
 	depends on BT_H4
@@ -97,6 +98,7 @@ choice
 	depends on CYW43012
 
   depends on CYW43012 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
+  prompt "Select CYW43012 module" if CYW43012 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 config CYW43012_MURATA_1LV
 	bool "MURATA-1LV"
 	help
@@ -115,6 +117,7 @@ choice
 	depends on CYW4343W
 
   depends on CYW4343W && !AIROC_WIFI_CUSTOM && WIFI_AIROC
+  prompt "Select CYW4343W module" if CYW4343W && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 config CYW4343W_MURATA_1DX
 	bool "MURATA-1DX"
 	help
@@ -133,6 +136,7 @@ choice
 	depends on CYW4373
 
   depends on CYW4373 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
+  prompt "Select CYW4373 module" if CYW4373 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 config CYW4373_STERLING_LWB5PLUS
 	bool "STERLING-LWB5plus"
 	help
@@ -165,6 +169,7 @@ choice
 	depends on CYW43439
 
   depends on CYW43439 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
+  prompt "Select CYW43439 module" if CYW43439 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 config CYW43439_MURATA_1YN
 	bool "MURATA_1YN"
 	help

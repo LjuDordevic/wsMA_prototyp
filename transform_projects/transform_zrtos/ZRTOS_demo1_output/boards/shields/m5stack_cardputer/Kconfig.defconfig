@@ -18,6 +18,8 @@ if DISPLAY
 choice
 	default ST7789V_RGB565
 endchoice
+	help
+	  Specify the color pixel format for the ST7789V display controller.
 endchoice
 
 if LVGL

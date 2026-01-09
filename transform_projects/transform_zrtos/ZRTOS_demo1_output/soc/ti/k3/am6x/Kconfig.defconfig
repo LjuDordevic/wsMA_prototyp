@@ -37,6 +37,8 @@ config UART_NS16550_TI_K3
 choice
 	default UART_NS16550_VARIANT_NS16750
 endchoice
+	help
+	  Select UART device variant
 endchoice
 
 endif # SERIAL

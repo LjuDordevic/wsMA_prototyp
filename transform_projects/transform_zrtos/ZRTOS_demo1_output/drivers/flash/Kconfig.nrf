@@ -41,6 +41,9 @@ choice
 
   default SOC_FLASH_NRF_RADIO_SYNC_TICKER if BT_LL_SW_SPLIT && SOC_FLASH_NRF && FLASH
   default SOC_FLASH_NRF_RADIO_SYNC_NONE if SOC_FLASH_NRF && FLASH
+  prompt "Nordic nRFx flash driver synchronization" if SOC_FLASH_NRF && FLASH && SOC_FLASH_NRF && FLASH
+	help
+	  synchronization between flash memory driver and radio.
 config SOC_FLASH_NRF_RADIO_SYNC_TICKER
 	bool "Nordic nRFx flash driver synchronized with radio"
 	depends on BT_LL_SW_SPLIT

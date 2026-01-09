@@ -42,6 +42,10 @@ config WIFI_NRF7000
 choice
 	default WIFI_USAGE_MODE_SCAN_ONLY if WIFI_NRF7000
 endchoice
+	help
+	  Inform the Wi-Fi driver of which Wi-Fi features the application
+	  will be using. Drivers can use this choice to default appropriate
+	  driver-specific options.
 endchoice
 
 config NRF70_QSPI_LOW_POWER
@@ -630,6 +634,9 @@ if NRF_WIFI_USE_VARIABLE_NET_BUFS
 choice
 	default NET_BUF_VARIABLE_DATA_SIZE
 endchoice
+	help
+	  Select the memory allocator for the network buffers that hold the
+	  packet data.
 endchoice
 endif # NRF_WIFI_USE_VARIABLE_NET_BUFS
 
