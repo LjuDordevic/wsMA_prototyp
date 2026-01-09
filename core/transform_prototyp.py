@@ -1455,6 +1455,8 @@ class KconfigTransformer:
         print(f"    GLOB LOG ----------------------------------------------------------------------------")
         print(f"    Resolve {source_keyword}: {pattern} at line {line.line_number}")
         
+        """ 
+        # was just for test of ESP-IDF
         if pattern.startswith("./"):
            #print(f"     patern starts with ./ -> remove ./")
            pattern = pattern[2:]
@@ -1464,7 +1466,7 @@ class KconfigTransformer:
            #print(f"     patern has $ENV replace it")
            pattern = re.sub(r"\$(\w+)", self._replace_env_var, pattern) 
            #print(f"     new pattern {pattern}")   
-
+        """
         #print("tests")
 
         # RESOLVE 
