@@ -1577,7 +1577,7 @@ class KconfigTransformer:
                 continue
             else:
                 # for source keyword just print  
-                new_line_text = f'{indent_str}{source_keyword} "{matched_file}"'
+                new_line_text = f'{indent_str}source "{matched_file}"'
                 new_line = KconfigLine(new_line_text, line.line_number)
                 result_lines.append(new_line)
                 print(f"      -> {matched_file}")

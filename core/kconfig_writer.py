@@ -20,7 +20,12 @@ class KconfigLine:
     def _detect_type(self) -> str:
         s = self.stripped
         source_keyword_pattern = r'^(source|osource|rsource|orsource)\s+["\']'
+        # because Kconfiglib can read these for backward compatibility
+        grsource_keyword_pattern = r'^(grsource)\s+["\']'   # orsource
+        gsource_keyword_pattern = r'^(gsource)\s+["\']'     # osource
         source_match = re.match(source_keyword_pattern, s)
+        grsource_match= re.match(grsource_keyword_pattern, s)
+        gsource_match = re.match(gsource_keyword_pattern, s)
         
         if not s:
             return 'empty'
@@ -54,6 +59,10 @@ class KconfigLine:
             return 'endif'
         elif source_match:
             return source_match.group(1)
+        elif grsource_match:
+            return 'orsource'
+        elif gsource_match:
+            return 'osource'
         elif s.startswith('bool') or s.startswith('boolean'):
             return 'type_bool'
         elif s.startswith('tristate'):
