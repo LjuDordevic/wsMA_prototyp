@@ -76,7 +76,7 @@ config SEGGER_RTT_MODE
 
 config SEGGER_RTT_MEMCPY_USE_BYTELOOP
 	bool "Use a simple byte-loop instead of standard memcpy"
-
+if ZZZ
 choice SEGGER_RTT_SECTION
 	prompt "Choose RTT data linker section"
 	default SEGGER_RTT_SECTION_CUSTOM
@@ -101,7 +101,7 @@ config SEGGER_RTT_SECTION_CUSTOM_DTS_REGION
 endif
 
 endchoice
-
+endif
 if SEGGER_RTT_SECTION_CUSTOM || SEGGER_RTT_SECTION_CUSTOM_DTS_REGION
 
 config SEGGER_RTT_SECTION_CUSTOM_NAME
@@ -114,7 +114,7 @@ choice SEGGER_RTT_INIT_MODE
 	prompt "RTT Initialization mode"
 	help
 		RTT initialization function can avoid re-init of Control Block
-		tif another program (e.g. bootloader) has already initialized it.
+		if another program (e.g. bootloader) has already initialized it.
 	default SEGGER_RTT_INIT_MODE_STRONG_CHECK if SEGGER_RTT_SECTION_CUSTOM
 	default SEGGER_RTT_INIT_MODE_STRONG_CHECK
 

@@ -62,8 +62,8 @@ config SEGGER_RTT_MODE
 
 config SEGGER_RTT_MEMCPY_USE_BYTELOOP
 	bool "Use a simple byte-loop instead of standard memcpy"
-
-
+if ZZZ
+endif
 if SEGGER_RTT_SECTION_CUSTOM || SEGGER_RTT_SECTION_CUSTOM_DTS_REGION
 
 config SEGGER_RTT_SECTION_CUSTOM_NAME

@@ -48,7 +48,7 @@ class KconfigLine:
             return 'endchoice'
         elif s.startswith('configdefault '):
             return 'configdefault'      
-        elif s.startswith('if '):
+        elif re.match(r'^if\s+[A-Za-z0-9_-]+$', s):
             return 'if'
         elif s.startswith('endif'): 
             return 'endif'
@@ -162,6 +162,9 @@ class KconfigLine:
         
         elif self.line_type == 'option env':
             content['env'] = line_stripped.split('"')[1]
+
+        elif self.line_type == 'prompt':
+            content['prompt_text'] = line_stripped.split('"')[1]
 
         elif self.line_type == 'named_choice':
             match = re.match(r'^choice\s+(\w+)', line_stripped)

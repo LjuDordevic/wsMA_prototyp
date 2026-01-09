@@ -871,8 +871,11 @@ class KconfigTransformer:
                     
                 # Take the first entry's lines as representative for this definition
                 # (since all configs in same definition have same choice-level attributes)
+                collect_additional = [] # needed additional dep for prompts of other definitions
                 if configs_in_this_def:
                     representative_cfg = configs_in_this_def[0]
+                    collect_additional_from_depends_on = []
+                    collect_additional_from_default = []
                     
                     # -------- depends on ----------
                     for dep_line in representative_cfg.get('depends_lines', []):
@@ -883,7 +886,8 @@ class KconfigTransformer:
                             d for d in node_deps
                             if d not in base_cond and d != 'y'
                         ]
-
+                        print(f"additional_from_depends_on: {additional}")
+                        collect_additional_from_depends_on.extend(additional)
                         if additional:
                             new_line = (
                                 f"{' ' * (choice_line.indent + 2)}"
@@ -921,6 +925,8 @@ class KconfigTransformer:
                             d for d in default_deps
                             if d not in existing_parts and d != 'y'
                         ]
+                        print(f"additional_from_default: {additional}")
+                        collect_additional_from_default.extend(additional)
 
                         cond = existing_parts + additional
 
@@ -941,13 +947,45 @@ class KconfigTransformer:
 
                     print(f"    Added default: {added_def_counter}")
                     self.FILE_ADDED_BC_NAMED_CHOICE += added_def_counter
+
+                    # we would like to take conditions form depends on but if the choice doesn't have
+                    # depends on, meaning no place to read all aditional cond from if/menu 
+                    # that parser gives us, then we read the additional that default got 
+                    if collect_additional_from_depends_on:
+                        collect_additional = collect_additional_from_depends_on
+                    else:
+                        collect_additional = collect_additional_from_default
+
+                if choice_prompts:
+                    print(choice_prompts)
+                    line = choice_prompts[0]
+                    line_text = line.content.get('prompt_text')
+                    add = None
+                    if collect_additional: 
+                        #add = collect_additional[0]
+                        add = ' && '.join(collect_additional)
+
+                        #print(f"hhhhhshsh {add}")
+                        indent_str = ' ' * (choice_line.indent + 2)
+                        new_prompt_line_text = f'{indent_str}prompt "{line_text}" if {add}'
+                        new_prompt_line=KconfigLine(new_prompt_line_text, line.line_number)
+                        result.append(new_prompt_line)
+                        self.FILE_ADDED_BC_NAMED_CHOICE += 1
+                        print(f"Added new_prompt {new_prompt_line_text.strip()}")
+                    else:
+                        result.append(line)
+                        print(f"Added old_prompt{line.raw_text}")
+                        self.FILE_ADDED_BC_NAMED_CHOICE += 1
+                    #print(f"heeee {line} + {} + {add}")
             
-            #print(f" DEBUG2: choice_prompts: {choice_prompts} + help_lines: {help_lines}")    
+            """ 
+            # move this up for each def, so that we can add conditions from if/menu
             if choice_prompts:
                 for pl in choice_prompts:
                     result.append(pl)
                     self.FILE_ADDED_BC_NAMED_CHOICE += 1
                     print(f"Added prompt {pl}")
+            """
             if help_lines:
                 for hl in help_lines:
                     result.append(hl)    

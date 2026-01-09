@@ -1,7 +1,7 @@
 choice
-	prompt "Mode for pre-initialized terminal channel (buffer 0)"
   default SEGGER_RTT_MODE_NO_BLOCK_SKIP
-config A
+	prompt "Mode for pre-initialized terminal channel (buffer 0)"
+  config A
 	bool "A"
 
 config SEGGER_RTT_MODE_NO_BLOCK_SKIP
@@ -16,11 +16,11 @@ config SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL
 endchoice
 
 choice
-	default B
-	prompt "Choose RTT data linker section"
-  default SEGGER_RTT_SECTION_CUSTOM if USE_SEGGER_RTT
-	config B
-		bool "B"
+  default B
+  default SEGGER_RTT_SECTION_CUSTOM if ZZZ && USE_SEGGER_RTT
+  prompt "Choose RTT data linker section" if ZZZ && USE_SEGGER_RTT
+  config B
+    bool "B"
 config SEGGER_RTT_SECTION_NONE
 	bool "Place RTT data in the default linker section"
 
@@ -43,14 +43,14 @@ endchoice
 
 
 choice
-	prompt "RTT Initialization mode"
-	help
-		RTT initialization function can avoid re-init of Control Block
-		tif another program (e.g. bootloader) has already initialized it.
   default SEGGER_RTT_INIT_MODE_STRONG_CHECK if SEGGER_RTT_SECTION_CUSTOM && USE_SEGGER_RTT
   default SEGGER_RTT_INIT_MODE_STRONG_CHECK if USE_SEGGER_RTT
-config A
-	bool "A"
+  prompt "RTT Initialization mode" if USE_SEGGER_RTT && USE_SEGGER_RTT
+	help
+		RTT initialization function can avoid re-init of Control Block
+		if another program (e.g. bootloader) has already initialized it.
+  config C
+	bool "C"
 config SEGGER_RTT_INIT_MODE_ALWAYS
 	bool "RTT Initialization done without conditions"
 
