@@ -520,11 +520,11 @@ Processing definition 1 at line 56
 additional_from_default: []
   Added default: default SEGGER_RTT_MODE_NO_BLOCK_SKIP
     Added default: 1
-[KconfigLine(prompt, line=57, indent=1)]
-Added old_prompt	prompt "Mode for pre-initialized terminal channel (buffer 0)"
+choice_prompts: [KconfigLine(prompt, line=57, indent=1)]
+Added old_prompt: 	prompt "Mode for pre-initialized terminal channel (buffer 0)"
 
 Final result has 3 lines before adding configs
-    Added Lines bc named choice 1
+    Added Lines bc named choice 2
 Track existing configs: KconfigLine(config, line=2, indent=2)
 Track existing configs: KconfigLine(endchoice, line=5, indent=0)
       Added config SEGGER_RTT_MODE_NO_BLOCK_SKIP from u1/Kconfig.segg
@@ -535,7 +535,7 @@ Track existing configs: KconfigLine(endchoice, line=5, indent=0)
 
   Adding 0 menuconfigs after endchoice
     Added 0 menuconfig lines (after endchoice) from other choice definitions
-    Added Total Lines bc named choice 10
+    Added Total Lines bc named choice 11
     Found first definition of choice SEGGER_RTT_SECTION at line 7
     Processing choice transformation
     processed_choices now: {'SEGGER_RTT_SECTION', 'SEGGER_RTT_MODE'}
@@ -568,12 +568,11 @@ Processing definition 1 at line 80
 additional_from_default: ['ZZZ', 'USE_SEGGER_RTT']
   Added default: default SEGGER_RTT_SECTION_CUSTOM if ZZZ && USE_SEGGER_RTT
     Added default: 1
-[KconfigLine(prompt, line=81, indent=1)]
-hhhhhshsh ZZZ && USE_SEGGER_RTT
-Added newprompt prompt "Choose RTT data linker section" if ZZZ && USE_SEGGER_RTT
+choice_prompts: [KconfigLine(prompt, line=81, indent=1)]
+Added new_prompt: prompt "Choose RTT data linker section" if ZZZ && USE_SEGGER_RTT
 
 Final result has 21 lines before adding configs
-    Added Lines bc named choice 11
+    Added Lines bc named choice 13
 Track existing configs: KconfigLine(config, line=9, indent=2)
 Track existing configs: KconfigLine(endchoice, line=11, indent=0)
       Added config SEGGER_RTT_SECTION_NONE from u1/Kconfig.segg
@@ -587,10 +586,10 @@ menuconfigs_in_if []
 
   Adding 0 menuconfigs after endchoice
     Added 0 menuconfig lines (after endchoice) from other choice definitions
-    Added Total Lines bc named choice 29
+    Added Total Lines bc named choice 31
     Found first definition of choice SEGGER_RTT_INIT_MODE at line 14
     Processing choice transformation
-    processed_choices now: {'SEGGER_RTT_INIT_MODE', 'SEGGER_RTT_SECTION', 'SEGGER_RTT_MODE'}
+    processed_choices now: {'SEGGER_RTT_SECTION', 'SEGGER_RTT_INIT_MODE', 'SEGGER_RTT_MODE'}
 process lines until first choice config/if was found
 current_indx: 14 - block endidx 17
 current_indx: 14 - choice_attr_end: 14
@@ -620,15 +619,14 @@ additional_from_default: ['USE_SEGGER_RTT']
 additional_from_default: ['USE_SEGGER_RTT']
   Added default: default SEGGER_RTT_INIT_MODE_STRONG_CHECK if USE_SEGGER_RTT
     Added default: 2
-[KconfigLine(prompt, line=114, indent=1)]
-hhhhhshsh USE_SEGGER_RTT && USE_SEGGER_RTT
-Added newprompt prompt "RTT Initialization mode" if USE_SEGGER_RTT && USE_SEGGER_RTT
+choice_prompts: [KconfigLine(prompt, line=114, indent=1)]
+Added new_prompt: prompt "RTT Initialization mode" if USE_SEGGER_RTT && USE_SEGGER_RTT
 Added help KconfigLine(help, line=115, indent=1)
 Added help KconfigLine(other, line=116, indent=2)
 Added help KconfigLine(other, line=117, indent=2)
 
 Final result has 51 lines before adding configs
-    Added Lines bc named choice 34
+    Added Lines bc named choice 37
 Track existing configs: KconfigLine(config, line=15, indent=2)
 Track existing configs: KconfigLine(endchoice, line=17, indent=0)
       Added config SEGGER_RTT_INIT_MODE_ALWAYS from u1/Kconfig.segg
@@ -639,7 +637,7 @@ Track existing configs: KconfigLine(endchoice, line=17, indent=0)
 
   Adding 0 menuconfigs after endchoice
     Added 0 menuconfig lines (after endchoice) from other choice definitions
-    Added Total Lines bc named choice 43
+    Added Total Lines bc named choice 46
     GLOB LOG ----------------------------------------------------------------------------
     Resolve source: u1/Kconfig* at line 19
       -> u1/Kconfig.segg
@@ -660,7 +658,7 @@ Track existing configs: KconfigLine(endchoice, line=17, indent=0)
         Added new bc of def_*:           0
         Added new bc of glob:            0
         Added new bc of config_default:  0
-        Added new bc of named choice:    43
+        Added new bc of named choice:    46
         Removed bc of config_default:    0
         Removed bc of named choice:      0
         Removed no match for o(r)source: 0
@@ -721,10 +719,10 @@ count options/attr that are not transformed:
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.002215s
-    Got parser results................................    0.003648s
-    Built context from parser results.................    0.002108s
-    File transformation and excel log.................    0.006571s
+    Parser initialization.............................    0.003317s
+    Got parser results................................    0.003990s
+    Built context from parser results.................    0.002134s
+    File transformation and excel log.................    0.005659s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   0.014544s ~ 0.01s
+    TOTAL TIME........................................   0.015100s ~ 0.02s
 ====================================================================================================
