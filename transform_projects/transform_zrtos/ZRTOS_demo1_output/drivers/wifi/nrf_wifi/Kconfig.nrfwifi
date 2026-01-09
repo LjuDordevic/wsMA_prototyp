@@ -42,18 +42,6 @@ config WIFI_NRF7000
 choice
 	default WIFI_USAGE_MODE_SCAN_ONLY if WIFI_NRF7000
 endchoice
-config WIFI_USAGE_MODE_STA
-	bool "Wi-Fi interface(s) acts as a Station"
-
-config WIFI_USAGE_MODE_AP
-	bool "Wi-Fi interface(s) acts as an Access Point"
-
-config WIFI_USAGE_MODE_STA_AP
-	bool "Wi-Fi interface(s) acts as an Access Point and Station"
-
-config WIFI_USAGE_MODE_SCAN_ONLY
-	bool "Wi-Fi interface(s) used for SSID scanning only"
-
 endchoice
 
 config NRF70_QSPI_LOW_POWER
@@ -642,19 +630,6 @@ if NRF_WIFI_USE_VARIABLE_NET_BUFS
 choice
 	default NET_BUF_VARIABLE_DATA_SIZE
 endchoice
-config NET_BUF_FIXED_DATA_SIZE
-	bool "Fixed data size buffer"
-	help
-	  Each buffer comes with a built time configured size. If runtime
-	  requested is bigger than that, it will allocate as many net_buf
-	  as necessary to reach that request.
-
-config NET_BUF_VARIABLE_DATA_SIZE
-	bool "Variable data size buffer [EXPERIMENTAL]"
-	select EXPERIMENTAL
-	help
-	  The buffer is dynamically allocated from runtime requested size.
-
 endchoice
 endif # NRF_WIFI_USE_VARIABLE_NET_BUFS
 

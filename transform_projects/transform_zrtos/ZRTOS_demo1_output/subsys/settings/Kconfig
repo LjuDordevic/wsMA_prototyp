@@ -65,7 +65,6 @@ config SETTINGS_ZMS_LL_CACHE_SIZE
 	  Number of entries in Settings ZMS linked list cache.
 
 endif # SETTINGS_ZMS
-
 config SETTINGS_FCB
 	bool "FCB"
 	depends on FCB
@@ -103,7 +102,6 @@ config SETTINGS_NVS_NAME_CACHE_SIZE
 	  Number of entries in Settings NVS name cache.
 
 endif # SETTINGS_NVS
-
 config SETTINGS_CUSTOM
 	bool "CUSTOM"
 	help
@@ -113,41 +111,6 @@ config SETTINGS_NONE
 	bool "NONE"
 	help
 	  No storage back-end.
-if SETTINGS_ZMS
-
-config SETTINGS_ZMS_LL_CACHE
-	bool "ZMS linked list lookup cache"
-	help
-	  Enable ZMS lookup cache for linked list, used to reduce the
-	  Settings load time by having most linked list elements already
-	  in cache.
-
-config SETTINGS_ZMS_LL_CACHE_SIZE
-	int "ZMS linked list lookup cache size"
-	default 128
-	range 1 $(UINT32_MAX)
-	depends on SETTINGS_ZMS_LL_CACHE
-	help
-	  Number of entries in Settings ZMS linked list cache.
-
-endif # SETTINGS_ZMS
-if SETTINGS_NVS
-
-config SETTINGS_NVS_NAME_CACHE
-	bool "NVS name lookup cache"
-	help
-	  Enable NVS name lookup cache, used to reduce the Settings name
-	  lookup time.
-
-config SETTINGS_NVS_NAME_CACHE_SIZE
-	int "NVS name lookup cache size"
-	default 128
-	range 1 $(UINT16_MAX)
-	depends on SETTINGS_NVS_NAME_CACHE
-	help
-	  Number of entries in Settings NVS name cache.
-
-endif # SETTINGS_NVS
 endchoice
 
 config SETTINGS_FCB_NUM_AREAS

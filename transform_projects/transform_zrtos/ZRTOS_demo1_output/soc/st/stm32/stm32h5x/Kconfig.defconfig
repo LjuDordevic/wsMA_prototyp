@@ -23,16 +23,6 @@ config CACHE_MANAGEMENT
 choice
 	default EXTERNAL_CACHE
 endchoice
-config ARCH_CACHE
-	bool "Integrated cache controller"
-	help
-	  Integrated on-core cache controller
-
-config EXTERNAL_CACHE
-	bool "External cache controller"
-	help
-	  External cache controller
-
 endchoice
 
 config ROM_START_OFFSET

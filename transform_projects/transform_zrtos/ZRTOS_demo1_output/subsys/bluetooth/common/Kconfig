@@ -392,30 +392,4 @@ config BT_DEBUG_MONITOR_RTT_BUFFER_SIZE
 	  Specify reserved size of up-buffer used for custom logger output.
 
 endif # BT_DEBUG_MONITOR_RTT
-
-if BT_DEBUG_MONITOR_RTT
-
-config BT_DEBUG_MONITOR_RTT_BUFFER
-	int "Buffer number used for custom logger output."
-	range 1 SEGGER_RTT_MAX_NUM_UP_BUFFERS
-	default 1
-	help
-	  Select index of up-buffer used for logger output.
-	  Make sure the buffer number is not used by other logger,
-	  e.g. in LOG_BACKEND_RTT_BUFFER, otherwise the buffer will be
-	  overwritten.
-
-config BT_DEBUG_MONITOR_RTT_BUFFER_NAME
-	string "Buffer name used for custom logger output."
-	default "btmonitor"
-	help
-	  Select index of up-buffer used for logger output.
-
-config BT_DEBUG_MONITOR_RTT_BUFFER_SIZE
-	int "Size of reserved up-buffer for custom logger output."
-	default 1024
-	help
-	  Specify reserved size of up-buffer used for custom logger output.
-
-endif # BT_DEBUG_MONITOR_RTT
 endchoice

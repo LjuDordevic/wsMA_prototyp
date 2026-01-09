@@ -15,15 +15,6 @@ choice
 	default WIFI_ESWIFI_BUS_UART if SHIELD_INVENTEK_ESWIFI_ARDUINO_UART
 	depends on WIFI_ESWIFI
 endchoice
-config WIFI_ESWIFI_BUS_SPI
-	bool "SPI Bus interface"
-	select SPI
-
-config WIFI_ESWIFI_BUS_UART
-	bool "UART Bus interface"
-	select SERIAL
-	select RING_BUFFER
-
 endchoice
 
 endif	# NETWORKING

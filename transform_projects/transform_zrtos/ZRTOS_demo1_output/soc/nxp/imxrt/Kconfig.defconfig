@@ -69,45 +69,12 @@ choice
 	default SEGGER_RTT_SECTION_DTCM if $(dt_chosen_enabled,$(DT_CHOSEN_Z_DTCM))
 	depends on USE_SEGGER_RTT
 endchoice
-config SEGGER_RTT_SECTION_NONE
-	bool "Place RTT data in the default linker section"
-
-config SEGGER_RTT_SECTION_DTCM
-	bool "Place RTT data in the DTCM linker section"
-
-config SEGGER_RTT_SECTION_CCM
-	bool "Place RTT data in the CCM linker section"
-
-if CPU_CORTEX_M
-
-config SEGGER_RTT_SECTION_CUSTOM
-	bool "Place RTT data in custom linker section at RAM start"
-
-config SEGGER_RTT_SECTION_CUSTOM_DTS_REGION
-	bool "Place RTT data in custom linker section defined by a memory region in DTS"
-
-endif
-if CPU_CORTEX_M
-
-config SEGGER_RTT_SECTION_CUSTOM
-	bool "Place RTT data in custom linker section at RAM start"
-
-config SEGGER_RTT_SECTION_CUSTOM_DTS_REGION
-	bool "Place RTT data in custom linker section defined by a memory region in DTS"
-
-endif
 endchoice
 
 choice
 	default SEGGER_SYSVIEW_SECTION_DTCM if $(dt_chosen_enabled,$(DT_CHOSEN_Z_DTCM))
 	depends on SEGGER_SYSTEMVIEW
 endchoice
-config SEGGER_SYSVIEW_SECTION_NONE
-	bool "Place SystemView data in the default linker section"
-
-config SEGGER_SYSVIEW_SECTION_DTCM
-	bool "Place SystemView data in the DTCM linker section"
-
 endchoice
 
 if MBEDTLS

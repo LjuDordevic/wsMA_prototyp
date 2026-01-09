@@ -17,21 +17,6 @@ config MODEM_UBLOX_SARA
 choice
 	default MODEM_UBLOX_SARA_R4
 endchoice
-config MODEM_UBLOX_SARA_R4
-	bool "u-blox SARA-R4"
-	help
-	  Enable support for SARA-R4 modem
-
-config MODEM_UBLOX_SARA_U2
-	bool "u-blox SARA-U2"
-	help
-	  Enable support for SARA-U2 modem
-
-config MODEM_UBLOX_SARA_AUTODETECT_VARIANT
-	bool "detect automatically"
-	help
-	  Enable automatic detection of modem variant (SARA-R4 or SARA-U2)
-
 endchoice
 
 config MODEM_UBLOX_SARA_R4_NET_STATUS

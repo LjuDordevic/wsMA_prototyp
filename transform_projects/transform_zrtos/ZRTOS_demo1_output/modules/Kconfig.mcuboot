@@ -271,6 +271,7 @@ config MCUBOOT_BOOTLOADER_MODE_SINGLE_APP_RAM_LOAD
 	  not possible to swap back to older version of the application. In fact, none
 	  of the swap operations are supported in this mode.
 
+endchoice # MCUBOOT_BOOTLOADER_MODE
 endchoice
 
 config MCUBOOT_BOOTLOADER_MODE_HAS_NO_DOWNGRADE

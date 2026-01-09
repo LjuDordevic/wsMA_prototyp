@@ -13,17 +13,6 @@ config GEN_IRQ_VECTOR_TABLE
 choice
 	default IRQ_VECTOR_TABLE_JUMP_BY_ADDRESS
 endchoice
-config IRQ_VECTOR_TABLE_JUMP_BY_ADDRESS
-	bool "Jump by address"
-	help
-	  The IRQ vector table contains the address of the interrupt handler.
-
-config IRQ_VECTOR_TABLE_JUMP_BY_CODE
-	bool "Jump by code"
-	help
-	  The IRQ vector table contains the opcode of a jump instruction to the
-	  interrupt handler address.
-
 endchoice
 
 config ARCH_SW_ISR_TABLE_ALIGN

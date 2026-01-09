@@ -96,24 +96,6 @@ config CORTEX_M_SYSTICK_LPM_TIMER_HOOKS
 	  Refer to `include/drivers/timer/cortex_m_systick.h` for more details.
 
 endif # PM
-if TICKLESS_KERNEL && PM
-
-config CORTEX_M_SYSTICK_LPM_TIMER_COUNTER
-	bool "Counter API timer"
-	depends on $(dt_chosen_enabled,$(DT_CHOSEN_IDLE_TIMER))
-	depends on COUNTER
-	help
-	  Use a device that implements the counter API as low-power mode timer.
-
-	  The device is selected by property "/chosen/cortex-m-idle-timer".
-
-config CORTEX_M_SYSTICK_LPM_TIMER_HOOKS
-	bool "Hook-based timer"
-	help
-	  Use hooks in the SysTick driver to configure the low-power mode timer.
-	  Refer to `include/drivers/timer/cortex_m_systick.h` for more details.
-
-endif # PM
 endchoice
 
 config CORTEX_M_SYSTICK_RESET_BY_LPM

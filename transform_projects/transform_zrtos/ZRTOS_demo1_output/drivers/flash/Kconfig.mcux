@@ -116,9 +116,6 @@ config FLASH_MCUX_FLEXSPI_HYPERFLASH_WRITE_BUFFER
 choice
 	default FLASH_LOG_LEVEL_OFF if FLASH_MCUX_FLEXSPI_XIP
 endchoice
-config $(module)_LOG_LEVEL_OFF
-	bool "Off"
-
 endchoice
 
 endif # HAS_MCUX_FLEXSPI
