@@ -1,0 +1,718 @@
+====================================================================================================
+TRANSFORMATION PROTOTYP LOG
+====================================================================================================
+    Root: /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep
+    Main file: Kconfig
+    Output dir: /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep_output
+====================================================================================================
+START using parser: 
+  spec_version: ZRTOS
+  kconfig_folder: /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig
+  kconfiglib_version: <module 'kconfiglib' from '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/kconfiglib.py'>
+1.  Parser Output: 
+warning: the choice symbol A (defined at Kconfig:2, Kconfig:15) is defined with a prompt outside the choice
+warning: the choice symbol A (defined at Kconfig:2, Kconfig:15) is defined with a prompt outside the choice
+{'choices': [<choice SEGGER_RTT_MODE, bool, "Mode for pre-initialized terminal channel (buffer 0)", mode n, visibility n, Kconfig:1, u1/Kconfig.segg:56>,
+             <choice SEGGER_RTT_SECTION, bool, "Choose RTT data linker section", mode n, visibility n, Kconfig:7, u1/Kconfig.segg:80>,
+             <choice SEGGER_RTT_INIT_MODE, bool, "RTT Initialization mode", mode n, visibility n, Kconfig:14, u1/Kconfig.segg:113>,
+             <choice SEGGER_RTT_MODE, bool, "Mode for pre-initialized terminal channel (buffer 0)", mode n, visibility n, Kconfig:1, u1/Kconfig.segg:56>,
+             <choice SEGGER_RTT_SECTION, bool, "Choose RTT data linker section", mode n, visibility n, Kconfig:7, u1/Kconfig.segg:80>,
+             <choice SEGGER_RTT_INIT_MODE, bool, "RTT Initialization mode", mode n, visibility n, Kconfig:14, u1/Kconfig.segg:113>],
+ 'comments': [],
+ 'const_syms': {'.rtt_buff_data': <symbol .rtt_buff_data, unknown, value ".rtt_buff_data", constant>,
+                'm': <symbol m, bool, value m, constant>,
+                'n': <symbol n, bool, value n, constant>,
+                'y': <symbol y, bool, value y, constant>},
+ 'defined_syms': [<symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>,
+                  <symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>,
+                  <symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>,
+                  <symbol ZEPHYR_SEGGER_MODULE, bool, value n, visibility n, direct deps y, u1/Kconfig.segg:4>,
+                  <symbol HAS_SEGGER_RTT, bool, value n, visibility n, direct deps y, u1/Kconfig.segg:7>,
+                  <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>,
+                  <symbol SEGGER_RTT_CUSTOM_LOCKING, bool, "Custom locking", value n, visibility n, direct deps n, u1/Kconfig.segg:23>,
+                  <symbol SEGGER_RTT_CB_ALIGNMENT, int, "Alignment of the RTT control block", value "", visibility n, direct deps n, u1/Kconfig.segg:28>,
+                  <symbol SEGGER_RTT_MAX_NUM_UP_BUFFERS, int, "Maximum number of up-buffers", value "", visibility n, direct deps n, u1/Kconfig.segg:36>,
+                  <symbol SEGGER_RTT_MAX_NUM_DOWN_BUFFERS, int, "Maximum number of down-buffers", value "", visibility n, direct deps n, u1/Kconfig.segg:40>,
+                  <symbol SEGGER_RTT_BUFFER_SIZE_UP, int, "Size of the buffer for terminal output of target, up to host", value "", visibility n, direct deps n, u1/Kconfig.segg:44>,
+                  <symbol SEGGER_RTT_BUFFER_SIZE_DOWN, int, "Size of the buffer for terminal input of target, from host", value "", visibility n, direct deps n, u1/Kconfig.segg:48>,
+                  <symbol SEGGER_RTT_PRINTF_BUFFER_SIZE, int, "Size of buffer for RTT printf to bulk-send chars via RTT", value "", visibility n, direct deps n, u1/Kconfig.segg:52>,
+                  <symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>,
+                  <symbol SEGGER_RTT_MODE_NO_BLOCK_TRIM, bool, "Trim: Do not block, output as much as fits.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:63>,
+                  <symbol SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, bool, "Block: Wait until there is space in the buffer.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:66>,
+                  <symbol SEGGER_RTT_MODE, int, value "", visibility n, direct deps n, u1/Kconfig.segg:71>,
+                  <symbol SEGGER_RTT_MEMCPY_USE_BYTELOOP, bool, "Use a simple byte-loop instead of standard memcpy", value n, visibility n, direct deps n, u1/Kconfig.segg:77>,
+                  <symbol SEGGER_RTT_SECTION_NONE, bool, "Place RTT data in the default linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:84>,
+                  <symbol SEGGER_RTT_SECTION_DTCM, bool, "Place RTT data in the DTCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:87>,
+                  <symbol SEGGER_RTT_SECTION_CCM, bool, "Place RTT data in the CCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:90>,
+                  <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>,
+                  <symbol SEGGER_RTT_SECTION_CUSTOM_DTS_REGION, bool, "Place RTT data in custom linker section defined by a memory region in DTS", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:98>,
+                  <symbol SEGGER_RTT_SECTION_CUSTOM_NAME, string, "Name of RTT data custom linker section", value "", visibility n, direct deps n, u1/Kconfig.segg:107>,
+                  <symbol SEGGER_RTT_INIT_MODE_ALWAYS, bool, "RTT Initialization done without conditions", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:121>,
+                  <symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>,
+                  <symbol SEGGER_RTT_INIT_MODE_WEAK_CHECK, bool, "RTT Initialization done if partial check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:127>],
+ 'kconf': <configuration with 37 symbols, main menu prompt "Main menu", srctree "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
+ 'menus': [],
+ 'missing_syms': [],
+ 'named_choices': {'SEGGER_RTT_INIT_MODE': <choice SEGGER_RTT_INIT_MODE, bool, "RTT Initialization mode", mode n, visibility n, Kconfig:14, u1/Kconfig.segg:113>,
+                   'SEGGER_RTT_MODE': <choice SEGGER_RTT_MODE, bool, "Mode for pre-initialized terminal channel (buffer 0)", mode n, visibility n, Kconfig:1, u1/Kconfig.segg:56>,
+                   'SEGGER_RTT_SECTION': <choice SEGGER_RTT_SECTION, bool, "Choose RTT data linker section", mode n, visibility n, Kconfig:7, u1/Kconfig.segg:80>},
+ 'syms': {'0': <symbol 0, unknown, value "0", visibility n, direct deps n, undefined>,
+          '1': <symbol 1, unknown, value "1", visibility n, direct deps n, undefined>,
+          '1024': <symbol 1024, unknown, value "1024", visibility n, direct deps n, undefined>,
+          '16': <symbol 16, unknown, value "16", visibility n, direct deps n, undefined>,
+          '2': <symbol 2, unknown, value "2", visibility n, direct deps n, undefined>,
+          '3': <symbol 3, unknown, value "3", visibility n, direct deps n, undefined>,
+          '64': <symbol 64, unknown, value "64", visibility n, direct deps n, undefined>,
+          'A': <symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>,
+          'B': <symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>,
+          'CPU_CORTEX_M': <symbol CPU_CORTEX_M, unknown, value "CPU_CORTEX_M", visibility n, direct deps n, undefined>,
+          'HAS_SEGGER_RTT': <symbol HAS_SEGGER_RTT, bool, value n, visibility n, direct deps y, u1/Kconfig.segg:7>,
+          'MODULES': <symbol MODULES, unknown, value "MODULES", visibility n, is the modules symbol, direct deps n, undefined>,
+          'SEGGER_RTT_BUFFER_SIZE_DOWN': <symbol SEGGER_RTT_BUFFER_SIZE_DOWN, int, "Size of the buffer for terminal input of target, from host", value "", visibility n, direct deps n, u1/Kconfig.segg:48>,
+          'SEGGER_RTT_BUFFER_SIZE_UP': <symbol SEGGER_RTT_BUFFER_SIZE_UP, int, "Size of the buffer for terminal output of target, up to host", value "", visibility n, direct deps n, u1/Kconfig.segg:44>,
+          'SEGGER_RTT_CB_ALIGNMENT': <symbol SEGGER_RTT_CB_ALIGNMENT, int, "Alignment of the RTT control block", value "", visibility n, direct deps n, u1/Kconfig.segg:28>,
+          'SEGGER_RTT_CUSTOM_LOCKING': <symbol SEGGER_RTT_CUSTOM_LOCKING, bool, "Custom locking", value n, visibility n, direct deps n, u1/Kconfig.segg:23>,
+          'SEGGER_RTT_INIT_MODE_ALWAYS': <symbol SEGGER_RTT_INIT_MODE_ALWAYS, bool, "RTT Initialization done without conditions", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:121>,
+          'SEGGER_RTT_INIT_MODE_STRONG_CHECK': <symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>,
+          'SEGGER_RTT_INIT_MODE_WEAK_CHECK': <symbol SEGGER_RTT_INIT_MODE_WEAK_CHECK, bool, "RTT Initialization done if partial check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:127>,
+          'SEGGER_RTT_MAX_NUM_DOWN_BUFFERS': <symbol SEGGER_RTT_MAX_NUM_DOWN_BUFFERS, int, "Maximum number of down-buffers", value "", visibility n, direct deps n, u1/Kconfig.segg:40>,
+          'SEGGER_RTT_MAX_NUM_UP_BUFFERS': <symbol SEGGER_RTT_MAX_NUM_UP_BUFFERS, int, "Maximum number of up-buffers", value "", visibility n, direct deps n, u1/Kconfig.segg:36>,
+          'SEGGER_RTT_MEMCPY_USE_BYTELOOP': <symbol SEGGER_RTT_MEMCPY_USE_BYTELOOP, bool, "Use a simple byte-loop instead of standard memcpy", value n, visibility n, direct deps n, u1/Kconfig.segg:77>,
+          'SEGGER_RTT_MODE': <symbol SEGGER_RTT_MODE, int, value "", visibility n, direct deps n, u1/Kconfig.segg:71>,
+          'SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL': <symbol SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, bool, "Block: Wait until there is space in the buffer.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:66>,
+          'SEGGER_RTT_MODE_NO_BLOCK_SKIP': <symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>,
+          'SEGGER_RTT_MODE_NO_BLOCK_TRIM': <symbol SEGGER_RTT_MODE_NO_BLOCK_TRIM, bool, "Trim: Do not block, output as much as fits.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:63>,
+          'SEGGER_RTT_PRINTF_BUFFER_SIZE': <symbol SEGGER_RTT_PRINTF_BUFFER_SIZE, int, "Size of buffer for RTT printf to bulk-send chars via RTT", value "", visibility n, direct deps n, u1/Kconfig.segg:52>,
+          'SEGGER_RTT_SECTION_CCM': <symbol SEGGER_RTT_SECTION_CCM, bool, "Place RTT data in the CCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:90>,
+          'SEGGER_RTT_SECTION_CUSTOM': <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>,
+          'SEGGER_RTT_SECTION_CUSTOM_DTS_REGION': <symbol SEGGER_RTT_SECTION_CUSTOM_DTS_REGION, bool, "Place RTT data in custom linker section defined by a memory region in DTS", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:98>,
+          'SEGGER_RTT_SECTION_CUSTOM_NAME': <symbol SEGGER_RTT_SECTION_CUSTOM_NAME, string, "Name of RTT data custom linker section", value "", visibility n, direct deps n, u1/Kconfig.segg:107>,
+          'SEGGER_RTT_SECTION_DTCM': <symbol SEGGER_RTT_SECTION_DTCM, bool, "Place RTT data in the DTCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:87>,
+          'SEGGER_RTT_SECTION_NONE': <symbol SEGGER_RTT_SECTION_NONE, bool, "Place RTT data in the default linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:84>,
+          'SOC_FAMILY_STM32': <symbol SOC_FAMILY_STM32, unknown, value "SOC_FAMILY_STM32", visibility n, direct deps n, undefined>,
+          'STM32_ENABLE_DEBUG_SLEEP_STOP': <symbol STM32_ENABLE_DEBUG_SLEEP_STOP, unknown, value "STM32_ENABLE_DEBUG_SLEEP_STOP", visibility n, direct deps n, undefined>,
+          'USE_SEGGER_RTT': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>,
+          'ZEPHYR_SEGGER_MODULE': <symbol ZEPHYR_SEGGER_MODULE, bool, value n, visibility n, direct deps y, u1/Kconfig.segg:4>},
+ 'top_node': <menu node for menu, prompt "Main menu" (visibility y), deps y, 'visible if' deps y, has child, Kconfig:1>,
+ 'unique_choices': [<choice SEGGER_RTT_MODE, bool, "Mode for pre-initialized terminal channel (buffer 0)", mode n, visibility n, Kconfig:1, u1/Kconfig.segg:56>,
+                    <choice SEGGER_RTT_SECTION, bool, "Choose RTT data linker section", mode n, visibility n, Kconfig:7, u1/Kconfig.segg:80>,
+                    <choice SEGGER_RTT_INIT_MODE, bool, "RTT Initialization mode", mode n, visibility n, Kconfig:14, u1/Kconfig.segg:113>],
+ 'unique_defined_syms': [<symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>,
+                         <symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>,
+                         <symbol ZEPHYR_SEGGER_MODULE, bool, value n, visibility n, direct deps y, u1/Kconfig.segg:4>,
+                         <symbol HAS_SEGGER_RTT, bool, value n, visibility n, direct deps y, u1/Kconfig.segg:7>,
+                         <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>,
+                         <symbol SEGGER_RTT_CUSTOM_LOCKING, bool, "Custom locking", value n, visibility n, direct deps n, u1/Kconfig.segg:23>,
+                         <symbol SEGGER_RTT_CB_ALIGNMENT, int, "Alignment of the RTT control block", value "", visibility n, direct deps n, u1/Kconfig.segg:28>,
+                         <symbol SEGGER_RTT_MAX_NUM_UP_BUFFERS, int, "Maximum number of up-buffers", value "", visibility n, direct deps n, u1/Kconfig.segg:36>,
+                         <symbol SEGGER_RTT_MAX_NUM_DOWN_BUFFERS, int, "Maximum number of down-buffers", value "", visibility n, direct deps n, u1/Kconfig.segg:40>,
+                         <symbol SEGGER_RTT_BUFFER_SIZE_UP, int, "Size of the buffer for terminal output of target, up to host", value "", visibility n, direct deps n, u1/Kconfig.segg:44>,
+                         <symbol SEGGER_RTT_BUFFER_SIZE_DOWN, int, "Size of the buffer for terminal input of target, from host", value "", visibility n, direct deps n, u1/Kconfig.segg:48>,
+                         <symbol SEGGER_RTT_PRINTF_BUFFER_SIZE, int, "Size of buffer for RTT printf to bulk-send chars via RTT", value "", visibility n, direct deps n, u1/Kconfig.segg:52>,
+                         <symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>,
+                         <symbol SEGGER_RTT_MODE_NO_BLOCK_TRIM, bool, "Trim: Do not block, output as much as fits.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:63>,
+                         <symbol SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, bool, "Block: Wait until there is space in the buffer.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:66>,
+                         <symbol SEGGER_RTT_MODE, int, value "", visibility n, direct deps n, u1/Kconfig.segg:71>,
+                         <symbol SEGGER_RTT_MEMCPY_USE_BYTELOOP, bool, "Use a simple byte-loop instead of standard memcpy", value n, visibility n, direct deps n, u1/Kconfig.segg:77>,
+                         <symbol SEGGER_RTT_SECTION_NONE, bool, "Place RTT data in the default linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:84>,
+                         <symbol SEGGER_RTT_SECTION_DTCM, bool, "Place RTT data in the DTCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:87>,
+                         <symbol SEGGER_RTT_SECTION_CCM, bool, "Place RTT data in the CCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:90>,
+                         <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>,
+                         <symbol SEGGER_RTT_SECTION_CUSTOM_DTS_REGION, bool, "Place RTT data in custom linker section defined by a memory region in DTS", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:98>,
+                         <symbol SEGGER_RTT_SECTION_CUSTOM_NAME, string, "Name of RTT data custom linker section", value "", visibility n, direct deps n, u1/Kconfig.segg:107>,
+                         <symbol SEGGER_RTT_INIT_MODE_ALWAYS, bool, "RTT Initialization done without conditions", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:121>,
+                         <symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>,
+                         <symbol SEGGER_RTT_INIT_MODE_WEAK_CHECK, bool, "RTT Initialization done if partial check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:127>]}
+--------------------------------------------------
+   Parser found: 27 defined syms
+   Parser found: 26 unique defined syms
+   Parser found: 2 files
+--------------------------------------------------
+
+2. Bild ExtParserContext FROM PARSER RESULTS
+ Transformer used: ZRTOS
+ call different attributes on options found in parser_result['unique_defined_syms']
+
+ For each symbol found in parser_result['unique_defined_syms']
+    -> call sym.name/.origin/.name_and_loc
+    -> call for each sym.nodes (.filename/.linenr/node/.defaults/is_configdefault
+    -> call all sym.defaults
+    -> call all sym.orig_defaults
+
+------------ symbol_infos --------------------------------------------------
+A: [{'sym.name': 'A', 'sym.name_and_loc': 'A (defined at Kconfig:2, Kconfig:15)'}]
+B: [{'sym.name': 'B', 'sym.name_and_loc': 'B (defined at Kconfig:9)'}]
+ZEPHYR_SEGGER_MODULE: [{'sym.name': 'ZEPHYR_SEGGER_MODULE', 'sym.name_and_loc': 'ZEPHYR_SEGGER_MODULE (defined at u1/Kconfig.segg:4)'}]
+HAS_SEGGER_RTT: [{'sym.name': 'HAS_SEGGER_RTT', 'sym.name_and_loc': 'HAS_SEGGER_RTT (defined at u1/Kconfig.segg:7)'}]
+USE_SEGGER_RTT: [{'sym.name': 'USE_SEGGER_RTT', 'sym.name_and_loc': 'USE_SEGGER_RTT (defined at u1/Kconfig.segg:12)'}]
+SEGGER_RTT_CUSTOM_LOCKING: [{'sym.name': 'SEGGER_RTT_CUSTOM_LOCKING', 'sym.name_and_loc': 'SEGGER_RTT_CUSTOM_LOCKING (defined at u1/Kconfig.segg:23)'}]
+SEGGER_RTT_CB_ALIGNMENT: [{'sym.name': 'SEGGER_RTT_CB_ALIGNMENT', 'sym.name_and_loc': 'SEGGER_RTT_CB_ALIGNMENT (defined at u1/Kconfig.segg:28)'}]
+SEGGER_RTT_MAX_NUM_UP_BUFFERS: [{'sym.name': 'SEGGER_RTT_MAX_NUM_UP_BUFFERS', 'sym.name_and_loc': 'SEGGER_RTT_MAX_NUM_UP_BUFFERS (defined at u1/Kconfig.segg:36)'}]
+SEGGER_RTT_MAX_NUM_DOWN_BUFFERS: [{'sym.name': 'SEGGER_RTT_MAX_NUM_DOWN_BUFFERS', 'sym.name_and_loc': 'SEGGER_RTT_MAX_NUM_DOWN_BUFFERS (defined at u1/Kconfig.segg:40)'}]
+SEGGER_RTT_BUFFER_SIZE_UP: [{'sym.name': 'SEGGER_RTT_BUFFER_SIZE_UP', 'sym.name_and_loc': 'SEGGER_RTT_BUFFER_SIZE_UP (defined at u1/Kconfig.segg:44)'}]
+SEGGER_RTT_BUFFER_SIZE_DOWN: [{'sym.name': 'SEGGER_RTT_BUFFER_SIZE_DOWN', 'sym.name_and_loc': 'SEGGER_RTT_BUFFER_SIZE_DOWN (defined at u1/Kconfig.segg:48)'}]
+SEGGER_RTT_PRINTF_BUFFER_SIZE: [{'sym.name': 'SEGGER_RTT_PRINTF_BUFFER_SIZE', 'sym.name_and_loc': 'SEGGER_RTT_PRINTF_BUFFER_SIZE (defined at u1/Kconfig.segg:52)'}]
+SEGGER_RTT_MODE_NO_BLOCK_SKIP: [{'sym.name': 'SEGGER_RTT_MODE_NO_BLOCK_SKIP', 'sym.name_and_loc': 'SEGGER_RTT_MODE_NO_BLOCK_SKIP (defined at u1/Kconfig.segg:60)'}]
+SEGGER_RTT_MODE_NO_BLOCK_TRIM: [{'sym.name': 'SEGGER_RTT_MODE_NO_BLOCK_TRIM', 'sym.name_and_loc': 'SEGGER_RTT_MODE_NO_BLOCK_TRIM (defined at u1/Kconfig.segg:63)'}]
+SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL: [{'sym.name': 'SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL', 'sym.name_and_loc': 'SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL (defined at u1/Kconfig.segg:66)'}]
+SEGGER_RTT_MODE: [{'sym.name': 'SEGGER_RTT_MODE', 'sym.name_and_loc': 'SEGGER_RTT_MODE (defined at u1/Kconfig.segg:71)'}]
+SEGGER_RTT_MEMCPY_USE_BYTELOOP: [{'sym.name': 'SEGGER_RTT_MEMCPY_USE_BYTELOOP', 'sym.name_and_loc': 'SEGGER_RTT_MEMCPY_USE_BYTELOOP (defined at u1/Kconfig.segg:77)'}]
+SEGGER_RTT_SECTION_NONE: [{'sym.name': 'SEGGER_RTT_SECTION_NONE', 'sym.name_and_loc': 'SEGGER_RTT_SECTION_NONE (defined at u1/Kconfig.segg:84)'}]
+SEGGER_RTT_SECTION_DTCM: [{'sym.name': 'SEGGER_RTT_SECTION_DTCM', 'sym.name_and_loc': 'SEGGER_RTT_SECTION_DTCM (defined at u1/Kconfig.segg:87)'}]
+SEGGER_RTT_SECTION_CCM: [{'sym.name': 'SEGGER_RTT_SECTION_CCM', 'sym.name_and_loc': 'SEGGER_RTT_SECTION_CCM (defined at u1/Kconfig.segg:90)'}]
+SEGGER_RTT_SECTION_CUSTOM: [{'sym.name': 'SEGGER_RTT_SECTION_CUSTOM', 'sym.name_and_loc': 'SEGGER_RTT_SECTION_CUSTOM (defined at u1/Kconfig.segg:95)'}]
+SEGGER_RTT_SECTION_CUSTOM_DTS_REGION: [{'sym.name': 'SEGGER_RTT_SECTION_CUSTOM_DTS_REGION', 'sym.name_and_loc': 'SEGGER_RTT_SECTION_CUSTOM_DTS_REGION (defined at u1/Kconfig.segg:98)'}]
+SEGGER_RTT_SECTION_CUSTOM_NAME: [{'sym.name': 'SEGGER_RTT_SECTION_CUSTOM_NAME', 'sym.name_and_loc': 'SEGGER_RTT_SECTION_CUSTOM_NAME (defined at u1/Kconfig.segg:107)'}]
+SEGGER_RTT_INIT_MODE_ALWAYS: [{'sym.name': 'SEGGER_RTT_INIT_MODE_ALWAYS', 'sym.name_and_loc': 'SEGGER_RTT_INIT_MODE_ALWAYS (defined at u1/Kconfig.segg:121)'}]
+SEGGER_RTT_INIT_MODE_STRONG_CHECK: [{'sym.name': 'SEGGER_RTT_INIT_MODE_STRONG_CHECK', 'sym.name_and_loc': 'SEGGER_RTT_INIT_MODE_STRONG_CHECK (defined at u1/Kconfig.segg:124)'}]
+SEGGER_RTT_INIT_MODE_WEAK_CHECK: [{'sym.name': 'SEGGER_RTT_INIT_MODE_WEAK_CHECK', 'sym.name_and_loc': 'SEGGER_RTT_INIT_MODE_WEAK_CHECK (defined at u1/Kconfig.segg:127)'}]
+
+------------ symbol_definitions --------------------------------------------------
+A: [{'file': 'Kconfig', 'line': 2, 'node': <menu node for symbol A, prompt "A" (visibility n), deps n, Kconfig:2>, 'node.defaults': [], 'is_configdefault': False}]
+A: [{'file': 'Kconfig', 'line': 15, 'node': <menu node for symbol A, prompt "A" (visibility n), deps n, Kconfig:15>, 'node.defaults': [], 'is_configdefault': False}]
+B: [{'file': 'Kconfig', 'line': 9, 'node': <menu node for symbol B, prompt "B" (visibility n), deps n, Kconfig:9>, 'node.defaults': [], 'is_configdefault': False}]
+ZEPHYR_SEGGER_MODULE: [{'file': 'u1/Kconfig.segg', 'line': 4, 'node': <menu node for symbol ZEPHYR_SEGGER_MODULE, deps y, has next, u1/Kconfig.segg:4>, 'node.defaults': [], 'is_configdefault': False}]
+HAS_SEGGER_RTT: [{'file': 'u1/Kconfig.segg', 'line': 7, 'node': <menu node for symbol HAS_SEGGER_RTT, deps y, has help, has next, u1/Kconfig.segg:7>, 'node.defaults': [], 'is_configdefault': False}]
+USE_SEGGER_RTT: [{'file': 'u1/Kconfig.segg', 'line': 12, 'node': <menu node for symbol USE_SEGGER_RTT, prompt "SEGGER RTT libraries." (visibility n), deps n, has help, has child, u1/Kconfig.segg:12>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_CUSTOM_LOCKING: [{'file': 'u1/Kconfig.segg', 'line': 23, 'node': <menu node for symbol SEGGER_RTT_CUSTOM_LOCKING, prompt "Custom locking" (visibility n), deps n, has help, has next, u1/Kconfig.segg:23>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_CB_ALIGNMENT: [{'file': 'u1/Kconfig.segg', 'line': 28, 'node': <menu node for symbol SEGGER_RTT_CB_ALIGNMENT, prompt "Alignment of the RTT control block" (visibility n), deps n, has help, has next, u1/Kconfig.segg:28>, 'node.defaults': [(<symbol 16, unknown, value "16", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 30))], 'is_configdefault': False}]
+SEGGER_RTT_MAX_NUM_UP_BUFFERS: [{'file': 'u1/Kconfig.segg', 'line': 36, 'node': <menu node for symbol SEGGER_RTT_MAX_NUM_UP_BUFFERS, prompt "Maximum number of up-buffers" (visibility n), deps n, has next, u1/Kconfig.segg:36>, 'node.defaults': [(<symbol 3, unknown, value "3", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 38))], 'is_configdefault': False}]
+SEGGER_RTT_MAX_NUM_DOWN_BUFFERS: [{'file': 'u1/Kconfig.segg', 'line': 40, 'node': <menu node for symbol SEGGER_RTT_MAX_NUM_DOWN_BUFFERS, prompt "Maximum number of down-buffers" (visibility n), deps n, has next, u1/Kconfig.segg:40>, 'node.defaults': [(<symbol 3, unknown, value "3", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 42))], 'is_configdefault': False}]
+SEGGER_RTT_BUFFER_SIZE_UP: [{'file': 'u1/Kconfig.segg', 'line': 44, 'node': <menu node for symbol SEGGER_RTT_BUFFER_SIZE_UP, prompt "Size of the buffer for terminal output of target, up to host" (visibility n), deps n, has next, u1/Kconfig.segg:44>, 'node.defaults': [(<symbol 1024, unknown, value "1024", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 46))], 'is_configdefault': False}]
+SEGGER_RTT_BUFFER_SIZE_DOWN: [{'file': 'u1/Kconfig.segg', 'line': 48, 'node': <menu node for symbol SEGGER_RTT_BUFFER_SIZE_DOWN, prompt "Size of the buffer for terminal input of target, from host" (visibility n), deps n, has next, u1/Kconfig.segg:48>, 'node.defaults': [(<symbol 16, unknown, value "16", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 50))], 'is_configdefault': False}]
+SEGGER_RTT_PRINTF_BUFFER_SIZE: [{'file': 'u1/Kconfig.segg', 'line': 52, 'node': <menu node for symbol SEGGER_RTT_PRINTF_BUFFER_SIZE, prompt "Size of buffer for RTT printf to bulk-send chars via RTT" (visibility n), deps n, has next, u1/Kconfig.segg:52>, 'node.defaults': [(<symbol 64, unknown, value "64", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 54))], 'is_configdefault': False}]
+SEGGER_RTT_MODE_NO_BLOCK_SKIP: [{'file': 'u1/Kconfig.segg', 'line': 60, 'node': <menu node for symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, prompt "Skip. Do not block, output nothing." (visibility n), deps n, has next, u1/Kconfig.segg:60>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_MODE_NO_BLOCK_TRIM: [{'file': 'u1/Kconfig.segg', 'line': 63, 'node': <menu node for symbol SEGGER_RTT_MODE_NO_BLOCK_TRIM, prompt "Trim: Do not block, output as much as fits." (visibility n), deps n, has next, u1/Kconfig.segg:63>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL: [{'file': 'u1/Kconfig.segg', 'line': 66, 'node': <menu node for symbol SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, prompt "Block: Wait until there is space in the buffer." (visibility n), deps n, u1/Kconfig.segg:66>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_MODE: [{'file': 'u1/Kconfig.segg', 'line': 71, 'node': <menu node for symbol SEGGER_RTT_MODE, deps n, has next, u1/Kconfig.segg:71>, 'node.defaults': [(<symbol 2, unknown, value "2", visibility n, direct deps n, undefined>, (2, <symbol SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, bool, "Block: Wait until there is space in the buffer.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:66>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 73)), (<symbol 1, unknown, value "1", visibility n, direct deps n, undefined>, (2, <symbol SEGGER_RTT_MODE_NO_BLOCK_TRIM, bool, "Trim: Do not block, output as much as fits.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:63>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 74)), (<symbol 0, unknown, value "0", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 75))], 'is_configdefault': False}]
+SEGGER_RTT_MEMCPY_USE_BYTELOOP: [{'file': 'u1/Kconfig.segg', 'line': 77, 'node': <menu node for symbol SEGGER_RTT_MEMCPY_USE_BYTELOOP, prompt "Use a simple byte-loop instead of standard memcpy" (visibility n), deps n, has next, u1/Kconfig.segg:77>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_SECTION_NONE: [{'file': 'u1/Kconfig.segg', 'line': 84, 'node': <menu node for symbol SEGGER_RTT_SECTION_NONE, prompt "Place RTT data in the default linker section" (visibility n), deps n, has next, u1/Kconfig.segg:84>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_SECTION_DTCM: [{'file': 'u1/Kconfig.segg', 'line': 87, 'node': <menu node for symbol SEGGER_RTT_SECTION_DTCM, prompt "Place RTT data in the DTCM linker section" (visibility n), deps n, has next, u1/Kconfig.segg:87>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_SECTION_CCM: [{'file': 'u1/Kconfig.segg', 'line': 90, 'node': <menu node for symbol SEGGER_RTT_SECTION_CCM, prompt "Place RTT data in the CCM linker section" (visibility n), deps n, has next, u1/Kconfig.segg:90>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_SECTION_CUSTOM: [{'file': 'u1/Kconfig.segg', 'line': 95, 'node': <menu node for symbol SEGGER_RTT_SECTION_CUSTOM, prompt "Place RTT data in custom linker section at RAM start" (visibility n), deps n, has next, u1/Kconfig.segg:95>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_SECTION_CUSTOM_DTS_REGION: [{'file': 'u1/Kconfig.segg', 'line': 98, 'node': <menu node for symbol SEGGER_RTT_SECTION_CUSTOM_DTS_REGION, prompt "Place RTT data in custom linker section defined by a memory region in DTS" (visibility n), deps n, u1/Kconfig.segg:98>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_SECTION_CUSTOM_NAME: [{'file': 'u1/Kconfig.segg', 'line': 107, 'node': <menu node for symbol SEGGER_RTT_SECTION_CUSTOM_NAME, prompt "Name of RTT data custom linker section" (visibility n), deps n, has next, u1/Kconfig.segg:107>, 'node.defaults': [(<symbol .rtt_buff_data, unknown, value ".rtt_buff_data", constant>, (2, (40, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol SEGGER_RTT_SECTION_CUSTOM_DTS_REGION, bool, "Place RTT data in custom linker section defined by a memory region in DTS", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:98>), <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 109))], 'is_configdefault': False}]
+SEGGER_RTT_INIT_MODE_ALWAYS: [{'file': 'u1/Kconfig.segg', 'line': 121, 'node': <menu node for symbol SEGGER_RTT_INIT_MODE_ALWAYS, prompt "RTT Initialization done without conditions" (visibility n), deps n, has next, u1/Kconfig.segg:121>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_INIT_MODE_STRONG_CHECK: [{'file': 'u1/Kconfig.segg', 'line': 124, 'node': <menu node for symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, prompt "RTT Initialization done if full check on Control Block ID fails" (visibility n), deps n, has next, u1/Kconfig.segg:124>, 'node.defaults': [], 'is_configdefault': False}]
+SEGGER_RTT_INIT_MODE_WEAK_CHECK: [{'file': 'u1/Kconfig.segg', 'line': 127, 'node': <menu node for symbol SEGGER_RTT_INIT_MODE_WEAK_CHECK, prompt "RTT Initialization done if partial check on Control Block ID fails" (visibility n), deps n, u1/Kconfig.segg:127>, 'node.defaults': [], 'is_configdefault': False}]
+
+------------ symbol_defaults -----------------------------------------------
+SEGGER_RTT_CB_ALIGNMENT: [{'sym.default': (<symbol 16, unknown, value "16", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 30))}]
+SEGGER_RTT_MAX_NUM_UP_BUFFERS: [{'sym.default': (<symbol 3, unknown, value "3", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 38))}]
+SEGGER_RTT_MAX_NUM_DOWN_BUFFERS: [{'sym.default': (<symbol 3, unknown, value "3", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 42))}]
+SEGGER_RTT_BUFFER_SIZE_UP: [{'sym.default': (<symbol 1024, unknown, value "1024", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 46))}]
+SEGGER_RTT_BUFFER_SIZE_DOWN: [{'sym.default': (<symbol 16, unknown, value "16", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 50))}]
+SEGGER_RTT_PRINTF_BUFFER_SIZE: [{'sym.default': (<symbol 64, unknown, value "64", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 54))}]
+SEGGER_RTT_MODE: [{'sym.default': (<symbol 2, unknown, value "2", visibility n, direct deps n, undefined>, (2, <symbol SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, bool, "Block: Wait until there is space in the buffer.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:66>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 73))}]
+SEGGER_RTT_MODE: [{'sym.default': (<symbol 1, unknown, value "1", visibility n, direct deps n, undefined>, (2, <symbol SEGGER_RTT_MODE_NO_BLOCK_TRIM, bool, "Trim: Do not block, output as much as fits.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:63>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 74))}]
+SEGGER_RTT_MODE: [{'sym.default': (<symbol 0, unknown, value "0", visibility n, direct deps n, undefined>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 75))}]
+SEGGER_RTT_SECTION_CUSTOM_NAME: [{'sym.default': (<symbol .rtt_buff_data, unknown, value ".rtt_buff_data", constant>, (2, (40, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol SEGGER_RTT_SECTION_CUSTOM_DTS_REGION, bool, "Place RTT data in custom linker section defined by a memory region in DTS", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:98>), <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 109))}]
+
+------------ choice_infos -----------------------------------------------
+SEGGER_RTT_MODE
+    [<symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>]
+    [<symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>]
+    [<symbol SEGGER_RTT_MODE_NO_BLOCK_TRIM, bool, "Trim: Do not block, output as much as fits.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:63>]
+    [<symbol SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, bool, "Block: Wait until there is space in the buffer.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:66>]
+SEGGER_RTT_SECTION
+    [<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>]
+    [<symbol SEGGER_RTT_SECTION_NONE, bool, "Place RTT data in the default linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:84>]
+    [<symbol SEGGER_RTT_SECTION_DTCM, bool, "Place RTT data in the DTCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:87>]
+    [<symbol SEGGER_RTT_SECTION_CCM, bool, "Place RTT data in the CCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:90>]
+    [<symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>]
+    [<symbol SEGGER_RTT_SECTION_CUSTOM_DTS_REGION, bool, "Place RTT data in custom linker section defined by a memory region in DTS", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:98>]
+SEGGER_RTT_INIT_MODE
+    [<symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>]
+    [<symbol SEGGER_RTT_INIT_MODE_ALWAYS, bool, "RTT Initialization done without conditions", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:121>]
+    [<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>]
+    [<symbol SEGGER_RTT_INIT_MODE_WEAK_CHECK, bool, "RTT Initialization done if partial check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:127>]
+
+------------ choice_definitions -----------------------------------------------
+SEGGER_RTT_MODE: [{'file': 'Kconfig', 'line': 1, 'node.prompt': None, 'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}]
+SEGGER_RTT_MODE: [{'file': 'u1/Kconfig.segg', 'line': 56, 'node.prompt': ('Mode for pre-initialized terminal channel (buffer 0)', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 58))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}]
+SEGGER_RTT_SECTION: [{'file': 'Kconfig', 'line': 7, 'node.prompt': None, 'node.defaults': [(<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol y, bool, value y, constant>, ('Kconfig', 8))], 'node.dep': <symbol y, bool, value y, constant>}]
+SEGGER_RTT_SECTION: [{'file': 'u1/Kconfig.segg', 'line': 80, 'node.prompt': ('Choose RTT data linker section', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 82))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}]
+SEGGER_RTT_INIT_MODE: [{'file': 'Kconfig', 'line': 14, 'node.prompt': None, 'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}]
+SEGGER_RTT_INIT_MODE: [{'file': 'u1/Kconfig.segg', 'line': 113, 'node.prompt': ('RTT Initialization mode', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, (2, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 118)), (<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 119))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}]
+
+   Symbol definitions and corresponding locations in ExParserContext: 
+   'A' is defined x2
+     - Kconfig:2
+     - Kconfig:15
+   'B' is defined x1
+     - Kconfig:9
+   'ZEPHYR_SEGGER_MODULE' is defined x1
+     - u1/Kconfig.segg:4
+   'HAS_SEGGER_RTT' is defined x1
+     - u1/Kconfig.segg:7
+   'USE_SEGGER_RTT' is defined x1
+     - u1/Kconfig.segg:12
+   'SEGGER_RTT_CUSTOM_LOCKING' is defined x1
+     - u1/Kconfig.segg:23
+   'SEGGER_RTT_CB_ALIGNMENT' is defined x1
+     - u1/Kconfig.segg:28
+   'SEGGER_RTT_MAX_NUM_UP_BUFFERS' is defined x1
+     - u1/Kconfig.segg:36
+   'SEGGER_RTT_MAX_NUM_DOWN_BUFFERS' is defined x1
+     - u1/Kconfig.segg:40
+   'SEGGER_RTT_BUFFER_SIZE_UP' is defined x1
+     - u1/Kconfig.segg:44
+   'SEGGER_RTT_BUFFER_SIZE_DOWN' is defined x1
+     - u1/Kconfig.segg:48
+   'SEGGER_RTT_PRINTF_BUFFER_SIZE' is defined x1
+     - u1/Kconfig.segg:52
+   'SEGGER_RTT_MODE_NO_BLOCK_SKIP' is defined x1
+     - u1/Kconfig.segg:60
+   'SEGGER_RTT_MODE_NO_BLOCK_TRIM' is defined x1
+     - u1/Kconfig.segg:63
+   'SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL' is defined x1
+     - u1/Kconfig.segg:66
+   'SEGGER_RTT_MODE' is defined x1
+     - u1/Kconfig.segg:71
+   'SEGGER_RTT_MEMCPY_USE_BYTELOOP' is defined x1
+     - u1/Kconfig.segg:77
+   'SEGGER_RTT_SECTION_NONE' is defined x1
+     - u1/Kconfig.segg:84
+   'SEGGER_RTT_SECTION_DTCM' is defined x1
+     - u1/Kconfig.segg:87
+   'SEGGER_RTT_SECTION_CCM' is defined x1
+     - u1/Kconfig.segg:90
+   'SEGGER_RTT_SECTION_CUSTOM' is defined x1
+     - u1/Kconfig.segg:95
+   'SEGGER_RTT_SECTION_CUSTOM_DTS_REGION' is defined x1
+     - u1/Kconfig.segg:98
+   'SEGGER_RTT_SECTION_CUSTOM_NAME' is defined x1
+     - u1/Kconfig.segg:107
+   'SEGGER_RTT_INIT_MODE_ALWAYS' is defined x1
+     - u1/Kconfig.segg:121
+   'SEGGER_RTT_INIT_MODE_STRONG_CHECK' is defined x1
+     - u1/Kconfig.segg:124
+   'SEGGER_RTT_INIT_MODE_WEAK_CHECK' is defined x1
+     - u1/Kconfig.segg:127
+    get_all_source_files: 
+
+3. Filter ExtParserContext
+extract all configdefault options and for each get transformed lines and last config
+extract infos for named choices - their definition & entries
+------H-----------
+context.choice_infos:       {'SEGGER_RTT_MODE': [{'choice.name': 'SEGGER_RTT_MODE', 'choice.syms': [<symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>, <symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol SEGGER_RTT_MODE_NO_BLOCK_TRIM, bool, "Trim: Do not block, output as much as fits.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:63>, <symbol SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, bool, "Block: Wait until there is space in the buffer.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:66>]}], 'SEGGER_RTT_SECTION': [{'choice.name': 'SEGGER_RTT_SECTION', 'choice.syms': [<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol SEGGER_RTT_SECTION_NONE, bool, "Place RTT data in the default linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:84>, <symbol SEGGER_RTT_SECTION_DTCM, bool, "Place RTT data in the DTCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:87>, <symbol SEGGER_RTT_SECTION_CCM, bool, "Place RTT data in the CCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:90>, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol SEGGER_RTT_SECTION_CUSTOM_DTS_REGION, bool, "Place RTT data in custom linker section defined by a memory region in DTS", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:98>]}], 'SEGGER_RTT_INIT_MODE': [{'choice.name': 'SEGGER_RTT_INIT_MODE', 'choice.syms': [<symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>, <symbol SEGGER_RTT_INIT_MODE_ALWAYS, bool, "RTT Initialization done without conditions", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:121>, <symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol SEGGER_RTT_INIT_MODE_WEAK_CHECK, bool, "RTT Initialization done if partial check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:127>]}]}
+context.choice_definitions: {'SEGGER_RTT_MODE': [{'file': 'Kconfig', 'line': 1, 'node.prompt': None, 'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'u1/Kconfig.segg', 'line': 56, 'node.prompt': ('Mode for pre-initialized terminal channel (buffer 0)', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 58))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_SECTION': [{'file': 'Kconfig', 'line': 7, 'node.prompt': None, 'node.defaults': [(<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol y, bool, value y, constant>, ('Kconfig', 8))], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'u1/Kconfig.segg', 'line': 80, 'node.prompt': ('Choose RTT data linker section', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 82))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_INIT_MODE': [{'file': 'Kconfig', 'line': 14, 'node.prompt': None, 'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'u1/Kconfig.segg', 'line': 113, 'node.prompt': ('RTT Initialization mode', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, (2, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 118)), (<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 119))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}]}
+context.choice_deps:        {'SEGGER_RTT_MODE': [{'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [(<symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 58))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_SECTION': [{'node.defaults': [(<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol y, bool, value y, constant>, ('Kconfig', 8))], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [(<symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 82))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_INIT_MODE': [{'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [(<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, (2, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 118)), (<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 119))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}]}
+
+choice_deps[SEGGER_RTT_MODE]:
+node.defaults:   []
+node.dep:        <symbol y, bool, value y, constant>
+node.defaults:   [(<symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 58))]
+node.dep:        <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>
+def dependencies extr: [['USE_SEGGER_RTT']]
+dep dependencies extr: [['y'], ['USE_SEGGER_RTT']]
+
+
+=== _get_all_choice_configs for SEGGER_RTT_MODE ===
+  Found 2 definitions:
+    [0] file=Kconfig, line=1
+    [1] file=u1/Kconfig.segg, line=56
+
+  Processing definition [0]: Kconfig:1
+    Looking for file: /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/Kconfig
+    File exists, reading...
+
+
+Reader found: 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/Kconfig
+    Read 19 lines
+    Found choice at line index 0, line_number=1
+  DEBUG: Found choice SEGGER_RTT_MODE at Kconfig:1
+  DEBUG: choice_default_lines: []
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: []
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config A
+  Finished processing definition [0]
+
+  Processing definition [1]: u1/Kconfig.segg:56
+    Looking for file: /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/u1/Kconfig.segg
+    File exists, reading...
+
+
+Reader found: 132 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/u1/Kconfig.segg
+    Read 132 lines
+    Found choice at line index 55, line_number=56
+  DEBUG: Found choice SEGGER_RTT_MODE at u1/Kconfig.segg:56
+  DEBUG: choice_default_lines: [KconfigLine(default, line=58, indent=1)]
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: [KconfigLine(prompt, line=57, indent=1)]
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config SEGGER_RTT_MODE_NO_BLOCK_SKIP
+  DEBUG: Adding config SEGGER_RTT_MODE_NO_BLOCK_TRIM
+  DEBUG: Adding config SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL
+  Finished processing definition [1]
+  DEBUG: Total entries collected: 4
+
+  named choice: SEGGER_RTT_MODE
+    'choice_def': [('SEGGER_RTT_MODE', [['USE_SEGGER_RTT']], [['y'], ['USE_SEGGER_RTT']])]
+    'choice_configs': 3 config entries
+    'prompt_lines': [KconfigLine(prompt, line=57, indent=1)]
+    'help_lines': []
+------H-----------
+context.choice_infos:       {'SEGGER_RTT_MODE': [{'choice.name': 'SEGGER_RTT_MODE', 'choice.syms': [<symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>, <symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol SEGGER_RTT_MODE_NO_BLOCK_TRIM, bool, "Trim: Do not block, output as much as fits.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:63>, <symbol SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, bool, "Block: Wait until there is space in the buffer.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:66>]}], 'SEGGER_RTT_SECTION': [{'choice.name': 'SEGGER_RTT_SECTION', 'choice.syms': [<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol SEGGER_RTT_SECTION_NONE, bool, "Place RTT data in the default linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:84>, <symbol SEGGER_RTT_SECTION_DTCM, bool, "Place RTT data in the DTCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:87>, <symbol SEGGER_RTT_SECTION_CCM, bool, "Place RTT data in the CCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:90>, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol SEGGER_RTT_SECTION_CUSTOM_DTS_REGION, bool, "Place RTT data in custom linker section defined by a memory region in DTS", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:98>]}], 'SEGGER_RTT_INIT_MODE': [{'choice.name': 'SEGGER_RTT_INIT_MODE', 'choice.syms': [<symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>, <symbol SEGGER_RTT_INIT_MODE_ALWAYS, bool, "RTT Initialization done without conditions", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:121>, <symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol SEGGER_RTT_INIT_MODE_WEAK_CHECK, bool, "RTT Initialization done if partial check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:127>]}]}
+context.choice_definitions: {'SEGGER_RTT_MODE': [{'file': 'Kconfig', 'line': 1, 'node.prompt': None, 'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'u1/Kconfig.segg', 'line': 56, 'node.prompt': ('Mode for pre-initialized terminal channel (buffer 0)', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 58))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_SECTION': [{'file': 'Kconfig', 'line': 7, 'node.prompt': None, 'node.defaults': [(<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol y, bool, value y, constant>, ('Kconfig', 8))], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'u1/Kconfig.segg', 'line': 80, 'node.prompt': ('Choose RTT data linker section', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 82))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_INIT_MODE': [{'file': 'Kconfig', 'line': 14, 'node.prompt': None, 'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'u1/Kconfig.segg', 'line': 113, 'node.prompt': ('RTT Initialization mode', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, (2, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 118)), (<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 119))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}]}
+context.choice_deps:        {'SEGGER_RTT_MODE': [{'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [(<symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 58))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_SECTION': [{'node.defaults': [(<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol y, bool, value y, constant>, ('Kconfig', 8))], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [(<symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 82))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_INIT_MODE': [{'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [(<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, (2, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 118)), (<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 119))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}]}
+
+choice_deps[SEGGER_RTT_SECTION]:
+node.defaults:   [(<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol y, bool, value y, constant>, ('Kconfig', 8))]
+node.dep:        <symbol y, bool, value y, constant>
+node.defaults:   [(<symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 82))]
+node.dep:        <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>
+def dependencies extr: [['y'], ['USE_SEGGER_RTT']]
+dep dependencies extr: [['y'], ['USE_SEGGER_RTT']]
+
+
+=== _get_all_choice_configs for SEGGER_RTT_SECTION ===
+  Found 2 definitions:
+    [0] file=Kconfig, line=7
+    [1] file=u1/Kconfig.segg, line=80
+
+  Processing definition [0]: Kconfig:7
+    Looking for file: /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/Kconfig
+    File exists, reading...
+
+
+Reader found: 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/Kconfig
+    Read 19 lines
+    Found choice at line index 6, line_number=7
+  DEBUG: Found choice SEGGER_RTT_SECTION at Kconfig:7
+  DEBUG: choice_default_lines: [KconfigLine(default, line=8, indent=1)]
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: []
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config B
+  Finished processing definition [0]
+
+  Processing definition [1]: u1/Kconfig.segg:80
+    Looking for file: /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/u1/Kconfig.segg
+    File exists, reading...
+
+
+Reader found: 132 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/u1/Kconfig.segg
+    Read 132 lines
+    Found choice at line index 79, line_number=80
+  DEBUG: Found choice SEGGER_RTT_SECTION at u1/Kconfig.segg:80
+  DEBUG: choice_default_lines: [KconfigLine(default, line=82, indent=1)]
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: [KconfigLine(prompt, line=81, indent=1)]
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config SEGGER_RTT_SECTION_NONE
+  DEBUG: Adding config SEGGER_RTT_SECTION_DTCM
+  DEBUG: Adding config SEGGER_RTT_SECTION_CCM
+  DEBUG: Adding if-block with configs ['SEGGER_RTT_SECTION_CUSTOM', 'SEGGER_RTT_SECTION_CUSTOM_DTS_REGION'] and menuconfigs []
+  Finished processing definition [1]
+  DEBUG: Total entries collected: 5
+
+  named choice: SEGGER_RTT_SECTION
+    'choice_def': [('SEGGER_RTT_SECTION', [['y'], ['USE_SEGGER_RTT']], [['y'], ['USE_SEGGER_RTT']])]
+    'choice_configs': 3 config entries
+    'prompt_lines': [KconfigLine(prompt, line=81, indent=1)]
+    'help_lines': []
+------H-----------
+context.choice_infos:       {'SEGGER_RTT_MODE': [{'choice.name': 'SEGGER_RTT_MODE', 'choice.syms': [<symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>, <symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol SEGGER_RTT_MODE_NO_BLOCK_TRIM, bool, "Trim: Do not block, output as much as fits.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:63>, <symbol SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, bool, "Block: Wait until there is space in the buffer.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:66>]}], 'SEGGER_RTT_SECTION': [{'choice.name': 'SEGGER_RTT_SECTION', 'choice.syms': [<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol SEGGER_RTT_SECTION_NONE, bool, "Place RTT data in the default linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:84>, <symbol SEGGER_RTT_SECTION_DTCM, bool, "Place RTT data in the DTCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:87>, <symbol SEGGER_RTT_SECTION_CCM, bool, "Place RTT data in the CCM linker section", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:90>, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol SEGGER_RTT_SECTION_CUSTOM_DTS_REGION, bool, "Place RTT data in custom linker section defined by a memory region in DTS", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:98>]}], 'SEGGER_RTT_INIT_MODE': [{'choice.name': 'SEGGER_RTT_INIT_MODE', 'choice.syms': [<symbol A, bool, "A", "A", value n, visibility n, choice symbol, direct deps n, Kconfig:2, Kconfig:15>, <symbol SEGGER_RTT_INIT_MODE_ALWAYS, bool, "RTT Initialization done without conditions", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:121>, <symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol SEGGER_RTT_INIT_MODE_WEAK_CHECK, bool, "RTT Initialization done if partial check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:127>]}]}
+context.choice_definitions: {'SEGGER_RTT_MODE': [{'file': 'Kconfig', 'line': 1, 'node.prompt': None, 'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'u1/Kconfig.segg', 'line': 56, 'node.prompt': ('Mode for pre-initialized terminal channel (buffer 0)', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 58))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_SECTION': [{'file': 'Kconfig', 'line': 7, 'node.prompt': None, 'node.defaults': [(<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol y, bool, value y, constant>, ('Kconfig', 8))], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'u1/Kconfig.segg', 'line': 80, 'node.prompt': ('Choose RTT data linker section', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 82))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_INIT_MODE': [{'file': 'Kconfig', 'line': 14, 'node.prompt': None, 'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'u1/Kconfig.segg', 'line': 113, 'node.prompt': ('RTT Initialization mode', <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), 'node.defaults': [(<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, (2, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 118)), (<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 119))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}]}
+context.choice_deps:        {'SEGGER_RTT_MODE': [{'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [(<symbol SEGGER_RTT_MODE_NO_BLOCK_SKIP, bool, "Skip. Do not block, output nothing.", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:60>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 58))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_SECTION': [{'node.defaults': [(<symbol B, bool, "B", value n, visibility n, choice symbol, direct deps n, Kconfig:9>, <symbol y, bool, value y, constant>, ('Kconfig', 8))], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [(<symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 82))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}], 'SEGGER_RTT_INIT_MODE': [{'node.defaults': [], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [(<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, (2, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 118)), (<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 119))], 'node.dep': <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>}]}
+
+choice_deps[SEGGER_RTT_INIT_MODE]:
+node.defaults:   []
+node.dep:        <symbol y, bool, value y, constant>
+node.defaults:   [(<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, (2, <symbol SEGGER_RTT_SECTION_CUSTOM, bool, "Place RTT data in custom linker section at RAM start", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:95>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>), ('u1/Kconfig.segg', 118)), (<symbol SEGGER_RTT_INIT_MODE_STRONG_CHECK, bool, "RTT Initialization done if full check on Control Block ID fails", value n, visibility n, choice symbol, direct deps n, u1/Kconfig.segg:124>, <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>, ('u1/Kconfig.segg', 119))]
+node.dep:        <symbol USE_SEGGER_RTT, bool, "SEGGER RTT libraries.", value n, visibility n, direct deps n, u1/Kconfig.segg:12>
+def dependencies extr: [['SEGGER_RTT_SECTION_CUSTOM', 'USE_SEGGER_RTT'], ['USE_SEGGER_RTT']]
+dep dependencies extr: [['y'], ['USE_SEGGER_RTT']]
+
+
+=== _get_all_choice_configs for SEGGER_RTT_INIT_MODE ===
+  Found 2 definitions:
+    [0] file=Kconfig, line=14
+    [1] file=u1/Kconfig.segg, line=113
+
+  Processing definition [0]: Kconfig:14
+    Looking for file: /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/Kconfig
+    File exists, reading...
+
+
+Reader found: 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/Kconfig
+    Read 19 lines
+    Found choice at line index 13, line_number=14
+  DEBUG: Found choice SEGGER_RTT_INIT_MODE at Kconfig:14
+  DEBUG: choice_default_lines: []
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: []
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config A
+  Finished processing definition [0]
+
+  Processing definition [1]: u1/Kconfig.segg:113
+    Looking for file: /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/u1/Kconfig.segg
+    File exists, reading...
+
+
+Reader found: 132 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/u1/Kconfig.segg
+    Read 132 lines
+    Found choice at line index 112, line_number=113
+  DEBUG: Found choice SEGGER_RTT_INIT_MODE at u1/Kconfig.segg:113
+  DEBUG: choice_default_lines: [KconfigLine(default, line=118, indent=1), KconfigLine(default, line=119, indent=1)]
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: [KconfigLine(prompt, line=114, indent=1)]
+  DEBUG: choice_help_lines: [KconfigLine(help, line=115, indent=1), KconfigLine(other, line=116, indent=2), KconfigLine(other, line=117, indent=2)]
+  DEBUG: Adding config SEGGER_RTT_INIT_MODE_ALWAYS
+  DEBUG: Adding config SEGGER_RTT_INIT_MODE_STRONG_CHECK
+  DEBUG: Adding config SEGGER_RTT_INIT_MODE_WEAK_CHECK
+  Finished processing definition [1]
+  DEBUG: Total entries collected: 4
+
+  named choice: SEGGER_RTT_INIT_MODE
+    'choice_def': [('SEGGER_RTT_INIT_MODE', [['SEGGER_RTT_SECTION_CUSTOM', 'USE_SEGGER_RTT'], ['USE_SEGGER_RTT']], [['y'], ['USE_SEGGER_RTT']])]
+    'choice_configs': 3 config entries
+    'prompt_lines': [KconfigLine(prompt, line=114, indent=1)]
+    'help_lines': [KconfigLine(help, line=115, indent=1), KconfigLine(other, line=116, indent=2), KconfigLine(other, line=117, indent=2)]
+
+for each given file at source_files start building path output structur and call reader and writer
+
+4. Transform all files - needs reader & writer
+
+
+Reader found: 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 19 input lines
+    Found first definition of choice SEGGER_RTT_MODE at line 1
+    Processing choice transformation
+    processed_choices now: {'SEGGER_RTT_MODE'}
+process lines until first choice config/if was found
+current_indx: 1 - block endidx 5
+current_indx: 1 - choice_attr_end: 1
+DEBUG: choice_def [('SEGGER_RTT_MODE', [['USE_SEGGER_RTT']], [['y'], ['USE_SEGGER_RTT']])]
+choice_configs length: 4
+choice_configs [{'type': 'config', 'symbol': 'A', 'file': 'Kconfig', 'line': 2, 'choice_line': 1, 'block': [KconfigLine(config, line=2, indent=0), KconfigLine(type_bool, line=3, indent=1), KconfigLine(empty, line=4, indent=0)], 'default_lines': [], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'SEGGER_RTT_MODE_NO_BLOCK_SKIP', 'file': 'u1/Kconfig.segg', 'line': 60, 'choice_line': 56, 'block': [KconfigLine(config, line=60, indent=0), KconfigLine(type_bool, line=61, indent=1), KconfigLine(empty, line=62, indent=0)], 'default_lines': [KconfigLine(default, line=58, indent=1)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'SEGGER_RTT_MODE_NO_BLOCK_TRIM', 'file': 'u1/Kconfig.segg', 'line': 63, 'choice_line': 56, 'block': [KconfigLine(config, line=63, indent=0), KconfigLine(type_bool, line=64, indent=1), KconfigLine(empty, line=65, indent=0)], 'default_lines': [KconfigLine(default, line=58, indent=1)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL', 'file': 'u1/Kconfig.segg', 'line': 66, 'choice_line': 56, 'block': [KconfigLine(config, line=66, indent=0), KconfigLine(type_bool, line=67, indent=1), KconfigLine(empty, line=68, indent=0)], 'default_lines': [KconfigLine(default, line=58, indent=1)], 'depends_lines': [], 'if_condition': None}]
+choice_prompts [KconfigLine(prompt, line=57, indent=1)]
+help_lines []
+  [0] type=config, symbol=A, symbols=None, choice_line=1
+  [1] type=config, symbol=SEGGER_RTT_MODE_NO_BLOCK_SKIP, symbols=None, choice_line=56
+  [2] type=config, symbol=SEGGER_RTT_MODE_NO_BLOCK_TRIM, symbols=None, choice_line=56
+  [3] type=config, symbol=SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL, symbols=None, choice_line=56
+Added prompt KconfigLine(prompt, line=57, indent=1)
+all_default_deps: [['USE_SEGGER_RTT']]
+all_node_deps: [['y'], ['USE_SEGGER_RTT']]
+Found 2 choice definitions at lines: [1, 56]
+
+Processing definition 1 at line 56
+  default_deps: []
+  node_deps: ['USE_SEGGER_RTT']
+  entries in this def:
+    config: SEGGER_RTT_MODE_NO_BLOCK_SKIP
+    config: SEGGER_RTT_MODE_NO_BLOCK_TRIM
+    config: SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL
+    Added depends on: 0
+  Added default: default SEGGER_RTT_MODE_NO_BLOCK_SKIP
+    Added default: 1
+
+Final result has 3 lines before adding configs
+    Added Lines bc named choice 2
+Track existing configs: KconfigLine(config, line=2, indent=0)
+Track existing configs: KconfigLine(endchoice, line=5, indent=0)
+      Added config SEGGER_RTT_MODE_NO_BLOCK_SKIP from u1/Kconfig.segg
+      Added config SEGGER_RTT_MODE_NO_BLOCK_TRIM from u1/Kconfig.segg
+      Added config SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL from u1/Kconfig.segg
+    Added 3 entries from other choice definitions
+    Added 9 lines from other choice definitions
+
+  Adding 0 menuconfigs after endchoice
+    Added 0 menuconfig lines (after endchoice) from other choice definitions
+    Added Total Lines bc named choice 11
+    Found first definition of choice SEGGER_RTT_SECTION at line 7
+    Processing choice transformation
+    processed_choices now: {'SEGGER_RTT_MODE', 'SEGGER_RTT_SECTION'}
+process lines until first choice config/if was found
+current_indx: 7 - block endidx 11
+current_indx: 7 - choice_attr_end: 8
+DEBUG: choice_def [('SEGGER_RTT_SECTION', [['y'], ['USE_SEGGER_RTT']], [['y'], ['USE_SEGGER_RTT']])]
+choice_configs length: 5
+choice_configs [{'type': 'config', 'symbol': 'B', 'file': 'Kconfig', 'line': 9, 'choice_line': 7, 'block': [KconfigLine(config, line=9, indent=1), KconfigLine(type_bool, line=10, indent=2)], 'default_lines': [KconfigLine(default, line=8, indent=1)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'SEGGER_RTT_SECTION_NONE', 'file': 'u1/Kconfig.segg', 'line': 84, 'choice_line': 80, 'block': [KconfigLine(config, line=84, indent=0), KconfigLine(type_bool, line=85, indent=1), KconfigLine(empty, line=86, indent=0)], 'default_lines': [KconfigLine(default, line=82, indent=1)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'SEGGER_RTT_SECTION_DTCM', 'file': 'u1/Kconfig.segg', 'line': 87, 'choice_line': 80, 'block': [KconfigLine(config, line=87, indent=0), KconfigLine(type_bool, line=88, indent=1), KconfigLine(empty, line=89, indent=0)], 'default_lines': [KconfigLine(default, line=82, indent=1)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'SEGGER_RTT_SECTION_CCM', 'file': 'u1/Kconfig.segg', 'line': 90, 'choice_line': 80, 'block': [KconfigLine(config, line=90, indent=0), KconfigLine(type_bool, line=91, indent=1), KconfigLine(empty, line=92, indent=0)], 'default_lines': [KconfigLine(default, line=82, indent=1)], 'depends_lines': [], 'if_condition': None}, {'type': 'if_block', 'configs': ['SEGGER_RTT_SECTION_CUSTOM', 'SEGGER_RTT_SECTION_CUSTOM_DTS_REGION'], 'menuconfigs': [], 'file': 'u1/Kconfig.segg', 'line': 93, 'choice_line': 80, 'block': [KconfigLine(if, line=93, indent=0), KconfigLine(empty, line=94, indent=0), KconfigLine(config, line=95, indent=0), KconfigLine(type_bool, line=96, indent=1), KconfigLine(empty, line=97, indent=0), KconfigLine(config, line=98, indent=0), KconfigLine(type_bool, line=99, indent=1), KconfigLine(empty, line=100, indent=0), KconfigLine(endif, line=101, indent=0)], 'default_lines': [KconfigLine(default, line=82, indent=1)], 'depends_lines': []}]
+choice_prompts [KconfigLine(prompt, line=81, indent=1)]
+help_lines []
+  [0] type=config, symbol=B, symbols=None, choice_line=7
+  [1] type=config, symbol=SEGGER_RTT_SECTION_NONE, symbols=None, choice_line=80
+  [2] type=config, symbol=SEGGER_RTT_SECTION_DTCM, symbols=None, choice_line=80
+  [3] type=config, symbol=SEGGER_RTT_SECTION_CCM, symbols=None, choice_line=80
+  [4] type=if_block, symbol=None, symbols=None, choice_line=80
+Added prompt KconfigLine(prompt, line=81, indent=1)
+all_default_deps: [['y'], ['USE_SEGGER_RTT']]
+all_node_deps: [['y'], ['USE_SEGGER_RTT']]
+Found 2 choice definitions at lines: [7, 80]
+
+Processing definition 1 at line 80
+  default_deps: ['USE_SEGGER_RTT']
+  node_deps: ['USE_SEGGER_RTT']
+  entries in this def:
+    config: SEGGER_RTT_SECTION_NONE
+    config: SEGGER_RTT_SECTION_DTCM
+    config: SEGGER_RTT_SECTION_CCM
+    if_block with configs: ['SEGGER_RTT_SECTION_CUSTOM', 'SEGGER_RTT_SECTION_CUSTOM_DTS_REGION'] and menuconfigs: []
+    Added depends on: 0
+  Added default: default SEGGER_RTT_SECTION_CUSTOM if USE_SEGGER_RTT
+    Added default: 1
+
+Final result has 21 lines before adding configs
+    Added Lines bc named choice 13
+Track existing configs: KconfigLine(config, line=9, indent=1)
+Track existing configs: KconfigLine(endchoice, line=11, indent=0)
+      Added config SEGGER_RTT_SECTION_NONE from u1/Kconfig.segg
+      Added config SEGGER_RTT_SECTION_DTCM from u1/Kconfig.segg
+      Added config SEGGER_RTT_SECTION_CCM from u1/Kconfig.segg
+configs_in_if ['SEGGER_RTT_SECTION_CUSTOM', 'SEGGER_RTT_SECTION_CUSTOM_DTS_REGION']
+menuconfigs_in_if []
+      Added if-block with configs ['SEGGER_RTT_SECTION_CUSTOM', 'SEGGER_RTT_SECTION_CUSTOM_DTS_REGION'] from u1/Kconfig.segg
+    Added 4 entries from other choice definitions
+    Added 18 lines from other choice definitions
+
+  Adding 0 menuconfigs after endchoice
+    Added 0 menuconfig lines (after endchoice) from other choice definitions
+    Added Total Lines bc named choice 31
+    Found first definition of choice SEGGER_RTT_INIT_MODE at line 14
+    Processing choice transformation
+    processed_choices now: {'SEGGER_RTT_MODE', 'SEGGER_RTT_SECTION', 'SEGGER_RTT_INIT_MODE'}
+process lines until first choice config/if was found
+current_indx: 14 - block endidx 17
+current_indx: 14 - choice_attr_end: 14
+DEBUG: choice_def [('SEGGER_RTT_INIT_MODE', [['SEGGER_RTT_SECTION_CUSTOM', 'USE_SEGGER_RTT'], ['USE_SEGGER_RTT']], [['y'], ['USE_SEGGER_RTT']])]
+choice_configs length: 4
+choice_configs [{'type': 'config', 'symbol': 'A', 'file': 'Kconfig', 'line': 15, 'choice_line': 14, 'block': [KconfigLine(config, line=15, indent=0), KconfigLine(type_bool, line=16, indent=1)], 'default_lines': [], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'SEGGER_RTT_INIT_MODE_ALWAYS', 'file': 'u1/Kconfig.segg', 'line': 121, 'choice_line': 113, 'block': [KconfigLine(config, line=121, indent=0), KconfigLine(type_bool, line=122, indent=1), KconfigLine(empty, line=123, indent=0)], 'default_lines': [KconfigLine(default, line=118, indent=1), KconfigLine(default, line=119, indent=1)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'SEGGER_RTT_INIT_MODE_STRONG_CHECK', 'file': 'u1/Kconfig.segg', 'line': 124, 'choice_line': 113, 'block': [KconfigLine(config, line=124, indent=0), KconfigLine(type_bool, line=125, indent=1), KconfigLine(empty, line=126, indent=0)], 'default_lines': [KconfigLine(default, line=118, indent=1), KconfigLine(default, line=119, indent=1)], 'depends_lines': [], 'if_condition': None}, {'type': 'config', 'symbol': 'SEGGER_RTT_INIT_MODE_WEAK_CHECK', 'file': 'u1/Kconfig.segg', 'line': 127, 'choice_line': 113, 'block': [KconfigLine(config, line=127, indent=0), KconfigLine(type_bool, line=128, indent=1), KconfigLine(empty, line=129, indent=0)], 'default_lines': [KconfigLine(default, line=118, indent=1), KconfigLine(default, line=119, indent=1)], 'depends_lines': [], 'if_condition': None}]
+choice_prompts [KconfigLine(prompt, line=114, indent=1)]
+help_lines [KconfigLine(help, line=115, indent=1), KconfigLine(other, line=116, indent=2), KconfigLine(other, line=117, indent=2)]
+  [0] type=config, symbol=A, symbols=None, choice_line=14
+  [1] type=config, symbol=SEGGER_RTT_INIT_MODE_ALWAYS, symbols=None, choice_line=113
+  [2] type=config, symbol=SEGGER_RTT_INIT_MODE_STRONG_CHECK, symbols=None, choice_line=113
+  [3] type=config, symbol=SEGGER_RTT_INIT_MODE_WEAK_CHECK, symbols=None, choice_line=113
+Added prompt KconfigLine(prompt, line=114, indent=1)
+Added help KconfigLine(help, line=115, indent=1)
+Added help KconfigLine(other, line=116, indent=2)
+Added help KconfigLine(other, line=117, indent=2)
+all_default_deps: [['SEGGER_RTT_SECTION_CUSTOM', 'USE_SEGGER_RTT'], ['USE_SEGGER_RTT']]
+all_node_deps: [['y'], ['USE_SEGGER_RTT']]
+Found 2 choice definitions at lines: [14, 113]
+
+Processing definition 1 at line 113
+  default_deps: ['USE_SEGGER_RTT']
+  node_deps: ['USE_SEGGER_RTT']
+  entries in this def:
+    config: SEGGER_RTT_INIT_MODE_ALWAYS
+    config: SEGGER_RTT_INIT_MODE_STRONG_CHECK
+    config: SEGGER_RTT_INIT_MODE_WEAK_CHECK
+    Added depends on: 0
+  Added default: default SEGGER_RTT_INIT_MODE_STRONG_CHECK if SEGGER_RTT_SECTION_CUSTOM && USE_SEGGER_RTT
+  Added default: default SEGGER_RTT_INIT_MODE_STRONG_CHECK if USE_SEGGER_RTT
+    Added default: 2
+
+Final result has 51 lines before adding configs
+    Added Lines bc named choice 37
+Track existing configs: KconfigLine(config, line=15, indent=0)
+Track existing configs: KconfigLine(endchoice, line=17, indent=0)
+      Added config SEGGER_RTT_INIT_MODE_ALWAYS from u1/Kconfig.segg
+      Added config SEGGER_RTT_INIT_MODE_STRONG_CHECK from u1/Kconfig.segg
+      Added config SEGGER_RTT_INIT_MODE_WEAK_CHECK from u1/Kconfig.segg
+    Added 3 entries from other choice definitions
+    Added 9 lines from other choice definitions
+
+  Adding 0 menuconfigs after endchoice
+    Added 0 menuconfig lines (after endchoice) from other choice definitions
+    Added Total Lines bc named choice 46
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve source: u1/Kconfig* at line 19
+      -> u1/Kconfig.segg
+    Files matching: 1 (using source)
+    FILE LOG --------------------------------------------------------------
+    Reader input                19 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      1
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         65 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    46
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+        Done writting 65 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep_output/Kconfig
+
+
+Reader found: 132 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/u1/Kconfig.segg
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 132 input lines
+    Skipping non-first definition of choice SEGGER_RTT_MODE at line 56, /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/u1/Kconfig.segg
+    after 69
+helloooend
+    Skipping non-first definition of choice SEGGER_RTT_SECTION at line 80, /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/u1/Kconfig.segg
+    after 103
+helloooend
+    Skipping non-first definition of choice SEGGER_RTT_INIT_MODE at line 113, /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep/u1/Kconfig.segg
+    after 130
+helloooend
+    FILE LOG --------------------------------------------------------------
+    Reader input                132 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         76 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      56
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+        Done writting 76 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep_output/u1/Kconfig.segg
+----------------------------------------------------------------------
+finished transforming: 2 files transformed
+----------------------------------------------------------------------
+Overall parser info: 
+    -> ExParserContext - unique options: 26
+    -> ExParserContext - configdefaults: 0 ()
+    -> ExParserContext - unique choices: 3
+    -> ExParserContext - named choices:  3
+----------------------------------------------------------------------
+    option modules: 0
+----------------------------------------------------------------------
+count options/attr that are not transformed: 
+    allnoconfig_y:  0
+    defconfig_list: 0
+    warning:        0
+    set:            0
+    set default:    0
+
+====================================================================================================
+TIMER REPORT:
+====================================================================================================
+    Parser initialization.............................    0.005001s
+    Got parser results................................    0.008454s
+    Built context from parser results.................    0.003914s
+    File transformation and excel log.................    0.015416s
+----------------------------------------------------------------------------------------------------
+    TOTAL TIME........................................   0.032788s ~ 0.03s
+====================================================================================================

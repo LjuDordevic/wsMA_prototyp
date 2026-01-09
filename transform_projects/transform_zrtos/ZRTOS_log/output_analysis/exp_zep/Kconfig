@@ -1,0 +1,19 @@
+choice SEGGER_RTT_MODE
+config A
+	bool "A"
+
+endchoice
+
+choice SEGGER_RTT_SECTION
+	default B
+	config B
+		bool "B"
+endchoice
+
+
+choice SEGGER_RTT_INIT_MODE
+config A
+	bool "A"
+endchoice
+
+source "u1/Kconfig*"

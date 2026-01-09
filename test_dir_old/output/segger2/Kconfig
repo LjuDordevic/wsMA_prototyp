@@ -1,0 +1,63 @@
+choice
+  default SEGGER_RTT_MODE_NO_BLOCK_SKIP
+config A
+	bool "A"
+
+config SEGGER_RTT_MODE_NO_BLOCK_SKIP
+	bool "Skip. Do not block, output nothing."
+
+config SEGGER_RTT_MODE_NO_BLOCK_TRIM
+	bool "Trim: Do not block, output as much as fits."
+
+config SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL
+	bool "Block: Wait until there is space in the buffer."
+
+endchoice
+
+choice
+  default SEGGER_RTT_SECTION_CUSTOM
+config A
+	bool "A"
+config SEGGER_RTT_SECTION_NONE
+	bool "Place RTT data in the default linker section"
+
+config SEGGER_RTT_SECTION_DTCM
+	bool "Place RTT data in the DTCM linker section"
+
+config SEGGER_RTT_SECTION_CCM
+	bool "Place RTT data in the CCM linker section"
+
+if CPU_CORTEX_M
+
+config SEGGER_RTT_SECTION_CUSTOM
+	bool "Place RTT data in custom linker section at RAM start"
+
+config SEGGER_RTT_SECTION_CUSTOM_DTS_REGION
+	bool "Place RTT data in custom linker section defined by a memory region in DTS"
+
+endif
+endchoice
+
+
+choice
+config A
+	bool "A"
+		if another program (e.g. bootloader) has already initialized it.
+	default SEGGER_RTT_INIT_MODE_STRONG_CHECK if SEGGER_RTT_SECTION_CUSTOM
+	default SEGGER_RTT_INIT_MODE_STRONG_CHECK
+
+config SEGGER_RTT_INIT_MODE_ALWAYS
+	bool "RTT Initialization done without conditions"
+
+config SEGGER_RTT_INIT_MODE_STRONG_CHECK
+	bool "RTT Initialization done if full check on Control Block ID fails"
+
+config SEGGER_RTT_INIT_MODE_WEAK_CHECK
+	bool "RTT Initialization done if partial check on Control Block ID fails"
+
+endchoice
+
+endif
+endchoice
+
+source "/home/ljd/wsMA_prototyp/test_dir_old/exp_zep/u1/Kconfig.segg"

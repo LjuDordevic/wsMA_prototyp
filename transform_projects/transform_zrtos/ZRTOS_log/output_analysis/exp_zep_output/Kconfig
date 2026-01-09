@@ -1,0 +1,65 @@
+choice
+	prompt "Mode for pre-initialized terminal channel (buffer 0)"
+  default SEGGER_RTT_MODE_NO_BLOCK_SKIP
+config A
+	bool "A"
+
+config SEGGER_RTT_MODE_NO_BLOCK_SKIP
+	bool "Skip. Do not block, output nothing."
+
+config SEGGER_RTT_MODE_NO_BLOCK_TRIM
+	bool "Trim: Do not block, output as much as fits."
+
+config SEGGER_RTT_MODE_BLOCK_IF_FIFO_FULL
+	bool "Block: Wait until there is space in the buffer."
+
+endchoice
+
+choice
+	default B
+	prompt "Choose RTT data linker section"
+  default SEGGER_RTT_SECTION_CUSTOM if USE_SEGGER_RTT
+	config B
+		bool "B"
+config SEGGER_RTT_SECTION_NONE
+	bool "Place RTT data in the default linker section"
+
+config SEGGER_RTT_SECTION_DTCM
+	bool "Place RTT data in the DTCM linker section"
+
+config SEGGER_RTT_SECTION_CCM
+	bool "Place RTT data in the CCM linker section"
+
+if CPU_CORTEX_M
+
+config SEGGER_RTT_SECTION_CUSTOM
+	bool "Place RTT data in custom linker section at RAM start"
+
+config SEGGER_RTT_SECTION_CUSTOM_DTS_REGION
+	bool "Place RTT data in custom linker section defined by a memory region in DTS"
+
+endif
+endchoice
+
+
+choice
+	prompt "RTT Initialization mode"
+	help
+		RTT initialization function can avoid re-init of Control Block
+		tif another program (e.g. bootloader) has already initialized it.
+  default SEGGER_RTT_INIT_MODE_STRONG_CHECK if SEGGER_RTT_SECTION_CUSTOM && USE_SEGGER_RTT
+  default SEGGER_RTT_INIT_MODE_STRONG_CHECK if USE_SEGGER_RTT
+config A
+	bool "A"
+config SEGGER_RTT_INIT_MODE_ALWAYS
+	bool "RTT Initialization done without conditions"
+
+config SEGGER_RTT_INIT_MODE_STRONG_CHECK
+	bool "RTT Initialization done if full check on Control Block ID fails"
+
+config SEGGER_RTT_INIT_MODE_WEAK_CHECK
+	bool "RTT Initialization done if partial check on Control Block ID fails"
+
+endchoice
+
+source "u1/Kconfig.segg"
