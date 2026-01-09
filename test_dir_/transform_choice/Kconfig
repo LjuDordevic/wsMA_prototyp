@@ -8,11 +8,14 @@ choice NAMED_CH
   prompt "pick bool named choice"
   default CH_A 
   depends on OPT_Y
+  depends on OPT_TTT
   optional
   config CH_A 
     bool "Op A"
   config CH_B
     bool "Op B"
+  menuconfig MCH_Z
+    bool "MCH_Z"
 endchoice   
 
 source "uo1/Kconfig"
@@ -25,4 +28,3 @@ choice
   config CH_T2
     tristate "Op T2"
 endchoice  
-

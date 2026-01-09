@@ -20,3 +20,24 @@ config OPT_ZZZ
 if OPT_ZZZ
 endif
 
+
+choice
+  prompt "P2"
+  help 
+    Some awesome help text nr. 2 
+    that should be transformed 
+  depends on OPT_AAA
+  default CH_SD if OPT_BBB
+  config CH_SD
+    bool "CH_SD"
+  config CH_SD2
+    bool "CH_SD2"
+  if OPT_CCC
+   menuconfig MC_SD2
+    bool "MC_SD"
+  endif
+endchoice
+  menuconfig MC_SD1
+    bool "MC_SD"
+    depends on OPT_AAA
+    

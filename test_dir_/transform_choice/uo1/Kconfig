@@ -19,6 +19,10 @@ config OPT_ZZZ
 
 if OPT_ZZZ
 choice NAMED_CH
+  prompt "P1"
+  help 
+    Some awesome help text  
+    that should be transformed 
   depends on OPT_AAA
   default CH_C if OPT_BBB
 
@@ -48,3 +52,23 @@ choice NAMED_CH
   config CH_D
     bool "Op D"
 endchoice
+
+choice SINGLE_DEF
+  prompt "P2"
+  help 
+    Some awesome help text nr. 2 
+    that should be transformed 
+  depends on OPT_AAA
+  default CH_SD if OPT_BBB
+  config CH_SD
+    bool "CH_SD"
+  config CH_SD2
+    bool "CH_SD2"
+  menuconfig MC_SD1
+    bool "MC_SD"
+  if OPT_CCC
+   menuconfig MC_SD2
+    bool "MC_SD"
+  endif
+endchoice
+    

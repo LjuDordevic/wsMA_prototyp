@@ -7,10 +7,15 @@ choice
   prompt "pick bool named choice"
   default CH_A 
   depends on OPT_Y
+  depends on OPT_TTT
   depends on OPT_AAA && OPT_ZZZ
   default CH_C if OPT_BBB && OPT_AAA && OPT_ZZZ
   depends on OPT_ZZZ
   default E if OPT_ZZZ
+  prompt "P1"
+  help 
+    Some awesome help text  
+    that should be transformed 
   config CH_A 
     bool "Op A"
   config CH_B
@@ -30,6 +35,10 @@ choice
   config CH_D
     bool "Op D"
 endchoice
+  menuconfig MCH_Z
+    bool "MCH_Z"
+    depends on OPT_Y
+    depends on OPT_TTT
   menuconfig MC1
     bool "M"
     depends on OPT_AAA && OPT_ZZZ
@@ -46,4 +55,3 @@ choice
   config CH_T2
     bool "Op T2"
 endchoice
-
