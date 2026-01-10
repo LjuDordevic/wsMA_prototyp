@@ -1,3 +1,5 @@
+more info: https://guide.riot-os.org/getting-started/installing/
+
 mkdir riot
 cd riot
 python3 -m venv venv_riot

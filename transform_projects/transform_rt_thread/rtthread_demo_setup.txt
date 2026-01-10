@@ -12,8 +12,9 @@ python -m SCons --menuconfig
 
 didn't add script as target, instead manipulated the script target_rtthread_workflow.py
 so that it can correctly read [...]rtthread/rt-thread/bsp/qemu-vexpress-a9/Kconfig
-which calls Kconfig-specification outside of project root ([...]rtthread/rt-thread/bsp/qemu-vexpress-a9/)
+which references Kconfig-specification outside of this example app at ([...]rtthread/rt-thread/bsp/qemu-vexpress-a9/)
 
+[...]rtthread/rt-thread/bsp/qemu-vexpress-a9/Kconfig:
 mainmenu "RT-Thread Project Configuration"
 BSP_DIR := .
 RTT_DIR := ../..
@@ -21,6 +22,9 @@ PKGS_DIR := packages
 source "$(RTT_DIR)/Kconfig"
 osource "$PKGS_DIR/Kconfig"
 source "$(BSP_DIR)/drivers/Kconfig"
+
+so this allows the prototyp to read the main specification of the project : $(RTT_DIR)/Kconfig
+and we get to analyse the whole Project configuration space
 
 called it from: 
 (wsMA_prototyp) ljd@HPENVYLJ:~/wsMA_prototyp/core$ python target_rtthread_workflow.py
