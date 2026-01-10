@@ -26,6 +26,8 @@ class KconfigLine:
         source_match = re.match(source_keyword_pattern, s)
         grsource_match= re.match(grsource_keyword_pattern, s)
         gsource_match = re.match(gsource_keyword_pattern, s)
+        inline_prompt_choice_pattern = r'\s*(bool|tristate)\s+"([^"]*)"'
+        inline_prompt_choice_match = re.match(inline_prompt_choice_pattern, s)
         
         if not s:
             return 'empty'
@@ -63,9 +65,11 @@ class KconfigLine:
             return 'orsource'
         elif gsource_match:
             return 'osource'
-        elif s.startswith('bool') or s.startswith('boolean'):
+        elif inline_prompt_choice_match:
+            return 'inline_prompt_choice'
+        elif re.match(r'^\s*(bool|boolean)\s*$', s):
             return 'type_bool'
-        elif s.startswith('tristate'):
+        elif re.match(r'^\s*(tristate)\s*$', s):
             return 'type_tristate'
         elif s.startswith('int'):
             return 'type_int'
@@ -174,6 +178,12 @@ class KconfigLine:
 
         elif self.line_type == 'prompt':
             content['prompt_text'] = line_stripped.split('"')[1]
+
+        elif self.line_type == 'inline_prompt_choice':
+            match = re.match(r'\s*(bool|tristate)\s+"([^"]*)"', line_stripped)
+            content['inline_typ'] = match.group(1)
+            content['prompt_text'] = match.group(2)
+
 
         elif self.line_type == 'named_choice':
             match = re.match(r'^choice\s+(\w+)', line_stripped)

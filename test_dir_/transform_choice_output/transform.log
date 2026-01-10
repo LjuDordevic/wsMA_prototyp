@@ -269,6 +269,8 @@ dep dependencies extr: [['OPT_Y', 'OPT_TTT'], ['OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ'
     [0] file=Kconfig, line=6
     [1] file=uo1/Kconfig, line=21
     [2] file=uo1/Kconfig, line=47
+  Extracted node_deps: [['OPT_Y', 'OPT_TTT'], ['OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ']]
+  Extracted default_deps: [['OPT_Y', 'OPT_TTT'], ['OPT_BBB', 'OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ']]
 
   Processing definition [0]: Kconfig:6
     Looking for file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
@@ -277,6 +279,7 @@ dep dependencies extr: [['OPT_Y', 'OPT_TTT'], ['OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ'
 
 Reader found: 30 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
     Read 30 lines
+    node_deps for definition [0]: ['OPT_Y', 'OPT_TTT']
     Found choice at line index 5, line_number=6
   DEBUG: Found choice NAMED_CH at Kconfig:6
   DEBUG: choice_default_lines: [KconfigLine(default, line=9, indent=2)]
@@ -295,6 +298,7 @@ Reader found: 30 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kco
 
 Reader found: 75 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
     Read 75 lines
+    node_deps for definition [1]: ['OPT_AAA', 'OPT_ZZZ']
     Found choice at line index 20, line_number=21
   DEBUG: Found choice NAMED_CH at uo1/Kconfig:21
   DEBUG: choice_default_lines: [KconfigLine(default, line=27, indent=2)]
@@ -314,6 +318,7 @@ Reader found: 75 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1
 
 Reader found: 75 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
     Read 75 lines
+    node_deps for definition [2]: ['OPT_ZZZ']
     Found choice at line index 46, line_number=47
   DEBUG: Found choice NAMED_CH at uo1/Kconfig:47
   DEBUG: choice_default_lines: [KconfigLine(default, line=50, indent=2)]
@@ -347,6 +352,8 @@ dep dependencies extr: [['OPT_AAA']]
 === _get_all_choice_configs for SINGLE_DEF ===
   Found 1 definitions:
     [0] file=uo1/Kconfig, line=57
+  Extracted node_deps: [['OPT_AAA']]
+  Extracted default_deps: [['OPT_BBB', 'OPT_AAA']]
 
   Processing definition [0]: uo1/Kconfig:57
     Looking for file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
@@ -355,6 +362,7 @@ dep dependencies extr: [['OPT_AAA']]
 
 Reader found: 75 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
     Read 75 lines
+    node_deps for definition [0]: ['OPT_AAA']
     Found choice at line index 56, line_number=57
   DEBUG: Found choice SINGLE_DEF at uo1/Kconfig:57
   DEBUG: choice_default_lines: [KconfigLine(default, line=63, indent=2)]
@@ -390,6 +398,8 @@ dep dependencies extr: [['y']]
 === _get_all_choice_configs for None ===
   Found 1 definitions:
     [0] file=Kconfig, line=23
+  Extracted node_deps: [['y']]
+  Extracted default_deps: []
 
   Processing definition [0]: Kconfig:23
     Looking for file: /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
@@ -398,6 +408,7 @@ dep dependencies extr: [['y']]
 
 Reader found: 30 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/Kconfig
     Read 30 lines
+    node_deps for definition [0]: ['y']
     Found choice at line index 22, line_number=23
   DEBUG: Found choice None at Kconfig:23
   DEBUG: choice_default_lines: []
@@ -433,7 +444,7 @@ current_indx: 6 - block endidx 19
 current_indx: 6 - choice_attr_end: 12
 DEBUGG: choice_def [('NAMED_CH', [['OPT_Y', 'OPT_TTT'], ['OPT_BBB', 'OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ']], [['OPT_Y', 'OPT_TTT'], ['OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ']])]
 choice_configs length: 9
-choice_configs [{'type': 'config', 'symbol': 'CH_A', 'file': 'Kconfig', 'line': 13, 'choice_line': 6, 'block': [KconfigLine(config, line=13, indent=2), KconfigLine(type_bool, line=14, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2), KconfigLine(depends_on, line=11, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_B', 'file': 'Kconfig', 'line': 15, 'choice_line': 6, 'block': [KconfigLine(config, line=15, indent=2), KconfigLine(type_bool, line=16, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2), KconfigLine(depends_on, line=11, indent=2)], 'if_condition': None}, {'type': 'menuconfig', 'symbol': 'MCH_Z', 'file': 'Kconfig', 'line': 17, 'choice_line': 6, 'block': [KconfigLine(menuconfig, line=17, indent=2), KconfigLine(type_bool, line=18, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2), KconfigLine(depends_on, line=11, indent=2)], 'if_condition': None}, {'type': 'if_block', 'configs': ['CH_C'], 'menuconfigs': [{'symbol': 'MC1', 'block': [KconfigLine(menuconfig, line=32, indent=2), KconfigLine(type_bool, line=33, indent=4)], 'if_condition': 'OPT_DDD'}], 'file': 'uo1/Kconfig', 'line': 29, 'choice_line': 21, 'block': [KconfigLine(if, line=29, indent=2), KconfigLine(config, line=30, indent=2), KconfigLine(type_bool, line=31, indent=4), KconfigLine(endif, line=34, indent=2)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)]}, {'type': 'menuconfig', 'symbol': 'MC2', 'file': 'uo1/Kconfig', 'line': 36, 'choice_line': 21, 'block': [KconfigLine(menuconfig, line=36, indent=2), KconfigLine(type_bool, line=37, indent=4)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CMC2', 'file': 'uo1/Kconfig', 'line': 38, 'choice_line': 21, 'block': [KconfigLine(config, line=38, indent=2), KconfigLine(type_bool, line=39, indent=4), KconfigLine(depends_on, line=40, indent=4)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CMC3', 'file': 'uo1/Kconfig', 'line': 41, 'choice_line': 21, 'block': [KconfigLine(config, line=41, indent=2), KconfigLine(type_bool, line=42, indent=4), KconfigLine(depends_on, line=43, indent=4)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_E', 'file': 'uo1/Kconfig', 'line': 51, 'choice_line': 47, 'block': [KconfigLine(config, line=51, indent=2), KconfigLine(type_bool, line=52, indent=4)], 'default_lines': [KconfigLine(default, line=50, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=49, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_D', 'file': 'uo1/Kconfig', 'line': 53, 'choice_line': 47, 'block': [KconfigLine(config, line=53, indent=2), KconfigLine(type_bool, line=54, indent=4)], 'default_lines': [KconfigLine(default, line=50, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=49, indent=2)], 'if_condition': None}]
+choice_configs [{'type': 'config', 'symbol': 'CH_A', 'file': 'Kconfig', 'line': 13, 'choice_line': 6, 'block': [KconfigLine(config, line=13, indent=2), KconfigLine(inline_prompt_choice, line=14, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2), KconfigLine(depends_on, line=11, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_B', 'file': 'Kconfig', 'line': 15, 'choice_line': 6, 'block': [KconfigLine(config, line=15, indent=2), KconfigLine(inline_prompt_choice, line=16, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2), KconfigLine(depends_on, line=11, indent=2)], 'if_condition': None}, {'type': 'menuconfig', 'symbol': 'MCH_Z', 'file': 'Kconfig', 'line': 17, 'choice_line': 6, 'block': [KconfigLine(menuconfig, line=17, indent=2), KconfigLine(inline_prompt_choice, line=18, indent=4)], 'default_lines': [KconfigLine(default, line=9, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=10, indent=2), KconfigLine(depends_on, line=11, indent=2)], 'if_condition': None}, {'type': 'if_block', 'configs': ['CH_C'], 'menuconfigs': [{'symbol': 'MC1', 'block': [KconfigLine(menuconfig, line=32, indent=2), KconfigLine(inline_prompt_choice, line=33, indent=4)], 'if_condition': 'OPT_DDD'}], 'file': 'uo1/Kconfig', 'line': 29, 'choice_line': 21, 'block': [KconfigLine(if, line=29, indent=2), KconfigLine(config, line=30, indent=2), KconfigLine(inline_prompt_choice, line=31, indent=4), KconfigLine(endif, line=34, indent=2)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)]}, {'type': 'menuconfig', 'symbol': 'MC2', 'file': 'uo1/Kconfig', 'line': 36, 'choice_line': 21, 'block': [KconfigLine(menuconfig, line=36, indent=2), KconfigLine(inline_prompt_choice, line=37, indent=4)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CMC2', 'file': 'uo1/Kconfig', 'line': 38, 'choice_line': 21, 'block': [KconfigLine(config, line=38, indent=2), KconfigLine(inline_prompt_choice, line=39, indent=4), KconfigLine(depends_on, line=40, indent=4)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CMC3', 'file': 'uo1/Kconfig', 'line': 41, 'choice_line': 21, 'block': [KconfigLine(config, line=41, indent=2), KconfigLine(inline_prompt_choice, line=42, indent=4), KconfigLine(depends_on, line=43, indent=4)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_E', 'file': 'uo1/Kconfig', 'line': 51, 'choice_line': 47, 'block': [KconfigLine(config, line=51, indent=2), KconfigLine(inline_prompt_choice, line=52, indent=4)], 'default_lines': [KconfigLine(default, line=50, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=49, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_D', 'file': 'uo1/Kconfig', 'line': 53, 'choice_line': 47, 'block': [KconfigLine(config, line=53, indent=2), KconfigLine(inline_prompt_choice, line=54, indent=4)], 'default_lines': [KconfigLine(default, line=50, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=49, indent=2)], 'if_condition': None}]
 choice_prompts [KconfigLine(prompt, line=22, indent=2), KconfigLine(prompt, line=48, indent=2)]
 help_lines [KconfigLine(help, line=23, indent=2), KconfigLine(other, line=24, indent=4), KconfigLine(other, line=25, indent=4)]
   [0] type=config, symbol=CH_A, symbols=None, choice_line=6
@@ -492,7 +503,7 @@ Track existing configs: KconfigLine(menuconfig, line=17, indent=2)
       Collected menuconfig MCH_Z (2 lines)
 Track existing configs: KconfigLine(endchoice, line=19, indent=0)
 configs_in_if ['CH_C']
-menuconfigs_in_if [{'symbol': 'MC1', 'block': [KconfigLine(menuconfig, line=32, indent=2), KconfigLine(type_bool, line=33, indent=4)], 'if_condition': 'OPT_DDD'}]
+menuconfigs_in_if [{'symbol': 'MC1', 'block': [KconfigLine(menuconfig, line=32, indent=2), KconfigLine(inline_prompt_choice, line=33, indent=4)], 'if_condition': 'OPT_DDD'}]
       Added if-block with configs ['CH_C'] from uo1/Kconfig
       Collected menuconfig MC2 from uo1/Kconfig (will add after endchoice)
       Added config CMC2 from uo1/Kconfig
@@ -514,7 +525,9 @@ menuconfigs_in_if [{'symbol': 'MC1', 'block': [KconfigLine(menuconfig, line=32, 
     Added Total Lines bc named choice 33
     source without glob: 1
 current_indx: 23 - choice_attr_end: 25
-PROCESS choice: [KconfigLine(mainmenu, line=1, indent=0), KconfigLine(empty, line=2, indent=0), KconfigLine(config, line=3, indent=0), KconfigLine(type_bool, line=4, indent=2), KconfigLine(empty, line=5, indent=0), KconfigLine(choice, line=6, indent=0), KconfigLine(prompt, line=8, indent=2), KconfigLine(default, line=9, indent=2), KconfigLine(depends_on, line=10, indent=2), KconfigLine(depends_on, line=11, indent=2), KconfigLine(depends_on, line=26, indent=2), KconfigLine(default, line=27, indent=2), KconfigLine(prompt, line=22, indent=2), KconfigLine(depends_on, line=49, indent=2), KconfigLine(default, line=50, indent=2), KconfigLine(prompt, line=48, indent=2), KconfigLine(help, line=23, indent=2), KconfigLine(other, line=24, indent=4), KconfigLine(other, line=25, indent=4), KconfigLine(config, line=13, indent=2), KconfigLine(type_bool, line=14, indent=4), KconfigLine(config, line=15, indent=2), KconfigLine(type_bool, line=16, indent=4), KconfigLine(if, line=29, indent=2), KconfigLine(config, line=30, indent=2), KconfigLine(type_bool, line=31, indent=4), KconfigLine(endif, line=34, indent=2), KconfigLine(config, line=38, indent=2), KconfigLine(type_bool, line=39, indent=4), KconfigLine(depends_on, line=40, indent=4), KconfigLine(config, line=41, indent=2), KconfigLine(type_bool, line=42, indent=4), KconfigLine(depends_on, line=43, indent=4), KconfigLine(config, line=51, indent=2), KconfigLine(type_bool, line=52, indent=4), KconfigLine(config, line=53, indent=2), KconfigLine(type_bool, line=54, indent=4), KconfigLine(endchoice, line=19, indent=0), KconfigLine(menuconfig, line=17, indent=2), KconfigLine(type_bool, line=18, indent=4), KconfigLine(depends_on, line=10, indent=4), KconfigLine(depends_on, line=11, indent=4), KconfigLine(menuconfig, line=32, indent=2), KconfigLine(type_bool, line=33, indent=4), KconfigLine(depends_on, line=26, indent=4), KconfigLine(menuconfig, line=36, indent=2), KconfigLine(type_bool, line=37, indent=4), KconfigLine(depends_on, line=26, indent=4), KconfigLine(empty, line=20, indent=0), KconfigLine(source, line=21, indent=0), KconfigLine(empty, line=22, indent=0), KconfigLine(choice, line=23, indent=0), KconfigLine(prompt, line=24, indent=2), KconfigLine(config, line=26, indent=2), KconfigLine(type_bool, line=27, indent=4), KconfigLine(config, line=28, indent=2), KconfigLine(type_bool, line=29, indent=4), KconfigLine(endchoice, line=30, indent=0)]
+dahjskaj prompt
+dahjskaj type_tristate
+PROCESS choice: [KconfigLine(mainmenu, line=1, indent=0), KconfigLine(empty, line=2, indent=0), KconfigLine(config, line=3, indent=0), KconfigLine(inline_prompt_choice, line=4, indent=2), KconfigLine(empty, line=5, indent=0), KconfigLine(choice, line=6, indent=0), KconfigLine(prompt, line=8, indent=2), KconfigLine(default, line=9, indent=2), KconfigLine(depends_on, line=10, indent=2), KconfigLine(depends_on, line=11, indent=2), KconfigLine(depends_on, line=26, indent=2), KconfigLine(default, line=27, indent=2), KconfigLine(prompt, line=22, indent=2), KconfigLine(depends_on, line=49, indent=2), KconfigLine(default, line=50, indent=2), KconfigLine(prompt, line=48, indent=2), KconfigLine(help, line=23, indent=2), KconfigLine(other, line=24, indent=4), KconfigLine(other, line=25, indent=4), KconfigLine(config, line=13, indent=2), KconfigLine(inline_prompt_choice, line=14, indent=4), KconfigLine(config, line=15, indent=2), KconfigLine(inline_prompt_choice, line=16, indent=4), KconfigLine(if, line=29, indent=2), KconfigLine(config, line=30, indent=2), KconfigLine(inline_prompt_choice, line=31, indent=4), KconfigLine(endif, line=34, indent=2), KconfigLine(config, line=38, indent=2), KconfigLine(inline_prompt_choice, line=39, indent=4), KconfigLine(depends_on, line=40, indent=4), KconfigLine(config, line=41, indent=2), KconfigLine(inline_prompt_choice, line=42, indent=4), KconfigLine(depends_on, line=43, indent=4), KconfigLine(config, line=51, indent=2), KconfigLine(inline_prompt_choice, line=52, indent=4), KconfigLine(config, line=53, indent=2), KconfigLine(inline_prompt_choice, line=54, indent=4), KconfigLine(endchoice, line=19, indent=0), KconfigLine(menuconfig, line=17, indent=2), KconfigLine(inline_prompt_choice, line=18, indent=4), KconfigLine(depends_on, line=10, indent=4), KconfigLine(depends_on, line=11, indent=4), KconfigLine(menuconfig, line=32, indent=2), KconfigLine(inline_prompt_choice, line=33, indent=4), KconfigLine(depends_on, line=26, indent=4), KconfigLine(menuconfig, line=36, indent=2), KconfigLine(inline_prompt_choice, line=37, indent=4), KconfigLine(depends_on, line=26, indent=4), KconfigLine(empty, line=20, indent=0), KconfigLine(source, line=21, indent=0), KconfigLine(empty, line=22, indent=0), KconfigLine(choice, line=23, indent=0), KconfigLine(prompt, line=24, indent=2), KconfigLine(config, line=26, indent=2), KconfigLine(inline_prompt_choice, line=27, indent=4), KconfigLine(config, line=28, indent=2), KconfigLine(inline_prompt_choice, line=29, indent=4), KconfigLine(endchoice, line=30, indent=0)]
     FILE LOG --------------------------------------------------------------
     Reader input                30 lines
     -----------------------------------------------------------------------
@@ -548,13 +561,13 @@ start transforming 75 input lines
     Skipping non-first definition of choice NAMED_CH at line 47, /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
     Found first definition of choice SINGLE_DEF at line 57
     Processing choice transformation
-    processed_choices now: {'NAMED_CH', 'SINGLE_DEF'}
+    processed_choices now: {'SINGLE_DEF', 'NAMED_CH'}
 process lines until first choice config/if was found
 current_indx: 57 - block endidx 74
 current_indx: 57 - choice_attr_end: 63
 DEBUGG: choice_def [('SINGLE_DEF', [['OPT_BBB', 'OPT_AAA']], [['OPT_AAA']])]
 choice_configs length: 4
-choice_configs [{'type': 'config', 'symbol': 'CH_SD', 'file': 'uo1/Kconfig', 'line': 64, 'choice_line': 57, 'block': [KconfigLine(config, line=64, indent=2), KconfigLine(type_bool, line=65, indent=4)], 'default_lines': [KconfigLine(default, line=63, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=62, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_SD2', 'file': 'uo1/Kconfig', 'line': 66, 'choice_line': 57, 'block': [KconfigLine(config, line=66, indent=2), KconfigLine(type_bool, line=67, indent=4)], 'default_lines': [KconfigLine(default, line=63, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=62, indent=2)], 'if_condition': None}, {'type': 'menuconfig', 'symbol': 'MC_SD1', 'file': 'uo1/Kconfig', 'line': 68, 'choice_line': 57, 'block': [KconfigLine(menuconfig, line=68, indent=2), KconfigLine(type_bool, line=69, indent=4)], 'default_lines': [KconfigLine(default, line=63, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=62, indent=2)], 'if_condition': None}, {'type': 'if_block', 'configs': [], 'menuconfigs': [{'symbol': 'MC_SD2', 'block': [KconfigLine(menuconfig, line=71, indent=3), KconfigLine(type_bool, line=72, indent=4)], 'if_condition': 'OPT_CCC'}], 'file': 'uo1/Kconfig', 'line': 70, 'choice_line': 57, 'block': [KconfigLine(if, line=70, indent=2), KconfigLine(endif, line=73, indent=2)], 'default_lines': [KconfigLine(default, line=63, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=62, indent=2)]}]
+choice_configs [{'type': 'config', 'symbol': 'CH_SD', 'file': 'uo1/Kconfig', 'line': 64, 'choice_line': 57, 'block': [KconfigLine(config, line=64, indent=2), KconfigLine(inline_prompt_choice, line=65, indent=4)], 'default_lines': [KconfigLine(default, line=63, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=62, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_SD2', 'file': 'uo1/Kconfig', 'line': 66, 'choice_line': 57, 'block': [KconfigLine(config, line=66, indent=2), KconfigLine(inline_prompt_choice, line=67, indent=4)], 'default_lines': [KconfigLine(default, line=63, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=62, indent=2)], 'if_condition': None}, {'type': 'menuconfig', 'symbol': 'MC_SD1', 'file': 'uo1/Kconfig', 'line': 68, 'choice_line': 57, 'block': [KconfigLine(menuconfig, line=68, indent=2), KconfigLine(inline_prompt_choice, line=69, indent=4)], 'default_lines': [KconfigLine(default, line=63, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=62, indent=2)], 'if_condition': None}, {'type': 'if_block', 'configs': [], 'menuconfigs': [{'symbol': 'MC_SD2', 'block': [KconfigLine(menuconfig, line=71, indent=3), KconfigLine(inline_prompt_choice, line=72, indent=4)], 'if_condition': 'OPT_CCC'}], 'file': 'uo1/Kconfig', 'line': 70, 'choice_line': 57, 'block': [KconfigLine(if, line=70, indent=2), KconfigLine(endif, line=73, indent=2)], 'default_lines': [KconfigLine(default, line=63, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=62, indent=2)]}]
 choice_prompts []
 help_lines []
   [0] type=config, symbol=CH_SD, symbols=None, choice_line=57
@@ -622,10 +635,10 @@ count options/attr that are not transformed:
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.001904s
-    Got parser results................................    0.002524s
-    Built context from parser results.................    0.001521s
-    File transformation and excel log.................    0.004102s
+    Parser initialization.............................    0.001903s
+    Got parser results................................    0.002660s
+    Built context from parser results.................    0.001333s
+    File transformation and excel log.................    0.004509s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   0.010052s ~ 0.01s
+    TOTAL TIME........................................   0.010406s ~ 0.01s
 ====================================================================================================

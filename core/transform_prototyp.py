@@ -666,6 +666,7 @@ class KconfigTransformer:
         idx = current_index + 1
         while idx < choice_attr_end:
             line_item = lines[idx]
+            print(f"dahjskaj {line_item.line_type}")
 
             # SKIP: type attr (bool/tristate) & optional attr
             if line_item.line_type == 'optional':
@@ -679,6 +680,13 @@ class KconfigTransformer:
             if line_item.line_type == 'type_bool':
                 self.FILE_SKIP_CHOICE_TYP_DEF_BOOL += 1
                 idx += 1
+                continue
+            if line_item.line_type == 'inline_prompt_choice':
+                inline_typ = line_item.content.get('inline_typ', '')
+                prompt_text = line_item.content.get('prompt_text', '')
+                new_prompt_line = f'{indent_str}{inline_typ} "{prompt_text}"'
+                modified_line = KconfigLine(new_prompt_line, next_line.line_number)
+                result.append(modified_line)
                 continue
 
             # everything else: copy/transform as usual (because it's a first definition)
@@ -1136,12 +1144,6 @@ class KconfigTransformer:
                         if (current.line_type in ('config', 'if','menuconfig', 'endchoice', 'comment') and current is not line_item):
                             break
 
-                        # TODO: This handles choice type switch: tristate -> bool. But only for the attrs of choice itselfelf
-                        #       but for the choice/menuconfigs from other choice definitions are not handled  
-                        # IF MENU/CONFIG INSIDE CHOICE is type tristate -> type bool  
-                        #if current.line_type == 'type_tristate':
-                        #    current = self.transform_bool_to_tristate_choice_typ(current)
-
                         transformed = transform_func(current, None, None)
                         if transformed is not None:
                             if isinstance(transformed, list):
@@ -1455,18 +1457,6 @@ class KconfigTransformer:
         print(f"    GLOB LOG ----------------------------------------------------------------------------")
         print(f"    Resolve {source_keyword}: {pattern} at line {line.line_number}")
         
-        """ 
-        # was just for test of ESP-IDF
-        if pattern.startswith("./"):
-           #print(f"     patern starts with ./ -> remove ./")
-           pattern = pattern[2:]
-           #print(f"     new pattern {pattern}")   
-
-        if '$' in pattern:
-           #print(f"     patern has $ENV replace it")
-           pattern = re.sub(r"\$(\w+)", self._replace_env_var, pattern) 
-           #print(f"     new pattern {pattern}")   
-        """
         #print("tests")
 
         # RESOLVE 
@@ -1624,7 +1614,7 @@ class KconfigTransformer:
             
         return default_line
     
-    def _get_all_choice_configs(self, choice_name: str, reader, project_dir: Path, log_cd_nc_details: bool):
+    def _get_all_choice_configs(self, choice_name: str, reader, project_dir: Path, log_cd_nc_details: bool, choice_info=None):
         """
         Get all config entries for a named choice from all its definitions.
         
@@ -1645,6 +1635,17 @@ class KconfigTransformer:
         for idx, cd in enumerate(choice_definitions):
             print(f"    [{idx}] file={cd.get('file')}, line={cd.get('line')}")
         
+        # Extrahiere node_deps aus choice_info
+        all_node_deps = []
+        all_default_deps = []
+        if choice_info and 'choice_def' in choice_info:
+            choice_def_list = choice_info['choice_def']
+            if choice_def_list:
+                # Unpack: (choice_name, default_deps_list, node_deps_list)
+                _, all_default_deps, all_node_deps = choice_def_list[0]
+                print(f"  Extracted node_deps: {all_node_deps}")
+                print(f"  Extracted default_deps: {all_default_deps}")
+
         all_entries = []
         all_choice_prompt_lines = []
         all_choice_help_lines = []
@@ -1670,6 +1671,13 @@ class KconfigTransformer:
             print(f"    File exists, reading...")
             lines = reader.read_file(input_file)
             print(f"    Read {len(lines)} lines")
+
+            # Get node_deps for this specific definition
+            node_deps = []
+            if def_idx < len(all_node_deps):
+                node_deps = all_node_deps[def_idx]
+            
+            print(f"    node_deps for definition [{def_idx}]: {node_deps}")
 
             # Find the choice line
             for i, line in enumerate(lines):
@@ -1752,6 +1760,29 @@ class KconfigTransformer:
                         print(f"  DEBUG: choice_depends_lines: {choice_depends_lines}")
                         print(f"  DEBUG: choice_prompt_lines: {choice_prompt_lines}")
                         print(f"  DEBUG: choice_help_lines: {choice_help_lines}")
+
+                    additional_deps = []
+
+                    # 1. base_cond
+                    for dep_line in choice_depends_lines:
+                        raw = dep_line.raw_text.strip()
+                        base_cond = raw[len('depends on'):].strip()
+                        additional_deps.append(base_cond)
+                                
+                    # 2. Additional (nur für def_idx > 0)
+                    if def_idx > 0 and node_deps:
+                        base_conds = additional_deps.copy()
+                        for base_cond in base_conds:
+                            additional = [
+                                d for d in node_deps
+                                if d not in base_cond and d != 'y'
+                            ]
+                            additional_deps.extend(additional)
+                                    
+                        if not base_conds:
+                            additional_deps.extend([d for d in node_deps if d != 'y'])
+                                
+                    additional_deps = list(dict.fromkeys(additional_deps))
                     
                     # Now collect all configs AND if-blocks in this choice block
                     if first_config_idx is not None:
@@ -1842,11 +1873,90 @@ class KconfigTransformer:
                                 k = m
                             
                             # Handle standalone configs/menuconfigs (not inside if)
-                            elif current_line.line_type in ('config', 'menuconfig'):
+                            elif current_line.line_type in ('config'):
+                                from kconfig_writer import KconfigLine
                                 sym_name = current_line.content.get('symbol')
                                 is_menuconfig = (current_line.line_type == 'menuconfig')
                                 config_block = [current_line]
+
+
+                                # Collect the config/menuconfig block
+                                m = k + 1
+                                while m < len(lines):
+                                    next_line = lines[m]
+                                    
+                                    if (
+                                        next_line.indent <= current_line.indent and
+                                        next_line.line_type in (
+                                            'config', 'menuconfig', 'endchoice', 'if', 'endif', 'comment'
+                                        )
+                                    ):
+                                        break
+                                    
+                                    #print(f"eehehjwe {next_line.line_type}")
+                                    if next_line.line_type == 'prompt' or next_line.line_type == 'inline_prompt_choice' or next_line.line_type == 'default' and def_idx > 0:
+                                        
+                                        """ 
+                                        # Von depends_on Zeilen
+                                        for dep_line in choice_depends_lines:
+                                            raw = dep_line.raw_text.strip()
+                                            base_cond = raw[len('depends on'):].strip()
+                                            additional_deps.append(base_cond)
+                                            base_conds = additional_deps.copy()
+                                            for base_cond in base_conds:
+                                                additional = [
+                                                    d for d in node_deps
+                                                    if d not in base_cond and d != 'y'
+                                                ]
+                                                additional_deps.extend(additional)
+                                        """                                        
+                                        
+                                        prompt_text = next_line.content.get('prompt_text', '')
+                                        inline_typ = next_line.content.get('inline_typ', '')
+                                        # ELEMENTS OF CHOICE CANT HAVE DEFAULT
+                                        #default_value = next_line.content.get('value', '')
+                                        #default_cond = next_line.content.get('condition', '')
+                                        
+                                        if additional_deps:
+                                            combined_cond = ' && '.join(additional_deps)
+                                            indent_str = ' ' * next_line.indent
+                                            if next_line.line_type == 'inline_prompt_choice': new_prompt_line = f'{indent_str}{inline_typ} "{prompt_text}" if {combined_cond}'
+                                            if next_line.line_type == 'prompt': new_prompt_line = f'{indent_str}prompt "{prompt_text}" if {combined_cond}'
+                                            #if next_line.line_type == 'default' and default_cond: new_prompt_line = f'{indent_str}default {default_value} if {default_cond} && {combined_cond}'
+                                            #if next_line.line_type == 'default' and not default_cond: new_prompt_line = f'{indent_str}default {default_value} if {combined_cond}'
+
+                                            modified_line = KconfigLine(new_prompt_line, next_line.line_number)
+                                            config_block.append(modified_line)
+                                        else:
+                                            config_block.append(next_line)
+                                    else:
+                                        config_block.append(next_line)
+                                    
+                                    m += 1
                                 
+                                if log_cd_nc_details: print(f"  DEBUG: Adding {'menuconfig' if is_menuconfig else 'config'} {sym_name}")
+                                
+                                all_entries.append({
+                                    'type': 'menuconfig' if is_menuconfig else 'config',
+                                    'symbol': sym_name,
+                                    'file': choice_file,
+                                    'line': current_line.line_number,
+                                    'choice_line': choice_line,
+                                    'block': config_block,
+                                    'default_lines': choice_default_lines.copy(),
+                                    'depends_lines': choice_depends_lines.copy(),
+                                    'if_condition': None  # Not inside if
+                                })
+                                
+                                k = m
+                            
+                            elif current_line.line_type in ('menuconfig'):
+                                from kconfig_writer import KconfigLine
+                                sym_name = current_line.content.get('symbol')
+                                is_menuconfig = (current_line.line_type == 'menuconfig')
+                                config_block = [current_line]
+
+
                                 # Collect the config/menuconfig block
                                 m = k + 1
                                 while m < len(lines):
@@ -2166,7 +2276,7 @@ class KconfigTransformer:
             choice_info = self._extract_named_choice_info(choice_name, log, log_cd_nc_details)
        
             # Get all config entries for this choice
-            choice_data = self._get_all_choice_configs(choice_name, reader, project_dir, log_cd_nc_details)
+            choice_data = self._get_all_choice_configs(choice_name, reader, project_dir, log_cd_nc_details, choice_info=choice_info)
             choice_info['choice_configs'] = choice_data['entries']
             choice_info['prompt_lines'] = choice_data['choice_prompt_lines']
             choice_info['help_lines'] = choice_data['choice_help_lines']

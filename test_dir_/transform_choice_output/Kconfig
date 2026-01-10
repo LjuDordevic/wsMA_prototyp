@@ -26,15 +26,15 @@ choice
     bool "Op C" 
   endif
   config CMC2
-    bool "CMC2"
+    bool "CMC2" if OPT_AAA && OPT_ZZZ
     depends on MC2
   config CMC3
-    bool "CMC3"
+    bool "CMC3" if OPT_AAA && OPT_ZZZ
     depends on MC2
   config CH_E
-    bool "Op E"
+    bool "Op E" if OPT_ZZZ
   config CH_D
-    bool "Op D"
+    bool "Op D" if OPT_ZZZ
 endchoice
   menuconfig MCH_Z
     bool "MCH_Z"
@@ -52,7 +52,7 @@ source "uo1/Kconfig"
 choice 
   prompt "pick tristate choice"
   config CH_T1
-    bool "Op T1"
+    tristate "Op T1"
   config CH_T2
-    bool "Op T2"
+    tristate "Op T2"
 endchoice
