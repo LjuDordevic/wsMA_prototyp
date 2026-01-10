@@ -4,8 +4,7 @@ config OPT_Y
   bool "depends on OPT_Yn"
 
 choice NAMED_CH
-  bool
-  prompt "pick bool named choice"
+  bool "pick bool named choice" 
   default CH_A 
   depends on OPT_Y
   depends on OPT_TTT

@@ -19,7 +19,7 @@ config OPT_ZZZ
 
 if OPT_ZZZ
 choice NAMED_CH
-  prompt "P1"
+  bool "P1"
   help 
     Some awesome help text  
     that should be transformed 

@@ -785,7 +785,14 @@ class KconfigTransformer:
             if line_item.line_type == 'type_bool':
                 self.FILE_SKIP_CHOICE_TYP_DEF_BOOL += 1
                 continue
-            
+            if line_item.line_type == 'inline_prompt_choice': 
+                #inline_typ = line_item.content.get('inline_typ') Linux doesn't allow bool "..."
+                indent_str = ' ' * (choice_line.indent + 2)
+                line_text = line_item.content.get('prompt_text')
+                new_prompt_line_text = f'{indent_str}prompt "{line_text}"'
+                new_prompt_line=KconfigLine(new_prompt_line_text, line_item.line_number)
+                result.append(new_prompt_line)
+                continue            
             if line_item.line_type == 'depends_on':
                 first_depends_on_for_mc.append(line_item)
             
@@ -917,13 +924,13 @@ class KconfigTransformer:
                                 f"{' ' * (choice_line.indent + 2)}"
                                 f"depends on {base_cond}"
                             )
-                        result.append(KconfigLine(new_line, dep_line.line_number))
+                        #result.append(KconfigLine(new_line, dep_line.line_number))
                         depends_from_def.append(KconfigLine(new_line, dep_line.line_number))
 
                         if log_debug: print(f"  Added: {new_line.strip()}")
                     
                     print(f"    Added depends on: {len(depends_from_def)}")
-                    self.FILE_ADDED_BC_NAMED_CHOICE += len(depends_from_def)
+                    #self.FILE_ADDED_BC_NAMED_CHOICE += len(depends_from_def)
                     # depends on for the line 
                     depends_by_choice_line[choice_line_num] = depends_from_def
                     
@@ -960,12 +967,12 @@ class KconfigTransformer:
                                 f"default {sym}"
                             )
 
-                        result.append(KconfigLine(new_line, def_line.line_number))
+                        #result.append(KconfigLine(new_line, def_line.line_number))
                         added_def_counter += 1
                         if log_debug: print(f"  Added default: {new_line.strip()}")
 
                     print(f"    Added default: {added_def_counter}")
-                    self.FILE_ADDED_BC_NAMED_CHOICE += added_def_counter
+                    #self.FILE_ADDED_BC_NAMED_CHOICE += added_def_counter
 
                     # we would like to take conditions form depends on but if the choice doesn't have
                     # depends on, meaning no place to read all aditional cond from if/menu 
@@ -976,8 +983,9 @@ class KconfigTransformer:
                         collect_additional = collect_additional_from_default
 
                 if choice_prompts:
-                    print(f"choice_prompts: {choice_prompts}")
-                    line = choice_prompts[def_idx-1]
+                    
+                    print(f"choice_prompts other att: {choice_prompts}")
+                    line = choice_prompts[def_idx-1]                    
                     line_text = line.content.get('prompt_text')
                     add = None
                     if collect_additional: 
@@ -986,7 +994,10 @@ class KconfigTransformer:
 
                         #print(f"hhhhhshsh {add}")
                         indent_str = ' ' * (choice_line.indent + 2)
-                        new_prompt_line_text = f'{indent_str}prompt "{line_text}" if {add}'
+                        if line.line_type == 'inline_prompt_choice': 
+                            inline_typ = line.content.get('inline_typ')
+                            new_prompt_line_text = f'{indent_str}prompt "{line_text}" if {add}'
+                        else: new_prompt_line_text = f'{indent_str}prompt "{line_text}" if {add}'
                         new_prompt_line=KconfigLine(new_prompt_line_text, line.line_number)
                         result.append(new_prompt_line)
                         self.FILE_ADDED_BC_NAMED_CHOICE += 1
@@ -1719,9 +1730,19 @@ class KconfigTransformer:
                         # because the attributs of the first definition are transformed in transform_named_choice
                         if def_idx != 0:
                             #print("collect from other def")
+                            print(f"nextttt {next_line.line_type}")
                             if next_line.line_type == 'prompt':
                                 choice_prompt_lines.append(next_line)
                                 all_choice_prompt_lines.append(next_line)
+                            elif next_line.line_type == 'inline_prompt_choice':
+                                inline_typ = next_line.content.get('inline_typ', '')
+                                prompt_text = next_line.content.get('prompt_text', '')
+                                new_prompt_line = f'{indent_str}{inline_typ} "{prompt_text}"'
+                                modified_line = KconfigLine(new_prompt_line, next_line.line_number)
+                                print(f"mod: {modified_line}")
+                                all_choice_prompt_lines.append(modified_line)
+                                print(all_choice_prompt_lines)
+                                
                             elif next_line.line_type == 'help':
                                 # store the 'help' keyword line
                                 choice_help_lines.append(next_line)
