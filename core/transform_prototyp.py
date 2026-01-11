@@ -684,7 +684,7 @@ class KconfigTransformer:
             if line_item.line_type == 'inline_prompt_choice':
                 inline_typ = line_item.content.get('inline_typ', '')
                 prompt_text = line_item.content.get('prompt_text', '')
-                new_prompt_line = f'{indent_str}{inline_typ} "{prompt_text}"'
+                new_prompt_line = f'{indent_str}bool "{prompt_text}"'
                 modified_line = KconfigLine(new_prompt_line, next_line.line_number)
                 result.append(modified_line)
                 continue
@@ -708,7 +708,7 @@ class KconfigTransformer:
             line_item = lines[idx]
 
             # IF CONFIG INSIDE CHOICE is type tristate 
-            if line_item.line_type == 'type_tristate':
+            if line_item.line_type in ('type_tristate', 'inline_prompt_choice'):
                 line_item = self._transform_bool_to_tristate_choice_typ(line_item)
 
             # everything else: copy/transform as usual (because it's a first definition)
@@ -1066,6 +1066,8 @@ class KconfigTransformer:
                             and current is not line_item):
                             break
                         
+                        current = self._transform_typ_choice_help(current)
+                        
                         menuconfig_block.append(current)
                         idx += 1
                     
@@ -1084,28 +1086,72 @@ class KconfigTransformer:
                 if line_item.line_type == 'if':
                     if_block_lines = []
                     if_start_idx = idx
+                    if_depth = 1
                     
-                    # Collect entire if block
-                    while idx < block_end_index:
+                    # Collect entire if block including nested ifs
+                    if_block_lines.append(lines[idx])  # Add the 'if' line
+                    idx += 1
+                    
+                    while idx < block_end_index and if_depth > 0:
                         current = lines[idx]
                         if_block_lines.append(current)
                         
-                        if current.line_type == 'endif':
-                            idx += 1
-                            break
+                        if current.line_type == 'if':
+                            if_depth += 1
+                        elif current.line_type == 'endif':
+                            if_depth -= 1
+                        
                         idx += 1
                     
-                    # Add if block to result
-                    for if_line in if_block_lines:
+                    # Now process the collected if_block_lines
+                    if_line_idx = 0
+                    while if_line_idx < len(if_block_lines):
+                        if_line = if_block_lines[if_line_idx]
                         
-                        # HERE HANDLE MC
+                        # Handle menuconfig inside if block
+                        if if_line.line_type == 'menuconfig':
+                            sym_name = if_line.content.get('symbol')
+                            if sym_name:
+                                existing_configs.add(sym_name)
+                            
+                            menuconfig_block = [if_line]
+                            if_line_idx += 1
+                            
+                            # Collect menuconfig properties until next symbol or block boundary
+                            while if_line_idx < len(if_block_lines):
+                                next_line = if_block_lines[if_line_idx]
+                                
+                                # Stop if next config/menuconfig/if/endif/endchoice starts
+                                if (next_line.indent <= if_line.indent and
+                                    next_line.line_type in ('config', 'menuconfig', 'if', 'endif', 'endchoice', 'comment')):
+                                    break
 
+                                next_line = self._transform_typ_choice_help(next_line)
+
+                                menuconfig_block.append(next_line)
+                                if_line_idx += 1
+                            
+                            # Store for adding after endchoice
+                            menuconfigs_to_add_after.append({
+                                'symbol': sym_name,
+                                'block': menuconfig_block,
+                                'depends_from_def': first_depends_on_for_mc  
+                            })
+                            
+                            print(f"      Collected menuconfig {sym_name} inside if-block ({len(menuconfig_block)} lines)")
+                            len_menuconfig_block_first_def += len(menuconfig_block)
+                            
+                            continue
+                        
+                        # For all other lines (if, endif, config, etc.), transform and add
                         transformed = transform_func(if_line, None, None)
                         if transformed is not None:
                             if isinstance(transformed, list):
                                 result.extend(transformed)
                             else:
                                 result.append(transformed)
+                        
+                        if_line_idx += 1
                     
                     print(f"      Added if-block ({len(if_block_lines)} lines)")
                     continue
@@ -1124,6 +1170,8 @@ class KconfigTransformer:
                         if (current.line_type in ('config', 'if', 'menuconfig', 'endchoice', 'comment') 
                             and current is not line_item):
                             break
+                        
+                        current = self._transform_typ_choice_help(current)
 
                         transformed = transform_func(current, None, None)
                         if transformed is not None:
@@ -1163,6 +1211,10 @@ class KconfigTransformer:
                         # Stop if next config or endchoice starts
                         if (current.line_type in ('config', 'if','menuconfig', 'endchoice', 'comment') and current is not line_item):
                             break
+                        
+                        #print(f"before:{current.raw_text}")
+                        current = self._transform_typ_choice_help(current)
+                        #print(f"after: {current.raw_text}")
 
                         transformed = transform_func(current, None, None)
                         if transformed is not None:
@@ -1189,6 +1241,7 @@ class KconfigTransformer:
                             and current is not line_item):
                             break
                         
+                        current = self._transform_typ_choice_help(current)
                         menuconfig_block.append(current)
                         idx += 1
                     
@@ -1313,7 +1366,7 @@ class KconfigTransformer:
             for dep_line in depends_from_def:
                 raw = dep_line.raw_text.strip()
                 new_line = f"{' ' * (line.indent)}{raw}"
-                print(f"        new line: {new_line}")
+                #print(f"        new line: {new_line}")
                 #print(line.indent)
                 result.append(KconfigLine(new_line, dep_line.line_number))
                 mc_lines_counter += 1
@@ -1326,22 +1379,42 @@ class KconfigTransformer:
         print(f"    Diff: {new_mc_lines}")
         self.FILE_ADDED_BC_NAMED_CHOICE += (new_mc_lines + added_lines)
         print(f"    Added Total Lines bc named choice {self.FILE_ADDED_BC_NAMED_CHOICE}")
-
-
+        """ 
+        for line in result:
+            print(f"resultttt {line}")
+        """
         return block_end_index
 
-    def _transform_bool_to_tristate_choice_typ(self, line_item):
+    def _transform_typ_choice_help(self, current):
+        
+        if (current.line_type == 'inline_prompt_choice' and current.content.get('inline_typ') == 'tristate'):
+            current_transformed = self._transform_bool_to_tristate_choice_typ(current, current.indent, current.content.get('prompt_text'))
+            return current_transformed
+        
+        if current.line_type == 'type_tristate':
+            current_transformed = self._transform_bool_to_tristate_choice_typ(current)
+            return current_transformed
+        
+        return current
+
+
+    def _transform_bool_to_tristate_choice_typ(self, line_item, indent: Optional[int] = 0,prompt_text: Optional[str] = ""):
         from kconfig_writer import KconfigLine
         import re
-
-        indent_str = ' ' * (line_item.indent)   
-        match = re.match(r'tristate\s+["\']([^"\']+)["\']', line_item.stripped) 
-        # actually it wouldn't be right for choice_conifg to not have prompt 
-        if match:
-            line_text = match.group(1)
-            new_line_text = f'{indent_str}bool "{line_text}"'
+        
+        # actually it wouldn't be right for choice_conifg to not have prompt
+        if indent:
+            indent_str = ' ' * (indent)  
         else:
-            new_line_text = f'{indent_str}bool'
+            indent_str = ' ' * (line_item.indent)   
+
+        if prompt_text:
+          new_line_text = f'{indent_str}bool "{prompt_text}"'
+        else:
+          match = re.match(r'tristate\s+["\']([^"\']+)["\']', line_item.stripped) 
+          line_text = match.group(1)
+          new_line_text = f'{indent_str}bool "{line_text}"'
+
         return KconfigLine(new_line_text, line_item.line_number)
 
     def _transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
@@ -1744,16 +1817,20 @@ class KconfigTransformer:
                         # because the attributs of the first definition are transformed in transform_named_choice
                         if def_idx != 0:
                             #print("collect from other def")
-                            print(f"nextttt {next_line.line_type}")
+                            #print(f"nextttt {next_line.line_type}")
+                            
                             if next_line.line_type == 'prompt':
                                 choice_prompt_lines.append(next_line)
                                 all_choice_prompt_lines.append(next_line)
+                            
                             elif next_line.line_type == 'inline_prompt_choice':
                                 inline_typ = next_line.content.get('inline_typ', '')
                                 prompt_text = next_line.content.get('prompt_text', '')
-                                new_prompt_line = f'{indent_str}{inline_typ} "{prompt_text}"'
+                                indent_str = ' ' * next_line.indent
+
+                                new_prompt_line = f'{indent_str}prompt "{prompt_text}"'
                                 modified_line = KconfigLine(new_prompt_line, next_line.line_number)
-                                print(f"mod: {modified_line}")
+                                #print(f"mod: {modified_line.raw_text}")
                                 all_choice_prompt_lines.append(modified_line)
                                 print(all_choice_prompt_lines)
                                 
@@ -1888,7 +1965,7 @@ class KconfigTransformer:
                                                         base_cond = raw[len('depends on'):].strip()
                                                         new_prompt_line = f'{indent_str}depends on {base_cond} && {combined_cond}'
                                                     elif config_line.line_type == 'inline_prompt_choice': 
-                                                        new_prompt_line = f'{indent_str}{inline_typ} "{prompt_text}" if {combined_cond}'
+                                                        new_prompt_line = f'{indent_str}bool "{prompt_text}" if {combined_cond}'
                                                     elif config_line.line_type == 'prompt': 
                                                         new_prompt_line = f'{indent_str}prompt "{prompt_text}" if {combined_cond}'
 
@@ -1918,7 +1995,10 @@ class KconfigTransformer:
                                                     mc_line.line_type in ('config', 'menuconfig', 'endchoice', 'if', 'endif', 'comment')
                                                 ):
                                                     break
-                                                
+                                                #print(f"mc before: {mc_line.raw_text}")
+                                                mc_line = self._transform_typ_choice_help(mc_line)
+                                                #print(f"mc after: {mc_line.raw_text}")
+
                                                 mc_block.append(mc_line)
                                                 m = mc_m
                                                 mc_m += 1
@@ -1973,8 +2053,8 @@ class KconfigTransformer:
                                     ):
                                         break
                                     
-                                    #print(f"eehehjwe {next_line.line_type}")
-                                    if next_line.line_type == 'prompt' or next_line.line_type == 'inline_prompt_choice' or next_line.line_type == 'default' and def_idx > 0:
+                                    #print(f"eehehjwe {next_line.line_type} + {next_line.raw_text}")
+                                    if next_line.line_type == 'prompt' or next_line.line_type == 'inline_prompt_choice' and def_idx > 0:
                                         
                                         """ 
                                         # Von depends_on Zeilen
@@ -2000,7 +2080,7 @@ class KconfigTransformer:
                                         if additional_deps:
                                             combined_cond = ' && '.join(additional_deps)
                                             indent_str = ' ' * next_line.indent
-                                            if next_line.line_type == 'inline_prompt_choice': new_prompt_line = f'{indent_str}{inline_typ} "{prompt_text}" if {combined_cond}'
+                                            if next_line.line_type == 'inline_prompt_choice': new_prompt_line = f'{indent_str}bool "{prompt_text}" if {combined_cond}'
                                             if next_line.line_type == 'prompt': new_prompt_line = f'{indent_str}prompt "{prompt_text}" if {combined_cond}'
                                             #if next_line.line_type == 'default' and default_cond: new_prompt_line = f'{indent_str}default {default_value} if {default_cond} && {combined_cond}'
                                             #if next_line.line_type == 'default' and not default_cond: new_prompt_line = f'{indent_str}default {default_value} if {combined_cond}'
@@ -2008,7 +2088,13 @@ class KconfigTransformer:
                                             modified_line = KconfigLine(new_prompt_line, next_line.line_number)
                                             config_block.append(modified_line)
                                         else:
-                                            config_block.append(next_line)
+                                            if next_line.line_type == 'prompt': 
+                                                new_prompt_line = f'{indent_str}prompt "{prompt_text}"'
+                                            if next_line.line_type == 'inline_prompt_choice': 
+                                                new_prompt_line = f'{indent_str}bool "{prompt_text}"'
+                                            
+                                            modified_line = KconfigLine(new_prompt_line, next_line.line_number)
+                                            config_block.append(modified_line)
                                     else:
                                         config_block.append(next_line)
                                     
@@ -2037,7 +2123,7 @@ class KconfigTransformer:
                                 config_block = [current_line]
 
 
-                                # Collect the config/menuconfig block
+                                # Collect the menuconfig block
                                 m = k + 1
                                 while m < len(lines):
                                     next_line = lines[m]
@@ -2050,6 +2136,7 @@ class KconfigTransformer:
                                     ):
                                         break
                                     
+                                    next_line = self._transform_typ_choice_help(next_line)
                                     config_block.append(next_line)
                                     m += 1
                                 

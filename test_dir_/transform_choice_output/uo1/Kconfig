@@ -33,11 +33,12 @@ choice
   config CH_SD2
     bool "CH_SD2"
   if OPT_CCC
-   menuconfig MC_SD2
-    bool "MC_SD"
   endif
 endchoice
   menuconfig MC_SD1
+    bool "MC_SD"
+    depends on OPT_AAA
+   menuconfig MC_SD2
     bool "MC_SD"
     depends on OPT_AAA
     

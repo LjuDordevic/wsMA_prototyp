@@ -300,13 +300,7 @@ Reader found: 75 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1
     Read 75 lines
     node_deps for definition [1]: ['OPT_AAA', 'OPT_ZZZ']
     Found choice at line index 20, line_number=21
-nextttt inline_prompt_choice
-mod: KconfigLine(inline_prompt_choice, line=22, indent=4)
-[KconfigLine(inline_prompt_choice, line=22, indent=4)]
-nextttt help
-nextttt depends_on
-nextttt default
-nextttt empty
+[KconfigLine(prompt, line=22, indent=2)]
   DEBUG: Found choice NAMED_CH at uo1/Kconfig:21
   DEBUG: choice_default_lines: [KconfigLine(default, line=27, indent=2)]
   DEBUG: choice_depends_lines: [KconfigLine(depends_on, line=26, indent=2)]
@@ -327,9 +321,6 @@ Reader found: 75 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1
     Read 75 lines
     node_deps for definition [2]: ['OPT_ZZZ']
     Found choice at line index 46, line_number=47
-nextttt prompt
-nextttt depends_on
-nextttt default
   DEBUG: Found choice NAMED_CH at uo1/Kconfig:47
   DEBUG: choice_default_lines: [KconfigLine(default, line=50, indent=2)]
   DEBUG: choice_depends_lines: [KconfigLine(depends_on, line=49, indent=2)]
@@ -345,7 +336,7 @@ nextttt default
   named choice: NAMED_CH
     'choice_def': [('NAMED_CH', [['OPT_Y', 'OPT_TTT'], ['OPT_BBB', 'OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ']], [['OPT_Y', 'OPT_TTT'], ['OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ']])]
     'choice_configs': 3 config entries
-    'prompt_lines': [KconfigLine(inline_prompt_choice, line=22, indent=4), KconfigLine(prompt, line=48, indent=2)]
+    'prompt_lines': [KconfigLine(prompt, line=22, indent=2), KconfigLine(prompt, line=48, indent=2)]
     'help_lines': [KconfigLine(help, line=23, indent=2), KconfigLine(other, line=24, indent=4), KconfigLine(other, line=25, indent=4)]
 ------H-----------
 context.choice_infos:       {'NAMED_CH': [{'choice.name': 'NAMED_CH', 'choice.syms': [<symbol CH_A, bool, "Op A", value n, visibility n, choice symbol, direct deps n, Kconfig:12>, <symbol CH_B, bool, "Op B", value n, visibility n, choice symbol, direct deps n, Kconfig:14>, <symbol MCH_Z, bool, "MCH_Z", value n, visibility n, choice symbol, direct deps n, Kconfig:16>, <symbol CH_C, bool, "Op C", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:30>, <symbol MC1, bool, "M", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:32>, <symbol MC2, bool, "MC2", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:36>, <symbol CH_E, bool, "Op E", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:51>, <symbol CH_D, bool, "Op D", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:53>]}], 'SINGLE_DEF': [{'choice.name': 'SINGLE_DEF', 'choice.syms': [<symbol CH_SD, bool, "CH_SD", value y, visibility y, choice symbol, direct deps y, uo1/Kconfig:64>, <symbol CH_SD2, bool, "CH_SD2", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:66>, <symbol MC_SD1, bool, "MC_SD", value n, visibility y, choice symbol, direct deps y, uo1/Kconfig:68>, <symbol MC_SD2, bool, "MC_SD", value n, visibility n, choice symbol, direct deps n, uo1/Kconfig:71>]}], None: [{'choice.name': None, 'choice.syms': [<symbol CH_T1, bool, "Op T1", value y, visibility y, choice symbol, direct deps y, Kconfig:25>, <symbol CH_T2, bool, "Op T2", value n, visibility y, choice symbol, direct deps y, Kconfig:27>]}]}
@@ -455,7 +446,7 @@ start transforming 29 input lines
     DEBUGG: choice_def [('NAMED_CH', [['OPT_Y', 'OPT_TTT'], ['OPT_BBB', 'OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ']], [['OPT_Y', 'OPT_TTT'], ['OPT_AAA', 'OPT_ZZZ'], ['OPT_ZZZ']])]
     choice_configs length: 9
     choice_configs [{'type': 'config', 'symbol': 'CH_A', 'file': 'Kconfig', 'line': 12, 'choice_line': 6, 'block': [KconfigLine(config, line=12, indent=2), KconfigLine(inline_prompt_choice, line=13, indent=4)], 'default_lines': [KconfigLine(default, line=8, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=9, indent=2), KconfigLine(depends_on, line=10, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_B', 'file': 'Kconfig', 'line': 14, 'choice_line': 6, 'block': [KconfigLine(config, line=14, indent=2), KconfigLine(inline_prompt_choice, line=15, indent=4)], 'default_lines': [KconfigLine(default, line=8, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=9, indent=2), KconfigLine(depends_on, line=10, indent=2)], 'if_condition': None}, {'type': 'menuconfig', 'symbol': 'MCH_Z', 'file': 'Kconfig', 'line': 16, 'choice_line': 6, 'block': [KconfigLine(menuconfig, line=16, indent=2), KconfigLine(inline_prompt_choice, line=17, indent=4)], 'default_lines': [KconfigLine(default, line=8, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=9, indent=2), KconfigLine(depends_on, line=10, indent=2)], 'if_condition': None}, {'type': 'if_block', 'configs': ['CH_C'], 'menuconfigs': [{'symbol': 'MC1', 'block': [KconfigLine(menuconfig, line=32, indent=2), KconfigLine(inline_prompt_choice, line=33, indent=4)], 'if_condition': 'OPT_DDD'}], 'file': 'uo1/Kconfig', 'line': 29, 'choice_line': 21, 'block': [KconfigLine(if, line=29, indent=2), KconfigLine(config, line=30, indent=2), KconfigLine(inline_prompt_choice, line=30, indent=4), KconfigLine(endif, line=34, indent=2)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)]}, {'type': 'menuconfig', 'symbol': 'MC2', 'file': 'uo1/Kconfig', 'line': 36, 'choice_line': 21, 'block': [KconfigLine(menuconfig, line=36, indent=2), KconfigLine(inline_prompt_choice, line=37, indent=4)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CMC2', 'file': 'uo1/Kconfig', 'line': 38, 'choice_line': 21, 'block': [KconfigLine(config, line=38, indent=2), KconfigLine(inline_prompt_choice, line=39, indent=4), KconfigLine(depends_on, line=40, indent=4)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CMC3', 'file': 'uo1/Kconfig', 'line': 41, 'choice_line': 21, 'block': [KconfigLine(config, line=41, indent=2), KconfigLine(inline_prompt_choice, line=42, indent=4), KconfigLine(depends_on, line=43, indent=4)], 'default_lines': [KconfigLine(default, line=27, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=26, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_E', 'file': 'uo1/Kconfig', 'line': 51, 'choice_line': 47, 'block': [KconfigLine(config, line=51, indent=2), KconfigLine(inline_prompt_choice, line=52, indent=4)], 'default_lines': [KconfigLine(default, line=50, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=49, indent=2)], 'if_condition': None}, {'type': 'config', 'symbol': 'CH_D', 'file': 'uo1/Kconfig', 'line': 53, 'choice_line': 47, 'block': [KconfigLine(config, line=53, indent=2), KconfigLine(inline_prompt_choice, line=54, indent=4)], 'default_lines': [KconfigLine(default, line=50, indent=2)], 'depends_lines': [KconfigLine(depends_on, line=49, indent=2)], 'if_condition': None}]
-    choice_prompts [KconfigLine(inline_prompt_choice, line=22, indent=4), KconfigLine(prompt, line=48, indent=2)]
+    choice_prompts [KconfigLine(prompt, line=22, indent=2), KconfigLine(prompt, line=48, indent=2)]
     help_lines [KconfigLine(help, line=23, indent=2), KconfigLine(other, line=24, indent=4), KconfigLine(other, line=25, indent=4)]
     [0] type=config, symbol=CH_A, symbols=None, choice_line=6
     [1] type=config, symbol=CH_B, symbols=None, choice_line=6
@@ -523,12 +514,8 @@ start transforming 29 input lines
 
   Adding 3 menuconfigs after endchoice
     Adding menuconfig MCH_Z, depends_from_def=[KconfigLine(depends_on, line=9, indent=2), KconfigLine(depends_on, line=10, indent=2)]
-        new line:     depends on OPT_Y
-        new line:     depends on OPT_TTT
     Adding menuconfig MC1, depends_from_def=[KconfigLine(depends_on, line=26, indent=2)]
-        new line:     depends on OPT_AAA && OPT_ZZZ
     Adding menuconfig MC2, depends_from_def=[KconfigLine(depends_on, line=26, indent=2)]
-        new line:     depends on OPT_AAA && OPT_ZZZ
     Added 10 menuconfig lines (after endchoice) from other choice definitions
     But in the first definition there where 2 menuconfig lines
     Diff: 8
@@ -568,7 +555,7 @@ start transforming 75 input lines
     Skipping non-first definition of choice NAMED_CH at line 47, /home/ljd/wsMA_prototyp/test_dir_/transform_choice/uo1/Kconfig
     Found first definition of choice SINGLE_DEF at line 57
     Processing choice transformation
-    processed_choices now: {'NAMED_CH', 'SINGLE_DEF'}
+    processed_choices now: {'SINGLE_DEF', 'NAMED_CH'}
     process lines until first choice config/if was found
     current_indx: 57 - block endidx 74
     current_indx: 57 - choice_attr_end: 63
@@ -589,16 +576,17 @@ start transforming 75 input lines
     Added Lines bc named choice 0
     Single definition detected - processing sequentially
       Collected menuconfig MC_SD1 (2 lines)
+      Collected menuconfig MC_SD2 inside if-block (2 lines)
       Added if-block (4 lines)
     Single definition: processed all entries sequentially
 
-  Adding 1 menuconfigs after endchoice
+  Adding 2 menuconfigs after endchoice
     Adding menuconfig MC_SD1, depends_from_def=[KconfigLine(depends_on, line=62, indent=2)]
-        new line:     depends on OPT_AAA
-    Added 3 menuconfig lines (after endchoice) from other choice definitions
-    But in the first definition there where 2 menuconfig lines
-    Diff: 1
-    Added Total Lines bc named choice 1
+    Adding menuconfig MC_SD2, depends_from_def=[KconfigLine(depends_on, line=62, indent=2)]
+    Added 6 menuconfig lines (after endchoice) from other choice definitions
+    But in the first definition there where 4 menuconfig lines
+    Diff: 2
+    Added Total Lines bc named choice 2
     FILE LOG --------------------------------------------------------------
     Reader input                75 lines
     -----------------------------------------------------------------------
@@ -610,19 +598,19 @@ start transforming 75 input lines
     SUM (r/or/o)source lines:   0
     All "option env" attr:      0
     -----------------------------------------------------------------------
-    Transformer Output:         43 lines
+    Transformer Output:         44 lines
     -----------------------------------------------------------------------
         Added new bc of def_*:           0
         Added new bc of glob:            0
         Added new bc of config_default:  0
-        Added new bc of named choice:    1
+        Added new bc of named choice:    2
         Removed bc of config_default:    0
         Removed bc of named choice:      33
         Removed no match for o(r)source: 0
         Removed optional choice attr:    0
         Removed bool     choice attr:    0
         Removed tristate choice attr:    0
-        Done writting 43 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/uo1/Kconfig
+        Done writting 44 lines in /home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/uo1/Kconfig
 ----------------------------------------------------------------------
 finished transforming: 2 files transformed
 ----------------------------------------------------------------------
@@ -644,10 +632,10 @@ count options/attr that are not transformed:
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.001745s
-    Got parser results................................    0.002175s
-    Built context from parser results.................    0.001335s
-    File transformation and excel log.................    0.004482s
+    Parser initialization.............................    0.002638s
+    Got parser results................................    0.006190s
+    Built context from parser results.................    0.005368s
+    File transformation and excel log.................    0.006938s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   0.009739s ~ 0.01s
+    TOTAL TIME........................................   0.021137s ~ 0.02s
 ====================================================================================================
