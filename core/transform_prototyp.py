@@ -661,12 +661,12 @@ class KconfigTransformer:
         
         # CHOICE ATTR
         choice_attr_end = first_ch_config_idx if first_ch_config_idx is not None else block_end_index - 1
-        print(f"current_indx: {current_index + 1} - choice_attr_end: {choice_attr_end}")
+        print(f"    current_indx: {current_index + 1} - choice_attr_end: {choice_attr_end}")
         
         idx = current_index + 1
         while idx < choice_attr_end:
             line_item = lines[idx]
-            print(f"dahjskaj {line_item.line_type}")
+            #print(f"dahjskaj {line_item.line_type}")
 
             # SKIP: type attr (bool/tristate) & optional attr
             if line_item.line_type == 'optional':
@@ -726,7 +726,7 @@ class KconfigTransformer:
 
         result.append(end_line)
 
-        print(f"PROCESS choice: {result}")
+        #print(f"PROCESS choice: {result}")
         return block_end_index
 
     def _transform_named_choice(self, log_debug: bool, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
@@ -756,8 +756,8 @@ class KconfigTransformer:
         
         # PROCESS: ATTR OF THE FIRST DEFINITION ----------------------------------------------------------------------------------------------
         # Kconfiglib can have menuconfig as choice elements (see wsMA_prototyp/test_dir_/transform_choice_analysis/transform_choice_analysis.log)
-        print(f"process lines until first choice config/if was found") 
-        print(f"current_indx: {current_index + 1} - block endidx {block_end_index}")
+        print(f"    process lines until first choice config/if was found") 
+        print(f"    current_indx: {current_index + 1} - block endidx {block_end_index}")
         
         # FIND line where first config/if starts ! Kconfiglib allows menuconfig as elements of choice Option
         first_ch_config_idx = None
@@ -768,7 +768,7 @@ class KconfigTransformer:
         
         # PROCESS attr of choice ---------------------------------------------------------------------------------------------------- 
         choice_attr_end = first_ch_config_idx if first_ch_config_idx is not None else block_end_index
-        print(f"current_indx: {current_index + 1} - choice_attr_end: {choice_attr_end}")
+        print(f"    current_indx: {current_index + 1} - choice_attr_end: {choice_attr_end}")
         # save depends on of first definition -> add them to menuconfigs of the first definition 
         first_depends_on_for_mc = []
         
@@ -821,27 +821,28 @@ class KconfigTransformer:
         help_lines = choice_info.get('help_lines', [])
 
         if log_debug:
-            print(f"DEBUGG: choice_def {choice_def}")
-            print(f"choice_configs length: {len(choice_configs)}")
-            print(f"choice_configs {choice_configs}")
-            print(f"choice_prompts {choice_prompts}")
-            print(f"help_lines {help_lines}")
+            print(f"    DEBUGG: choice_def {choice_def}")
+            print(f"    choice_configs length: {len(choice_configs)}")
+            print(f"    choice_configs {choice_configs}")
+            print(f"    choice_prompts {choice_prompts}")
+            print(f"    help_lines {help_lines}")
 
             for idx, cfg in enumerate(choice_configs):
-                print(f"  [{idx}] type={cfg.get('type')}, symbol={cfg.get('symbol')}, symbols={cfg.get('symbols')}, choice_line={cfg.get('choice_line')}")
+                print(f"    [{idx}] type={cfg.get('type')}, symbol={cfg.get('symbol')}, symbols={cfg.get('symbols')}, choice_line={cfg.get('choice_line')}")
         
-        # WRONG: dont add choice_prompts and help_lines here bc doppel   
         menuconfigs_to_add_after = []  # Collect menuconfigs to add after endchoice
+        len_menuconfig_block_first_def = 0
 
+        # dont add choice_prompts and help_lines here bc doppel, add them later   
         if not choice_def:
-            print("No choice_def found")
+            print(f"    No choice_def found")
         else:
             # Unpack the single entry
             _, all_default_deps, all_node_deps = choice_def[0]
             
             if log_debug:
-                print(f"all_default_deps: {all_default_deps}")
-                print(f"all_node_deps: {all_node_deps}")
+                print(f"    all_default_deps: {all_default_deps}")
+                print(f"    all_node_deps: {all_node_deps}")
             
             # Group configs by choice_line to identify which definition they belong to
             configs_by_definition = {}
@@ -853,7 +854,7 @@ class KconfigTransformer:
             
             # Sort by choice_line to get definitions in order
             sorted_def_lines = sorted(configs_by_definition.keys())
-            print(f"Found {len(sorted_def_lines)} choice definitions at lines: {sorted_def_lines}")
+            print(f"    Found {len(sorted_def_lines)} choice definitions at lines: {sorted_def_lines}")
             
             def_index_by_line = {
                 line: idx for idx, line in enumerate(sorted_def_lines)
@@ -872,17 +873,17 @@ class KconfigTransformer:
                 default_deps = all_default_deps[def_idx] if def_idx < len(all_default_deps) else []
                 node_deps = all_node_deps[def_idx] if def_idx < len(all_node_deps) else []
                 
-                print(f"\nProcessing definition {def_idx} at line {choice_line_num}")
+                print(f"\n  Processing definition {def_idx} at line {choice_line_num}")
                 if log_debug:
-                    print(f"  default_deps: {default_deps}")
-                    print(f"  node_deps: {node_deps}")
+                    print(f"    default_deps: {default_deps}")
+                    print(f"    node_deps: {node_deps}")
                     #print(f"  configs: {[c['symbol'] for c in configs_in_this_def]}")
-                    print(f"  entries in this def:")
+                    print(f"    entries in this def:")
                     for c in configs_in_this_def:
                         if c.get('type') == 'if_block':
-                            print(f"    if_block with configs: {c.get('configs')} and menuconfigs: {[mc['symbol'] for mc in c.get('menuconfigs', [])]}")
+                            print(f"        if_block with configs: {c.get('configs')} and menuconfigs: {[mc['symbol'] for mc in c.get('menuconfigs', [])]}")
                         else:
-                            print(f"    {c.get('type')}: {c.get('symbol')}")
+                            print(f"        {c.get('type')}: {c.get('symbol')}")
                     
                 # Take the first entry's lines as representative for this definition
                 # (since all configs in same definition have same choice-level attributes)
@@ -901,7 +902,7 @@ class KconfigTransformer:
                             d for d in node_deps
                             if d not in base_cond and d != 'y'
                         ]
-                        print(f"additional_from_depends_on: {additional} + {base_cond}")
+                        print(f"    additional_from_depends_on: {additional} + {base_cond}")
                         """
                         Because if you don't take base_cond -> prompt cond is wrong 
                         additional_from_depends_on: ['OPT_ZZZ']
@@ -924,13 +925,17 @@ class KconfigTransformer:
                                 f"{' ' * (choice_line.indent + 2)}"
                                 f"depends on {base_cond}"
                             )
-                        #result.append(KconfigLine(new_line, dep_line.line_number))
+                        # WRONG: result.append(KconfigLine(new_line, dep_line.line_number))
+                        # we propagate them to the (menu)configs of the definiton but dont' add the line to the output 
+                        # because that would mean the depends on would be propagated to elments of all defintions
+                        # and because we skip this -> counter + (WRONG WE COUNT AT THE END IN transform_lines)
                         depends_from_def.append(KconfigLine(new_line, dep_line.line_number))
 
-                        if log_debug: print(f"  Added: {new_line.strip()}")
+                        if log_debug: print(f"      Found: {new_line.strip()}")
                     
-                    print(f"    Added depends on: {len(depends_from_def)}")
-                    #self.FILE_ADDED_BC_NAMED_CHOICE += len(depends_from_def)
+                    print(f"        Found depends on: {len(depends_from_def)}")
+                    
+                    #self.FILE_SKIPPED_BC_NAMED_CHOICE += len(depends_from_def)
                     # depends on for the line 
                     depends_by_choice_line[choice_line_num] = depends_from_def
                     
@@ -951,7 +956,7 @@ class KconfigTransformer:
                             d for d in default_deps
                             if d not in existing_parts and d != 'y'
                         ]
-                        print(f"additional_from_default: {additional}")
+                        print(f"    additional_from_default: {additional}")
                         collect_additional_from_default.extend(additional)
 
                         cond = existing_parts + additional
@@ -967,12 +972,12 @@ class KconfigTransformer:
                                 f"default {sym}"
                             )
 
-                        #result.append(KconfigLine(new_line, def_line.line_number))
+                        result.append(KconfigLine(new_line, def_line.line_number))
                         added_def_counter += 1
-                        if log_debug: print(f"  Added default: {new_line.strip()}")
+                        if log_debug: print(f"      Added default: {new_line.strip()}")
 
-                    print(f"    Added default: {added_def_counter}")
-                    #self.FILE_ADDED_BC_NAMED_CHOICE += added_def_counter
+                    print(f"        Added default: {added_def_counter}")
+                    self.FILE_ADDED_BC_NAMED_CHOICE += added_def_counter
 
                     # we would like to take conditions form depends on but if the choice doesn't have
                     # depends on, meaning no place to read all aditional cond from if/menu 
@@ -984,7 +989,7 @@ class KconfigTransformer:
 
                 if choice_prompts:
                     
-                    print(f"choice_prompts other att: {choice_prompts}")
+                    #print(f"    choice_prompts other att: {choice_prompts}")
                     line = choice_prompts[def_idx-1]                    
                     line_text = line.content.get('prompt_text')
                     add = None
@@ -1001,10 +1006,10 @@ class KconfigTransformer:
                         new_prompt_line=KconfigLine(new_prompt_line_text, line.line_number)
                         result.append(new_prompt_line)
                         self.FILE_ADDED_BC_NAMED_CHOICE += 1
-                        print(f"Added new_prompt: {new_prompt_line_text.strip()}")
+                        print(f"    Added new_prompt: {new_prompt_line_text.strip()}")
                     else:
                         result.append(line)
-                        print(f"Added old_prompt: {line.raw_text}")
+                        print(f"    Added old_prompt: {line.raw_text}")
                         self.FILE_ADDED_BC_NAMED_CHOICE += 1
                         #print(f"heeee {line} + {} + {add}")
             
@@ -1020,10 +1025,10 @@ class KconfigTransformer:
                 for hl in help_lines:
                     result.append(hl)    
                     self.FILE_ADDED_BC_NAMED_CHOICE += 1
-                    print(f"Added help {hl}")
+                    print(f"    Added help {hl}")
 
         if log_debug:
-            print(f"\nFinal result has {len(result)} lines before adding configs")
+            print(f"\n  Final result has {len(result)} lines before adding configs")
             print(f"    Added Lines bc named choice {self.FILE_ADDED_BC_NAMED_CHOICE}")
 
         # ADD all configs in choice block
@@ -1035,7 +1040,7 @@ class KconfigTransformer:
 
         # SPECIAL CASE: If there's only ONE definition, process sequentially
         if len(sorted_def_lines) == 1:
-            print(f"Single definition detected - processing sequentially")
+            print(f"    Single definition detected - processing sequentially")
             
             idx = first_ch_config_idx
             while idx is not None and idx < block_end_index:
@@ -1072,6 +1077,7 @@ class KconfigTransformer:
                     })
                     
                     print(f"      Collected menuconfig {sym_name} ({len(menuconfig_block)} lines)")
+                    len_menuconfig_block_first_def += len(menuconfig_block)
                     continue
 
                 # Handle if blocks - add directly to result
@@ -1091,6 +1097,9 @@ class KconfigTransformer:
                     
                     # Add if block to result
                     for if_line in if_block_lines:
+                        
+                        # HERE HANDLE MC
+
                         transformed = transform_func(if_line, None, None)
                         if transformed is not None:
                             if isinstance(transformed, list):
@@ -1134,7 +1143,7 @@ class KconfigTransformer:
             idx = first_ch_config_idx
             while idx is not None and idx < block_end_index:
                 line_item = lines[idx]
-                if log_debug: print(f"Track existing configs: {line_item}")
+                if log_debug: print(f"  Track existing configs: {line_item}")
                 # Stop at endchoice
                 if line_item.line_type == 'endchoice':
                     break
@@ -1191,6 +1200,7 @@ class KconfigTransformer:
                     })
                     
                     print(f"      Collected menuconfig {sym_name} ({len(menuconfig_block)} lines)")
+                    len_menuconfig_block_first_def += len(menuconfig_block)
                     continue
                 
                 idx += 1
@@ -1207,9 +1217,9 @@ class KconfigTransformer:
                 if entry_type == 'if_block':
                     # Add entire if-block (contains configs, maybe menuconfigs)
                     configs_in_if = entry.get('configs', [])
-                    print(f"configs_in_if {configs_in_if}")
+                    print(f"    configs_in_if {configs_in_if}")
                     menuconfigs_in_if = entry.get('menuconfigs', [])
-                    print(f"menuconfigs_in_if {menuconfigs_in_if}")
+                    print(f"    menuconfigs_in_if {menuconfigs_in_if}")
 
                     # Add the if-block to the choice
                     for line in entry.get('block', []):
@@ -1309,8 +1319,12 @@ class KconfigTransformer:
                 mc_lines_counter += 1
             
             menuconfig_lines_added += mc_lines_counter
+        
         print(f"    Added {menuconfig_lines_added} menuconfig lines (after endchoice) from other choice definitions")
-        self.FILE_ADDED_BC_NAMED_CHOICE += (menuconfig_lines_added + added_lines)
+        print(f"    But in the first definition there where {len_menuconfig_block_first_def} menuconfig lines")
+        new_mc_lines = menuconfig_lines_added - len_menuconfig_block_first_def
+        print(f"    Diff: {new_mc_lines}")
+        self.FILE_ADDED_BC_NAMED_CHOICE += (new_mc_lines + added_lines)
         print(f"    Added Total Lines bc named choice {self.FILE_ADDED_BC_NAMED_CHOICE}")
 
 
@@ -1814,7 +1828,7 @@ class KconfigTransformer:
                             if current_line.line_type == 'endchoice':
                                 break
                             
-                            # Handle IF blocks
+                            # Handle IF blocks --------------------------------------------------------------------------------------
                             if current_line.line_type == 'if':
                                 # Get if condition from the line
                                 if_condition_raw = current_line.raw_text.strip()
@@ -1834,17 +1848,62 @@ class KconfigTransformer:
                                         if_depth += 1
                                     elif next_line.line_type == 'endif':
                                         if_depth -= 1
+                                        if if_depth == 0:
+                                            if_block.append(next_line)
+                                            m += 1
+                                            break
                                            
-                                    # skip if menuconfig for the copy 
-                                    if next_line.line_type != 'menuconfig':
+                                    if next_line.line_type == 'comment':
                                         if_block.append(next_line)
+                                        m += 1
+                                        continue
                                     
                                     # Track config symbols inside the if
                                     if next_line.line_type == 'config':
                                         sym_name = next_line.content.get('symbol')
-                                        if sym_name:
-                                            if_configs.append(sym_name)
-                                    
+                                        if sym_name: if_configs.append(sym_name)
+                                        # HERE HANDLE THE ADDITIONAL DEPENDENCIES FOR CONFIGS OF OTHER DEFINITIONS INSIDE IF!!!!
+                                        from kconfig_writer import KconfigLine
+                                        
+                                        if_block.append(next_line) #config line itself
+
+                                        config_m = m + 1
+                                        # add dependecies as you collect the block
+                                        while config_m < len(lines):
+                                            config_line = lines[config_m]
+                                            
+                                            if (config_line.line_type in ('config', 'menuconfig', 'if', 'endif', 'comment', 'endchoice')):
+                                                break
+                                            
+                                            # MODIFY LINES 
+                                            if config_line.line_type in ('prompt', 'inline_prompt_choice', 'depends_on') and def_idx > 0:
+                                                if additional_deps:
+                                                    prompt_text = config_line.content.get('prompt_text', '')
+                                                    inline_typ = config_line.content.get('inline_typ', '')
+                                                    indent_str = ' ' * config_line.indent
+                                                    combined_cond = ' && '.join(additional_deps)
+                                                    
+                                                    if config_line.line_type == 'depends_on':
+                                                        raw = config_line.raw_text.strip()
+                                                        base_cond = raw[len('depends on'):].strip()
+                                                        new_prompt_line = f'{indent_str}depends on {base_cond} && {combined_cond}'
+                                                    elif config_line.line_type == 'inline_prompt_choice': 
+                                                        new_prompt_line = f'{indent_str}{inline_typ} "{prompt_text}" if {combined_cond}'
+                                                    elif config_line.line_type == 'prompt': 
+                                                        new_prompt_line = f'{indent_str}prompt "{prompt_text}" if {combined_cond}'
+
+                                                    modified_line = KconfigLine(new_prompt_line, next_line.line_number)
+                                                    if_block.append(modified_line)
+                                                else:
+                                                    if_block.append(next_line)
+                                            else:
+                                                if_block.append(next_line)
+
+                                            config_m += 1
+                                                                                
+                                        m = config_m
+                                        continue
+
                                     # Track menuconfig symbols with their blocks, at the end we want these after choice-endchoice block 
                                     if next_line.line_type == 'menuconfig':
                                         sym_name = next_line.content.get('symbol')
