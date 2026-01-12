@@ -62,6 +62,8 @@ class KconfigTransformer:
     FILE_SKIP_CHOICE_TYP_DEF_TRISTATE = 0
     FILE_SKIPPED_BC_NAMED_CHOICE = 0
     FILE_ADDED_BC_NAMED_CHOICE = 0
+    FILE_CHANGED_INPROMPT_BC_CHOICE = 0
+    FILE_CHANGED_TYP_TRISTATE_TO_BOOL = 0  
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -688,6 +690,7 @@ class KconfigTransformer:
                 new_prompt_line = f'{indent_str}prompt "{prompt_text}"'
                 modified_line = KconfigLine(new_prompt_line, line_item.line_number)
                 result.append(modified_line)
+                self.FILE_CHANGED_INPROMPT_BC_CHOICE += 1
                 idx += 1
                 continue
 
@@ -794,6 +797,7 @@ class KconfigTransformer:
                 new_prompt_line_text = f'{indent_str}prompt "{line_text}"'
                 new_prompt_line=KconfigLine(new_prompt_line_text, line_item.line_number)
                 result.append(new_prompt_line)
+                self.FILE_CHANGED_INPROMPT_BC_CHOICE += 1
                 continue            
             if line_item.line_type == 'depends_on':
                 first_depends_on_for_mc.append(line_item)
@@ -1004,7 +1008,8 @@ class KconfigTransformer:
                         if line.line_type == 'inline_prompt_choice': 
                             inline_typ = line.content.get('inline_typ')
                             new_prompt_line_text = f'{indent_str}prompt "{line_text}" if {add}'
-                        else: new_prompt_line_text = f'{indent_str}prompt "{line_text}" if {add}'
+                        else: 
+                            new_prompt_line_text = f'{indent_str}prompt "{line_text}" if {add}'
                         new_prompt_line=KconfigLine(new_prompt_line_text, line.line_number)
                         result.append(new_prompt_line)
                         self.FILE_ADDED_BC_NAMED_CHOICE += 1
@@ -1068,7 +1073,7 @@ class KconfigTransformer:
                             and current is not line_item):
                             break
                         
-                        current = self._transform_typ_choice_help(current)
+                        current = self._transform_typ_choice_help(current, already_counted=True)
                         
                         menuconfig_block.append(current)
                         idx += 1
@@ -1128,7 +1133,7 @@ class KconfigTransformer:
                                     next_line.line_type in ('config', 'menuconfig', 'if', 'endif', 'endchoice', 'comment')):
                                     break
 
-                                next_line = self._transform_typ_choice_help(next_line)
+                                next_line = self._transform_typ_choice_help(next_line, already_counted=True)
 
                                 menuconfig_block.append(next_line)
                                 if_line_idx += 1
@@ -1387,22 +1392,22 @@ class KconfigTransformer:
         """
         return block_end_index
 
-    def _transform_typ_choice_help(self, current):
+    def _transform_typ_choice_help(self, current, already_counted: Optional[bool]=None):
         
         if (current.line_type == 'inline_prompt_choice' and current.content.get('inline_typ') == 'tristate'):
             #print("Kjskasj")
-            current_transformed = self._transform_bool_to_tristate_choice_typ(current, current.indent, current.content.get('prompt_text'))
+            current_transformed = self._transform_bool_to_tristate_choice_typ(current, current.indent, current.content.get('prompt_text'), already_counted)
             return current_transformed
         
         if current.line_type == 'type_tristate':
             #print("Kjskasj2")
-            current_transformed = self._transform_bool_to_tristate_choice_typ(current)
+            current_transformed = self._transform_bool_to_tristate_choice_typ(current, already_counted)
             return current_transformed
         
         return current
 
 
-    def _transform_bool_to_tristate_choice_typ(self, line_item, indent: Optional[int] = 0,prompt_text: Optional[str] = ""):
+    def _transform_bool_to_tristate_choice_typ(self, line_item, indent: Optional[int] = 0,prompt_text: Optional[str] = "", already_counted: Optional[bool]=None):
         from kconfig_writer import KconfigLine
         import re
         
@@ -1420,6 +1425,12 @@ class KconfigTransformer:
           #re.match(r'^\s*(tristate)\s*$', s)
           #line_text = match.group(1)
           new_line_text = f'{indent_str}bool'
+        
+        if already_counted: 
+            print(f" already counted the typ change {new_line_text}")
+        else: 
+            self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL += 1
+            #print(f" meein {new_line_text}")
 
         return KconfigLine(new_line_text, line_item.line_number)
 
@@ -1839,7 +1850,8 @@ class KconfigTransformer:
                                 modified_line = KconfigLine(new_prompt_line, next_line.line_number)
                                 #print(f"mod: {modified_line.raw_text}")
                                 all_choice_prompt_lines.append(modified_line)
-                                print(all_choice_prompt_lines)
+                                self.FILE_CHANGED_INPROMPT_BC_CHOICE += 1
+                                #print(all_choice_prompt_lines)
                                 
                             elif next_line.line_type == 'help':
                                 # store the 'help' keyword line
@@ -1972,6 +1984,10 @@ class KconfigTransformer:
                                                         new_prompt_line = f'{indent_str}depends on {base_cond} && {combined_cond}'
                                                     elif config_line.line_type == 'inline_prompt_choice': 
                                                         new_prompt_line = f'{indent_str}bool "{prompt_text}" if {combined_cond}'
+                                                        if inline_typ == 'tristate': 
+                                                            self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL += 1
+                                                            #print(f"meeinn {new_prompt_line}")
+
                                                     elif config_line.line_type == 'prompt': 
                                                         new_prompt_line = f'{indent_str}prompt "{prompt_text}" if {combined_cond}'
 
@@ -2038,14 +2054,12 @@ class KconfigTransformer:
                                 
                                 k = m
                             
-                            # Handle standalone configs/menuconfigs (not inside if)
+                            # Handle standalone configs (not inside if)
                             elif current_line.line_type in ('config'):
                                 sym_name = current_line.content.get('symbol')
-                                is_menuconfig = (current_line.line_type == 'menuconfig')
                                 config_block = [current_line]
 
-
-                                # Collect the config/menuconfig block
+                                # Collect the config block
                                 m = k + 1
                                 while m < len(lines):
                                     next_line = lines[m]
@@ -2084,7 +2098,13 @@ class KconfigTransformer:
                                         indent_str = ' ' * next_line.indent
                                         if additional_deps:
                                             combined_cond = ' && '.join(additional_deps)
-                                            if next_line.line_type == 'inline_prompt_choice': new_prompt_line = f'{indent_str}bool "{prompt_text}" if {combined_cond}'
+                                            if next_line.line_type == 'inline_prompt_choice': 
+                                                new_prompt_line = f'{indent_str}bool "{prompt_text}" if {combined_cond}'
+
+                                                if inline_typ == 'tristate': 
+                                                    self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL += 1 # bc we are looking at prompts at config level 
+                                                    #print(f"meeinn {new_prompt_line}")
+                                                
                                             if next_line.line_type == 'prompt': new_prompt_line = f'{indent_str}prompt "{prompt_text}" if {combined_cond}'
                                             #if next_line.line_type == 'default' and default_cond: new_prompt_line = f'{indent_str}default {default_value} if {default_cond} && {combined_cond}'
                                             #if next_line.line_type == 'default' and not default_cond: new_prompt_line = f'{indent_str}default {default_value} if {combined_cond}'
@@ -2095,8 +2115,11 @@ class KconfigTransformer:
                                             if next_line.line_type == 'prompt': 
                                                 new_prompt_line = f'{indent_str}prompt "{prompt_text}"'
                                             if next_line.line_type == 'inline_prompt_choice': 
-                                                new_prompt_line = f'{indent_str}bool "{prompt_text}"'
-                                            
+                                                new_prompt_line = f'{indent_str}bool "{prompt_text}"'    # config tristate -> bool "xxxx" BUT also bool -> bool 
+                                                if inline_typ == 'tristate': 
+                                                    self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL += 1
+                                                    #print(f"meeinn {new_prompt_line}")
+
                                             modified_line = KconfigLine(new_prompt_line, next_line.line_number)
                                             config_block.append(modified_line)
                                     else:
@@ -2104,10 +2127,10 @@ class KconfigTransformer:
                                     
                                     m += 1
                                 
-                                if log_cd_nc_details: print(f"  DEBUG: Adding {'menuconfig' if is_menuconfig else 'config'} {sym_name}")
+                                if log_cd_nc_details: print(f"  DEBUG: Adding config {sym_name}")
                                 
                                 all_entries.append({
-                                    'type': 'menuconfig' if is_menuconfig else 'config',
+                                    'type': 'config',
                                     'symbol': sym_name,
                                     'file': choice_file,
                                     'line': current_line.line_number,
@@ -2565,6 +2588,11 @@ class KconfigTransformer:
         print(f"    warning:        {self.FILE_WARNING_ATTR}")
         print(f"    set:            {self.FILE_SET_OPTION}")
         print(f"    set default:    {self.FILE_SET_DEFAULT_OPTION}")
+        print(f"----------------------------------------------------------------------")
+        print("count changes that don't affect the output size: ")
+        print(f"        Changed inline prompt choice:    {self.FILE_CHANGED_INPROMPT_BC_CHOICE}") 
+        print(f"        Changed typ of choice element:   {self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL}") 
+
 
         self.FILE_OPT_DEFCONFIG = 0
         self.FILE_OPT_ALLNONCONG = 0
@@ -2573,4 +2601,7 @@ class KconfigTransformer:
         self.FILE_WARNING_ATTR = 0
         self.FILE_SET_OPTION = 0
         self.FILE_SET_DEFAULT_OPTION = 0
+        self.FILE_CHANGED_INPROMPT_BC_CHOICE = 0        # for choice -> bool "pick something" --> prompt "pick something"
+        self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL = 0      # tristate elements of choice should be restricted to bool 
+
         return excel_stats
