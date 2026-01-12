@@ -11,7 +11,6 @@ config BT_CYW43XX
 choice
 	prompt "Select AIROC part"
 
-  depends on !AIROC_WIFI_CUSTOM && WIFI_AIROC
   prompt "Select AIROC part" if !AIROC_WIFI_CUSTOM && WIFI_AIROC
 config CYW4343W
 	bool "CYW4343W"
@@ -69,14 +68,14 @@ config BT_AIROC_CUSTOM
 	  custom or vendor AIROC modules in AIROC_CUSTOM_FIRMWARE_HCD_BLOB.
 
 config CYW43022
-	bool "CYW43022"
+ bool "CYW43022" if !AIROC_WIFI_CUSTOM && WIFI_AIROC
 	help
 	  Enable Infineon AIROC CYW43022 Wi-Fi connectivity,
 	  More information about CYW43022 device you can find on
 	  https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/wi-fi-5-802.11ac/cyw43022/
 
 config CYW55500
-	bool "CYW55500"
+ bool "CYW55500" if !AIROC_WIFI_CUSTOM && WIFI_AIROC
 	select AIROC_WIFI6
 	help
 	  Enable Infineon AIROC CYW55500 Wi-Fi connectivity,
@@ -84,7 +83,7 @@ config CYW55500
 	  https://www.infineon.com/cms/en/product/wireless-connectivity/airoc-wi-fi-plus-bluetooth-combos/wi-fi-6-6e-802.11ax/cyw55511/
 
 config CYW55572
-	bool "CYW55572"
+ bool "CYW55572" if !AIROC_WIFI_CUSTOM && WIFI_AIROC
 	select AIROC_WIFI6
 	help
 	  Enable Infineon AIROC CYW55572 Wi-Fi connectivity,
@@ -97,7 +96,6 @@ choice
 	prompt "Select CYW43012 module"
 	depends on CYW43012
 
-  depends on CYW43012 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
   prompt "Select CYW43012 module" if CYW43012 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 config CYW43012_MURATA_1LV
 	bool "MURATA-1LV"
@@ -116,7 +114,6 @@ choice
 	prompt "Select CYW4343W module"
 	depends on CYW4343W
 
-  depends on CYW4343W && !AIROC_WIFI_CUSTOM && WIFI_AIROC
   prompt "Select CYW4343W module" if CYW4343W && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 config CYW4343W_MURATA_1DX
 	bool "MURATA-1DX"
@@ -135,7 +132,6 @@ choice
 	prompt "Select CYW4373 module"
 	depends on CYW4373
 
-  depends on CYW4373 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
   prompt "Select CYW4373 module" if CYW4373 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 config CYW4373_STERLING_LWB5PLUS
 	bool "STERLING-LWB5plus"
@@ -147,7 +143,7 @@ config CYW4373_STERLING_LWB5PLUS
 	  https://www.ezurio.com/wireless-modules/wifi-modules-bluetooth/sterling-lwb5-plus-wifi-5-bluetooth-5-module
 
 config CYW4373_MURATA_2AE
-	bool "CYW4373_MURATA_2AE"
+ bool "CYW4373_MURATA_2AE" if CYW4373 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 	help
 	  Murata Type 2AE modules based on Infineon CYW4373 combo chipset
 
@@ -155,7 +151,7 @@ config CYW4373_MURATA_2AE
 	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/type2ae
 
 config CYW4373_MURATA_2BC
-	bool "CYW4373_MURATA_2BC"
+ bool "CYW4373_MURATA_2BC" if CYW4373 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 	help
 	  Murata Type 2BC modules based on Infineon CYW4373 combo chipset
 
@@ -168,7 +164,6 @@ choice
 	prompt "Select CYW43439 module"
 	depends on CYW43439
 
-  depends on CYW43439 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
   prompt "Select CYW43439 module" if CYW43439 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 config CYW43439_MURATA_1YN
 	bool "MURATA_1YN"
@@ -182,7 +177,7 @@ config CYW43439_MURATA_1YN
 	  https://www.murata.com/en-us/products/connectivitymodule/wi-fi-bluetooth/overview/lineup/type1yn
 
 config CYW43439_STERLING_LWBPLUS
-	bool "STERLING-LWBplus"
+ bool "STERLING-LWBplus" if CYW43439 && !AIROC_WIFI_CUSTOM && WIFI_AIROC
 	help
 	  Ezurio Sterling-LWB+ WiFi 4 with Bluetooth 5.2 module
 	  Detailed information about this module you can find on

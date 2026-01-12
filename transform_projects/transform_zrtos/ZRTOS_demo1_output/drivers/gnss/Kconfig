@@ -67,6 +67,7 @@ config GNSS_U_BLOX_PROTOCOL
 	  Hidden option that enables gnss u-blox protocol.
 
 choice
+  prompt "GNSS reference frame datum"
 	default GNSS_REFERENCE_FRAME_WGS84
 
 config GNSS_REFERENCE_FRAME_WGS84

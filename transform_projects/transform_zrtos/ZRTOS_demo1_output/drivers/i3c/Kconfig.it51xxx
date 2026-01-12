@@ -47,6 +47,7 @@ config I3CS_IT51XXX_IBI_TIMEOUT_MS
 	default 1000
 
 choice
+ prompt "choose i3cs tx fifo size"
 	default I3CS_TX_FIFO_16_BYTE
 
 config I3CS_TX_FIFO_16_BYTE
@@ -77,6 +78,7 @@ config I3CS_IT51XXX_TX_FIFO_SIZE
 	  Set i3cs tx fifo size size.
 
 choice
+ prompt "choose i3cs rx fifo size"
 	default I3CS_RX_FIFO_16_BYTE
 
 config I3CS_RX_FIFO_16_BYTE

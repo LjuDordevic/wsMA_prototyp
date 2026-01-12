@@ -46,6 +46,7 @@ config MODEM_HL7800_APN_NAME
 endif # MODEM_HL7800_SET_APN_NAME_ON_STARTUP
 
 choice
+  prompt "Radio Access Technology Mode"
 	default MODEM_HL7800_RAT_NO_CHANGE
 
 config MODEM_HL7800_RAT_NO_CHANGE

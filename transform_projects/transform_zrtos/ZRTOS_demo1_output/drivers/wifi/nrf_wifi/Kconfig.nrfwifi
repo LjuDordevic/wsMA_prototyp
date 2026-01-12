@@ -53,6 +53,7 @@ config NRF70_QSPI_LOW_POWER
 	default y if NRF_WIFI_LOW_POWER
 
 choice
+  prompt "nRF70 operating modes"
 	default NRF70_SYSTEM_MODE if !WIFI_USAGE_MODE_SCAN_ONLY
 	default NRF70_SCAN_ONLY
 	help

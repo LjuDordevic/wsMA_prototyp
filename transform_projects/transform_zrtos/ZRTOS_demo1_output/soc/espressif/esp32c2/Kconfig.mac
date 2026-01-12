@@ -4,6 +4,7 @@
 if SOC_SERIES_ESP32C2
 
 choice
+  prompt "Number of universally administered (by IEEE) MAC address"
 	default ESP32C2_UNIVERSAL_MAC_ADDRESSES_FOUR
 	help
 	  Configure the number of universally administered (by IEEE) MAC addresses.

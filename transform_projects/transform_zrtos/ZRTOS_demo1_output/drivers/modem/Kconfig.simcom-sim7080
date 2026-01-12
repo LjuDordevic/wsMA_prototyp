@@ -50,6 +50,7 @@ config MODEM_SIMCOM_SIM7080_APN
 	  need to be changed.
 
 choice
+  prompt "Radio Access Technology Mode"
 	default MODEM_SIMCOM_SIM7080_RAT_NB1
 
 config MODEM_SIMCOM_SIM7080_RAT_NB1

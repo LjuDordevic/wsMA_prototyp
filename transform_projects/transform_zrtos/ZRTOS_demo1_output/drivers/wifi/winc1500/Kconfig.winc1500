@@ -62,6 +62,7 @@ config WIFI_WINC1500_OFFLOAD_MAX_SOCKETS
 	  and the chip.
 
 choice
+ prompt "In which region is the chip running?"
 	default WIFI_WINC1500_REGION_NORTH_AMERICA
 
 config WIFI_WINC1500_REGION_NORTH_AMERICA

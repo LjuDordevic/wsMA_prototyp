@@ -4,6 +4,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 choice
+  prompt "LoRaWAN NVM backend"
 	default LORAWAN_NVM_SETTINGS if SETTINGS
 	default LORAWAN_NVM_NONE
 

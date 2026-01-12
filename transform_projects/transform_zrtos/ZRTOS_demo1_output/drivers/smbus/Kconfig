@@ -45,6 +45,7 @@ config SMBUS_INTEL_PCH
 if SMBUS_INTEL_PCH
 
 choice
+  prompt "SMBus register access mode"
 	default SMBUS_INTEL_PCH_ACCESS_IO
 	help
 	  Default PCH register access mode. Set default access IO so
