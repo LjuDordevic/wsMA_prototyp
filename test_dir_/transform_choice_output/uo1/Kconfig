@@ -41,4 +41,3 @@ endchoice
    menuconfig MC_SD2
     bool "MC_SD"
     depends on OPT_AAA
-    
