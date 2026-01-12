@@ -682,11 +682,13 @@ class KconfigTransformer:
                 idx += 1
                 continue
             if line_item.line_type == 'inline_prompt_choice':
-                inline_typ = line_item.content.get('inline_typ', '')
+                #inline_typ = line_item.content.get('inline_typ', '')
+                indent_str = ' ' * line_item.indent
                 prompt_text = line_item.content.get('prompt_text', '')
-                new_prompt_line = f'{indent_str}bool "{prompt_text}"'
-                modified_line = KconfigLine(new_prompt_line, next_line.line_number)
+                new_prompt_line = f'{indent_str}prompt "{prompt_text}"'
+                modified_line = KconfigLine(new_prompt_line, line_item.line_number)
                 result.append(modified_line)
+                idx += 1
                 continue
 
             # everything else: copy/transform as usual (because it's a first definition)
@@ -709,7 +711,7 @@ class KconfigTransformer:
 
             # IF CONFIG INSIDE CHOICE is type tristate 
             if line_item.line_type in ('type_tristate', 'inline_prompt_choice'):
-                line_item = self._transform_bool_to_tristate_choice_typ(line_item)
+                line_item = self._transform_typ_choice_help(line_item)
 
             # everything else: copy/transform as usual (because it's a first definition)
             transformed = transform_func(line_item, None, None)
@@ -1196,7 +1198,7 @@ class KconfigTransformer:
                 if line_item.line_type == 'endchoice':
                     break
 
-                # Start of a config/menuconfig block
+                # Start of a config block
                 # skip menuconfig
                 if line_item.line_type in ('config'):
                     sym_name = line_item.content.get('symbol')
@@ -1388,10 +1390,12 @@ class KconfigTransformer:
     def _transform_typ_choice_help(self, current):
         
         if (current.line_type == 'inline_prompt_choice' and current.content.get('inline_typ') == 'tristate'):
+            #print("Kjskasj")
             current_transformed = self._transform_bool_to_tristate_choice_typ(current, current.indent, current.content.get('prompt_text'))
             return current_transformed
         
         if current.line_type == 'type_tristate':
+            #print("Kjskasj2")
             current_transformed = self._transform_bool_to_tristate_choice_typ(current)
             return current_transformed
         
@@ -1411,9 +1415,11 @@ class KconfigTransformer:
         if prompt_text:
           new_line_text = f'{indent_str}bool "{prompt_text}"'
         else:
-          match = re.match(r'tristate\s+["\']([^"\']+)["\']', line_item.stripped) 
-          line_text = match.group(1)
-          new_line_text = f'{indent_str}bool "{line_text}"'
+          #match = re.match(r'tristate\s+["\']([^"\']+)["\']', line_item.stripped)
+          #match = re.match(r'\s*(bool|tristate)\s+"([^"]*)"', line_stripped)
+          #re.match(r'^\s*(tristate)\s*$', s)
+          #line_text = match.group(1)
+          new_line_text = f'{indent_str}bool'
 
         return KconfigLine(new_line_text, line_item.line_number)
 
@@ -1723,6 +1729,7 @@ class KconfigTransformer:
         - Menuconfig entries (standalone or in if-blocks) with their if-conditions
         """
         print(f"\n=== _get_all_choice_configs for {choice_name} ===")
+        from kconfig_writer import KconfigLine
         
         if choice_name not in self.context.choice_definitions:
             print(f"  {choice_name} not in choice_definitions!")
@@ -1940,7 +1947,6 @@ class KconfigTransformer:
                                         sym_name = next_line.content.get('symbol')
                                         if sym_name: if_configs.append(sym_name)
                                         # HERE HANDLE THE ADDITIONAL DEPENDENCIES FOR CONFIGS OF OTHER DEFINITIONS INSIDE IF!!!!
-                                        from kconfig_writer import KconfigLine
                                         
                                         if_block.append(next_line) #config line itself
 
@@ -2034,7 +2040,6 @@ class KconfigTransformer:
                             
                             # Handle standalone configs/menuconfigs (not inside if)
                             elif current_line.line_type in ('config'):
-                                from kconfig_writer import KconfigLine
                                 sym_name = current_line.content.get('symbol')
                                 is_menuconfig = (current_line.line_type == 'menuconfig')
                                 config_block = [current_line]
@@ -2076,10 +2081,9 @@ class KconfigTransformer:
                                         # ELEMENTS OF CHOICE CANT HAVE DEFAULT
                                         #default_value = next_line.content.get('value', '')
                                         #default_cond = next_line.content.get('condition', '')
-                                        
+                                        indent_str = ' ' * next_line.indent
                                         if additional_deps:
                                             combined_cond = ' && '.join(additional_deps)
-                                            indent_str = ' ' * next_line.indent
                                             if next_line.line_type == 'inline_prompt_choice': new_prompt_line = f'{indent_str}bool "{prompt_text}" if {combined_cond}'
                                             if next_line.line_type == 'prompt': new_prompt_line = f'{indent_str}prompt "{prompt_text}" if {combined_cond}'
                                             #if next_line.line_type == 'default' and default_cond: new_prompt_line = f'{indent_str}default {default_value} if {default_cond} && {combined_cond}'
@@ -2117,7 +2121,6 @@ class KconfigTransformer:
                                 k = m
                             
                             elif current_line.line_type in ('menuconfig'):
-                                from kconfig_writer import KconfigLine
                                 sym_name = current_line.content.get('symbol')
                                 is_menuconfig = (current_line.line_type == 'menuconfig')
                                 config_block = [current_line]
