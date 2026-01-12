@@ -67,9 +67,9 @@ choice SINGLE_DEF
   config CH_SD2
     tristate "CH_SD2"
   menuconfig MC_SD1
-    tristate "MC_SD"
+    tristate "MC_SD1"
   if OPT_CCC
    menuconfig MC_SD2
-    tristate "MC_SD"
+    tristate "MC_SD2"
   endif
 endchoice
