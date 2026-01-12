@@ -36,8 +36,8 @@ choice
   endif
 endchoice
   menuconfig MC_SD1
-    bool "MC_SD"
+    bool "MC_SD1"
     depends on OPT_AAA
    menuconfig MC_SD2
-    bool "MC_SD"
+    bool "MC_SD2"
     depends on OPT_AAA
