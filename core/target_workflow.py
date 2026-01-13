@@ -16,8 +16,8 @@ def main():
     #project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr"
     #output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo1_output"
 
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo2_output/transform.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo2_output/results.xlsx"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo2_output/transform2.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo2_output/results2.xlsx"
     project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1_without_defconfig/zephyr"
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo2_output"
 
