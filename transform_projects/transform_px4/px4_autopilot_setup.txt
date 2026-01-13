@@ -1,3 +1,5 @@
+[...] -> means you have to add the rest od the path, where repository is placed 
+
 mkdir px4 
 cd px4 
 python3 -m venv venv_px4

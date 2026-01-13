@@ -1,5 +1,7 @@
 more info: https://guide.riot-os.org/getting-started/installing/
 
+[...] -> means you have to add the rest od the path, where repository is placed 
+
 mkdir riot
 cd riot
 python3 -m venv venv_riot

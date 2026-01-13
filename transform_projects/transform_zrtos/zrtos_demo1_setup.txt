@@ -1,5 +1,8 @@
 FOR MORE INFO: https://docs.zephyrproject.org/latest/develop/getting_started/index.html
 ********************************** /venv_zrtos_demo1/  **********************************
+
+[...] -> means you have to add the rest od the path, where repository is placed 
+
 Zephyr SDK 0.17.4 Setup
 0. -> wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.4/zephyr-sdk-0.17.4_linux-x86_64.tar.xz
 tar xvf zephyr-sdk-0.17.4_linux-x86_64.tar.xz
@@ -38,11 +41,11 @@ ZRTOS_demo1
 |- modules 
 |- tools 
 |- zephyr
-|  |-samples
-|  |  |-hello_world
 |  |-cmake
 |  |  |-modules
-|  |  |   |-kconfig.cmake
+|  |  |   |-kconfig.cmake (HERE)
+|  |-samples
+|  |  |-hello_world
 
 ---> 
     set(EXTRA_KCONFIG_TARGET_COMMAND_FOR_transform

@@ -1,4 +1,7 @@
 ********************************** venv_rtthread  **********************************
+
+[...] -> means you have to add the rest od the path, where repository is placed 
+
 mkdir rtthread
 cd rtthread
 python3 -m venv venv_rtthread
