@@ -1,0 +1,47 @@
+# Copyright (c) 2018 Intel Corporation
+# Copyright (c) 2023 Meta
+# Copyright (c) 2024 Tenstorrent AI ULC
+#
+# SPDX-License-Identifier: Apache-2.0
+
+menu "POSIX Options"
+
+source "lib/posix/options/Kconfig.profile"
+
+source "lib/posix/options/Kconfig.aio"
+source "lib/posix/options/Kconfig.barrier"
+source "lib/posix/options/Kconfig.c_lang_r"
+source "lib/posix/options/Kconfig.c_lib_ext"
+source "lib/posix/options/Kconfig.device_io"
+source "lib/posix/options/Kconfig.fd_mgmt"
+source "lib/posix/options/Kconfig.file_system_r"
+source "lib/posix/options/Kconfig.fs"
+source "lib/posix/options/Kconfig.mem"
+source "lib/posix/options/Kconfig.mqueue"
+source "lib/posix/options/Kconfig.net"
+source "lib/posix/options/Kconfig.proc1"
+source "lib/posix/options/Kconfig.procN"
+source "lib/posix/options/Kconfig.pthread"
+source "lib/posix/options/Kconfig.rwlock"
+source "lib/posix/options/Kconfig.sched"
+source "lib/posix/options/Kconfig.semaphore"
+source "lib/posix/options/Kconfig.signal"
+source "lib/posix/options/Kconfig.spinlock"
+source "lib/posix/options/Kconfig.sync_io"
+source "lib/posix/options/Kconfig.timer"
+
+menu "X/Open system interfaces"
+
+source "lib/posix/options/Kconfig.xsi_realtime"
+source "lib/posix/options/Kconfig.xsi_single_process"
+source "lib/posix/options/Kconfig.xsi_streams"
+source "lib/posix/options/Kconfig.xsi_system_logging"
+source "lib/posix/options/Kconfig.xsi_threads_ext"
+
+endmenu # "X/Open system interfaces"
+
+source "lib/posix/options/Kconfig.compat"
+
+source "lib/posix/options/Kconfig.toolchain"
+
+endmenu # "POSIX Options"

@@ -1,0 +1,13 @@
+# Copyright (c) 2024 Synopsys, Inc.
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_NSIM_ARC_CLASSIC
+	bool
+
+config SOC_FAMILY
+	default "nsim_arc_classic" if SOC_FAMILY_NSIM_ARC_CLASSIC
+
+source "soc/snps/nsim/arc_classic/em/Kconfig.soc"
+source "soc/snps/nsim/arc_classic/hs/Kconfig.soc"
+source "soc/snps/nsim/arc_classic/sem/Kconfig.soc"
+source "soc/snps/nsim/arc_classic/vpx5/Kconfig.soc"

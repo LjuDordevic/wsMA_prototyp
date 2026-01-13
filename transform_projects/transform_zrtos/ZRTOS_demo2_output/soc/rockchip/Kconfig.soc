@@ -1,0 +1,14 @@
+#
+# Copyright 2021 Huawei France Technologies SASU
+#
+# SPDX-License-Identifier: Apache-2.0
+#
+
+config SOC_FAMILY_ROCKCHIP
+	bool
+
+config SOC_FAMILY
+	default "rockchip" if SOC_FAMILY_ROCKCHIP
+
+source "soc/rockchip/rk3399/Kconfig.soc"
+source "soc/rockchip/rk35/Kconfig.soc"

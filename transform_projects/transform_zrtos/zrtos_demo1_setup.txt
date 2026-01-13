@@ -61,9 +61,9 @@ ZRTOS_demo1
 5. Then cd to: ZRTOS_demo1/zephyr 
 west build -b native_sim samples/hello_world
 west build -t transform
-** IF you make changes on transform.py:
+** IF you make changes on transform.py RUN THESE to start cmake again:
 (sometimes you have to delete zephyr/build folder)
-west build -p always -b native_sim samples/hello_world -> um CMake wieder zu starten 
+west build -p always -b native_sim samples/hello_world 
 west build -t transform
 
 #####

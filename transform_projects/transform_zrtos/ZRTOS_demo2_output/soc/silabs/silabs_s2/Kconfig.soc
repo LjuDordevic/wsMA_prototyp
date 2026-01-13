@@ -1,0 +1,12 @@
+# Copyright (c) 2017 Christian Taedcke
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_SILABS_S2
+	bool
+
+source "soc/silabs/silabs_s2/efr32bg22/Kconfig.soc"
+source "soc/silabs/silabs_s2/efr32bg27/Kconfig.soc"
+source "soc/silabs/silabs_s2/efr32mg21/Kconfig.soc"
+source "soc/silabs/silabs_s2/efr32zg23/Kconfig.soc"
+source "soc/silabs/silabs_s2/xg24/Kconfig.soc"
+source "soc/silabs/silabs_s2/xg29/Kconfig.soc"

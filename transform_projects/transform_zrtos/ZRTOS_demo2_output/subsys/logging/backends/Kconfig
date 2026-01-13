@@ -1,0 +1,23 @@
+# Copyright (c) 2021 Nordic Semiconductor ASA
+# SPDX-License-Identifier: Apache-2.0
+
+menu "Backends"
+
+source "subsys/logging/backends/Kconfig.adsp"
+source "subsys/logging/backends/Kconfig.adsp_mtrace"
+source "subsys/logging/backends/Kconfig.ble"
+source "subsys/logging/backends/Kconfig.efi_console"
+source "subsys/logging/backends/Kconfig.fs"
+source "subsys/logging/backends/Kconfig.mqtt"
+source "subsys/logging/backends/Kconfig.native_posix"
+source "subsys/logging/backends/Kconfig.net"
+source "subsys/logging/backends/Kconfig.ws"
+source "subsys/logging/backends/Kconfig.rtt"
+source "subsys/logging/backends/Kconfig.spinel"
+source "subsys/logging/backends/Kconfig.swo"
+source "subsys/logging/backends/Kconfig.uart"
+source "subsys/logging/backends/Kconfig.xtensa_sim"
+source "subsys/logging/backends/Kconfig.multidomain"
+source "subsys/logging/backends/Kconfig.semihost"
+
+endmenu

@@ -470,8 +470,8 @@ class KconfigTransformer:
             file_path = Path(filename)
             files.append(file_path)
         print("    get_all_source_files: ")
-        #for file in files:
-        #    print(f"    parser found: {file}")
+        for file in files:
+            print(f"    parser found: {file}")
 
         return files    
 

@@ -1,0 +1,15 @@
+# Texas Instruments SimpleLink Family
+# SPDX-License-Identifier: Apache-2.0
+# Copyright (c) 2017 Zephyr Contributors
+
+config SOC_FAMILY_TI_SIMPLELINK
+	bool
+
+config SOC_FAMILY
+	default "ti_simplelink" if SOC_FAMILY_TI_SIMPLELINK
+
+source "soc/ti/simplelink/cc13x2_cc26x2/Kconfig.soc"
+source "soc/ti/simplelink/cc13x2x7_cc26x2x7/Kconfig.soc"
+source "soc/ti/simplelink/cc23x0/Kconfig.soc"
+source "soc/ti/simplelink/cc32xx/Kconfig.soc"
+source "soc/ti/simplelink/msp432p4xx/Kconfig.soc"

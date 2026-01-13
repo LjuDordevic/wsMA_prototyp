@@ -1,0 +1,11 @@
+# SPDX-License-Identifier: Apache-2.0
+#
+# Copyright 2020 Broadcom.
+#
+
+if SOC_FAMILY_BCMVK
+
+source "soc/brcm/bcmvk/valkyrie/Kconfig"
+source "soc/brcm/bcmvk/viper/Kconfig"
+
+endif

@@ -1,0 +1,2 @@
+# Load board Kconfig descriptions.
+source "boards/native/native_sim/Kconfig.native_sim"

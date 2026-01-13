@@ -1,0 +1,10 @@
+# Copyright 2022-2024 NXP
+# SPDX-License-Identifier: Apache-2.0
+
+if SOC_FAMILY_NXP_S32
+
+source "soc/nxp/s32/s32k1/Kconfig"
+source "soc/nxp/s32/s32k3/Kconfig"
+source "soc/nxp/s32/s32ze/Kconfig"
+
+endif # SOC_FAMILY_NXP_S32

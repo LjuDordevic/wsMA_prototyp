@@ -1,0 +1,29 @@
+# Atmel SAM0 MCU family configuration options
+
+# Copyright (c) 2017 Google LLC.
+# Copyright (c) 2024 Gerson Fernando Budke <nandojve@gmail.com>
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_ATMEL_SAM0
+	select ASF
+	select HAS_SEGGER_RTT if ZEPHYR_SEGGER_MODULE
+
+if SOC_FAMILY_ATMEL_SAM0
+
+source "soc/atmel/sam0/common/Kconfig.samd2x"
+source "soc/atmel/sam0/common/Kconfig.samd5x"
+source "soc/atmel/sam0/common/Kconfig.saml2x"
+source "soc/atmel/sam0/samc20/Kconfig"
+source "soc/atmel/sam0/samc21/Kconfig"
+source "soc/atmel/sam0/samd20/Kconfig"
+source "soc/atmel/sam0/samd21/Kconfig"
+source "soc/atmel/sam0/samd51/Kconfig"
+source "soc/atmel/sam0/same51/Kconfig"
+source "soc/atmel/sam0/same53/Kconfig"
+source "soc/atmel/sam0/same54/Kconfig"
+source "soc/atmel/sam0/saml21/Kconfig"
+source "soc/atmel/sam0/samr21/Kconfig"
+source "soc/atmel/sam0/samr34/Kconfig"
+source "soc/atmel/sam0/samr35/Kconfig"
+
+endif # SOC_FAMILY_ATMEL_SAM0

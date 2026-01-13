@@ -1,0 +1,17 @@
+# Copyright (c) 2021, ATL Electronics
+# SPDX-License-Identifier: Apache-2.0
+
+config SOC_FAMILY_GD_GD32
+	bool
+
+config SOC_FAMILY
+	default "gd_gd32" if SOC_FAMILY_GD_GD32
+
+source "soc/gd/gd32/gd32a50x/Kconfig.soc"
+source "soc/gd/gd32/gd32e10x/Kconfig.soc"
+source "soc/gd/gd32/gd32e50x/Kconfig.soc"
+source "soc/gd/gd32/gd32f3x0/Kconfig.soc"
+source "soc/gd/gd32/gd32f403/Kconfig.soc"
+source "soc/gd/gd32/gd32f4xx/Kconfig.soc"
+source "soc/gd/gd32/gd32l23x/Kconfig.soc"
+source "soc/gd/gd32/gd32vf103/Kconfig.soc"
