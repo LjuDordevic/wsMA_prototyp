@@ -37,7 +37,7 @@ if MODULES_ZENOH
 
 
     # Choose exactly one item
-    choice 
+    choice ZENOH_PUBSUB_SELECTION
             prompt "Publishers/Subscribers selection"
             default ZENOH_PUBSUB_ALL
 
