@@ -1,0 +1,3167 @@
+====================================================================================================
+TRANSFORMATION PROTOTYP LOG
+====================================================================================================
+Log file: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/transform6.log
+====================================================================================================
+Project dir: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9
+Current working directory: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9
+Main file: Kconfig
+Output dir: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output
+Environment variables:
+  RTT_DIR=../..
+  BSP_DIR=.
+  PKGS_DIR=packages
+====================================================================================================
+<zrtos_parser.ZRTOSParser object at 0x77040689d1f0>
+Defined symbols: 1198
+Unique symbols: 1196
+Files: 118
+
+2. Build ExtParserContext FROM PARSER RESULTS
+ Transformer used: ZRTOS
+ call different attributes on options found in parser_result['unique_defined_syms']
+====================================================================================================
+Build context finished
+    get_all_source_files: 
+    parser found: Kconfig
+    parser found: ../../Kconfig
+    parser found: ../../src/Kconfig
+    parser found: ../../src/klibc/Kconfig
+    parser found: ../../libcpu/Kconfig
+    parser found: ../../libcpu/aarch64/Kconfig
+    parser found: ../../components/Kconfig
+    parser found: ../../components/finsh/Kconfig
+    parser found: ../../components/dfs/Kconfig
+    parser found: ../../components/fal/Kconfig
+    parser found: ../../components/drivers/Kconfig
+    parser found: ../../components/drivers/core/Kconfig
+    parser found: ../../components/drivers/ipc/Kconfig
+    parser found: ../../components/drivers/serial/Kconfig
+    parser found: ../../components/drivers/serial/device/Kconfig
+    parser found: ../../components/drivers/serial/device/8250/Kconfig
+    parser found: ../../components/drivers/serial/device/virtual/Kconfig
+    parser found: ../../components/drivers/can/Kconfig
+    parser found: ../../components/drivers/cputime/Kconfig
+    parser found: ../../components/drivers/i2c/Kconfig
+    parser found: ../../components/drivers/phy/Kconfig
+    parser found: ../../components/drivers/misc/Kconfig
+    parser found: ../../components/drivers/mtd/Kconfig
+    parser found: ../../components/drivers/pm/Kconfig
+    parser found: ../../components/drivers/rtc/Kconfig
+    parser found: ../../components/drivers/sdio/Kconfig
+    parser found: ../../components/drivers/sdio/host/Kconfig
+    parser found: ../../components/drivers/spi/Kconfig
+    parser found: ../../components/drivers/watchdog/Kconfig
+    parser found: ../../components/drivers/audio/Kconfig
+    parser found: ../../components/drivers/sensor/Kconfig
+    parser found: ../../components/drivers/touch/Kconfig
+    parser found: ../../components/drivers/graphic/Kconfig
+    parser found: ../../components/drivers/graphic/backlight/Kconfig
+    parser found: ../../components/drivers/graphic/framebuffer/Kconfig
+    parser found: ../../components/drivers/graphic/logo/Kconfig
+    parser found: ../../components/drivers/hwcrypto/Kconfig
+    parser found: ../../components/drivers/wlan/Kconfig
+    parser found: ../../components/drivers/led/Kconfig
+    parser found: ../../components/drivers/input/Kconfig
+    parser found: ../../components/drivers/input/joystick/Kconfig
+    parser found: ../../components/drivers/input/keyboard/Kconfig
+    parser found: ../../components/drivers/input/misc/Kconfig
+    parser found: ../../components/drivers/input/touchscreen/Kconfig
+    parser found: ../../components/drivers/mailbox/Kconfig
+    parser found: ../../components/drivers/hwspinlock/Kconfig
+    parser found: ../../components/drivers/phye/Kconfig
+    parser found: ../../components/drivers/ata/Kconfig
+    parser found: ../../components/drivers/nvme/Kconfig
+    parser found: ../../components/drivers/block/Kconfig
+    parser found: ../../components/drivers/block/partitions/Kconfig
+    parser found: ../../components/drivers/scsi/Kconfig
+    parser found: ../../components/drivers/firmware/Kconfig
+    parser found: ../../components/drivers/firmware/arm_scmi/Kconfig
+    parser found: ../../components/drivers/hwcache/Kconfig
+    parser found: ../../components/drivers/regulator/Kconfig
+    parser found: ../../components/drivers/reset/Kconfig
+    parser found: ../../components/drivers/pmdomain/Kconfig
+    parser found: ../../components/drivers/power/Kconfig
+    parser found: ../../components/drivers/power/reset/Kconfig
+    parser found: ../../components/drivers/power/supply/Kconfig
+    parser found: ../../components/drivers/thermal/Kconfig
+    parser found: ../../components/drivers/virtio/Kconfig
+    parser found: ../../components/drivers/nvmem/Kconfig
+    parser found: ../../components/drivers/dma/Kconfig
+    parser found: ../../components/drivers/mfd/Kconfig
+    parser found: ../../components/drivers/ofw/Kconfig
+    parser found: ../../components/drivers/pci/Kconfig
+    parser found: ../../components/drivers/pci/host/Kconfig
+    parser found: ../../components/drivers/pci/host/dw/Kconfig
+    parser found: ../../components/drivers/pic/Kconfig
+    parser found: ../../components/drivers/pin/Kconfig
+    parser found: ../../components/drivers/pinctrl/Kconfig
+    parser found: ../../components/drivers/ktime/Kconfig
+    parser found: ../../components/drivers/clk/Kconfig
+    parser found: ../../components/drivers/hwtimer/Kconfig
+    parser found: ../../components/drivers/usb/Kconfig
+    parser found: ../../components/drivers/usb/cherryusb/Kconfig.rtt
+    parser found: ../../components/libc/Kconfig
+    parser found: ../../components/libc/compilers/common/Kconfig
+    parser found: ../../components/libc/posix/Kconfig
+    parser found: ../../components/libc/posix/ipc/Kconfig
+    parser found: ../../components/libc/cplusplus/Kconfig
+    parser found: ../../components/net/Kconfig
+    parser found: ../../components/net/sal/Kconfig
+    parser found: ../../components/net/netdev/Kconfig
+    parser found: ../../components/net/lwip/Kconfig
+    parser found: ../../components/net/at/Kconfig
+    parser found: ../../components/mprotect/Kconfig
+    parser found: ../../components/utilities/Kconfig
+    parser found: ../../components/utilities/libadt/Kconfig
+    parser found: ../../components/utilities/rt-link/Kconfig
+    parser found: ../../components/mm/Kconfig
+    parser found: ../../components/lwp/Kconfig
+    parser found: ../../components/lwp/terminal/Kconfig
+    parser found: ../../components/lwp/vdso/Kconfig
+    parser found: ../../components/legacy/Kconfig
+    parser found: ../../components/legacy/usb/Kconfig
+    parser found: ../../components/legacy/fdt/Kconfig
+    parser found: ../../components/rust/Kconfig
+    parser found: ../../components/rust/examples/Kconfig
+    parser found: ../../Kconfig.utestcases
+    parser found: ../../src/utest/Kconfig
+    parser found: ../../src/utest/perf/Kconfig
+    parser found: ../../src/utest/../klibc/utest/Kconfig
+    parser found: ../../src/utest/smp/Kconfig
+    parser found: ../../components/drivers/core/utest/Kconfig
+    parser found: ../../components/drivers/audio/utest/Kconfig
+    parser found: ../../components/drivers/ipc/utest/Kconfig
+    parser found: ../../components/drivers/serial/utest/Kconfig
+    parser found: ../../components/drivers/smp_call/utest/Kconfig
+    parser found: ../../components/dfs/utest/Kconfig
+    parser found: ../../components/libc/cplusplus/utest/Kconfig
+    parser found: ../../components/net/utest/Kconfig
+    parser found: ../../components/utilities/utest/utest/Kconfig
+    parser found: ../../examples/utest/testcases/mm/Kconfig
+    parser found: ../../examples/utest/testcases/tmpfs/Kconfig
+    parser found: drivers/Kconfig
+
+3. Filter ExtParserContext
+extract all configdefault options and for each get transformed lines and last config
+extract infos for named choices - their definition & entries
+def dependencies extr: [['RT_USING_AMP']]
+dep dependencies extr: [['RT_USING_AMP']]
+
+
+=== _get_all_choice_configs for RT_USING_AMP_ROLE ===
+  Found 1 definitions:
+    [0] file=../../src/Kconfig, line=58
+  Extracted node_deps: [['RT_USING_AMP']]
+  Extracted default_deps: [['RT_USING_AMP']]
+
+  Processing definition [0]: ../../src/Kconfig:58
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../src/Kconfig
+    File exists, reading...
+
+
+Reader found: 449 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../src/Kconfig
+    Read 449 lines
+    node_deps for definition [0]: ['RT_USING_AMP']
+    Found choice at line index 57, line_number=58
+  DEBUG: Found choice RT_USING_AMP_ROLE at ../../src/Kconfig:58
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for RT_THREAD_PRIORITY_VAL_MAX ===
+  Found 1 definitions:
+    [0] file=../../src/Kconfig, line=92
+  Extracted node_deps: [['y']]
+  Extracted default_deps: [['y']]
+
+  Processing definition [0]: ../../src/Kconfig:92
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../src/Kconfig
+    File exists, reading...
+
+
+Reader found: 449 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../src/Kconfig
+    Read 449 lines
+    node_deps for definition [0]: ['y']
+    Found choice at line index 91, line_number=92
+  DEBUG: Found choice RT_THREAD_PRIORITY_VAL_MAX at ../../src/Kconfig:92
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['RT_USING_MEMHEAP']]
+dep dependencies extr: [['RT_USING_MEMHEAP']]
+
+
+=== _get_all_choice_configs for RT_MEMHEAP_MODE ===
+  Found 1 definitions:
+    [0] file=../../src/Kconfig, line=316
+  Extracted node_deps: [['RT_USING_MEMHEAP']]
+  Extracted default_deps: [['RT_USING_MEMHEAP']]
+
+  Processing definition [0]: ../../src/Kconfig:316
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../src/Kconfig
+    File exists, reading...
+
+
+Reader found: 449 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../src/Kconfig
+    Read 449 lines
+    node_deps for definition [0]: ['RT_USING_MEMHEAP']
+    Found choice at line index 315, line_number=316
+  DEBUG: Found choice RT_MEMHEAP_MODE at ../../src/Kconfig:316
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['y']]
+dep dependencies extr: [['y']]
+
+
+=== _get_all_choice_configs for RT_USING_HEAP_TYPE ===
+  Found 1 definitions:
+    [0] file=../../src/Kconfig, line=334
+  Extracted node_deps: [['y']]
+  Extracted default_deps: [['y']]
+
+  Processing definition [0]: ../../src/Kconfig:334
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../src/Kconfig
+    File exists, reading...
+
+
+Reader found: 449 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../src/Kconfig
+    Read 449 lines
+    node_deps for definition [0]: ['y']
+    Found choice at line index 333, line_number=334
+  DEBUG: Found choice RT_USING_HEAP_TYPE at ../../src/Kconfig:334
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 5
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['ARCH_RISCV_VECTOR']]
+dep dependencies extr: [['ARCH_RISCV_VECTOR']]
+
+
+=== _get_all_choice_configs for ARCH_VECTOR_VLEN ===
+  Found 1 definitions:
+    [0] file=../../libcpu/Kconfig, line=231
+  Extracted node_deps: [['ARCH_RISCV_VECTOR']]
+  Extracted default_deps: [['ARCH_RISCV_VECTOR']]
+
+  Processing definition [0]: ../../libcpu/Kconfig:231
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../libcpu/Kconfig
+    File exists, reading...
+
+
+Reader found: 309 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../libcpu/Kconfig
+    Read 309 lines
+    node_deps for definition [0]: ['ARCH_RISCV_VECTOR']
+    Found choice at line index 230, line_number=231
+  DEBUG: Found choice ARCH_VECTOR_VLEN at ../../libcpu/Kconfig:231
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['RT_USING_DFS', 'RT_USING_NANO'], ['RT_USING_SMART', 'RT_USING_DFS', 'RT_USING_NANO']]
+dep dependencies extr: [['RT_USING_DFS', 'RT_USING_NANO']]
+
+
+=== _get_all_choice_configs for RT_USING_DFS_VERSION ===
+  Found 1 definitions:
+    [0] file=../../components/dfs/Kconfig, line=37
+  Extracted node_deps: [['RT_USING_DFS', 'RT_USING_NANO']]
+  Extracted default_deps: [['RT_USING_DFS', 'RT_USING_NANO'], ['RT_USING_SMART', 'RT_USING_DFS', 'RT_USING_NANO']]
+
+  Processing definition [0]: ../../components/dfs/Kconfig:37
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/dfs/Kconfig
+    File exists, reading...
+
+
+Reader found: 272 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/dfs/Kconfig
+    Read 272 lines
+    node_deps for definition [0]: ['RT_USING_DFS', 'RT_USING_NANO']
+    Found choice at line index 36, line_number=37
+  DEBUG: Found choice RT_USING_DFS_VERSION at ../../components/dfs/Kconfig:37
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['RT_USING_DFS_ELMFAT', 'RT_USING_DFS', 'RT_USING_NANO']]
+dep dependencies extr: [['RT_USING_DFS_ELMFAT', 'RT_USING_DFS', 'RT_USING_NANO']]
+
+
+=== _get_all_choice_configs for RT_DFS_ELM_USE_LFN_NAME ===
+  Found 1 definitions:
+    [0] file=../../components/dfs/Kconfig, line=77
+  Extracted node_deps: [['RT_USING_DFS_ELMFAT', 'RT_USING_DFS', 'RT_USING_NANO']]
+  Extracted default_deps: [['RT_USING_DFS_ELMFAT', 'RT_USING_DFS', 'RT_USING_NANO']]
+
+  Processing definition [0]: ../../components/dfs/Kconfig:77
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/dfs/Kconfig
+    File exists, reading...
+
+
+Reader found: 272 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/dfs/Kconfig
+    Read 272 lines
+    node_deps for definition [0]: ['RT_USING_DFS_ELMFAT', 'RT_USING_DFS', 'RT_USING_NANO']
+    Found choice at line index 76, line_number=77
+  DEBUG: Found choice RT_DFS_ELM_USE_LFN_NAME at ../../components/dfs/Kconfig:77
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['RT_USING_DFS_ELMFAT', 'RT_USING_DFS', 'RT_USING_NANO']]
+dep dependencies extr: [['RT_USING_DFS_ELMFAT', 'RT_USING_DFS', 'RT_USING_NANO']]
+
+
+=== _get_all_choice_configs for RT_DFS_ELM_LFN_UNICODE_NAME ===
+  Found 1 definitions:
+    [0] file=../../components/dfs/Kconfig, line=101
+  Extracted node_deps: [['RT_USING_DFS_ELMFAT', 'RT_USING_DFS', 'RT_USING_NANO']]
+  Extracted default_deps: [['RT_USING_DFS_ELMFAT', 'RT_USING_DFS', 'RT_USING_NANO']]
+
+  Processing definition [0]: ../../components/dfs/Kconfig:101
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/dfs/Kconfig
+    File exists, reading...
+
+
+Reader found: 272 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/dfs/Kconfig
+    Read 272 lines
+    node_deps for definition [0]: ['RT_USING_DFS_ELMFAT', 'RT_USING_DFS', 'RT_USING_NANO']
+    Found choice at line index 100, line_number=101
+  DEBUG: Found choice RT_DFS_ELM_LFN_UNICODE_NAME at ../../components/dfs/Kconfig:101
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 4
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['RT_USING_SERIAL', 'RT_USING_NANO']]
+dep dependencies extr: [['RT_USING_SERIAL', 'RT_USING_NANO']]
+
+
+=== _get_all_choice_configs for RT_USING_SERIAL_VERSION ===
+  Found 1 definitions:
+    [0] file=../../components/drivers/serial/Kconfig, line=8
+  Extracted node_deps: [['RT_USING_SERIAL', 'RT_USING_NANO']]
+  Extracted default_deps: [['RT_USING_SERIAL', 'RT_USING_NANO']]
+
+  Processing definition [0]: ../../components/drivers/serial/Kconfig:8
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/serial/Kconfig
+    File exists, reading...
+
+
+Reader found: 42 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/serial/Kconfig
+    Read 42 lines
+    node_deps for definition [0]: ['RT_USING_SERIAL', 'RT_USING_NANO']
+    Found choice at line index 7, line_number=8
+  DEBUG: Found choice RT_USING_SERIAL_VERSION at ../../components/drivers/serial/Kconfig:8
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['RT_USING_SERIAL_V2', 'RT_USING_SERIAL', 'RT_USING_NANO']]
+dep dependencies extr: [['RT_USING_SERIAL_V2', 'RT_USING_SERIAL', 'RT_USING_NANO']]
+
+
+=== _get_all_choice_configs for RT_USING_SERIAL_MODE ===
+  Found 1 definitions:
+    [0] file=../../components/drivers/serial/Kconfig, line=17
+  Extracted node_deps: [['RT_USING_SERIAL_V2', 'RT_USING_SERIAL', 'RT_USING_NANO']]
+  Extracted default_deps: [['RT_USING_SERIAL_V2', 'RT_USING_SERIAL', 'RT_USING_NANO']]
+
+  Processing definition [0]: ../../components/drivers/serial/Kconfig:17
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/serial/Kconfig
+    File exists, reading...
+
+
+Reader found: 42 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/serial/Kconfig
+    Read 42 lines
+    node_deps for definition [0]: ['RT_USING_SERIAL_V2', 'RT_USING_SERIAL', 'RT_USING_NANO']
+    Found choice at line index 16, line_number=17
+  DEBUG: Found choice RT_USING_SERIAL_MODE at ../../components/drivers/serial/Kconfig:17
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['RT_SERIAL_VIRTUAL', 'RT_USING_DM', 'RT_USING_SERIAL', 'RT_USING_NANO'], ['RT_GRAPHIC_LOGO', 'RT_USING_GRAPHIC', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_HOST', 'RT_USING_CHERRYUSB', 'RT_USING_NANO']]
+dep dependencies extr: [['RT_SERIAL_VIRTUAL', 'RT_USING_DM', 'RT_USING_SERIAL', 'RT_USING_NANO'], ['RT_GRAPHIC_LOGO', 'RT_USING_GRAPHIC', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_HOST', 'RT_USING_CHERRYUSB', 'RT_USING_NANO']]
+
+
+=== _get_all_choice_configs for None ===
+  Found 6 definitions:
+    [0] file=../../components/drivers/serial/device/virtual/Kconfig, line=7
+    [1] file=../../components/drivers/graphic/logo/Kconfig, line=6
+    [2] file=../../components/drivers/usb/cherryusb/Kconfig.rtt, line=13
+    [3] file=../../components/drivers/usb/cherryusb/Kconfig.rtt, line=24
+    [4] file=../../components/drivers/usb/cherryusb/Kconfig.rtt, line=168
+    [5] file=../../components/drivers/usb/cherryusb/Kconfig.rtt, line=263
+  Extracted node_deps: [['RT_SERIAL_VIRTUAL', 'RT_USING_DM', 'RT_USING_SERIAL', 'RT_USING_NANO'], ['RT_GRAPHIC_LOGO', 'RT_USING_GRAPHIC', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_HOST', 'RT_USING_CHERRYUSB', 'RT_USING_NANO']]
+  Extracted default_deps: [['RT_SERIAL_VIRTUAL', 'RT_USING_DM', 'RT_USING_SERIAL', 'RT_USING_NANO'], ['RT_GRAPHIC_LOGO', 'RT_USING_GRAPHIC', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO'], ['RT_CHERRYUSB_HOST', 'RT_USING_CHERRYUSB', 'RT_USING_NANO']]
+
+  Processing definition [0]: ../../components/drivers/serial/device/virtual/Kconfig:7
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/serial/device/virtual/Kconfig
+    File exists, reading...
+
+
+Reader found: 17 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/serial/device/virtual/Kconfig
+    Read 17 lines
+    node_deps for definition [0]: ['RT_SERIAL_VIRTUAL', 'RT_USING_DM', 'RT_USING_SERIAL', 'RT_USING_NANO']
+    Found choice at line index 6, line_number=7
+  DEBUG: Found choice None at ../../components/drivers/serial/device/virtual/Kconfig:7
+  Finished processing definition [0]
+
+  Processing definition [1]: ../../components/drivers/graphic/logo/Kconfig:6
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/graphic/logo/Kconfig
+    File exists, reading...
+
+
+Reader found: 37 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/graphic/logo/Kconfig
+    Read 37 lines
+    node_deps for definition [1]: ['RT_GRAPHIC_LOGO', 'RT_USING_GRAPHIC', 'RT_USING_NANO']
+    Found choice at line index 5, line_number=6
+  DEBUG: Found choice None at ../../components/drivers/graphic/logo/Kconfig:6
+  Finished processing definition [1]
+
+  Processing definition [2]: ../../components/drivers/usb/cherryusb/Kconfig.rtt:13
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/usb/cherryusb/Kconfig.rtt
+    File exists, reading...
+
+
+Reader found: 462 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/usb/cherryusb/Kconfig.rtt
+    Read 462 lines
+    node_deps for definition [2]: ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO']
+    Found choice at line index 12, line_number=13
+  DEBUG: Found choice None at ../../components/drivers/usb/cherryusb/Kconfig.rtt:13
+  Finished processing definition [2]
+
+  Processing definition [3]: ../../components/drivers/usb/cherryusb/Kconfig.rtt:24
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/usb/cherryusb/Kconfig.rtt
+    File exists, reading...
+
+
+Reader found: 462 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/usb/cherryusb/Kconfig.rtt
+    Read 462 lines
+    node_deps for definition [3]: ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO']
+    Found choice at line index 23, line_number=24
+  DEBUG: Found choice None at ../../components/drivers/usb/cherryusb/Kconfig.rtt:24
+  Finished processing definition [3]
+
+  Processing definition [4]: ../../components/drivers/usb/cherryusb/Kconfig.rtt:168
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/usb/cherryusb/Kconfig.rtt
+    File exists, reading...
+
+
+Reader found: 462 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/usb/cherryusb/Kconfig.rtt
+    Read 462 lines
+    node_deps for definition [4]: ['RT_CHERRYUSB_DEVICE', 'RT_USING_CHERRYUSB', 'RT_USING_NANO']
+    Found choice at line index 167, line_number=168
+  DEBUG: Found choice None at ../../components/drivers/usb/cherryusb/Kconfig.rtt:168
+  Finished processing definition [4]
+
+  Processing definition [5]: ../../components/drivers/usb/cherryusb/Kconfig.rtt:263
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/usb/cherryusb/Kconfig.rtt
+    File exists, reading...
+
+
+Reader found: 462 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/usb/cherryusb/Kconfig.rtt
+    Read 462 lines
+    node_deps for definition [5]: ['RT_CHERRYUSB_HOST', 'RT_USING_CHERRYUSB', 'RT_USING_NANO']
+    Found choice at line index 262, line_number=263
+  DEBUG: Found choice None at ../../components/drivers/usb/cherryusb/Kconfig.rtt:263
+  Finished processing definition [5]
+  DEBUG: Total entries collected: 78
+  DEBUG: Total prompts collected: 5
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['RT_USING_VIRTIO', 'RT_USING_NANO']]
+dep dependencies extr: [['RT_USING_VIRTIO', 'RT_USING_NANO']]
+
+
+=== _get_all_choice_configs for RT_USING_VIRTIO_VERSION ===
+  Found 1 definitions:
+    [0] file=../../components/drivers/virtio/Kconfig, line=6
+  Extracted node_deps: [['RT_USING_VIRTIO', 'RT_USING_NANO']]
+  Extracted default_deps: [['RT_USING_VIRTIO', 'RT_USING_NANO']]
+
+  Processing definition [0]: ../../components/drivers/virtio/Kconfig:6
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/virtio/Kconfig
+    File exists, reading...
+
+
+Reader found: 43 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/drivers/virtio/Kconfig
+    Read 43 lines
+    node_deps for definition [0]: ['RT_USING_VIRTIO', 'RT_USING_NANO']
+    Found choice at line index 5, line_number=6
+  DEBUG: Found choice RT_USING_VIRTIO_VERSION at ../../components/drivers/virtio/Kconfig:6
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 1
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['RT_USING_LWIP', 'RT_USING_NANO']]
+dep dependencies extr: [['RT_USING_LWIP', 'RT_USING_NANO']]
+
+
+=== _get_all_choice_configs for RT_USING_LWIP_VERSION ===
+  Found 1 definitions:
+    [0] file=../../components/net/lwip/Kconfig, line=16
+  Extracted node_deps: [['RT_USING_LWIP', 'RT_USING_NANO']]
+  Extracted default_deps: [['RT_USING_LWIP', 'RT_USING_NANO']]
+
+  Processing definition [0]: ../../components/net/lwip/Kconfig:16
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/net/lwip/Kconfig
+    File exists, reading...
+
+
+Reader found: 408 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/net/lwip/Kconfig
+    Read 408 lines
+    node_deps for definition [0]: ['RT_USING_LWIP', 'RT_USING_NANO']
+    Found choice at line index 15, line_number=16
+  DEBUG: Found choice RT_USING_LWIP_VERSION at ../../components/net/lwip/Kconfig:16
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 3
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['ULOG_USING_SYSLOG', 'RT_USING_ULOG', 'RT_USING_NANO'], ['ULOG_USING_SYSLOG', 'RT_USING_ULOG', 'RT_USING_NANO']]
+dep dependencies extr: [['ULOG_USING_SYSLOG', 'RT_USING_ULOG', 'RT_USING_NANO'], ['ULOG_USING_SYSLOG', 'RT_USING_ULOG', 'RT_USING_NANO']]
+
+
+=== _get_all_choice_configs for ULOG_OUTPUT_LOG_LEVEL ===
+  Found 2 definitions:
+    [0] file=../../components/utilities/Kconfig, line=24
+    [1] file=../../components/utilities/Kconfig, line=45
+  Extracted node_deps: [['ULOG_USING_SYSLOG', 'RT_USING_ULOG', 'RT_USING_NANO'], ['ULOG_USING_SYSLOG', 'RT_USING_ULOG', 'RT_USING_NANO']]
+  Extracted default_deps: [['ULOG_USING_SYSLOG', 'RT_USING_ULOG', 'RT_USING_NANO'], ['ULOG_USING_SYSLOG', 'RT_USING_ULOG', 'RT_USING_NANO']]
+
+  Processing definition [0]: ../../components/utilities/Kconfig:24
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/utilities/Kconfig
+    File exists, reading...
+
+
+Reader found: 247 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/utilities/Kconfig
+    Read 247 lines
+    node_deps for definition [0]: ['ULOG_USING_SYSLOG', 'RT_USING_ULOG', 'RT_USING_NANO']
+    Found choice at line index 23, line_number=24
+  DEBUG: Found choice ULOG_OUTPUT_LOG_LEVEL at ../../components/utilities/Kconfig:24
+  Finished processing definition [0]
+
+  Processing definition [1]: ../../components/utilities/Kconfig:45
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/utilities/Kconfig
+    File exists, reading...
+
+
+Reader found: 247 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/utilities/Kconfig
+    Read 247 lines
+    node_deps for definition [1]: ['ULOG_USING_SYSLOG', 'RT_USING_ULOG', 'RT_USING_NANO']
+    Found choice at line index 44, line_number=45
+  DEBUG: Found choice ULOG_OUTPUT_LOG_LEVEL at ../../components/utilities/Kconfig:45
+  Finished processing definition [1]
+  DEBUG: Total entries collected: 13
+  DEBUG: Total prompts collected: 1
+  DEBUG: Total helps collected: 4 + [KconfigLine(help, line=48, indent=16), KconfigLine(other, line=49, indent=20), KconfigLine(other, line=50, indent=20), KconfigLine(other, line=51, indent=20)]
+def dependencies extr: [['RT_USING_RT_LINK', 'RT_USING_NANO']]
+dep dependencies extr: [['RT_USING_RT_LINK', 'RT_USING_NANO']]
+
+
+=== _get_all_choice_configs for RT_LINK_USING_CRC ===
+  Found 1 definitions:
+    [0] file=../../components/utilities/rt-link/Kconfig, line=7
+  Extracted node_deps: [['RT_USING_RT_LINK', 'RT_USING_NANO']]
+  Extracted default_deps: [['RT_USING_RT_LINK', 'RT_USING_NANO']]
+
+  Processing definition [0]: ../../components/utilities/rt-link/Kconfig:7
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/utilities/rt-link/Kconfig
+    File exists, reading...
+
+
+Reader found: 25 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/utilities/rt-link/Kconfig
+    Read 25 lines
+    node_deps for definition [0]: ['RT_USING_RT_LINK', 'RT_USING_NANO']
+    Found choice at line index 6, line_number=7
+  DEBUG: Found choice RT_LINK_USING_CRC at ../../components/utilities/rt-link/Kconfig:7
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 2
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+def dependencies extr: [['RT_USB_DEVICE_COMPOSITE', 'RT_USING_USB_DEVICE']]
+dep dependencies extr: [['RT_USB_DEVICE_COMPOSITE', 'RT_USING_USB_DEVICE']]
+
+
+=== _get_all_choice_configs for RT_USING_COMPOSITE_DEVICE ===
+  Found 1 definitions:
+    [0] file=../../components/legacy/usb/Kconfig, line=53
+  Extracted node_deps: [['RT_USB_DEVICE_COMPOSITE', 'RT_USING_USB_DEVICE']]
+  Extracted default_deps: [['RT_USB_DEVICE_COMPOSITE', 'RT_USING_USB_DEVICE']]
+
+  Processing definition [0]: ../../components/legacy/usb/Kconfig:53
+    Looking for file: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/legacy/usb/Kconfig
+    File exists, reading...
+
+
+Reader found: 200 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/../../components/legacy/usb/Kconfig
+    Read 200 lines
+    node_deps for definition [0]: ['RT_USB_DEVICE_COMPOSITE', 'RT_USING_USB_DEVICE']
+    Found choice at line index 52, line_number=53
+  DEBUG: Found choice RT_USING_COMPOSITE_DEVICE at ../../components/legacy/usb/Kconfig:53
+  Finished processing definition [0]
+  DEBUG: Total entries collected: 8
+  DEBUG: Total prompts collected: 0
+  DEBUG: Total helps collected: 0 + []
+
+for each given file at source_files start building path output structur and call reader and writer
+
+4. Transform all files - needs reader & writer
+
+
+Reader found: 11 lines in /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 11 input lines
+    source without glob: 1
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $PKGS_DIR/Kconfig at line 10
+      no files found for the: $PKGS_DIR/Kconfig
+    source without glob: 1
+    FILE LOG --------------------------------------------------------------
+    Reader input                11 lines
+    -----------------------------------------------------------------------
+    All source without glob:    2
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   3
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         10 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 10 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
+
+
+Reader found: 4 lines in /home/ljd/rtthread/rt-thread/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 4 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: src/Kconfig at line 1
+      -> ../../src/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: libcpu/Kconfig at line 2
+      -> ../../libcpu/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: components/Kconfig at line 3
+      -> ../../components/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: Kconfig.utestcases at line 4
+      -> ../../Kconfig.utestcases
+    Files matching: 1 (using rsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                4 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       4
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   4
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         4 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 4 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
+
+
+Reader found: 449 lines in /home/ljd/rtthread/rt-thread/src/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 449 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: klibc/Kconfig at line 3
+      -> ../../src/klibc/Kconfig
+    Files matching: 1 (using rsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                449 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       1
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         449 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 449 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/src/Kconfig
+
+
+Reader found: 253 lines in /home/ljd/rtthread/rt-thread/src/klibc/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 253 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                253 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         253 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 253 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/src/klibc/Kconfig
+
+
+Reader found: 309 lines in /home/ljd/rtthread/rt-thread/libcpu/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 309 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve orsource: ./aarch64/Kconfig at line 2
+      -> ../../libcpu/./aarch64/Kconfig
+    Files matching: 1 (using orsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                309 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      1
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         309 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 309 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/libcpu/Kconfig
+
+
+Reader found: 25 lines in /home/ljd/rtthread/rt-thread/libcpu/aarch64/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 25 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                25 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         25 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 25 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/libcpu/aarch64/Kconfig
+
+
+Reader found: 52 lines in /home/ljd/rtthread/rt-thread/components/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 52 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: finsh/Kconfig at line 29
+      -> ../../components/finsh/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: dfs/Kconfig at line 33
+      -> ../../components/dfs/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: fal/Kconfig at line 34
+      -> ../../components/fal/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: drivers/Kconfig at line 35
+      -> ../../components/drivers/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: libc/Kconfig at line 36
+      -> ../../components/libc/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: net/Kconfig at line 37
+      -> ../../components/net/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: mprotect/Kconfig at line 38
+      -> ../../components/mprotect/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: utilities/Kconfig at line 39
+      -> ../../components/utilities/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: mm/Kconfig at line 43
+      -> ../../components/mm/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: lwp/Kconfig at line 47
+      -> ../../components/lwp/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: legacy/Kconfig at line 50
+      no files found for the: legacy/Kconfig
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: rust/Kconfig at line 51
+      -> ../../components/rust/Kconfig
+    Files matching: 1 (using rsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                52 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       12
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   12
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         51 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 51 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/Kconfig
+
+
+Reader found: 97 lines in /home/ljd/rtthread/rt-thread/components/finsh/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 97 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                97 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         97 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 97 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/finsh/Kconfig
+
+
+Reader found: 272 lines in /home/ljd/rtthread/rt-thread/components/dfs/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 272 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                272 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         272 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 272 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/dfs/Kconfig
+
+
+Reader found: 51 lines in /home/ljd/rtthread/rt-thread/components/fal/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 51 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                51 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         51 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 51 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/fal/Kconfig
+
+
+Reader found: 54 lines in /home/ljd/rtthread/rt-thread/components/drivers/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 54 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: core/Kconfig at line 3
+      -> ../../components/drivers/core/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: ipc/Kconfig at line 4
+      -> ../../components/drivers/ipc/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: serial/Kconfig at line 6
+      -> ../../components/drivers/serial/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: can/Kconfig at line 7
+      -> ../../components/drivers/can/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: cputime/Kconfig at line 8
+      -> ../../components/drivers/cputime/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: i2c/Kconfig at line 9
+      -> ../../components/drivers/i2c/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: phy/Kconfig at line 10
+      -> ../../components/drivers/phy/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: misc/Kconfig at line 11
+      -> ../../components/drivers/misc/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: mtd/Kconfig at line 12
+      -> ../../components/drivers/mtd/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: pm/Kconfig at line 13
+      -> ../../components/drivers/pm/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: rtc/Kconfig at line 14
+      -> ../../components/drivers/rtc/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: sdio/Kconfig at line 15
+      -> ../../components/drivers/sdio/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: spi/Kconfig at line 16
+      -> ../../components/drivers/spi/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: watchdog/Kconfig at line 17
+      -> ../../components/drivers/watchdog/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: audio/Kconfig at line 18
+      -> ../../components/drivers/audio/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: sensor/Kconfig at line 19
+      -> ../../components/drivers/sensor/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: touch/Kconfig at line 20
+      -> ../../components/drivers/touch/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: graphic/Kconfig at line 21
+      -> ../../components/drivers/graphic/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: hwcrypto/Kconfig at line 22
+      -> ../../components/drivers/hwcrypto/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: wlan/Kconfig at line 23
+      -> ../../components/drivers/wlan/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: led/Kconfig at line 24
+      -> ../../components/drivers/led/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: input/Kconfig at line 25
+      -> ../../components/drivers/input/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: mailbox/Kconfig at line 26
+      -> ../../components/drivers/mailbox/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: hwspinlock/Kconfig at line 27
+      -> ../../components/drivers/hwspinlock/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: phye/Kconfig at line 28
+      -> ../../components/drivers/phye/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: ata/Kconfig at line 29
+      -> ../../components/drivers/ata/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: nvme/Kconfig at line 30
+      -> ../../components/drivers/nvme/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: block/Kconfig at line 31
+      -> ../../components/drivers/block/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: scsi/Kconfig at line 32
+      -> ../../components/drivers/scsi/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: firmware/Kconfig at line 33
+      -> ../../components/drivers/firmware/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: hwcache/Kconfig at line 34
+      -> ../../components/drivers/hwcache/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: regulator/Kconfig at line 35
+      -> ../../components/drivers/regulator/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: reset/Kconfig at line 36
+      -> ../../components/drivers/reset/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: pmdomain/Kconfig at line 37
+      -> ../../components/drivers/pmdomain/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: power/Kconfig at line 38
+      no files found for the: power/Kconfig
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: thermal/Kconfig at line 39
+      -> ../../components/drivers/thermal/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: virtio/Kconfig at line 40
+      -> ../../components/drivers/virtio/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: nvmem/Kconfig at line 41
+      -> ../../components/drivers/nvmem/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: dma/Kconfig at line 42
+      -> ../../components/drivers/dma/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: mfd/Kconfig at line 43
+      -> ../../components/drivers/mfd/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: ofw/Kconfig at line 44
+      -> ../../components/drivers/ofw/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: pci/Kconfig at line 45
+      -> ../../components/drivers/pci/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: pic/Kconfig at line 46
+      -> ../../components/drivers/pic/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: pin/Kconfig at line 47
+      -> ../../components/drivers/pin/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: pinctrl/Kconfig at line 48
+      -> ../../components/drivers/pinctrl/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: ktime/Kconfig at line 49
+      -> ../../components/drivers/ktime/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: clk/Kconfig at line 50
+      -> ../../components/drivers/clk/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: hwtimer/Kconfig at line 51
+      -> ../../components/drivers/hwtimer/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: usb/Kconfig at line 52
+      no files found for the: usb/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                54 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       49
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   49
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         52 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 2
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 52 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/Kconfig
+
+
+Reader found: 11 lines in /home/ljd/rtthread/rt-thread/components/drivers/core/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 11 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                11 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         11 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/core/Kconfig
+
+
+Reader found: 25 lines in /home/ljd/rtthread/rt-thread/components/drivers/ipc/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 25 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                25 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         25 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 25 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/ipc/Kconfig
+
+
+Reader found: 42 lines in /home/ljd/rtthread/rt-thread/components/drivers/serial/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 42 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: device/Kconfig at line 41
+      -> ../../components/drivers/serial/device/Kconfig
+    Files matching: 1 (using rsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                42 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       1
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         42 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 42 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/serial/Kconfig
+
+
+Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/serial/device/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 12 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: 8250/Kconfig at line 9
+      -> ../../components/drivers/serial/device/8250/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: virtual/Kconfig at line 10
+      -> ../../components/drivers/serial/device/virtual/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_SERIAL_DIR)/Kconfig at line 12
+      no files found for the: $(SOC_DM_SERIAL_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                12 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       2
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   3
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         11 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/serial/device/Kconfig
+
+
+Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/serial/device/8250/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 14 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                14 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         14 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/serial/device/8250/Kconfig
+
+
+Reader found: 17 lines in /home/ljd/rtthread/rt-thread/components/drivers/serial/device/virtual/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 17 input lines
+    current_indx: 7 - choice_attr_end: 11
+    FILE LOG --------------------------------------------------------------
+    Reader input                17 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         17 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 17 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/serial/device/virtual/Kconfig
+
+
+Reader found: 80 lines in /home/ljd/rtthread/rt-thread/components/drivers/can/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 80 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_CAN_DIR)/Kconfig at line 79
+      no files found for the: $(SOC_DM_CAN_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                80 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         79 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 79 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/can/Kconfig
+
+
+Reader found: 34 lines in /home/ljd/rtthread/rt-thread/components/drivers/cputime/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 34 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                34 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         34 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 34 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/cputime/Kconfig
+
+
+Reader found: 247 lines in /home/ljd/rtthread/rt-thread/components/drivers/i2c/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 247 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_I2C_DIR)/Kconfig at line 246
+      no files found for the: $(SOC_DM_I2C_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                247 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         246 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 246 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/i2c/Kconfig
+
+
+Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/phy/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 12 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_PHY_DIR)/Kconfig at line 11
+      no files found for the: $(SOC_DM_PHY_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                12 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         11 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/phy/Kconfig
+
+
+Reader found: 45 lines in /home/ljd/rtthread/rt-thread/components/drivers/misc/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 45 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_ADC_DIR)/Kconfig at line 6
+      no files found for the: $(SOC_DM_ADC_DIR)/Kconfig
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_PWM_DIR)/Kconfig at line 30
+      no files found for the: $(SOC_DM_PWM_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                45 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       2
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   2
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         43 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 2
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 43 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/misc/Kconfig
+
+
+Reader found: 30 lines in /home/ljd/rtthread/rt-thread/components/drivers/mtd/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 30 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                30 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         30 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 30 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/mtd/Kconfig
+
+
+Reader found: 39 lines in /home/ljd/rtthread/rt-thread/components/drivers/pm/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 39 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                39 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         39 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 39 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pm/Kconfig
+
+
+Reader found: 90 lines in /home/ljd/rtthread/rt-thread/components/drivers/rtc/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 90 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_RTC_DIR)/Kconfig at line 89
+      no files found for the: $(SOC_DM_RTC_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                90 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         89 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 89 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/rtc/Kconfig
+
+
+Reader found: 36 lines in /home/ljd/rtthread/rt-thread/components/drivers/sdio/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 36 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: host/Kconfig at line 35
+      -> ../../components/drivers/sdio/host/Kconfig
+    Files matching: 1 (using rsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                36 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       1
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         36 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 36 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/sdio/Kconfig
+
+
+Reader found: 22 lines in /home/ljd/rtthread/rt-thread/components/drivers/sdio/host/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 22 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_SDIO_DIR)/Kconfig at line 22
+      no files found for the: $(SOC_DM_SDIO_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                22 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         21 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 21 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/sdio/host/Kconfig
+
+
+Reader found: 250 lines in /home/ljd/rtthread/rt-thread/components/drivers/spi/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 250 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_SPI_DIR)/Kconfig at line 249
+      no files found for the: $(SOC_DM_SPI_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                250 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         249 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 249 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/spi/Kconfig
+
+
+Reader found: 20 lines in /home/ljd/rtthread/rt-thread/components/drivers/watchdog/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 20 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_WDT_DIR)/Kconfig at line 19
+      no files found for the: $(SOC_DM_WDT_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                20 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         19 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/watchdog/Kconfig
+
+
+Reader found: 18 lines in /home/ljd/rtthread/rt-thread/components/drivers/audio/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 18 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                18 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         18 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 18 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/audio/Kconfig
+
+
+Reader found: 15 lines in /home/ljd/rtthread/rt-thread/components/drivers/sensor/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 15 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                15 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         15 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 15 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/sensor/Kconfig
+
+
+Reader found: 8 lines in /home/ljd/rtthread/rt-thread/components/drivers/touch/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 8 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                8 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         8 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/touch/Kconfig
+
+
+Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/graphic/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 14 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: backlight/Kconfig at line 11
+      -> ../../components/drivers/graphic/backlight/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: framebuffer/Kconfig at line 12
+      -> ../../components/drivers/graphic/framebuffer/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: logo/Kconfig at line 13
+      -> ../../components/drivers/graphic/logo/Kconfig
+    Files matching: 1 (using rsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                14 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       3
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   3
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         14 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/graphic/Kconfig
+
+
+Reader found: 22 lines in /home/ljd/rtthread/rt-thread/components/drivers/graphic/backlight/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 22 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_GRAPHIC_BACKLIGHT_DIR)/Kconfig at line 21
+      no files found for the: $(SOC_DM_GRAPHIC_BACKLIGHT_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                22 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         21 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 21 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/graphic/backlight/Kconfig
+
+
+Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/graphic/framebuffer/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 14 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_GRAPHIC_FB_DIR)/Kconfig at line 13
+      no files found for the: $(SOC_DM_GRAPHIC_FB_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                14 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         13 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/graphic/framebuffer/Kconfig
+
+
+Reader found: 37 lines in /home/ljd/rtthread/rt-thread/components/drivers/graphic/logo/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 37 input lines
+    current_indx: 6 - choice_attr_end: 10
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_GRAPHIC_LOGO_DIR)/Kconfig at line 20
+    WARNING: current_file is None, using cwd: /home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9
+      no files found for the: $(SOC_DM_GRAPHIC_LOGO_DIR)/Kconfig
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_GRAPHIC_LOGO_DIR)/Kconfig.path at line 37
+      no files found for the: $(SOC_DM_GRAPHIC_LOGO_DIR)/Kconfig.path
+    FILE LOG --------------------------------------------------------------
+    Reader input                37 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       2
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   2
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         35 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 2
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 35 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/graphic/logo/Kconfig
+
+
+Reader found: 169 lines in /home/ljd/rtthread/rt-thread/components/drivers/hwcrypto/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 169 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_HWCRYPTO_DIR)/Kconfig at line 168
+      no files found for the: $(SOC_DM_HWCRYPTO_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                169 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         168 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 168 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/hwcrypto/Kconfig
+
+
+Reader found: 154 lines in /home/ljd/rtthread/rt-thread/components/drivers/wlan/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 154 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                154 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         154 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 154 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/wlan/Kconfig
+
+
+Reader found: 28 lines in /home/ljd/rtthread/rt-thread/components/drivers/led/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 28 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_LED_DIR)/Kconfig at line 27
+      no files found for the: $(SOC_DM_LED_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                28 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         27 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 27 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/led/Kconfig
+
+
+Reader found: 36 lines in /home/ljd/rtthread/rt-thread/components/drivers/input/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 36 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: joystick/Kconfig at line 32
+      -> ../../components/drivers/input/joystick/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: keyboard/Kconfig at line 33
+      -> ../../components/drivers/input/keyboard/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: misc/Kconfig at line 34
+      -> ../../components/drivers/input/misc/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: touchscreen/Kconfig at line 35
+      -> ../../components/drivers/input/touchscreen/Kconfig
+    Files matching: 1 (using rsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                36 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       4
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   4
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         36 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 36 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/input/Kconfig
+
+
+Reader found: 7 lines in /home/ljd/rtthread/rt-thread/components/drivers/input/joystick/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 7 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_INPUT_JOYSTICK_DIR)/Kconfig at line 6
+      no files found for the: $(SOC_DM_INPUT_JOYSTICK_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                7 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         6 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 6 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/input/joystick/Kconfig
+
+
+Reader found: 13 lines in /home/ljd/rtthread/rt-thread/components/drivers/input/keyboard/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 13 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_INPUT_KEYBOARD_DIR)/Kconfig at line 12
+      no files found for the: $(SOC_DM_INPUT_KEYBOARD_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                13 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         12 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 12 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/input/keyboard/Kconfig
+
+
+Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/input/misc/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 12 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_INPUT_MISC_DIR)/Kconfig at line 11
+      no files found for the: $(SOC_DM_INPUT_MISC_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                12 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         11 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/input/misc/Kconfig
+
+
+Reader found: 8 lines in /home/ljd/rtthread/rt-thread/components/drivers/input/touchscreen/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 8 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_INPUT_TOUCHSCREEN_DIR)/Kconfig at line 7
+      no files found for the: $(SOC_DM_INPUT_TOUCHSCREEN_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                8 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         7 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 7 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/input/touchscreen/Kconfig
+
+
+Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/mailbox/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 14 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_MBOX_DIR)/Kconfig at line 13
+      no files found for the: $(SOC_DM_MBOX_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                14 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         13 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/mailbox/Kconfig
+
+
+Reader found: 15 lines in /home/ljd/rtthread/rt-thread/components/drivers/hwspinlock/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 15 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_HWSPINLOCK_DIR)/Kconfig at line 14
+      no files found for the: $(SOC_DM_HWSPINLOCK_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                15 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         14 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 14 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/hwspinlock/Kconfig
+
+
+Reader found: 20 lines in /home/ljd/rtthread/rt-thread/components/drivers/phye/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 20 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_PHYE_DIR)/Kconfig at line 19
+      no files found for the: $(SOC_DM_PHYE_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                20 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         19 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/phye/Kconfig
+
+
+Reader found: 22 lines in /home/ljd/rtthread/rt-thread/components/drivers/ata/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 22 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_ATA_DIR)/Kconfig at line 21
+      no files found for the: $(SOC_DM_ATA_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                22 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         21 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 21 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/ata/Kconfig
+
+
+Reader found: 23 lines in /home/ljd/rtthread/rt-thread/components/drivers/nvme/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 23 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_NVME_DIR)/Kconfig at line 22
+      no files found for the: $(SOC_DM_NVME_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                23 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         22 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 22 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/nvme/Kconfig
+
+
+Reader found: 7 lines in /home/ljd/rtthread/rt-thread/components/drivers/block/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 7 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: partitions/Kconfig at line 6
+      -> ../../components/drivers/block/partitions/Kconfig
+    Files matching: 1 (using rsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                7 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       1
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         7 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 7 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/block/Kconfig
+
+
+Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/block/partitions/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 12 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                12 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         12 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 12 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/block/partitions/Kconfig
+
+
+Reader found: 20 lines in /home/ljd/rtthread/rt-thread/components/drivers/scsi/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 20 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_SCSI_DIR)/Kconfig at line 19
+      no files found for the: $(SOC_DM_SCSI_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                20 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         19 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/scsi/Kconfig
+
+
+Reader found: 9 lines in /home/ljd/rtthread/rt-thread/components/drivers/firmware/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 9 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: arm_scmi/Kconfig at line 7
+      -> ../../components/drivers/firmware/arm_scmi/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_FIRMWARE_DIR)/Kconfig at line 8
+      no files found for the: $(SOC_DM_FIRMWARE_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                9 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       1
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   2
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         8 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/firmware/Kconfig
+
+
+Reader found: 23 lines in /home/ljd/rtthread/rt-thread/components/drivers/firmware/arm_scmi/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 23 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                23 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         23 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 23 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/firmware/arm_scmi/Kconfig
+
+
+Reader found: 9 lines in /home/ljd/rtthread/rt-thread/components/drivers/hwcache/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 9 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_HWCACHE_DIR)/Kconfig at line 8
+      no files found for the: $(SOC_DM_HWCACHE_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                9 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         8 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 8 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/hwcache/Kconfig
+
+
+Reader found: 30 lines in /home/ljd/rtthread/rt-thread/components/drivers/regulator/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 30 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_REGULATOR_DIR)/Kconfig at line 29
+      no files found for the: $(SOC_DM_REGULATOR_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                30 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         29 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 29 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/regulator/Kconfig
+
+
+Reader found: 20 lines in /home/ljd/rtthread/rt-thread/components/drivers/reset/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 20 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_RESET_DIR)/Kconfig at line 19
+      no files found for the: $(SOC_DM_RESET_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                20 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         19 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 19 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/reset/Kconfig
+
+
+Reader found: 11 lines in /home/ljd/rtthread/rt-thread/components/drivers/pmdomain/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 11 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_PMDOMAIN_DIR)/Kconfig at line 9
+      no files found for the: $(SOC_DM_PMDOMAIN_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                11 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         10 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 10 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pmdomain/Kconfig
+
+
+Reader found: 2 lines in /home/ljd/rtthread/rt-thread/components/drivers/power/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 2 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: reset/Kconfig at line 1
+      -> ../../components/drivers/power/reset/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: supply/Kconfig at line 2
+      -> ../../components/drivers/power/supply/Kconfig
+    Files matching: 1 (using rsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                2 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       2
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   2
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         2 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 2 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/power/Kconfig
+
+
+Reader found: 39 lines in /home/ljd/rtthread/rt-thread/components/drivers/power/reset/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 39 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_POWER_RESET_DIR)/Kconfig at line 34
+      no files found for the: $(SOC_DM_POWER_RESET_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                39 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         38 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 38 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/power/reset/Kconfig
+
+
+Reader found: 35 lines in /home/ljd/rtthread/rt-thread/components/drivers/power/supply/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 35 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_POWER_SUPPLY_DIR)/Kconfig at line 34
+      no files found for the: $(SOC_DM_POWER_SUPPLY_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                35 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         34 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 34 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/power/supply/Kconfig
+
+
+Reader found: 34 lines in /home/ljd/rtthread/rt-thread/components/drivers/thermal/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 34 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_THERMAL_DIR)/Kconfig at line 17
+      no files found for the: $(SOC_DM_THERMAL_DIR)/Kconfig
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_THERMAL_COOL_DIR)/Kconfig at line 33
+      no files found for the: $(SOC_DM_THERMAL_COOL_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                34 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       2
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   2
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         32 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 2
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 32 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/thermal/Kconfig
+
+
+Reader found: 43 lines in /home/ljd/rtthread/rt-thread/components/drivers/virtio/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 43 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                43 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         43 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 43 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/virtio/Kconfig
+
+
+Reader found: 12 lines in /home/ljd/rtthread/rt-thread/components/drivers/nvmem/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 12 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_NVMEM_DIR)/Kconfig at line 11
+      no files found for the: $(SOC_DM_NVMEM_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                12 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         11 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 11 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/nvmem/Kconfig
+
+
+Reader found: 17 lines in /home/ljd/rtthread/rt-thread/components/drivers/dma/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 17 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_DMA_DIR)/Kconfig at line 16
+      no files found for the: $(SOC_DM_DMA_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                17 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         16 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 16 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/dma/Kconfig
+
+
+Reader found: 21 lines in /home/ljd/rtthread/rt-thread/components/drivers/mfd/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 21 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_MFD_DIR)/Kconfig at line 20
+      no files found for the: $(SOC_DM_MFD_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                21 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         20 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 20 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/mfd/Kconfig
+
+
+Reader found: 29 lines in /home/ljd/rtthread/rt-thread/components/drivers/ofw/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 29 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                29 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         29 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 29 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/ofw/Kconfig
+
+
+Reader found: 49 lines in /home/ljd/rtthread/rt-thread/components/drivers/pci/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 49 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: host/Kconfig at line 48
+      -> ../../components/drivers/pci/host/Kconfig
+    Files matching: 1 (using rsource)
+    FILE LOG --------------------------------------------------------------
+    Reader input                49 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       1
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   1
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         49 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 49 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pci/Kconfig
+
+
+Reader found: 14 lines in /home/ljd/rtthread/rt-thread/components/drivers/pci/host/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 14 input lines
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve rsource: dw/Kconfig at line 12
+      -> ../../components/drivers/pci/host/dw/Kconfig
+    Files matching: 1 (using rsource)
+    GLOB LOG ----------------------------------------------------------------------------
+    Resolve osource: $(SOC_DM_PCI_DIR)/Kconfig at line 14
+      no files found for the: $(SOC_DM_PCI_DIR)/Kconfig
+    FILE LOG --------------------------------------------------------------
+    Reader input                14 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       1
+    All rsource_keywords:       1
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   2
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         13 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 1
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+Excel saved: /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx
+        Done writting 13 lines in /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/components/drivers/pci/host/Kconfig
+
+
+Reader found: 13 lines in /home/ljd/rtthread/rt-thread/components/drivers/pci/host/dw/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 13 input lines
+    FILE LOG --------------------------------------------------------------
+    Reader input                13 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         13 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0

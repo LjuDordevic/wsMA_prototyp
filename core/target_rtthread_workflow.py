@@ -10,8 +10,8 @@ import pprint
 import os
 
 def main():    
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/transform5.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results5.xlsx"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/transform6.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results6.xlsx"
     project_dir = "/home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9"
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output"
     main_file = "Kconfig"
