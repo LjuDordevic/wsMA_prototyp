@@ -41,6 +41,7 @@ if DRIVERS_CYPHAL
         help
             When the board uses the UAVCANv0 bootloader functionality you need a AppImageDescriptor defined
 
+
     menu "Publisher support"
 
         config CYPHAL_GNSS_PUBLISHER

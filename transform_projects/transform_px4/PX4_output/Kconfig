@@ -1,5 +1,6 @@
 # PX4 Firmware Configuration
 
+
 mainmenu "PX4 Firmware Configuration"
 
 comment "Vendor: $(VENDOR)"
@@ -120,6 +121,7 @@ config BOARD_TESTING
     select SYSTEMCMDS_TESTS
     help
         flag to enable automatic inclusion of PX4 testing modules
+
 
 config BOARD_ETHERNET
     bool "Ethernet"

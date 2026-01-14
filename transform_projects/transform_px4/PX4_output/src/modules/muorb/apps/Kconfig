@@ -5,6 +5,7 @@ menuconfig MODULES_MUORB_APPS
 	---help---
 		Enable support for muorb apps
 
+
     config MUORB_APPS_SYNC_TIMESTAMP
         bool "Sync timestamp with external processor"
         depends on MODULES_MUORB_APPS

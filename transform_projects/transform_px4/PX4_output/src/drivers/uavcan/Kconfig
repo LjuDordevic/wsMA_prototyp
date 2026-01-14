@@ -92,6 +92,7 @@ if DRIVERS_UAVCAN
 
 endif #DRIVERS_UAVCAN
 
+
 menuconfig BOARD_UAVCAN_INTERFACES
 depends on DRIVERS_UAVCAN || DRIVERS_UAVCANNODE
     int "UAVCANv0 interface count"

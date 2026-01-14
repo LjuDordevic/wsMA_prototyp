@@ -4,12 +4,14 @@ menuconfig MODULES_DATAMAN
 	---help---
 		Enable support for dataman
 
+
 menuconfig USER_DATAMAN
 	bool "dataman running as userspace module"
 	default y
 	depends on BOARD_PROTECTED && MODULES_DATAMAN
 	---help---
 		Put dataman in userspace memory
+
 
 menuconfig DATAMAN_PERSISTENT_STORAGE
 	bool "dataman supports persistent storage"

@@ -4,6 +4,7 @@ menuconfig SYSTEMCMDS_MICROBENCH
 	---help---
 		Enable support for microbench
 
+
 menuconfig USER_MICROBENCH
 	bool "microbench running as userspace module"
 	default y
