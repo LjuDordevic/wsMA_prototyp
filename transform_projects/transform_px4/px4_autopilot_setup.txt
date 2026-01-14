@@ -10,3 +10,9 @@ Didn't have to build the project
 just made the script target_px4_workflow.py
 and called it from venv:
 (wsMA_prototyp) ljd@HPENVYLJ:~/wsMA_prototyp/core$ python target_px4_workflow.py
+
+* PX4 was the only one with old --help-- symbol, when I checked the first time (../PX4_check/px4_check_w_mconf.txt)
+so in transform_prototyp you have to remove # if you want to print these infoa  
+
+        #print("additionaly count --help-- for PX4")
+        #print(f"Attr --HELP--: {self.OLD_HELP}")

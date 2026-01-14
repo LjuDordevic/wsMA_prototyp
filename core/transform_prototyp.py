@@ -2612,8 +2612,8 @@ class KconfigTransformer:
         print(f"        Changed inline prompt choice:    {self.FILE_CHANGED_INPROMPT_BC_CHOICE}") 
         print(f"        Changed typ of choice element:   {self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL}") 
         print(f"----------------------------------------------------------------------")
-        print("additionaly count --help-- for PX4")
-        print(f"Attr --HELP--: {self.OLD_HELP}")
+        #print("additionaly count --help-- for PX4")
+        #print(f"Attr --HELP--: {self.OLD_HELP}")
 
         self.FILE_OPT_DEFCONFIG = 0
         self.FILE_OPT_ALLNONCONG = 0
