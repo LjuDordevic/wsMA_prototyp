@@ -10,8 +10,8 @@ import pprint
 import os
 
 def main():    
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_log/transform6.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_log/results6.xlsx"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_log/transform9.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_log/results9.xlsx"
     project_dir = "/home/ljd/px4/PX4-Autopilot"
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_output"
     main_file = "Kconfig"
@@ -41,7 +41,6 @@ def main():
 
 
     try:
-        # Parser ausführen (wir sind bereits im richtigen Verzeichnis)
         parser_result = parser.parse_files(".", main_file)
         timer.lap("Got parser results")
         print(f"Defined symbols: {len(parser_result['defined_syms'])}")
@@ -64,25 +63,21 @@ def main():
         reader = KconfigReader("ZRTOS")
         writer = KconfigWriter("ZRTOS")
 
-        # Absolute Pfade verwenden für beide Parameter
         excel_data = transformer.transform_all_files(
             reader=reader,
             writer=writer,
-            project_dir=Path(project_dir).resolve(),  # Absoluter Pfad
-            output_dir=Path(output_dir).resolve(),     # Absoluter Pfad
+            project_dir=Path(project_dir).resolve(),  
+            output_dir=Path(output_dir).resolve(),     
             log=True,
             log_lines=False,
             log_and_check_resolve_glob=False,
-            log_cd_nc_details=False,
+            log_cd_nc_details=True,
             log_excel_after_each_file=True,
             log_excel_output=excel_file
         )   
 
         timer.lap("File transformation and excel log")
         timer.stop()
-
-        # Optional: Excel-Daten schreiben
-        # excel_writer.write_excel(excel_data, "/home/ljd/wsMA_prototyp/results.xlsx")
 
         return_code = 0
 
@@ -93,7 +88,6 @@ def main():
         return_code = 1
 
     finally:
-        # Aufräumen: Log-Datei schließen und zurück ins ursprüngliche Verzeichnis
         log_handle.close()
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
