@@ -1,0 +1,18 @@
+This was done manually.
+
+In directory outside of this project linux_kc_new:
+
+1. set up the test space:
+git clone --depth 1 https://github.com/torvalds/linux.git
+sudo apt-get install build-essential libncurses-dev bison flex
+check clone with: cd linux -> make menuconfig -> OK
+
+2. check the transformed specification:
+Before calling mconf in terminal, you have to set SRCTREE in terminal every time:
+export srctree="/home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output"
+
+Then call in terminal:
+~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output/Kconfig
+
+--> 
+/RT_Thread_output/Kconfig:1: can't open file "../../src/Kconfig"

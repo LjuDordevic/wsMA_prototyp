@@ -1,0 +1,97 @@
+This was done manually.
+
+In directory outside of this project linux_kc_new:
+
+1. set up the test space:
+git clone --depth 1 https://github.com/torvalds/linux.git
+sudo apt-get install build-essential libncurses-dev bison flex
+check clone with: cd linux -> make menuconfig -> OK
+
+2. check the transformed specification:
+Before calling mconf in terminal, you have to set SRCTREE in terminal every time:
+export srctree="/home/ljd/wsMA_prototyp/transform_projects/transform_riot/RIOT_output"
+
+Then call in terminal:
+~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/transform_projects/transform_riot/RIOT_output/Kconfig
+
+--> 
+    drivers/rn2xx3/Kconfig:13: syntax error         
+    drivers/rn2xx3/Kconfig:13: invalid statement
+    drivers/rn2xx3/Kconfig:14: invalid statement
+    drivers/rn2xx3/Kconfig:15: invalid statement
+    drivers/rn2xx3/Kconfig:16:warning: ignoring unsupported character '.'
+    drivers/rn2xx3/Kconfig:16: unknown statement "Set"
+    drivers/rn2xx3/Kconfig:17: unknown statement "The"
+
+    if you look at the lines manually Linux couln't read:
+
+        config RN2XX3_DEFAULT_SLEEP
+            int "Sleep duration in milliseconds [ms]"
+            range 100 $(UINT32_MAX)
+            default 5000
+            help
+                Set the sleep duration (in ms).
+                The value should be greater than RN2XX3_SLEEP_MIN (100 ms)
+
+    drivers/vl6180x/Kconfig:23: syntax error
+    drivers/vl6180x/Kconfig:23: invalid statement
+    drivers/vl6180x/Kconfig:24: invalid statement
+    drivers/vl6180x/Kconfig:25: invalid statement
+    drivers/vl6180x/Kconfig:44: unexpected 'choice' within if block
+    drivers/vl6180x/Kconfig:169: unexpected 'if' within menu block
+    drivers/Kconfig:54: 'menu' in different file than 'menu'
+    drivers/vl6180x/Kconfig:8: location of the 'menu'
+    drivers/Kconfig:60: syntax error
+    drivers/Kconfig:60: invalid statement
+    sys/net/application_layer/gcoap/Kconfig:174: syntax error
+    sys/net/application_layer/gcoap/Kconfig:174: unknown statement "gcoap-tokenlen-max"
+    sys/net/application_layer/gcoap/Kconfig:179: syntax error
+    sys/net/application_layer/gcoap/Kconfig:179: invalid statement
+    sys/net/application_layer/gcoap/Kconfig:180: invalid statement
+    sys/net/application_layer/gcoap/Kconfig:181:warning: ignoring unsupported character ','
+    sys/net/application_layer/gcoap/Kconfig:181:warning: ignoring unsupported character '.'
+    sys/net/application_layer/gcoap/Kconfig:181: unknown statement "Length"
+    sys/net/application_layer/asymcute/Kconfig:31: syntax error
+    sys/net/application_layer/asymcute/Kconfig:31: invalid statement
+    sys/net/application_layer/asymcute/Kconfig:32: invalid statement
+    sys/net/application_layer/asymcute/Kconfig:33: invalid statement
+    sys/net/application_layer/asymcute/Kconfig:34:warning: ignoring unsupported character ','
+    sys/net/application_layer/asymcute/Kconfig:34: unknown statement "Configure"
+    sys/net/application_layer/asymcute/Kconfig:35:warning: ignoring unsupported character '.'
+    sys/net/application_layer/asymcute/Kconfig:35: unknown statement "which"
+    sys/net/application_layer/asymcute/Kconfig:36:warning: ignoring unsupported character ','
+    sys/net/application_layer/asymcute/Kconfig:36:warning: ignoring unsupported character '.'
+    sys/net/application_layer/asymcute/Kconfig:36:warning: ignoring unsupported character ','
+    sys/net/application_layer/asymcute/Kconfig:36:warning: ignoring unsupported character '.'
+    sys/net/application_layer/asymcute/Kconfig:36:warning: ignoring unsupported character '.'
+    sys/net/application_layer/asymcute/Kconfig:36:warning: ignoring unsupported character '.'
+    sys/net/application_layer/asymcute/Kconfig:36:warning: ignoring unsupported character ','
+    sys/net/application_layer/asymcute/Kconfig:36: unknown statement "information"
+    sys/net/application_layer/asymcute/Kconfig:37:warning: ignoring unsupported character '.'
+    sys/net/application_layer/asymcute/Kconfig:37:warning: ignoring unsupported character ':'
+    sys/net/application_layer/asymcute/Kconfig:37:warning: ignoring unsupported character '.'
+    sys/net/application_layer/asymcute/Kconfig:37: unknown statement "see"
+    sys/net/application_layer/asymcute/Kconfig:38:warning: ignoring unsupported character '.'
+    sys/net/application_layer/asymcute/Kconfig:38: unknown statement "corresponds"
+    sys/net/application_layer/emcute/Kconfig:36: syntax error
+    sys/net/application_layer/emcute/Kconfig:36: invalid statement
+    sys/net/application_layer/emcute/Kconfig:37: invalid statement
+    sys/net/application_layer/emcute/Kconfig:38: invalid statement
+    sys/net/application_layer/emcute/Kconfig:39:warning: ignoring unsupported character '.'
+    sys/net/application_layer/emcute/Kconfig:39: unknown statement "Configure"
+    sys/net/application_layer/emcute/Kconfig:40: unknown statement "interval"
+    sys/net/application_layer/emcute/Kconfig:41:warning: ignoring unsupported character '.'
+    sys/net/application_layer/emcute/Kconfig:41:warning: ignoring unsupported character ','
+    sys/net/application_layer/emcute/Kconfig:41:warning: ignoring unsupported character '.'
+    sys/net/application_layer/emcute/Kconfig:41:warning: ignoring unsupported character ','
+    sys/net/application_layer/emcute/Kconfig:41: unknown statement "of"
+    sys/net/application_layer/emcute/Kconfig:42:warning: ignoring unsupported character '.'
+    sys/net/application_layer/emcute/Kconfig:42:warning: ignoring unsupported character '.'
+    sys/net/application_layer/emcute/Kconfig:42:warning: ignoring unsupported character '.'
+    sys/net/application_layer/emcute/Kconfig:42:warning: ignoring unsupported character ','
+    sys/net/application_layer/emcute/Kconfig:42:warning: ignoring unsupported character '.'
+    sys/net/application_layer/emcute/Kconfig:42:warning: ignoring unsupported character ':'
+    sys/net/application_layer/emcute/Kconfig:42:warning: ignoring unsupported character '.'
+    sys/net/application_layer/emcute/Kconfig:42: unknown statement "5"
+    sys/net/application_layer/emcute/Kconfig:43:warning: ignoring unsupported character '.'
+    sys/net/application_layer/emcute/Kconfig:43: unknown statement "value"
