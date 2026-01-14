@@ -1,4 +1,5 @@
-In directory linux_kc_new:
+In directory outside of this project (for example with name - linux_kc_new):
+
 git clone --depth 1 https://github.com/torvalds/linux.git
 sudo apt-get install build-essential libncurses-dev bison flex
 check clone with: cd linux -> make menuconfig -> OK

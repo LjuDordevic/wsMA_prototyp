@@ -1,0 +1,74 @@
+This was done manually.
+
+In directory outside of this project linux_kc_new:
+
+1. set up the test space:
+git clone --depth 1 https://github.com/torvalds/linux.git
+sudo apt-get install build-essential libncurses-dev bison flex
+check clone with: cd linux -> make menuconfig -> OK
+
+2. check the transformed specification:
+Before calling mconf in terminal, you have to set SRCTREE in terminal every time:
+export srctree="/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo1_output"
+
+Then call in terminal:
+ ~/linux_kc_new/linux/scripts/kconfig/mconf /home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo1_output/Kconfig
+
+--> 
+    boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:16: error: choice must have a prompt
+    boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:19: syntax error
+    boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:19: invalid statement
+    boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:20: invalid statement
+    boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:21: invalid statement
+    boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:22:warning: ignoring unsupported character '.'
+    boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:22: unknown statement "Color"
+    boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:33: unexpected 'choice' within if block
+    boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:49: syntax error
+    boards/shields/adafruit_2_8_tft_touch_v2/Kconfig.defconfig:49: invalid statement
+    boards/shields/esp_8266/Kconfig.defconfig:10: error: choice must have a prompt
+    boards/shields/esp_8266/Kconfig.defconfig:14: syntax error
+    boards/shields/esp_8266/Kconfig.defconfig:14: invalid statement
+    boards/shields/esp_8266/Kconfig.defconfig:15:warning: ignoring unsupported character '.'
+    boards/shields/esp_8266/Kconfig.defconfig:15: unknown statement "Select"
+    boards/shields/esp_8266/Kconfig.defconfig:16: unexpected 'choice' within if block
+    boards/shields/esp_8266/Kconfig.defconfig:23: syntax error
+    boards/shields/esp_8266/Kconfig.defconfig:23: invalid statement
+    boards/shields/inventek_eswifi/Kconfig.defconfig:13: error: choice must have a prompt
+    boards/shields/inventek_eswifi/Kconfig.defconfig:18: unexpected 'choice' within if block
+    boards/shields/inventek_eswifi/Kconfig.defconfig:22: syntax error
+    boards/shields/inventek_eswifi/Kconfig.defconfig:22: invalid statement
+    boards/shields/m5stack_cardputer/Kconfig.defconfig:18: error: choice must have a prompt
+    boards/shields/m5stack_cardputer/Kconfig.defconfig:21: syntax error
+    boards/shields/m5stack_cardputer/Kconfig.defconfig:21: invalid statement
+    boards/shields/m5stack_cardputer/Kconfig.defconfig:22:warning: ignoring unsupported character '.'
+    boards/shields/m5stack_cardputer/Kconfig.defconfig:22: unknown statement "Specify"
+    boards/shields/m5stack_cardputer/Kconfig.defconfig:23: unexpected 'choice' within if block
+    boards/shields/m5stack_cardputer/Kconfig.defconfig:36: syntax error
+    boards/shields/m5stack_cardputer/Kconfig.defconfig:36: invalid statement
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:8: error: choice must have a prompt
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:11: unexpected 'choice' within if block
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:26: error: choice must have a prompt
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:29: syntax error
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:29: invalid statement
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:30:warning: ignoring unsupported character '.'
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:30: unknown statement "Choose"
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:31: unexpected 'choice' within if block
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:33: error: choice must have a prompt
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:36: syntax error
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:36: invalid statement
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:45: syntax error
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:45: invalid statement
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:47: invalid statement
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:62: error: choice must have a prompt
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:65: unexpected 'choice' within if block
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:76: syntax error
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:76: invalid statement
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:91: error: choice must have a prompt
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:94: unexpected 'choice' within if block
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:105: syntax error
+    boards/shields/nxp_m2_wifi_bt/Kconfig.defconfig:105: invalid statement
+    boards/shields/sparkfun_sara_r4/Kconfig.defconfig:17: error: choice must have a prompt
+    boards/shields/sparkfun_sara_r4/Kconfig.defconfig:20: unexpected 'choice' within if block
+    boards/shields/sparkfun_sara_r4/Kconfig.defconfig:41: syntax error
+    boards/shields/sparkfun_sara_r4/Kconfig.defconfig:41: invalid statement
+    Kconfig.zephyr:72: can't open file "/soc/Kconfig.defconfig"
