@@ -7,7 +7,7 @@ Root: /home/ljd/px4/PX4-Autopilot
 Main file: Kconfig
 Output dir: /home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_output
 ====================================================================================================
-<zrtos_parser.ZRTOSParser object at 0x75b59e0751f0>
+<zrtos_parser.ZRTOSParser object at 0x7b374587a5d0>
 Defined symbols: 834
 Unique symbols: 834
 Files: 345
@@ -367,6 +367,24 @@ Build context finished
 3. Filter ExtParserContext
 extract all configdefault options and for each get transformed lines and last config
 extract infos for named choices - their definition & entries
+------H-----------
+context.choice_infos:       {None: [{'choice.name': None, 'choice.syms': [<symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, <symbol PLATFORM_POSIX, bool, "posix", value n, visibility y, choice symbol, direct deps y, Kconfig:16>, <symbol PLATFORM_QURT, bool, "qurt", value n, visibility y, choice symbol, direct deps y, Kconfig:18>, <symbol PLATFORM_ROS2, bool, "ros2", value n, visibility y, choice symbol, direct deps y, Kconfig:20>]}, {'choice.name': None, 'choice.syms': [<symbol CYPHAL_FMU, bool, "Server (FMU)", value n, visibility n, choice symbol, direct deps n, src/drivers/cyphal/Kconfig:15>, <symbol CYPHAL_CLIENT, bool, "Client (Peripheral)", value n, visibility n, choice symbol, direct deps n, src/drivers/cyphal/Kconfig:18>]}, {'choice.name': None, 'choice.syms': [<symbol BMI088_ACCELEROMETER_INT_NONE, bool, "No interrupts", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:13>, <symbol BMI088_ACCELEROMETER_INT1, bool, "INT1", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:18>, <symbol BMI088_ACCELEROMETER_INT2, bool, "INT2", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:23>]}, {'choice.name': None, 'choice.syms': [<symbol BMI088_GYROSCOPE_INT_NONE, bool, "No interrupts", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:33>, <symbol BMI088_GYROSCOPE_INT3, bool, "INT3", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:38>, <symbol BMI088_GYROSCOPE_INT4, bool, "INT4", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:43>]}, {'choice.name': None, 'choice.syms': [<symbol SERIAL_PASSTHRU_GPS1, bool, "GPS1", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:29>, <symbol SERIAL_PASSTHRU_GPS2, bool, "GPS2", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:33>, <symbol SERIAL_PASSTHRU_GPS3, bool, "GPS3", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:37>, <symbol SERIAL_PASSTHRU_GPS4, bool, "GPS4", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:41>, <symbol SERIAL_PASSTHRU_GPS5, bool, "GPS5", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:45>]}, {'choice.name': None, 'choice.syms': [<symbol ARCH_CHIP_UNSET, bool, "Unset", value y, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:5>, <symbol ARCH_CHIP_STM32H7, bool, "STM32H7", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:7>, <symbol ARCH_CHIP_STM32F7, bool, "STM32F7", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:9>, <symbol ARCH_CHIP_STM32F4, bool, "STM32F4", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:11>, <symbol ARCH_CHIP_IMXRT, bool, "IMXRT", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:13>, <symbol ARCH_CHIP_S32K3XX, bool, "S32K3XX", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:15>, <symbol ARCH_CHIP_RP2040, bool, "RP2040", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:17>]}], 'ZENOH_PUBSUB_SELECTION': [{'choice.name': 'ZENOH_PUBSUB_SELECTION', 'choice.syms': [<symbol ZENOH_PUBSUB_MINIMAL, bool, "Minimal", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:44>, <symbol ZENOH_PUBSUB_ALL, bool, "All", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:69>, <symbol ZENOH_PUBSUB_CUSTOM, bool, "Custom", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:72>]}]}
+context.choice_definitions: {None: [{'file': 'Kconfig', 'line': 11, 'node.prompt': ('Platform', <symbol y, bool, value y, constant>), 'node.defaults': [(<symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, <symbol y, bool, value y, constant>, ('Kconfig', 13))], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'src/drivers/cyphal/Kconfig', 'line': 12, 'node.prompt': ('Cyphal Mode', <symbol DRIVERS_CYPHAL, bool, "Cyphal", value n, visibility y, direct deps y, src/drivers/cyphal/Kconfig:5>), 'node.defaults': [], 'node.dep': <symbol DRIVERS_CYPHAL, bool, "Cyphal", value n, visibility y, direct deps y, src/drivers/cyphal/Kconfig:5>}, {'file': 'src/drivers/imu/bosch/bmi088/Kconfig', 'line': 9, 'node.prompt': ('BMI088 accelerometer interrupt pin', <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>), 'node.defaults': [(<symbol BMI088_ACCELEROMETER_INT1, bool, "INT1", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:18>, <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>, ('src/drivers/imu/bosch/bmi088/Kconfig', 11))], 'node.dep': <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>}, {'file': 'src/drivers/imu/bosch/bmi088/Kconfig', 'line': 29, 'node.prompt': ('BMI088 gyroscope interrupt pin', <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>), 'node.defaults': [(<symbol BMI088_GYROSCOPE_INT3, bool, "INT3", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:38>, <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>, ('src/drivers/imu/bosch/bmi088/Kconfig', 31))], 'node.dep': <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>}, {'file': 'src/systemcmds/serial_passthru/Kconfig', 'line': 21, 'node.prompt': ('Passthru device', (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)), 'node.defaults': [(<symbol SERIAL_PASSTHRU_GPS1, bool, "GPS1", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:29>, (2, (50, <symbol BOARD_SERIAL_GPS1, string, "GPS1 tty port", value "", visibility y, direct deps y, Kconfig:146>, <symbol , unknown, value "", constant>), (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)), ('src/systemcmds/serial_passthru/Kconfig', 23))], 'node.dep': (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)}, {'file': 'platforms/nuttx/Kconfig', 'line': 1, 'node.prompt': ('NuttX platform', (2, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, (40, <symbol PLATFORM_QURT, bool, "qurt", value n, visibility y, choice symbol, direct deps y, Kconfig:18>, (40, <symbol PLATFORM_POSIX, bool, "posix", value n, visibility y, choice symbol, direct deps y, Kconfig:16>, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>)))), 'node.defaults': [], 'node.dep': (2, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, (40, <symbol PLATFORM_QURT, bool, "qurt", value n, visibility y, choice symbol, direct deps y, Kconfig:18>, (40, <symbol PLATFORM_POSIX, bool, "posix", value n, visibility y, choice symbol, direct deps y, Kconfig:16>, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>)))}], 'ZENOH_PUBSUB_SELECTION': [{'file': 'src/modules/zenoh/Kconfig', 'line': 40, 'node.prompt': ('Publishers/Subscribers selection', <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>), 'node.defaults': [(<symbol ZENOH_PUBSUB_ALL, bool, "All", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:69>, <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>, ('src/modules/zenoh/Kconfig', 42))], 'node.dep': <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>}]}
+context.choice_deps:        {None: [{'node.defaults': [(<symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, <symbol y, bool, value y, constant>, ('Kconfig', 13))], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [], 'node.dep': <symbol DRIVERS_CYPHAL, bool, "Cyphal", value n, visibility y, direct deps y, src/drivers/cyphal/Kconfig:5>}, {'node.defaults': [(<symbol BMI088_ACCELEROMETER_INT1, bool, "INT1", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:18>, <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>, ('src/drivers/imu/bosch/bmi088/Kconfig', 11))], 'node.dep': <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>}, {'node.defaults': [(<symbol BMI088_GYROSCOPE_INT3, bool, "INT3", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:38>, <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>, ('src/drivers/imu/bosch/bmi088/Kconfig', 31))], 'node.dep': <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>}, {'node.defaults': [(<symbol SERIAL_PASSTHRU_GPS1, bool, "GPS1", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:29>, (2, (50, <symbol BOARD_SERIAL_GPS1, string, "GPS1 tty port", value "", visibility y, direct deps y, Kconfig:146>, <symbol , unknown, value "", constant>), (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)), ('src/systemcmds/serial_passthru/Kconfig', 23))], 'node.dep': (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)}, {'node.defaults': [], 'node.dep': (2, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, (40, <symbol PLATFORM_QURT, bool, "qurt", value n, visibility y, choice symbol, direct deps y, Kconfig:18>, (40, <symbol PLATFORM_POSIX, bool, "posix", value n, visibility y, choice symbol, direct deps y, Kconfig:16>, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>)))}], 'ZENOH_PUBSUB_SELECTION': [{'node.defaults': [(<symbol ZENOH_PUBSUB_ALL, bool, "All", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:69>, <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>, ('src/modules/zenoh/Kconfig', 42))], 'node.dep': <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>}]}
+
+choice_deps[None]:
+node.defaults:   [(<symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, <symbol y, bool, value y, constant>, ('Kconfig', 13))]
+node.dep:        <symbol y, bool, value y, constant>
+node.defaults:   []
+node.dep:        <symbol DRIVERS_CYPHAL, bool, "Cyphal", value n, visibility y, direct deps y, src/drivers/cyphal/Kconfig:5>
+node.defaults:   [(<symbol BMI088_ACCELEROMETER_INT1, bool, "INT1", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:18>, <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>, ('src/drivers/imu/bosch/bmi088/Kconfig', 11))]
+node.dep:        <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>
+node.defaults:   [(<symbol BMI088_GYROSCOPE_INT3, bool, "INT3", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:38>, <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>, ('src/drivers/imu/bosch/bmi088/Kconfig', 31))]
+node.dep:        <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>
+node.defaults:   [(<symbol SERIAL_PASSTHRU_GPS1, bool, "GPS1", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:29>, (2, (50, <symbol BOARD_SERIAL_GPS1, string, "GPS1 tty port", value "", visibility y, direct deps y, Kconfig:146>, <symbol , unknown, value "", constant>), (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)), ('src/systemcmds/serial_passthru/Kconfig', 23))]
+node.dep:        (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)
+node.defaults:   []
+node.dep:        (2, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, (40, <symbol PLATFORM_QURT, bool, "qurt", value n, visibility y, choice symbol, direct deps y, Kconfig:18>, (40, <symbol PLATFORM_POSIX, bool, "posix", value n, visibility y, choice symbol, direct deps y, Kconfig:16>, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>)))
 def dependencies extr: [['y'], ['DRIVERS_IMU_BOSCH_BMI088'], ['DRIVERS_IMU_BOSCH_BMI088'], ['BOARD_SERIAL_GPS1', '', 'SERIAL_PASSTHRU_UBLOX', 'SYSTEMCMDS_SERIAL_PASSTHRU']]
 dep dependencies extr: [['y'], ['DRIVERS_CYPHAL'], ['DRIVERS_IMU_BOSCH_BMI088'], ['DRIVERS_IMU_BOSCH_BMI088'], ['SERIAL_PASSTHRU_UBLOX', 'SYSTEMCMDS_SERIAL_PASSTHRU'], ['PLATFORM_NUTTX', 'PLATFORM_QURT', 'PLATFORM_POSIX', 'PLATFORM_NUTTX']]
 
@@ -392,6 +410,14 @@ Reader found: 218 lines in /home/ljd/px4/PX4-Autopilot/Kconfig
     node_deps for definition [0]: ['y']
     Found choice at line index 10, line_number=11
   DEBUG: Found choice None at Kconfig:11
+  DEBUG: choice_default_lines: [KconfigLine(default, line=13, indent=8)]
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: []
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config PLATFORM_NUTTX
+  DEBUG: Adding config PLATFORM_POSIX
+  DEBUG: Adding config PLATFORM_QURT
+  DEBUG: Adding config PLATFORM_ROS2
   Finished processing definition [0]
 
   Processing definition [1]: src/drivers/cyphal/Kconfig:12
@@ -404,6 +430,12 @@ Reader found: 110 lines in /home/ljd/px4/PX4-Autopilot/src/drivers/cyphal/Kconfi
     node_deps for definition [1]: ['DRIVERS_CYPHAL']
     Found choice at line index 11, line_number=12
   DEBUG: Found choice None at src/drivers/cyphal/Kconfig:12
+  DEBUG: choice_default_lines: []
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: [KconfigLine(prompt, line=13, indent=8)]
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config CYPHAL_FMU
+  DEBUG: Adding config CYPHAL_CLIENT
   Finished processing definition [1]
 
   Processing definition [2]: src/drivers/imu/bosch/bmi088/Kconfig:9
@@ -416,6 +448,13 @@ Reader found: 49 lines in /home/ljd/px4/PX4-Autopilot/src/drivers/imu/bosch/bmi0
     node_deps for definition [2]: ['DRIVERS_IMU_BOSCH_BMI088']
     Found choice at line index 8, line_number=9
   DEBUG: Found choice None at src/drivers/imu/bosch/bmi088/Kconfig:9
+  DEBUG: choice_default_lines: [KconfigLine(default, line=11, indent=1)]
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: [KconfigLine(prompt, line=10, indent=1)]
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config BMI088_ACCELEROMETER_INT_NONE
+  DEBUG: Adding config BMI088_ACCELEROMETER_INT1
+  DEBUG: Adding config BMI088_ACCELEROMETER_INT2
   Finished processing definition [2]
 
   Processing definition [3]: src/drivers/imu/bosch/bmi088/Kconfig:29
@@ -428,6 +467,13 @@ Reader found: 49 lines in /home/ljd/px4/PX4-Autopilot/src/drivers/imu/bosch/bmi0
     node_deps for definition [3]: ['DRIVERS_IMU_BOSCH_BMI088']
     Found choice at line index 28, line_number=29
   DEBUG: Found choice None at src/drivers/imu/bosch/bmi088/Kconfig:29
+  DEBUG: choice_default_lines: [KconfigLine(default, line=31, indent=1)]
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: [KconfigLine(prompt, line=30, indent=1)]
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config BMI088_GYROSCOPE_INT_NONE
+  DEBUG: Adding config BMI088_GYROSCOPE_INT3
+  DEBUG: Adding config BMI088_GYROSCOPE_INT4
   Finished processing definition [3]
 
   Processing definition [4]: src/systemcmds/serial_passthru/Kconfig:21
@@ -440,6 +486,15 @@ Reader found: 57 lines in /home/ljd/px4/PX4-Autopilot/src/systemcmds/serial_pass
     node_deps for definition [4]: ['SERIAL_PASSTHRU_UBLOX', 'SYSTEMCMDS_SERIAL_PASSTHRU']
     Found choice at line index 20, line_number=21
   DEBUG: Found choice None at src/systemcmds/serial_passthru/Kconfig:21
+  DEBUG: choice_default_lines: [KconfigLine(default, line=23, indent=1)]
+  DEBUG: choice_depends_lines: [KconfigLine(depends_on, line=24, indent=1)]
+  DEBUG: choice_prompt_lines: [KconfigLine(prompt, line=22, indent=1)]
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config SERIAL_PASSTHRU_GPS1
+  DEBUG: Adding config SERIAL_PASSTHRU_GPS2
+  DEBUG: Adding config SERIAL_PASSTHRU_GPS3
+  DEBUG: Adding config SERIAL_PASSTHRU_GPS4
+  DEBUG: Adding config SERIAL_PASSTHRU_GPS5
   Finished processing definition [4]
 
   Processing definition [5]: platforms/nuttx/Kconfig:1
@@ -452,10 +507,35 @@ Reader found: 26 lines in /home/ljd/px4/PX4-Autopilot/platforms/nuttx/Kconfig
     node_deps for definition [5]: ['PLATFORM_NUTTX', 'PLATFORM_QURT', 'PLATFORM_POSIX', 'PLATFORM_NUTTX']
     Found choice at line index 0, line_number=1
   DEBUG: Found choice None at platforms/nuttx/Kconfig:1
+  DEBUG: choice_default_lines: []
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: [KconfigLine(prompt, line=2, indent=1)]
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config ARCH_CHIP_UNSET
+  DEBUG: Adding config ARCH_CHIP_STM32H7
+  DEBUG: Adding config ARCH_CHIP_STM32F7
+  DEBUG: Adding config ARCH_CHIP_STM32F4
+  DEBUG: Adding config ARCH_CHIP_IMXRT
+  DEBUG: Adding config ARCH_CHIP_S32K3XX
+  DEBUG: Adding config ARCH_CHIP_RP2040
   Finished processing definition [5]
   DEBUG: Total entries collected: 24
   DEBUG: Total prompts collected: 5
   DEBUG: Total helps collected: 0 + []
+
+  named choice: None
+    'choice_def': [(None, [['y'], ['DRIVERS_IMU_BOSCH_BMI088'], ['DRIVERS_IMU_BOSCH_BMI088'], ['BOARD_SERIAL_GPS1', '', 'SERIAL_PASSTHRU_UBLOX', 'SYSTEMCMDS_SERIAL_PASSTHRU']], [['y'], ['DRIVERS_CYPHAL'], ['DRIVERS_IMU_BOSCH_BMI088'], ['DRIVERS_IMU_BOSCH_BMI088'], ['SERIAL_PASSTHRU_UBLOX', 'SYSTEMCMDS_SERIAL_PASSTHRU'], ['PLATFORM_NUTTX', 'PLATFORM_QURT', 'PLATFORM_POSIX', 'PLATFORM_NUTTX']])]
+    'choice_configs': 3 config entries
+    'prompt_lines': [KconfigLine(prompt, line=13, indent=8), KconfigLine(prompt, line=10, indent=1), KconfigLine(prompt, line=30, indent=1), KconfigLine(prompt, line=22, indent=1), KconfigLine(prompt, line=2, indent=1)]
+    'help_lines': []
+------H-----------
+context.choice_infos:       {None: [{'choice.name': None, 'choice.syms': [<symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, <symbol PLATFORM_POSIX, bool, "posix", value n, visibility y, choice symbol, direct deps y, Kconfig:16>, <symbol PLATFORM_QURT, bool, "qurt", value n, visibility y, choice symbol, direct deps y, Kconfig:18>, <symbol PLATFORM_ROS2, bool, "ros2", value n, visibility y, choice symbol, direct deps y, Kconfig:20>]}, {'choice.name': None, 'choice.syms': [<symbol CYPHAL_FMU, bool, "Server (FMU)", value n, visibility n, choice symbol, direct deps n, src/drivers/cyphal/Kconfig:15>, <symbol CYPHAL_CLIENT, bool, "Client (Peripheral)", value n, visibility n, choice symbol, direct deps n, src/drivers/cyphal/Kconfig:18>]}, {'choice.name': None, 'choice.syms': [<symbol BMI088_ACCELEROMETER_INT_NONE, bool, "No interrupts", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:13>, <symbol BMI088_ACCELEROMETER_INT1, bool, "INT1", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:18>, <symbol BMI088_ACCELEROMETER_INT2, bool, "INT2", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:23>]}, {'choice.name': None, 'choice.syms': [<symbol BMI088_GYROSCOPE_INT_NONE, bool, "No interrupts", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:33>, <symbol BMI088_GYROSCOPE_INT3, bool, "INT3", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:38>, <symbol BMI088_GYROSCOPE_INT4, bool, "INT4", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:43>]}, {'choice.name': None, 'choice.syms': [<symbol SERIAL_PASSTHRU_GPS1, bool, "GPS1", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:29>, <symbol SERIAL_PASSTHRU_GPS2, bool, "GPS2", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:33>, <symbol SERIAL_PASSTHRU_GPS3, bool, "GPS3", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:37>, <symbol SERIAL_PASSTHRU_GPS4, bool, "GPS4", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:41>, <symbol SERIAL_PASSTHRU_GPS5, bool, "GPS5", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:45>]}, {'choice.name': None, 'choice.syms': [<symbol ARCH_CHIP_UNSET, bool, "Unset", value y, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:5>, <symbol ARCH_CHIP_STM32H7, bool, "STM32H7", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:7>, <symbol ARCH_CHIP_STM32F7, bool, "STM32F7", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:9>, <symbol ARCH_CHIP_STM32F4, bool, "STM32F4", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:11>, <symbol ARCH_CHIP_IMXRT, bool, "IMXRT", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:13>, <symbol ARCH_CHIP_S32K3XX, bool, "S32K3XX", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:15>, <symbol ARCH_CHIP_RP2040, bool, "RP2040", value n, visibility y, choice symbol, direct deps y, platforms/nuttx/Kconfig:17>]}], 'ZENOH_PUBSUB_SELECTION': [{'choice.name': 'ZENOH_PUBSUB_SELECTION', 'choice.syms': [<symbol ZENOH_PUBSUB_MINIMAL, bool, "Minimal", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:44>, <symbol ZENOH_PUBSUB_ALL, bool, "All", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:69>, <symbol ZENOH_PUBSUB_CUSTOM, bool, "Custom", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:72>]}]}
+context.choice_definitions: {None: [{'file': 'Kconfig', 'line': 11, 'node.prompt': ('Platform', <symbol y, bool, value y, constant>), 'node.defaults': [(<symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, <symbol y, bool, value y, constant>, ('Kconfig', 13))], 'node.dep': <symbol y, bool, value y, constant>}, {'file': 'src/drivers/cyphal/Kconfig', 'line': 12, 'node.prompt': ('Cyphal Mode', <symbol DRIVERS_CYPHAL, bool, "Cyphal", value n, visibility y, direct deps y, src/drivers/cyphal/Kconfig:5>), 'node.defaults': [], 'node.dep': <symbol DRIVERS_CYPHAL, bool, "Cyphal", value n, visibility y, direct deps y, src/drivers/cyphal/Kconfig:5>}, {'file': 'src/drivers/imu/bosch/bmi088/Kconfig', 'line': 9, 'node.prompt': ('BMI088 accelerometer interrupt pin', <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>), 'node.defaults': [(<symbol BMI088_ACCELEROMETER_INT1, bool, "INT1", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:18>, <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>, ('src/drivers/imu/bosch/bmi088/Kconfig', 11))], 'node.dep': <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>}, {'file': 'src/drivers/imu/bosch/bmi088/Kconfig', 'line': 29, 'node.prompt': ('BMI088 gyroscope interrupt pin', <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>), 'node.defaults': [(<symbol BMI088_GYROSCOPE_INT3, bool, "INT3", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:38>, <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>, ('src/drivers/imu/bosch/bmi088/Kconfig', 31))], 'node.dep': <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>}, {'file': 'src/systemcmds/serial_passthru/Kconfig', 'line': 21, 'node.prompt': ('Passthru device', (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)), 'node.defaults': [(<symbol SERIAL_PASSTHRU_GPS1, bool, "GPS1", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:29>, (2, (50, <symbol BOARD_SERIAL_GPS1, string, "GPS1 tty port", value "", visibility y, direct deps y, Kconfig:146>, <symbol , unknown, value "", constant>), (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)), ('src/systemcmds/serial_passthru/Kconfig', 23))], 'node.dep': (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)}, {'file': 'platforms/nuttx/Kconfig', 'line': 1, 'node.prompt': ('NuttX platform', (2, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, (40, <symbol PLATFORM_QURT, bool, "qurt", value n, visibility y, choice symbol, direct deps y, Kconfig:18>, (40, <symbol PLATFORM_POSIX, bool, "posix", value n, visibility y, choice symbol, direct deps y, Kconfig:16>, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>)))), 'node.defaults': [], 'node.dep': (2, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, (40, <symbol PLATFORM_QURT, bool, "qurt", value n, visibility y, choice symbol, direct deps y, Kconfig:18>, (40, <symbol PLATFORM_POSIX, bool, "posix", value n, visibility y, choice symbol, direct deps y, Kconfig:16>, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>)))}], 'ZENOH_PUBSUB_SELECTION': [{'file': 'src/modules/zenoh/Kconfig', 'line': 40, 'node.prompt': ('Publishers/Subscribers selection', <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>), 'node.defaults': [(<symbol ZENOH_PUBSUB_ALL, bool, "All", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:69>, <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>, ('src/modules/zenoh/Kconfig', 42))], 'node.dep': <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>}]}
+context.choice_deps:        {None: [{'node.defaults': [(<symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, <symbol y, bool, value y, constant>, ('Kconfig', 13))], 'node.dep': <symbol y, bool, value y, constant>}, {'node.defaults': [], 'node.dep': <symbol DRIVERS_CYPHAL, bool, "Cyphal", value n, visibility y, direct deps y, src/drivers/cyphal/Kconfig:5>}, {'node.defaults': [(<symbol BMI088_ACCELEROMETER_INT1, bool, "INT1", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:18>, <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>, ('src/drivers/imu/bosch/bmi088/Kconfig', 11))], 'node.dep': <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>}, {'node.defaults': [(<symbol BMI088_GYROSCOPE_INT3, bool, "INT3", value n, visibility n, choice symbol, direct deps n, src/drivers/imu/bosch/bmi088/Kconfig:38>, <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>, ('src/drivers/imu/bosch/bmi088/Kconfig', 31))], 'node.dep': <symbol DRIVERS_IMU_BOSCH_BMI088, bool, "bosch bmi088", value n, visibility y, direct deps y, src/drivers/imu/bosch/bmi088/Kconfig:1>}, {'node.defaults': [(<symbol SERIAL_PASSTHRU_GPS1, bool, "GPS1", value n, visibility n, choice symbol, direct deps n, src/systemcmds/serial_passthru/Kconfig:29>, (2, (50, <symbol BOARD_SERIAL_GPS1, string, "GPS1 tty port", value "", visibility y, direct deps y, Kconfig:146>, <symbol , unknown, value "", constant>), (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)), ('src/systemcmds/serial_passthru/Kconfig', 23))], 'node.dep': (2, <symbol SERIAL_PASSTHRU_UBLOX, bool, "Detect and Auto Connect on U-Center messages", value n, visibility n, direct deps n, src/systemcmds/serial_passthru/Kconfig:10>, <symbol SYSTEMCMDS_SERIAL_PASSTHRU, bool, "serial_passthru", value n, visibility y, direct deps y, src/systemcmds/serial_passthru/Kconfig:1>)}, {'node.defaults': [], 'node.dep': (2, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>, (40, <symbol PLATFORM_QURT, bool, "qurt", value n, visibility y, choice symbol, direct deps y, Kconfig:18>, (40, <symbol PLATFORM_POSIX, bool, "posix", value n, visibility y, choice symbol, direct deps y, Kconfig:16>, <symbol PLATFORM_NUTTX, bool, "nuttx", value y, visibility y, choice symbol, direct deps y, Kconfig:14>)))}], 'ZENOH_PUBSUB_SELECTION': [{'node.defaults': [(<symbol ZENOH_PUBSUB_ALL, bool, "All", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:69>, <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>, ('src/modules/zenoh/Kconfig', 42))], 'node.dep': <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>}]}
+
+choice_deps[ZENOH_PUBSUB_SELECTION]:
+node.defaults:   [(<symbol ZENOH_PUBSUB_ALL, bool, "All", value n, visibility n, choice symbol, direct deps n, src/modules/zenoh/Kconfig:69>, <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>, ('src/modules/zenoh/Kconfig', 42))]
+node.dep:        <symbol MODULES_ZENOH, bool, "Zenoh", value n, visibility y, direct deps y, src/modules/zenoh/Kconfig:1>
 def dependencies extr: [['MODULES_ZENOH']]
 dep dependencies extr: [['MODULES_ZENOH']]
 
@@ -476,10 +556,23 @@ Reader found: 78 lines in /home/ljd/px4/PX4-Autopilot/src/modules/zenoh/Kconfig
     node_deps for definition [0]: ['MODULES_ZENOH']
     Found choice at line index 39, line_number=40
   DEBUG: Found choice ZENOH_PUBSUB_SELECTION at src/modules/zenoh/Kconfig:40
+  DEBUG: choice_default_lines: [KconfigLine(default, line=42, indent=12)]
+  DEBUG: choice_depends_lines: []
+  DEBUG: choice_prompt_lines: []
+  DEBUG: choice_help_lines: []
+  DEBUG: Adding config ZENOH_PUBSUB_MINIMAL
+  DEBUG: Adding config ZENOH_PUBSUB_ALL
+  DEBUG: Adding config ZENOH_PUBSUB_CUSTOM
   Finished processing definition [0]
   DEBUG: Total entries collected: 3
   DEBUG: Total prompts collected: 0
   DEBUG: Total helps collected: 0 + []
+
+  named choice: ZENOH_PUBSUB_SELECTION
+    'choice_def': [('ZENOH_PUBSUB_SELECTION', [['MODULES_ZENOH']], [['MODULES_ZENOH']])]
+    'choice_configs': 3 config entries
+    'prompt_lines': []
+    'help_lines': []
 
 for each given file at source_files start building path output structur and call reader and writer
 
@@ -11354,14 +11447,17 @@ count options/attr that are not transformed:
 count changes that don't affect the output size: 
         Changed inline prompt choice:    0
         Changed typ of choice element:   0
+----------------------------------------------------------------------
+additionaly count --help-- for PX4
+Attr --HELP--: 419
 
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.002846s
-    Got parser results................................    0.031480s
-    Built context from parser results.................    0.003688s
-    File transformation and excel log.................   13.837048s
+    Parser initialization.............................    0.005681s
+    Got parser results................................    0.034600s
+    Built context from parser results.................    0.005437s
+    File transformation and excel log.................   15.063802s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................  13.875064s ~ 13.88s
+    TOTAL TIME........................................  15.109520s ~ 15.11s
 ====================================================================================================

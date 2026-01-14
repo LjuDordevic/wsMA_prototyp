@@ -64,6 +64,7 @@ class KconfigTransformer:
     FILE_ADDED_BC_NAMED_CHOICE = 0
     FILE_CHANGED_INPROMPT_BC_CHOICE = 0
     FILE_CHANGED_TYP_TRISTATE_TO_BOOL = 0  
+    OLD_HELP = 0
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -1490,6 +1491,7 @@ class KconfigTransformer:
             self.FILE_OPT_ENV += 1
             return self._transform_opt_env(line)
         elif line.line_type == "help_old":
+            self.OLD_HELP += 1
             return self._transform_old_help(line)
         else:
             if line.line_type == "allnoconfig_y":
@@ -2609,7 +2611,9 @@ class KconfigTransformer:
         print("count changes that don't affect the output size: ")
         print(f"        Changed inline prompt choice:    {self.FILE_CHANGED_INPROMPT_BC_CHOICE}") 
         print(f"        Changed typ of choice element:   {self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL}") 
-
+        print(f"----------------------------------------------------------------------")
+        print("additionaly count --help-- for PX4")
+        print(f"Attr --HELP--: {self.OLD_HELP}")
 
         self.FILE_OPT_DEFCONFIG = 0
         self.FILE_OPT_ALLNONCONG = 0
@@ -2620,5 +2624,6 @@ class KconfigTransformer:
         self.FILE_SET_DEFAULT_OPTION = 0
         self.FILE_CHANGED_INPROMPT_BC_CHOICE = 0        # for choice -> bool "pick something" --> prompt "pick something"
         self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL = 0      # tristate elements of choice should be restricted to bool 
+        self.OLD_HELP = 0
 
         return excel_stats
