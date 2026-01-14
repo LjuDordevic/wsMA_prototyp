@@ -7,7 +7,9 @@
 
 if USEMODULE_L3GXXXX
 
+
 choice
+    prompt "Output data rate (ODR)"
     default L3GXXXX_ODR_100_25
     help
         Measurements are performed at a defined output rate (ODR) with a
@@ -58,6 +60,7 @@ endif # USEMODULE_L3GXXXX_LOW_ODR
 endchoice
 
 choice
+    prompt "Full scale"
     default L3GXXXX_SCALE_245_DPS
     help
         The full scale value determines the sensitivity of the sensor and thus
@@ -86,6 +89,7 @@ endif # !USEMODULE_A3G4250D
 endchoice
 
 choice
+    prompt "Filters used for output data"
     default L3GXXXX_HPF_AND_LPF2
     help
         L3Gxxxx sensors integrate a combination of two low pass filters (LPF)
@@ -117,6 +121,7 @@ endchoice
 if L3GXXXX_HPF_ONLY || L3GXXXX_HPF_AND_LPF2 || L3GXXXX_INT1_HPF_ONLY || L3GXXXX_INT1_HPF_AND_LPF2
 
 choice
+    prompt "HPF mode"
     help
         The high pass filter (HPF) can be used in different modes. Select
         the right one.
@@ -155,6 +160,7 @@ endif # L3GXXXX_HPF_ONLY || L3GXXXX_HPF_AND_LPF2 || L3GXXXX_INT1_HPF_ONLY || L3G
 if USEMODULE_L3GXXXX_FIFO
 
 choice
+    prompt "FIFO mode"
     default L3GXXXX_FIFO_MODE_FIFO
     help
         The 32 level FIFO is used to collect a number of sensor
@@ -275,6 +281,7 @@ config L3GXXXX_INT1_Z_LT_THRESH
     default n
 
 choice
+    prompt "Filters used for event interrupt generation"
     default L3GXXXX_INT1_HPF_AND_LPF2
     help
         The combination of high pass filter (HPF) and low pass filter 2 (LPF2)

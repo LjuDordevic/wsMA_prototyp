@@ -8,5 +8,6 @@
 if USEMODULE_PERIPH_TIMER
 menu "timer peripheral driver"
 
+
 endmenu # timer peripheral driver
 endif # USEMODULE_PERIPH_TIMER

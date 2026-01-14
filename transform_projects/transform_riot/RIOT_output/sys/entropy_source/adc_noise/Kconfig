@@ -8,6 +8,7 @@ menu "ADC Noise entropy source module"
     depends on USEMODULE_ENTROPY_SOURCE_ADC_NOISE
 
 choice
+    prompt "ADC default sampling resolution"
     default ENTROPY_SOURCE_ADC_RES_10BIT
     help
         This parameter sets the ADC sampling resolution. Please note that not all

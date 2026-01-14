@@ -30,6 +30,7 @@ config GNRC_RPL_DEFAULT_DIO_REDUNDANCY_CONSTANT
 
 endmenu # Trickle parameters
 
+
 menu "Default parent and route entry lifetime"
 
 config GNRC_RPL_DEFAULT_LIFETIME
@@ -46,6 +47,7 @@ config GNRC_RPL_LIFETIME_UNIT
     default 60
 
 endmenu # Default parent and route entry lifetime
+
 
 menu "Parameters used for DAO handling"
 
@@ -75,7 +77,9 @@ config GNRC_RPL_CLEANUP_TIME
 
 endmenu # Parameters used for DAO handling
 
+
 choice
+    prompt "Mode of Operation"
     default GNRC_RPL_MOP_STORING_MODE_NO_MC
 
 config GNRC_RPL_MOP_NO_DOWNWARD_ROUTES
@@ -91,6 +95,7 @@ config GNRC_RPL_MOP_STORING_MODE_MC
     bool "Storing and multicast"
 
 endchoice
+
 
 config GNRC_RPL_WITHOUT_PIO
     bool "Exclude Prefix Information Options from DIOs"

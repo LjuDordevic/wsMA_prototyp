@@ -20,6 +20,7 @@ config TMP00X_I2C_ADDRESS
         refer to the 'Serial Bus Address' section in the datasheet.
 
 choice
+    prompt "Conversion time"
     default TMP00X_CONVERSION_TIME_1S
     help
         The duration of the analog-to-digital(A/D) conversion is determined by

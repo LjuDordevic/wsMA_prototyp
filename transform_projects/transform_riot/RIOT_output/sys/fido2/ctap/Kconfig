@@ -4,6 +4,7 @@
 # General Public License v2.1. See the file LICENSE in the top level
 # directory for more details.
 
+
 if USEMODULE_FIDO2_CTAP
 
 config FIDO2_CTAP_STACK_SIZE
@@ -44,6 +45,7 @@ config FIDO2_CTAP_UP_BUTTON_PIN
     default -1
 
 choice
+    prompt "User presence button mode"
     depends on !FIDO2_CTAP_DISABLE_UP
     default FIDO2_CTAP_UP_BUTTON_MODE_IN_PU
 
@@ -65,6 +67,7 @@ config FIDO2_CTAP_UP_BUTTON_MODE_IN
 endchoice
 
 choice
+    prompt "User presence button pin flank"
     depends on !FIDO2_CTAP_DISABLE_UP
     default FIDO2_CTAP_UP_BUTTON_FLANK_FALLING
 
@@ -89,5 +92,6 @@ config FIDO2_CTAP_NUM_FLASHPAGES
         size is 4096 bytes roughly 156 * 40 / 4096 (2) flashpages are needed.
         To save authenticator state data one additional flashpage is needed.
         So in total one has to configure 3 to save 40 credentials.
+
 
 endif # USEMODULE_FIDO2_CTAP

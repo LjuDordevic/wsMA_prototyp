@@ -30,6 +30,7 @@ config FDCAN_DEVICE_TRANSCEIVER_LOOP_DELAY
       If unsure, leave this value as 0 or refer to the hardware documentation
       for the correct delay value.
 
+
 endmenu # FD CAN
 
 endmenu # CAN

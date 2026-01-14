@@ -8,6 +8,7 @@ menu "IEEE802.15.4"
     depends on USEMODULE_IEEE802154
 
 choice
+    prompt "IEEE802.15.4 default PHY mode"
     default IEEE802154_DEFAULT_PHY_OQPSK
     help
         IEEE802.15.4 default mode

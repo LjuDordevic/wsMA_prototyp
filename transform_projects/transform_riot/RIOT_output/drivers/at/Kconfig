@@ -9,6 +9,7 @@ menu "AT driver"
     depends on USEMODULE_AT
 
 choice
+    prompt "End of line character"
     default AT_SEND_EOL_MAC
     help
         Select the EOL character to send after the AT command.

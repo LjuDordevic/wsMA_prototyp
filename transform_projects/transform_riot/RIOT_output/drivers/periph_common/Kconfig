@@ -4,6 +4,10 @@
 # General Public License v2.1. See the file LICENSE in the top level
 # directory for more details.
 
+
+
+
+
 source "drivers/periph_common/Kconfig.timer"
 
 source "drivers/periph_common/Kconfig.vbat"

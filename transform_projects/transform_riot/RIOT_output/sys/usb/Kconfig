@@ -25,6 +25,7 @@ config USB_SELF_POWERED
 endmenu # Power management
 
 choice
+    prompt "USB specification version"
 
     config USB_SPEC_BCDVERSION_2_0
         bool "USB v2.0"

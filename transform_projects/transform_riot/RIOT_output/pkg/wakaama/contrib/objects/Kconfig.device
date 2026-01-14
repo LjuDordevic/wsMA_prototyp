@@ -8,6 +8,7 @@
 menu "Device"
 
 choice
+    prompt "Device binding and queue mode"
     default LWM2M_DEVICE_BINDING_U
 
 config LWM2M_DEVICE_BINDING_U

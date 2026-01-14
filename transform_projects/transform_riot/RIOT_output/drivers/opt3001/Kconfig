@@ -20,6 +20,7 @@ config OPT3001_I2C_ADDRESS
         (7.3.4.1) section in the Datasheet.
 
 choice
+    prompt "Conversion time"
     default OPT3001_CONVERSION_TIME_800
     help
         Time over which the results are integrated. A longer integration time

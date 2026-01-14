@@ -59,6 +59,6 @@ ADD TARGET in RIOT/makefiles/kconfig.mk
 Then in RIOT/examples/basic/hello-world/ call
  -> make kconfig-transform SHOULD_RUN_KCONFIG=1
 
-If you want to run it again: 
+If you want to run it again (from RIOT/examples/basic/hello-world/ call): 
 - first: rm bin/native64/generated/.kconfig_transform_done
 - then: make kconfig-transform SHOULD_RUN_KCONFIG=1

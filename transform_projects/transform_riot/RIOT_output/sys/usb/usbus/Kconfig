@@ -16,6 +16,7 @@ config USBUS_AUTO_ATTACH
         that the USB peripheral is ready for use.
 
 choice
+    prompt "Endpoint 0 buffer size"
     default USBUS_EP0_SIZE_64
     help
         This configures the buffer size of the control endpoint. Unless you

@@ -7,4 +7,5 @@
 menu "CongURE congestion control abstraction"
     depends on USEMODULE_CONGURE
 
+
 endmenu # CongURE congestion control abstraction

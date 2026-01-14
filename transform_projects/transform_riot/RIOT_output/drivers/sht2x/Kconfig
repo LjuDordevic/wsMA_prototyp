@@ -8,6 +8,7 @@
 if USEMODULE_SHT2X
 
 choice
+    prompt "Measurement Resolution"
     default SHT2X_RES_12_14BIT
 
     config SHT2X_RES_12_14BIT
@@ -23,6 +24,7 @@ choice
 endchoice
 
 choice
+    prompt "Measurement Mode"
     default SHT2X_MEASURE_MODE_NO_HOLD
 
     config SHT2X_MEASURE_MODE_NO_HOLD

@@ -30,6 +30,7 @@ config LORA_SYMBOL_TIMEOUT_DEFAULT
         a length in time of (2^SF)/BW seconds.
 
 choice
+    prompt "Channel bandwidth"
     default LORA_BW_DEFAULT_125
     help
         Configure the channel bandwidth. Refer to country specific regulations
@@ -47,6 +48,7 @@ config LORA_BW_DEFAULT_500
 endchoice
 
 choice
+    prompt "Spreading factor"
     default LORA_SF_DEFAULT_SF7
     help
         Configure Spreading Factor (SF). SF denotes the amount of spreading code
@@ -81,6 +83,7 @@ config LORA_SF_DEFAULT_SF12
 endchoice
 
 choice
+    prompt "Coding rate"
     default LORA_CR_DEFAULT_CR_4_5
     help
         Configure Coding rate (CR). CR denotes the implementation of forward

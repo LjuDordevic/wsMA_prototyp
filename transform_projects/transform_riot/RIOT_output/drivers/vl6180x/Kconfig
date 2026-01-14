@@ -73,6 +73,7 @@ config VL6180X_MEAS_PERIOD
 if USEMODULE_VL6180X_IRQ
 
 choice
+    prompt "Ranging interrupt mode"
     depends on USEMODULE_VL6180X_RNG
     default VL6180X_RNG_INT_DRDY
     help
@@ -118,6 +119,7 @@ config VL6180X_RNG_THRESH_HIGH
         Interrupt is triggered when ranging values are above this threshold
 
 choice
+    prompt "ALS interrupt mode"
     depends on USEMODULE_VL6180X_ALS
     default VL6180X_ALS_INT_DRDY
     help

@@ -19,6 +19,7 @@ config USBUS_CDC_ACM_STDIO_BUF_SIZE_EXP
         buffer.
 
 choice
+    prompt "USB CDC ACM bulk endpoint size"
     default USBUS_CDC_ACM_BULK_EP_SIZE_64
     help
         This configures the maximum amount of bytes (chars) sent per transfer

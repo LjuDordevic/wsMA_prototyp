@@ -17,6 +17,7 @@ menuconfig AT86RF215_OQPSK
 if AT86RF215_OQPSK
 
 choice
+    prompt "Default (legacy) O-QPSK rate mode"
     default AT86RF215_OQPSK_RATE_LOW
     help
         The at86rf215 supports proprietary high data rates that are compatible
@@ -86,6 +87,7 @@ config AT86RF215_DEFAULT_MR_OFDM_OPT
         Each increment halves the PSDU data rate.
 
 choice
+    prompt "Default MR-OFDM Modulation & Coding Scheme"
     default AT86RF215_MR_OFDM_MCS_QPSK_R12_FR2
     help
         Default Modulation & Coding Scheme of the MR-OFDM PHY.
@@ -133,6 +135,7 @@ menuconfig AT86RF215_MR_FSK
 if AT86RF215_MR_FSK
 
 choice
+    prompt "Default MR-FSK Symbol Rate"
     default AT86RF215_MR_FSK_SRATE_200K
     help
         Default Symbol Rate of the MR-FSK PHY.
@@ -175,6 +178,7 @@ config AT86RF215_DEFAULT_MR_FSK_MOD_IDX
         (32/64 = 0.5; 64/64 = 1 …)
 
 choice
+    prompt "Default MR-FSK Modulation Order"
     default AT86RF215_MR_FSK_MORD_4
 
 config AT86RF215_MR_FSK_MORD_4
@@ -191,6 +195,7 @@ config AT86RF215_DEFAULT_MR_FSK_MORD
     default 1 if AT86RF215_MR_FSK_MORD_4
 
 choice
+    prompt "Default MR-FSK Forward Error Correction Scheme"
     default AT86RF215_MR_FSK_FEC_NONE
 
 config AT86RF215_MR_FSK_FEC_NONE

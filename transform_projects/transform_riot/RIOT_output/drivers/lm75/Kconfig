@@ -12,6 +12,7 @@ config LM75_I2C_ADDR
         For more information refer to the 'Slaves Address' section in the datasheet.
 
 choice
+    prompt "Operation Mode"
     default NORMAL_MODE
     help
         Whether the device operates in normal or shutdown mode.
@@ -24,7 +25,9 @@ config SHUTDOWN_MODE
 
 endchoice
 
+
 choice
+    prompt "Thermostat mode"
     default COMPARATOR_MODE
     help
         Defines whether the device operates is comparator or interrupt mode.
@@ -43,7 +46,9 @@ config INTERRUPT_MODE
 
 endchoice
 
+
 choice
+    prompt "OS pin polarity"
     default OS_ACTIVE_LOW
     help
         Define the polarity of the overtemperature shutdown(OS) pin.
@@ -56,7 +61,9 @@ config OS_ACTIVE_HIGH
 
 endchoice
 
+
 choice
+    prompt "Fault Queue configuration"
     default FAULT_1
     help
         Define the number of consecutive faults that must occur for the OS pin to become active
@@ -78,9 +85,11 @@ config FAULT_6
 
 endchoice
 
+
 if USEMODULE_TMP1075
 
 choice
+    prompt "Conversion rate"
     default TMP1075_CONV_RATE_REG_27H
     help
         Defines the frequency through which temperature conversions are performed and the temperature register is updated
@@ -96,6 +105,7 @@ config TMP1075_CONV_RATE_REG_110
 
 config TMP1075_CONV_RATE_REG_220
     bool "220 ms conversion rate"
+
 
 endchoice
 

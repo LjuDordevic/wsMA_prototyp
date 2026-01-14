@@ -2,6 +2,7 @@ menu "LoRaWAN MAC"
     depends on USEMODULE_LORAWAN
 
 choice
+    prompt "Channel plan"
     depends on USEMODULE_GNRC_LORAWAN || USEPKG_SEMTECH_LORAMAC
     default LORAMAC_REGION_EU_868
     help
@@ -51,6 +52,7 @@ endif # USEPKG_SEMTECH_LORAMAC
 endchoice
 
 choice
+    prompt "Join procedure"
     depends on USEMODULE_GNRC_LORAWAN
     default LORAMAC_DEFAULT_JOIN_PROCEDURE_OTAA
     help
@@ -175,6 +177,7 @@ endmenu # ABP credentials
 endif # USEMODULE_GNRC_LORAWAN
 
 choice
+    prompt "Device Class"
     depends on USEMODULE_GNRC_LORAWAN || USEPKG_SEMTECH_LORAMAC
     default LORAMAC_DEFAULT_DEVICE_CLASS_A
     help
@@ -225,6 +228,7 @@ config LORAMAC_DEFAULT_PRIVATE_NETWORK
         private networks use `0x12` as sync word.
 
 choice
+    prompt "Tx Data rate index"
     default LORAMAC_DEFAULT_DR_0
     help
         Configure Data Rate (DR). Data rate combines two aspects, Bandwidth (BW)
@@ -288,6 +292,7 @@ endif # LORAMAC_REGION_US_915
 endchoice
 
 choice
+    prompt "TX Power index"
     depends on USEMODULE_RN2XX3
     default LORAMAC_DEFAULT_TX_POWER_1
     help
@@ -362,6 +367,7 @@ config LORAMAC_DEFAULT_TX_PORT
         the different values based on value of port.
 
 choice
+    prompt "MAC TX mode"
     default LORAMAC_DEFAULT_TX_MODE_CNF
     help
         Configure the type of uplink packet (confirmed/unconfirmed). A confirmed
@@ -434,6 +440,7 @@ config LORAMAC_DEFAULT_RX1_DELAY
         uplink modulation on the end-node.
 
 choice
+    prompt "RX2 window datarate index"
     depends on USEMODULE_GNRC_LORAWAN || USEMODULE_RN2XX3
     default LORAMAC_DEFAULT_RX2_DR_0 if LORAMAC_REGION_EU_868
     default LORAMAC_DEFAULT_RX2_DR_2 if LORAMAC_REGION_IN_865
