@@ -10,8 +10,8 @@ import pprint
 import os
 
 def main():    
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_riot/RIOT_log/transform4.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_riot/RIOT_log/results4.xlsx"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_riot/RIOT_log/transform5.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_riot/RIOT_log/results5.xlsx"
     project_dir = "/home/ljd/riot/RIOT"
     output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_riot/RIOT_output"
     main_file = "Kconfig"
