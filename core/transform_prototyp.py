@@ -1489,6 +1489,8 @@ class KconfigTransformer:
         elif line.line_type == "option env":
             self.FILE_OPT_ENV += 1
             return self._transform_opt_env(line)
+        elif line.line_type == "help_old":
+            return self._transform_old_help(line)
         else:
             if line.line_type == "allnoconfig_y":
                 self.FILE_OPT_ALLNONCONG += 1
@@ -1502,6 +1504,21 @@ class KconfigTransformer:
                 self.FILE_SET_DEFAULT_OPTION += 1
             return line    
 
+    def _transform_old_help(self, line) -> List:
+        from kconfig_writer import KconfigLine  
+            
+        indent_str = ' ' * line.indent
+
+        new_text = f"{indent_str}help"
+            
+        new_line = KconfigLine(
+            new_text,
+            line.line_number  
+        )
+            
+        return new_line
+    
+    
     def _transform_def_keyword(self, line) -> List:
         """
         For def_* keywords == def_bool, def_int, def_hex, def_string 

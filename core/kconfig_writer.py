@@ -100,8 +100,10 @@ class KconfigLine:
             return 'imply'
         elif s.startswith('range '):
             return 'range'
-        elif s.startswith('help') or s.startswith('---help---'):
+        elif s.startswith('help'):
             return 'help'
+        elif s.startswith('---help---'):
+            return 'help_old'
         elif s.startswith('optional'):
             return 'optional'
         elif s.startswith('visible if '):
