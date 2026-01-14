@@ -1,5 +1,5 @@
 menuconfig MODULES_ROVER_ACKERMANN
 	bool "rover_ackermann"
 	default n
-	---help---
+ help
 		Enable support for ackermann rovers

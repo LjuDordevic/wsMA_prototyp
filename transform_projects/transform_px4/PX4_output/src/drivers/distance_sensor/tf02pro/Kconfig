@@ -1,5 +1,5 @@
 menuconfig DRIVERS_DISTANCE_SENSOR_TF02PRO
 	bool "tf02pro"
 	default n
-	---help---
+ help
 		Enable support for tf02pro

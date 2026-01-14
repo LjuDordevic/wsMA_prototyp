@@ -7,7 +7,7 @@ menu "Inertial Navigation Systems (INS)"
         select DRIVERS_INS_MICROSTRAIN
         select DRIVERS_INS_EULERNAV_BAHRS
         select DRIVERS_INS_SBGECOM
-        ---help---
+        help
             Enable default set of INS sensors
     source "src/drivers/ins/eulernav_bahrs/Kconfig"
     source "src/drivers/ins/ilabs/Kconfig"

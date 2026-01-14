@@ -2,7 +2,7 @@ menu "stub_keystore configuration"
 	menuconfig DRIVERS_STUB_KEYSTORE
 	bool "stub_keystore"
 	default n
-	---help---
+ help
 		Enable support for stub_keystore
 
 	menuconfig PUBLIC_KEY0

@@ -1,5 +1,5 @@
 menuconfig DRIVERS_BAROMETER_GOERTEK_SPL06
 	bool "spl06"
 	default n
-	---help---
+ help
 		Enable support for spl06

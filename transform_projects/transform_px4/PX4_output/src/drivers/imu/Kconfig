@@ -25,7 +25,7 @@ menu "IMU"
         select DRIVERS_IMU_ST_L3GD20
         select DRIVERS_IMU_ST_LSM303D
         select DRIVERS_IMU_ST_LSM9DS1
-        ---help---
+        help
             Enable default set of IMU drivers
     source "src/drivers/imu/analog_devices/Kconfig"
     source "src/drivers/imu/bosch/Kconfig"

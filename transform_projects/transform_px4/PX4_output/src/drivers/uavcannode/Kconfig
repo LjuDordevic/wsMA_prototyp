@@ -2,7 +2,7 @@ menuconfig DRIVERS_UAVCANNODE
 	bool "uavcannode"
 	default n
     depends on BOARD_ROMFSROOT != "px4fmu_common"
-	---help---
+ help
 		Enable support for uavcannode
 
 if DRIVERS_UAVCANNODE

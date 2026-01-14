@@ -1,5 +1,5 @@
 menuconfig MODULES_SIMULATION_SENSOR_AIRSPEED_SIM
 	bool "sensor_airspeed_sim"
 	default n
-	---help---
+ help
 		Enable support for sensor_airspeed_sim

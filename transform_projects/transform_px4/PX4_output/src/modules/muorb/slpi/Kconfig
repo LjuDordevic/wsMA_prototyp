@@ -2,5 +2,5 @@ menuconfig MODULES_MUORB_SLPI
 	bool "muorb_slpi"
 	default n
 	depends on PLATFORM_QURT
-	---help---
+ help
 		Enable support for muorb slpi

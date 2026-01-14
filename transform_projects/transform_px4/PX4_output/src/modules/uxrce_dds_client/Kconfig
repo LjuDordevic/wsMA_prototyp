@@ -1,5 +1,5 @@
 menuconfig MODULES_UXRCE_DDS_CLIENT
 	bool "uxrce_dds_client"
 	default n
-	---help---
+ help
 		Enable support for the UXRCE-DDS Client

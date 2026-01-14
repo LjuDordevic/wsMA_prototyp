@@ -4,7 +4,7 @@ menu "RPM"
         default n
         select DRIVERS_RPM_PCF8583
         select DRIVERS_RPM_RPM_SIMULATOR
-        ---help---
+        help
             Enable default set of RPM drivers
     source "src/drivers/rpm/pcf8583/Kconfig"
     source "src/drivers/rpm/rpm_simulator/Kconfig"

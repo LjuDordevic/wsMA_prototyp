@@ -3,5 +3,5 @@ menuconfig MODULES_SIMULATION_SIMULATOR_MAVLINK
 	default n
 	select MODULES_SIMULATION_PWM_OUT_SIM
 	depends on PLATFORM_POSIX
-	---help---
+ help
 		Enable support for mavlink simulator

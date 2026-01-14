@@ -5,12 +5,12 @@ menuconfig MODULES_SIMULATION_SIMULATOR_SIH
 	select MODULES_SIMULATION_SENSOR_BARO_SIM
 	select MODULES_SIMULATION_SENSOR_GPS_SIM
 	select MODULES_SIMULATION_SENSOR_MAG_SIM
-	---help---
+ help
 		Enable support for simulator_sih
 
 menuconfig USER_SIH
 	bool "simulator_sih running as userspace module"
 	default y
 	depends on BOARD_PROTECTED && MODULES_SIMULATION_SIMULATOR_SIH
-	---help---
+ help
 		Put sih in userspace memory

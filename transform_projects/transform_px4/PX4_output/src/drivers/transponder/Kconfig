@@ -3,7 +3,7 @@ menu "Transponder"
         bool "Transponder"
         default n
         select DRIVERS_TRANSPONDER_SAGETECH_MXS
-        ---help---
+        help
             Enable default set of transponder drivers
 
     source "src/drivers/transponder/sagetech_mxs/Kconfig"

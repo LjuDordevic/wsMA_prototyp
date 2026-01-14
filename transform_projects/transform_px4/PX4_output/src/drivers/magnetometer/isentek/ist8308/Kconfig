@@ -1,5 +1,5 @@
 menuconfig DRIVERS_MAGNETOMETER_ISENTEK_IST8308
 	bool "IST8308"
 	default n
-	---help---
+ help
 		Enable support for isentek IST8308

@@ -1,7 +1,7 @@
 menuconfig DRIVERS_PCA9685_PWM_OUT
 	bool "pca9685_pwm_out"
 	default n
-	---help---
+ help
 		Enable support for pca9685_pwm_out
 
 if DRIVERS_PCA9685_PWM_OUT

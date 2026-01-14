@@ -1,5 +1,5 @@
 menuconfig MODULES_MAG_BIAS_ESTIMATOR
 	bool "mag_bias_estimator"
 	default n
-	---help---
+ help
 		Enable support for mag_bias_estimator

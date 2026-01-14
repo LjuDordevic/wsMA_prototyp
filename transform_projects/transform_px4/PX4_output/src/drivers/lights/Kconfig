@@ -7,7 +7,7 @@ menu "Lights"
         select DRIVERS_LIGHTS_RGBLED_IS31FL3195
         select DRIVERS_LIGHTS_RGBLED_LP5562
         select DRIVERS_LIGHTS_RGBLED_AW2023
-        ---help---
+        help
             Enable default set of light drivers
     source "src/drivers/lights/neopixel/Kconfig"
     source "src/drivers/lights/rgbled/Kconfig"

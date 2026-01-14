@@ -1,12 +1,12 @@
 menuconfig MODULES_GYRO_FFT
 	bool "gyro_fft"
 	default n
-	---help---
+ help
 		Enable support for gyro_fft
 
 menuconfig USER_GYRO_FFT
 	bool "gyro_fft running as userspace module"
 	default n
 	depends on BOARD_PROTECTED && MODULES_GYRO_FFT
-	---help---
+ help
 		Put gyro_fft in userspace memory

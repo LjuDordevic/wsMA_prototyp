@@ -1,5 +1,5 @@
 menuconfig MODULES_SIMULATION_PWM_OUT_SIM
 	bool "pwm_out_sim"
 	default n
-	---help---
+ help
 		Enable support for pwm_out_sim

@@ -1,5 +1,5 @@
 menuconfig DRIVERS_IMU_NXP_FXAS21002C
 	bool "fxas21002c"
 	default n
-	---help---
+ help
 		Enable support for fxas21002c

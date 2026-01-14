@@ -5,7 +5,7 @@ menu "Telemetry"
         select DRIVERS_TELEMETRY_BST
         select DRIVERS_TELEMETRY_FRSKY_TELEMETRY
         select DRIVERS_TELEMETRY_HOTT
-        ---help---
+        help
             Enable default set of telemetry drivers
     source "src/drivers/telemetry/bst/Kconfig"
     source "src/drivers/telemetry/frsky_telemetry/Kconfig"

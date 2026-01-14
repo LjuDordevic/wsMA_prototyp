@@ -2,6 +2,6 @@ menuconfig DRIVERS_BOOTLOADERS
 	bool "bootloaders"
 	default n
 	depends on BOARD_ROMFSROOT = "cannode" || BOARD_ROMFSROOT = ""
-	---help---
+ help
 		Enable support for bootloaders
 		Note: This is only supported on UAVCAN node boards (CAN peripherals)

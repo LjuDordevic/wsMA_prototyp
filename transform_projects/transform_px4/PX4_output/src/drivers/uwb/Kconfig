@@ -3,7 +3,7 @@ menu "UWB"
         bool "common UWB Drivers"
         default n
         select DRIVERS_UWB_UWB_SR150
-        ---help---
+        help
             Enable support for uwb drivers
     source "src/drivers/uwb/uwb_sr150/Kconfig"
 endmenu

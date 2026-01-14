@@ -2,5 +2,5 @@ menuconfig DRIVERS_QSHELL_QURT
 	bool "qurt"
 	default n
 	depends on PLATFORM_QURT
-	---help---
+ help
 		Enable support for qurt

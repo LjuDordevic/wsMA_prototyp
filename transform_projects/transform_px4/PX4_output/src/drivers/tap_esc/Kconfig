@@ -1,5 +1,5 @@
 menuconfig DRIVERS_TAP_ESC
 	bool "tap_esc"
 	default n
-	---help---
+ help
 		Enable support for tap_esc

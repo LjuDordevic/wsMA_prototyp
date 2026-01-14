@@ -1,5 +1,5 @@
 menuconfig DRIVERS_ADC_ADS1115
 	bool "ads1115"
 	default n
-	---help---
+ help
 		Enable support for ads1115

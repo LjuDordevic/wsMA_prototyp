@@ -1,6 +1,6 @@
 choice
 	prompt "NuttX platform"
-	---help---
+ help
 		This automatically gets set by the NuttX defconfig
 	config ARCH_CHIP_UNSET
 		bool "Unset"
@@ -22,5 +22,5 @@ config BOARD_PWM_FREQ
 	int "Board default PWM frequency"
 	default 160000000 if ARCH_CHIP_S32K3XX
 	default 1000000 if !ARCH_CHIP_S32K3XX
-	---help---
+ help
 		Board default PWM frequency

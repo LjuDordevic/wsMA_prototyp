@@ -1,5 +1,5 @@
 menuconfig DRIVERS_TATTU_CAN
 	bool "tattu_can"
 	default n
-	---help---
+ help
 		Enable support for tattu_can

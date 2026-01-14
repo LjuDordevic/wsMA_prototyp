@@ -1,5 +1,5 @@
 menuconfig DRIVERS_DIFFERENTIAL_PRESSURE_MS5525DSO
 	bool "ms5525dso"
 	default n
-	---help---
+ help
 		Enable support for ms5525dso

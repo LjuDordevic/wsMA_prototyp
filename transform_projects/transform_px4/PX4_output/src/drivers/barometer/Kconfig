@@ -14,7 +14,7 @@ menu "barometer"
         select DRIVERS_BAROMETER_GOERTEK_SPA06
         select DRIVERS_BAROMETER_INVENSENSE_ICP101XX
         select DRIVERS_BAROMETER_INVENSENSE_ICP201XX
-        ---help---
+        help
             Enable default set of barometer drivers
     source "src/drivers/barometer/bmp280/Kconfig"
     source "src/drivers/barometer/bmp388/Kconfig"

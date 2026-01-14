@@ -12,7 +12,7 @@ menu "Simulation"
         select MODULES_SIMULATION_SYSTEM_POWER_SIMULATOR
         select MODULES_SIMULATION_SIMULATOR_MAVLINK
         select MODULES_SIMULATION_SIMULATOR_SIH
-        ---help---
+        help
             Enable default set of simulation modules
     source "src/modules/simulation/battery_simulator/Kconfig"
     source "src/modules/simulation/gz_bridge/Kconfig"

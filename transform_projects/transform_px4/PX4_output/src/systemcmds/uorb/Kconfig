@@ -1,7 +1,7 @@
 config SYSTEMCMDS_UORB
 	bool "uorb"
 	default n
-	---help---
+ help
 		Enable support for uorb
 
 config USER_UORB

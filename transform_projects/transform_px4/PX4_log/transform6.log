@@ -7,7 +7,7 @@ Root: /home/ljd/px4/PX4-Autopilot
 Main file: Kconfig
 Output dir: /home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_output
 ====================================================================================================
-<zrtos_parser.ZRTOSParser object at 0x7ced9e534a40>
+<zrtos_parser.ZRTOSParser object at 0x7211a9ccbc20>
 Defined symbols: 834
 Unique symbols: 834
 Files: 345
@@ -455,7 +455,7 @@ Reader found: 26 lines in /home/ljd/px4/PX4-Autopilot/platforms/nuttx/Kconfig
   Finished processing definition [5]
   DEBUG: Total entries collected: 24
   DEBUG: Total prompts collected: 5
-  DEBUG: Total helps collected: 5 + [KconfigLine(help, line=25, indent=1), KconfigLine(other, line=26, indent=2), KconfigLine(other, line=27, indent=2), KconfigLine(help, line=3, indent=1), KconfigLine(other, line=4, indent=2)]
+  DEBUG: Total helps collected: 0 + []
 def dependencies extr: [['MODULES_ZENOH']]
 dep dependencies extr: [['MODULES_ZENOH']]
 
@@ -11358,10 +11358,10 @@ count changes that don't affect the output size:
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.002180s
-    Got parser results................................    0.027015s
-    Built context from parser results.................    0.003593s
-    File transformation and excel log.................    9.412402s
+    Parser initialization.............................    0.006342s
+    Got parser results................................    0.511485s
+    Built context from parser results.................    0.003865s
+    File transformation and excel log.................   15.839652s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   9.445192s ~ 9.45s
+    TOTAL TIME........................................  16.361346s ~ 16.36s
 ====================================================================================================

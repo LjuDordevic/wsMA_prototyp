@@ -1,5 +1,5 @@
 menuconfig EXAMPLES_PX4_SIMPLE_APP
 	bool "px4_simple_app"
 	default n
-	---help---
+ help
 		Enable support for px4_simple_app

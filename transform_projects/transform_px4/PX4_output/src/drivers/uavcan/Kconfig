@@ -2,7 +2,7 @@ menuconfig DRIVERS_UAVCAN
 	bool "uavcan"
 	default n
     depends on PLATFORM_NUTTX
-	---help---
+ help
 		Enable support for uavcan
 
 if DRIVERS_UAVCAN
@@ -97,7 +97,7 @@ menuconfig BOARD_UAVCAN_INTERFACES
 depends on DRIVERS_UAVCAN || DRIVERS_UAVCANNODE
     int "UAVCANv0 interface count"
     default 2
-    ---help---
+    help
         Interface count for UAVCANv0
 
 menuconfig BOARD_UAVCAN_PERIPHERALS

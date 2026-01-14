@@ -1,5 +1,5 @@
 menuconfig DRIVERS_DISTANCE_SENSOR_ULANDING_RADAR
 	bool "ulanding_radar"
 	default n
-	---help---
+ help
 		Enable support for ulanding_radar
