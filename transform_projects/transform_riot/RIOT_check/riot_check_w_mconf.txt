@@ -43,6 +43,12 @@ Then call in terminal:
     drivers/vl6180x/Kconfig:8: location of the 'menu'
     drivers/Kconfig:60: syntax error
     drivers/Kconfig:60: invalid statement
+
+    if you look at the lines manually Linux couln't read:
+    choice VL6180X_ALS_GAIN
+        bool "ALS analogue light channel gain"
+        default VL6180X_ALS_GAIN_1
+
     sys/net/application_layer/gcoap/Kconfig:174: syntax error
     sys/net/application_layer/gcoap/Kconfig:174: unknown statement "gcoap-tokenlen-max"
     sys/net/application_layer/gcoap/Kconfig:179: syntax error
@@ -51,6 +57,17 @@ Then call in terminal:
     sys/net/application_layer/gcoap/Kconfig:181:warning: ignoring unsupported character ','
     sys/net/application_layer/gcoap/Kconfig:181:warning: ignoring unsupported character '.'
     sys/net/application_layer/gcoap/Kconfig:181: unknown statement "Length"
+
+    # defined in gcoap.h as GCOAP_TOKENLEN_MAX
+    gcoap-tokenlen-max = 8
+    
+    config GCOAP_TOKENLEN
+        int "Token length"
+        default 2
+        range 0 $(gcoap-tokenlen-max)
+        help
+            Length for a token, expressed in bytes.
+
     sys/net/application_layer/asymcute/Kconfig:31: syntax error
     sys/net/application_layer/asymcute/Kconfig:31: invalid statement
     sys/net/application_layer/asymcute/Kconfig:32: invalid statement
@@ -73,6 +90,18 @@ Then call in terminal:
     sys/net/application_layer/asymcute/Kconfig:37: unknown statement "see"
     sys/net/application_layer/asymcute/Kconfig:38:warning: ignoring unsupported character '.'
     sys/net/application_layer/asymcute/Kconfig:38: unknown statement "corresponds"
+
+    config ASYMCUTE_KEEPALIVE
+        int "Keep alive interval in seconds"
+        range 300 $(UINT32_MAX)
+        default 360
+        help
+            Configure 'CONFIG_ASYMCUTE_KEEPALIVE', keep alive interval in seconds
+            which is communicated to the gateway in the CONNECT message. For more
+            information, see MQTT-SN Spec v1.2, section 5.4.4. For default values,
+            see section 7.2 -> TWAIT: > 5 min. Default value is 360 seconds which
+            corresponds to 6 minutes.
+
     sys/net/application_layer/emcute/Kconfig:36: syntax error
     sys/net/application_layer/emcute/Kconfig:36: invalid statement
     sys/net/application_layer/emcute/Kconfig:37: invalid statement
