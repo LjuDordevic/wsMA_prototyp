@@ -67,8 +67,10 @@ class KconfigLine:
             return 'osource'
         elif inline_prompt_choice_match:
             return 'inline_prompt_choice'
-        elif re.match(r'^\s*(bool|boolean)\s*$', s):
+        elif re.match(r'^\s*(bool)\s*$', s):
             return 'type_bool'
+        elif re.match(r'^\s*(boolean)\s*$', s):
+            return 'type_bool_old'
         elif re.match(r'^\s*(tristate)\s*$', s):
             return 'type_tristate'
         elif s.startswith('int'):

@@ -65,6 +65,7 @@ class KconfigTransformer:
     FILE_CHANGED_INPROMPT_BC_CHOICE = 0
     FILE_CHANGED_TYP_TRISTATE_TO_BOOL = 0  
     OLD_HELP = 0
+    OLD_BOOLEAN = 0
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
@@ -1493,6 +1494,9 @@ class KconfigTransformer:
         elif line.line_type == "help_old":
             self.OLD_HELP += 1
             return self._transform_old_help(line)
+        elif line.line_type == "typ_bool_old":
+            self.OLD_BOOLEAN += 1
+            return self._transform_old_boolean(line)
         else:
             if line.line_type == "allnoconfig_y":
                 self.FILE_OPT_ALLNONCONG += 1
@@ -1506,7 +1510,7 @@ class KconfigTransformer:
                 self.FILE_SET_DEFAULT_OPTION += 1
             return line    
 
-    def _transform_old_help(self, line) -> List:
+    def _transform_old_help(self, line):
         from kconfig_writer import KconfigLine  
             
         indent_str = ' ' * line.indent
@@ -1520,6 +1524,19 @@ class KconfigTransformer:
             
         return new_line
     
+    def _transform_old_boolean(self, line):
+       from kconfig_writer import KconfigLine  
+            
+       indent_str = ' ' * line.indent
+
+       new_text = f"{indent_str}bool"
+            
+       new_line = KconfigLine(
+           new_text,
+           line.line_number  
+       )
+            
+       return new_line
     
     def _transform_def_keyword(self, line) -> List:
         """
@@ -2613,7 +2630,8 @@ class KconfigTransformer:
         print(f"        Changed typ of choice element:   {self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL}") 
         print(f"----------------------------------------------------------------------")
         #print("additionaly count --help-- for PX4")
-        #print(f"Attr --HELP--: {self.OLD_HELP}")
+        print(f"Attr --help--: {self.OLD_HELP}")
+        print(f"Attr boolean: {self.OLD_BOOLEAN}")
 
         self.FILE_OPT_DEFCONFIG = 0
         self.FILE_OPT_ALLNONCONG = 0
@@ -2625,5 +2643,6 @@ class KconfigTransformer:
         self.FILE_CHANGED_INPROMPT_BC_CHOICE = 0        # for choice -> bool "pick something" --> prompt "pick something"
         self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL = 0      # tristate elements of choice should be restricted to bool 
         self.OLD_HELP = 0
+        self.OLD_BOOLEAN = 0
 
         return excel_stats

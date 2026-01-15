@@ -7,7 +7,7 @@ Root: /home/ljd/px4/PX4-Autopilot
 Main file: Kconfig
 Output dir: /home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_output
 ====================================================================================================
-<zrtos_parser.ZRTOSParser object at 0x72ed92d66f60>
+<zrtos_parser.ZRTOSParser object at 0x7e3717bb4a40>
 Defined symbols: 834
 Unique symbols: 834
 Files: 345
@@ -11448,16 +11448,16 @@ count changes that don't affect the output size:
         Changed inline prompt choice:    0
         Changed typ of choice element:   0
 ----------------------------------------------------------------------
-additionaly count --help-- for PX4
-Attr --HELP--: 419
+Attr --help--: 419
+Attr boolean: 0
 
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.019522s
-    Got parser results................................    0.073354s
-    Built context from parser results.................    0.007623s
-    File transformation and excel log.................   13.973355s
+    Parser initialization.............................    0.002502s
+    Got parser results................................    0.029295s
+    Built context from parser results.................    0.003666s
+    File transformation and excel log.................   11.508481s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................  14.073856s ~ 14.07s
+    TOTAL TIME........................................  11.543945s ~ 11.54s
 ====================================================================================================
