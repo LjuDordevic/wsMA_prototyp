@@ -12,7 +12,7 @@ Environment variables:
   BSP_DIR=.
   PKGS_DIR=packages
 ====================================================================================================
-<zrtos_parser.ZRTOSParser object at 0x7412d26f4830>
+<zrtos_parser.ZRTOSParser object at 0x7df694d8ef00>
 Defined symbols: 1198
 Unique symbols: 1196
 Files: 118
@@ -4773,14 +4773,17 @@ count options/attr that are not transformed:
 count changes that don't affect the output size: 
         Changed inline prompt choice:    0
         Changed typ of choice element:   0
+----------------------------------------------------------------------
+Attr --help--: 0
+Attr boolean: 0
 
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.002457s
-    Got parser results................................    0.040911s
-    Built context from parser results.................    0.007848s
-    File transformation and excel log.................    7.409005s
+    Parser initialization.............................    0.001880s
+    Got parser results................................    0.025934s
+    Built context from parser results.................    0.005272s
+    File transformation and excel log.................    6.245049s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   7.460222s ~ 7.46s
+    TOTAL TIME........................................   6.278136s ~ 6.28s
 ====================================================================================================
