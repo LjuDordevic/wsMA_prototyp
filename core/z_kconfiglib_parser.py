@@ -5,7 +5,7 @@ class ZephyrKconfiglibParser:
     """
     help-class -> Parser for Zephyr Kconfiglib specifications, "ZKCL" in pick_parser.py
     init: save kconfiglib_module that the PickParser chose -> input for subclass 
-    in the subclass: call the parser from parent Kconfig 
+    in the subclass: call the parser from parent Kconfig class 
     we don't override finalize functions, because we want final result
     """
     def __init__(self, kconfiglib_module):
