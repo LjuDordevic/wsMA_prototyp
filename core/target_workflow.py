@@ -11,15 +11,15 @@ import os
 
 def main():    
     # DON'T FORGET TO CHANGE
-    #log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/transform9.log"
-    #excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/results9.xlsx"
-    #project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr"
-    #output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo1_output"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/transform10.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/results10.xlsx"
+    project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr"
+    output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo1_output"
 
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo2_output/transform3.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo2_output/results3.xlsx"
-    project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1_without_defconfig/zephyr"
-    output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo2_output"
+    #log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo2_output/transform3.log"
+    #excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo2_output/results3.xlsx"
+    #project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1_without_defconfig/zephyr"
+    #output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo2_output"
 
     main_file = "Kconfig"
 
