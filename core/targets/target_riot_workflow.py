@@ -1,10 +1,9 @@
 from pathlib import Path
 from pick_parser import PickParser
-from zrtos_parser import ZRTOSParser
+from core.parser.zrtos_parser import ZRTOSParser
 from kconfig_writer import KconfigReader, KconfigWriter
 from transform_prototyp import KconfigTransformer
-import excel_writer
-from time_writer import TransformTimer
+from core.utils.time_writer import TransformTimer
 import sys
 import pprint
 import os
@@ -80,9 +79,6 @@ def main():
 
         timer.lap("File transformation and excel log")
         timer.stop()
-
-        # Optional: Excel-Daten schreiben
-        # excel_writer.write_excel(excel_data, "/home/ljd/wsMA_prototyp/results.xlsx")
 
         return_code = 0
 

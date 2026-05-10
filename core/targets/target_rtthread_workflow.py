@@ -1,37 +1,55 @@
 from pathlib import Path
 from pick_parser import PickParser
-from zrtos_parser import ZRTOSParser
+from core.parser.zrtos_parser import ZRTOSParser
 from kconfig_writer import KconfigReader, KconfigWriter
 from transform_prototyp import KconfigTransformer
-import excel_writer
-from time_writer import TransformTimer
+from core.utils import TransformTimer
 import sys
 import pprint
 import os
 
 def main():    
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_log/transform8.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_log/results8.xlsx"
-    project_dir = "/home/ljd/px4/PX4-Autopilot"
-    output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_px4/PX4_output"
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/transform4.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_log/results4.xlsx"
+    project_dir = "/home/ljd/rtthread/rt-thread/bsp/qemu-vexpress-a9"
+    output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_rt_thread/RT_Thread_output"
     main_file = "Kconfig"
 
+    # Because the main Kconfig in /bsp/qemu-vexpress-a9 refers to other Kconfig that are in ../ or ../..
+    # we give this as outside_file_relative_to to transform_all_files() 
+    # without this the output structur of transformation is not right 
+    rt_thread_root = "/home/ljd/rtthread/rt-thread"
+    
+    # Ins Projektverzeichnis wechseln
     original_cwd = os.getcwd()
     os.chdir(project_dir)
+    
+    # Relative Pfade setzen (relativ zum project_dir)
+    os.environ["RTT_DIR"] = "../.."
+    os.environ["BSP_DIR"] = "."
+    os.environ["PKGS_DIR"] = "packages"
 
-    timer = TransformTimer()
+    # Log-Datei öffnen
     log_handle = open(log_file, "w")
     sys.stdout = log_handle
     sys.stderr = log_handle
 
+    timer = TransformTimer()
+
     print("=" * 100)
     print("TRANSFORMATION PROTOTYP LOG")
     print("=" * 100)
-    print(f"{log_file}")
+    print(f"Log file: {log_file}")
+    
     print("=" * 100)
-    print(f"Root: {project_dir}")
+    print(f"Project dir: {project_dir}")
+    print(f"Current working directory: {os.getcwd()}")
     print(f"Main file: {main_file}")
     print(f"Output dir: {output_dir}")
+    print("Environment variables:")
+    print(f"  RTT_DIR={os.environ.get('RTT_DIR')}")
+    print(f"  BSP_DIR={os.environ.get('BSP_DIR')}")
+    print(f"  PKGS_DIR={os.environ.get('PKGS_DIR')}")
     print("=" * 100)
     
     picker = PickParser("ZRTOS")
@@ -39,8 +57,8 @@ def main():
     timer.lap("Parser initialization")
     print(parser)
 
-
     try:
+        # Parser ausführen (wir sind bereits im richtigen Verzeichnis)
         parser_result = parser.parse_files(".", main_file)
         timer.lap("Got parser results")
         print(f"Defined symbols: {len(parser_result['defined_syms'])}")
@@ -63,17 +81,19 @@ def main():
         reader = KconfigReader("ZRTOS")
         writer = KconfigWriter("ZRTOS")
 
+        # Absolute Pfade verwenden für beide Parameter
         excel_data = transformer.transform_all_files(
             reader=reader,
             writer=writer,
-            project_dir=Path(project_dir).resolve(),  
-            output_dir=Path(output_dir).resolve(),     
+            project_dir=Path(project_dir).resolve(),  # Absoluter Pfad
+            output_dir=Path(output_dir).resolve(),     # Absoluter Pfad
             log=True,
             log_lines=False,
             log_and_check_resolve_glob=False,
-            log_cd_nc_details=True,
+            log_cd_nc_details=False,
             log_excel_after_each_file=True,
-            log_excel_output=excel_file
+            log_excel_output=excel_file, 
+            outside_file_relative_to = rt_thread_root
         )   
 
         timer.lap("File transformation and excel log")
@@ -88,6 +108,7 @@ def main():
         return_code = 1
 
     finally:
+        # Aufräumen: Log-Datei schließen und zurück ins ursprüngliche Verzeichnis
         log_handle.close()
         sys.stdout = sys.__stdout__
         sys.stderr = sys.__stderr__
@@ -96,4 +117,4 @@ def main():
     return return_code
 
 if __name__ == '__main__':
-    sys.exit(main())   
+    sys.exit(main())

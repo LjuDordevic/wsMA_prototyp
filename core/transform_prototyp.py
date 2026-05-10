@@ -2,7 +2,7 @@ from pathlib import Path
 from posixpath import join, dirname
 from typing import List, Dict, Optional, Set, Tuple, Any
 from dataclasses import dataclass
-import excel_writer
+from core.utils import write_to_excel
 from glob import iglob
 
 @dataclass
@@ -2595,7 +2595,7 @@ class KconfigTransformer:
 
             excel_stats.append(stats)
             if log_excel_after_each_file:
-                excel_writer.write_to_excel(excel_stats, log_excel_output)
+                write_to_excel(excel_stats, log_excel_output)
             
             try:
                 writer.write(transformed, output_file)

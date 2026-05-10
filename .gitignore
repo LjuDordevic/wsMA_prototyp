@@ -8,7 +8,6 @@ __pycache__/
 .vscode/
 
 ZRTOS_demo/
-core/single_file.py
 
 results_old.xlsx
 transform_demo.log
@@ -21,3 +20,5 @@ venv_esp_idf_demo
 
 venv_zrtos_demo2
 ZRTOS_demo1_without_defconfig
+
+core/old_scripts/

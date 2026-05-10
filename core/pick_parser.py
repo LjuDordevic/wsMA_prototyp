@@ -2,7 +2,7 @@ import sys
 import os
 from pathlib import Path
 import pprint
-from zrtos_parser import ZRTOSParser
+from core.parser.zrtos_parser import ZRTOSParser
 
 # /core  
 base_dir = Path(__file__).parent

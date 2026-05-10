@@ -1,30 +1,24 @@
 from pathlib import Path
 from pick_parser import PickParser
-from zrtos_parser import ZRTOSParser
+from core.parser import ESPIDFParser
 from kconfig_writer import KconfigReader, KconfigWriter
 from transform_prototyp import KconfigTransformer
-import excel_writer
-from time_writer import TransformTimer
+from core.utils.time_writer import TransformTimer
 import sys
-import pprint
-import os
+import os 
 
 def main():    
-    # DON'T FORGET TO CHANGE
-    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/transform10.log"
-    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo1_output/results10.xlsx"
-    project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr"
-    output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo1_output"
-
-    #log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo2_output/transform3.log"
-    #excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/ZRTOS_demo2_output/results3.xlsx"
-    #project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo1_without_defconfig/zephyr"
-    #output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_demo2_output"
-
+    log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/transform3.log"
+    excel_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_log/results3.xlsx"
+    project_dir = "/home/ljd/espcode/v5.5.2/esp-idf"
+    output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_esp_idf/ESP_IDF_demo_output"
     main_file = "Kconfig"
 
-    #project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr"
-    #output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_copy1"
+    os.environ["IDF_ENV_FPGA"] = "false"
+    os.environ["srctree"] = project_dir
+    os.environ["IDF_TARGET"] = "esp32"
+    os.environ["COMPONENT_KCONFIGS_SOURCE_FILE"] = "/home/ljd/wsMA_prototyp/ESP_IDF_demo/build/kconfigs.in"
+    os.environ["COMPONENT_KCONFIGS_PROJBUILD_SOURCE_FILE"] = "/home/ljd/wsMA_prototyp/ESP_IDF_demo/build/kconfigs_projbuild.in"
 
     timer = TransformTimer()
     sys.stdout = open(log_file, "w")
@@ -34,24 +28,17 @@ def main():
     print("TRANSFORMATION PROTOTYP LOG")
     print("=" * 100)
     print(f"{log_file}")
-    print("VARS: ")
-    vars = ['ZEPHYR_BASE', 'WORKING_DIRECTORY', 'PROJECT_BINARY_DIR', 
-            'BOARD', 'srctree', 'KCONFIG_BINARY_DIR', 'ZEPHYR_ACPICA_KCONFIG']
-    
-    print(f"  project dir: {project_dir}\n  main file: {main_file}\n  output_dir: {output_dir}")
-    
-    for key in vars:
-        value = os.environ.get(key, '<NOT SET>')
-        print(f"  {key}='{value}'")
-
-    print("=" * 100)
     print(f"Root: {project_dir}")
     print(f"Main file: {main_file}")
     print(f"Output dir: {output_dir}")
     print("=" * 100)
     
-    picker = PickParser("ZRTOS")
-    parser = ZRTOSParser(picker.kconfiglib_version)
+    
+    print("PROJBUILD exists:",
+      os.path.exists(os.environ["COMPONENT_KCONFIGS_PROJBUILD_SOURCE_FILE"]))
+
+    picker = PickParser("ESPIDF")
+    parser = ESPIDFParser(picker.kconfiglib_version)
     timer.lap("Parser initialization")
     print(parser)
 
@@ -67,7 +54,7 @@ def main():
         traceback.print_exc()
         sys.exit(1)
 
-    transformer = KconfigTransformer(source_spec="ZRTOS")
+    transformer = KconfigTransformer(source_spec="ESPIDF")
     print("\n2. Bild ExtParserContext FROM PARSER RESULTS")
     print(f" Transformer used: {transformer.source_spec}")
 
@@ -80,8 +67,8 @@ def main():
     print("=" * 100)
     print(f"Build context finished")
 
-    reader = KconfigReader("ZRTOS")
-    writer = KconfigWriter("ZRTOS")
+    reader = KconfigReader("ESPIDF")
+    writer = KconfigWriter("ESPIDF")
 
     excel_data = transformer.transform_all_files(
         reader=reader,
@@ -99,8 +86,6 @@ def main():
     timer.lap("File transformation and excel log")
 
     timer.stop()
-
-    #excel_writer.write_excel(excel_data, "/home/ljd/wsMA_prototyp/results.xlsx")
 
     return 0
 
