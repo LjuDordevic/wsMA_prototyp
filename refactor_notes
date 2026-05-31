@@ -1,4 +1,4 @@
-DELETE: venv_esp_idf, venv_esp_idf_demo
+DELETE: venv_esp_idf, venv_esp_idf_demo, ESP_IDF_demo
 
 **********************************espressif/esp-idf-kconfig ********************************** 
 -> ~/wsMA_prototyp$ -> git submodule add https://github.com/espressif/esp-idf-kconfig.git external/ESPIDFKconfig
