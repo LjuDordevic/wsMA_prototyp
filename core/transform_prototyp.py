@@ -2,212 +2,23 @@ from pathlib import Path
 from posixpath import join, dirname
 from typing import List, Dict, Optional, Set, Tuple, Any
 from dataclasses import dataclass
-from core.utils import write_to_excel
+from core.utils import ContextBuilder, TransformationStats, write_to_excel
+from core.context.context import ExtParserContext
+from core.utils.context_builder import ContextBuilder
 from glob import iglob
 
-@dataclass
-class ExtParserContext:
-    symbol_infos: Dict[str, List[dict]]
-    symbol_definitions: Dict[str, List[dict]]  # symbol_name -> [location1, location2, ...]
-    symbol_nr: int
-    symbol_defaults: Dict[str, List[dict]]
-    symbol_orig_defaults: Dict[str, List[dict]]
-    configdefault_options: Set[str]
-    configdefault_options_nr: int
-    choice_infos: Dict[str, List[dict]]
-    choice_definitions : Dict[str, List[dict]] # choice_name -> [location1, location2, ...]
-    choice_nr: int
-    named_choices_nr: int
-    choice_dep: Dict[str, List[dict]]
-    parser_result: dict
-    srctree: Path
-
 class KconfigTransformer:
-    """
-    build context based on parser_result
-    transform lines
-    """
     DEF_KEYWORDS = ('def_string', 'def_int', 'def_hex')
-    FILE_DEF_KEYWORDS_COUNT = 0
-    PROJECT_DEF_KEYWORDS_COUNT = 0
     SOURCE_KEYWORDS = ('source', 'osource', 'rsource', 'orsource')
-    FILE_SOURCE_NR = 0
-    FILE_SOURCE_W_GLOB = 0
-    FILE_OSOURCE_NR = 0
-    FILE_RSOURCE_NR = 0
-    FILE_ORSOURCE_NR = 0
-    FILE_SOURCE_OUT_DIFF = 0
-    FILE_OSOURCE_OUT = 0
-    FILE_RSOURCE_OUT = 0
-    FILE_ORSOURCE_OUT = 0
-    NEW_BC_GLOB = 0
-    FILE_SOURCE_KEYWORDS_ALL_NR = 0
-    FILE_ALL_ADDED_LINES_SKW = 0
-    ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0
-    FILE_CONFIGDEFAULT_NR = 0
-    FILE_REMOVED_CONSECUTIVE_EMPTY_LINES = 0
-    FILE_SKIPPED_BC_CONFIGDEFAULT = 0
-    FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
-    OPTION_MODULES_COUNTER = 0
-    OPTION_MODULES_INFO = []
-    FILE_OPT_ENV = 0
-    FILE_OPT_ALLNONCONG = 0
-    FILE_OPT_DEFCONFIG = 0
-    PROCESSED_CHOICES = set()
-    FILE_SKIP_OPTIONAL_CHOICE_ATTR = 0
-    FILE_WARNING_ATTR = 0
-    FILE_SET_OPTION = 0
-    FILE_SET_DEFAULT_OPTION = 0
-    FILE_SKIP_CHOICE_TYP_DEF_BOOL = 0       # Linux doesn't allow typ definion as choice attr 
-    FILE_SKIP_CHOICE_TYP_DEF_TRISTATE = 0
-    FILE_SKIPPED_BC_NAMED_CHOICE = 0
-    FILE_ADDED_BC_NAMED_CHOICE = 0
-    FILE_CHANGED_INPROMPT_BC_CHOICE = 0
-    FILE_CHANGED_TYP_TRISTATE_TO_BOOL = 0  
-    OLD_HELP = 0
-    OLD_BOOLEAN = 0
 
     def __init__(self, source_spec: str):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
-        self.context: Optional[ExtParserContext] = None
-   
-    def _build_context_from_parser(self, parser_result: dict, log: bool) -> ExtParserContext: 
-        konf = parser_result['kconf']
-        symbol_infos = {}
-        symbol_definitions = {}
-        symbol_defaults = {}
-        symbol_orig_defaults = {}
-        configdefault_options = set()
-        choice_infos = {}
-        choice_definitions = {}
-        choice_dep = {}
-        unique_syms_nr = len(parser_result['unique_defined_syms'])
-        unique_choice_nr = len(parser_result['unique_choices'])
-        unique_named_choices_nr = len(parser_result['named_choices'])
+        self.context = None
+        self.stats = TransformationStats()
+        self.processed_choices = set()
 
-        print(" call different attributes on options found in parser_result['unique_defined_syms']")
-        
-        for sym in parser_result['unique_defined_syms']:
-            if sym.name not in (symbol_infos or symbol_definitions or symbol_defaults or symbol_orig_defaults):
-                #print(sym.name)
-                symbol_infos[sym.name] = []
-                symbol_definitions[sym.name] = []
-                symbol_defaults[sym.name] = []
-                symbol_orig_defaults[sym.name] = []
-            
-            """ 
-            if sym.name == "DEFSTRING" or sym.name=="FOO":
-                print(f"sym.name: {sym.name}")
-                print(f"sym.origin: {sym.origin}")
-                print(f"sym.name_and_loc: {sym.name_and_loc}")
-                print(f"\n sym.defaults---------------------")
-                for d in sym.defaults:
-                    print(f"{d}")
-                print(f"\n sym.orig_defaults---------------------")
-                for od in sym.orig_defaults:
-                    print(f"{od}")
-                print(f"\n sym.nodes---------------------")
-                for n in sym.nodes:
-                    print(f"{n}\n")
-                    print(f"{n.dep}\n")
-                print(f"\n sym.nodes---------------------")
-            """
-            symbol_info ={
-                'sym.name' : sym.name,
-                #'sym.origin' : sym.origin,
-                'sym.name_and_loc' : sym.name_and_loc
-            }  
-            symbol_infos[sym.name].append(symbol_info)
-            
-            for sd in sym.defaults:              
-                #print(f"{sd}\n")
-                defaults_info = {
-                    'sym.default': sd
-                }
-                symbol_defaults[sym.name].append(defaults_info)
-             
-            for sod in sym.orig_defaults:
-                #print(f"{sod}")  
-                orig_defaults_info = {
-                    'orig_defaults': sod
-                }    
-                symbol_orig_defaults[sym.name].append(orig_defaults_info)
-            
-            for node in sym.nodes:
-                is_configdefault = getattr(node, 'is_configdefault', False)
-                #print(node.is_configdefault)               
-                
-                location_info = {
-                    'file': node.filename if hasattr(node, 'filename') else None,
-                    'line': node.linenr if hasattr(node, 'linenr') else None,
-                    'node': node,
-                    'node.defaults': node.defaults,
-                    #'node.default.dep':  node_default_dep,
-                    #'node.default.loc': node_default_loc,
-                    'is_configdefault': is_configdefault
-                }
-                symbol_definitions[sym.name].append(location_info)
-            
-                if is_configdefault: configdefault_options.add(sym.name)
-         
-        for choice in parser_result['unique_choices']:
-            if choice.name not in (choice_infos or choice_definitions or choice_dep):
-                choice_infos[choice.name] = []
-                choice_definitions[choice.name] = []
-                choice_dep[choice.name] = []
-
-            choice_info ={
-                'choice.name' : choice.name,
-                #'choice.type' : choice.type,
-                #'choice.name_and_loc' : choice.name_and_loc,
-                'choice.syms': choice.syms,
-                #'choice.direct_dep': choice.direct_dep,
-                #'choice.orig_defaults': choice.orig_defaults
-            }  
-            choice_infos[choice.name].append(choice_info)
-            #print(f"chinfo: {choice.name_and_loc}: {choice_info}")
-
-            for node in choice.nodes:
-
-                location_info = {
-                    'file': node.filename if hasattr(node, 'filename') else None,
-                    'line': node.linenr if hasattr(node, 'linenr') else None,
-                    'node.prompt': node.prompt,
-                    'node.defaults': node.defaults,
-                    #'node.item.dd': node.item.direct_dep,
-                    'node.dep': node.dep,
-                    #'node.item.name': node.item.name
-    
-                }
-
-                dep_info = {
-                    'node.defaults': node.defaults,
-                    'node.dep': node.dep,
-                }
-
-                choice_definitions[choice.name].append(location_info)
-                choice_dep[choice.name].append(dep_info)
-
-        context = ExtParserContext(
-            symbol_infos = symbol_infos,
-            symbol_definitions = symbol_definitions,
-            symbol_nr = unique_syms_nr, #len(symbol_definitions),
-            configdefault_options = configdefault_options,
-            configdefault_options_nr = len(configdefault_options),
-            symbol_defaults = symbol_defaults,
-            symbol_orig_defaults = symbol_orig_defaults,
-            choice_infos = choice_infos,
-            choice_definitions = choice_definitions,
-            choice_nr = unique_choice_nr, #len(choice_definitions),
-            named_choices_nr = unique_named_choices_nr,
-            choice_dep = choice_dep,
-            parser_result=parser_result,
-            srctree=Path(konf.srctree), 
-        )
-        
-        self.context = context
-        if log: self._log_parser_context(self.context)
-        return context
+    def initialize_context(self, parser_result: dict, log):
+        self.context = ContextBuilder().build(parser_result, log)
 
     def _extract_named_choice_info(self, choice_name: str, log: bool, log_cd_nc_details: bool):
         context = self.context
@@ -396,7 +207,7 @@ class KconfigTransformer:
         return cd_entries
 
     def _get_transformed_config_defaults(self, cd_entries, reader, project_dir: Path) -> List:
-        from kconfig_writer import KconfigLine
+        from core.kconfig_writer import KconfigLine
         transformed_lines = []
         
         print("transform all extracted <default lines> from conifgdefaults - add them together")
@@ -503,17 +314,17 @@ class KconfigTransformer:
                         print(f"    Skipping if-endif block (only configdefaults) starting at line {line.line_number}")
                         old_i = i
                         i = self._skip_if_block(lines, i)
-                        self.FILE_SKIPPED_BC_CONFIGDEFAULT += (i - old_i)
+                        self.stats.file_skipped_bc_configdefault += (i - old_i)
                         continue
 
                 if line.line_type == 'configdefault':
                     print(f"    Skipping configdefault block starting at line {line.line_number}")
-                    self.FILE_SKIPPED_BC_CONFIGDEFAULT += 1 # the configdefault line itself
+                    self.stats.file_skipped_bc_configdefault += 1 # the configdefault line itself
                     i += 1
 
                     while i < len(lines) and lines[i].indent > line.indent:
                         print(f"      Skipping line {lines[i].line_number}: {lines[i].line_type}")
-                        self.FILE_SKIPPED_BC_CONFIGDEFAULT += 1
+                        self.stats.file_skipped_bc_configdefault += 1
                         i += 1
                     # i = 1. line after the block 
                     continue
@@ -535,14 +346,14 @@ class KconfigTransformer:
                             print(f"    Skipping non-first definition of choice {choice_name} at line {line.line_number}, {current_file}")
                             # Skip until endchoice
                             #print(f"    before_i {i}")
-                            self.FILE_SKIPPED_BC_NAMED_CHOICE += 1 # the choice line itself
+                            self.stats.file_skipped_bc_named_choice += 1 # the choice line itself
                             i += 1
                             while i < len(lines) and lines[i].line_type != 'endchoice':
                                 #print(f"        {lines[i]}")
-                                self.FILE_SKIPPED_BC_NAMED_CHOICE += 1
+                                self.stats.file_skipped_bc_named_choice += 1
                                 i += 1
                             i += 1  # consume endchoice
-                            self.FILE_SKIPPED_BC_NAMED_CHOICE += 1
+                            self.stats.file_skipped_bc_named_choice += 1
                             #print(f"    after {i}")
                             #print("helloooend")     
                             continue
@@ -632,11 +443,11 @@ class KconfigTransformer:
                             
             len_transformed_lines = len(result)
             # EXCEL stats
-            #stats = self._log_file_and_reset_count(self.FILE_SOURCE_OUT_DIFF, current_file, len_reader_input, len_transformed_lines)
-            return result, self.FILE_SOURCE_OUT_DIFF, len_reader_input, len_transformed_lines
+            #stats = self._log_file_and_reset_count(self.stats.file_source_out_diff, current_file, len_reader_input, len_transformed_lines)
+            return result, self.stats.file_source_out_diff, len_reader_input, len_transformed_lines
 
     def _transform_choice(self, lines: List, current_index: int, result: List, transform_func) -> int:
-        from kconfig_writer import KconfigLine
+        from core.kconfig_writer import KconfigLine
         import re
 
         choice_line = lines[current_index]        
@@ -674,15 +485,15 @@ class KconfigTransformer:
 
             # SKIP: type attr (bool/tristate) & optional attr
             if line_item.line_type == 'optional':
-                self.FILE_SKIP_OPTIONAL_CHOICE_ATTR += 1 
+                self.stats.file_skip_optional_choice_attr += 1 
                 idx += 1
                 continue
             if line_item.line_type == 'type_tristate':
-                self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE += 1
+                self.stats.file_skip_choice_typ_def_tristate += 1
                 idx += 1
                 continue
             if line_item.line_type == 'type_bool':
-                self.FILE_SKIP_CHOICE_TYP_DEF_BOOL += 1
+                self.stats.file_skip_choice_typ_def_bool += 1
                 idx += 1
                 continue
             if line_item.line_type == 'inline_prompt_choice':
@@ -692,7 +503,7 @@ class KconfigTransformer:
                 new_prompt_line = f'{indent_str}prompt "{prompt_text}"'
                 modified_line = KconfigLine(new_prompt_line, line_item.line_number)
                 result.append(modified_line)
-                self.FILE_CHANGED_INPROMPT_BC_CHOICE += 1
+                self.stats.file_changed_inprompt_bc_choice += 1
                 idx += 1
                 continue
 
@@ -737,7 +548,7 @@ class KconfigTransformer:
         return block_end_index
 
     def _transform_named_choice(self, log_debug: bool, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
-        from kconfig_writer import KconfigLine
+        from core.kconfig_writer import KconfigLine
         
         choice_line = lines[current_index]        
         # save first line without name
@@ -784,13 +595,13 @@ class KconfigTransformer:
 
             # SKIP: type attr (bool/tristate) & optional attr
             if line_item.line_type == 'optional':
-                self.FILE_SKIP_OPTIONAL_CHOICE_ATTR += 1 
+                self.stats.file_skip_optional_choice_attr += 1 
                 continue
             if line_item.line_type == 'type_tristate':
-                self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE += 1
+                self.stats.file_skip_choice_typ_def_tristate += 1
                 continue
             if line_item.line_type == 'type_bool':
-                self.FILE_SKIP_CHOICE_TYP_DEF_BOOL += 1
+                self.stats.file_skip_choice_typ_def_bool += 1
                 continue
             if line_item.line_type == 'inline_prompt_choice': 
                 #inline_typ = line_item.content.get('inline_typ') Linux doesn't allow bool "..."
@@ -799,7 +610,7 @@ class KconfigTransformer:
                 new_prompt_line_text = f'{indent_str}prompt "{line_text}"'
                 new_prompt_line=KconfigLine(new_prompt_line_text, line_item.line_number)
                 result.append(new_prompt_line)
-                self.FILE_CHANGED_INPROMPT_BC_CHOICE += 1
+                self.stats.file_changed_inprompt_bc_choice += 1
                 continue            
             if line_item.line_type == 'depends_on':
                 first_depends_on_for_mc.append(line_item)
@@ -943,7 +754,7 @@ class KconfigTransformer:
                     
                     print(f"        Found depends on: {len(depends_from_def)}")
                     
-                    #self.FILE_SKIPPED_BC_NAMED_CHOICE += len(depends_from_def)
+                    #self.stats.file_skipped_bc_named_choice += len(depends_from_def)
                     # depends on for the line 
                     depends_by_choice_line[choice_line_num] = depends_from_def
                     
@@ -985,7 +796,7 @@ class KconfigTransformer:
                         if log_debug: print(f"      Added default: {new_line.strip()}")
 
                     print(f"        Added default: {added_def_counter}")
-                    self.FILE_ADDED_BC_NAMED_CHOICE += added_def_counter
+                    self.stats.file_added_bc_named_choice += added_def_counter
 
                     # we would like to take conditions form depends on but if the choice doesn't have
                     # depends on, meaning no place to read all aditional cond from if/menu 
@@ -1014,12 +825,12 @@ class KconfigTransformer:
                             new_prompt_line_text = f'{indent_str}prompt "{line_text}" if {add}'
                         new_prompt_line=KconfigLine(new_prompt_line_text, line.line_number)
                         result.append(new_prompt_line)
-                        self.FILE_ADDED_BC_NAMED_CHOICE += 1
+                        self.stats.file_added_bc_named_choice += 1
                         print(f"    Added new_prompt: {new_prompt_line_text.strip()}")
                     else:
                         result.append(line)
                         print(f"    Added old_prompt: {line.raw_text}")
-                        self.FILE_ADDED_BC_NAMED_CHOICE += 1
+                        self.stats.file_added_bc_named_choice += 1
                         #print(f"heeee {line} + {} + {add}")
             
             """ 
@@ -1027,18 +838,18 @@ class KconfigTransformer:
             if choice_prompts:
                 for pl in choice_prompts:
                     result.append(pl)
-                    self.FILE_ADDED_BC_NAMED_CHOICE += 1
+                    self.stats.file_added_bc_named_choice += 1
                     print(f"Added prompt {pl}")
             """
             if help_lines:
                 for hl in help_lines:
                     result.append(hl)    
-                    self.FILE_ADDED_BC_NAMED_CHOICE += 1
+                    self.stats.file_added_bc_named_choice += 1
                     print(f"    Added help {hl}")
 
         if log_debug:
             print(f"\n  Final result has {len(result)} lines before adding configs")
-            print(f"    Added Lines bc named choice {self.FILE_ADDED_BC_NAMED_CHOICE}")
+            print(f"    Added Lines bc named choice {self.stats.file_added_bc_named_choice}")
 
         # ADD all configs in choice block
         # 1. TRACK configs already present in this choice block
@@ -1386,8 +1197,8 @@ class KconfigTransformer:
         print(f"    But in the first definition there where {len_menuconfig_block_first_def} menuconfig lines")
         new_mc_lines = menuconfig_lines_added - len_menuconfig_block_first_def
         print(f"    Diff: {new_mc_lines}")
-        self.FILE_ADDED_BC_NAMED_CHOICE += (new_mc_lines + added_lines)
-        print(f"    Added Total Lines bc named choice {self.FILE_ADDED_BC_NAMED_CHOICE}")
+        self.stats.file_added_bc_named_choice += (new_mc_lines + added_lines)
+        print(f"    Added Total Lines bc named choice {self.stats.file_added_bc_named_choice}")
         """ 
         for line in result:
             print(f"resultttt {line}")
@@ -1410,7 +1221,7 @@ class KconfigTransformer:
 
 
     def _transform_bool_to_tristate_choice_typ(self, line_item, indent: Optional[int] = 0,prompt_text: Optional[str] = "", already_counted: Optional[bool]=None):
-        from kconfig_writer import KconfigLine
+        from core.kconfig_writer import KconfigLine
         import re
         
         # actually it wouldn't be right for choice_conifg to not have prompt
@@ -1431,7 +1242,7 @@ class KconfigTransformer:
         if already_counted: 
             print(f" already counted the typ change {new_line_text}")
         else: 
-            self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL += 1
+            self.stats.file_changed_typ_tristate_to_bool += 1
             #print(f" meein {new_line_text}")
 
         return KconfigLine(new_line_text, line_item.line_number)
@@ -1470,7 +1281,7 @@ class KconfigTransformer:
                 result.append(transformed)
         
         result.extend(transformed_entries) 
-        self.FILE_CONFIGDEFAULT_NR += len(transformed_entries)  
+        self.stats.file_configdefault_nr += len(transformed_entries)  
         return block_end_index
 
     def _transform_single_line(self, line, current_symbol: Optional[str], current_file: Path, resolve_log: None):
@@ -1480,38 +1291,38 @@ class KconfigTransformer:
             - List[KconfigLine]: 1:n
         """
         if line.line_type in self.DEF_KEYWORDS:
-            self.FILE_DEF_KEYWORDS_COUNT += 1                                      # for each def_* -> count 1 one added line   
+            self.stats.file_def_keywords_count += 1                                      # for each def_* -> count 1 one added line   
             return self._transform_def_keyword(line)
         elif line.line_type in self.SOURCE_KEYWORDS:
-            self.FILE_SOURCE_KEYWORDS_ALL_NR += 1                                  # for each self.SOURCE_KEYWORDS -> count 1, so that we have SUM of all 
+            self.stats.file_source_keywords_all_nr += 1                                  # for each self.SOURCE_KEYWORDS -> count 1, so that we have SUM of all 
             return self._transform_source_line(line, current_file, resolve_log)    # if resolve_log == True, than there is log for resolving and also iglob check is active 
         elif line.line_type == "option modules":
-            self.OPTION_MODULES_COUNTER += 1
+            self.stats.option_modules_counter += 1
             return self._transform_opt_modules(line, current_file)
         elif line.line_type == "option env":
-            self.FILE_OPT_ENV += 1
+            self.stats.file_opt_env += 1
             return self._transform_opt_env(line)
         elif line.line_type == "help_old":
-            self.OLD_HELP += 1
-            return self._transform_old_help(line)
+            self.stats.old_help += 1
+            return self._transform_stats.old_help(line)
         elif line.line_type == "typ_bool_old":
-            self.OLD_BOOLEAN += 1
-            return self._transform_old_boolean(line)
+            self.stats.old_boolean += 1
+            return self._transform_stats.old_boolean(line)
         else:
             if line.line_type == "allnoconfig_y":
-                self.FILE_OPT_ALLNONCONG += 1
+                self.stats.file_opt_allnoconfig += 1
             if line.line_type == "defconfig_list":
-                self.FILE_OPT_DEFCONFIG += 1
+                self.stats.file_opt_defconfig += 1
             if line.line_type == "warning":
-                self.FILE_WARNING_ATTR += 1
+                self.stats.file_warning_attr += 1
             if line.line_type == "set":
-                self.FILE_SET_OPTION += 1
+                self.stats.file_set_option += 1
             if line.line_type == "set_default":
-                self.FILE_SET_DEFAULT_OPTION += 1
+                self.stats.file_set_default_option += 1
             return line    
 
     def _transform_old_help(self, line):
-        from kconfig_writer import KconfigLine  
+        from core.kconfig_writer import KconfigLine  
             
         indent_str = ' ' * line.indent
 
@@ -1525,7 +1336,7 @@ class KconfigTransformer:
         return new_line
     
     def _transform_old_boolean(self, line):
-       from kconfig_writer import KconfigLine  
+       from core.kconfig_writer import KconfigLine  
             
        indent_str = ' ' * line.indent
 
@@ -1545,7 +1356,7 @@ class KconfigTransformer:
             def_<typ> [if <exp>]   -->      <type> 
                                             default [if <exp>]
         """
-        from kconfig_writer import KconfigLine  # avoid circular import
+        from core.kconfig_writer import KconfigLine  # avoid circular import
             
         indent_str = ' ' * line.indent
         keyword = line.content.get('_keyword')
@@ -1575,7 +1386,7 @@ class KconfigTransformer:
         return os.environ.get(var_name, match.group(0))
 
     def _transform_source_line(self, line, current_file, resolve_log) -> List:
-        from kconfig_writer import KconfigLine
+        from core.kconfig_writer import KconfigLine
         import re, os
 
         # GET needed information
@@ -1588,20 +1399,20 @@ class KconfigTransformer:
         has_glob = any(c in pattern for c in ['*', '?', '[', ']', '!'])
 
         # COUNT each keyword in file
-        if source_keyword == "osource": self.FILE_OSOURCE_NR += 1
-        elif source_keyword == "rsource": self.FILE_RSOURCE_NR += 1  
-        elif source_keyword == "orsource": self.FILE_ORSOURCE_NR += 1      
+        if source_keyword == "osource": self.stats.file_osource_nr += 1
+        elif source_keyword == "rsource": self.stats.file_rsource_nr += 1  
+        elif source_keyword == "orsource": self.stats.file_orsource_nr += 1      
 
         # COUNT source with and without glob
         if has_glob and source_keyword == "source":
-            self.FILE_SOURCE_W_GLOB += 1
+            self.stats.file_source_w_glob += 1
         if not has_glob and source_keyword == "source":
-            self.FILE_SOURCE_NR += 1 
+            self.stats.file_source_nr += 1 
 
         # NO GLOB -> copy line as it is to the output! BUT skip this for (o)r/(o)source because these have to be transformed to source before returning the line
         if not has_glob and not source_keyword == 'rsource' \
             and not source_keyword == 'orsource' and not source_keyword == 'osource':
-            print(f"    source without glob: 1")    # this is just for LOGGING, no need of using FILE_SOURCE_OUT_DIFF, because it's always 1 line that we look at and return
+            print(f"    source without glob: 1")    # this is just for LOGGING, no need of using stats.file_source_out_diff, because it's always 1 line that we look at and return
             return line
 
         # GLOB
@@ -1695,7 +1506,7 @@ class KconfigTransformer:
                     else: 
                         raise RuntimeError("check source matching")
 
-            self.FILE_O_SOURCE_KEYWORDS_NO_MATCH += 1
+            self.stats.file_o_source_keywords_no_match += 1
             """
             if source_keyword == "orsource" or source_keyword == "osource":
                 new_line_text = f'#{indent_str}source "{pattern}"' # comment, but transform ((o)r/o)source and path before? 
@@ -1726,24 +1537,24 @@ class KconfigTransformer:
                 print(f"      -> {matched_file}")
         
         # for glob log:
-        self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB += len(result_lines)   
-        print(f"    Files matching: {self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB} (using {source_keyword})")
+        self.stats.one_source_keywords_matched_glob += len(result_lines)   
+        print(f"    Files matching: {self.stats.one_source_keywords_matched_glob} (using {source_keyword})")
         
         # for file log, save diff. when source matches more files (1:n)
-        self.NEW_BC_GLOB = self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB - 1
-        self.FILE_SOURCE_OUT_DIFF += self.NEW_BC_GLOB  # sum all diff for 1 file, reset after FILE logging
+        self.stats.new_bc_glob = self.stats.one_source_keywords_matched_glob - 1
+        self.stats.file_source_out_diff += self.stats.new_bc_glob  # sum all diff for 1 file, reset after FILE logging
         
-        self.ONE_SOURCE_KEYWORDS_MATCHED_GLOB = 0 # set back for the next line with keyword
+        self.stats.one_source_keywords_matched_glob = 0 # set back for the next line with keyword
         return result_lines
 
     def _transform_opt_modules(self, line, current_file):
         # option modules --> modules
-        from kconfig_writer import KconfigLine 
+        from core.kconfig_writer import KconfigLine 
         indent_str = ' ' * line.indent
         new_line_text = f'{indent_str}modules'
         new_line = KconfigLine(new_line_text, line.line_number)
 
-        self.OPTION_MODULES_INFO.append({
+        self.stats.option_modules_info.append({
             'line': line.line_number, 
             'file': current_file
         })
@@ -1751,7 +1562,7 @@ class KconfigTransformer:
 
     def _transform_opt_env(self, line):
         # option env="<value>" --> default "$(<value>)"
-        from kconfig_writer import KconfigLine  # avoid circular import
+        from core.kconfig_writer import KconfigLine  # avoid circular import
         indent_str = ' ' * line.indent
         env_var = line.content.get('env')
         #env_value = os.environ.get(env_var) WRONG
@@ -1776,7 +1587,7 @@ class KconfigTransformer:
         - Menuconfig entries (standalone or in if-blocks) with their if-conditions
         """
         print(f"\n=== _get_all_choice_configs for {choice_name} ===")
-        from kconfig_writer import KconfigLine
+        from core.kconfig_writer import KconfigLine
         
         if choice_name not in self.context.choice_definitions:
             print(f"  {choice_name} not in choice_definitions!")
@@ -1886,7 +1697,7 @@ class KconfigTransformer:
                                 modified_line = KconfigLine(new_prompt_line, next_line.line_number)
                                 #print(f"mod: {modified_line.raw_text}")
                                 all_choice_prompt_lines.append(modified_line)
-                                self.FILE_CHANGED_INPROMPT_BC_CHOICE += 1
+                                self.stats.file_changed_inprompt_bc_choice += 1
                                 #print(all_choice_prompt_lines)
                                 
                             elif next_line.line_type == 'help':
@@ -2021,7 +1832,7 @@ class KconfigTransformer:
                                                     elif config_line.line_type == 'inline_prompt_choice': 
                                                         new_prompt_line = f'{indent_str}bool "{prompt_text}" if {combined_cond}'
                                                         if inline_typ == 'tristate': 
-                                                            self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL += 1
+                                                            self.stats.file_changed_typ_tristate_to_bool += 1
                                                             #print(f"meeinn {new_prompt_line}")
 
                                                     elif config_line.line_type == 'prompt': 
@@ -2138,7 +1949,7 @@ class KconfigTransformer:
                                                 new_prompt_line = f'{indent_str}bool "{prompt_text}" if {combined_cond}'
 
                                                 if inline_typ == 'tristate': 
-                                                    self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL += 1 # bc we are looking at prompts at config level 
+                                                    self.stats.file_changed_typ_tristate_to_bool += 1 # bc we are looking at prompts at config level 
                                                     #print(f"meeinn {new_prompt_line}")
                                                 
                                             if next_line.line_type == 'prompt': new_prompt_line = f'{indent_str}prompt "{prompt_text}" if {combined_cond}'
@@ -2153,7 +1964,7 @@ class KconfigTransformer:
                                             if next_line.line_type == 'inline_prompt_choice': 
                                                 new_prompt_line = f'{indent_str}bool "{prompt_text}"'    # config tristate -> bool "xxxx" BUT also bool -> bool 
                                                 if inline_typ == 'tristate': 
-                                                    self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL += 1
+                                                    self.stats.file_changed_typ_tristate_to_bool += 1
                                                     #print(f"meeinn {new_prompt_line}")
 
                                             modified_line = KconfigLine(new_prompt_line, next_line.line_number)
@@ -2241,79 +2052,79 @@ class KconfigTransformer:
         #print(f"    File:                      {str(current_file)}")
         print(f"    Reader input                {len_input} lines")
         print(f"    -----------------------------------------------------------------------")
-        print(f"    All source without glob:    {self.FILE_SOURCE_NR}")
-        print(f"    All source using glob:      {self.FILE_SOURCE_W_GLOB}")
-        print(f"    All osource_keywords:       {self.FILE_OSOURCE_NR}")
-        print(f"    All rsource_keywords:       {self.FILE_RSOURCE_NR}")
-        print(f"    All orsource_keywords:      {self.FILE_ORSOURCE_NR}")  
-        print(f"    SUM (r/or/o)source lines:   {self.FILE_SOURCE_KEYWORDS_ALL_NR}")
-        print(f"    All \"option env\" attr:      {self.FILE_OPT_ENV}")
+        print(f"    All source without glob:    {self.stats.file_source_nr}")
+        print(f"    All source using glob:      {self.stats.file_source_w_glob}")
+        print(f"    All osource_keywords:       {self.stats.file_osource_nr}")
+        print(f"    All rsource_keywords:       {self.stats.file_rsource_nr}")
+        print(f"    All orsource_keywords:      {self.stats.file_orsource_nr}")  
+        print(f"    SUM (r/or/o)source lines:   {self.stats.file_source_keywords_all_nr}")
+        print(f"    All \"option env\" attr:      {self.stats.file_opt_env}")
         print(f"    -----------------------------------------------------------------------")
         print(f"    Transformer Output:         {len_result} lines")
         print(f"    -----------------------------------------------------------------------")
-        print(f"        Added new bc of def_*:           {self.FILE_DEF_KEYWORDS_COUNT}")
+        print(f"        Added new bc of def_*:           {self.stats.file_def_keywords_count}")
         print(f"        Added new bc of glob:            {new_lines_skw}")
-        print(f"        Added new bc of config_default:  {self.FILE_CONFIGDEFAULT_NR}")
-        print(f"        Added new bc of named choice:    {self.FILE_ADDED_BC_NAMED_CHOICE}") 
-    #print(f"        Removed consecutive empty lines:  {self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES}") 
-        print(f"        Removed bc of config_default:    {self.FILE_SKIPPED_BC_CONFIGDEFAULT}") 
-        print(f"        Removed bc of named choice:      {self.FILE_SKIPPED_BC_NAMED_CHOICE}") 
-        print(f"        Removed no match for o(r)source: {self.FILE_O_SOURCE_KEYWORDS_NO_MATCH}")  
-        print(f"        Removed optional choice attr:    {self.FILE_SKIP_OPTIONAL_CHOICE_ATTR}")
-        print(f"        Removed bool     choice attr:    {self.FILE_SKIP_CHOICE_TYP_DEF_BOOL}")
-        print(f"        Removed tristate choice attr:    {self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE}") 
+        print(f"        Added new bc of config_default:  {self.stats.file_configdefault_nr}")
+        print(f"        Added new bc of named choice:    {self.stats.file_added_bc_named_choice}") 
+    #print(f"        Removed consecutive empty lines:  {self.stats.file_removed_consecutive_empty_lines}") 
+        print(f"        Removed bc of config_default:    {self.stats.file_skipped_bc_configdefault}") 
+        print(f"        Removed bc of named choice:      {self.stats.file_skipped_bc_named_choice}") 
+        print(f"        Removed no match for o(r)source: {self.stats.file_o_source_keywords_no_match}")  
+        print(f"        Removed optional choice attr:    {self.stats.file_skip_optional_choice_attr}")
+        print(f"        Removed bool     choice attr:    {self.stats.file_skip_choice_typ_def_bool}")
+        print(f"        Removed tristate choice attr:    {self.stats.file_skip_choice_typ_def_tristate}") 
         
         # STORE FOR EXCEL
         file_stats_excel = {
             'test file' : str(current_file),
             'input'     : len_input,
             'output'    : len_result,
-            'source_keyword_wo_glob' : self.FILE_SOURCE_NR,
-            'source_keyword_w_glob' : self.FILE_SOURCE_W_GLOB,
-            'osource_keyword' : self.FILE_OSOURCE_NR,
-            'rource_keyword' : self.FILE_RSOURCE_NR,
-            'orsource_keyword' : self.FILE_ORSOURCE_NR,
-            'sum_all_source' : self.FILE_SOURCE_KEYWORDS_ALL_NR,
-            'option_env' : self.FILE_OPT_ENV,
+            'source_keyword_wo_glob' : self.stats.file_source_nr,
+            'source_keyword_w_glob' : self.stats.file_source_w_glob,
+            'osource_keyword' : self.stats.file_osource_nr,
+            'rource_keyword' : self.stats.file_rsource_nr,
+            'orsource_keyword' : self.stats.file_orsource_nr,
+            'sum_all_source' : self.stats.file_source_keywords_all_nr,
+            'option_env' : self.stats.file_opt_env,
 
-            'new_lines_bc_of_def_': self.FILE_DEF_KEYWORDS_COUNT,
+            'new_lines_bc_of_def_': self.stats.file_def_keywords_count,
 
             'new_lines_bc_of_glob': new_lines_skw,
-            'new_lines_bc_cd': self.FILE_CONFIGDEFAULT_NR,
-            'new_lines_bc_named_choice': self.FILE_ADDED_BC_NAMED_CHOICE,
+            'new_lines_bc_cd': self.stats.file_configdefault_nr,
+            'new_lines_bc_named_choice': self.stats.file_added_bc_named_choice,
 
-            'removed_bc_orsource': self.FILE_O_SOURCE_KEYWORDS_NO_MATCH,
-            'removed_lines_bc_cd': self.FILE_SKIPPED_BC_CONFIGDEFAULT,
-            'removed_lines_bc_named_choice': self.FILE_SKIPPED_BC_NAMED_CHOICE,
+            'removed_bc_orsource': self.stats.file_o_source_keywords_no_match,
+            'removed_lines_bc_cd': self.stats.file_skipped_bc_configdefault,
+            'removed_lines_bc_named_choice': self.stats.file_skipped_bc_named_choice,
 
-            'removed_optional_choice_attr': self.FILE_SKIP_OPTIONAL_CHOICE_ATTR,
-            'removed_bool_choice_attr': self.FILE_SKIP_CHOICE_TYP_DEF_BOOL,
-            'removed_tristate_choice_attr': self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE
+            'removed_optional_choice_attr': self.stats.file_skip_optional_choice_attr,
+            'removed_bool_choice_attr': self.stats.file_skip_choice_typ_def_bool,
+            'removed_tristate_choice_attr': self.stats.file_skip_choice_typ_def_tristate
         }
 
-        self.FILE_SOURCE_NR = 0
-        self.FILE_SOURCE_W_GLOB = 0
-        self.FILE_OSOURCE_NR = 0
-        self.FILE_RSOURCE_NR = 0
-        self.FILE_ORSOURCE_NR = 0
-        self.FILE_SOURCE_KEYWORDS_ALL_NR = 0
-        self.FILE_DEF_KEYWORDS_COUNT = 0
-        self.FILE_ALL_ADDED_LINES_SKW = 0
-        self.FILE_CONFIGDEFAULT_NR = 0
-        self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES = 0
-        self.FILE_SKIPPED_BC_CONFIGDEFAULT = 0
-        self.NEW_BC_GLOB = 0
-        self.FILE_SOURCE_OUT_DIFF = 0
-        self.FILE_O_SOURCE_KEYWORDS_NO_MATCH = 0
-        self.FILE_OPT_ENV = 0
-        self.FILE_SKIP_OPTIONAL_CHOICE_ATTR = 0
-        self.FILE_WARNING_ATTR = 0
-        self.FILE_SET_OPTION = 0
-        self.FILE_SET_DEFAULT_OPTION = 0
-        self.FILE_SKIP_CHOICE_TYP_DEF_BOOL = 0
-        self.FILE_SKIP_CHOICE_TYP_DEF_TRISTATE = 0
-        self.FILE_SKIPPED_BC_NAMED_CHOICE = 0
-        self.FILE_ADDED_BC_NAMED_CHOICE = 0
+        self.stats.file_source_nr = 0
+        self.stats.file_source_w_glob = 0
+        self.stats.file_osource_nr = 0
+        self.stats.file_rsource_nr = 0
+        self.stats.file_orsource_nr = 0
+        self.stats.file_source_keywords_all_nr = 0
+        self.stats.file_def_keywords_count = 0
+        self.stats.file_all_added_lines_skw = 0
+        self.stats.file_configdefault_nr = 0
+        self.stats.file_removed_consecutive_empty_lines = 0
+        self.stats.file_skipped_bc_configdefault = 0
+        self.stats.new_bc_glob = 0
+        self.stats.file_source_out_diff = 0
+        self.stats.file_o_source_keywords_no_match = 0
+        self.stats.file_opt_env = 0
+        self.stats.file_skip_optional_choice_attr = 0
+        self.stats.file_warning_attr = 0
+        self.stats.file_set_option = 0
+        self.stats.file_set_default_option = 0
+        self.stats.file_skip_choice_typ_def_bool = 0
+        self.stats.file_skip_choice_typ_def_tristate = 0
+        self.stats.file_skipped_bc_named_choice = 0
+        self.stats.file_added_bc_named_choice = 0
 
         return file_stats_excel
         
@@ -2443,9 +2254,9 @@ class KconfigTransformer:
 
             cleaned.append(line)
         
-        # this lines are already counted through self.FILE_SKIPPED_BC_CONFIGDEFAULT
-        self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES = previous_len - len(cleaned)
-        #print(f"{self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES} = {previous_len} - {len(cleaned)}")
+        # this lines are already counted through self.stats.file_skipped_bc_configdefault
+        self.stats.file_removed_consecutive_empty_lines = previous_len - len(cleaned)
+        #print(f"{self.stats.file_removed_consecutive_empty_lines} = {previous_len} - {len(cleaned)}")
         return cleaned
 
     def _filter_cd_from_context(self, reader, project_dir, log_cd_nc_details):
@@ -2589,7 +2400,7 @@ class KconfigTransformer:
             # TODO: add new_lines to excel stats 
             # DON'T NEED THIS FOR THE STATISTICS - it just makes a lot compilcated 
             #new_lines = self._remove_consecutive_empty_lines(transformed)
-            #removed_consecutive_lines_nr = self.FILE_REMOVED_CONSECUTIVE_EMPTY_LINES
+            #removed_consecutive_lines_nr = self.stats.file_removed_consecutive_empty_lines
 
             stats = self._log_file_and_reset_count(source_out_diff, input_file, len_reader_input, len_transformed_lines)
 
@@ -2612,37 +2423,37 @@ class KconfigTransformer:
         print(f"    -> ExParserContext - unique choices: {self.context.choice_nr}")
         print(f"    -> ExParserContext - named choices:  {self.context.named_choices_nr}")
         print(f"----------------------------------------------------------------------")
-        if self.OPTION_MODULES_INFO:
-            for info in self.OPTION_MODULES_INFO:
-                print(f"    {self.OPTION_MODULES_COUNTER} option modules-attr found at line {info['line']} in {info['file']}")
+        if self.stats.option_modules_info:
+            for info in self.stats.option_modules_info:
+                print(f"    {self.stats.option_modules_counter} option modules-attr found at line {info['line']} in {info['file']}")
         else:
             print(f"    option modules: 0")          
         print(f"----------------------------------------------------------------------")
         print("count options/attr that are not transformed: ")
-        print(f"    allnoconfig_y:  {self.FILE_OPT_ALLNONCONG}")        
-        print(f"    defconfig_list: {self.FILE_OPT_DEFCONFIG}")
-        print(f"    warning:        {self.FILE_WARNING_ATTR}")
-        print(f"    set:            {self.FILE_SET_OPTION}")
-        print(f"    set default:    {self.FILE_SET_DEFAULT_OPTION}")
+        print(f"    allnoconfig_y:  {self.stats.file_opt_allnoconfig}")        
+        print(f"    defconfig_list: {self.stats.file_opt_defconfig}")
+        print(f"    warning:        {self.stats.file_warning_attr}")
+        print(f"    set:            {self.stats.file_set_option}")
+        print(f"    set default:    {self.stats.file_set_default_option}")
         print(f"----------------------------------------------------------------------")
         print("count changes that don't affect the output size: ")
-        print(f"        Changed inline prompt choice:    {self.FILE_CHANGED_INPROMPT_BC_CHOICE}") 
-        print(f"        Changed typ of choice element:   {self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL}") 
+        print(f"        Changed inline prompt choice:    {self.stats.file_changed_inprompt_bc_choice}") 
+        print(f"        Changed typ of choice element:   {self.stats.file_changed_typ_tristate_to_bool}") 
         print(f"----------------------------------------------------------------------")
         #print("additionaly count --help-- for PX4")
-        print(f"Attr --help--: {self.OLD_HELP}")
-        print(f"Attr boolean: {self.OLD_BOOLEAN}")
+        print(f"Attr --help--: {self.stats.old_help}")
+        print(f"Attr boolean: {self.stats.old_boolean}")
 
-        self.FILE_OPT_DEFCONFIG = 0
-        self.FILE_OPT_ALLNONCONG = 0
-        self.OPTION_MODULES_COUNTER = 0
-        self.OPTION_MODULES_INFO.clear()
-        self.FILE_WARNING_ATTR = 0
-        self.FILE_SET_OPTION = 0
-        self.FILE_SET_DEFAULT_OPTION = 0
-        self.FILE_CHANGED_INPROMPT_BC_CHOICE = 0        # for choice -> bool "pick something" --> prompt "pick something"
-        self.FILE_CHANGED_TYP_TRISTATE_TO_BOOL = 0      # tristate elements of choice should be restricted to bool 
-        self.OLD_HELP = 0
-        self.OLD_BOOLEAN = 0
+        self.stats.file_opt_defconfig = 0
+        self.stats.file_opt_allnoconfig = 0
+        self.stats.option_modules_counter = 0
+        self.stats.option_modules_info.clear()
+        self.stats.file_warning_attr = 0
+        self.stats.file_set_option = 0
+        self.stats.file_set_default_option = 0
+        self.stats.file_changed_inprompt_bc_choice = 0        # for choice -> bool "pick something" --> prompt "pick something"
+        self.stats.file_changed_typ_tristate_to_bool = 0      # tristate elements of choice should be restricted to bool 
+        self.stats.old_help = 0
+        self.stats.old_boolean = 0
 
         return excel_stats

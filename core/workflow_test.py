@@ -1,8 +1,8 @@
 from pathlib import Path
-from pick_parser import PickParser
+from core.pick_parser import PickParser
 from core.parser import ZRTOSParser
-from kconfig_writer import KconfigReader, KconfigWriter
-from transform_prototyp import KconfigTransformer
+from core.kconfig_writer import KconfigReader, KconfigWriter
+from core.transform_prototyp import KconfigTransformer
 from core.utils import TransformTimer
 import pprint
 import os
@@ -32,18 +32,18 @@ def main():
     #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source"       
     #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output"  
 
-    #log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output/transform.log"
-    #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
-    #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
+    log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output/transform.log"
+    project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
+    output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
 
     #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_option_output/transform.log"
     #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option"       
     #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option_output"  
     #os.environ["ENV_A"] = "i7-1260P"
 
-    log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/transform.log"
-    project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice"
-    output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output"
+    #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/transform.log"
+    #project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice"
+    #output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output"
 
     #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/transform.log"
     #project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault"
@@ -84,13 +84,9 @@ def main():
     print("-" * 50)
 
     transformer = KconfigTransformer(source_spec="ZRTOS")
-    print("\n2. Bild ExtParserContext FROM PARSER RESULTS")
+    print("\n2. Build ExtParserContext FROM PARSER RESULTS")
     print(f" Transformer used: {transformer.source_spec}")
-
-    context = transformer._build_context_from_parser(
-        parser_result,
-        log=True
-    )
+    transformer.initialize_context(parser_result, log=False)
     
     timer.lap("Built context from parser results")
 

@@ -48,58 +48,10 @@ START using parser:
    Parser found: 1 files
 --------------------------------------------------
 
-2. Bild ExtParserContext FROM PARSER RESULTS
+2. Build ExtParserContext FROM PARSER RESULTS
  Transformer used: ZRTOS
- call different attributes on options found in parser_result['unique_defined_syms']
-
- For each symbol found in parser_result['unique_defined_syms']
-    -> call sym.name/.origin/.name_and_loc
-    -> call for each sym.nodes (.filename/.linenr/node/.defaults/is_configdefault
-    -> call all sym.defaults
-    -> call all sym.orig_defaults
-
------------- symbol_infos --------------------------------------------------
-MODULES: [{'sym.name': 'MODULES', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig', 4)), 'sym.name_and_loc': 'MODULES (defined at Kconfig:3)'}]
-OPTION1: [{'sym.name': 'OPTION1', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig', 8)), 'sym.name_and_loc': 'OPTION1 (defined at Kconfig:7)'}]
-OPTION2: [{'sym.name': 'OPTION2', 'sym.origin': ('unset', None), 'sym.name_and_loc': 'OPTION2 (defined at Kconfig:11)'}]
-OPTION3: [{'sym.name': 'OPTION3', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig', 16)), 'sym.name_and_loc': 'OPTION3 (defined at Kconfig:15)'}]
-OPTION4: [{'sym.name': 'OPTION4', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig', 20)), 'sym.name_and_loc': 'OPTION4 (defined at Kconfig:19)'}]
-OPTION5: [{'sym.name': 'OPTION5', 'sym.origin': ('default', ('/home/ljd/wsMA_prototyp/test_dir_/transform_def/Kconfig', 24)), 'sym.name_and_loc': 'OPTION5 (defined at Kconfig:23)'}]
-
------------- symbol_definitions --------------------------------------------------
-MODULES: [{'file': 'Kconfig', 'line': 3, 'node': <menu node for symbol MODULES, deps y, has next, Kconfig:3>, 'node.defaults': [(<symbol y, tristate, value y, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 4))], 'is_configdefault': False}]
-OPTION1: [{'file': 'Kconfig', 'line': 7, 'node': <menu node for symbol OPTION1, prompt "option bool" (visibility y), deps y, has next, Kconfig:7>, 'node.defaults': [(<symbol y, tristate, value y, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 8))], 'is_configdefault': False}]
-OPTION2: [{'file': 'Kconfig', 'line': 11, 'node': <menu node for symbol OPTION2, prompt "option tristate" (visibility y), deps y, has next, Kconfig:11>, 'node.defaults': [(<symbol n, tristate, value n, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 12))], 'is_configdefault': False}]
-OPTION3: [{'file': 'Kconfig', 'line': 15, 'node': <menu node for symbol OPTION3, prompt "option int" (visibility y), deps y, has next, Kconfig:15>, 'node.defaults': [(<symbol 5, unknown, value "5", visibility n, direct deps n, undefined>, <symbol y, tristate, value y, constant>, ('Kconfig', 16))], 'is_configdefault': False}]
-OPTION4: [{'file': 'Kconfig', 'line': 19, 'node': <menu node for symbol OPTION4, prompt "option hex" (visibility y), deps y, has next, Kconfig:19>, 'node.defaults': [(<symbol 0x8000000, unknown, value "0x8000000", visibility n, direct deps n, undefined>, <symbol y, tristate, value y, constant>, ('Kconfig', 20))], 'is_configdefault': False}]
-OPTION5: [{'file': 'Kconfig', 'line': 23, 'node': <menu node for symbol OPTION5, prompt "option string" (visibility y), deps y, Kconfig:23>, 'node.defaults': [(<symbol text, unknown, value "text", constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 24))], 'is_configdefault': False}]
-
------------- symbol_defaults -----------------------------------------------
-MODULES: [{'sym.default': (<symbol y, tristate, value y, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 4))}]
-OPTION1: [{'sym.default': (<symbol y, tristate, value y, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 8))}]
-OPTION2: [{'sym.default': (<symbol n, tristate, value n, constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 12))}]
-OPTION3: [{'sym.default': (<symbol 5, unknown, value "5", visibility n, direct deps n, undefined>, <symbol y, tristate, value y, constant>, ('Kconfig', 16))}]
-OPTION4: [{'sym.default': (<symbol 0x8000000, unknown, value "0x8000000", visibility n, direct deps n, undefined>, <symbol y, tristate, value y, constant>, ('Kconfig', 20))}]
-OPTION5: [{'sym.default': (<symbol text, unknown, value "text", constant>, <symbol y, tristate, value y, constant>, ('Kconfig', 24))}]
-
------------- choice_infos -----------------------------------------------
-
------------- choice_definitions -----------------------------------------------
-
-   Symbol definitions and corresponding locations in ExParserContext: 
-   'MODULES' is defined x1
-     - Kconfig:3
-   'OPTION1' is defined x1
-     - Kconfig:7
-   'OPTION2' is defined x1
-     - Kconfig:11
-   'OPTION3' is defined x1
-     - Kconfig:15
-   'OPTION4' is defined x1
-     - Kconfig:19
-   'OPTION5' is defined x1
-     - Kconfig:23
     get_all_source_files: 
+    parser found: Kconfig
 
 3. Filter ExtParserContext
 extract all configdefault options and for each get transformed lines and last config
@@ -154,14 +106,21 @@ count options/attr that are not transformed:
     warning:        0
     set:            0
     set default:    0
+----------------------------------------------------------------------
+count changes that don't affect the output size: 
+        Changed inline prompt choice:    0
+        Changed typ of choice element:   0
+----------------------------------------------------------------------
+Attr --help--: 0
+Attr boolean: 0
 
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.006812s
-    Got parser results................................    0.009044s
-    Built context from parser results.................    0.001275s
-    File transformation and excel log.................    0.003906s
+    Parser initialization.............................    0.006452s
+    Got parser results................................    0.002666s
+    Built context from parser results.................    0.000826s
+    File transformation and excel log.................    0.003561s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   0.021041s ~ 0.02s
+    TOTAL TIME........................................   0.013507s ~ 0.01s
 ====================================================================================================
