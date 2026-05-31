@@ -53,10 +53,10 @@ Question: How to add different Kconfiglib-Projects as Git-Submodule?
           example: python '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' KconfigZephyrRTOS
 
   Folder: external\ESPIDFKconfig ("esp-idf-kconfig")
-    Python venv: venv_esp_idf
-      - python3 -m venv venv_esp_idf
+    Python venv: venv_esp_idf_demo
+      - python3 -m venv venv_esp_idf_demo
       - source venv_esp_idf/bin/activate 
-      - IMPORTANT: set export KCONFIG_PARSER_VERSION='2' in venv_esp_idf/bin/activate  
+      - IMPORTANT: set export KCONFIG_PARSER_VERSION='2' in venv_esp_idf_demo/bin/activate  
     Steps:
       Terminal: ~/wsMA_prototyp$ 
           call: git submodule add https://github.com/espressif/esp-idf-kconfig.git external/ESPIDFKconfig
