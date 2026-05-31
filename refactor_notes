@@ -1,0 +1,42 @@
+DELETE: venv_esp_idf, venv_esp_idf_demo
+
+**********************************espressif/esp-idf-kconfig ********************************** 
+-> ~/wsMA_prototyp$ -> git submodule add https://github.com/espressif/esp-idf-kconfig.git external/ESPIDFKconfig
+-> pip install -e ./external/ESPIDFKconfig/
+Successfully built esp-idf-kconfig
+Installing collected packages: pyparsing, pygments, mdurl, markdown-it-py, rich, esp-idf-kconfig
+Successfully installed esp-idf-kconfig-3.3.0 markdown-it-py-4.0.0 mdurl-0.1.2 pygments-2.19.2 pyparsing-3.2.5 rich-14.2.0
+-> echo "pip install -e ./external/ESPIDFKconfig/" > requirements.txt
+-> python -c "import esp_idf_kconfig; print(esp_idf_kconfig.__file__)" (same check pip show esp-idf-kconfig)
+~/wsMA_prototyp/external/ESPIDFKconfig/esp_idf_kconfig/__init__.py
+IMPORTANT: set export KCONFIG_PARSER_VERSION='2' in venv/bin/activate  
+-> /exp$ python test.py 
+Symbols: 4
+
+**********************************zephyr-rtos/zephyr ********************************** 
+OLD NOTES; Verschiedene Art von Zephyr Anwendungen 
+mkdir expr_zrtos
+cd expr_zrtos
+pip install west 
+west init -m https://github.com/zephyrproject-rtos/zephyr.git
+west update
+sudo apt install cmake
+west zephyr-export
+--> Zephyr has been added to the user package registry in:
+~/.cmake/packages/Zephyr
+--> ZephyrUnittest
+has been added to the user package registry in:
+~/.cmake/packages/ZephyrUnittest
+
+source '/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/zephyr-env.sh' !!!
+mkdir app
+cd app
+src -> main.C
+CMakeLists.txt
+prj.conf
+["KCONFIG_BINARY_DIR"] --> erst nach erfolgreichen build
+pip install west jsonschema pyelftools
+sudo apt install ninja-build
+pip install -r '/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/scripts/requirements.txt'
+west build -b native_sim .
+sudo apt install gcc-multilib g++-multilib libc6-dev-i386

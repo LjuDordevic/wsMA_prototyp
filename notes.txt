@@ -1,244 +1,246 @@
-**********************************zephyr-rtos/Kconfiglib ********************************** 
+Question: How to add different Kconfiglib-Projects as Git-Submodule?
+  Folder: external 
+  Projects:
+    - Kconfiglib von UM (depricated)
+      - Tag: "Kconfiglib"
+    - Kconfiglib (active) 
+      - Tag: "Zephyr-Kconfiglib", "ZephyrKconfiglib"
+      - zephyr-rtos/Kconfiglib 
+      - Zehpyr's futher development of UM-Kconfiglib
+      - currently as kconfiglib-14.1.1a4
+    - Kconfiglib in Zephyr 
+      - Tag: "ZRTOS-Kconfiglib", "ZephyrRTOS"
+      - project-specific Kconfiglib
+    - Kconfiglib in ESPIDF 
+      - Tag: "esp-idf-kconfig", "ESPIDFKconfig"
+      - project-specific Kconfiglib
 
--> ~/wsMA_prototyp$ git submodule add https://github.com/zephyrproject-rtos/Kconfiglib.git external/ZephyrKconfiglib
--> cd external/ZephyrKconfiglib -> git pull -> Already up to date.
--> cd .. -> pip install -e ./external/ZephyrKconfiglib/ 
-Successfully built kconfiglib
-Installing collected packages: kconfiglib
-Successfully installed kconfiglib-14.1.1a4
--> python -c "import kconfiglib; print(kconfiglib.__file__)"
-~/wsMA_prototyp/external/ZephyrKconfiglib/kconfiglib.py
--> cd exp/ -> python test.py 
-Symbols: 3
--> cd .. -> echo "-e ./external/ZephyrKconfiglib" > requirements.txt
-python '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' '/home/ljd/wsMA_prototyp/exp/KconfigZephyrRTOS'
+  Folder: external\ZephyrKconfiglib ("Zephyr-Kconfiglib")
+    Python venv: "venv"
+    Steps:
+      Terminal: ~/wsMA_prototyp$ 
+          call: git submodule add https://github.com/zephyrproject-rtos/Kconfiglib.git external/ZephyrKconfiglib
+      Terminal: ~/wsMA_prototyp$      
+          call: cd external/ZephyrKconfiglib 
+                git pull 
+                shoud see: "Already up to date"
+      Terminal: ~/wsMA_prototyp$           
+          call: pip install -e ./external/ZephyrKconfiglib/ 
+                should see: 
+                  Successfully built kconfiglib
+                  Installing collected packages: kconfiglib
+                  Successfully installed kconfiglib-14.1.1a4
+      Terminal: ~/wsMA_prototyp$     
+          call: echo "-e ./external/ZephyrKconfiglib" > requirements.txt
+    How to call menuconfig?
+      - Right now manually through terminal with the full path 
+      Terminal: ~/wsMA_prototyp$ 
+          call: python <path to /external/ZephyrRTOS/scripts/kconfig/menuconfig.py> <path to Kconfig-File>
+          example: python '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' '/home/ljd/wsMA_prototyp/exp/KconfigZephyrRTOS'
 
-**********************************zephyr-rtos/zephyr ********************************** 
-deactivate venv
-python3 -m venv venv_zephyr_rtos
-source venv_zephyr_rtos !!!!
-git submodule add https://github.com/zephyrproject-rtos/zephyr.git external/ZephyrRTOS
-pip install -e./external/ZephyrRTOS -> is not a valid editable requirement
-Use directly with python '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' KconfigZephyrRTOS
+  Folder: external\ZephyrRTOS ("ZRTOS-Kconfiglib")
+    Python venv: venv_zephyr_rtos
+      - deactivate venv
+      - python3 -m venv venv_zephyr_rtos
+      - source venv_zephyr_rtos/bin/activate 
+    Steps:
+      Terminal: ~/wsMA_prototyp$ 
+          call: git submodule add https://github.com/zephyrproject-rtos/zephyr.git external/ZephyrRTOS
+      Terminal: ~/wsMA_prototyp$ 
+          call: pip install -e./external/ZephyrRTOS
+          should see: is not a valid editable requirement
+          use directly: python 
+          example: python '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py' KconfigZephyrRTOS
 
-activate venv_zephyr_rtos
-mkdir expr_zrtos
-cd expr_zrtos
-pip install west 
-west init -m https://github.com/zephyrproject-rtos/zephyr.git
-west update
-sudo apt install cmake
-west zephyr-export
---> Zephyr has been added to the user package registry in:
-~/.cmake/packages/Zephyr
---> ZephyrUnittest
-has been added to the user package registry in:
-~/.cmake/packages/ZephyrUnittest
+  Folder: external\ESPIDFKconfig ("esp-idf-kconfig")
+    Python venv: venv_esp_idf
+      - python3 -m venv venv_esp_idf
+      - source venv_esp_idf/bin/activate 
+      - IMPORTANT: set export KCONFIG_PARSER_VERSION='2' in venv_esp_idf/bin/activate  
+    Steps:
+      Terminal: ~/wsMA_prototyp$ 
+          call: git submodule add https://github.com/espressif/esp-idf-kconfig.git external/ESPIDFKconfig
+                pip install -e ./external/ESPIDFKconfig/
+          should see: Successfully built esp-idf-kconfig
+                      Installing collected packages: pyparsing, pygments, mdurl, markdown-it-py, rich, esp-idf-kconfig
+      Terminal: ~/wsMA_prototyp$ 
+          call: echo "pip install -e ./external/ESPIDFKconfig/" > requirements.txt
 
-source '/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/zephyr-env.sh'    !!!
-mkdir app
-cd app
-src -> main.C
-CMakeLists.txt
-prj.conf
-["KCONFIG_BINARY_DIR"] --> erst nach erfolgreichen build
-pip install west jsonschema pyelftools
-sudo apt install ninja-build
-pip install -r '/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/scripts/requirements.txt'
-west build -b native_sim .
-sudo apt install gcc-multilib g++-multilib libc6-dev-i386
+Question: Settings in Python venvs?
+  VENV: venv_zephyr_rtos 
+    Settings:
+      - wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.4/zephyr-sdk-0.17.4_linux-x86_64.tar.xz
+      - tar xvf zephyr-sdk-0.17.4_linux-x86_64.tar.xz
+      - cd zephyr-sdk-0.17.4/
+      - ./setup.sh
+        -> Zephyr SDK 0.17.4 Setup
+        ** NOTE **
+        You only need to run this script once after extracting the Zephyr SDK
+        distribution bundle archive.
+        Install host tools [y/n]? -> y
+        Register Zephyr SDK CMake package [y/n]? -> y
+        Installing host tools ...
+        Registering Zephyr SDK CMake package ...
+        Zephyr-sdk (/home/ljd/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4/cmake)
+        has been added to the user package registry in:
+        ~/.cmake/packages/Zephyr-sdk
+      - Also some deprecared setting for old experiments:
+        - pip install west 
+        - west init -m https://github.com/zephyrproject-rtos/zephyr.git
+        - west update
+        - sudo apt install cmake
+        - west zephyr-export
+        - pip install west jsonschema pyelftools
+        - sudo apt install ninja-build
 
-**********************************espressif/esp-idf-kconfig ********************************** 
+  VENV: venv_zrtos_demo1
+    Settungs: 
+      Terminal: ~/wsMA_prototyp$
+      call: mkdir ZRTOS_demo1 
+            python3 -m venv venv_zrtos_demo1
+            source '/home/ljd/wsMA_prototyp/venv_zrtos_demo1/bin/activate'
+            sudo apt update
+            sudo apt upgrade
+            sudo apt install --no-install-recommends ninja-build gperf ccache dfu-util device-tree-compiler xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
+            pip install pyelftools (was needed later for west build native_sim ...)
+            pip install openpyxl
+            pip install west 
 
--> ~/wsMA_prototyp$ -> git submodule add https://github.com/espressif/esp-idf-kconfig.git external/ESPIDFKconfig
--> pip install -e ./external/ESPIDFKconfig/
-Successfully built esp-idf-kconfig
-Installing collected packages: pyparsing, pygments, mdurl, markdown-it-py, rich, esp-idf-kconfig
-Successfully installed esp-idf-kconfig-3.3.0 markdown-it-py-4.0.0 mdurl-0.1.2 pygments-2.19.2 pyparsing-3.2.5 rich-14.2.0
--> echo "pip install -e ./external/ESPIDFKconfig/" > requirements.txt
--> python -c "import esp_idf_kconfig; print(esp_idf_kconfig.__file__)" (same check pip show esp-idf-kconfig)
-~/wsMA_prototyp/external/ESPIDFKconfig/esp_idf_kconfig/__init__.py
-IMPORTANT: set export KCONFIG_PARSER_VERSION='2' in venv/bin/activate  
--> /exp$ python test.py 
-Symbols: 4
+      Terminal: cd ZRTOS_demo1
+      call: west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.2.1
+              Should see: Cloning manifest repository from https://github.com/zephyrproject-rtos/zephyr, rev. v4.2.1
+            west update 
+            west zephyr-export
+            Should see:
+              --> Zephyr (/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/share/zephyr-package/cmake)
+              has been added to the user package registry in:
+              ~/.cmake/packages/Zephyr
 
-********************************** linux ********************************** 
-TODO: als submodule 
-aktuell: cd ~/linux_kc_new/
-ohne make/puython nur direkt:
-~/linux_kc_new/linux/scripts/kconfig/mconf '/home/ljd/wsMA_prototyp/exp_copy/KconfigZephyrRTOS'
+              ZephyrUnittest (/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/share/zephyrunittest-package/cmake)
+              has been added to the user package registry in:
+              ~/.cmake/packages/ZephyrUnittest
+            Add neu target "transform": in [...]/ZRTOS_demo1/zephyr/cmake/modules/kconfig.cmake
+              set(EXTRA_KCONFIG_TARGET_COMMAND_FOR_transform
+                  /home/ljd/wsMA_prototyp/core/target_workflow.py
+              )
+              set_ifndef(KCONFIG_TARGETS menuconfig guiconfig hardenconfig transform)
 
-********************************** /venv_zephyr_rtos/  ********************************** 
--> wget https://github.com/zephyrproject-rtos/sdk-ng/releases/download/v0.17.4/zephyr-sdk-0.17.4_linux-x86_64.tar.xz
-tar xvf zephyr-sdk-0.17.4_linux-x86_64.tar.xz
-cd zephyr-sdk-0.17.4/
-./setup.sh
-Zephyr SDK 0.17.4 Setup
+            Then in target_worflow.py:
+            - check and update given paths for:
+            -- project_dir/output_dir/main_file/log and excel file
+            - check which logging parameter in transformer.transform_all_files() you want to set on true 
 
-** NOTE **
-You only need to run this script once after extracting the Zephyr SDK
-distribution bundle archive.
+      Terminal: cd  ZRTOS_demo1/zephyr 
+      call: west build -b native_sim samples/hello_world
+            west build -t transform
+            ** IF you make changes on transform.py:
+            (sometimes you have to delete zephyr/build folder)
+            west build -p always -b native_sim samples/hello_world -> um CMake wieder zu starten 
+            west build -t transform
 
-Install host tools [y/n]? y
-Register Zephyr SDK CMake package [y/n]? y
+          What you would see with: (venv_zrtos_demo1) ljd@HPENVYLJ:~/wsMA_prototyp/ZRTOS_demo1/zephyr$ west build -b native_sim samples/hello_world
+            -- west build: generating a build system
+            Loading Zephyr default modules (Zephyr base).
+            -- Application: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/samples/hello_world
+            -- CMake version: 3.28.3
+            -- Found Python3: /home/ljd/wsMA_prototyp/venv_zrtos_demo1/bin/python3 (found suitable version "3.12.3", minimum required is "3.10") found components: Interpreter 
+            -- Cache files will be written to: /home/ljd/.cache/zephyr
+            -- Zephyr version: 4.2.1 (/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr)
+            -- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
+            -- Board: native_sim, qualifiers: native
+            -- ZEPHYR_TOOLCHAIN_VARIANT not set, trying to locate Zephyr SDK
+            -- Found host-tools: zephyr 0.17.4 (/home/ljd/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4)
+            -- Found toolchain: host (gcc/ld)
+            -- Found Dtc: /home/ljd/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
+            -- Found BOARD.dts: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/boards/native/native_sim/native_sim.dts
+            -- Generated zephyr.dts: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/zephyr.dts
+            -- Generated pickled edt: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/edt.pickle
+            -- Generated devicetree_generated.h: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/include/generated/zephyr/devicetree_generated.h
+            Parsing /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/Kconfig
+            Loaded configuration '/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/boards/native/native_sim/native_sim_defconfig'
+            Merged configuration '/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/samples/hello_world/prj.conf'
+            Configuration saved to '/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/.config'
+            Kconfig header saved to '/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/include/generated/zephyr/autoconf.h'
+            -- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
+            -- The C compiler identification is GNU 13.3.0
+            -- The CXX compiler identification is GNU 13.3.0
+            -- The ASM compiler identification is GNU
+            -- Found assembler: /usr/bin/gcc
+            -- Using ccache: /usr/bin/ccache
+            -- Found gen_kobject_list: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/scripts/build/gen_kobject_list.py
+            -- Configuring done (21.6s)
+            -- Generating done (0.1s)
+            -- Build files have been written to: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build
+            -- west build: building application
+            [...]
+            ####
 
-Installing host tools ...
+  VENV: venv_zrtos_demo
+    Settings: SAME AS DEMO1??
+        https://docs.zephyrproject.org/latest/develop/getting_started/index.html
+      mkdir ZRTOS_demo 
+      ~/wsMA_prototyp$ python3 -m venv venv_zrtos_demo
+      source '/home/ljd/wsMA_prototyp/venv_zrtos_demo/bin/activate'
+      sudo apt update
+      sudo apt upgrade
+      sudo apt install --no-install-recommends ninja-build gperf ccache dfu-util device-tree-compiler xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
+      pip install west 
+      west init 
+      west update
+      west zephyr-export
+      pip install west jsonschema pyelftools
+      zephyr$ west build -b native_sim samples/hello_world
+      west build -t transform
 
-Registering Zephyr SDK CMake package ...
-Zephyr-sdk (/home/ljd/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4/cmake)
-has been added to the user package registry in:
-~/.cmake/packages/Zephyr-sdk
+      # ZRTOS_demo -> /home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/cmake/modules/kconfig.cmake
+      there is already:
+      # Export each `ZEPHYR_<module>_KCONFIG` to Kconfig.
+      # APP_DIR: Path to the main image (sysbuild) or synonym for APPLICATION_SOURCE_DIR (non-sysbuild)
+      zephyr_get(APP_DIR VAR APP_DIR APPLICATION_SOURCE_DIR)
+      # Load the module Kconfig file into CMake
+      include("${KCONFIG_BINARY_DIR}/kconfig_module_dirs.cmake")
+      set(COMMON_KCONFIG_ENV_SETTINGS
+        PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
+        srctree=${ZEPHYR_BASE}
+        ${kconfig_env_dirs}  ...) --> modules variables that weren't recognized when the skript was run as standalone 
+                                    # build/Kconfig/Kconfig.modules:2: Could not open '/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/' (in 'osource "$(ZEPHYR_ACPICA_KCONFIG)"')
+                                    # kconfig_module_dirs.cmake -> list append kconfig_env_dirs
 
-********************************** /venv_zrtos_demo1/  **********************************
-FÜR DIE ARBEIT:
-mkdir ZRTOS_demo1 
-~/wsMA_prototyp$ python3 -m venv venv_zrtos_demo1
-source '/home/ljd/wsMA_prototyp/venv_zrtos_demo1/bin/activate'
-sudo apt update
-sudo apt upgrade
-sudo apt install --no-install-recommends ninja-build gperf ccache dfu-util device-tree-compiler xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
-pip install pyelftools (was needed later for west build native_sim ...)
-pip install openpyxl
-pip install west 
+      foreach(kconfig_target
+          ${KCONFIG_TARGETS}
+          ${EXTRA_KCONFIG_TARGETS}
+          )
+        add_custom_target(...)
 
-cd ZRTOS_demo1
-west init -m https://github.com/zephyrproject-rtos/zephyr --mr v4.2.1
---> --- Cloning manifest repository from https://github.com/zephyrproject-rtos/zephyr, rev. v4.2.1
-west update 
-west zephyr-export
---> Zephyr (/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/share/zephyr-package/cmake)
-    has been added to the user package registry in:
-    ~/.cmake/packages/Zephyr
+      * add target:
+      set(EXTRA_KCONFIG_TARGET_COMMAND_FOR_transform
+        ${CMAKE_CURRENT_LIST_DIR}/../core/target_workflow.py
+      )
+      set_ifndef(KCONFIG_TARGETS menuconfig guiconfig hardenconfig traceconfig transform)
 
-    ZephyrUnittest (/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/share/zephyrunittest-package/cmake)
-    has been added to the user package registry in:
-    ~/.cmake/packages/ZephyrUnittest
-should be updated with a new target:
-[...]/ZRTOS_demo1/zephyr/cmake/modules/kconfig.cmake
----> 
-    set(EXTRA_KCONFIG_TARGET_COMMAND_FOR_transform
-    /home/ljd/wsMA_prototyp/core/target_workflow.py
-    )
-    set_ifndef(KCONFIG_TARGETS menuconfig guiconfig hardenconfig transform)
+      Then in: ZRTOS_demo/zephyr 
+      west build -b native_sim samples/hello_world
+      west build -t transform
 
-Then in target_worflow.py:
-  - check and update given paths for:
-  -- project_dir/output_dir/main_file/log and excel file
-  - check which logging parameter in transformer.transform_all_files() you want to set on true 
+Question: Test with Linux-Kconfig?
+  - TODO: Maybe add als submodule
+  - now: cd ~/linux_kc_new/
+  - without make/python juct direct call in Terminal: ~/linux_kc_new/linux/scripts/kconfig/mconf <pfad to Kconfig-File>
+    - example: ~/linux_kc_new/linux/scripts/kconfig/mconf '/home/ljd/wsMA_prototyp/exp_copy/KconfigZephyrRTOS'
 
-Then cd to: ZRTOS_demo1/zephyr 
-west build -b native_sim samples/hello_world
-west build -t transform
-** IF you make changes on transform.py:
-(sometimes you have to delete zephyr/build folder)
-west build -p always -b native_sim samples/hello_world -> um CMake wieder zu starten 
-west build -t transform
+Question: Additional notes?
+    for excel: pip install openpyxl
+    ---
+    python /home/ljd/wsMA_prototyp/core/workflow_test.py
+    export srctree="/home/ljd/wsMA_prototyp/experiment_dec"
+    python /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/experiment_dec_copy/Kconfig
 
-#####
-(venv_zrtos_demo1) ljd@HPENVYLJ:~/wsMA_prototyp/ZRTOS_demo1/zephyr$ west build -b native_sim samples/hello_world
--- west build: generating a build system
-Loading Zephyr default modules (Zephyr base).
--- Application: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/samples/hello_world
--- CMake version: 3.28.3
--- Found Python3: /home/ljd/wsMA_prototyp/venv_zrtos_demo1/bin/python3 (found suitable version "3.12.3", minimum required is "3.10") found components: Interpreter 
--- Cache files will be written to: /home/ljd/.cache/zephyr
--- Zephyr version: 4.2.1 (/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr)
--- Found west (found suitable version "1.5.0", minimum required is "0.14.0")
--- Board: native_sim, qualifiers: native
--- ZEPHYR_TOOLCHAIN_VARIANT not set, trying to locate Zephyr SDK
--- Found host-tools: zephyr 0.17.4 (/home/ljd/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4)
--- Found toolchain: host (gcc/ld)
--- Found Dtc: /home/ljd/wsMA_prototyp/venv_zephyr_rtos/zephyr-sdk-0.17.4/sysroots/x86_64-pokysdk-linux/usr/bin/dtc (found suitable version "1.7.0", minimum required is "1.4.6") 
--- Found BOARD.dts: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/boards/native/native_sim/native_sim.dts
--- Generated zephyr.dts: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/zephyr.dts
--- Generated pickled edt: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/edt.pickle
--- Generated devicetree_generated.h: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/include/generated/zephyr/devicetree_generated.h
-Parsing /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/Kconfig
-Loaded configuration '/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/boards/native/native_sim/native_sim_defconfig'
-Merged configuration '/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/samples/hello_world/prj.conf'
-Configuration saved to '/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/.config'
-Kconfig header saved to '/home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build/zephyr/include/generated/zephyr/autoconf.h'
--- Found GnuLd: /usr/bin/ld.bfd (found version "2.42") 
--- The C compiler identification is GNU 13.3.0
--- The CXX compiler identification is GNU 13.3.0
--- The ASM compiler identification is GNU
--- Found assembler: /usr/bin/gcc
--- Using ccache: /usr/bin/ccache
--- Found gen_kobject_list: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/scripts/build/gen_kobject_list.py
--- Configuring done (21.6s)
--- Generating done (0.1s)
--- Build files have been written to: /home/ljd/wsMA_prototyp/ZRTOS_demo1/zephyr/build
--- west build: building application
-[...]
-####
-
-
-
-********************************** /venv_zrtos_demo/  **********************************
-https://docs.zephyrproject.org/latest/develop/getting_started/index.html
-mkdir ZRTOS_demo 
-~/wsMA_prototyp$ python3 -m venv venv_zrtos_demo
-source '/home/ljd/wsMA_prototyp/venv_zrtos_demo/bin/activate'
-sudo apt update
-sudo apt upgrade
-sudo apt install --no-install-recommends ninja-build gperf ccache dfu-util device-tree-compiler xz-utils file make gcc gcc-multilib g++-multilib libsdl2-dev libmagic1
-pip install west 
-west init 
-west update
-west zephyr-export
-Zephyr (/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/share/zephyr-package/cmake)
-has been added to the user package registry in:
-~/.cmake/packages/Zephyr
-
-ZephyrUnittest (/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/share/zephyrunittest-package/cmake)
-has been added to the user package registry in:
-~/.cmake/packages/ZephyrUnittest
-pip install west jsonschema pyelftools
-zephyr$ west build -b native_sim samples/hello_world
-west build -t transform
-
-# ZRTOS_demo -> /home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/cmake/modules/kconfig.cmake
-there is already:
-# Export each `ZEPHYR_<module>_KCONFIG` to Kconfig.
-# APP_DIR: Path to the main image (sysbuild) or synonym for APPLICATION_SOURCE_DIR (non-sysbuild)
-zephyr_get(APP_DIR VAR APP_DIR APPLICATION_SOURCE_DIR)
-# Load the module Kconfig file into CMake
-include("${KCONFIG_BINARY_DIR}/kconfig_module_dirs.cmake")
-set(COMMON_KCONFIG_ENV_SETTINGS
-  PYTHON_EXECUTABLE=${PYTHON_EXECUTABLE}
-  srctree=${ZEPHYR_BASE}
-  ${kconfig_env_dirs}  ...) --> modules variables that weren't recognized when the skript was run as standalone 
-                              # build/Kconfig/Kconfig.modules:2: Could not open '/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr/' (in 'osource "$(ZEPHYR_ACPICA_KCONFIG)"')
-                              # kconfig_module_dirs.cmake -> list append kconfig_env_dirs
-
-foreach(kconfig_target
-    ${KCONFIG_TARGETS}
-    ${EXTRA_KCONFIG_TARGETS}
-    )
-  add_custom_target(...)
-
-* add target:
-set(EXTRA_KCONFIG_TARGET_COMMAND_FOR_transform
-  ${CMAKE_CURRENT_LIST_DIR}/../core/target_workflow.py
-)
-set_ifndef(KCONFIG_TARGETS menuconfig guiconfig hardenconfig traceconfig transform)
-
-Then in: ZRTOS_demo/zephyr 
-west build -b native_sim samples/hello_world
-west build -t transform
-
-for excel: pip install openpyxl
----
-python /home/ljd/wsMA_prototyp/core/workflow_test.py
-export srctree="/home/ljd/wsMA_prototyp/experiment_dec"
-python /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/menuconfig.py /home/ljd/wsMA_prototyp/experiment_dec_copy/Kconfig
-
-#-----
-FOR NAMED CHOICE TRANSFORMATION:
-- missing choice symbol filter 
-'unique_choices': [<choice NAMED_CH, bool, "pick", mode y, CH_A selected, visibility y, Kconfig:1, uo2/Kconfig:4>],
-'unique_defined_syms': [<symbol CH_A, bool, "Op A", value y, visibility y, choice symbol, direct deps y, Kconfig:4>,
-                         <symbol CH_B, bool, "Op B", value n, visibility y, choice symbol, direct deps y, Kconfig:6>,
-                         <symbol AAA, bool, "AAA", value n, visibility y, direct deps y, uo2/Kconfig:1>,
-                         <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo2/Kconfig:6>,
-                         <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo2/Kconfig:8>]
+    #-----
+    FOR NAMED CHOICE TRANSFORMATION:
+    - missing choice symbol filter 
+    'unique_choices': [<choice NAMED_CH, bool, "pick", mode y, CH_A selected, visibility y, Kconfig:1, uo2/Kconfig:4>],
+    'unique_defined_syms': [<symbol CH_A, bool, "Op A", value y, visibility y, choice symbol, direct deps y, Kconfig:4>,
+                            <symbol CH_B, bool, "Op B", value n, visibility y, choice symbol, direct deps y, Kconfig:6>,
+                            <symbol AAA, bool, "AAA", value n, visibility y, direct deps y, uo2/Kconfig:1>,
+                            <symbol CH_C, bool, "Op C", value n, visibility y, choice symbol, direct deps y, uo2/Kconfig:6>,
+                            <symbol CH_D, bool, "Op D", value n, visibility y, choice symbol, direct deps y, uo2/Kconfig:8>]
