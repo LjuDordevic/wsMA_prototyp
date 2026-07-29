@@ -1,9 +1,9 @@
 from pathlib import Path
 from core.pick_parser import PickParser
-from core.parser import ZRTOSParser
+from core.parser.zrtos_parser import ZRTOSParser
 from core.kconfig_writer import KconfigReader, KconfigWriter
 from core.transform_prototyp import KconfigTransformer
-from core.utils import TransformTimer
+from core.utils.time_writer import TransformTimer
 import pprint
 import os
 import sys

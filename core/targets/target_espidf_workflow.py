@@ -1,8 +1,8 @@
 from pathlib import Path
-from pick_parser import PickParser
-from core.parser import ESPIDFParser
-from kconfig_writer import KconfigReader, KconfigWriter
-from transform_prototyp import KconfigTransformer
+from core.pick_parser import PickParser
+from core.parser.espidf_parser import ESPIDFParser
+from core.kconfig_writer import KconfigReader, KconfigWriter
+from core.transform_prototyp import KconfigTransformer
 from core.utils.time_writer import TransformTimer
 import sys
 import os 

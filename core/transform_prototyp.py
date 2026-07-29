@@ -2,9 +2,10 @@ from pathlib import Path
 from posixpath import join, dirname
 from typing import List, Dict, Optional, Set, Tuple, Any
 from dataclasses import dataclass
-from core.utils import ContextBuilder, TransformationStats, write_to_excel
+from core.utils.transformation_stats import TransformationStats
+from core.utils.excel_writer import write_to_excel
 from core.context.context import ExtParserContext
-from core.utils.context_builder import ContextBuilder
+from core.context.context_builder import ContextBuilder
 from glob import iglob
 
 class KconfigTransformer:
