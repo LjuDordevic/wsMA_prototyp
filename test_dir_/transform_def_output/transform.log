@@ -1,15 +1,17 @@
+START using parser: 
+  spec_version: ZRTOS
+  kconfig_folder: /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig
+  kconfiglib_version: <module 'kconfiglib' from '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/kconfiglib.py'>  parser_class: ZRTOSParser
 ====================================================================================================
 TRANSFORMATION PROTOTYP LOG
 ====================================================================================================
     Root: /home/ljd/wsMA_prototyp/test_dir_/transform_def
     Main file: Kconfig
     Output dir: /home/ljd/wsMA_prototyp/test_dir_/transform_def_output
+    Specification Version: ZRTOS
+    Parser obj: <core.parser.zrtos_parser.ZRTOSParser object at 0x71521592c7a0>
 ====================================================================================================
-START using parser: 
-  spec_version: ZRTOS
-  kconfig_folder: /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig
-  kconfiglib_version: <module 'kconfiglib' from '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/kconfiglib.py'>
-1.  Parser Output: 
+1. Parser output: 
 {'choices': [],
  'comments': [],
  'const_syms': {'m': <symbol m, tristate, value m, constant>,
@@ -48,8 +50,8 @@ START using parser:
    Parser found: 1 files
 --------------------------------------------------
 
-2. Build ExtParserContext FROM PARSER RESULTS
- Transformer used: ZRTOS
+2. Build ExtParserContext from PARSER RESULTS
+ Parser used: ZRTOS
     get_all_source_files: 
     parser found: Kconfig
 
@@ -117,10 +119,10 @@ Attr boolean: 0
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.006452s
-    Got parser results................................    0.002666s
-    Built context from parser results.................    0.000826s
-    File transformation and excel log.................    0.003561s
+    Parser initialization.............................    0.005188s
+    Got parser results................................    0.002843s
+    Built context from parser results.................    0.000804s
+    File transformation and excel log.................    0.003901s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   0.013507s ~ 0.01s
+    TOTAL TIME........................................   0.012741s ~ 0.01s
 ====================================================================================================

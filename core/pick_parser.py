@@ -154,6 +154,7 @@ class PickParser:
 
     def get_parser(self):
         """Returns the pre-configured parser instance."""
+        print(self)
         return self.parser
 
 """ 

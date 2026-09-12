@@ -16,10 +16,12 @@ class ExitCode(IntEnum):
     UNEXPECTED_ERROR = 99
 
 class WorkflowRunnerHelper:
-    load_dotenv()
     """Helper class for CLI parsing, logging redirection, and JSON response handling."""
 
+    VALID_SPEC_VERSIONS = {"ZKCL", "ZRTOS", "ESPIDF"}
+
     def __init__(self, description: str = "Kconfig Workflow Transformation"):
+        load_dotenv()
         self.parser = argparse.ArgumentParser(description=description)
         self._setup_args()
         self.log_file_handle = None
