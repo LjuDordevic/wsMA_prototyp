@@ -4,98 +4,35 @@ from core.parser.zrtos_parser import ZRTOSParser
 from core.kconfig_writer import KconfigReader, KconfigWriter
 from core.transform_prototyp import KconfigTransformer
 from core.utils.time_writer import TransformTimer
-import pprint
+from core.utils.logger import Logger
+from core.utils.cli_helper import ExitCode, WorkflowRunnerHelper                    
 import os
 import sys
 
-#project_dir = "/home/ljd/wsMA_prototyp/exp" 
-#output_dir = "/home/ljd/wsMA_prototyp/exp_copy"   
-#main_file =  "KconfigZephyrRTOS"                                   
-#project_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_conf_def/"       
-#output_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_conf_def_copy/"   
-#main_file =  "Kconfig"  
-#project_dir = "/home/ljd/wsMA_prototyp/expr_zrtos/zephyr/"  # old 
-#project_dir = "/home/ljd/wsMA_prototyp/ZRTOS_demo/zephyr"   # documented  
-#output_dir = "/home/ljd/wsMA_prototyp/ZRTOS_copy/"   
-#project_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_A"       
-#output_dir = "/home/ljd/wsMA_prototyp/test_dir_old/exp_B"   
-#picker._test_kconfiglib(project_dir, main_file)
-#result = picker._parse_only(project_dir, main_file)
-#transformer.extract_named_choice_info("NAMED_CH")
-
 def main():
+    setup_helper = WorkflowRunnerHelper()
+    logger = Logger()
+
+    # 1. Parse & validate CLI or environment parameters
+    project_dir, output_dir, main_file, log_file, spec_version = setup_helper.parse_and_validate()
+
+    # 2. Configure environment & activate logging redirection
+    os.environ["srctree"] = project_dir
+    reader = KconfigReader(spec_version)
+    writer = KconfigWriter(spec_version)
+    setup_helper.redirect_stdout_to_log(log_file)
 
     timer = TransformTimer()
-
-    #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_source_output/transform_log_resolve_steps.log"
-    #log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output/transform.log"
-    #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source"       
-    #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_source_output"  
-
-    log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output/transform.log"
-    project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
-    output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
-
-    #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_option_output/transform.log"
-    #project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option"       
-    #output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_option_output"  
-    #os.environ["ENV_A"] = "i7-1260P"
-
-    #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output/transform.log"
-    #project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice"
-    #output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_choice_output"
-
-    #log_file="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output/transform.log"
-    #project_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault"
-    #output_dir="/home/ljd/wsMA_prototyp/test_dir_/transform_configdefault_output"
-    
-    #log_file = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep.log"
-    #project_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep"
-    #output_dir = "/home/ljd/wsMA_prototyp/transform_projects/transform_zrtos/ZRTOS_log/output_analysis/exp_zep_output"
-
-    main_file = "Kconfig"  
-    os.environ["srctree"] = project_dir
-    
-    sys.stdout = open(log_file, "w")
-    sys.stderr = sys.stdout 
-    print("=" * 100)
-    print("TRANSFORMATION PROTOTYP LOG")
-    print("=" * 100)
-    print(f"    Root: {project_dir}")
-    print(f"    Main file: {main_file}")
-    print(f"    Output dir: {output_dir}")
-    print("=" * 100)
-
-    picker = PickParser("ZRTOS")
-    print(picker)
-
-    print("1.  Parser Output: ")
-    parser = ZRTOSParser(picker.kconfiglib_version)
+    parser = PickParser(spec_version).get_parser()
     timer.lap("Parser initialization")
+    logger.start(project_dir, main_file, output_dir, parser)
     
     parser_result = parser.parse_files(project_dir, main_file)
     timer.lap("Got parser results")
+    logger.print_parser_result(parser_result)
 
-    pprint.pprint(parser_result)
-    print("-" * 50)
-    print(f"   Parser found: {len(parser_result['defined_syms'])} defined syms")
-    print(f"   Parser found: {len(parser_result['unique_defined_syms'])} unique defined syms")
-    print(f"   Parser found: {len(parser_result['kconf'].kconfig_filenames)} files")
-    print("-" * 50)
-
-    transformer = KconfigTransformer("ZRTOS", parser_result)
+    transformer = KconfigTransformer(spec_version, parser_result)
     timer.lap("Built context from parser results")
-
-    #info = transformer.extract_named_choice_info('NAMED_CH')
-    """ print("choice definition ------------------------------------------------------")
-    for cn, file, line, node in info['choice_def']:
-        print(f"{cn}, {file}, {line}, {node}")
-    print("\n")"""
-
-    reader = KconfigReader("ZRTOS")
-    writer = KconfigWriter("ZRTOS")
-    #input_file = Path(project_dir) / main_file
-    #output_file = Path(output_dir) / main_file
 
     transformer.transform_all_files(
         reader=reader,
@@ -152,4 +89,76 @@ transformed_lines = transformer._transform_lines(lines, input_file)
 
 print(f"\n5.  call writer - write transformed lines in {output_file}")
 writer.write(transformed_lines, output_file)
+"""
+
+
+"""
+   #info = transformer.extract_named_choice_info('NAMED_CH')
+    print("choice definition ------------------------------------------------------")
+    for cn, file, line, node in info['choice_def']:
+        print(f"{cn}, {file}, {line}, {node}")
+    print("\n")
+
+
+    #input_file = Path(project_dir) / main_file
+    #output_file = Path(output_dir) / main_file
+
+def main():
+
+    timer = TransformTimer()
+
+    log_file = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output/transform.log"
+    project_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def"       
+    output_dir = "/home/ljd/wsMA_prototyp/test_dir_/transform_def_output"  
+
+    main_file = "Kconfig"  
+    os.environ["srctree"] = project_dir
+    
+    sys.stdout = open(log_file, "w")
+    sys.stderr = sys.stdout 
+
+    picker = PickParser("ZRTOS")
+    print(picker)
+
+    print("1.  Parser Output: ")
+    parser = ZRTOSParser(picker.kconfiglib_version)
+    timer.lap("Parser initialization")
+    
+    parser_result = parser.parse_files(project_dir, main_file)
+    timer.lap("Got parser results")
+
+    pprint.pprint(parser_result)
+    print("-" * 50)
+    print(f"   Parser found: {len(parser_result['defined_syms'])} defined syms")
+    print(f"   Parser found: {len(parser_result['unique_defined_syms'])} unique defined syms")
+    print(f"   Parser found: {len(parser_result['kconf'].kconfig_filenames)} files")
+    print("-" * 50)
+
+    transformer = KconfigTransformer("ZRTOS", parser_result)
+    timer.lap("Built context from parser results")
+
+    reader = KconfigReader("ZRTOS")
+    writer = KconfigWriter("ZRTOS")
+    #input_file = Path(project_dir) / main_file
+    #output_file = Path(output_dir) / main_file
+
+    transformer.transform_all_files(
+        reader=reader,
+        writer=writer,
+        project_dir=Path(project_dir),
+        output_dir=Path(output_dir),
+        log=True,
+        log_lines=False,
+        log_and_check_resolve_glob=False,
+        log_cd_nc_details=True,
+        log_excel_after_each_file=False,
+        log_excel_output="/home/ljd/wsMA_prototyp/results.xlsx"
+    )   
+
+    timer.lap("File transformation and excel log")
+    timer.stop() 
+
+    return 0
+
+
 """
