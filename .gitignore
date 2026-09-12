@@ -23,3 +23,4 @@ ZRTOS_demo1_without_defconfig
 
 core/old_scripts/
 lessonslearnednotes.txt
+.env
