@@ -4,7 +4,7 @@ import os
 import sys
 from enum import IntEnum
 from pathlib import Path
-
+from dotenv import load_dotenv
 
 class ExitCode(IntEnum):
     """Standardized exit codes for process status signaling."""
@@ -15,8 +15,8 @@ class ExitCode(IntEnum):
     TRANSFORM_ERROR = 5
     UNEXPECTED_ERROR = 99
 
-
 class WorkflowRunnerHelper:
+    load_dotenv()
     """Helper class for CLI parsing, logging redirection, and JSON response handling."""
 
     def __init__(self, description: str = "Kconfig Workflow Transformation"):
