@@ -66,10 +66,7 @@ def main():
         traceback.print_exc()
         sys.exit(1)
 
-    transformer = KconfigTransformer(source_spec="ZRTOS")
-    print("\n2. Build ExtParserContext FROM PARSER RESULTS")
-    print(f" Transformer used: {transformer.source_spec}")
-    transformer.initialize_context(parser_result, log=False)
+    transformer = KconfigTransformer("ZRTOS", parser_result)
     
     timer.lap("Built context from parser results")
     print("=" * 100)

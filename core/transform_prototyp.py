@@ -12,14 +12,14 @@ class KconfigTransformer:
     DEF_KEYWORDS = ('def_string', 'def_int', 'def_hex')
     SOURCE_KEYWORDS = ('source', 'osource', 'rsource', 'orsource')
 
-    def __init__(self, source_spec: str):
+    def __init__(self, source_spec: str, parser_result: dict):
         self.source_spec = source_spec.upper()  # maybe for some later checks 
         self.context = None
         self.stats = TransformationStats()
         self.processed_choices = set()
-
-    def initialize_context(self, parser_result: dict, log):
-        self.context = ContextBuilder().build(parser_result, log)
+        print("\n2. Build ExtParserContext from PARSER RESULTS")
+        print(f" Parser used: {self.source_spec}")   
+        self.context = ContextBuilder().build(parser_result, log=False)
 
     def _extract_named_choice_info(self, choice_name: str, log: bool, log_cd_nc_details: bool):
         context = self.context
@@ -288,165 +288,7 @@ class KconfigTransformer:
             print(f"    parser found: {file}")
 
         return files    
-
-    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info, choice_definition_info, log_and_check_resolve_glob):
-            """
-            lines -> from reader 
-            """
-            len_reader_input = len(lines)
-            print(f"start transforming {len(lines)} input lines")
-            if self.context is None:
-                raise RuntimeError("call build_context_from_parser() first")
-            
-            result = []             # list for whole output  
-            i = 0                   # counter
-            current_symbol = None   
-            while i < len(lines):
-                cd_processed = False
-                choice_processed = False
-                line = lines[i]
-                #print(f"hellooo {line}")     
-                #print(f"\n while counter i: {i} given line: {line}")
-                
-                if line.line_type == 'if':
-                    if_contains_only_configdefault = self._if_block_contains_only_configdefault(lines, i)
-            
-                    if if_contains_only_configdefault:
-                        print(f"    Skipping if-endif block (only configdefaults) starting at line {line.line_number}")
-                        old_i = i
-                        i = self._skip_if_block(lines, i)
-                        self.stats.file_skipped_bc_configdefault += (i - old_i)
-                        continue
-
-                if line.line_type == 'configdefault':
-                    print(f"    Skipping configdefault block starting at line {line.line_number}")
-                    self.stats.file_skipped_bc_configdefault += 1 # the configdefault line itself
-                    i += 1
-
-                    while i < len(lines) and lines[i].indent > line.indent:
-                        print(f"      Skipping line {lines[i].line_number}: {lines[i].line_type}")
-                        self.stats.file_skipped_bc_configdefault += 1
-                        i += 1
-                    # i = 1. line after the block 
-                    continue
-
-                if line.line_type == 'named_choice':
-                    choice_name = line.content.get('name')
-                    
-                    if not choice_name or choice_name not in choice_definition_info:
-                        pass  
-  
-                    else:
-                        choice_info = choice_definition_info[choice_name]
-                        #print(f"choice_definition_info: {choice_definition_info}")
-                        #print(f"choice_info {choice_info}")
-                        
-                        #print(f"    processed_choices before if: {self.PROCESSED_CHOICES}")
-
-                        if choice_name in self.PROCESSED_CHOICES:
-                            print(f"    Skipping non-first definition of choice {choice_name} at line {line.line_number}, {current_file}")
-                            # Skip until endchoice
-                            #print(f"    before_i {i}")
-                            self.stats.file_skipped_bc_named_choice += 1 # the choice line itself
-                            i += 1
-                            while i < len(lines) and lines[i].line_type != 'endchoice':
-                                #print(f"        {lines[i]}")
-                                self.stats.file_skipped_bc_named_choice += 1
-                                i += 1
-                            i += 1  # consume endchoice
-                            self.stats.file_skipped_bc_named_choice += 1
-                            #print(f"    after {i}")
-                            #print("helloooend")     
-                            continue
-                        #print("helloooneu")
-                        first_def = self.context.choice_definitions[choice_name][0]
-                        first_def_file = self.context.srctree / first_def['file']
-                        first_def_line = first_def['line']
-                            
-                        if (current_file == first_def_file and 
-                            line.line_number == first_def_line):
-                                
-                            print(f"    Found first definition of choice {choice_name} at line {line.line_number}")
-                            print(f"    Processing choice transformation")
-
-                            self.PROCESSED_CHOICES.add(choice_name)
-                            print(f"    processed_choices now: {self.PROCESSED_CHOICES}")
-
-                            # IF THE FIRST PARAMETER = True, then we log DEBUG info 
-                            i = self._transform_named_choice(True, lines, i, choice_info, result, 
-                                                lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
-                            #choice_processed = True
-                            continue
-                
-                if line.line_type == 'choice':
-                    i = self._transform_choice(lines, i, result, 
-                                                lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
-                    continue
-
-                if line.line_type in ['config', 'menuconfig']:
-                    #print("line is config/ menuconfig")
-                    current_symbol = line.content.get('symbol')
-                    #print(f"line's symbol: {current_symbol}")
-                    
-                    if current_symbol and current_symbol in cd_definition_info:
-                        cd_info_list = cd_definition_info[current_symbol]
-                        #print(f"\ncd_info_list: {cd_info_list}")
-
-                        for cd_entry in cd_info_list:
-                            last_config = cd_entry.get('last_config')
-                            #print(f"\nlast_config: {last_config}")
-                            transformed_entries = cd_entry.get('transformed_entries_list', [])
-                            #print(f"transformed_entries: {transformed_entries}")
-
-                            if last_config:
-                                last_conf_symbol = last_config[0]
-                                last_conf_file = last_config[1]
-                                last_conf_line = last_config[2]
-                                #print(f"last_conf_symbol: {last_conf_symbol}")
-                                #print(f"last_conf_file: {last_conf_file}")
-                                #print(f"last_conf_line: {last_conf_line}") 
-
-                                last_conf_full_path = self.context.srctree / last_conf_file
-                                #print(f"last_conf_full_path: {last_conf_full_path}")
-
-                                if (current_symbol == last_conf_symbol and 
-                                    line.line_number == last_conf_line and 
-                                    current_file == last_conf_full_path):
-                                    
-                                    print(f"    Found matching config for {current_symbol} at line {line.line_number}")
-                                    print(f"    Adding {len(transformed_entries)} configdefault entries")
-                                    
-                                    i = self._transform_cd(lines, i, transformed_entries, result, 
-                                                lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
-                                    #print(f"i = self.transform_cd {i}")
-                                    cd_processed = True
-                                    break 
-                
-                if cd_processed:
-                    continue
-
-                #print(f"\nget transformed wenn line is not config/menuconfig:")
-                transformed = self._transform_single_line(line, current_symbol, current_file, log_and_check_resolve_glob)
-                
-                #print(f"transformed: {transformed}")
-                
-                if transformed is None:
-                    #print(f"transformed is non i++")
-                    i += 1
-                    continue
-                
-                if isinstance(transformed, list):
-                    result.extend(transformed) # 1:n (def_bool → bool + default)
-                else:
-                    result.append(transformed) # 1:1         
-                #print(f"after {i} is result: {result}")
-                i += 1  # go to the next line
-                            
-            len_transformed_lines = len(result)
-            # EXCEL stats
-            #stats = self._log_file_and_reset_count(self.stats.file_source_out_diff, current_file, len_reader_input, len_transformed_lines)
-            return result, self.stats.file_source_out_diff, len_reader_input, len_transformed_lines
-
+    
     def _transform_choice(self, lines: List, current_index: int, result: List, transform_func) -> int:
         from core.kconfig_writer import KconfigLine
         import re
@@ -2332,6 +2174,164 @@ class KconfigTransformer:
                 print(f"    'help_lines': {choice_info.get('help_lines')}")
 
         return choice_definition_info
+
+    def _transform_lines(self, lines: List, current_file: Path, cd_definition_info, choice_definition_info, log_and_check_resolve_glob):
+                """
+                lines -> from reader 
+                """
+                len_reader_input = len(lines)
+                print(f"start transforming {len(lines)} input lines")
+                if self.context is None:
+                    raise RuntimeError("call build_context_from_parser() first")
+                
+                result = []             # list for whole output  
+                i = 0                   # counter
+                current_symbol = None   
+                while i < len(lines):
+                    cd_processed = False
+                    choice_processed = False
+                    line = lines[i]
+                    #print(f"hellooo {line}")     
+                    #print(f"\n while counter i: {i} given line: {line}")
+                    
+                    if line.line_type == 'if':
+                        if_contains_only_configdefault = self._if_block_contains_only_configdefault(lines, i)
+                
+                        if if_contains_only_configdefault:
+                            print(f"    Skipping if-endif block (only configdefaults) starting at line {line.line_number}")
+                            old_i = i
+                            i = self._skip_if_block(lines, i)
+                            self.stats.file_skipped_bc_configdefault += (i - old_i)
+                            continue
+    
+                    if line.line_type == 'configdefault':
+                        print(f"    Skipping configdefault block starting at line {line.line_number}")
+                        self.stats.file_skipped_bc_configdefault += 1 # the configdefault line itself
+                        i += 1
+    
+                        while i < len(lines) and lines[i].indent > line.indent:
+                            print(f"      Skipping line {lines[i].line_number}: {lines[i].line_type}")
+                            self.stats.file_skipped_bc_configdefault += 1
+                            i += 1
+                        # i = 1. line after the block 
+                        continue
+    
+                    if line.line_type == 'named_choice':
+                        choice_name = line.content.get('name')
+                        
+                        if not choice_name or choice_name not in choice_definition_info:
+                            pass  
+      
+                        else:
+                            choice_info = choice_definition_info[choice_name]
+                            #print(f"choice_definition_info: {choice_definition_info}")
+                            #print(f"choice_info {choice_info}")
+                            
+                            #print(f"    processed_choices before if: {self.PROCESSED_CHOICES}")
+    
+                            if choice_name in self.PROCESSED_CHOICES:
+                                print(f"    Skipping non-first definition of choice {choice_name} at line {line.line_number}, {current_file}")
+                                # Skip until endchoice
+                                #print(f"    before_i {i}")
+                                self.stats.file_skipped_bc_named_choice += 1 # the choice line itself
+                                i += 1
+                                while i < len(lines) and lines[i].line_type != 'endchoice':
+                                    #print(f"        {lines[i]}")
+                                    self.stats.file_skipped_bc_named_choice += 1
+                                    i += 1
+                                i += 1  # consume endchoice
+                                self.stats.file_skipped_bc_named_choice += 1
+                                #print(f"    after {i}")
+                                #print("helloooend")     
+                                continue
+                            #print("helloooneu")
+                            first_def = self.context.choice_definitions[choice_name][0]
+                            first_def_file = self.context.srctree / first_def['file']
+                            first_def_line = first_def['line']
+                                
+                            if (current_file == first_def_file and 
+                                line.line_number == first_def_line):
+                                    
+                                print(f"    Found first definition of choice {choice_name} at line {line.line_number}")
+                                print(f"    Processing choice transformation")
+    
+                                self.PROCESSED_CHOICES.add(choice_name)
+                                print(f"    processed_choices now: {self.PROCESSED_CHOICES}")
+    
+                                # IF THE FIRST PARAMETER = True, then we log DEBUG info 
+                                i = self._transform_named_choice(True, lines, i, choice_info, result, 
+                                                    lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
+                                #choice_processed = True
+                                continue
+                    
+                    if line.line_type == 'choice':
+                        i = self._transform_choice(lines, i, result, 
+                                                    lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
+                        continue
+    
+                    if line.line_type in ['config', 'menuconfig']:
+                        #print("line is config/ menuconfig")
+                        current_symbol = line.content.get('symbol')
+                        #print(f"line's symbol: {current_symbol}")
+                        
+                        if current_symbol and current_symbol in cd_definition_info:
+                            cd_info_list = cd_definition_info[current_symbol]
+                            #print(f"\ncd_info_list: {cd_info_list}")
+    
+                            for cd_entry in cd_info_list:
+                                last_config = cd_entry.get('last_config')
+                                #print(f"\nlast_config: {last_config}")
+                                transformed_entries = cd_entry.get('transformed_entries_list', [])
+                                #print(f"transformed_entries: {transformed_entries}")
+    
+                                if last_config:
+                                    last_conf_symbol = last_config[0]
+                                    last_conf_file = last_config[1]
+                                    last_conf_line = last_config[2]
+                                    #print(f"last_conf_symbol: {last_conf_symbol}")
+                                    #print(f"last_conf_file: {last_conf_file}")
+                                    #print(f"last_conf_line: {last_conf_line}") 
+    
+                                    last_conf_full_path = self.context.srctree / last_conf_file
+                                    #print(f"last_conf_full_path: {last_conf_full_path}")
+    
+                                    if (current_symbol == last_conf_symbol and 
+                                        line.line_number == last_conf_line and 
+                                        current_file == last_conf_full_path):
+                                        
+                                        print(f"    Found matching config for {current_symbol} at line {line.line_number}")
+                                        print(f"    Adding {len(transformed_entries)} configdefault entries")
+                                        
+                                        i = self._transform_cd(lines, i, transformed_entries, result, 
+                                                    lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
+                                        #print(f"i = self.transform_cd {i}")
+                                        cd_processed = True
+                                        break 
+                    
+                    if cd_processed:
+                        continue
+    
+                    #print(f"\nget transformed wenn line is not config/menuconfig:")
+                    transformed = self._transform_single_line(line, current_symbol, current_file, log_and_check_resolve_glob)
+                    
+                    #print(f"transformed: {transformed}")
+                    
+                    if transformed is None:
+                        #print(f"transformed is non i++")
+                        i += 1
+                        continue
+                    
+                    if isinstance(transformed, list):
+                        result.extend(transformed) # 1:n (def_bool → bool + default)
+                    else:
+                        result.append(transformed) # 1:1         
+                    #print(f"after {i} is result: {result}")
+                    i += 1  # go to the next line
+                                
+                len_transformed_lines = len(result)
+                # EXCEL stats
+                #stats = self._log_file_and_reset_count(self.stats.file_source_out_diff, current_file, len_reader_input, len_transformed_lines)
+                return result, self.stats.file_source_out_diff, len_reader_input, len_transformed_lines
         
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
                             log: bool, log_lines: bool, log_and_check_resolve_glob: bool, \

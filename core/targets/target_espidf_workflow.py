@@ -54,14 +54,7 @@ def main():
         traceback.print_exc()
         sys.exit(1)
 
-    transformer = KconfigTransformer(source_spec="ESPIDF")
-    print("\n2. Bild ExtParserContext FROM PARSER RESULTS")
-    print(f" Transformer used: {transformer.source_spec}")
-
-    context = transformer._build_context_from_parser(
-        parser_result,
-        log=False
-    )
+    transformer = KconfigTransformer("ZRTOS", parser_result)
     
     timer.lap("Built context from parser results")
     print("=" * 100)

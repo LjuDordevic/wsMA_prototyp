@@ -46,14 +46,7 @@ def main():
         print(f"Unique symbols: {len(parser_result['unique_defined_syms'])}")
         print(f"Files: {len(parser_result['kconf'].kconfig_filenames)}")
 
-        transformer = KconfigTransformer(source_spec="ZRTOS")
-        print("\n2. Build ExtParserContext FROM PARSER RESULTS")
-        print(f" Transformer used: {transformer.source_spec}")
-
-        context = transformer._build_context_from_parser(
-            parser_result,
-            log=False
-        )
+        transformer = KconfigTransformer("ZRTOS", parser_result)
         
         timer.lap("Built context from parser results")
         print("=" * 100)

@@ -83,11 +83,7 @@ def main():
     print(f"   Parser found: {len(parser_result['kconf'].kconfig_filenames)} files")
     print("-" * 50)
 
-    transformer = KconfigTransformer(source_spec="ZRTOS")
-    print("\n2. Build ExtParserContext FROM PARSER RESULTS")
-    print(f" Transformer used: {transformer.source_spec}")
-    transformer.initialize_context(parser_result, log=False)
-    
+    transformer = KconfigTransformer("ZRTOS", parser_result)
     timer.lap("Built context from parser results")
 
     #info = transformer.extract_named_choice_info('NAMED_CH')
