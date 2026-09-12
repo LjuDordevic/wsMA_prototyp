@@ -3,6 +3,8 @@ import os
 from pathlib import Path
 import pprint
 from core.parser.zrtos_parser import ZRTOSParser
+from core.parser.z_kconfiglib_parser import ZephyrKconfiglibParser
+from core.parser.espidf_parser import ESPIDFParser
 
 # /core  
 base_dir = Path(__file__).parent
@@ -14,7 +16,8 @@ class PickParser:
     __slots__= (
         "spec_version",
         "_kconfig_folder",
-        "kconfiglib_version"
+        "kconfiglib_version",
+        "parser"
     )
 
     def __str__(self):
@@ -23,6 +26,7 @@ class PickParser:
             f"  spec_version: {self.spec_version}\n"
             f"  kconfig_folder: {self._kconfig_folder}\n"
             f"  kconfiglib_version: {self.kconfiglib_version}"
+            f"  parser_class: {self.parser.__class__.__name__ if self.parser else None}"
         )
 
     def __init__(self, spec_version: str):
@@ -36,7 +40,9 @@ class PickParser:
         self.spec_version = spec_version.upper() # make sure is upper case 
         self._kconfig_folder = None
         self.kconfiglib_version = None
-        self._load_kconfiglib()
+        self.parser = None
+        self._load_kconfiglib() # get kconfiglib module 
+        self._create_parser()   # init parser
     
     def _load_zrtos(self):
         zephyr_rtos_root = external_dir / "ZephyrRTOS"
@@ -114,7 +120,6 @@ class PickParser:
                 f"couldn't import from {kcl_folder_str}: {e}"
             )
 
-
     def _load_kconfiglib(self):
         """
         get right version of kconfiglib
@@ -133,6 +138,23 @@ class PickParser:
 
         elif self.spec_version == "ESPIDF":
             self._load_espidf()
+        else:
+            raise ValueError(f"Unknown spec_version: {self.spec_version}")
+
+    def _create_parser(self):
+        """Instantiates the appropriate Parser class based on spec_version."""
+        if self.spec_version == "ZRTOS":
+            self.parser = ZRTOSParser(self.kconfiglib_version)
+        elif self.spec_version == "ZKCL":
+             self.parser = ZephyrKconfiglibParser(self.kconfiglib_version)
+        elif self.spec_version == "ESPIDF":
+             self.parser = ESPIDFParser(self.kconfiglib_version)
+        else:
+            raise NotImplementedError(f"No parser implemented for spec_version {self.spec_version}")
+
+    def get_parser(self):
+        """Returns the pre-configured parser instance."""
+        return self.parser
 
 """ 
 #------------ ZUM TESTEN TODO: soll weg ------------------- 
