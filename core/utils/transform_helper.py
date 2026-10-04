@@ -23,7 +23,7 @@ class TransformHelperUtils:
     
         return files   
 
-    def extract_named_choice_info(self, context, choice_name: str, log: bool, log_cd_nc_details: bool):
+    def extract_named_choice_info(self, context: ExtParserContext, choice_name: str, log: bool, log_cd_nc_details: bool):
         choice_infos = context.choice_infos
         choice_definitions = context.choice_definitions
         choice_deps = context.choice_dep    
