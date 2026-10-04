@@ -66,7 +66,7 @@ class KconfigTransformer:
                 """
                 extracted_node_defaults = []
                 for (d_value, d_cond, d_loc) in node_defaults:
-                    if_cond_ext = self._extract_dependencies(d_cond)
+                    if_cond_ext = self.helper.extract_dependencies(d_cond)
                     d_value_ext = self._extract_value(d_value)
                     extracted_node_defaults.append({
                         "value_ext": d_value_ext,
@@ -86,7 +86,7 @@ class KconfigTransformer:
             default_location = default_tuple[2]
                 
             default_dependencies = default_tuple[1]
-            dependencies = self._extract_dependencies(default_dependencies)
+            dependencies = self.helper.extract_dependencies(default_dependencies)
                 
             default_dependencies_list.append((symbol_name, default_location, dependencies))
             
@@ -97,21 +97,6 @@ class KconfigTransformer:
             'def_dep' : default_dependencies_list
         }
     
-    def _extract_dependencies(self, dep_element):
-        dependencies = []
-        
-        if hasattr(dep_element, 'name'):
-            return [dep_element.name]
-        
-        if isinstance(dep_element, tuple):
-            for item in dep_element:
-                if hasattr(item, 'name'):
-                    dependencies.append(item.name)
-                elif isinstance(item, tuple):
-                    dependencies.extend(self._extract_dependencies(item))
-        
-        return dependencies
-
     def _extract_value(self, d_value):
         if d_value is None:
             return None
