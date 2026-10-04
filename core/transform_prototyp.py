@@ -1149,79 +1149,6 @@ class KconfigTransformer:
             
         return default_line
 
-    def _filter_cd_from_context(self, reader, project_dir, log_cd_nc_details):
-
-        cd_definition_info = {}
-        print("\n3. Filter ExtParserContext")
-        print("extract all configdefault options and for each get transformed lines and last config")
-        for cd in self.context.configdefault_options:
-            
-            if cd not in cd_definition_info:
-                cd_definition_info[cd] = []     # replace defaultdict
-
-            info = self.context_builder.extract_symbol_info(self.context, cd)
-            last_config = self.helper.get_last_config(info['sym_def'])
-            cd_default_lines = self.helper.get_cd_entries(info['sym_def'])
-            tcd_list = self.helper.get_transformed_config_defaults(cd_default_lines, reader, project_dir)
-            cd_all_sym = {
-               'last_config': last_config,
-               'cd_default_lines': cd_default_lines,
-               'transformed_entries_list': tcd_list
-            } 
-            cd_definition_info[cd].append(cd_all_sym)
-
-            if log_cd_nc_details:
-                print(f"\ninfos about whole configdefault dictionary")
-
-                print(f"configdefault: {cd}")
-                print(f"'last_config': {cd_definition_info[cd][0].get('last_config')}")
-                print(f"'cd_default_lines': {cd_definition_info[cd][0].get('cd_default_lines')}")
-                print(f"'transformed_cd_default_lines': {cd_definition_info[cd][0].get('transformed_entries_list')}")
-               
-
-                print(f"\nfilter: symbol definitions & each sym.node.defaults extracted ---------------------------------------------------------------")
-                for sn, file, line, cf_flag, extr_nd in info['sym_def']:
-                    print(f"{sn}, {file}, {line}, {cf_flag}, {extr_nd}")
-                print("filter: default definitions of symbol (loc & complete list for if cond) ------------------------------------------------------")
-                for sn, def_loc, def_dep in info['def_dep']:
-                    print(f"{sn}, {def_loc}, ({', '.join(def_dep)})")
-                print(f"\n - last conf")
-                print(last_config)
-                print(f"\n - configdefault entries")
-                print(cd_default_lines)   
-                print(f"\n - transformed cd entries")
-                print(tcd_list)             
-
-        return cd_definition_info
-    
-    def _filter_nc_from_context(self, reader, project_dir, log, log_cd_nc_details):
-
-        choice_definition_info = {}
-        
-        print("extract infos for named choices - their definition & entries")
-        for choice_name in self.context.choice_definitions.keys():
-            if choice_name not in choice_definition_info:
-                choice_definition_info[choice_name] = {}
-            
-            choice_info = self.context_builder.extract_named_choice_info(self.context, choice_name, log, log_cd_nc_details)
-       
-            # Get all config entries for this choice
-            choice_data = self.context_builder.get_all_choice_configs(choice_name, reader, project_dir, log_cd_nc_details, choice_info=choice_info)
-            choice_info['choice_configs'] = choice_data['entries']
-            choice_info['prompt_lines'] = choice_data['choice_prompt_lines']
-            choice_info['help_lines'] = choice_data['choice_help_lines']
-            
-            choice_definition_info[choice_name] = choice_info
-            
-            if log_cd_nc_details:
-                print(f"\n  named choice: {choice_name}")
-                print(f"    'choice_def': {choice_info.get('choice_def')}")
-                print(f"    'choice_configs': {len(choice_data)} config entries")
-                print(f"    'prompt_lines': {choice_info.get('prompt_lines')}")
-                print(f"    'help_lines': {choice_info.get('help_lines')}")
-
-        return choice_definition_info
-
     def _transform_lines(self, lines: List, current_file: Path, cd_definition_info, choice_definition_info, log_and_check_resolve_glob):
                 """
                 lines -> from reader 
@@ -1397,8 +1324,8 @@ class KconfigTransformer:
         
         # GET source_files & filtered info for configdefault & named choice 
         source_files = self.context_builder.get_all_source_files(self.context)             
-        cd_definition_info = self._filter_cd_from_context(reader, project_dir, log_cd_nc_details)
-        choice_definition_info = self._filter_nc_from_context(reader, project_dir, log, log_cd_nc_details)
+        cd_definition_info = self.context_builder.filter_cd_from_context(self.context, reader, project_dir, log_cd_nc_details)
+        choice_definition_info = self.context_builder.filter_nc_from_context(self.context, reader, project_dir, log, log_cd_nc_details)
 
         print(f"\nfor each given file at source_files start building path output structur and call reader and writer")     
         print(f"\n4. Transform all files - needs reader & writer")
