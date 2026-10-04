@@ -24,51 +24,7 @@ class KconfigTransformer:
         print(f" Parser used: {self.source_spec}")   
         self.context = ContextBuilder().build(parser_result, log=False)
 
-    def _extract_named_choice_info(self, choice_name: str, log: bool, log_cd_nc_details: bool):
-        context = self.context
-        choice_infos = context.choice_infos
-        choice_definitions = context.choice_definitions
-        choice_deps = context.choice_dep    
-
-        if choice_name not in choice_infos:
-            return {
-            'choice_def': []
-            }
-        
-        default_dependencies_extracted_list = []
-        node_dep_extracted_list = []
-        if log_cd_nc_details:
-            print("------H-----------")
-            print(f"context.choice_infos:       {choice_infos}")
-            print(f"context.choice_definitions: {choice_definitions}")
-            print(f"context.choice_deps:        {choice_deps}\n")
-            print(f"choice_deps[{choice_name}]:")
-        
-        for entry in choice_deps[choice_name]:
-            default_tuple = entry['node.defaults']
-            if log_cd_nc_details: print(f"node.defaults:   {default_tuple}")
-            for default in default_tuple:
-                default_dependencies = default[1]
-                dependencies = self._extract_dependencies(default_dependencies)
-                default_dependencies_extracted_list.append(dependencies)
-             
-            dep_tuple = entry['node.dep']
-            if log_cd_nc_details: print(f"node.dep:        {repr(dep_tuple)}")
-            extr_dep_dependencies = self._extract_dependencies(dep_tuple)
-            node_dep_extracted_list.append(extr_dep_dependencies)
-
-        if log:
-            print(f"def dependencies extr: {default_dependencies_extracted_list}")
-            print(f"dep dependencies extr: {node_dep_extracted_list}")
-        
-        choice_all_dep_list = []
-        choice_all_dep_list.append((choice_name, default_dependencies_extracted_list, node_dep_extracted_list))
-    
-        print()
-        return {
-            'choice_def': choice_all_dep_list
-        }
-        
+   
     def _extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
        
         symbol_infos = context.symbol_infos
@@ -2007,7 +1963,7 @@ class KconfigTransformer:
             if choice_name not in choice_definition_info:
                 choice_definition_info[choice_name] = {}
             
-            choice_info = self._extract_named_choice_info(choice_name, log, log_cd_nc_details)
+            choice_info = self.helper.extract_named_choice_info(self.context, choice_name, log, log_cd_nc_details)
        
             # Get all config entries for this choice
             choice_data = self._get_all_choice_configs(choice_name, reader, project_dir, log_cd_nc_details, choice_info=choice_info)
