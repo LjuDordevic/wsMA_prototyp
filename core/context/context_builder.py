@@ -1,5 +1,6 @@
 from pathlib import Path
 from core.context.context import ExtParserContext
+from core.utils.logger import Logger
 
 class ContextBuilder:
 
@@ -142,5 +143,7 @@ class ContextBuilder:
             srctree=Path(konf.srctree), 
         )
 
-        if log: self._log_parser_context(self.context)
+        if log: 
+            logger = Logger()
+            logger.log_parser_context(self.context)
         return context
