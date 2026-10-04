@@ -66,6 +66,9 @@ class TransformationStats:
         self.file_source_out_diff = 0
         self.file_o_source_keywords_no_match = 0
         self.file_opt_env = 0
+        self.file_warning_attr = 0
+        self.file_set_option = 0
+        self.file_set_default_option = 0
         self.file_skip_optional_choice_attr = 0
         self.file_skip_choice_typ_def_bool = 0
         self.file_skip_choice_typ_def_tristate = 0
