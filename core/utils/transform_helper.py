@@ -18,3 +18,32 @@ class TransformHelperUtils:
                     dependencies.extend(self._extract_dependencies(item))
         
         return dependencies
+    
+    def extract_value(self, d_value):
+        if d_value is None:
+            return None
+        #print(f"xx {d_value}")
+
+        if hasattr(d_value, "value"):
+            v = getattr(d_value, "value")
+            if isinstance(v, (str, int, float)):
+                #print(f"1 {d_value}")
+                return v
+    
+        if hasattr(d_value, "str_value"):
+            try:
+                return d_value.str_value()
+            except Exception: # not callable
+                #print(f"2 {d_value}")
+                pass
+
+        if hasattr(d_value, "name"):
+            #print(f"3 {d_value}")
+            return getattr(d_value, "name")
+        
+        if isinstance(d_value, tuple):
+                #print(f"4 {d_value}")
+                return str("expr")
+
+        # 5) Fallback: string representation
+        return str(d_value)

@@ -9,8 +9,8 @@ TRANSFORMATION PROTOTYP LOG
     Main file:      Kconfig
     Output dir:     /home/ljd/wsMA_prototyp/test_dir_/transform_def_output
     Specification:  ZRTOS
-    Parser obj:     <core.parser.zrtos_parser.ZRTOSParser object at 0x7b02bcac8800>
-    Timestamp:      04.10.2026 18:00
+    Parser obj:     <core.parser.zrtos_parser.ZRTOSParser object at 0x7e01f3d8c0b0>
+    Timestamp:      04.10.2026 18:42
 ====================================================================================================
 1. Parser output: 
 {'choices': [],
@@ -120,10 +120,10 @@ Attr boolean: 0
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.003029s
-    Got parser results................................    0.001398s
-    Built context from parser results.................    0.000638s
-    File transformation and excel log.................    0.001479s
+    Parser initialization.............................    0.003331s
+    Got parser results................................    0.002480s
+    Built context from parser results.................    0.000488s
+    File transformation and excel log.................    0.001915s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   0.006547s ~ 0.01s
+    TOTAL TIME........................................   0.008215s ~ 0.01s
 ====================================================================================================

@@ -25,107 +25,6 @@ class KconfigTransformer:
         self.context_builder = ContextBuilder()
         self.context = self.context_builder.build(parser_result, log=False)
 
-    def _extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
-       
-        symbol_infos = context.symbol_infos
-        symbol_definitions = context.symbol_definitions
-        symbol_defaults = context.symbol_defaults
-
-        if symbol_name not in symbol_infos:
-            return {
-            'sym_def': [],
-            'def_dep': []
-            }
-        
-        symbol_definitions_list = []
-
-        if symbol_name in symbol_definitions:
-            for location_info in symbol_definitions[symbol_name]: # filter symbol_def for given symbol 
-                file = location_info.get('file')
-                line = location_info.get('line')
-                is_conf_def_flag = location_info.get('is_configdefault')
-                node_defaults = location_info.get('node.defaults')
-                #node_defs_dep = location_info.get('node.default.dep')
-                #node_defs_loc = location_info.get('node.default.loc')
-                #symbol_definitions_list.append((symbol_name, file, line, is_conf_def_flag, node_defs, node_defs_dep, node_defs_loc))
-                
-                """
-                Examples of node_defaults entry:
-                [(<symbol y, bool, value y, constant>, <symbol y, bool, value y, constant>, ('KconfigZephyrRTOS', 34))]
-                --> extracted_node_defaults:
-                [{'value_ext': 'y', 'deps_ext': ['y'], 'loc': ('KconfigZephyrRTOS', 34)}]
-
-                [(<symbol y, bool, value y, constant>, (2, <symbol CN, bool, value n, visibility n, direct deps y, KconfigZephyrRTOS:18>, 
-                (2, <symbol CY, bool, value n, visibility n, direct deps y, KconfigZephyrRTOS:15>, 
-                <symbol ACCC, bool, value y, visibility n, direct deps y, Kconfig3:19>)), ('Kconfig3', 6))]
-                --> extracted_node_defaults:
-                [{'value_ext': 'y', 'deps_ext': ['CN', 'CY', 'ACCC'], 'loc': ('Kconfig3', 6)}]
-
-                * if deps_exp == y, means ther's no [if <exp>] after default value
-                  also deps_exp collects every dependency - form the symbol itself, from if-block, from menu depends on ...
-                """
-                extracted_node_defaults = []
-                for (d_value, d_cond, d_loc) in node_defaults:
-                    if_cond_ext = self.helper.extract_dependencies(d_cond)
-                    d_value_ext = self._extract_value(d_value)
-                    extracted_node_defaults.append({
-                        "value_ext": d_value_ext,
-                        "deps_ext": if_cond_ext,       
-                        "loc": d_loc
-                    })
-                
-                symbol_definitions_list.append((symbol_name, file, line, is_conf_def_flag, extracted_node_defaults))
-
-        #last_config_for_sym = self._get_last_config(symbol_definitions_list)
-        #configdefault_entries = self._get_cd_entries(symbol_definitions_list)
-        
-        default_dependencies_list = []
-
-        for entry in symbol_defaults[symbol_name]:
-            default_tuple = entry['sym.default']
-            default_location = default_tuple[2]
-                
-            default_dependencies = default_tuple[1]
-            dependencies = self.helper.extract_dependencies(default_dependencies)
-                
-            default_dependencies_list.append((symbol_name, default_location, dependencies))
-            
-        return {
-            'sym_def' : symbol_definitions_list,
-            #'last_config': last_config_for_sym,
-            #'configdefaults': configdefault_entries,
-            'def_dep' : default_dependencies_list
-        }
-    
-    def _extract_value(self, d_value):
-        if d_value is None:
-            return None
-        #print(f"xx {d_value}")
-
-        if hasattr(d_value, "value"):
-            v = getattr(d_value, "value")
-            if isinstance(v, (str, int, float)):
-                #print(f"1 {d_value}")
-                return v
-    
-        if hasattr(d_value, "str_value"):
-            try:
-                return d_value.str_value()
-            except Exception: # not callable
-                #print(f"2 {d_value}")
-                pass
-
-        if hasattr(d_value, "name"):
-            #print(f"3 {d_value}")
-            return getattr(d_value, "name")
-        
-        if isinstance(d_value, tuple):
-                #print(f"4 {d_value}")
-                return str("expr")
-
-        # 5) Fallback: string representation
-        return str(d_value)
-
     def _get_last_config(self, ext_sym_def: List[Tuple]) -> Optional[Tuple]:
         last_config = None
         for entry in ext_sym_def:
@@ -1904,7 +1803,7 @@ class KconfigTransformer:
             if cd not in cd_definition_info:
                 cd_definition_info[cd] = []     # replace defaultdict
 
-            info = self._extract_symbol_info(self.context, cd)
+            info = self.context_builder.extract_symbol_info(self.context, cd)
             last_config = self._get_last_config(info['sym_def'])
             cd_default_lines = self._get_cd_entries(info['sym_def'])
             tcd_list = self._get_transformed_config_defaults(cd_default_lines, reader, project_dir)
