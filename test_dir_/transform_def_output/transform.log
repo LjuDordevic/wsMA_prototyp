@@ -5,11 +5,12 @@ START using parser:
 ====================================================================================================
 TRANSFORMATION PROTOTYP LOG
 ====================================================================================================
-    Root: /home/ljd/wsMA_prototyp/test_dir_/transform_def
-    Main file: Kconfig
-    Output dir: /home/ljd/wsMA_prototyp/test_dir_/transform_def_output
-    Specification Version: ZRTOS
-    Parser obj: <core.parser.zrtos_parser.ZRTOSParser object at 0x71521592c7a0>
+    Root (srctree): /home/ljd/wsMA_prototyp/test_dir_/transform_def
+    Main file:      Kconfig
+    Output dir:     /home/ljd/wsMA_prototyp/test_dir_/transform_def_output
+    Specification:  ZRTOS
+    Parser obj:     <core.parser.zrtos_parser.ZRTOSParser object at 0x7fae35673b30>
+    Timestamp:      04.10.2026 17:05
 ====================================================================================================
 1. Parser output: 
 {'choices': [],
@@ -119,10 +120,10 @@ Attr boolean: 0
 ====================================================================================================
 TIMER REPORT:
 ====================================================================================================
-    Parser initialization.............................    0.005188s
-    Got parser results................................    0.002843s
-    Built context from parser results.................    0.000804s
-    File transformation and excel log.................    0.003901s
+    Parser initialization.............................    0.002241s
+    Got parser results................................    0.001393s
+    Built context from parser results.................    0.000644s
+    File transformation and excel log.................    0.001470s
 ----------------------------------------------------------------------------------------------------
-    TOTAL TIME........................................   0.012741s ~ 0.01s
+    TOTAL TIME........................................   0.005750s ~ 0.01s
 ====================================================================================================

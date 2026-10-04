@@ -2,21 +2,24 @@ from pathlib import Path
 from posixpath import join, dirname
 from typing import List, Dict, Optional, Set, Tuple, Any
 from dataclasses import dataclass
+from core.utils.transform_helper import TransformHelperUtils
 from core.utils.transformation_stats import TransformationStats
 from core.utils.excel_writer import write_to_excel
 from core.context.context import ExtParserContext
 from core.context.context_builder import ContextBuilder
 from glob import iglob
+from core.utils.logger import Logger
 
 class KconfigTransformer:
     DEF_KEYWORDS = ('def_string', 'def_int', 'def_hex')
     SOURCE_KEYWORDS = ('source', 'osource', 'rsource', 'orsource')
 
     def __init__(self, source_spec: str, parser_result: dict):
-        self.source_spec = source_spec.upper()  # maybe for some later checks 
-        self.context = None
+        self.logger = Logger()
+        self.helper = TransformHelperUtils()
         self.stats = TransformationStats()
         self.processed_choices = set()
+        self.source_spec = source_spec.upper()  
         print("\n2. Build ExtParserContext from PARSER RESULTS")
         print(f" Parser used: {self.source_spec}")   
         self.context = ContextBuilder().build(parser_result, log=False)
@@ -266,28 +269,6 @@ class KconfigTransformer:
                 conditions.append(dep)
 
         return " && ".join(conditions) if conditions else ""
-
-    def _get_all_source_files(self) -> List[Path]:
-        """
-        extract Kconfig files, that parser found 
-        output: all paths that parser found, 
-        these are either relativ to srctree = project_dir
-        or are absolut paths "outside of srctree"
-        """
-        if self.context is None:
-            raise RuntimeError("call build_context_from_parser() first")
-            
-        kconf = self.context.parser_result['kconf']
-        files = []
-        
-        for filename in kconf.kconfig_filenames:
-            file_path = Path(filename)
-            files.append(file_path)
-        print("    get_all_source_files: ")
-        for file in files:
-            print(f"    parser found: {file}")
-
-        return files    
     
     def _transform_choice(self, lines: List, current_index: int, result: List, transform_func) -> int:
         from core.kconfig_writer import KconfigLine
@@ -1061,7 +1042,6 @@ class KconfigTransformer:
             return current_transformed
         
         return current
-
 
     def _transform_bool_to_tristate_choice_typ(self, line_item, indent: Optional[int] = 0,prompt_text: Optional[str] = "", already_counted: Optional[bool]=None):
         from core.kconfig_writer import KconfigLine
@@ -1889,136 +1869,7 @@ class KconfigTransformer:
             'choice_prompt_lines': all_choice_prompt_lines,
             'choice_help_lines': all_choice_help_lines
         }
-
-    def _log_file_and_reset_count(self, new_lines_skw : int, current_file : Path, len_input : int, len_result : int):
-        print(f"    FILE LOG --------------------------------------------------------------")
-        #print(f"    File:                      {str(current_file)}")
-        print(f"    Reader input                {len_input} lines")
-        print(f"    -----------------------------------------------------------------------")
-        print(f"    All source without glob:    {self.stats.file_source_nr}")
-        print(f"    All source using glob:      {self.stats.file_source_w_glob}")
-        print(f"    All osource_keywords:       {self.stats.file_osource_nr}")
-        print(f"    All rsource_keywords:       {self.stats.file_rsource_nr}")
-        print(f"    All orsource_keywords:      {self.stats.file_orsource_nr}")  
-        print(f"    SUM (r/or/o)source lines:   {self.stats.file_source_keywords_all_nr}")
-        print(f"    All \"option env\" attr:      {self.stats.file_opt_env}")
-        print(f"    -----------------------------------------------------------------------")
-        print(f"    Transformer Output:         {len_result} lines")
-        print(f"    -----------------------------------------------------------------------")
-        print(f"        Added new bc of def_*:           {self.stats.file_def_keywords_count}")
-        print(f"        Added new bc of glob:            {new_lines_skw}")
-        print(f"        Added new bc of config_default:  {self.stats.file_configdefault_nr}")
-        print(f"        Added new bc of named choice:    {self.stats.file_added_bc_named_choice}") 
-    #print(f"        Removed consecutive empty lines:  {self.stats.file_removed_consecutive_empty_lines}") 
-        print(f"        Removed bc of config_default:    {self.stats.file_skipped_bc_configdefault}") 
-        print(f"        Removed bc of named choice:      {self.stats.file_skipped_bc_named_choice}") 
-        print(f"        Removed no match for o(r)source: {self.stats.file_o_source_keywords_no_match}")  
-        print(f"        Removed optional choice attr:    {self.stats.file_skip_optional_choice_attr}")
-        print(f"        Removed bool     choice attr:    {self.stats.file_skip_choice_typ_def_bool}")
-        print(f"        Removed tristate choice attr:    {self.stats.file_skip_choice_typ_def_tristate}") 
-        
-        # STORE FOR EXCEL
-        file_stats_excel = {
-            'test file' : str(current_file),
-            'input'     : len_input,
-            'output'    : len_result,
-            'source_keyword_wo_glob' : self.stats.file_source_nr,
-            'source_keyword_w_glob' : self.stats.file_source_w_glob,
-            'osource_keyword' : self.stats.file_osource_nr,
-            'rource_keyword' : self.stats.file_rsource_nr,
-            'orsource_keyword' : self.stats.file_orsource_nr,
-            'sum_all_source' : self.stats.file_source_keywords_all_nr,
-            'option_env' : self.stats.file_opt_env,
-
-            'new_lines_bc_of_def_': self.stats.file_def_keywords_count,
-
-            'new_lines_bc_of_glob': new_lines_skw,
-            'new_lines_bc_cd': self.stats.file_configdefault_nr,
-            'new_lines_bc_named_choice': self.stats.file_added_bc_named_choice,
-
-            'removed_bc_orsource': self.stats.file_o_source_keywords_no_match,
-            'removed_lines_bc_cd': self.stats.file_skipped_bc_configdefault,
-            'removed_lines_bc_named_choice': self.stats.file_skipped_bc_named_choice,
-
-            'removed_optional_choice_attr': self.stats.file_skip_optional_choice_attr,
-            'removed_bool_choice_attr': self.stats.file_skip_choice_typ_def_bool,
-            'removed_tristate_choice_attr': self.stats.file_skip_choice_typ_def_tristate
-        }
-
-        self.stats.file_source_nr = 0
-        self.stats.file_source_w_glob = 0
-        self.stats.file_osource_nr = 0
-        self.stats.file_rsource_nr = 0
-        self.stats.file_orsource_nr = 0
-        self.stats.file_source_keywords_all_nr = 0
-        self.stats.file_def_keywords_count = 0
-        self.stats.file_all_added_lines_skw = 0
-        self.stats.file_configdefault_nr = 0
-        self.stats.file_removed_consecutive_empty_lines = 0
-        self.stats.file_skipped_bc_configdefault = 0
-        self.stats.new_bc_glob = 0
-        self.stats.file_source_out_diff = 0
-        self.stats.file_o_source_keywords_no_match = 0
-        self.stats.file_opt_env = 0
-        self.stats.file_skip_optional_choice_attr = 0
-        self.stats.file_warning_attr = 0
-        self.stats.file_set_option = 0
-        self.stats.file_set_default_option = 0
-        self.stats.file_skip_choice_typ_def_bool = 0
-        self.stats.file_skip_choice_typ_def_tristate = 0
-        self.stats.file_skipped_bc_named_choice = 0
-        self.stats.file_added_bc_named_choice = 0
-
-        return file_stats_excel
-        
-    def _log_parser_context(self, given_context):
-        
-        print(f"\n For each symbol found in parser_result['unique_defined_syms']")
-        print(f"    -> call sym.name/.origin/.name_and_loc")
-        print(f"    -> call for each sym.nodes (.filename/.linenr/node/.defaults/is_configdefault")
-        print(f"    -> call all sym.defaults")
-        print(f"    -> call all sym.orig_defaults")
-        print(f"\n------------ symbol_infos --------------------------------------------------")
-        #print(given_context.symbol_infos)
-        for symbol_name, infos in given_context.symbol_infos.items():
-            for symbol_info in infos:
-                print(f"{symbol_name}: [{symbol_info}]")
-        print(f"\n------------ symbol_definitions --------------------------------------------------")
-        #print(given_context.symbol_definitions)
-        for symbol_name, definitions in given_context.symbol_definitions.items():
-            for definition in definitions:
-                print(f"{symbol_name}: [{definition}]")
-        print(f"\n------------ symbol_defaults -----------------------------------------------")
-        #print(given_context.symbol_defaults)
-        for symbol_name, defaults in given_context.symbol_defaults.items():
-            for default in defaults:
-                print(f"{symbol_name}: [{default}]")
-        #print(f"\n------------ sym.orig_defaults ---------------------------------------------")
-        #print(f"these omit any dependencies propagated from 'depends on' and surrounding 'if's & strip location of default line")
-        #print(given_context.symbol_orig_defaults)
-        print(f"\n------------ choice_infos -----------------------------------------------")
-        for choice_name, infos in given_context.choice_infos.items():
-            print(f"{choice_name}")
-            for info in infos:
-                for sym in info.get('choice.syms', []) or []:
-                    print(f"    [{repr(sym)}]")
-        
-        print(f"\n------------ choice_definitions -----------------------------------------------")
-        for choice_name, definitions in given_context.choice_definitions.items():
-            for definition in definitions:
-                print(f"{choice_name}: [{repr(definition)}]")
-       
-        print(f"\n   Symbol definitions and corresponding locations in ExParserContext: ")
-        for sym_name, definitions in given_context.symbol_definitions.items():
-            if len(definitions) >= 1:
-                print(f"   '{sym_name}' is defined x{len(definitions)}")
-                for defn in definitions:
-                    is_default = defn.get('is_configdefault', False)
-                    default_tag = " (as configdefault)" if is_default else ""
-                    file = defn.get('file') or "<unknown file>"
-                    line = defn.get('line') or "<unknown line>"
-                    print(f"     - {file}:{line}{default_tag}")
-        
+                
     def _if_block_contains_only_configdefault(self, lines, if_start_indx) -> bool:
         i = if_start_indx + 1
         has_configdefault = False
@@ -2330,7 +2181,6 @@ class KconfigTransformer:
                                 
                 len_transformed_lines = len(result)
                 # EXCEL stats
-                #stats = self._log_file_and_reset_count(self.stats.file_source_out_diff, current_file, len_reader_input, len_transformed_lines)
                 return result, self.stats.file_source_out_diff, len_reader_input, len_transformed_lines
         
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
@@ -2350,7 +2200,7 @@ class KconfigTransformer:
             raise RuntimeError("Context missing!")
         
         # GET source_files & filtered info for configdefault & named choice 
-        source_files = self._get_all_source_files()             # all paths are relative to srctree 
+        source_files = self.helper.get_all_source_files(self.context)             
         cd_definition_info = self._filter_cd_from_context(reader, project_dir, log_cd_nc_details)
         choice_definition_info = self._filter_nc_from_context(reader, project_dir, log, log_cd_nc_details)
 
@@ -2399,13 +2249,10 @@ class KconfigTransformer:
                   = self._transform_lines(lines, input_file, cd_definition_info, choice_definition_info, log_and_check_resolve_glob)
              
             # TODO: add new_lines to excel stats 
-            # DON'T NEED THIS FOR THE STATISTICS - it just makes a lot compilcated 
-            #new_lines = self._remove_consecutive_empty_lines(transformed)
-            #removed_consecutive_lines_nr = self.stats.file_removed_consecutive_empty_lines
+            statistics = self.logger._log_file_stats(self.stats, source_out_diff, input_file, len_reader_input, len_transformed_lines)
+            excel_stats.append(statistics)
+            self.stats.reset_file_stats()
 
-            stats = self._log_file_and_reset_count(source_out_diff, input_file, len_reader_input, len_transformed_lines)
-
-            excel_stats.append(stats)
             if log_excel_after_each_file:
                 write_to_excel(excel_stats, log_excel_output)
             
