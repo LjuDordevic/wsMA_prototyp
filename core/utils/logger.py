@@ -25,7 +25,7 @@ class Logger:
         print(f"   Parser found: {len(parser_result['kconf'].kconfig_filenames)} files")
         print("-" * 50)
 
-    def _log_file_stats(self, stats: TransformationStats, new_lines_skw : int, current_file : Path, len_input : int, len_result : int):
+    def log_file_stats(self, stats: TransformationStats, new_lines_skw : int, current_file : Path, len_input : int, len_result : int):
         print(f"    FILE LOG --------------------------------------------------------------")
         #print(f"    File:                      {str(current_file)}")
         print(f"    Reader input                {len_input} lines")

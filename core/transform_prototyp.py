@@ -1372,7 +1372,7 @@ class KconfigTransformer:
                   = self._transform_lines(lines, input_file, cd_definition_info, choice_definition_info, log_and_check_resolve_glob)
              
             # TODO: add new_lines to excel stats 
-            statistics = self.logger._log_file_stats(self.stats, source_out_diff, input_file, len_reader_input, len_transformed_lines)
+            statistics = self.logger.log_file_stats(self.stats, source_out_diff, input_file, len_reader_input, len_transformed_lines)
             excel_stats.append(statistics)
             self.stats.reset_file_stats()
 
