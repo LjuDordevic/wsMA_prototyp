@@ -22,9 +22,9 @@ class KconfigTransformer:
         self.source_spec = source_spec.upper()  
         print("\n2. Build ExtParserContext from PARSER RESULTS")
         print(f" Parser used: {self.source_spec}")   
-        self.context = ContextBuilder().build(parser_result, log=False)
+        self.context_builder = ContextBuilder()
+        self.context = self.context_builder.build(parser_result, log=False)
 
-   
     def _extract_symbol_info(self, context: ExtParserContext, symbol_name: str):
        
         symbol_infos = context.symbol_infos
@@ -1948,7 +1948,7 @@ class KconfigTransformer:
             if choice_name not in choice_definition_info:
                 choice_definition_info[choice_name] = {}
             
-            choice_info = self.helper.extract_named_choice_info(self.context, choice_name, log, log_cd_nc_details)
+            choice_info = self.context_builder.extract_named_choice_info(self.context, choice_name, log, log_cd_nc_details)
        
             # Get all config entries for this choice
             choice_data = self._get_all_choice_configs(choice_name, reader, project_dir, log_cd_nc_details, choice_info=choice_info)
@@ -2141,7 +2141,7 @@ class KconfigTransformer:
             raise RuntimeError("Context missing!")
         
         # GET source_files & filtered info for configdefault & named choice 
-        source_files = self.helper.get_all_source_files(self.context)             
+        source_files = self.context_builder.get_all_source_files(self.context)             
         cd_definition_info = self._filter_cd_from_context(reader, project_dir, log_cd_nc_details)
         choice_definition_info = self._filter_nc_from_context(reader, project_dir, log, log_cd_nc_details)
 
