@@ -191,27 +191,3 @@ class TransformHelperUtils:
 
         return i
 
-    def remove_consecutive_empty_lines(self, lines):
-        """
-        transformation of configdefault can leave some unwanted empty lines,
-        so this function removes them 
-        """
-        cleaned = []
-        previous_line_empty = False
-        removed_nr = 0
-        previous_len = len(lines)
-        for line in lines:
-            if line.line_type == 'empty':        # looking at empty line, so 
-                if previous_line_empty:
-                    removed_nr += 1
-                    continue                     # skip this empty line, go check the next one           
-                previous_line_empty = True       # if previous line wasn't empty, than set a flag on this one 
-            else:
-                previous_line_empty = False      # the line we are looking at it's not empty, so set the flag
-
-            cleaned.append(line)
-        
-        # this lines are already counted through self.stats.file_skipped_bc_configdefault
-        self.stats.file_removed_consecutive_empty_lines = previous_len - len(cleaned)
-        #print(f"{self.stats.file_removed_consecutive_empty_lines} = {previous_len} - {len(cleaned)}")
-        return cleaned

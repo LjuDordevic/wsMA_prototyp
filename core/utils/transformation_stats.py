@@ -20,7 +20,6 @@ class TransformationStats:
     one_source_keywords_matched_glob: int = 0
 
     file_configdefault_nr: int = 0
-    file_removed_consecutive_empty_lines: int = 0
     file_skipped_bc_configdefault: int = 0
 
     file_o_source_keywords_no_match: int = 0
@@ -60,7 +59,6 @@ class TransformationStats:
         self.file_def_keywords_count = 0
         self.file_all_added_lines_skw = 0
         self.file_configdefault_nr = 0
-        self.file_removed_consecutive_empty_lines = 0
         self.file_skipped_bc_configdefault = 0
         self.new_bc_glob = 0
         self.file_source_out_diff = 0

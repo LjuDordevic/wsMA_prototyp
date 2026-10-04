@@ -44,7 +44,6 @@ class Logger:
         print(f"        Added new bc of glob:            {new_lines_skw}")
         print(f"        Added new bc of config_default:  {stats.file_configdefault_nr}")
         print(f"        Added new bc of named choice:    {stats.file_added_bc_named_choice}") 
-    #print(f"        Removed consecutive empty lines:  {self.stats.file_removed_consecutive_empty_lines}") 
         print(f"        Removed bc of config_default:    {stats.file_skipped_bc_configdefault}") 
         print(f"        Removed bc of named choice:      {stats.file_skipped_bc_named_choice}") 
         print(f"        Removed no match for o(r)source: {stats.file_o_source_keywords_no_match}")  
