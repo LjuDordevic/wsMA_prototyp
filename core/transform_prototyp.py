@@ -1309,8 +1309,7 @@ class KconfigTransformer:
     def transform_all_files(self, reader, writer, project_dir: Path, output_dir: Path, \
                             log: bool, log_lines: bool, log_and_check_resolve_glob: bool, \
                                 log_cd_nc_details: bool, log_excel_after_each_file: bool, \
-                                    log_excel_output: Optional[str] = None, \
-                                        outside_file_relative_to: Optional[str] = None):
+                                    log_excel_output: Optional[str] = None):
         """
         1. get all source files parser found (these are all realtive to srctree)
         2. Filter ExtParserContext -> get needed infos for transformation of configdefault and named choice options 
@@ -1330,6 +1329,8 @@ class KconfigTransformer:
         print(f"\nfor each given file at source_files start building path output structur and call reader and writer")     
         print(f"\n4. Transform all files - needs reader & writer")
         
+        project_dir = project_dir.resolve()
+        output_dir = output_dir.resolve()
         for file_path in source_files:
             input_file = (project_dir / file_path).resolve()
 
@@ -1337,10 +1338,8 @@ class KconfigTransformer:
             try:
                 relative_normalized = input_file.relative_to(project_dir)
             except ValueError:
-                if outside_file_relative_to:
-                    relative_normalized = input_file.relative_to(Path(outside_file_relative_to))
-                else:
-                    print(f"    Skip file outside project: {input_file}")
+                print(f"    Skip file outside project: {input_file}")
+                continue
 
             output_file = output_dir / relative_normalized
             if not input_file.exists():
