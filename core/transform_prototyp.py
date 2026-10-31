@@ -25,7 +25,7 @@ class KconfigTransformer:
         self.context_builder = ContextBuilder()
         self.context = self.context_builder.build(parser_result, log=False)
     
-    def _transform_choice(self, lines: List, current_index: int, result: List, transform_func) -> int:
+    def _transform_choice(self, lines: List, current_index: int, result: List, current_file: Path, transform_func) -> int:
         from core.kconfig_writer import KconfigLine
         import re
 
@@ -87,7 +87,7 @@ class KconfigTransformer:
                 continue
 
             # everything else: copy/transform as usual (because it's a first definition)
-            transformed = transform_func(line_item, None, None)
+            transformed = transform_func(line_item, None, current_file)
             if transformed is None:
                 idx += 1
                 continue
@@ -126,7 +126,7 @@ class KconfigTransformer:
         #print(f"PROCESS choice: {result}")
         return block_end_index
 
-    def _transform_named_choice(self, log_debug: bool, lines: List, current_index: int, choice_info: dict, result: List, transform_func) -> int:
+    def _transform_named_choice(self, log_debug: bool, lines: List, current_index: int, choice_info: dict, result: List, current_file: Path, transform_func) -> int:
         from core.kconfig_writer import KconfigLine
         
         choice_line = lines[current_index]        
@@ -195,7 +195,7 @@ class KconfigTransformer:
                 first_depends_on_for_mc.append(line_item)
             
             # everything else: prompt, default, depends on, help -> copy/transform as usual (because it's a first definition)
-            transformed = transform_func(line_item, None, None)
+            transformed = transform_func(line_item, None, current_file)
             if transformed is None:
                 continue
 
@@ -543,7 +543,7 @@ class KconfigTransformer:
                             continue
                         
                         # For all other lines (if, endif, config, etc.), transform and add
-                        transformed = transform_func(if_line, None, None)
+                        transformed = transform_func(if_line, None, current_file)
                         if transformed is not None:
                             if isinstance(transformed, list):
                                 result.extend(transformed)
@@ -572,7 +572,7 @@ class KconfigTransformer:
                         
                         current = self._transform_typ_choice_help(current)
 
-                        transformed = transform_func(current, None, None)
+                        transformed = transform_func(current, None, current_file)
                         if transformed is not None:
                             if isinstance(transformed, list):
                                 result.extend(transformed)
@@ -615,7 +615,7 @@ class KconfigTransformer:
                         current = self._transform_typ_choice_help(current)
                         #print(f"after: {current.raw_text}")
 
-                        transformed = transform_func(current, None, None)
+                        transformed = transform_func(current, None, current_file)
                         if transformed is not None:
                             if isinstance(transformed, list):
                                 result.extend(transformed)
@@ -825,7 +825,7 @@ class KconfigTransformer:
 
         return KconfigLine(new_line_text, line_item.line_number)
 
-    def _transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, transform_func) -> int:
+    def _transform_cd(self, lines: List, current_index: int, transformed_entries: List, result: List, current_file: Path, transform_func) -> int:
        
         line = lines[current_index]
         current_symbol = line.content.get('symbol') if hasattr(line, 'content') else None
@@ -848,7 +848,7 @@ class KconfigTransformer:
         for idx in range(current_index + 1, block_end_index):
             line = lines[idx]
             
-            transformed = transform_func(line, current_symbol, None)
+            transformed = transform_func(line, current_symbol, current_file)
             
             if transformed is None:
                 continue
@@ -1233,13 +1233,13 @@ class KconfigTransformer:
                                 print(f"    processed_choices now: {self.PROCESSED_CHOICES}")
     
                                 # IF THE FIRST PARAMETER = True, then we log DEBUG info 
-                                i = self._transform_named_choice(True, lines, i, choice_info, result, 
+                                i = self._transform_named_choice(True, lines, i, choice_info, result, current_file,
                                                     lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
                                 #choice_processed = True
                                 continue
                     
                     if line.line_type == 'choice':
-                        i = self._transform_choice(lines, i, result, 
+                        i = self._transform_choice(lines, i, result, current_file,
                                                     lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
                         continue
     
@@ -1369,7 +1369,6 @@ class KconfigTransformer:
 
             if log_excel_after_each_file:
                 write_to_excel(excel_stats, log_excel_output)
-            
             try:
                 writer.write(transformed, output_file)
                 transformed_count += 1
