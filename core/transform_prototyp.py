@@ -1201,9 +1201,9 @@ class KconfigTransformer:
                             #print(f"choice_definition_info: {choice_definition_info}")
                             #print(f"choice_info {choice_info}")
                             
-                            #print(f"    processed_choices before if: {self.PROCESSED_CHOICES}")
+                            #print(f"    processed_choices before if: {self.processed_choices}")
     
-                            if choice_name in self.PROCESSED_CHOICES:
+                            if choice_name in self.processed_choices:
                                 print(f"    Skipping non-first definition of choice {choice_name} at line {line.line_number}, {current_file}")
                                 # Skip until endchoice
                                 #print(f"    before_i {i}")
@@ -1229,8 +1229,8 @@ class KconfigTransformer:
                                 print(f"    Found first definition of choice {choice_name} at line {line.line_number}")
                                 print(f"    Processing choice transformation")
     
-                                self.PROCESSED_CHOICES.add(choice_name)
-                                print(f"    processed_choices now: {self.PROCESSED_CHOICES}")
+                                self.processed_choices.add(choice_name)
+                                print(f"    processed_choices now: {self.processed_choices}")
     
                                 # IF THE FIRST PARAMETER = True, then we log DEBUG info 
                                 i = self._transform_named_choice(True, lines, i, choice_info, result, current_file,
@@ -1317,6 +1317,7 @@ class KconfigTransformer:
         """
         excel_stats = []
         transformed_count = 0
+        self.processed_choices = set()
 
         if self.context is None:
             raise RuntimeError("Context missing!")
