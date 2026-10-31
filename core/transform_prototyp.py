@@ -882,10 +882,10 @@ class KconfigTransformer:
             return self._transform_opt_env(line)
         elif line.line_type == "help_old":
             self.stats.old_help += 1
-            return self._transform_stats.old_help(line)
+            return self._transform_old_help(line)
         elif line.line_type == "typ_bool_old":
             self.stats.old_boolean += 1
-            return self._transform_stats.old_boolean(line)
+            return self._transform_old_boolean(line)
         else:
             if line.line_type == "allnoconfig_y":
                 self.stats.file_opt_allnoconfig += 1
