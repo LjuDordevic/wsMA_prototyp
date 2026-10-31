@@ -81,8 +81,8 @@ class TransformationStats:
         self.file_warning_attr = 0
         self.file_set_option = 0
         self.file_set_default_option = 0
-        self.file_changed_inprompt_bc_choice = 0
-        self.file_changed_typ_tristate_to_bool = 0
+        self.file_changed_inprompt_bc_choice = 0 # for choice -> bool "pick something" --> prompt "pick something"
+        self.file_changed_typ_tristate_to_bool = 0 # tristate elements of choice should be restricted to bool 
         self.old_help = 0
         self.old_boolean = 0
 

@@ -28,7 +28,7 @@ def main():
             # PickParser as Factory 
             parser = PickParser(spec_version).get_parser()
             timer.lap("Parser initialization")  
-            logger.start(project_dir, main_file, output_dir, parser, spec_version)
+            logger.log_start(project_dir, main_file, output_dir, parser, spec_version)
 
             # File Parsing
             print("1. Parser output: ")

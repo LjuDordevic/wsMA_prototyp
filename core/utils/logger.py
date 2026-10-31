@@ -5,7 +5,7 @@ from core.utils.transformation_stats import TransformationStats
 
 class Logger:
 
-    def start(self, project_dir: str, main_file: str, output_dir: str, parser, spec_version: str):
+    def log_start(self, project_dir: str, main_file: str, output_dir: str, parser, spec_version: str):
         print("=" * 100)
         print("TRANSFORMATION PROTOTYP LOG")
         print("=" * 100)
@@ -16,6 +16,39 @@ class Logger:
         print(f"    Parser obj:     {parser}")
         print(f"    Timestamp:      {datetime.now().strftime("%d.%m.%Y %H:%M")}")
         print("=" * 100)
+
+    def log_end(self, transformed_count: int, context, stats):
+        print("----------------------------------------------------------------------")
+        print(f"finished transforming: {transformed_count} files transformed")
+        print("----------------------------------------------------------------------")
+        print("Overall parser info: ")
+        print(f"    -> ExParserContext - unique options: {context.symbol_nr}")
+        print(f"    -> ExParserContext - configdefaults: {context.configdefault_options_nr} ({', '.join(context.configdefault_options)})")
+        print(f"    -> ExParserContext - unique choices: {context.choice_nr}")
+        print(f"    -> ExParserContext - named choices:  {context.named_choices_nr}")
+        print("----------------------------------------------------------------------")
+        
+        if stats.option_modules_info:
+            for info in stats.option_modules_info:
+                print(f"    {stats.option_modules_counter} option modules-attr found at line {info['line']} in {info['file']}")
+        else:
+            print("    option modules: 0")         
+            
+        print("----------------------------------------------------------------------")
+        print("count options/attr that are not transformed: ")
+        print(f"    allnoconfig_y:  {stats.file_opt_allnoconfig}")        
+        print(f"    defconfig_list: {stats.file_opt_defconfig}")
+        print(f"    warning:        {stats.file_warning_attr}")
+        print(f"    set:            {stats.file_set_option}")
+        print(f"    set default:    {stats.file_set_default_option}")
+        print("----------------------------------------------------------------------")
+        print("count changes that don't affect the output size: ")
+        print(f"    Changed inline prompt choice:    {stats.file_changed_inprompt_bc_choice}") 
+        print(f"    Changed typ of choice element:   {stats.file_changed_typ_tristate_to_bool}") 
+        print("----------------------------------------------------------------------")
+        # print("additionally count --help-- for PX4")
+        print(f"Attr --help--: {stats.old_help}")
+        print(f"Attr boolean: {stats.old_boolean}")
 
     def print_parser_result(self, parser_result: dict):
         pprint.pprint(parser_result)

@@ -1329,29 +1329,20 @@ class KconfigTransformer:
 
         print(f"\nfor each given file at source_files start building path output structur and call reader and writer")     
         print(f"\n4. Transform all files - needs reader & writer")
+        
         for file_path in source_files:
             input_file = (project_dir / file_path).resolve()
 
             # this solution bc of ../ in paths 
             try:
-                #print(f"\nDEBUG: input_file={input_file}")
-                #print(f"DEBUG: project_dir={project_dir}")
                 relative_normalized = input_file.relative_to(project_dir)
-                #print(f"DEBUG: relative_path={relative_normalized}")
-                #print(f"DEBUG: output_file would be={output_dir / relative_normalized}")
             except ValueError:
                 if outside_file_relative_to:
                     relative_normalized = input_file.relative_to(Path(outside_file_relative_to))
-                    #print(relative_normalized)
                 else:
                     print(f"    Skip file outside project: {input_file}")
 
             output_file = output_dir / relative_normalized
-            #print(f"DEBUG: output_file would be={output_file}")
-                
-            #print(f"\ninput file: {input_file}")
-            #print(f"relative_normalized: {relative_normalized}")
-            #print(f"output file: {output_file}")
             if not input_file.exists():
                 print(f"  Skip not found: {input_file}")
                 continue
@@ -1385,46 +1376,6 @@ class KconfigTransformer:
             except Exception as e:
                 print(f"     Error write: {e}")
         
-        print(f"----------------------------------------------------------------------")
-        print(f"finished transforming: {transformed_count} files transformed")
-        print(f"----------------------------------------------------------------------")
-        print("Overall parser info: ")
-        print(f"    -> ExParserContext - unique options: {self.context.symbol_nr}")
-        print(f"    -> ExParserContext - configdefaults: {self.context.configdefault_options_nr} ({', '.join(self.context.configdefault_options)})")
-        print(f"    -> ExParserContext - unique choices: {self.context.choice_nr}")
-        print(f"    -> ExParserContext - named choices:  {self.context.named_choices_nr}")
-        print(f"----------------------------------------------------------------------")
-        if self.stats.option_modules_info:
-            for info in self.stats.option_modules_info:
-                print(f"    {self.stats.option_modules_counter} option modules-attr found at line {info['line']} in {info['file']}")
-        else:
-            print(f"    option modules: 0")          
-        print(f"----------------------------------------------------------------------")
-        print("count options/attr that are not transformed: ")
-        print(f"    allnoconfig_y:  {self.stats.file_opt_allnoconfig}")        
-        print(f"    defconfig_list: {self.stats.file_opt_defconfig}")
-        print(f"    warning:        {self.stats.file_warning_attr}")
-        print(f"    set:            {self.stats.file_set_option}")
-        print(f"    set default:    {self.stats.file_set_default_option}")
-        print(f"----------------------------------------------------------------------")
-        print("count changes that don't affect the output size: ")
-        print(f"        Changed inline prompt choice:    {self.stats.file_changed_inprompt_bc_choice}") 
-        print(f"        Changed typ of choice element:   {self.stats.file_changed_typ_tristate_to_bool}") 
-        print(f"----------------------------------------------------------------------")
-        #print("additionaly count --help-- for PX4")
-        print(f"Attr --help--: {self.stats.old_help}")
-        print(f"Attr boolean: {self.stats.old_boolean}")
-
-        self.stats.file_opt_defconfig = 0
-        self.stats.file_opt_allnoconfig = 0
-        self.stats.option_modules_counter = 0
-        self.stats.option_modules_info.clear()
-        self.stats.file_warning_attr = 0
-        self.stats.file_set_option = 0
-        self.stats.file_set_default_option = 0
-        self.stats.file_changed_inprompt_bc_choice = 0        # for choice -> bool "pick something" --> prompt "pick something"
-        self.stats.file_changed_typ_tristate_to_bool = 0      # tristate elements of choice should be restricted to bool 
-        self.stats.old_help = 0
-        self.stats.old_boolean = 0
-
+        self.logger.log_end(transformed_count, self.context, self.stats)
+        self.stats.reset_global_stats()
         return excel_stats
