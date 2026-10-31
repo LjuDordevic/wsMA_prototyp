@@ -1332,20 +1332,22 @@ class KconfigTransformer:
         project_dir = project_dir.resolve()
         output_dir = output_dir.resolve()
         for file_path in source_files:
-            input_file = (project_dir / file_path).resolve()
 
-            # this solution bc of ../ in paths 
+            # input 
+            input_file = (project_dir / file_path).resolve()
+            if not input_file.exists():
+                print(f"  Skip not found: {input_file}")
+                continue
+
+            # get relative part = diff. project_dir & input_file, using this solution bc of ../ in paths 
             try:
                 relative_normalized = input_file.relative_to(project_dir)
             except ValueError:
                 print(f"    Skip file outside project: {input_file}")
                 continue
 
+            # new output 
             output_file = output_dir / relative_normalized
-            if not input_file.exists():
-                print(f"  Skip not found: {input_file}")
-                continue
-            
             output_file.parent.mkdir(parents=True, exist_ok=True)
             lines = reader.read_file(input_file)
 
