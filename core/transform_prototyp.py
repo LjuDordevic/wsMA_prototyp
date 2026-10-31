@@ -1353,10 +1353,9 @@ class KconfigTransformer:
 
             if log_lines:
                 for line in lines:
-                    #if line.line_type in LINE_TYP_LOG:
-                        print(f"    {line}")
-                        if line.line_type != 'empty' and line.line_type != 'other':
-                            print(f"        -> Content: {line.content}")
+                    print(f"    {line}")
+                    if line.line_type != 'empty' and line.line_type != 'other':
+                        print(f"        -> Content: {line.content}")
 
             print("call _transform_lines(lines from reader, input, configdefault dict info)")
             # also collect not only transformed lines but some statistics 
