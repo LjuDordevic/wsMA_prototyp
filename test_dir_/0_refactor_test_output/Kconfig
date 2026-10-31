@@ -1,0 +1,22 @@
+# fixtures/a/Kconfig
+config FOO
+	bool "Foo"
+	help
+	  choices are listed below.
+	  default settings are used.
+	  config file location.
+
+config BAR
+	def_tristate y
+
+config SQ
+	bool 'Single quoted'
+
+if FOO && !BAZ
+	if BAR
+config NESTED
+	bool "Nested"
+	depends on FOO
+	endif
+endif
+

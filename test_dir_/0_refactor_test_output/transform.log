@@ -1,0 +1,123 @@
+START using parser: 
+  spec_version: ZRTOS
+  kconfig_folder: /home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig
+  kconfiglib_version: <module 'kconfiglib' from '/home/ljd/wsMA_prototyp/external/ZephyrRTOS/scripts/kconfig/kconfiglib.py'>  parser_class: ZRTOSParser
+====================================================================================================
+TRANSFORMATION PROTOTYP LOG
+====================================================================================================
+    Root (srctree): /home/ljd/wsMA_prototyp/test_dir_/0_refactor_test
+    Main file:      Kconfig
+    Output dir:     /home/ljd/wsMA_prototyp/test_dir_/0_refactor_test_output
+    Specification:  ZRTOS
+    Parser obj:     <core.parser.zrtos_parser.ZRTOSParser object at 0x76df71590350>
+    Timestamp:      31.10.2026 13:12
+====================================================================================================
+1. Parser output: 
+{'choices': [],
+ 'comments': [],
+ 'const_syms': {'m': <symbol m, bool, value m, constant>,
+                'n': <symbol n, bool, value n, constant>,
+                'y': <symbol y, bool, value y, constant>},
+ 'defined_syms': [<symbol FOO, bool, "Foo", value n, visibility y, direct deps y, Kconfig:2>,
+                  <symbol BAR, bool, value y, visibility n, direct deps y, Kconfig:9>,
+                  <symbol SQ, bool, "Single quoted", value n, visibility y, direct deps y, Kconfig:12>,
+                  <symbol NESTED, bool, "Nested", value n, visibility n, direct deps n, Kconfig:17>],
+ 'kconf': <configuration with 6 symbols, main menu prompt "Main menu", srctree "/home/ljd/wsMA_prototyp/test_dir_/0_refactor_test", config symbol prefix "CONFIG_", warnings enabled, printing of warnings to stderr enabled, undef. symbol assignment warnings disabled, overriding symbol assignment warnings enabled, redundant symbol assignment warnings enabled>,
+ 'menus': [],
+ 'missing_syms': [],
+ 'named_choices': {},
+ 'syms': {'BAR': <symbol BAR, bool, value y, visibility n, direct deps y, Kconfig:9>,
+          'BAZ': <symbol BAZ, unknown, value "BAZ", visibility n, direct deps n, undefined>,
+          'FOO': <symbol FOO, bool, "Foo", value n, visibility y, direct deps y, Kconfig:2>,
+          'MODULES': <symbol MODULES, unknown, value "MODULES", visibility n, is the modules symbol, direct deps n, undefined>,
+          'NESTED': <symbol NESTED, bool, "Nested", value n, visibility n, direct deps n, Kconfig:17>,
+          'SQ': <symbol SQ, bool, "Single quoted", value n, visibility y, direct deps y, Kconfig:12>},
+ 'top_node': <menu node for menu, prompt "Main menu" (visibility y), deps y, 'visible if' deps y, has child, Kconfig:1>,
+ 'unique_choices': [],
+ 'unique_defined_syms': [<symbol FOO, bool, "Foo", value n, visibility y, direct deps y, Kconfig:2>,
+                         <symbol BAR, bool, value y, visibility n, direct deps y, Kconfig:9>,
+                         <symbol SQ, bool, "Single quoted", value n, visibility y, direct deps y, Kconfig:12>,
+                         <symbol NESTED, bool, "Nested", value n, visibility n, direct deps n, Kconfig:17>]}
+--------------------------------------------------
+   Parser found: 4 defined syms
+   Parser found: 4 unique defined syms
+   Parser found: 1 files
+--------------------------------------------------
+
+2. Build ExtParserContext from PARSER RESULTS
+ Parser used: ZRTOS
+    get_all_source_files: 
+    parser found: Kconfig
+
+3. Filter ExtParserContext
+extract all configdefault options and for each get transformed lines and last config
+extract infos for named choices - their definition & entries
+
+for each given file at source_files start building path output structur and call reader and writer
+
+4. Transform all files - needs reader & writer
+
+
+Reader found: 23 lines in /home/ljd/wsMA_prototyp/test_dir_/0_refactor_test/Kconfig
+call _transform_lines(lines from reader, input, configdefault dict info)
+start transforming 23 input lines
+    current_indx: 5 - choice_attr_end: 6
+    FILE LOG --------------------------------------------------------------
+    Reader input                23 lines
+    -----------------------------------------------------------------------
+    All source without glob:    0
+    All source using glob:      0
+    All osource_keywords:       0
+    All rsource_keywords:       0
+    All orsource_keywords:      0
+    SUM (r/or/o)source lines:   0
+    All "option env" attr:      0
+    -----------------------------------------------------------------------
+    Transformer Output:         23 lines
+    -----------------------------------------------------------------------
+        Added new bc of def_*:           0
+        Added new bc of glob:            0
+        Added new bc of config_default:  0
+        Added new bc of named choice:    0
+        Removed bc of config_default:    0
+        Removed bc of named choice:      0
+        Removed no match for o(r)source: 0
+        Removed optional choice attr:    0
+        Removed bool     choice attr:    0
+        Removed tristate choice attr:    0
+     Error write: 'NoneType' object has no attribute 'raw_text'
+----------------------------------------------------------------------
+finished transforming: 0 files transformed
+----------------------------------------------------------------------
+Overall parser info: 
+    -> ExParserContext - unique options: 4
+    -> ExParserContext - configdefaults: 0 ()
+    -> ExParserContext - unique choices: 0
+    -> ExParserContext - named choices:  0
+----------------------------------------------------------------------
+    option modules: 0
+----------------------------------------------------------------------
+count options/attr that are not transformed: 
+    allnoconfig_y:  0
+    defconfig_list: 0
+    warning:        0
+    set:            0
+    set default:    0
+----------------------------------------------------------------------
+count changes that don't affect the output size: 
+        Changed inline prompt choice:    0
+        Changed typ of choice element:   0
+----------------------------------------------------------------------
+Attr --help--: 0
+Attr boolean: 0
+
+====================================================================================================
+TIMER REPORT:
+====================================================================================================
+    Parser initialization.............................    0.005177s
+    Got parser results................................    0.002711s
+    Built context from parser results.................    0.000487s
+    File transformation and excel log.................    0.002173s
+----------------------------------------------------------------------------------------------------
+    TOTAL TIME........................................   0.010551s ~ 0.01s
+====================================================================================================
