@@ -230,7 +230,10 @@ class KconfigTransformer:
         
         menuconfigs_to_add_after = []  # Collect menuconfigs to add after endchoice
         len_menuconfig_block_first_def = 0
-
+        
+        sorted_def_lines = []
+        def_index_by_line = {}
+        depends_by_choice_line = {}
         # dont add choice_prompts and help_lines here bc doppel, add them later   
         if not choice_def:
             print(f"    No choice_def found")
