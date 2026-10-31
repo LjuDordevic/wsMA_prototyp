@@ -21,7 +21,7 @@ class WorkflowRunnerHelper:
     VALID_SPEC_VERSIONS = {"ZKCL", "ZRTOS", "ESPIDF"}
 
     def __init__(self, description: str = "Kconfig Workflow Transformation"):
-        load_dotenv()
+        load_dotenv(override=True)
         self.parser = argparse.ArgumentParser(description=description)
         self._setup_args()
         self.log_file_handle = None
