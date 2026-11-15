@@ -1257,43 +1257,36 @@ class KconfigTransformer:
                         continue
     
                     if line.line_type in ['config', 'menuconfig']:
-                        #print("line is config/ menuconfig")
                         current_symbol = line.content.get('symbol')
-                        #print(f"line's symbol: {current_symbol}")
                         
                         if current_symbol and current_symbol in cd_definition_info:
                             cd_info_list = cd_definition_info[current_symbol]
-                            #print(f"\ncd_info_list: {cd_info_list}")
     
                             for cd_entry in cd_info_list:
                                 last_config = cd_entry.get('last_config')
-                                #print(f"\nlast_config: {last_config}")
                                 transformed_entries = cd_entry.get('transformed_entries_list', [])
-                                #print(f"transformed_entries: {transformed_entries}")
+
+                                if not last_config:
+                                    self.logger.warn(f"configdefault for {current_symbol} doesn't have last_config")
+                                    continue
+
+                                last_conf_symbol = last_config[0]
+                                last_conf_file = last_config[1]
+                                last_conf_line = last_config[2]
     
-                                if last_config:
-                                    last_conf_symbol = last_config[0]
-                                    last_conf_file = last_config[1]
-                                    last_conf_line = last_config[2]
-                                    #print(f"last_conf_symbol: {last_conf_symbol}")
-                                    #print(f"last_conf_file: {last_conf_file}")
-                                    #print(f"last_conf_line: {last_conf_line}") 
+                                last_conf_full_path = (self.context.srctree / last_conf_file).resolve()
     
-                                    last_conf_full_path = (self.context.srctree / last_conf_file).resolve()
-                                    #print(f"last_conf_full_path: {last_conf_full_path}")
-    
-                                    if (current_symbol == last_conf_symbol and 
-                                        line.line_number == last_conf_line and 
-                                        current_file == last_conf_full_path):
+                                if (current_symbol == last_conf_symbol and 
+                                    line.line_number == last_conf_line and 
+                                    current_file == last_conf_full_path):
                                         
-                                        print(f"    Found matching config for {current_symbol} at line {line.line_number}")
-                                        print(f"    Adding {len(transformed_entries)} configdefault entries")
+                                    print(f"    Found matching config for {current_symbol} at line {line.line_number}")
+                                    print(f"    Adding {len(transformed_entries)} configdefault entries")
                                         
-                                        i = self._transform_cd(lines, i, transformed_entries, result, 
-                                                    lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
-                                        #print(f"i = self.transform_cd {i}")
-                                        cd_processed = True
-                                        break 
+                                    i = self._transform_cd(lines, i, transformed_entries, result, 
+                                                lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
+                                    cd_processed = True
+                                    break 
                     
                     if cd_processed:
                         continue
