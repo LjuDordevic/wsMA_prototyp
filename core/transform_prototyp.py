@@ -810,13 +810,11 @@ class KconfigTransformer:
     def _transform_typ_choice_help(self, current, already_counted: Optional[bool]=None):
         
         if (current.line_type == 'inline_prompt_choice' and current.content.get('inline_typ') == 'tristate'):
-            #print("Kjskasj")
             current_transformed = self._transform_bool_to_tristate_choice_typ(current, current.indent, current.content.get('prompt_text'), already_counted)
             return current_transformed
         
         if current.line_type == 'type_tristate':
-            #print("Kjskasj2")
-            current_transformed = self._transform_bool_to_tristate_choice_typ(current, already_counted)
+            current_transformed = self._transform_bool_to_tristate_choice_typ(current, already_counted=already_counted)
             return current_transformed
         
         return current
