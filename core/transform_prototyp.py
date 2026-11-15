@@ -968,7 +968,8 @@ class KconfigTransformer:
         # GET needed information
         match = re.match(r'(source|osource|rsource|orsource)\s+["\']([^"\']+)["\']', line.stripped) # Future work: I think there is no need to check for both types: ' and ". I think only " is allowed 
         if not match:
-            print(f"error at source line: {line}")      
+            print(f"error at source line: {line} in {current_file}")
+            return line      
         indent_str = ' ' * line.indent
         source_keyword = match.group(1)
         pattern = match.group(2)
@@ -1063,7 +1064,7 @@ class KconfigTransformer:
                 #print(f"{filenames}")
                 # iglob returnes abs path -> convert to SRCTREE-relative path
                 for file in filenames:
-                    iglob_with_rel_path.append(str(Path(file).relative_to(os.environ["srctree"])))
+                    iglob_with_rel_path.append(str(Path(file).relative_to(kconf.srctree)))
             
         if not matched_files:
             # don't just comment the line, instead skip -> no output line, when there is no match 
