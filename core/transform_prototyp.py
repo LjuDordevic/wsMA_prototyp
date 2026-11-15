@@ -591,6 +591,10 @@ class KconfigTransformer:
                         idx += 1
                     continue
                 
+                # add rest of the lines (comment, empty, ...) 
+                transformed = transform_func(line_item, None, current_file)
+                if transformed is not None:
+                    result.extend(transformed if isinstance(transformed, list) else [transformed])
                 idx += 1
             
             print(f"    Single definition: processed all entries sequentially")
@@ -664,7 +668,16 @@ class KconfigTransformer:
                     print(f"      Collected menuconfig {sym_name} ({len(menuconfig_block)} lines)")
                     len_menuconfig_block_first_def += len(menuconfig_block)
                     continue
-                
+
+                # skip if-Block, as it is output via choice_configs
+                if line_item.line_type == 'if':
+                    idx = self.helper.skip_if_block(lines, idx)
+                    continue
+
+                # add lines to result (if, comment, empty, ...)
+                transformed = transform_func(line_item, None, current_file)
+                if transformed is not None:
+                    result.extend(transformed if isinstance(transformed, list) else [transformed])
                 idx += 1
 
             #print(f"result after first definition: {len(result)} lines")
