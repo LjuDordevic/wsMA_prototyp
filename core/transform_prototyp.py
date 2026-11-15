@@ -45,6 +45,9 @@ class KconfigTransformer:
                 block_end_index += 1
                 break
             block_end_index += 1
+
+        if end_line is None:
+            raise RuntimeError(f"Choice in Zeile {choice_line.line_number} hat kein endchoice!")
         
         # FIND line where first config/if starts
         first_ch_config_idx = None
@@ -150,6 +153,10 @@ class KconfigTransformer:
                 block_end_index += 1
                 break
             block_end_index += 1
+            
+        if end_line is None:
+            raise RuntimeError(f"Choice in Zeile {choice_line.line_number} hat kein endchoice!")
+
         
         # PROCESS: ATTR OF THE FIRST DEFINITION ----------------------------------------------------------------------------------------------
         # Kconfiglib can have menuconfig as choice elements (see wsMA_prototyp/test_dir_/transform_choice_analysis/transform_choice_analysis.log)
