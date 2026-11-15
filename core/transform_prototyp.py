@@ -1279,7 +1279,7 @@ class KconfigTransformer:
                                     #print(f"last_conf_file: {last_conf_file}")
                                     #print(f"last_conf_line: {last_conf_line}") 
     
-                                    last_conf_full_path = self.context.srctree / last_conf_file
+                                    last_conf_full_path = (self.context.srctree / last_conf_file).resolve()
                                     #print(f"last_conf_full_path: {last_conf_full_path}")
     
                                     if (current_symbol == last_conf_symbol and 
