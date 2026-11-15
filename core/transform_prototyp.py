@@ -153,7 +153,7 @@ class KconfigTransformer:
                 block_end_index += 1
                 break
             block_end_index += 1
-            
+
         if end_line is None:
             raise RuntimeError(f"Choice in Zeile {choice_line.line_number} hat kein endchoice!")
 
@@ -1209,45 +1209,36 @@ class KconfigTransformer:
       
                         else:
                             choice_info = choice_definition_info[choice_name]
-                            #print(f"choice_definition_info: {choice_definition_info}")
-                            #print(f"choice_info {choice_info}")
-                            
-                            #print(f"    processed_choices before if: {self.processed_choices}")
-    
-                            if choice_name in self.processed_choices:
+
+                            # find first defintiom in context (file + line)
+                            first_def = self.context.choice_definitions[choice_name][0]
+                            first_def_file = self.context.srctree / first_def['file']
+                            first_def_line = first_def['line']
+                            # check if we're there at the moment
+                            is_first = (current_file == first_def_file and line.line_number == first_def_line)
+
+                            if not is_first or choice_name in self.processed_choices:
                                 print(f"    Skipping non-first definition of choice {choice_name} at line {line.line_number}, {current_file}")
-                                # Skip until endchoice
-                                #print(f"    before_i {i}")
                                 self.stats.file_skipped_bc_named_choice += 1 # the choice line itself
                                 i += 1
                                 while i < len(lines) and lines[i].line_type != 'endchoice':
-                                    #print(f"        {lines[i]}")
                                     self.stats.file_skipped_bc_named_choice += 1
                                     i += 1
                                 i += 1  # consume endchoice
                                 self.stats.file_skipped_bc_named_choice += 1
-                                #print(f"    after {i}")
-                                #print("helloooend")     
                                 continue
-                            #print("helloooneu")
-                            first_def = self.context.choice_definitions[choice_name][0]
-                            first_def_file = self.context.srctree / first_def['file']
-                            first_def_line = first_def['line']
-                                
-                            if (current_file == first_def_file and 
-                                line.line_number == first_def_line):
-                                    
-                                print(f"    Found first definition of choice {choice_name} at line {line.line_number}")
-                                print(f"    Processing choice transformation")
+                                 
+                            print(f"    Found first definition of choice {choice_name} at line {line.line_number}")
+                            print(f"    Processing choice transformation")
     
-                                self.processed_choices.add(choice_name)
-                                print(f"    processed_choices now: {self.processed_choices}")
+                            self.processed_choices.add(choice_name)
+                            print(f"    processed_choices now: {self.processed_choices}")
     
-                                # IF THE FIRST PARAMETER = True, then we log DEBUG info 
-                                i = self._transform_named_choice(True, lines, i, choice_info, result, current_file,
+                            # IF THE FIRST PARAMETER = True, then we log DEBUG info 
+                            i = self._transform_named_choice(True, lines, i, choice_info, result, current_file,
                                                     lambda l, s, f: self._transform_single_line(l, s, f, log_and_check_resolve_glob))
-                                #choice_processed = True
-                                continue
+                            #choice_processed = True
+                            continue
                     
                     if line.line_type == 'choice':
                         i = self._transform_choice(lines, i, result, current_file,
@@ -1310,7 +1301,6 @@ class KconfigTransformer:
                         result.extend(transformed) # 1:n (def_bool → bool + default)
                     else:
                         result.append(transformed) # 1:1         
-                    #print(f"after {i} is result: {result}")
                     i += 1  # go to the next line
                                 
                 len_transformed_lines = len(result)
